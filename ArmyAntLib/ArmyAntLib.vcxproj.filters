@@ -1,0 +1,51 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="1.base">
+      <UniqueIdentifier>{579faa00-8746-4de8-afac-92388e276088}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="2.mainOutput">
+      <UniqueIdentifier>{e2c0bc50-5c1d-421a-8e8d-b365683d7b71}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="4.CRefCode">
+      <UniqueIdentifier>{ac785b23-3647-4f04-88a8-206444e89428}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="3.CppLibCode">
+      <UniqueIdentifier>{09386418-a31d-4aae-9a6e-950db72c5a64}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="base\base.hpp">
+      <Filter>1.base</Filter>
+    </ClInclude>
+    <ClInclude Include="include\AADefine.h">
+      <Filter>2.mainOutput</Filter>
+    </ClInclude>
+    <ClInclude Include="include\C_AADefine.h">
+      <Filter>2.mainOutput</Filter>
+    </ClInclude>
+    <ClInclude Include="ArmyAnt.h">
+      <Filter>2.mainOutput</Filter>
+    </ClInclude>
+    <ClInclude Include="C_ArmyAnt.h">
+      <Filter>2.mainOutput</Filter>
+    </ClInclude>
+    <ClInclude Include="include\C_AAFile.h">
+      <Filter>4.CRefCode</Filter>
+    </ClInclude>
+    <ClInclude Include="include\AAFile.h">
+      <Filter>3.CppLibCode</Filter>
+    </ClInclude>
+    <ClInclude Include="include\AA_start.h">
+      <Filter>2.mainOutput</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="src\AAFile.cpp">
+      <Filter>3.CppLibCode</Filter>
+    </ClCompile>
+    <ClCompile Include="src\C_AAFile.cpp">
+      <Filter>4.CRefCode</Filter>
+    </ClCompile>
+  </ItemGroup>
+</Project>
