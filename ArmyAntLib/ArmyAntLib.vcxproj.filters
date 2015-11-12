@@ -13,22 +13,22 @@
     <Filter Include="3.CppLibCode">
       <UniqueIdentifier>{09386418-a31d-4aae-9a6e-950db72c5a64}</UniqueIdentifier>
     </Filter>
+    <Filter Include="2.mainOutput\defination">
+      <UniqueIdentifier>{d4c8c1b6-0500-4171-8530-3e167af4d6bb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="2.mainOutput\onlyIncludeFile">
+      <UniqueIdentifier>{87091049-0cff-4be6-9e99-8f02e1fde1e5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="5.Third-party-libraries">
+      <UniqueIdentifier>{2c051ef0-4c9f-4b2f-90a6-3de89fbadcea}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="6.docs">
+      <UniqueIdentifier>{b54891ba-0f44-427d-8458-326b09b23eba}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="base\base.hpp">
       <Filter>1.base</Filter>
-    </ClInclude>
-    <ClInclude Include="include\AADefine.h">
-      <Filter>2.mainOutput</Filter>
-    </ClInclude>
-    <ClInclude Include="include\C_AADefine.h">
-      <Filter>2.mainOutput</Filter>
-    </ClInclude>
-    <ClInclude Include="ArmyAnt.h">
-      <Filter>2.mainOutput</Filter>
-    </ClInclude>
-    <ClInclude Include="C_ArmyAnt.h">
-      <Filter>2.mainOutput</Filter>
     </ClInclude>
     <ClInclude Include="include\C_AAFile.h">
       <Filter>4.CRefCode</Filter>
@@ -36,11 +36,23 @@
     <ClInclude Include="include\AAFile.h">
       <Filter>3.CppLibCode</Filter>
     </ClInclude>
-    <ClInclude Include="include\AA_start.h">
-      <Filter>2.mainOutput</Filter>
-    </ClInclude>
     <ClInclude Include="include\AA_end.h">
-      <Filter>2.mainOutput</Filter>
+      <Filter>2.mainOutput\defination</Filter>
+    </ClInclude>
+    <ClInclude Include="include\AA_start.h">
+      <Filter>2.mainOutput\defination</Filter>
+    </ClInclude>
+    <ClInclude Include="include\AADefine.h">
+      <Filter>2.mainOutput\defination</Filter>
+    </ClInclude>
+    <ClInclude Include="include\C_AADefine.h">
+      <Filter>2.mainOutput\defination</Filter>
+    </ClInclude>
+    <ClInclude Include="ArmyAnt.h">
+      <Filter>2.mainOutput\onlyIncludeFile</Filter>
+    </ClInclude>
+    <ClInclude Include="C_ArmyAnt.h">
+      <Filter>2.mainOutput\onlyIncludeFile</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -50,5 +62,18 @@
     <ClCompile Include="src\C_AAFile.cpp">
       <Filter>4.CRefCode</Filter>
     </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="base\build_start.bat">
+      <Filter>1.base</Filter>
+    </None>
+    <None Include="base\build_end.bat">
+      <Filter>1.base</Filter>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="base\ProgrammerRule.txt">
+      <Filter>6.docs</Filter>
+    </Text>
   </ItemGroup>
 </Project>

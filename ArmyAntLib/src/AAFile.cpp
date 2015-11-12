@@ -38,9 +38,11 @@ public: // 保护器句柄管理
 	static void ReleaseHandle(DWORD handle);
 
 	static std::map<DWORD, FsPrivate*> handleMap;
+	static std::map<DWORD, FileStream*> handleRefMap;
 };
 
 std::map<DWORD, FsPrivate*> FsPrivate::handleMap;
+std::map<DWORD, FileStream*> FsPrivate::handleRefMap;
 
 FsPrivate::FsPrivate()
 {
@@ -90,11 +92,13 @@ void FsPrivate::ReleaseHandle(DWORD handle)
 FileStream::FileStream()
 	:handle(FsPrivate::GetHandle())
 {
+	FsPrivate::handleRefMap.insert(std::pair<DWORD, FileStream*>(handle, this));
 }
 
 FileStream::~FileStream()
 {
 	FsPrivate::ReleaseHandle(handle);
+	FsPrivate::handleRefMap.erase(handle);
 }
 
 bool FileStream::SetStreamMode(bool nocreate /*= true*/, bool noexist /*= false*/)
@@ -114,7 +118,7 @@ bool FileStream::Open(const char* filepath)
 		return false;
 	AAAssert(filepath != nullptr);
 	hd->name = filepath;
-	hd->file = fopen(filepath, "wb+");
+	hd->file = fopen(filepath, "rb+");
 	hd->type = StreamType::File;
 	return true;
 }
@@ -233,7 +237,7 @@ bool FileStream::Close()
 bool FileStream::IsOpened(bool dynamicCheck/* = true*/)
 {
 	auto hd = FsPrivate::handleMap.find(handle)->second;
-	if(hd->type == StreamType::None || hd->file!=nullptr||hd->mem!=nullptr||hd->len>0)
+	if(hd->type == StreamType::None || (hd->file == nullptr&&hd->mem == nullptr&&hd->len <= 0))
 		return false;
 	else if(!dynamicCheck)
 		return true;
@@ -243,7 +247,7 @@ bool FileStream::IsOpened(bool dynamicCheck/* = true*/)
 	switch(hd->type)
 	{
 		case StreamType::Memory:
-			if(hd->mem == nullptr||hd->len == 0)
+			if(hd->mem == nullptr || hd->len == 0)
 				return false;
 		case StreamType::File:
 		case StreamType::NamePipe:
@@ -368,19 +372,23 @@ DWORD FileStream::Read(void*buffer, DWORD len /*= FILE_SHORT_POS_END*/, fpos_t p
 		case StreamType::NamePipe:
 		case StreamType::ComData:
 		{
+			auto ret = errno;
 			fpos_t now = 0;
 			fgetpos(hd->file, &now);
 			_fseeki64(hd->file, 0, SEEK_END);
 			fpos_t wholelen = 0;
 			fgetpos(hd->file, &wholelen);
+			bool gostart = false;
 			if(pos == FILE_LONG_POS_END)
+			{
+				gostart = true;
 				pos = now;
-			else
-				_fseeki64(hd->file, pos, SEEK_SET);
-			auto ret = fread(buffer, len, 1, hd->file);
-			if(pos != now)
+			}
+			_fseeki64(hd->file, pos, SEEK_SET);
+			fread(buffer, DWORD(min(wholelen, len)), 1, hd->file);
+			if(!gostart)
 				_fseeki64(hd->file, now, SEEK_SET);
-			return ret;
+			return ret == 0;
 		}
 		case StreamType::Memory:
 		{
@@ -460,7 +468,8 @@ DWORD FileStream::Write(void*buffer, DWORD len /*= 0*/)
 		case StreamType::File:
 		case StreamType::NamePipe:
 		case StreamType::ComData:
-			return fwrite(buffer, len, 1, hd->file);
+			fwrite(buffer, len, 1, hd->file);
+			return 0 == errno;
 		case StreamType::Memory:
 		{
 			auto realLen = DWORD(min(len, hd->len - hd->pos));
@@ -537,6 +546,11 @@ FileStream& FileStream::operator<<(void*buffer)
 {
 	Write(buffer);
 	return *this;
+}
+
+FileStream* FileStream::GetStream(DWORD handle)
+{
+	return FsPrivate::handleRefMap.find(handle)->second;
 }
 
 bool FileStream::operator!=(std::nullptr_t)
