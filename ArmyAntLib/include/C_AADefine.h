@@ -1,14 +1,12 @@
-#ifndef C_A_A_DEFINE_H_2015_11_11
+﻿#ifndef C_A_A_DEFINE_H_2015_11_11
 #define C_A_A_DEFINE_H_2015_11_11
 
 #include "AADefine.h"
 
-#ifndef BOOL
-typedef BYTE BOOL;
-#ifndef TRUE
-const BYTE TRUE = BYTE(1);
-const BYTE FALSE = BYTE(0);
-#endif
+#ifndef _cplusplus
+typedef _Bool bool;
+#define true 1
+#define false 0
 #endif
 
 #define ARMYANT_CLIB_API ARMYANTLIB_API

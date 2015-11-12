@@ -1,12 +1,12 @@
-/*	*
+ï»¿/*	*
 	* Created by Jason ZJ 10/17/2015
 
 	* You need only include this header file when you use this library
-	* ÒªÊ¹ÓÃ±¾¿â£¬Äã½öĞèÒª°üº¬´ËÍ·ÎÄ¼ş
+	* è¦ä½¿ç”¨æœ¬åº“ï¼Œä½ ä»…éœ€è¦åŒ…å«æ­¤å¤´æ–‡ä»¶
 	* You can also comment those header files you do not want to use which is referenced in this file
-	* ±¾Í·ÎÄ¼ş°üº¬ÁË´Ë¿âµÄ³ÉÔ±Ä£¿é£¬Èç¹ûÆäÖĞÓĞÄã²»ÏëÊ¹ÓÃµÄ²¿·Ö£¬ÄãÒ²¿ÉÒÔ×¢ÊÍµô
+	* æœ¬å¤´æ–‡ä»¶åŒ…å«äº†æ­¤åº“çš„æˆå‘˜æ¨¡å—ï¼Œå¦‚æœå…¶ä¸­æœ‰ä½ ä¸æƒ³ä½¿ç”¨çš„éƒ¨åˆ†ï¼Œä½ ä¹Ÿå¯ä»¥æ³¨é‡Šæ‰
 	* For more information, please read those header files
-	* ÏëÒª»ñÈ¡¸ü¶àĞÅÏ¢£¬Çë²Î¿¼ÕâĞ©Ä£¿éµÄÍ·ÎÄ¼ş
+	* æƒ³è¦è·å–æ›´å¤šä¿¡æ¯ï¼Œè¯·å‚è€ƒè¿™äº›æ¨¡å—çš„å¤´æ–‡ä»¶
  *	*/
 
 #ifndef ARMY_ANT_H_2015_11_11
@@ -15,12 +15,9 @@
 #include "include/AADefine.h"
 #include "include/AAFile.h"
 
-#ifndef ARMYANTLIB_EXPORTS
-#ifdef NDEBUG
-#pragma comment(lib,"lib\\ArmyAntLib.lib")
-#else	// NDEBUG
-#pragma comment(lib,"lib\\ArmyAntLib.lib")
-#endif // NDEBUG
-#endif // ARMYANTLIB_EXPORTS
+
+
+
+#include "include/AA_end.h"
 
 #endif // ARMY_ANT_H_2015_11_11

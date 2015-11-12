@@ -1,4 +1,4 @@
-#include "../include/AAFile.h"
+ï»¿#include "../include/AAFile.h"
 #include <map>
 
 #ifdef OS_WINDOWS
@@ -14,7 +14,7 @@
 
 namespace ArmyAnt {
 
-//·â×°ÀàË½ÓÐ³ÉÔ±µÄ±£»¤Æ÷
+//å°è£…ç±»ç§æœ‰æˆå‘˜çš„ä¿æŠ¤å™¨
 class FsPrivate
 {
 public:
@@ -33,7 +33,7 @@ private:
 	void operator=(FsPrivate&);
 	~FsPrivate();
 
-public: // ±£»¤Æ÷¾ä±ú¹ÜÀí
+public: // ä¿æŠ¤å™¨å¥æŸ„ç®¡ç†
 	static DWORD GetHandle();
 	static void ReleaseHandle(DWORD handle);
 
@@ -187,7 +187,7 @@ bool FileStream::Open(const char* netAddr, BYTE protocol)
 		return false;
 	AAAssert(netAddr != nullptr && protocol != 0);
 	hd->name = netAddr;
-	//Ìî³äÍøÂçÍ¨ÐÅÁ¬½Ó²Ù×÷
+	//å¡«å……ç½‘ç»œé€šä¿¡è¿žæŽ¥æ“ä½œ
 	return false;
 }
 
@@ -200,7 +200,7 @@ bool FileStream::Open(DWORD netIp, WORD port, BYTE protocol)
 	char name[32] = "";
 	sprintf(name, "%d.%d.%d.%d:%d", netIp / 256 / 256 / 256, netIp / 256 / 256 % 256, netIp / 256 % 256, netIp % 256, int(port));
 	hd->name = name;
-	//Ìî³äÍøÂçÍ¨ÐÅÁ¬½Ó²Ù×÷
+	//å¡«å……ç½‘ç»œé€šä¿¡è¿žæŽ¥æ“ä½œ
 	return false;
 }
 
@@ -220,7 +220,7 @@ bool FileStream::Close()
 			hd->len = 0;
 			break;
 		case StreamType::Network:
-			AAAssert(0);	//ÐÞ¸ÄÎªÍøÂç¹Ø±Õ²Ù×÷
+			AAAssert(0);	//ä¿®æ”¹ä¸ºç½‘ç»œå…³é—­æ“ä½œ
 			break;
 		case StreamType::None:
 		default:
@@ -238,7 +238,7 @@ bool FileStream::IsOpened(bool dynamicCheck/* = true*/)
 	else if(!dynamicCheck)
 		return true;
 
-	//¶¯Ì¬¼ì²éÊÇ·ñ´ò¿ª£¬·ÀÖ¹ÒâÍâ¶Ï¿ª
+	//åŠ¨æ€æ£€æŸ¥æ˜¯å¦æ‰“å¼€ï¼Œé˜²æ­¢æ„å¤–æ–­å¼€
 	BYTE c;
 	switch(hd->type)
 	{

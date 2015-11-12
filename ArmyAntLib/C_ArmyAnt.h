@@ -1,14 +1,14 @@
-/*	*
+ï»¿/*	*
 	* Created by Jason ZJ 11/7/2015
 
 	* This is the C-language version of the library
-	* ÕâÊÇ±¾¿âµÄ´¿CÓïÑÔ°æ±¾Í·ÎÄ¼ş£¬ÓÃÓÚÂú×ã½öÄÜÊ¹ÓÃCÓïÑÔµÄ»·¾³
+	* è¿™æ˜¯æœ¬åº“çš„çº¯Cè¯­è¨€ç‰ˆæœ¬å¤´æ–‡ä»¶ï¼Œç”¨äºæ»¡è¶³ä»…èƒ½ä½¿ç”¨Cè¯­è¨€çš„ç¯å¢ƒ
 	* You need only include this header file when you use this library in C
-	* ÒªÔÚCÓïÑÔ±à³ÌÖĞÊ¹ÓÃ±¾¿â£¬Äã½öĞèÒª°üº¬´ËÍ·ÎÄ¼ş
+	* è¦åœ¨Cè¯­è¨€ç¼–ç¨‹ä¸­ä½¿ç”¨æœ¬åº“ï¼Œä½ ä»…éœ€è¦åŒ…å«æ­¤å¤´æ–‡ä»¶
 	* You can also comment those header files you do not want to use which is referenced in this file
-	* ±¾Í·ÎÄ¼ş°üº¬ÁË´Ë¿âµÄ³ÉÔ±Ä£¿é£¬Èç¹ûÆäÖĞÓĞÄã²»ÏëÊ¹ÓÃµÄ²¿·Ö£¬ÄãÒ²¿ÉÒÔ×¢ÊÍµô
+	* æœ¬å¤´æ–‡ä»¶åŒ…å«äº†æ­¤åº“çš„æˆå‘˜æ¨¡å—ï¼Œå¦‚æœå…¶ä¸­æœ‰ä½ ä¸æƒ³ä½¿ç”¨çš„éƒ¨åˆ†ï¼Œä½ ä¹Ÿå¯ä»¥æ³¨é‡Šæ‰
 	* For more information, please read those header files
-	* ÏëÒª»ñÈ¡¸ü¶àĞÅÏ¢£¬Çë²Î¿¼ÕâĞ©Ä£¿éµÄÍ·ÎÄ¼ş
+	* æƒ³è¦è·å–æ›´å¤šä¿¡æ¯ï¼Œè¯·å‚è€ƒè¿™äº›æ¨¡å—çš„å¤´æ–‡ä»¶
 *	*/
 
 #ifndef C_ARMY_ANT_H_2015_11_7
@@ -17,12 +17,10 @@
 #include "include/C_AADefine.h"
 #include "include/C_AAFile.h"
 
-#ifndef ARMYANTLIB_EXPORTS
-#ifdef NDEBUG
-#pragma comment(lib,"lib\\ArmyAntLib.lib")
-#else	// NDEBUG
-#pragma comment(lib,"lib\\ArmyAntLib.lib")
-#endif // NDEBUG
-#endif // ARMYANTLIB_EXPORTS
+
+
+
+
+#include "include/AA_end.h"
 
 #endif // C_ARMY_ANT_H_2015_11_7

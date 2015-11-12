@@ -1,4 +1,4 @@
-#ifndef AA_FILE_H_2015_11_11
+ï»¿#ifndef AA_FILE_H_2015_11_11
 #define AA_FILE_H_2015_11_11
 
 #include <cstdio>
@@ -14,7 +14,7 @@ enum class StreamType
 	Memory,
 	NamePipe,
 	ComData,
-	Network		//ÍøÂçÍ¨ĞÅ¹¦ÄÜÉĞÎ´¿ª·¢
+	Network		//ç½‘ç»œé€šä¿¡åŠŸèƒ½å°šæœªå¼€å‘
 };
 
 class ARMYANTLIB_API FileStream
@@ -24,161 +24,161 @@ public:
 	~FileStream();
 
 public:
-	/*	* @ summary : Éè¶¨Á÷µÄ´ò¿ª¹æÔò
-		* @ param = "nocreate" : Èô´Ë²ÎÊıÎªtrue£¬Ôò²»ÔÊĞí´´½¨ĞÂÎÄ¼ş£¬ÎÄ¼ş²»´æÔÚÊ±»á´ò¿ªÊ§°Ü
-		* @ param = "noexist" : Èô´Ë²ÎÊıÎªtrue£¬Ôò²»ÔÊĞíÎÄ¼şÒÑ´æÔÚ£¬ÎÄ¼şÒÑ´æÔÚÊ±»á´ò¿ªÊ§°Ü
+	/*	* @ summary : è®¾å®šæµçš„æ‰“å¼€è§„åˆ™
+		* @ param = "nocreate" : è‹¥æ­¤å‚æ•°ä¸ºtrueï¼Œåˆ™ä¸å…è®¸åˆ›å»ºæ–°æ–‡ä»¶ï¼Œæ–‡ä»¶ä¸å­˜åœ¨æ—¶ä¼šæ‰“å¼€å¤±è´¥
+		* @ param = "noexist" : è‹¥æ­¤å‚æ•°ä¸ºtrueï¼Œåˆ™ä¸å…è®¸æ–‡ä»¶å·²å­˜åœ¨ï¼Œæ–‡ä»¶å·²å­˜åœ¨æ—¶ä¼šæ‰“å¼€å¤±è´¥
 		*/
 	bool SetStreamMode(bool nocreate = true, bool noexist = false);
 
-	/*	* @ summary : ´ò¿ª´ÅÅÌÎÄ¼ş
-		* @ param = "filepath" : Òª´ò¿ªµÄÎÄ¼şÂ·¾¶
+	/*	* @ summary : æ‰“å¼€ç£ç›˜æ–‡ä»¶
+		* @ param = "filepath" : è¦æ‰“å¼€çš„æ–‡ä»¶è·¯å¾„
 		*/
 	bool Open(const char* filepath);
 
-	/*	* @ summary : °´ÄÚ´æµØÖ·Êı¾İ´ò¿ªÄÚ´æ»ò¹²ÏíÄÚ´æ
-		* @ param = "memaddr" : ÒªÄÚ´æµØÖ·±àºÅ
-		* @ param = "len" : ¿É¶ÁĞ´µÄÄÚ´æ¿é×Ü´óĞ¡
+	/*	* @ summary : æŒ‰å†…å­˜åœ°å€æ•°æ®æ‰“å¼€å†…å­˜æˆ–å…±äº«å†…å­˜
+		* @ param = "memaddr" : è¦å†…å­˜åœ°å€ç¼–å·
+		* @ param = "len" : å¯è¯»å†™çš„å†…å­˜å—æ€»å¤§å°
 		*/
 	bool Open(DWORD memaddr, fpos_t len);
 
-	/*	* @ summary : °´ÄÚ´æÖ¸Õë´ò¿ªÄÚ´æ»ò¹²ÏíÄÚ´æ
-		* @ param = "memaddr" : ÒªÄÚ´æÆğÊ¼Ö¸Õë
-		* @ param = "len" : ¿É¶ÁĞ´µÄÄÚ´æ¿é×Ü´óĞ¡
+	/*	* @ summary : æŒ‰å†…å­˜æŒ‡é’ˆæ‰“å¼€å†…å­˜æˆ–å…±äº«å†…å­˜
+		* @ param = "memaddr" : è¦å†…å­˜èµ·å§‹æŒ‡é’ˆ
+		* @ param = "len" : å¯è¯»å†™çš„å†…å­˜å—æ€»å¤§å°
 		*/
 	bool Open(BYTE* memaddr, fpos_t len);
 
-	/*	* @ summary : ´ò¿ªÃüÃû¹ÜµÀ
-		* @ param = "pipename" : ¹ÜµÀÃû£¬×Ô¶¨Òå
-		* @ param = "pipePath" : ¹ÜµÀÂ·¾¶£¬¿ÉÎª¿Õ
-		* @ param = "pipeServer" : ¹ÜµÀËùÔÚ»úÆ÷£¬Í¨³£Îª±¾»ú£¨Ä¬ÈÏ£©
+	/*	* @ summary : æ‰“å¼€å‘½åç®¡é“
+		* @ param = "pipename" : ç®¡é“åï¼Œè‡ªå®šä¹‰
+		* @ param = "pipePath" : ç®¡é“è·¯å¾„ï¼Œå¯ä¸ºç©º
+		* @ param = "pipeServer" : ç®¡é“æ‰€åœ¨æœºå™¨ï¼Œé€šå¸¸ä¸ºæœ¬æœºï¼ˆé»˜è®¤ï¼‰
 	*/
 	bool Open(const char* pipename, const char*pipePath, const char*pipeServer = ".");
 
-	/*	* @ summary : ´ò¿ª´®¿Ú
-		* @ param = "comNum" : ´®¿ÚĞòºÅ
+	/*	* @ summary : æ‰“å¼€ä¸²å£
+		* @ param = "comNum" : ä¸²å£åºå·
 	*/
 	bool Open(BYTE comNum);
 
-	//´ò¿ªÖ¸¶¨ÓòÃûµÄÍøÂçÍ¨ĞÅ£¨ÔİÎ´ÊµÏÖ£©
+	//æ‰“å¼€æŒ‡å®šåŸŸåçš„ç½‘ç»œé€šä¿¡ï¼ˆæš‚æœªå®ç°ï¼‰
 	bool Open(const char* netAddr, BYTE protocol);
-	//´ò¿ªÖ¸¶¨IPºÍ¶Ë¿ÚµÄÍøÂçÍ¨ĞÅ£¨ÔİÎ´ÊµÏÖ£©
+	//æ‰“å¼€æŒ‡å®šIPå’Œç«¯å£çš„ç½‘ç»œé€šä¿¡ï¼ˆæš‚æœªå®ç°ï¼‰
 	bool Open(DWORD netIp, WORD port, BYTE protocol);
 
-	/*	* @ summary : ´ò¿ªÃüÃû¹ÜµÀ
+	/*	* @ summary : æ‰“å¼€å‘½åç®¡é“
 		*/
 	bool Close();
 
-	/*	* @ summary : ¼ìÑéÁ÷ÊÇ·ñ´ò¿ªÖĞ
-		* @ param = "dynamicCheck" : ÊÇ·ñ½øĞĞÊµÊ±¼ì²é£¬µ±¸Ã²ÎÊıÎªÄ¬ÈÏ»òÕßtrueÊ±£¬ÔÚ·ÇÁªÍø×´Ì¬ÏÂ£¬½«³¢ÊÔ¶ÁÈ¡Á÷£¬ÁªÍø×´Ì¬ÏÂ£¬½«³¢ÊÔpingÄ¿±êµØÖ·
+	/*	* @ summary : æ£€éªŒæµæ˜¯å¦æ‰“å¼€ä¸­
+		* @ param = "dynamicCheck" : æ˜¯å¦è¿›è¡Œå®æ—¶æ£€æŸ¥ï¼Œå½“è¯¥å‚æ•°ä¸ºé»˜è®¤æˆ–è€…trueæ—¶ï¼Œåœ¨éè”ç½‘çŠ¶æ€ä¸‹ï¼Œå°†å°è¯•è¯»å–æµï¼Œè”ç½‘çŠ¶æ€ä¸‹ï¼Œå°†å°è¯•pingç›®æ ‡åœ°å€
 		*/
 	bool IsOpened(bool dynamicCheck = true) ;
 
-	/*	* @ summary : ¼ìÑéµ±Ç°Á÷µÄÀàĞÍ
-		* @ return : ·µ»ØÁ÷µÄÀàĞÍ
+	/*	* @ summary : æ£€éªŒå½“å‰æµçš„ç±»å‹
+		* @ return : è¿”å›æµçš„ç±»å‹
 		*/
 	StreamType NowType() const;
 
-	/*	* @ summary : ¼ì²éÁ÷µÄ³¤¶È
+	/*	* @ summary : æ£€æŸ¥æµçš„é•¿åº¦
 		*/
 	fpos_t GetLength() const;
 
-	/*	* @ summary : ¼ì²éµ±Ç°¶ÁĞ´Ö¸ÕëµÄÎ»ÖÃ
+	/*	* @ summary : æ£€æŸ¥å½“å‰è¯»å†™æŒ‡é’ˆçš„ä½ç½®
 		*/
 	fpos_t GetPos() const;
 
-	/*	* @ summary : ¶ÁĞ´Ö¸ÕëÊÇ·ñÒÑµ½Á÷Ä©Î²
+	/*	* @ summary : è¯»å†™æŒ‡é’ˆæ˜¯å¦å·²åˆ°æµæœ«å°¾
 		*/
 	bool IsEndPos() const;
 
-	/*	* @ summary : ½«¶ÁĞ´Ö¸ÕëÒÆ¶¯µ½Ö¸¶¨Î»ÖÃ
-		* @ param = "pos" : ´ÓÁ÷¿ªÍ·ËãÆğ£¬ÒªÒÆ¶¯µ½µÄÎ»ÖÃ¡£´Ë²ÎÊıÄ¬ÈÏÖµÎªÒÆ¶¯µ½Á÷Î²²¿
+	/*	* @ summary : å°†è¯»å†™æŒ‡é’ˆç§»åŠ¨åˆ°æŒ‡å®šä½ç½®
+		* @ param = "pos" : ä»æµå¼€å¤´ç®—èµ·ï¼Œè¦ç§»åŠ¨åˆ°çš„ä½ç½®ã€‚æ­¤å‚æ•°é»˜è®¤å€¼ä¸ºç§»åŠ¨åˆ°æµå°¾éƒ¨
 		*/
 	bool MovePos(fpos_t pos = FILE_LONG_POS_END) const;
 
-	/*	* @ summary : »ñÈ¡Á÷Ô´µÄÎÄ¼şÃû£¬¶ÔÓÚÎÄ¼şÖ¸ÆäÂ·¾¶Ãû³Æ£¬¶ÔÓÚ¹ÜµÀÔòÊÇ¹ÜµÀÈ«Ãû£¬¶ÔÓÚ´®¿ÚÔòÊÇ´®¿ÚÃû£¬¶ÔÓÚÄÚ´æºÍ¹²ÏíÄÚ´æ£¬ÔòÊÇÄÚ´æµØÖ·ºÅ£¬¶ÔÓÚÍøÂç£¬ÔòÊÇÆäÓòÃû»òÕßipµØÖ·ºÍ¶Ë¿Ú
+	/*	* @ summary : è·å–æµæºçš„æ–‡ä»¶åï¼Œå¯¹äºæ–‡ä»¶æŒ‡å…¶è·¯å¾„åç§°ï¼Œå¯¹äºç®¡é“åˆ™æ˜¯ç®¡é“å…¨åï¼Œå¯¹äºä¸²å£åˆ™æ˜¯ä¸²å£åï¼Œå¯¹äºå†…å­˜å’Œå…±äº«å†…å­˜ï¼Œåˆ™æ˜¯å†…å­˜åœ°å€å·ï¼Œå¯¹äºç½‘ç»œï¼Œåˆ™æ˜¯å…¶åŸŸåæˆ–è€…ipåœ°å€å’Œç«¯å£
 		*/
 	const char* GetSourceName() const;
 
-	/*	* @ summary : ¶ÁÈ¡Á÷ÖĞµÄÊı¾İ
-		* @ param = "buffer" : Òª½«Êı¾İ±£´æµ½µÄÎ»ÖÃ
-		* @ param = "len" : Òª¶ÁÈ¡µÄ×î´ó³¤¶È
-		* @ param = "pos" : Òª¶ÁÈ¡µÄ¿ªÊ¼Î»ÖÃ£¬²»´«´Ë²ÎÊıÔò´Óµ±Ç°Î»ÖÃ¾ÍµØ¶ÁÈ¡
-		* @ return : ¶ÁÈ¡µ½µÄÊµ¼Ê³¤¶È£¬Èç¹ûÎª0£¬¿ÉÄÜ·¢ÉúÁË´íÎó
+	/*	* @ summary : è¯»å–æµä¸­çš„æ•°æ®
+		* @ param = "buffer" : è¦å°†æ•°æ®ä¿å­˜åˆ°çš„ä½ç½®
+		* @ param = "len" : è¦è¯»å–çš„æœ€å¤§é•¿åº¦
+		* @ param = "pos" : è¦è¯»å–çš„å¼€å§‹ä½ç½®ï¼Œä¸ä¼ æ­¤å‚æ•°åˆ™ä»å½“å‰ä½ç½®å°±åœ°è¯»å–
+		* @ return : è¯»å–åˆ°çš„å®é™…é•¿åº¦ï¼Œå¦‚æœä¸º0ï¼Œå¯èƒ½å‘ç”Ÿäº†é”™è¯¯
 		*/
 	DWORD Read(void*buffer, DWORD len = FILE_SHORT_POS_END, fpos_t pos = FILE_LONG_POS_END);
 
-	/*	* @ summary : ¶ÁÈ¡Á÷ÖĞµÄÊı¾İ
-		* @ param = "buffer" : Òª½«Êı¾İ±£´æµ½µÄÎ»ÖÃ
-		* @ param = "endtag" : ¶ÁÈ¡µ½´ËÖµµÄ×Ö½ÚÊı¾İÊ±£¬Í£Ö¹
-		* @ param = "maxlen" : Òª¶ÁÈ¡µÄ×î´ó³¤¶È
-		* @ return : ¶ÁÈ¡µ½µÄÊµ¼Ê³¤¶È£¬Èç¹ûÎª0£¬¿ÉÄÜ·¢ÉúÁË´íÎó
+	/*	* @ summary : è¯»å–æµä¸­çš„æ•°æ®
+		* @ param = "buffer" : è¦å°†æ•°æ®ä¿å­˜åˆ°çš„ä½ç½®
+		* @ param = "endtag" : è¯»å–åˆ°æ­¤å€¼çš„å­—èŠ‚æ•°æ®æ—¶ï¼Œåœæ­¢
+		* @ param = "maxlen" : è¦è¯»å–çš„æœ€å¤§é•¿åº¦
+		* @ return : è¯»å–åˆ°çš„å®é™…é•¿åº¦ï¼Œå¦‚æœä¸º0ï¼Œå¯èƒ½å‘ç”Ÿäº†é”™è¯¯
 		*/
 	DWORD Read(void*buffer, BYTE endtag, DWORD maxlen = FILE_SHORT_POS_END);
 
-	/*	* @ summary : ½«Êı¾İĞ´ÈëÁ÷
-		* @ param = "buffer" : ÒªĞ´ÈëµÄÊı¾İËùÔÚµÄÎ»ÖÃ
-		* @ param = "len" : ÒªĞ´ÈëµÄ³¤¶È£¬²»´«´Ë²ÎÊı£¬Ôòµ±Óöµ½Êı¾İÖĞµÄ0Öµ£¨×Ö·û´®½áÎ²£©Ê±Í£Ö¹Ğ´Èë
-		* @ return : Ğ´ÈëµÄÊµ¼Ê³¤¶È£¬Èç¹ûÎª0£¬¿ÉÄÜ·¢ÉúÁË´íÎó
+	/*	* @ summary : å°†æ•°æ®å†™å…¥æµ
+		* @ param = "buffer" : è¦å†™å…¥çš„æ•°æ®æ‰€åœ¨çš„ä½ç½®
+		* @ param = "len" : è¦å†™å…¥çš„é•¿åº¦ï¼Œä¸ä¼ æ­¤å‚æ•°ï¼Œåˆ™å½“é‡åˆ°æ•°æ®ä¸­çš„0å€¼ï¼ˆå­—ç¬¦ä¸²ç»“å°¾ï¼‰æ—¶åœæ­¢å†™å…¥
+		* @ return : å†™å…¥çš„å®é™…é•¿åº¦ï¼Œå¦‚æœä¸º0ï¼Œå¯èƒ½å‘ç”Ÿäº†é”™è¯¯
 		*/
 	DWORD Write(void*buffer, DWORD len = 0);
 
 public:
-	//ÒÔÏÂ½öÏŞÎÄ¼ş²Ù×÷
+	//ä»¥ä¸‹ä»…é™æ–‡ä»¶æ“ä½œ
 
-	/*	* @ summary : ¿½±´ÎÄ¼ş£¬ÒªÇóÄ¿±êÎÄ¼ş²»´æÔÚ£¬·ñÔò·µ»Øfalse
-		* @ param = "srcPath" : Ô´ÎÄ¼şÂ·¾¶
-		* @ param = "dstPath" : Ä¿±êÎÄ¼şÂ·¾¶
+	/*	* @ summary : æ‹·è´æ–‡ä»¶ï¼Œè¦æ±‚ç›®æ ‡æ–‡ä»¶ä¸å­˜åœ¨ï¼Œå¦åˆ™è¿”å›false
+		* @ param = "srcPath" : æºæ–‡ä»¶è·¯å¾„
+		* @ param = "dstPath" : ç›®æ ‡æ–‡ä»¶è·¯å¾„
 		*/
 	static bool CopyFile(const char*srcPath, const char*dstPath);
 
-	/*	* @ summary : ÒÆ¶¯ÎÄ¼ş»òÖØÃüÃûÎÄ¼ş£¬ÒªÇóÄ¿±êÎÄ¼ş»òÎÄ¼şÃû²»´æÔÚ£¬·ñÔò·µ»Øfalse
-		* @ param = "srcPath" : Ô´ÎÄ¼şÂ·¾¶Ãû³Æ
-		* @ param = "dstPath" : Ä¿±êÎÄ¼şÂ·¾¶Ãû³Æ
+	/*	* @ summary : ç§»åŠ¨æ–‡ä»¶æˆ–é‡å‘½åæ–‡ä»¶ï¼Œè¦æ±‚ç›®æ ‡æ–‡ä»¶æˆ–æ–‡ä»¶åä¸å­˜åœ¨ï¼Œå¦åˆ™è¿”å›false
+		* @ param = "srcPath" : æºæ–‡ä»¶è·¯å¾„åç§°
+		* @ param = "dstPath" : ç›®æ ‡æ–‡ä»¶è·¯å¾„åç§°
 		*/
 	static bool MoveOrRenameFile(const char*srcPath, const char*dstPath);
 
-	/*	* @ summary : É¾³ıÎÄ¼ş
-		* @ param = "path" : ÒªÉ¾³ıµÄÎÄ¼şÂ·¾¶
+	/*	* @ summary : åˆ é™¤æ–‡ä»¶
+		* @ param = "path" : è¦åˆ é™¤çš„æ–‡ä»¶è·¯å¾„
 		*/
 	static bool DeleteFile(const char*path);
 
-	/*	* @ summary : ¼ì²éÎÄ¼şÊÇ·ñÒÑ´æÔÚ
-		* @ param = "path" : Òª¼ì²éµÄÎÄ¼şÂ·¾¶
+	/*	* @ summary : æ£€æŸ¥æ–‡ä»¶æ˜¯å¦å·²å­˜åœ¨
+		* @ param = "path" : è¦æ£€æŸ¥çš„æ–‡ä»¶è·¯å¾„
 		*/
 	static bool IsFileExist(const char*path);
 
 public:
 
-	/*	* @ summary : ½«Á÷ÄÚÈİĞ´ÈëÖ¸¶¨Î»ÖÃ£¬Ğ´Èë²¿·ÖÎª´Óµ±Ç°Ö¸Õë´¦µ½ÎÄ¼ş½áÎ²£¬Èç¹ûÔÚµ½´ï½áÎ²Ç°ÒÑ¾­Ğ´ÈëµÄ³¤¶È´ïµ½FILE_SHORT_POS_END£¬ÔòÍ£Ö¹
-		* @ param = "buffer" : ÒªĞ´ÈëµÄÇøÓò
+	/*	* @ summary : å°†æµå†…å®¹å†™å…¥æŒ‡å®šä½ç½®ï¼Œå†™å…¥éƒ¨åˆ†ä¸ºä»å½“å‰æŒ‡é’ˆå¤„åˆ°æ–‡ä»¶ç»“å°¾ï¼Œå¦‚æœåœ¨åˆ°è¾¾ç»“å°¾å‰å·²ç»å†™å…¥çš„é•¿åº¦è¾¾åˆ°FILE_SHORT_POS_ENDï¼Œåˆ™åœæ­¢
+		* @ param = "buffer" : è¦å†™å…¥çš„åŒºåŸŸ
 		*/
 	FileStream&operator>>(void*buffer);
 
-	/*	* @ summary : ½«Ä¿±ê×Ö·û´®ÄÚÈİĞ´ÈëÁ÷£¬¸ÃÄÚÈİÓöµ½0Êı¾İ£¨×Ö·û´®½áÎ²£©Ê±Í£Ö¹Ğ´Èë
-		* @ param = "buffer" : ÒªĞ´ÈëµÄÇøÓò
+	/*	* @ summary : å°†ç›®æ ‡å­—ç¬¦ä¸²å†…å®¹å†™å…¥æµï¼Œè¯¥å†…å®¹é‡åˆ°0æ•°æ®ï¼ˆå­—ç¬¦ä¸²ç»“å°¾ï¼‰æ—¶åœæ­¢å†™å…¥
+		* @ param = "buffer" : è¦å†™å…¥çš„åŒºåŸŸ
 		*/
 	FileStream&operator<<(void*buffer);
 	
-	/*	* @ summary : ½«Á÷ÄÚÈİ´Óµ±Ç°Ö¸Õë´¦Ö®ºóµÄËùÓĞÄÚÈİ£¬¿½±´µ½ÁíÒ»ÎÄ¼ş
-		* @ param = "filename" : ÒªĞ´ÈëµÄÎÄ¼ş
+	/*	* @ summary : å°†æµå†…å®¹ä»å½“å‰æŒ‡é’ˆå¤„ä¹‹åçš„æ‰€æœ‰å†…å®¹ï¼Œæ‹·è´åˆ°å¦ä¸€æ–‡ä»¶
+		* @ param = "filename" : è¦å†™å…¥çš„æ–‡ä»¶
 		*/
 	bool operator^=(const char* filename);
 
-	/*	* @ summary : ÅĞ¶ÏÁ÷ÊÇ·ñÎª¿Õ
+	/*	* @ summary : åˆ¤æ–­æµæ˜¯å¦ä¸ºç©º
 	*/
 	bool operator==(std::nullptr_t);
 
-	/*	* @ summary : ÅĞ¶ÏÁ÷ÊÇ·ñ²»Îª¿Õ
+	/*	* @ summary : åˆ¤æ–­æµæ˜¯å¦ä¸ä¸ºç©º
 	*/
 	bool operator!=(std::nullptr_t);
 
 public:
-	// ×î´óÎÄ¼ş³¤¶È
+	// æœ€å¤§æ–‡ä»¶é•¿åº¦
 	static const fpos_t FILE_LONG_POS_END = 0x7fffffffffffffff;
 	static const DWORD FILE_SHORT_POS_END = 0xffffffff;
 
 public:
-	// ÄÚ²¿Êı¾İ¾ä±ú£¬¶ÔÍâÎŞÓÃ
+	// å†…éƒ¨æ•°æ®å¥æŸ„ï¼Œå¯¹å¤–æ— ç”¨
 	const DWORD handle;
 };
 

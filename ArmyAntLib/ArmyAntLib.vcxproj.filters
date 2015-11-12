@@ -39,6 +39,9 @@
     <ClInclude Include="include\AA_start.h">
       <Filter>2.mainOutput</Filter>
     </ClInclude>
+    <ClInclude Include="include\AA_end.h">
+      <Filter>2.mainOutput</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\AAFile.cpp">

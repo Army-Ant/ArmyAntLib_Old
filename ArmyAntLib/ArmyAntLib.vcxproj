@@ -82,6 +82,7 @@
     <ClInclude Include="C_ArmyAnt.h" />
     <ClInclude Include="ArmyAnt.h" />
     <ClInclude Include="base\base.hpp" />
+    <ClInclude Include="include\AA_end.h" />
     <ClInclude Include="include\AA_start.h" />
     <ClInclude Include="include\AADefine.h" />
     <ClInclude Include="include\AAFile.h" />
