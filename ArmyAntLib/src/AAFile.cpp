@@ -1,5 +1,5 @@
 ﻿#include "../include/AAFile.h"
-#include <map>
+#include "../include/AAClassPrivateHandle.hpp"
 
 #ifdef OS_WINDOWS
 
@@ -18,6 +18,9 @@ namespace ArmyAnt {
 class FsPrivate
 {
 public:
+	FsPrivate() {};
+	~FsPrivate() {};
+
 	StreamType type = StreamType::None;
 	bool nocreate = true;
 	bool noexist = false;
@@ -28,84 +31,27 @@ public:
 	fpos_t pos = 0;
 
 private:
-	FsPrivate();
-	FsPrivate(FsPrivate&);
-	void operator=(FsPrivate&);
-	~FsPrivate();
-
-public: // 保护器句柄管理
-	static DWORD GetHandle();
-	static void ReleaseHandle(DWORD handle);
-
-	static std::map<DWORD, FsPrivate*> handleMap;
-	static std::map<DWORD, FileStream*> handleRefMap;
+	FsPrivate(FsPrivate&) {};
+	void operator=(FsPrivate&) {};
 };
 
-std::map<DWORD, FsPrivate*> FsPrivate::handleMap;
-std::map<DWORD, FileStream*> FsPrivate::handleRefMap;
-
-FsPrivate::FsPrivate()
-{
-
-}
-
-FsPrivate::FsPrivate(FsPrivate&)
-{
-
-}
-
-void FsPrivate::operator=(FsPrivate&)
-{
-
-}
-
-FsPrivate::~FsPrivate()
-{
-
-}
-
-DWORD FsPrivate::GetHandle()
-{
-	auto len = handleMap.size();
-	for(DWORD n = 0; n < len; n++)
-	{
-		if(handleMap.find(n) == handleMap.end())
-		{
-			handleMap.insert(std::pair<DWORD, FsPrivate*>(n, new FsPrivate()));
-			return n;
-		}
-	}
-	handleMap.insert(std::pair<DWORD, FsPrivate*>(len, new FsPrivate()));
-	return len;
-}
-
-void FsPrivate::ReleaseHandle(DWORD handle)
-{
-	auto ret = handleMap.find(handle);
-	if(ret != handleMap.end())
-	{
-		AA_SAFE_DEL(ret->second);
-		handleMap.erase(ret);
-	}
-}
+static ClassPrivateHandleManager<FileStream, FsPrivate> handleManager;
 
 FileStream::FileStream()
-	:handle(FsPrivate::GetHandle())
+	:handle(handleManager.GetHandle(this))
 {
-	FsPrivate::handleRefMap.insert(std::pair<DWORD, FileStream*>(handle, this));
 }
 
 FileStream::~FileStream()
 {
-	FsPrivate::ReleaseHandle(handle);
-	FsPrivate::handleRefMap.erase(handle);
+	handleManager.ReleaseHandle(handle);
 }
 
 bool FileStream::SetStreamMode(bool nocreate /*= true*/, bool noexist /*= false*/)
 {
 	if(nocreate&&noexist)
 		return false;
-	auto hd = FsPrivate::handleMap.find(handle)->second;
+	auto hd = handleManager[handle];
 	hd->nocreate = nocreate;
 	hd->noexist = noexist;
 	return true;
@@ -113,7 +59,7 @@ bool FileStream::SetStreamMode(bool nocreate /*= true*/, bool noexist /*= false*
 
 bool FileStream::Open(const char* filepath)
 {
-	auto hd = FsPrivate::handleMap.find(handle)->second;
+	auto hd = handleManager[handle];
 	if(hd->type != StreamType::None)
 		return false;
 	AAAssert(filepath != nullptr);
@@ -125,7 +71,7 @@ bool FileStream::Open(const char* filepath)
 
 bool FileStream::Open(DWORD memaddr, fpos_t len)
 {
-	auto hd = FsPrivate::handleMap.find(handle)->second;
+	auto hd = handleManager[handle];
 	if(hd->type != StreamType::None)
 		return false;
 	AAAssert(memaddr != 0);
@@ -162,7 +108,7 @@ bool FileStream::Open(BYTE* memaddr, fpos_t len)
 
 bool FileStream::Open(const char* pipename, const char*pipePath, const char*pipeServer /*= "."*/)
 {
-	auto hd = FsPrivate::handleMap.find(handle)->second;
+	auto hd = handleManager[handle];
 	if(hd->type != StreamType::None)
 		return false;
 	AAAssert(pipename != nullptr);
@@ -174,7 +120,7 @@ bool FileStream::Open(const char* pipename, const char*pipePath, const char*pipe
 
 bool FileStream::Open(BYTE comNum)
 {
-	auto hd = FsPrivate::handleMap.find(handle)->second;
+	auto hd = handleManager[handle];
 	if(hd->type != StreamType::None)
 		return false;
 	AAAssert(comNum != 0);
@@ -186,7 +132,7 @@ bool FileStream::Open(BYTE comNum)
 
 bool FileStream::Open(const char* netAddr, BYTE protocol)
 {
-	auto hd = FsPrivate::handleMap.find(handle)->second;
+	auto hd = handleManager[handle];
 	if(hd->type != StreamType::None)
 		return false;
 	AAAssert(netAddr != nullptr && protocol != 0);
@@ -197,7 +143,7 @@ bool FileStream::Open(const char* netAddr, BYTE protocol)
 
 bool FileStream::Open(DWORD netIp, WORD port, BYTE protocol)
 {
-	auto hd = FsPrivate::handleMap.find(handle)->second;
+	auto hd = handleManager[handle];
 	if(hd->type != StreamType::None)
 		return false;
 	AAAssert(port != 0 && protocol != 0);
@@ -210,7 +156,7 @@ bool FileStream::Open(DWORD netIp, WORD port, BYTE protocol)
 
 bool FileStream::Close()
 {
-	auto hd = FsPrivate::handleMap.find(handle)->second;
+	auto hd = handleManager[handle];
 	switch(hd->type)
 	{
 		case StreamType::File:
@@ -236,7 +182,7 @@ bool FileStream::Close()
 
 bool FileStream::IsOpened(bool dynamicCheck/* = true*/)
 {
-	auto hd = FsPrivate::handleMap.find(handle)->second;
+	auto hd = handleManager[handle];
 	if(hd->type == StreamType::None || (hd->file == nullptr&&hd->mem == nullptr&&hd->len <= 0))
 		return false;
 	else if(!dynamicCheck)
@@ -271,13 +217,13 @@ bool FileStream::IsOpened(bool dynamicCheck/* = true*/)
 
 ArmyAnt::StreamType FileStream::NowType() const
 {
-	auto hd = FsPrivate::handleMap.find(handle)->second;
+	auto hd = handleManager[handle];
 	return hd->type;
 }
 
 fpos_t FileStream::GetLength() const
 {
-	auto hd = FsPrivate::handleMap.find(handle)->second;
+	auto hd = handleManager[handle];
 	switch(hd->type)
 	{
 		case StreamType::File:
@@ -302,7 +248,7 @@ fpos_t FileStream::GetLength() const
 
 fpos_t FileStream::GetPos() const
 {
-	auto hd = FsPrivate::handleMap.find(handle)->second;
+	auto hd = handleManager[handle];
 	switch(hd->type)
 	{
 		case StreamType::File:
@@ -321,7 +267,7 @@ fpos_t FileStream::GetPos() const
 
 bool FileStream::IsEndPos() const
 {
-	auto hd = FsPrivate::handleMap.find(handle)->second;
+	auto hd = handleManager[handle];
 	switch(hd->type)
 	{
 		case StreamType::File:
@@ -339,7 +285,7 @@ bool FileStream::IsEndPos() const
 
 bool FileStream::MovePos(fpos_t pos /*= FILE_POS_END*/) const
 {
-	auto hd = FsPrivate::handleMap.find(handle)->second;
+	auto hd = handleManager[handle];
 	switch(hd->type)
 	{
 		case StreamType::File:
@@ -359,13 +305,13 @@ bool FileStream::MovePos(fpos_t pos /*= FILE_POS_END*/) const
 
 const char* FileStream::GetSourceName() const
 {
-	return FsPrivate::handleMap.find(handle)->second->name.c_str();
+	return	handleManager[handle]->name.c_str();
 }
 
 DWORD FileStream::Read(void*buffer, DWORD len /*= FILE_SHORT_POS_END*/, fpos_t pos /*= FILE_LONG_POS_END*/)
 {
 	AAAssert(buffer != nullptr);
-	auto hd = FsPrivate::handleMap.find(handle)->second;
+	auto hd = handleManager[handle];
 	switch(hd->type)
 	{
 		case StreamType::File:
@@ -411,7 +357,7 @@ DWORD FileStream::Read(void*buffer, DWORD len /*= FILE_SHORT_POS_END*/, fpos_t p
 DWORD FileStream::Read(void*buffer, BYTE endtag, DWORD maxlen/* = FILE_SHORT_POS_END*/)
 {
 	AAAssert(buffer != nullptr);
-	auto hd = FsPrivate::handleMap.find(handle)->second;
+	auto hd = handleManager[handle];
 	DWORD len = 0;
 	fpos_t wholeLen = 0;
 	if(hd->type != StreamType::None)
@@ -458,7 +404,7 @@ DWORD FileStream::Read(void*buffer, BYTE endtag, DWORD maxlen/* = FILE_SHORT_POS
 DWORD FileStream::Write(void*buffer, DWORD len /*= 0*/)
 {
 	AAAssert(buffer != nullptr);
-	auto hd = FsPrivate::handleMap.find(handle)->second;
+	auto hd = handleManager[handle];
 	if(len == 0)
 		while(reinterpret_cast<BYTE*>(buffer)[len] != 0)
 			len++;
@@ -550,7 +496,7 @@ FileStream& FileStream::operator<<(void*buffer)
 
 FileStream* FileStream::GetStream(DWORD handle)
 {
-	return FsPrivate::handleRefMap.find(handle)->second;
+	return 	handleManager.GetSourceByHandle(handle);
 }
 
 bool FileStream::operator!=(std::nullptr_t)

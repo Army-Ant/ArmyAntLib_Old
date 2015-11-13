@@ -98,6 +98,7 @@
     <ClInclude Include="include\AA_start.h" />
     <ClInclude Include="include\AADefine.h" />
     <ClInclude Include="include\AAFile.h" />
+    <ClInclude Include="include\AAClassPrivateHandle.hpp" />
     <ClInclude Include="include\C_AADefine.h" />
     <ClInclude Include="include\C_AAFile.h" />
   </ItemGroup>

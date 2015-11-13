@@ -54,6 +54,9 @@
     <ClInclude Include="C_ArmyAnt.h">
       <Filter>2.mainOutput\onlyIncludeFile</Filter>
     </ClInclude>
+    <ClInclude Include="include\AAClassPrivateHandle.hpp">
+      <Filter>3.CppLibCode</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\AAFile.cpp">
