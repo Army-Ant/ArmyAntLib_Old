@@ -231,3 +231,5 @@ $RECYCLE.BIN/
 *.lnk
 *.tlog
 *.idb
+*.tlog
+*.idb
