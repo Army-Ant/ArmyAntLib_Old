@@ -57,6 +57,9 @@
     <ClInclude Include="include\AAClassPrivateHandle.hpp">
       <Filter>3.CppLibCode</Filter>
     </ClInclude>
+    <ClInclude Include="include\AATripleMap.hpp">
+      <Filter>3.CppLibCode</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\AAFile.cpp">
