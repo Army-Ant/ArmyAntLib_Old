@@ -25,6 +25,9 @@
     <Filter Include="6.docs">
       <UniqueIdentifier>{b54891ba-0f44-427d-8458-326b09b23eba}</UniqueIdentifier>
     </Filter>
+    <Filter Include="3.CppLibCode\templateClasses">
+      <UniqueIdentifier>{d5c166c9-3636-4581-90c6-7bf459fd2df2}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="base\base.hpp">
@@ -55,10 +58,10 @@
       <Filter>2.mainOutput\onlyIncludeFile</Filter>
     </ClInclude>
     <ClInclude Include="include\AAClassPrivateHandle.hpp">
-      <Filter>3.CppLibCode</Filter>
+      <Filter>3.CppLibCode\templateClasses</Filter>
     </ClInclude>
     <ClInclude Include="include\AATripleMap.hpp">
-      <Filter>3.CppLibCode</Filter>
+      <Filter>3.CppLibCode\templateClasses</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
