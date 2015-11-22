@@ -57,8 +57,7 @@ template <class _Key, class _Value1, class _Value2>
 class TripleMap
 {
 public:
-	TripleMap();
-	TripleMap(Triad*, DWORD);
+	TripleMap(Triad* dataArray = nullptr, DWORD num = 0);
 	TripleMap(const SelfMap&);
 	~TripleMap();
 	typedef TripleMap<_Key, _Value1, _Value2> SelfMap;
@@ -113,7 +112,6 @@ class Iterator_TripleMap
 {
 public:
 	Iterator_TripleMap(const TripleMap&);
-	Iterator_TripleMap(const Element&);
 	Iterator_TripleMap(const Iterator_TripleMap&);
 	~Iterator_TripleMap();
 	typedef Iterator_TripleMap<_Key, _Value1, _Value2> Iterator;
@@ -172,6 +170,9 @@ public:
 	inline const Element* operator->() const;
 	inline Element operator *();
 	inline const Element& operator *() const;
+
+public:
+	const _Key&key;
 
 private:
 	Element* pointer;
@@ -415,9 +416,65 @@ bool Triad<_First, _Second, _Third>::operator!() const
 
 
 template <class _Key, class _Value1, class _Value2>
-TripleMap<_Key, _Value1, _Value2>::TripleMap()
+TripleMap<_Key, _Value1, _Value2>::TripleMap(Triad* dataArray/* = nullptr*/, DWORD num/* = 0*/)
 {
+	if(dataArray == nullptr || num == 0)
+		return;
+	for(DWORD i = 0; i < num; i++)
+	{
+		datas.push_back(dataArray[i]);
+	}
 }
+
+template <class _Key, class _Value1, class _Value2>
+ArmyAnt::TripleMap<_Key, _Value1, _Value2>::TripleMap(const SelfMap& value)
+{
+	auto len = value.datas.size();
+	for(DWORD i = 0; i < len; i++)
+	{
+		datas.push_back(value.datas.at(i));
+	}
+}
+
+template <class _Key, class _Value1, class _Value2>
+ArmyAnt::TripleMap<_Key, _Value1, _Value2>::~TripleMap()
+{
+	Clear();
+}
+
+template <class _Key, class _Value1, class _Value2>
+bool ArmyAnt::TripleMap<_Key, _Value1, _Value2>::Equals(const SelfMap& value) const
+{
+	auto len = value.datas.size();
+	for(DWORD i = 0; i < len; i++)
+	{
+		datas.push_back(value.datas.at(i));
+	}
+}
+
+template <class _Key, class _Value1, class _Value2>
+bool ArmyAnt::TripleMap<_Key, _Value1, _Value2>::Empty() const
+{
+	return datas.empty();
+}
+
+template <class _Key, class _Value1, class _Value2>
+std::pair<_Value1, _Value2> ArmyAnt::TripleMap<_Key, _Value1, _Value2>::GetValues(const _Key& key) const
+{
+	auto ret = Find(key);
+	return std::pair<_Value1, _Value2>(ret->second, ret->third);
+}
+
+template <class _Key, class _Value1, class _Value2>
+DWORD ArmyAnt::TripleMap<_Key, _Value1, _Value2>::Size() const
+{
+	return datas.size();
+}
+
+
+
+
+
 
 
  } // namespace ArmyAnt
