@@ -126,3 +126,6 @@ ARMYANT_CLIB_API bool AA_Stream_IsFileExist(const char*path)
 {
 	return FileStream::IsFileExist(path);
 }
+
+#include "../include/AATripleMap.hpp"
+static ArmyAnt::TripleMap<int, char, int> res;
