@@ -6,8 +6,8 @@
 #ifndef _cplusplus
 
 typedef _Bool bool;
-#define true 1
-#define false 0
+const int true = 1;
+const int false = 0;
 
 #undef AA_SAFE_DEL
 #undef AA_SAFE_DELALL
