@@ -13,8 +13,24 @@
 
 #include "AADefine.h"
 #include "AA_start.h"
+#include <functional>
 
 namespace ArmyAnt {
+
+namespace StateMachineHelper {
+
+typedef std::function<bool(const char*lastState, const char*nextState, void*params)> StateChangeFunc;
+typedef std::function<bool(const char*thisState, DWORD delayTime, void*params)> StateUpdateFunc;
+
+struct State
+{
+	char name[128] = "";
+	StateChangeFunc OnEnter = nullptr;
+	StateChangeFunc OnLeave = nullptr;
+	StateUpdateFunc OnUpdate = nullptr;
+};
+
+}
 
 class ARMYANTLIB_API StateMachine
 {
@@ -25,20 +41,33 @@ public:
 	~StateMachine();
 
 public:
-	bool InsertState();
-	bool DeleteState();
-	bool IsStateExist()const;
-	bool GetAllStates()const;
-	bool GetCurrentState()const;
-	bool GoToState();
-	bool AbortToState();
-	bool GetDefaultState()const;
-	bool SetDefaultState();
-	bool EnableState();
-	bool IsStateEnable()const;
+	bool InsertState(const StateMachineHelper::State&state, bool isDefaultState = false);
+	bool DeleteState(const char*name);
+	bool IsStateExist(const char*name)const;
+	const char* GetAllStates()const;
+
+	bool GoToState(const char*name = nullptr);
+	bool AbortToState(const char*name = nullptr, StateMachineHelper::StateChangeFunc dealFunc = nullptr);
+	const char* GetCurrentState()const;
+	const char* GetDefaultState()const;
+	bool SetDefaultState(const char*name);
+	bool EnableState(const char*name);
+	bool IsStateEnable(const char*name)const;
+
+	bool Start(const char*name = nullptr);
 	bool Pause();
 	bool Resume();
 	bool IsRunning()const;
+
+public:
+	StateMachine& operator+=(StateMachineHelper::State&state);
+	StateMachine& operator-=(StateMachineHelper::State&state);
+	StateMachineHelper::State& operator[](const char*name);
+	const StateMachineHelper::State& operator[](const char*name)const;
+	StateMachine& operator>>(const char*name);
+
+public:
+	const DWORD handle;
 };
 
 }

@@ -66,6 +66,12 @@
     <ClInclude Include="include\AAStateMachine.h">
       <Filter>3.CppLibCode</Filter>
     </ClInclude>
+    <ClInclude Include="include\AABinary.h">
+      <Filter>3.CppLibCode</Filter>
+    </ClInclude>
+    <ClInclude Include="include\AAAes.h">
+      <Filter>3.CppLibCode</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\AAFile.cpp">

@@ -94,6 +94,8 @@
     <ClInclude Include="C_ArmyAnt.h" />
     <ClInclude Include="ArmyAnt.h" />
     <ClInclude Include="base\base.hpp" />
+    <ClInclude Include="include\AAAes.h" />
+    <ClInclude Include="include\AABinary.h" />
     <ClInclude Include="include\AAStateMachine.h" />
     <ClInclude Include="include\AATripleMap.hpp" />
     <ClInclude Include="include\AA_end.h" />
