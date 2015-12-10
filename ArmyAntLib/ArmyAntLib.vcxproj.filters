@@ -80,6 +80,9 @@
     <ClCompile Include="src\C_AAFile.cpp">
       <Filter>4.CRefCode</Filter>
     </ClCompile>
+    <ClCompile Include="src\AAAes.cpp">
+      <Filter>3.CppLibCode</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="base\build_start.bat">

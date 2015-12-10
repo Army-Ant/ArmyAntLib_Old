@@ -1,11 +1,11 @@
-#ifndef AA_BINARY_H_2015_12_8
+ï»¿#ifndef AA_BINARY_H_2015_12_8
 #define AA_BINARY_H_2015_12_8
 
 /*	* @ author			: Jason
 	* @ date			: 12/08/2015
 	* @ nearly update	: 12/08/2015
 	* @ small version	: 0.1
-	* @ summary			: ¶ş½øÖÆÊı¾İ×ª»»Æ÷£¬×ª»»µÄÊı¾İÓÃÓÚÎÄ¼ş»òÍøÂçÍ¨ĞÅ
+	* @ summary			: äºŒè¿›åˆ¶æ•°æ®è½¬æ¢å™¨ï¼Œè½¬æ¢çš„æ•°æ®ç”¨äºæ–‡ä»¶æˆ–ç½‘ç»œé€šä¿¡
 	* @ uncompleted		: all
 	* @ untested		:
 	* @ tested			:

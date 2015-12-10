@@ -1,11 +1,11 @@
-#ifndef AA_STATE_MACHINE_H_2015_12_2
+﻿#ifndef AA_STATE_MACHINE_H_2015_12_2
 #define AA_STATE_MACHINE_H_2015_12_2
 
 /*	* @ author			: Jason
 	* @ date			: 12/02/2015
 	* @ nearly update	: 12/02/2015
 	* @ small version	: 0.1
-	* @ summary			: ״̬��
+	* @ summary			: 状态机
 	* @ uncompleted		: all
 	* @ untested		: 
 	* @ tested			: 

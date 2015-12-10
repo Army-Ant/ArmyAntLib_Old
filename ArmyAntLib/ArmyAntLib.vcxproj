@@ -107,6 +107,7 @@
     <ClInclude Include="include\C_AAFile.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="src\AAAes.cpp" />
     <ClCompile Include="src\AAFile.cpp" />
     <ClCompile Include="src\C_AAFile.cpp" />
   </ItemGroup>
