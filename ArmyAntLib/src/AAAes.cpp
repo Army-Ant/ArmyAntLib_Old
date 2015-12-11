@@ -6,6 +6,14 @@ namespace ArmyAnt {
 
 namespace AES {
 
+class ByteEncoder_Private;
+class RoundSetting_Private;
+class Parser_Private;
+
+static ClassPrivateHandleManager<ByteEncoder, ByteEncoder_Private> byteEncoder_manager;
+static ClassPrivateHandleManager<RoundSetting, RoundSetting_Private> roundSetting_manager;
+static ClassPrivateHandleManager<Parser, Parser_Private> parserManager;
+
 /***************** Code : ByteEncoder *******************************************************************/
 
 class ByteEncoder_Private
@@ -38,7 +46,7 @@ void ByteEncoder_Private::MakeRandomSBox()
 	BYTE start = rand() % 256;
 	for(BYTE i = 1; i < 256; i++)
 	{
-		srand(time(nullptr));
+		srand(int(time(nullptr)));
 		BYTE c = rand() % 256;
 		while(c == start || data[c]>0)
 		{
@@ -91,8 +99,6 @@ bool ByteEncoder_Private::CheckObayRule()
 	return res;
 }
 
-static ClassPrivateHandleManager<ByteEncoder, ByteEncoder_Private> byteEncoder_manager;
-
 ByteEncoder::ByteEncoder()
 	:handle(byteEncoder_manager.GetHandle(this))
 {
@@ -100,12 +106,19 @@ ByteEncoder::ByteEncoder()
 
 
 ByteEncoder::ByteEncoder(const ByteEncoder&value)
-	:handle(value.handle)
+	: handle(value.handle)
 {
-	AAAssert(byteEncoder_manager[handle] != nullptr);
-	byteEncoder_manager[handle]->refCount++;
+	AAAssert(byteEncoder_manager[value.handle] != nullptr);
+	byteEncoder_manager[value.handle]->refCount++;
 }
 
+
+ByteEncoder::ByteEncoder(DWORD encoderHandle)
+	:handle(encoderHandle)
+{
+	AAAssert(byteEncoder_manager[encoderHandle] != nullptr);
+	byteEncoder_manager[encoderHandle]->refCount++;
+}
 
 ByteEncoder::~ByteEncoder()
 {
@@ -188,6 +201,7 @@ ByteEncoder& ByteEncoder::operator= (const ByteEncoder&value)
 {
 	AAAssert(byteEncoder_manager[value.handle] != nullptr);
 	AAAssert(CopiedFromAnother(value));
+	return *this;
 }
 
 BYTE& ByteEncoder::operator[](BYTE src)
@@ -240,7 +254,7 @@ public:
 	bool Lock(void*dest, const char*src, LWORD length);
 	static bool Lock(void*dest, const char*src, LWORD length, BYTE pwd[16]);
 
-private:
+public:
 	inline static BYTE BinMul(BYTE x, BYTE y);
 };
 
@@ -277,10 +291,10 @@ bool RoundSetting_Private::ByteDecode(void* dest, const char*src, LWORD length)
 bool RoundSetting_Private::RowMix(void*dest, const char*src, LWORD length, bool isBack/* = false*/)
 {
 	BYTE*pdest = reinterpret_cast<BYTE*>(dest);
-	BYTE len[4][4] = {2,3,1,1,1,2,3,1,1,1,2,3,3,1,1,2};
+	static BYTE len[4][4] = {2,3,1,1,1,2,3,1,1,1,2,3,3,1,1,2};
+	static BYTE backLen[4][4] = {14,11,13,9,9,14,11,13,13,9,14,11,11,13,9,14};
 	if(isBack)
 	{
-		BYTE backLen[4][4] = {14,11,13,9,9,14,11,13,13,9,14,11,11,13,9,14};
 		memcpy(len, backLen, 16);
 	}
 	for(LWORD i = 0; i + 16 < length; i += 16)
@@ -305,12 +319,10 @@ bool RoundSetting_Private::Lock(void*dest, const char*src, LWORD length)
 
 bool RoundSetting_Private::Lock(void*dest, const char*src, LWORD length, BYTE pwd[16])
 {
-	// TODO：这里需要添加密匙扩展的算法
-
 	BYTE*pdest = reinterpret_cast<BYTE*>(dest);
-	for(LWORD i = 0; i + 16 < length; i+=16)
+	for(LWORD i = 0; i + 16 < length; i += 16)
 	{
-		for(int j = 0; j < 16;j++)
+		for(int j = 0; j < 16; j++)
 		{
 			pdest[i + j] = src[i + j] ^ pwd[j];
 		}
@@ -389,8 +401,6 @@ bool RoundSetting_Private::ByteDecode(DWORD encoder, void* dest, const char*src,
 	return ret;
 }
 
-static ClassPrivateHandleManager<RoundSetting, RoundSetting_Private> roundSetting_manager;
-
 RoundSetting::RoundSetting()
 	:handle(roundSetting_manager.GetHandle(this))
 {
@@ -398,10 +408,18 @@ RoundSetting::RoundSetting()
 }
 
 RoundSetting::RoundSetting(const RoundSetting&setting)
-	:handle(setting.handle)
+	: handle(setting.handle)
 {
 	AAAssert(roundSetting_manager[setting.handle] != nullptr);
 	roundSetting_manager[setting.handle]->refCount++;
+}
+
+
+RoundSetting::RoundSetting(DWORD settingHandle)
+	:handle(settingHandle)
+{
+	AAAssert(roundSetting_manager[settingHandle] != nullptr);
+	roundSetting_manager[settingHandle]->refCount++;
 }
 
 RoundSetting::~RoundSetting()
@@ -438,20 +456,14 @@ bool RoundSetting::SetLineMoving(BYTE rectWidth /*= 4*/)
 
 ByteEncoder RoundSetting::GetByteEncoder()
 {
-	auto ret = ByteEncoder();
-	byteEncoder_manager.ReleaseHandle(ret.handle);
-	*(DWORD*)(&ret.handle) = roundSetting_manager[handle]->encoder;
-	byteEncoder_manager[ret.handle]->refCount++;
+	auto ret = ByteEncoder(roundSetting_manager[handle]->encoder);
 	return ret;
 }
 
 
 const ByteEncoder RoundSetting::GetByteEncoder() const
 {
-	auto ret = ByteEncoder();
-	byteEncoder_manager.ReleaseHandle(ret.handle);
-	*(DWORD*)(&ret.handle) = roundSetting_manager[handle]->encoder;
-	byteEncoder_manager[ret.handle]->refCount++;
+	auto ret = ByteEncoder(roundSetting_manager[handle]->encoder);
 	return ret;
 }
 
@@ -477,13 +489,170 @@ bool RoundSetting::Decode(void* dest, const char*src, LWORD length, bool withRow
 {
 	auto hd = roundSetting_manager[handle];
 	AAAssert(dest != nullptr&&src != nullptr&&length > 15);
-	if(!hd->LineMoveBack(dest, src, length))
-		return false;
-	if(!hd->ByteDecode(dest, src, length))
-		return false;
 	if(!hd->Lock(dest, src, length))
 		return false;
-	return (!withRowMix) || hd->RowMix(dest, src, length, true);
+	if(!withRowMix&&!hd->RowMix(dest, src, length, true))
+		return false;
+	if(!hd->LineMoveBack(dest, src, length))
+		return false;
+	return hd->ByteDecode(dest, src, length);
+}
+
+/********************* Code : Parser ********************************************************************/
+
+class Parser_Private
+{
+public:
+	std::vector<DWORD> settings;
+	void* data = nullptr;
+	LWORD length = 0;
+	BYTE fpwd[16] = {0};
+
+public:
+	inline static DWORD GetGPwd(DWORD src, BYTE rank);
+};
+
+DWORD Parser_Private::GetGPwd(DWORD src, BYTE rank)
+{
+	AAAssert(rank > 3 && rank < 44);
+	if(src >> 31 > 0)
+		src = (src << 1) + 1;
+	else src = src << 1;
+	BYTE tmp[4] = {0};
+	memcpy(tmp, &src, 4);
+	static BYTE len[4][4] = {2,3,1,1,1,2,3,1,1,1,2,3,3,1,1,2};
+	for(BYTE k = 0; k < 4; k++)
+	{
+		tmp[k] = RoundSetting_Private::BinMul(src / 65536 / 256, len[0][k]) ^ RoundSetting_Private::BinMul(src / 65536 % 256, len[1][k]) ^ RoundSetting_Private::BinMul(src / 256 % 65536, len[2][k]) ^ RoundSetting_Private::BinMul(src % 256, len[3][k]);
+	}
+	src = tmp[0] * 65536 * 256 + tmp[1] * 65536 + tmp[2] * 256 + tmp[3];
+	static BYTE RC[] = {0, 1, 2, 4, 8, 16, 32, 64, 128, 127, 54};
+	return src ^ (RC[rank / 4]);
+}
+
+Parser::Parser()
+	:handle(parserManager.GetHandle(this))
+{
+}
+
+
+Parser::~Parser()
+{
+	parserManager.ReleaseHandle(handle);
+}
+
+
+bool Parser::SetFirstlyPwd(BYTE pwd[16])
+{
+	memcpy(parserManager[handle]->fpwd, pwd, 16);
+	return true;
+}
+
+bool Parser::SetRounds(const RoundSetting settingArray[], int roundsCount)
+{
+	auto hd = parserManager[handle];
+	for(int i = 0; i < roundsCount; i++)
+	{
+		hd->settings.push_back(settingArray[i].handle);
+	}
+	return true;
+}
+
+
+bool Parser::SetRound(BYTE round, const RoundSetting setting)
+{
+	parserManager[handle]->settings[round] = setting.handle;
+	return true;
+}
+
+
+bool Parser::SetData(void*data, LWORD length)
+{
+	auto hd = parserManager[handle];
+	hd->data = data;
+	hd->length = length;
+	return true;
+}
+
+
+RoundSetting Parser::GetSetting(BYTE round) const
+{
+	return RoundSetting(parserManager[handle]->settings[round]);
+}
+
+
+BYTE Parser::GetRoundCount() const
+{
+	return BYTE(parserManager[handle]->settings.size());
+}
+
+
+bool Parser::Encode(void*dest, void*data /*= nullptr*/, LWORD length /*= 0*/)
+{
+	auto hd = parserManager[handle];
+	if(!RoundSetting_Private::Lock(dest, reinterpret_cast<char*>(data), length, hd->fpwd))
+		return false;
+	auto rounds = GetRoundCount();
+	for(BYTE i = 0; i < rounds - 1; i++)
+	{
+		if(!RoundSetting(hd->settings[i]).Encode(dest, reinterpret_cast<char*>(data), length))
+			return false;
+	}
+	return RoundSetting(hd->settings[rounds - 1]).Encode(dest, reinterpret_cast<char*>(data), length, false);
+}
+
+
+bool Parser::Decode(void*dest, void*data /*= nullptr*/, LWORD length /*= 0*/)
+{
+	auto hd = parserManager[handle];
+	auto rounds = GetRoundCount();
+	if(RoundSetting(hd->settings[rounds - 1]).Decode(dest, reinterpret_cast<char*>(data), length, false))
+		return false;
+	for(BYTE i = rounds - 2; i >= 0; i--)
+	{
+		if(!RoundSetting(hd->settings[i]).Decode(dest, reinterpret_cast<char*>(data), length))
+			return false;
+	}
+	return RoundSetting_Private::Lock(dest, reinterpret_cast<char*>(data), length, hd->fpwd);
+}
+
+
+bool Parser::GetExtendPwds(BYTE initPwd[16], BYTE gettedPwd[176])
+{
+	DWORD passwords[44];
+	for(int i = 0; i < 4; i++)
+	{
+		passwords[i] = initPwd[i] * 65536 * 256 + initPwd[i + 4] * 65536 + initPwd[i + 8] * 256 + initPwd[i + 12];
+	}
+	for(int i = 4; i < 44; i++)
+	{
+		if(i % 4 == 0)
+			passwords[i] = passwords[i - 4] ^ Parser_Private::GetGPwd(passwords[i - 1], i);
+		else
+			passwords[i] = passwords[i - 4] ^ passwords[i - 1];
+	}
+	memcpy(gettedPwd, passwords, 176);
+	return true;
+}
+
+
+Parser Parser::GetQuickParser(BYTE initPwd[16], BYTE byteEncoder[256] /*= nullptr*/)
+{
+	Parser ret;
+	BYTE pwds[176] = {0};
+	AAAssert(GetExtendPwds(initPwd, pwds));
+	AAAssert(ret.SetFirstlyPwd(pwds));
+	RoundSetting setting[10];
+	ByteEncoder bencoder;
+	AAAssert(bencoder.InputData(byteEncoder, true));
+	for(int i = 0; i < 10; i++)
+	{
+		setting[i].SetByteEncoder(bencoder);
+		setting[i].SetRoundPassword(pwds + 16 + 16 * i);
+	}
+	AAAssert(ret.SetRounds(setting, 10));
+	return ret;
+	//这里返回时会不会导致数据被销毁？需要谨慎定义赋值运算符和拷贝构造函数
 }
 
 }

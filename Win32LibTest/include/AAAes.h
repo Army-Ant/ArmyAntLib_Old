@@ -28,10 +28,9 @@ public:
 	~Parser();
 
 public:
-	bool SetFirstlyPwd(BYTE pwd[16]);
-	bool SetRounds(const RoundSetting settingArray[], int roundsCount);
-	bool SetRound(BYTE round, const RoundSetting setting);
+	bool SetEncoder(const RoundSetting*settingArray[], int roundsCount);
 	bool SetData(void*data, LWORD length);
+	bool SetRound(BYTE round, const RoundSetting setting);
 
 public:
 	RoundSetting GetSetting(BYTE round)const;
@@ -42,10 +41,6 @@ public:
 	bool Decode(void*dest, void*data = nullptr, LWORD length = 0);
 
 public:
-	static bool GetExtendPwds(BYTE initPwd[16], BYTE gettedPwd[176]);
-	static Parser GetQuickParser(BYTE initPwd[16], BYTE byteEncoder[256] = nullptr);
-
-public:
 	const DWORD handle;
 };
 
@@ -54,7 +49,6 @@ class ARMYANTLIB_API RoundSetting
 public:
 	RoundSetting();
 	RoundSetting(const RoundSetting&setting);
-	RoundSetting(DWORD settingHandle);
 	~RoundSetting();
 
 public:
@@ -82,7 +76,6 @@ class ARMYANTLIB_API ByteEncoder
 public:
 	ByteEncoder();
 	ByteEncoder(const ByteEncoder&value);
-	ByteEncoder(DWORD encoderHandle);
 	ByteEncoder&operator=(const ByteEncoder&value);
 	~ByteEncoder();
 
