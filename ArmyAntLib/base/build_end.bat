@@ -7,9 +7,9 @@
 set ConfigType=%1
 set ProjectPath=%2
 set TargetName=%3
-
-:CopyStaticLibFile
-move %ProjectPath%bin\TargetName.lib %ProjectPath%lib\
+ 
+ :CopyStaticLibFile
+move %ProjectPath%bin\%TargetName%.lib %ProjectPath%lib\
 
 :End
 @echo on

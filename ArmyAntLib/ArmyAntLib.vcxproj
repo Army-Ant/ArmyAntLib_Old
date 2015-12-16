@@ -58,6 +58,8 @@
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>_cplusplus;OS_WINDOWS;_WIN32;ARMYANTLIB_EXPORTS;_CRT_SECURE_NO_WARNINGS;DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <EnableParallelCodeGeneration>true</EnableParallelCodeGeneration>
+      <PrecompiledHeaderFile>base.hpp</PrecompiledHeaderFile>
     </ClCompile>
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>
@@ -66,7 +68,7 @@
       <Command>$(ProjectDir)base\build_start.bat $(Configuration) $(ProjectDir) $(TargetName)</Command>
     </PreBuildEvent>
     <PostBuildEvent>
-      <Command>$(ProjectDir)base\build_end.bat $(Configuration) $(ProjectDir)</Command>
+      <Command>$(ProjectDir)base\build_end.bat $(Configuration) $(ProjectDir) $(TargetName)</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -77,6 +79,8 @@
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>_cplusplus;OS_WINDOWS;_WIN32;ARMYANTLIB_EXPORTS;_CRT_SECURE_NO_WARNINGS;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <EnableParallelCodeGeneration>true</EnableParallelCodeGeneration>
+      <PrecompiledHeaderFile>base.hpp</PrecompiledHeaderFile>
     </ClCompile>
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>

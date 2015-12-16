@@ -1,36 +1,45 @@
 ﻿#include "main.h"
 
-#define EXIT_TEST 0xffffffff
+static const int s_exitCode = 0xffffffff;
 
-static ArmyAnt::FileStream*file = nullptr;
-
-int UnitTest(const std::string&);
+int FileStreamTest(const std::string&);
+int AESTest(const std::string&);
 
 inline int Error(const std::string& errmsg, const char* errmsg2 = "")
 {
-	auto hd = GetStdHandle(STD_ERROR_HANDLE);
-	SetConsoleTextAttribute(hd, 0x0064);
+	SetConsoleTextAttribute(GetStdHandle(STD_ERROR_HANDLE), 0x0064);
 	std::cerr << errmsg << errmsg2 << std::endl;
-	hd = GetStdHandle(STD_ERROR_HANDLE);
-	SetConsoleTextAttribute(hd, 0x000F);
+	std::cerr << "errno : " << errno << std::endl;
+	_set_errno(0);
+	SetConsoleTextAttribute(GetStdHandle(STD_ERROR_HANDLE), 0x000F);
 	return 0;
 }
 
 int main(int argc, char* argv[])
 {
 	std::string str;
+	auto func = AESTest;
 	do
 	{
 		std::cin >> str;
-	} while(UnitTest(str) != EXIT_TEST);
+	} while(func(str) != s_exitCode);
 	
 	return 0;
 }
 
-int UnitTest(const std::string& cmd)
+int FileStreamTest(const std::string& cmd)
 {
+	static ArmyAnt::FileStream*file = nullptr;
+	static BYTE memoryTest[2048] = {0};
+	static bool memInit = false;
+	if(!memInit)
+	{
+		memInit = true;
+		strcpy(reinterpret_cast<char*>(memoryTest), "I am a small sentence of memory test !\n\tPlease amazing me !");
+	}
+
 	if(cmd == "exit")
-		return EXIT_TEST;
+		return s_exitCode;
 	if(cmd == "create")
 	{
 		if(file != nullptr)
@@ -61,6 +70,39 @@ int UnitTest(const std::string& cmd)
 		else
 			std::cout << "File open successful" << std::endl;
 	}
+	else if(cmd == "openmem")
+	{
+		if(file == nullptr)
+			return Error("The file stream has not been created !");
+		if(!file->Open(memoryTest,2048))
+			return Error("Memory open failed");
+		else
+			std::cout << "Memory open successful" << std::endl;
+	}
+	else if(cmd == "openpipe")
+	{
+		if(file == nullptr)
+			return Error("The file stream has not been created !");
+		if(!file->Open("jason_1", ""))
+			return Error("Pipe open failed");
+		else
+			std::cout << "Pipe open successful" << std::endl;
+	}
+	else if(cmd == "opencom")
+	{
+		if(file == nullptr)
+			return Error("The file stream has not been created !");
+		if(!file->Open(1))
+			return Error("COM open failed");
+		else
+			std::cout << "COM open successful" << std::endl;
+	}
+	else if(cmd == "opennet")
+	{
+		if(file == nullptr)
+			return Error("The file stream has not been created !");
+		return Error("The network connection functions have not been created !");
+	}
 	else if(cmd == "close")
 	{
 		if(file == nullptr)
@@ -78,7 +120,7 @@ int UnitTest(const std::string& cmd)
 			return Error("Please open the file before reading");
 		if(!file->IsOpened())
 			return Error("File stream disconnected !");
-		char buf[1024] = "";
+		char buf[2048] = "";
 		if(0==file->Read(buf))
 			return Error("Reading file failed");
 		std::cout << "Read file successfully, its content is :" << std::endl;
@@ -111,6 +153,131 @@ int UnitTest(const std::string& cmd)
 			return Error("Reading file failed");
 		std::cout << "Read file successfully, its content is :" << std::endl;
 		std::cout << buf << std::endl;
+	}
+	else if(cmd == "isopened")
+	{
+		if(file == nullptr)
+			return Error("The file stream has not been created !");
+		if(!file->IsOpened(false))
+			std::cout << "The stream has not been opened." << std::endl;
+		else switch(file->NowType())
+		{
+			case ArmyAnt::StreamType::File:
+				std::cout << "The stream type is diskfile." << std::endl;
+				break;
+			case ArmyAnt::StreamType::Memory:
+				std::cout << "The stream type is memory." << std::endl;
+				break;
+			case ArmyAnt::StreamType::NamePipe:
+				std::cout << "The stream type is name pipe." << std::endl;
+				break;
+			case ArmyAnt::StreamType::ComData:
+				std::cout << "The stream type is COM." << std::endl;
+				break;
+			case ArmyAnt::StreamType::Network:
+				std::cout << "The stream type is network." << std::endl;
+				break;
+			default:
+				Error("The file stream is opened with unknown type!");
+				break;
+		}
+	}
+	else if(cmd == "getlength")
+	{
+		if(file == nullptr)
+			return Error("The file stream has not been created !");
+		if(!file->IsOpened(false))
+			return Error("Please open the file before reading");
+		std::cout << "The length of the stream is " << file->GetLength() << std::endl;
+	}
+	else if(cmd == "getpos")
+	{
+		if(file == nullptr)
+			return Error("The file stream has not been created !");
+		if(!file->IsOpened(false))
+			return Error("Please open the file before reading");
+		std::cout << "The reading pointer of the stream is " << file->GetPos() << std::endl;
+	}
+	else if(cmd == "setposnext")
+	{
+		if(file == nullptr)
+			return Error("The file stream has not been created !");
+		if(!file->IsOpened(false))
+			return Error("Please open the file before reading");
+		if(!file->MovePos(file->GetPos()+1))
+			return Error("Move the stream reading pointer failed!");
+		std::cout << "Move reading pointer to next byte successful !" << std::endl;
+	}
+	else if(cmd == "getname")
+	{
+		if(file == nullptr)
+			return Error("The file stream has not been created !");
+		if(!file->IsOpened(false))
+			return Error("Please open the file before reading");
+		std::cout << "The source name of the stream is " << file->GetSourceName() << std::endl;
+	}
+	else
+	{
+		Error("Wrong command word : ", cmd.c_str());
+	}
+	return 0;
+}
+
+
+int AESTest(const std::string&cmd)
+{
+	static BYTE enc[16] = {'?','z','j','l','j',0xc,'y','1',1,'2',9,'0',1,'1',2,'!'};
+	static auto parser = ArmyAnt::AES::Parser::GetQuickParser(enc);
+	static ArmyAnt::FileStream file;
+	if(cmd == "exit")
+		return s_exitCode;
+	else if(cmd == "chbenc")
+	{
+		static BYTE tst[256] = {0};
+		for(int i = 0; i < 256; i++)
+		{
+			tst[i] = BYTE(i);
+		}
+		ArmyAnt::AES::ByteEncoder tstecd;
+		if(!tstecd.InputData(tst, true))
+			return Error("Check failed !");
+		std::cout << "Check passed !" << std::endl;
+	}
+	else if(cmd == "insertdata")
+	{
+		if(!file.Open("test.txt"))
+			return Error("Open the data file failed");
+		BYTE datas[128] = {0};
+		if(0 >= file.Read(datas, DWORD(128)))
+			return Error("Read the data file failed");
+		file.Close();
+		if(!parser.SetData(datas, 128))
+			return Error("Copy the data failed");
+		std::cout << "Insert the data successful !" << std::endl;
+	}
+	else if(cmd == "encode")
+	{
+		BYTE ret[128] = {0};
+		if(!parser.Encode(ret))
+			return Error("Encode the data failed");
+		std::cout << "Encode the data successful !" << std::endl;
+		if(!file.Open("encode.txt"))
+			return Error("Open the save file failed");
+		if(0 >= file.Write(ret, 128))
+			return Error("Write the encoded data to file failed");
+		std::cout << "The encoded data has been saved into file !" << std::endl;
+	}
+	else if(cmd == "decode")
+	{
+		BYTE ret[128] = {0};
+		if(!parser.Decode(ret))
+			return Error("Decode the data failed");
+		std::cout << "Decode the data successful !" << std::endl;
+		if(!file.Open("decode.txt"))
+			return Error("Open the save file failed");
+		if(0 >= file.Write(ret, 128))
+			return Error("Write the decode data to file failed");
+		std::cout << "The decode data has been saved into file !" << std::endl;
 	}
 	else
 	{

@@ -33,7 +33,7 @@ public:
 
 	//内外实例以及句柄的表图
 	TripleMap<T_Handle, T_Out*, T_In*> handleMap;
-	
+
 
 	AA_FORBID_COPY_CTOR(ClassPrivateHandleManager);
 	AA_FORBID_ASSGN_OPR(ClassPrivateHandleManager);
@@ -75,13 +75,15 @@ void ArmyAnt::ClassPrivateHandleManager<T_Out, T_In, T_Handle>::ReleaseHandle(T_
 template <class T_Out, class T_In, class T_Handle>
 T_Out* ArmyAnt::ClassPrivateHandleManager<T_Out, T_In, T_Handle>::GetSourceByHandle(T_Handle handle)
 {
-	return handleMap.Find(handle)->second;
+	auto ret = handleMap.Find(handle);
+	return ret == handleMap.End() ? nullptr : ret->second;
 }
 
 template <class T_Out, class T_In, class T_Handle>
 T_In* ArmyAnt::ClassPrivateHandleManager<T_Out, T_In, T_Handle>::GetDataByHandle(T_Handle handle)
 {
-	return handleMap.Find(handle)->third;
+	auto ret = handleMap.Find(handle);
+	return ret == handleMap.End() ? nullptr : ret->third;
 }
 
 template <class T_Out, class T_In, class T_Handle>

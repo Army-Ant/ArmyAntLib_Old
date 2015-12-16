@@ -25,6 +25,7 @@ class ARMYANTLIB_API Parser
 {
 public:
 	Parser();
+	Parser(const Parser&value);
 	~Parser();
 
 public:
@@ -47,6 +48,8 @@ public:
 
 public:
 	const DWORD handle;
+
+	AA_FORBID_ASSGN_OPR(Parser);
 };
 
 class ARMYANTLIB_API RoundSetting

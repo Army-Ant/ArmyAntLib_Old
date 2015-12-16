@@ -25,12 +25,14 @@ class ARMYANTLIB_API Parser
 {
 public:
 	Parser();
+	Parser(const Parser&value);
 	~Parser();
 
 public:
-	bool SetEncoder(const RoundSetting*settingArray[], int roundsCount);
-	bool SetData(void*data, LWORD length);
+	bool SetFirstlyPwd(BYTE pwd[16]);
+	bool SetRounds(const RoundSetting settingArray[], int roundsCount);
 	bool SetRound(BYTE round, const RoundSetting setting);
+	bool SetData(void*data, LWORD length);
 
 public:
 	RoundSetting GetSetting(BYTE round)const;
@@ -41,7 +43,13 @@ public:
 	bool Decode(void*dest, void*data = nullptr, LWORD length = 0);
 
 public:
+	static bool GetExtendPwds(BYTE initPwd[16], BYTE gettedPwd[176]);
+	static Parser GetQuickParser(BYTE initPwd[16], BYTE byteEncoder[256] = nullptr);
+
+public:
 	const DWORD handle;
+
+	AA_FORBID_ASSGN_OPR(Parser);
 };
 
 class ARMYANTLIB_API RoundSetting
@@ -49,6 +57,7 @@ class ARMYANTLIB_API RoundSetting
 public:
 	RoundSetting();
 	RoundSetting(const RoundSetting&setting);
+	RoundSetting(DWORD settingHandle);
 	~RoundSetting();
 
 public:
@@ -76,6 +85,7 @@ class ARMYANTLIB_API ByteEncoder
 public:
 	ByteEncoder();
 	ByteEncoder(const ByteEncoder&value);
+	ByteEncoder(DWORD encoderHandle);
 	ByteEncoder&operator=(const ByteEncoder&value);
 	~ByteEncoder();
 

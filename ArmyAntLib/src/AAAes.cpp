@@ -44,11 +44,11 @@ void ByteEncoder_Private::MakeRandomSBox()
 {
 	memset(data, 0, 256);
 	BYTE start = rand() % 256;
-	for(BYTE i = 1; i < 256; i++)
+	for(BYTE i = 1; i < 256 && i>0; i++)
 	{
 		srand(int(time(nullptr)));
 		BYTE c = rand() % 256;
-		while(c == start || data[c]>0)
+		while(c == start || data[c] > 0)
 		{
 			if(++c > 255)
 				c = 0;
@@ -59,25 +59,24 @@ void ByteEncoder_Private::MakeRandomSBox()
 
 bool ByteEncoder_Private::TurnToBack(bool withCheck/* = false*/)
 {
-	data[256] = {0};
-	memcpy(data, this->data, 256);
+	BYTE tmp[256] = {0};
 	if(withCheck)
 	{
-		memset(this->data, 0, 256);
-		BYTE zeropos = data[0];
-		for(BYTE i = 0; i < 256; i++)
+		BYTE zeropos = this->data[0];
+		for(int i = 0; i < 256; i++)
 		{
-			if(i > 0 && data[i] == zeropos)
+			if(i > 0 && this->data[i] == zeropos)
 				return false;
-			if(this->data[data[i]] > 0)
+			if(tmp[this->data[i]] > 0)
 				return false;
-			this->data[data[i]] = i;
+			tmp[this->data[i]] = BYTE(i);
 		}
 	}
 	else for(BYTE i = 0; i < 256; i++)
 	{
-		this->data[data[i]] = i;
+		tmp[this->data[i]] = i;
 	}
+	memcpy(this->data, tmp, 256);
 	return true;
 }
 
@@ -508,6 +507,8 @@ public:
 	LWORD length = 0;
 	BYTE fpwd[16] = {0};
 
+	WORD refCount = 1;
+
 public:
 	inline static DWORD GetGPwd(DWORD src, BYTE rank);
 };
@@ -523,7 +524,7 @@ DWORD Parser_Private::GetGPwd(DWORD src, BYTE rank)
 	static BYTE len[4][4] = {2,3,1,1,1,2,3,1,1,1,2,3,3,1,1,2};
 	for(BYTE k = 0; k < 4; k++)
 	{
-		tmp[k] = RoundSetting_Private::BinMul(src / 65536 / 256, len[0][k]) ^ RoundSetting_Private::BinMul(src / 65536 % 256, len[1][k]) ^ RoundSetting_Private::BinMul(src / 256 % 65536, len[2][k]) ^ RoundSetting_Private::BinMul(src % 256, len[3][k]);
+		tmp[k] = RoundSetting_Private::BinMul(BYTE(src / 65536 / 256), len[0][k]) ^ RoundSetting_Private::BinMul(BYTE(src / 65536 % 256), len[1][k]) ^ RoundSetting_Private::BinMul(BYTE(src / 256 % 65536), len[2][k]) ^ RoundSetting_Private::BinMul(BYTE(src % 256), len[3][k]);
 	}
 	src = tmp[0] * 65536 * 256 + tmp[1] * 65536 + tmp[2] * 256 + tmp[3];
 	static BYTE RC[] = {0, 1, 2, 4, 8, 16, 32, 64, 128, 127, 54};
@@ -536,9 +537,16 @@ Parser::Parser()
 }
 
 
+Parser::Parser(const Parser&value)
+	: handle(value.handle)
+{
+	parserManager[handle]->refCount++;
+}
+
 Parser::~Parser()
 {
-	parserManager.ReleaseHandle(handle);
+	if(--parserManager[handle]->refCount <= 0)
+		parserManager.ReleaseHandle(handle);
 }
 
 
@@ -592,8 +600,8 @@ bool Parser::Encode(void*dest, void*data /*= nullptr*/, LWORD length /*= 0*/)
 	auto hd = parserManager[handle];
 	if(!RoundSetting_Private::Lock(dest, reinterpret_cast<char*>(data), length, hd->fpwd))
 		return false;
-	auto rounds = GetRoundCount();
-	for(BYTE i = 0; i < rounds - 1; i++)
+	int rounds = GetRoundCount();
+	for(int i = 0; i < rounds - 1; i++)
 	{
 		if(!RoundSetting(hd->settings[i]).Encode(dest, reinterpret_cast<char*>(data), length))
 			return false;
@@ -624,10 +632,10 @@ bool Parser::GetExtendPwds(BYTE initPwd[16], BYTE gettedPwd[176])
 	{
 		passwords[i] = initPwd[i] * 65536 * 256 + initPwd[i + 4] * 65536 + initPwd[i + 8] * 256 + initPwd[i + 12];
 	}
-	for(int i = 4; i < 44; i++)
+	for(BYTE i = 4; i < 44; i++)
 	{
 		if(i % 4 == 0)
-			passwords[i] = passwords[i - 4] ^ Parser_Private::GetGPwd(passwords[i - 1], i);
+			passwords[i] = passwords[i - 4] ^ Parser_Private::GetGPwd(passwords[BYTE(i - 1)], i);
 		else
 			passwords[i] = passwords[i - 4] ^ passwords[i - 1];
 	}
@@ -644,11 +652,14 @@ Parser Parser::GetQuickParser(BYTE initPwd[16], BYTE byteEncoder[256] /*= nullpt
 	AAAssert(ret.SetFirstlyPwd(pwds));
 	RoundSetting setting[10];
 	ByteEncoder bencoder;
-	AAAssert(bencoder.InputData(byteEncoder, true));
+	if(byteEncoder == nullptr)
+		bencoder = ByteEncoder::GetRandomEncoder();
+	else
+		AAAssert(bencoder.InputData(byteEncoder, true));
 	for(int i = 0; i < 10; i++)
 	{
-		setting[i].SetByteEncoder(bencoder);
-		setting[i].SetRoundPassword(pwds + 16 + 16 * i);
+		AAAssert(setting[i].SetByteEncoder(bencoder));
+		AAAssert(setting[i].SetRoundPassword(pwds + 16 + 16 * i));
 	}
 	AAAssert(ret.SetRounds(setting, 10));
 	return ret;

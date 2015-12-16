@@ -12,54 +12,54 @@ ARMYANT_CLIB_API void AA_Stream_Release(AA_CFileStream stream)
 	delete FileStream::GetStream(stream);
 }
 
-ARMYANT_CLIB_API bool AA_Stream_SetMode(AA_CFileStream stream, bool nocreate, bool noexist)
+ARMYANT_CLIB_API BOOL AA_Stream_SetMode(AA_CFileStream stream, bool nocreate, bool noexist)
 {
-	return FileStream::GetStream(stream)->SetStreamMode(nocreate, noexist);
+	return FileStream::GetStream(stream)->SetStreamMode(nocreate, noexist) ? TRUE : FALSE;
 }
 
-ARMYANT_CLIB_API bool AA_Stream_OpenFile(AA_CFileStream stream, const char* filename)
+ARMYANT_CLIB_API BOOL AA_Stream_OpenFile(AA_CFileStream stream, const char* filename)
 {
-	return FileStream::GetStream(stream)->Open(filename);
+	return FileStream::GetStream(stream)->Open(filename) ? TRUE : FALSE;
 }
 
-ARMYANT_CLIB_API bool AA_Stream_OpenMemoryByAddr(AA_CFileStream stream, DWORD memaddr, WORD len)
+ARMYANT_CLIB_API BOOL AA_Stream_OpenMemoryByAddr(AA_CFileStream stream, DWORD memaddr, WORD len)
 {
-	return FileStream::GetStream(stream)->Open(memaddr, len);
+	return FileStream::GetStream(stream)->Open(memaddr, len) ? TRUE : FALSE;
 }
 
-ARMYANT_CLIB_API bool AA_Stream_OpenMemoryByPtr(AA_CFileStream stream, void* memaddr, WORD len)
+ARMYANT_CLIB_API BOOL AA_Stream_OpenMemoryByPtr(AA_CFileStream stream, void* memaddr, WORD len)
 {
-	return FileStream::GetStream(stream)->Open(reinterpret_cast<BYTE*>(memaddr), fpos_t(len));
+	return FileStream::GetStream(stream)->Open(reinterpret_cast<BYTE*>(memaddr), fpos_t(len)) ? TRUE : FALSE;
 }
 
-ARMYANT_CLIB_API bool AA_Stream_OpenNamePipe(AA_CFileStream stream, const char* pipename, const char*pipePath, const char*pipeServer)
+ARMYANT_CLIB_API BOOL AA_Stream_OpenNamePipe(AA_CFileStream stream, const char* pipename, const char*pipePath, const char*pipeServer)
 {
-	return FileStream::GetStream(stream)->Open(pipename, pipePath, pipeServer);
+	return FileStream::GetStream(stream)->Open(pipename, pipePath, pipeServer) ? TRUE : FALSE;
 }
 
-ARMYANT_CLIB_API bool AA_Stream_OpenCom(AA_CFileStream stream, BYTE comNum)
+ARMYANT_CLIB_API BOOL AA_Stream_OpenCom(AA_CFileStream stream, BYTE comNum)
 {
-	return FileStream::GetStream(stream)->Open(comNum);
+	return FileStream::GetStream(stream)->Open(comNum) ? TRUE : FALSE;
 }
 
-ARMYANT_CLIB_API bool AA_Stream_OpenNetWithName(AA_CFileStream stream, const char* netAddr, BYTE protocol)
+ARMYANT_CLIB_API BOOL AA_Stream_OpenNetWithName(AA_CFileStream stream, const char* netAddr, BYTE protocol)
 {
-	return FileStream::GetStream(stream)->Open(netAddr, protocol);
+	return FileStream::GetStream(stream)->Open(netAddr, protocol) ? TRUE : FALSE;
 }
 
-ARMYANT_CLIB_API bool AA_Stream_OpenNetWithAddr(AA_CFileStream stream, DWORD netIp, WORD port, BYTE protocol)
+ARMYANT_CLIB_API BOOL AA_Stream_OpenNetWithAddr(AA_CFileStream stream, DWORD netIp, WORD port, BYTE protocol)
 {
-	return FileStream::GetStream(stream)->Open(netIp, port, protocol);
+	return FileStream::GetStream(stream)->Open(netIp, port, protocol) ? TRUE : FALSE;
 }
 
-ARMYANT_CLIB_API bool AA_Stream_Close(AA_CFileStream stream)
+ARMYANT_CLIB_API BOOL AA_Stream_Close(AA_CFileStream stream)
 {
-	return FileStream::GetStream(stream)->Close();
+	return FileStream::GetStream(stream)->Close() ? TRUE : FALSE;
 }
 
-ARMYANT_CLIB_API bool AA_Stream_IsOpened(AA_CFileStream stream)
+ARMYANT_CLIB_API BOOL AA_Stream_IsOpened(AA_CFileStream stream)
 {
-	return FileStream::GetStream(stream)->IsOpened();
+	return FileStream::GetStream(stream)->IsOpened() ? TRUE : FALSE;
 }
 
 ARMYANT_CLIB_API AA_StreamType AA_Stream_NowType(AA_CFileStream stream)
@@ -77,14 +77,14 @@ ARMYANT_CLIB_API DWORD AA_Stream_GetPos(AA_CFileStream stream)
 	return FileStream::GetStream(stream)->GetPos();
 }
 
-ARMYANT_CLIB_API bool AA_stream_IsEndPos(AA_CFileStream stream)
+ARMYANT_CLIB_API BOOL AA_stream_IsEndPos(AA_CFileStream stream)
 {
-	return FileStream::GetStream(stream)->IsEndPos();
+	return FileStream::GetStream(stream)->IsEndPos() ? TRUE : FALSE;
 }
 
-ARMYANT_CLIB_API bool AA_Stream_MovePos(AA_CFileStream stream, DWORD pos)
+ARMYANT_CLIB_API BOOL AA_Stream_MovePos(AA_CFileStream stream, DWORD pos)
 {
-	return FileStream::GetStream(stream)->MovePos(pos);
+	return FileStream::GetStream(stream)->MovePos(pos) ? TRUE : FALSE;
 }
 
 ARMYANT_CLIB_API const char* AA_Stream_GetStreamName(AA_CFileStream stream)
@@ -107,22 +107,22 @@ ARMYANT_CLIB_API DWORD AA_Stream_Write(AA_CFileStream stream, void*buffer, DWORD
 	return FileStream::GetStream(stream)->Write(buffer, len);
 }
 
-ARMYANT_CLIB_API bool AA_Stream_CopyFile(const char*srcPath, const char*dstPath)
+ARMYANT_CLIB_API BOOL AA_Stream_CopyFile(const char*srcPath, const char*dstPath)
 {
-	return FileStream::CopyFile(srcPath, dstPath);
+	return FileStream::CopyFile(srcPath, dstPath) ? TRUE : FALSE;
 }
 
-ARMYANT_CLIB_API bool AA_Stream_MoveOrRenameFile(const char*srcPath, const char*dstPath)
+ARMYANT_CLIB_API BOOL AA_Stream_MoveOrRenameFile(const char*srcPath, const char*dstPath)
 {
-	return FileStream::MoveOrRenameFile(srcPath, dstPath);
+	return FileStream::MoveOrRenameFile(srcPath, dstPath) ? TRUE : FALSE;
 }
 
-ARMYANT_CLIB_API bool AA_Stream_DeleteFile(const char*path)
+ARMYANT_CLIB_API BOOL AA_Stream_DeleteFile(const char*path)
 {
-	return FileStream::DeleteFile(path);
+	return FileStream::DeleteFile(path) ? TRUE : FALSE;
 }
 
-ARMYANT_CLIB_API bool AA_Stream_IsFileExist(const char*path)
+ARMYANT_CLIB_API BOOL AA_Stream_IsFileExist(const char*path)
 {
-	return FileStream::IsFileExist(path);
+	return FileStream::IsFileExist(path) ? TRUE : FALSE;
 }

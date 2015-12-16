@@ -16,4 +16,9 @@
       <Filter>源文件</Filter>
     </ClInclude>
   </ItemGroup>
+  <ItemGroup>
+    <None Include="build_start.bat">
+      <Filter>源文件</Filter>
+    </None>
+  </ItemGroup>
 </Project>
