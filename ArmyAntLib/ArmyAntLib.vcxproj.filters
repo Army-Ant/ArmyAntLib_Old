@@ -83,6 +83,9 @@
     <ClCompile Include="src\AAAes.cpp">
       <Filter>3.CppLibCode</Filter>
     </ClCompile>
+    <ClCompile Include="src\AAStateMachine.cpp">
+      <Filter>3.CppLibCode</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="base\build_start.bat">

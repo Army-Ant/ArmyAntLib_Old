@@ -229,6 +229,7 @@ int AESTest(const std::string&cmd)
 	static BYTE enc[16] = {'?','z','j','l','j',0xc,'y','1',1,'2',9,'0',1,'1',2,'!'};
 	static auto parser = ArmyAnt::AES::Parser::GetQuickParser(enc);
 	static ArmyAnt::FileStream file;
+	static bool isEncoded = false;
 	if(cmd == "exit")
 		return s_exitCode;
 	else if(cmd == "chbenc")
@@ -243,20 +244,60 @@ int AESTest(const std::string&cmd)
 			return Error("Check failed !");
 		std::cout << "Check passed !" << std::endl;
 	}
+	else if(cmd == "saveBencoder")
+	{
+		file.SetStreamMode(false, false);
+		BYTE datas[256] = {0};
+		if(!parser.GetSetting(0).GetByteEncoder().GetData(datas))
+			return Error("Get the encoder error !");
+		if(!file.Open("byteEncoder.txt"))
+			return Error("Open the encoder data saving file failed");
+		if(0 >= file.Write(datas, 256))
+		{
+			file.Close();
+			return Error("Write the encoder data to file failed");
+		}
+		file.Close();
+		std::cout << "The byte encoder data has been saved into file !" << std::endl;
+	}
+	else if(cmd == "saveBdecoder")
+	{
+		file.SetStreamMode(false, false);
+		BYTE datas[256] = {0};
+		if(!parser.GetSetting(0).GetByteEncoder().GetBackData(datas))
+			return Error("Get the decoder error !");
+		if(!file.Open("byteDecoder.txt"))
+			return Error("Open the decoder data saving file failed");
+		if(0 >= file.Write(datas, 256))
+		{
+			file.Close();
+			return Error("Write the decoder data to file failed");
+		}
+		file.Close();
+		std::cout << "The byte decoder data has been saved into file !" << std::endl;
+	}
 	else if(cmd == "insertdata")
 	{
+		file.SetStreamMode(true, false);
 		if(!file.Open("test.txt"))
 			return Error("Open the data file failed");
 		BYTE datas[128] = {0};
 		if(0 >= file.Read(datas, DWORD(128)))
+		{
+			file.Close();
 			return Error("Read the data file failed");
+		}
 		file.Close();
 		if(!parser.SetData(datas, 128))
 			return Error("Copy the data failed");
 		std::cout << "Insert the data successful !" << std::endl;
+		isEncoded = false;
 	}
 	else if(cmd == "encode")
 	{
+		if(isEncoded)
+			return Error("The data has been encoded !");
+		file.SetStreamMode(false, false);
 		BYTE ret[128] = {0};
 		if(!parser.Encode(ret))
 			return Error("Encode the data failed");
@@ -264,11 +305,21 @@ int AESTest(const std::string&cmd)
 		if(!file.Open("encode.txt"))
 			return Error("Open the save file failed");
 		if(0 >= file.Write(ret, 128))
+		{
+			file.Close();
 			return Error("Write the encoded data to file failed");
+		}
+		file.Close();
 		std::cout << "The encoded data has been saved into file !" << std::endl;
+		if(!parser.SetData(ret, 128))
+			return Error("Set the encoded data failed");
+		isEncoded = true;
 	}
 	else if(cmd == "decode")
 	{
+		if(!isEncoded)
+			return Error("The data has not been encoded !");
+		file.SetStreamMode(false, false);
 		BYTE ret[128] = {0};
 		if(!parser.Decode(ret))
 			return Error("Decode the data failed");
@@ -276,8 +327,15 @@ int AESTest(const std::string&cmd)
 		if(!file.Open("decode.txt"))
 			return Error("Open the save file failed");
 		if(0 >= file.Write(ret, 128))
+		{
+			file.Close();
 			return Error("Write the decode data to file failed");
+		}
+		file.Close();
 		std::cout << "The decode data has been saved into file !" << std::endl;
+		if(!parser.SetData(ret, 128))
+			return Error("Set the decoded data failed");
+		isEncoded = false;
 	}
 	else
 	{

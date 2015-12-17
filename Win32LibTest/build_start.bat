@@ -10,10 +10,10 @@ set ProjectD=%2
 :: Need to got administor access here if you don't run VS or CL with it;
 
 :CopyExtensionLibFiles
-xcopy %SolutionD%ArmyAntLib\include %ProjectD%include /D /C /Q /K /X /Y
-xcopy %SolutionD%ArmyAntLib\lib %ProjectD%lib  /D /C /Q /K /X /Y
-copy %SolutionD%ArmyAntLib\*.h %ProjectD%\*.h  /Y
-xcopy %SolutionD%ArmyAntLib\bin %ProjectD%bin  /D /C /Q /K /X /Y
+xcopy %SolutionD%LibOut\include %ProjectD%include /D /C /Q /K /X /Y
+xcopy %SolutionD%LibOut\lib %ProjectD%lib  /D /C /Q /K /X /Y
+copy %SolutionD%LibOut\*.h %ProjectD%\*.h  /Y
+xcopy %SolutionD%LibOut\bin %ProjectD%bin  /D /C /Q /K /X /Y
 
 :End
 @echo on

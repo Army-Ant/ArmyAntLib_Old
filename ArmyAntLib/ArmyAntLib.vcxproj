@@ -46,6 +46,7 @@
     <OutDir>$(ProjectDir)bin\</OutDir>
     <IntDir />
     <TargetName>$(ProjectName)d</TargetName>
+    <CodeAnalysisRuleSet>SecurityRules.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <TargetExt>.dll</TargetExt>
@@ -113,6 +114,7 @@
   <ItemGroup>
     <ClCompile Include="src\AAAes.cpp" />
     <ClCompile Include="src\AAFile.cpp" />
+    <ClCompile Include="src\AAStateMachine.cpp" />
     <ClCompile Include="src\C_AAFile.cpp" />
   </ItemGroup>
   <ItemGroup>

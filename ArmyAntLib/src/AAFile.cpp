@@ -132,7 +132,17 @@ bool FileStream::Open(const char* filepath)
 	//打开文件，并保存文件名
 	hd->file = fopen(filepath, "rb+");
 	if(hd->file == nullptr)
-		return false;
+	{
+		if(hd->nocreate)
+			return false;
+		hd->file = fopen(filepath, "wb");
+		if(hd->file == nullptr)
+			return false;
+		fclose(hd->file);
+		hd->file = fopen(filepath, "rb+");
+		if(hd->file == nullptr)
+			return false;
+	}
 	hd->name = filepath;
 	hd->type = StreamType::File;
 	return true;

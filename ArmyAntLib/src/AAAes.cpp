@@ -23,9 +23,13 @@ public:
 	~ByteEncoder_Private();
 
 public:
+	//生成一个随机的S盒子
 	void MakeRandomSBox();
+	//转化为反盒子
 	bool TurnToBack(bool withCheck = false);
+	//输出一个带有反盒子的新内部类，该类不被管理器所管理
 	ByteEncoder_Private GetBackDatas();
+	//验证当前的盒子是否为一一映射
 	bool CheckObayRule();
 
 	BYTE data[256] = {0};
@@ -42,40 +46,52 @@ ByteEncoder_Private::~ByteEncoder_Private()
 
 void ByteEncoder_Private::MakeRandomSBox()
 {
+	//清空数据
 	memset(data, 0, 256);
+	//重置随机种子
+	srand(int(time(nullptr)));
+	//摇出第一个数
 	BYTE start = rand() % 256;
-	for(BYTE i = 1; i < 256 && i>0; i++)
+	//摇出剩余的数
+	for(int i = 1; i < 256; i++)
 	{
-		srand(int(time(nullptr)));
+		if(i % 16 == 0)
+			srand(int(time(nullptr)));
 		BYTE c = rand() % 256;
 		while(c == start || data[c] > 0)
 		{
 			if(++c > 255)
 				c = 0;
 		}
-		data[c] = i;
+		data[c] = BYTE(i);
 	}
 }
 
 bool ByteEncoder_Private::TurnToBack(bool withCheck/* = false*/)
 {
+	//存放反转后数据的临时数组
 	BYTE tmp[256] = {0};
 	if(withCheck)
 	{
+		//索引为0的数的值，将变为转化后值为0的索引
 		BYTE zeropos = this->data[0];
 		for(int i = 0; i < 256; i++)
 		{
+			//如果值为zeropos，则表明另一个索引不为0的数(i)占用该处，这不符合规则
 			if(i > 0 && this->data[i] == zeropos)
 				return false;
+			//如果值不为0，则证明该处已被占用，这不符合规则
 			if(tmp[this->data[i]] > 0)
 				return false;
 			tmp[this->data[i]] = BYTE(i);
 		}
 	}
-	else for(BYTE i = 0; i < 256; i++)
+	else for(int i = 0; i < 256; i++)
 	{
+		//不检查，单纯转换数据，如果原S盒不符合规则，可能发生数据覆盖等问题
 		tmp[this->data[i]] = i;
 	}
+	//更新数据
 	memcpy(this->data, tmp, 256);
 	return true;
 }
@@ -91,6 +107,7 @@ ByteEncoder_Private ByteEncoder_Private::GetBackDatas()
 
 bool ByteEncoder_Private::CheckObayRule()
 {
+	//通过生成反转盒是否成功，来判断元数据是否符合规则
 	auto ret = new ByteEncoder_Private();
 	memcpy(ret, this, sizeof(ByteEncoder_Private));
 	auto res = ret->TurnToBack(true);
@@ -132,9 +149,11 @@ bool ByteEncoder::InputData(const BYTE elems[256], bool needCheck/* = false*/)
 	auto hd = byteEncoder_manager[handle];
 	if(needCheck)
 	{
+		//将元数据拷贝到临时区域，失败时将还原
 		BYTE tmp[256];
 		memcpy(tmp, hd->data, 256);
 		memcpy(hd->data, elems, 256);
+		//验证是否符合规则
 		if(hd->CheckObayRule())
 			return true;
 		memcpy(hd->data, tmp, 256);
@@ -142,6 +161,7 @@ bool ByteEncoder::InputData(const BYTE elems[256], bool needCheck/* = false*/)
 	}
 	else
 	{
+		//不验证，仅输入数据
 		memcpy(hd->data, elems, 256);
 	}
 	return true;
@@ -150,6 +170,7 @@ bool ByteEncoder::InputData(const BYTE elems[256], bool needCheck/* = false*/)
 
 bool ByteEncoder::InputBackData(const BYTE elems[256], bool needCheck/* = false*/)
 {
+	//输入数据，然后求反
 	if(!InputData(elems, needCheck))
 		return false;
 	return byteEncoder_manager[handle]->TurnToBack();
@@ -158,12 +179,16 @@ bool ByteEncoder::InputBackData(const BYTE elems[256], bool needCheck/* = false*
 
 bool ByteEncoder::CopiedFromAnother(const ByteEncoder another, bool needCheck /*= false*/)
 {
+	//找不到元数据
 	if(byteEncoder_manager[another.handle] == nullptr)
 		return false;
+	//要求检查，而元数据不符合规则
 	if(needCheck&&!byteEncoder_manager[another.handle]->CheckObayRule())
 		return false;
+	//解除原来的本数据类，引用计数器-1
 	if(--byteEncoder_manager[handle]->refCount <= 0)
 		byteEncoder_manager.ReleaseHandle(handle);
+	//绑定目标数据类的句柄，引用计数器+1
 	*(DWORD*)(&this->handle) = another.handle;
 	byteEncoder_manager[handle]->refCount++;
 	return true;
@@ -393,8 +418,8 @@ bool RoundSetting_Private::ByteEncode(DWORD encoder, void* dest, const char*src,
 bool RoundSetting_Private::ByteDecode(DWORD encoder, void* dest, const char*src, LWORD length)
 {
 	auto bhd = byteEncoder_manager.GetHandle(nullptr);
-	memcpy(byteEncoder_manager[bhd]->data, byteEncoder_manager[encoder], 256);
-	byteEncoder_manager[bhd]->GetBackDatas();
+	memcpy(byteEncoder_manager[bhd]->data, byteEncoder_manager[encoder]->data, 256);
+	byteEncoder_manager[bhd]->TurnToBack();
 	bool ret = ByteEncode(bhd, dest, src, length);
 	byteEncoder_manager.ReleaseHandle(bhd);
 	return ret;
@@ -474,7 +499,8 @@ BYTE RoundSetting::GetLineMoving() const
 bool RoundSetting::Encode(void* dest, const char*src, LWORD length, bool withRowMix /*= true*/)
 {
 	auto hd = roundSetting_manager[handle];
-	AAAssert(dest != nullptr&&src != nullptr&&length >= hd->rectWidth*hd->rectWidth);
+	if(dest == nullptr || src == nullptr || length < hd->rectWidth*hd->rectWidth)
+		return false;
 	if(!hd->ByteEncode(dest, src, length))
 		return false;
 	if(!hd->LineMove(dest, src, length))
@@ -487,7 +513,8 @@ bool RoundSetting::Encode(void* dest, const char*src, LWORD length, bool withRow
 bool RoundSetting::Decode(void* dest, const char*src, LWORD length, bool withRowMix /*= true*/)
 {
 	auto hd = roundSetting_manager[handle];
-	AAAssert(dest != nullptr&&src != nullptr&&length > 15);
+	if(dest == nullptr || src == nullptr || length < 16)
+		return false;
 	if(!hd->Lock(dest, src, length))
 		return false;
 	if(!withRowMix&&!hd->RowMix(dest, src, length, true))
@@ -561,7 +588,11 @@ bool Parser::SetRounds(const RoundSetting settingArray[], int roundsCount)
 	auto hd = parserManager[handle];
 	for(int i = 0; i < roundsCount; i++)
 	{
-		hd->settings.push_back(settingArray[i].handle);
+		if(roundSetting_manager[settingArray[i].handle] != nullptr)
+		{
+			roundSetting_manager[settingArray[i].handle]->refCount++;
+			hd->settings.push_back(settingArray[i].handle);
+		}
 	}
 	return true;
 }
@@ -569,7 +600,10 @@ bool Parser::SetRounds(const RoundSetting settingArray[], int roundsCount)
 
 bool Parser::SetRound(BYTE round, const RoundSetting setting)
 {
+	if(0 >= roundSetting_manager[parserManager[handle]->settings[round]]->refCount--)
+		roundSetting_manager.ReleaseHandle(parserManager[handle]->settings[round]);
 	parserManager[handle]->settings[round] = setting.handle;
+	roundSetting_manager[parserManager[handle]->settings[round]]->refCount++;
 	return true;
 }
 
@@ -601,6 +635,10 @@ bool Parser::Encode(void*dest, void*data /*= nullptr*/, LWORD length /*= 0*/)
 	if(!RoundSetting_Private::Lock(dest, reinterpret_cast<char*>(data), length, hd->fpwd))
 		return false;
 	int rounds = GetRoundCount();
+	if(data == nullptr)
+		data = hd->data;
+	if(length == 0)
+		length = hd->length;
 	for(int i = 0; i < rounds - 1; i++)
 	{
 		if(!RoundSetting(hd->settings[i]).Encode(dest, reinterpret_cast<char*>(data), length))
@@ -614,9 +652,13 @@ bool Parser::Decode(void*dest, void*data /*= nullptr*/, LWORD length /*= 0*/)
 {
 	auto hd = parserManager[handle];
 	auto rounds = GetRoundCount();
-	if(RoundSetting(hd->settings[rounds - 1]).Decode(dest, reinterpret_cast<char*>(data), length, false))
+	if(data == nullptr)
+		data = hd->data;
+	if(length == 0)
+		length = hd->length;
+	if(!RoundSetting(hd->settings[rounds - 1]).Decode(dest, reinterpret_cast<char*>(data), length, false))
 		return false;
-	for(BYTE i = rounds - 2; i >= 0; i--)
+	for(int i = rounds - 2; i >= 0; i--)
 	{
 		if(!RoundSetting(hd->settings[i]).Decode(dest, reinterpret_cast<char*>(data), length))
 			return false;
