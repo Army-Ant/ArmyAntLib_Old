@@ -1,11 +1,10 @@
 ﻿#ifndef ARMY_ANT_TRIPLE_MAP_2015_11_19
 #define ARMY_ANT_TRIPLE_MAP_2015_11_19
 
-#include "AADefine.h"
 #include <cstddef>
-#include <tuple>
 #include <functional>
 #include <vector>
+#include "AADefine.h"
 
 namespace ArmyAnt {
 
@@ -213,7 +212,7 @@ Triad<_First, _Second, _Third>& Triad<_First, _Second, _Third>::operator=(const 
 }
 
 template <class _First, class _Second, class _Third>
-Triad<_First, _Second, _Third>& Triad<_First, _Second, _Third>::operator=(const Iterator&)
+Triad<_First, _Second, _Third>& Triad<_First, _Second, _Third>::operator=(const Iterator&value)
 {
 	first = value->first;
 	second = value->second;
@@ -459,7 +458,7 @@ const Iterator_TripleMap<_Key, _Value1, _Value2> TripleMap<_Key, _Value1, _Value
 {
 	if(Empty())
 		return End();
-	return const Iterator(*this);
+	return (const Iterator)(*this);
 }
 
 template <class _Key, class _Value1, class _Value2>
@@ -580,7 +579,7 @@ const Iterator_TripleMap<_Key, _Value1, _Value2> TripleMap<_Key, _Value1, _Value
 template <class _Key, class _Value1, class _Value2>
 const Iterator_TripleMap<_Key, _Value1, _Value2> TripleMap<_Key, _Value1, _Value2>::operator[](std::nullptr_t)
 {
-	return iempty;
+	return Iterator::iempty;
 }
 
 

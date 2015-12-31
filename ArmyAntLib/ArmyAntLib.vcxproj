@@ -61,6 +61,8 @@
       <PreprocessorDefinitions>_cplusplus;OS_WINDOWS;_WIN32;ARMYANTLIB_EXPORTS;_CRT_SECURE_NO_WARNINGS;DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <EnableParallelCodeGeneration>true</EnableParallelCodeGeneration>
       <PrecompiledHeaderFile>base.hpp</PrecompiledHeaderFile>
+      <StringPooling>true</StringPooling>
+      <DebugInformationFormat>OldStyle</DebugInformationFormat>
     </ClCompile>
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>
@@ -101,6 +103,7 @@
     <ClInclude Include="base\base.hpp" />
     <ClInclude Include="include\AAAes.h" />
     <ClInclude Include="include\AABinary.h" />
+    <ClInclude Include="include\AAFragment.h" />
     <ClInclude Include="include\AAStateMachine.h" />
     <ClInclude Include="include\AATripleMap.hpp" />
     <ClInclude Include="include\AA_end.h" />

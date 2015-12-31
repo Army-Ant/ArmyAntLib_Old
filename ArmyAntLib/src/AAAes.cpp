@@ -1,6 +1,8 @@
 ﻿#include "../include/AAAes.h"
 #include "../include/AAClassPrivateHandle.hpp"
 #include <ctime>
+#include <cstdlib>
+#include <memory.h>
 
 namespace ArmyAnt {
 
@@ -124,7 +126,7 @@ ByteEncoder::ByteEncoder()
 ByteEncoder::ByteEncoder(const ByteEncoder&value)
 	: handle(value.handle)
 {
-	AAAssert(byteEncoder_manager[value.handle] != nullptr);
+	Assert(byteEncoder_manager[value.handle] != nullptr);
 	byteEncoder_manager[value.handle]->refCount++;
 }
 
@@ -132,7 +134,7 @@ ByteEncoder::ByteEncoder(const ByteEncoder&value)
 ByteEncoder::ByteEncoder(DWORD encoderHandle)
 	:handle(encoderHandle)
 {
-	AAAssert(byteEncoder_manager[encoderHandle] != nullptr);
+	Assert(byteEncoder_manager[encoderHandle] != nullptr);
 	byteEncoder_manager[encoderHandle]->refCount++;
 }
 
@@ -145,7 +147,7 @@ ByteEncoder::~ByteEncoder()
 
 bool ByteEncoder::InputData(const BYTE elems[256], bool needCheck/* = false*/)
 {
-	AAAssert(elems != nullptr);
+	Assert(elems != nullptr);
 	auto hd = byteEncoder_manager[handle];
 	if(needCheck)
 	{
@@ -197,7 +199,7 @@ bool ByteEncoder::CopiedFromAnother(const ByteEncoder another, bool needCheck /*
 
 bool ByteEncoder::GetData(BYTE elems[256]) const
 {
-	AAAssert(elems != nullptr);
+	Assert(elems != nullptr);
 	memcpy(elems, byteEncoder_manager[handle]->data, 256);
 	return true;
 }
@@ -223,8 +225,8 @@ ByteEncoder ByteEncoder::GetBack() const
 
 ByteEncoder& ByteEncoder::operator= (const ByteEncoder&value)
 {
-	AAAssert(byteEncoder_manager[value.handle] != nullptr);
-	AAAssert(CopiedFromAnother(value));
+	Assert(byteEncoder_manager[value.handle] != nullptr);
+	Assert(CopiedFromAnother(value));
 	return *this;
 }
 
@@ -434,7 +436,7 @@ RoundSetting::RoundSetting()
 RoundSetting::RoundSetting(const RoundSetting&setting)
 	: handle(setting.handle)
 {
-	AAAssert(roundSetting_manager[setting.handle] != nullptr);
+	Assert(roundSetting_manager[setting.handle] != nullptr);
 	roundSetting_manager[setting.handle]->refCount++;
 }
 
@@ -442,7 +444,7 @@ RoundSetting::RoundSetting(const RoundSetting&setting)
 RoundSetting::RoundSetting(DWORD settingHandle)
 	:handle(settingHandle)
 {
-	AAAssert(roundSetting_manager[settingHandle] != nullptr);
+	Assert(roundSetting_manager[settingHandle] != nullptr);
 	roundSetting_manager[settingHandle]->refCount++;
 }
 
@@ -454,7 +456,7 @@ RoundSetting::~RoundSetting()
 
 bool RoundSetting::SetRoundPassword(const BYTE pwd[16])
 {
-	AAAssert(pwd != nullptr);
+	Assert(pwd != nullptr);
 	memcpy(roundSetting_manager[handle]->pwd, pwd, 16);
 	return true;
 }
@@ -542,7 +544,7 @@ public:
 
 DWORD Parser_Private::GetGPwd(DWORD src, BYTE rank)
 {
-	AAAssert(rank > 3 && rank < 44);
+	Assert(rank > 3 && rank < 44);
 	if(src >> 31 > 0)
 		src = (src << 1) + 1;
 	else src = src << 1;
@@ -690,20 +692,20 @@ Parser Parser::GetQuickParser(BYTE initPwd[16], BYTE byteEncoder[256] /*= nullpt
 {
 	Parser ret;
 	BYTE pwds[176] = {0};
-	AAAssert(GetExtendPwds(initPwd, pwds));
-	AAAssert(ret.SetFirstlyPwd(pwds));
+	Assert(GetExtendPwds(initPwd, pwds));
+	Assert(ret.SetFirstlyPwd(pwds));
 	RoundSetting setting[10];
 	ByteEncoder bencoder;
 	if(byteEncoder == nullptr)
 		bencoder = ByteEncoder::GetRandomEncoder();
 	else
-		AAAssert(bencoder.InputData(byteEncoder, true));
+		Assert(bencoder.InputData(byteEncoder, true));
 	for(int i = 0; i < 10; i++)
 	{
-		AAAssert(setting[i].SetByteEncoder(bencoder));
-		AAAssert(setting[i].SetRoundPassword(pwds + 16 + 16 * i));
+		Assert(setting[i].SetByteEncoder(bencoder));
+		Assert(setting[i].SetRoundPassword(pwds + 16 + 16 * i));
 	}
-	AAAssert(ret.SetRounds(setting, 10));
+	Assert(ret.SetRounds(setting, 10));
 	return ret;
 	//这里返回时会不会导致数据被销毁？需要谨慎定义赋值运算符和拷贝构造函数
 }

@@ -9,6 +9,13 @@
 #undef DeleteFile
 
 #elif defined OS_UNIX
+#define _FILE_OFFSET_BITS 64
+#include <sys/stat.h>
+#include <fcntl.h>
+#include <memory.h>
+#include <sys/errno.h>
+#include <unistd.h>
+#include <sys/types.h>
 
 #ifdef OS_ANDROID
 
@@ -30,7 +37,7 @@ public:
 		{
 			pipeReader->join();
 		}
-		AA_SAFE_DEL(pipeReader);
+		SafeDel(pipeReader);
 	};
 
 	//流的类型
@@ -56,6 +63,15 @@ public:
 
 	static void NamePipeReader(FsPrivate*self);
 	std::list<char> ReadNamePipe(DWORD length, const BYTE* endtag = nullptr);
+
+	static inline int Fseek(FILE*stream,LWORD offset,int whence)
+	{
+#ifdef OS_WINDOWS
+        return _fseeki64(stream, offset, whence);
+#else
+        return fseek(stream, offset, whence);
+#endif
+	}
 
 private:
 	AA_FORBID_COPY_CTOR(FsPrivate);
@@ -122,7 +138,7 @@ bool FileStream::Open(const char* filepath)
 	//type没有重置，说明本流尚未关闭
 	if(hd->type != StreamType::None)
 		return false;
-	AAAssert(filepath != nullptr);
+	Assert(filepath != nullptr);
 	//根据exist和created的允许设定，判断文件存在情况
 	bool fexist = IsFileExist(filepath);
 	if(hd->nocreate&&!fexist)
@@ -154,7 +170,7 @@ bool FileStream::Open(DWORD memaddr, fpos_t len)
 	//type没有重置，说明本流尚未关闭
 	if(hd->type != StreamType::None)
 		return false;
-	AAAssert(memaddr != 0);
+	Assert(memaddr != 0);
 	if(hd->noexist)
 		return false;
 	//保存内存地址
@@ -197,7 +213,7 @@ bool FileStream::Open(const char* pipename, const char*pipePath, const char*pipe
 	auto hd = handleManager[handle];
 	if(hd->type != StreamType::None)
 		return false;
-	AAAssert(pipename != nullptr);
+	Assert(pipename != nullptr);
 	//打开命名管道
 	hd->name = std::string("\\\\") + pipeServer + "\\pipe\\" + pipePath + pipename;
 	hd->file = fopen(hd->name.c_str(), "wb+");
@@ -218,14 +234,15 @@ bool FileStream::Open(const char* pipename, const char*pipePath, const char*pipe
 		hd->pipeHandle = CreateNamedPipeA(hd->name.c_str(), PIPE_ACCESS_DUPLEX | FILE_FLAG_OVERLAPPED, PIPE_TYPE_MESSAGE | PIPE_READMODE_MESSAGE | PIPE_WAIT, PIPE_UNLIMITED_INSTANCES - 1, 0, 0, 0, 0);
 		if(hd->pipeHandle==nullptr
 #else
-		if(0 == (hd->pipeHandle = !mkfifo(hd->name, O_RDWR | O_CREAT))
+		if(0 == (hd->pipeHandle = reinterpret_cast<void*>(!mkfifo(hd->name.c_str(), O_RDWR | O_CREAT)))
 #endif
 		   || nullptr == (hd->file = fopen(hd->name.c_str(), "wb+")))
 		{
 			hd->name = "";
 			return false;
 		}
-		hd->pipeReader = new std::thread(hd->NamePipeReader,hd);
+		std::function<void(ArmyAnt::FsPrivate*)> func = hd->NamePipeReader;
+		hd->pipeReader = new std::thread(func,&(*hd));
 	}
 	hd->type = StreamType::NamePipe;
 	return true;
@@ -236,7 +253,7 @@ bool FileStream::Open(BYTE comNum)
 	auto hd = handleManager[handle];
 	if(hd->type != StreamType::None)
 		return false;
-	AAAssert(comNum != 0);
+	Assert(comNum != 0);
 	//打开串口
 	hd->name = std::string("com") + char((comNum / 10 > 0) ? (comNum / 10 + 48) : 0) + char(comNum % 10 + 48);
 	hd->file = fopen(hd->name.c_str(), "wb+");
@@ -254,7 +271,7 @@ bool FileStream::Open(const char* netAddr, BYTE protocol)
 	auto hd = handleManager[handle];
 	if(hd->type != StreamType::None)
 		return false;
-	AAAssert(netAddr != nullptr && protocol != 0);
+	Assert(netAddr != nullptr && protocol != 0);
 	hd->name = netAddr;
 	//填充网络通信连接操作
 	return false;
@@ -265,7 +282,7 @@ bool FileStream::Open(DWORD netIp, WORD port, BYTE protocol)
 	auto hd = handleManager[handle];
 	if(hd->type != StreamType::None)
 		return false;
-	AAAssert(port != 0 && protocol != 0);
+	Assert(port != 0 && protocol != 0);
 	char name[32] = "";
 	sprintf(name, "%d.%d.%d.%d:%d", netIp / 256 / 256 / 256, netIp / 256 / 256 % 256, netIp / 256 % 256, netIp % 256, int(port));
 	hd->name = name;
@@ -292,7 +309,7 @@ bool FileStream::Close()
 				hd->pipeHandle = nullptr;
 				fclose(hd->file);
 				hd->pipeReader->join();
-				AA_SAFE_DEL(hd->pipeReader)
+				SafeDel(hd->pipeReader);
 			}
 			hd->file = nullptr;
 			break;
@@ -301,7 +318,7 @@ bool FileStream::Close()
 			hd->len = 0;
 			break;
 		case StreamType::Network:
-			AAAssert(0);	//修改为网络关闭操作
+			Assert(0);	//修改为网络关闭操作
 			break;
 		case StreamType::None:
 		default:
@@ -364,10 +381,11 @@ fpos_t FileStream::GetLength() const
 		{
 			fpos_t nowpos = 0;
 			fgetpos(hd->file, &nowpos);
-			_fseeki64(hd->file, 0, SEEK_END);
+			fseek(hd->file,0,SEEK_END);
+			FsPrivate::Fseek(hd->file, 0, SEEK_END);
 			fpos_t ret;
 			fgetpos(hd->file, &ret);
-			_fseeki64(hd->file, nowpos, SEEK_SET);
+			FsPrivate::Fseek(hd->file, nowpos, SEEK_SET);
 			return ret;
 		}
 		case StreamType::Memory:
@@ -423,7 +441,7 @@ bool FileStream::MovePos(fpos_t pos /*= FILE_POS_END*/) const
 		case StreamType::File:
 		case StreamType::NamePipe:
 		case StreamType::ComData:
-			_fseeki64(hd->file, pos, SEEK_SET);
+			FsPrivate::Fseek(hd->file, pos, SEEK_SET);
 			break;
 		case StreamType::Memory:
 			hd->pos = pos;
@@ -442,7 +460,7 @@ const char* FileStream::GetSourceName() const
 
 DWORD FileStream::Read(void*buffer, DWORD len /*= FILE_SHORT_POS_END*/, fpos_t pos /*= FILE_LONG_POS_END*/)
 {
-	AAAssert(buffer != nullptr);
+	Assert(buffer != nullptr);
 	auto hd = handleManager[handle];
 	//根据类型进行读取。磁盘文件、命名管道和串口可以统一调用库函数
 	switch(hd->type)
@@ -453,7 +471,7 @@ DWORD FileStream::Read(void*buffer, DWORD len /*= FILE_SHORT_POS_END*/, fpos_t p
 			//记录当前位置。如果参数制定了要开始读取的位置，则读取过后要返回到原位置
 			fpos_t now = 0;
 			fgetpos(hd->file, &now);
-			_fseeki64(hd->file, 0, SEEK_END);
+			FsPrivate::Fseek(hd->file, 0, SEEK_END);
 			fpos_t wholelen = 0;
 			fgetpos(hd->file, &wholelen);
 			//标记是否在读取结束后返回初始位置
@@ -463,10 +481,10 @@ DWORD FileStream::Read(void*buffer, DWORD len /*= FILE_SHORT_POS_END*/, fpos_t p
 				gostart = false;
 				pos = now;
 			}
-			_fseeki64(hd->file, pos, SEEK_SET);
+			FsPrivate::Fseek(hd->file, pos, SEEK_SET);
 			fread(buffer, DWORD(min(wholelen, len)), 1, hd->file);
 			if(gostart)
-				_fseeki64(hd->file, now, SEEK_SET);
+				FsPrivate::Fseek(hd->file, now, SEEK_SET);
 			return DWORD(min(wholelen, len));
 		}
 		case StreamType::NamePipe:
@@ -502,7 +520,7 @@ DWORD FileStream::Read(void*buffer, DWORD len /*= FILE_SHORT_POS_END*/, fpos_t p
 
 DWORD FileStream::Read(void*buffer, BYTE endtag, DWORD maxlen/* = FILE_SHORT_POS_END*/)
 {
-	AAAssert(buffer != nullptr);
+	Assert(buffer != nullptr);
 	auto hd = handleManager[handle];
 	DWORD len = 0;
 	fpos_t wholeLen = 0;
@@ -564,7 +582,7 @@ DWORD FileStream::Read(void*buffer, BYTE endtag, DWORD maxlen/* = FILE_SHORT_POS
 
 DWORD FileStream::Write(void*buffer, DWORD len /*= 0*/)
 {
-	AAAssert(buffer != nullptr);
+	Assert(buffer != nullptr);
 	auto hd = handleManager[handle];
 	//如果len参数没有传入，则写内存到流，直至遇到0，这相当于写入字符串至流
 	if(len == 0)
@@ -610,13 +628,13 @@ bool FileStream::CopyFile(const char*srcPath, const char*dstPath)
 	{
 		memlen = 1024;
 		cpmem = new char[memlen];
-		AAAssert(cpmem == nullptr);
+		Assert(cpmem == nullptr);
 	}
 	//检测源文件的长度
 	fpos_t flen = 0;
-	_fseeki64(srcfp, 0, SEEK_END);
+	FsPrivate::Fseek(srcfp, 0, SEEK_END);
 	fgetpos(srcfp, &flen);
-	_fseeki64(srcfp, 0, SEEK_SET);
+	FsPrivate::Fseek(srcfp, 0, SEEK_SET);
 	//拷贝
 	for(fpos_t i = 0; i < flen; i+=memlen)
 	{
@@ -628,7 +646,7 @@ bool FileStream::CopyFile(const char*srcPath, const char*dstPath)
 	fclose(srcfp);
 	fclose(dstfp);
 	//释放内存
-	AA_SAFE_DELALL(cpmem)
+	SafeDelAll(cpmem);
 	return true;
 }
 
@@ -696,7 +714,7 @@ bool FileStream::operator^=(const char* filename)
 	{
 		memlen = 1024;
 		cpmem = new char[memlen];
-		AAAssert(cpmem == nullptr);
+		Assert(cpmem == nullptr);
 	}
 	//进行数据拷贝
 	for(fpos_t i = 0; i < flen; i += memlen)
