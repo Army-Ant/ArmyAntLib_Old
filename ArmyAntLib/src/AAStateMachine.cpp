@@ -13,7 +13,7 @@ public:
 	std::list<StateMachineHelper::State> states;
 };
 
-static ClassPrivateHandleManager<StateMachine, StateMachine_Private> manager;
+static ClassPrivateHandleManager<FiniteStateMachine, StateMachine_Private> manager;
 
 
 

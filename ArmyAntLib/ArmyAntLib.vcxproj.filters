@@ -72,6 +72,9 @@
     <ClInclude Include="include\AAAes.h">
       <Filter>3.CppLibCode</Filter>
     </ClInclude>
+    <ClInclude Include="include\AATree.hpp">
+      <Filter>3.CppLibCode</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\AAFile.cpp">
