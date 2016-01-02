@@ -75,6 +75,9 @@
     <ClInclude Include="include\AATree.hpp">
       <Filter>3.CppLibCode</Filter>
     </ClInclude>
+    <ClInclude Include="include\AAFragment.h">
+      <Filter>2.mainOutput\defination</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\AAFile.cpp">
