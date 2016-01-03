@@ -94,7 +94,7 @@
       <Command>$(ProjectDir)base\build_start.bat $(Configuration) $(ProjectDir) $(TargetName)</Command>
     </PreBuildEvent>
     <PostBuildEvent>
-      <Command>$(ProjectDir)base\build_end.bat $(Configuration) $(ProjectDir)</Command>
+      <Command>$(ProjectDir)base\build_end.bat $(Configuration) $(ProjectDir) $(TargetName)</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>

@@ -1,21 +1,6 @@
+------------------------------------ English ----------------------------------------------------------------------------------------------
 
-The following is a BSD 3-Clause ("BSD New" or "BSD Simplified") license template. To generate your own license, change the values of OWNER, ORGANIZATION and YEAR from their original values as given here, and substitute your own.
-
-Note: You may omit clause 3 and still be OSD-conformant. Despite its colloquial name "BSD New", this is not the newest version of the BSD license; it was followed by the even newer BSD-2-Clause version, sometimes known as the "Simplified BSD License". On January 9th, 2008 the OSI Board approved BSD-2-Clause, which is used by FreeBSD and others. It omits the final "no-endorsement" clause and is thus roughly equivalent to the MIT License.
-
-Historical Background: The original license used on BSD Unix had four clauses. The advertising clause (the third of four clauses) required you to acknowledge use of U.C. Berkeley code in your advertising of any product using that code. It was officially rescinded by the Director of the Office of Technology Licensing of the University of California on July 22nd, 1999. He states that clause 3 is "hereby deleted in its entirety." The four clause license has not been approved by OSI. The license below does not contain the advertising clause.
-
-This prelude is not part of the license.
-
-<OWNER> = ArmyAnt
-<ORGANIZATION> = ArmyAnt
-<YEAR> = 2015
-
-In the original BSD license, the occurrence of "copyright holder" in the 3rd clause read "ORGANIZATION", placeholder for "University of California". In the original BSD license, both occurrences of the phrase "COPYRIGHT HOLDERS AND CONTRIBUTORS" in the disclaimer read "REGENTS AND CONTRIBUTORS".
-
-Here is the license template:
-
-Copyright (c) <YEAR>, <OWNER>
+Copyright (c) 2015, ArmyAnt
  All rights reserved.
 
 Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
@@ -28,56 +13,40 @@ Redistribution and use in source and binary forms, with or without modification,
 
 THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
-----------------------------------------------------------------------------------------------------------------------------------
+------------------------------------ Traditional Chinese ----------------------------------------------------------------------------------
 
+版權所有 (c) 2015, ArmyAnt
 
-一、概覽
-	The BSD License（BSD）是Berkeley Software Distribution License（柏克萊軟體散布授權條款）的縮寫，許多軟體是在此一授權條款下發佈的。因為BSD起源自加州大學柏克萊分校，所以最原始散布的BSD擁有 者是加州大學董事會。又因一些軟體設計師修訂BSD的部份內容以做為其軟體程式授權使用，造成BSD有多種不同條款內容，統稱BSD-style授權條 款。
-	最初的BSD是由四個主要條款構成的，其中廣告條款的存在讓許多後來參與修改原始碼的使用者均會將其名字加入聲明之中，而遭受GNU計畫（GNU Project）的批評：該廣告條款造成非常冗長的聲明內容，是相當不便利，且易發生使用上困擾而與GPL不相容。而為了回應Richard Stallman（GNU 計畫的主導者與GPL的起草者），BSD的官方主導人William Hoskins遂在一九九九年七月二十二日率先將該廣告條款自BSD中刪除，也引發其他使用BSD者的跟進，刪除廣告條款之後的BSD被稱為「三條款 BSD」（3-clause BSD），而原本的被稱為「四條款BSD」（4-clause BSD）。
-	而BSD與其他授權條款如GPL條款內容相比，是幾乎沒有限制的，因此是更接近公共領域（public domain）的。
+被授權人無論修改或不修改本源碼，無輪發佈源碼或二進位形式産品，均需要滿足以下條件：
 
-二、運用狀況
-	目前實際上的使用是以三條款BSD為主，而又因為BSD可以任由他人修改條款部份內容以符合使用上需求，因此實務上有許多BSD-style授權條款存在。
-	目前實際使用上，只有NetBSD仍然使用四條款BSD；而在某些包含在KDE裡面的程式庫使用了二條款BSD，除刪除廣告條款外，亦將著作權所有者名稱 作為背書使用許可的禁止規定去除，而這樣的二條款BSD在功能上相當於MIT；FreeBSD也是使用二條款BSD，但另增加了後繼貢獻者的觀點並非 FreeBSD計畫的官方觀點的額外聲明。
+1.在原始碼的重製物中一定要保有本授權條款的著作權標示內容。
 
-三、權利義務
-	（一） 被授權人權利
-		允許任何商業上或私有使用。
-	（二） 被授權人義務
-		1.在原始碼的重製物中一定要保有本授權條款的著作權標示內容。
-		2.以二進位制格式呈現的重製物必須再現本授權條款的著作權聲明和內容。
-		3.在沒有事前書面同意的情況下，「the name of the 」及「the names of its contributors」均不得被用於支持或宣傳從既有軟體衍生出的產品（不為產品背書）。ORGANIZATION視使用BSD的使用者名稱而定。
+2.以二進位制格式呈現的重製物必須再現本授權條款的著作權聲明和內容。
 
-四、其他重要特性
-	1.可與其他授權條款並存。
-	2.是一個近乎公共領域的授權條款，一般個人或組織可以為了使授權條款內容符合自身需求而更改”University of California”此一標示。
-	3.使用BSD的軟體程式碼可以被任意使用，代表的是在開放源碼和封閉源碼軟體上均可利用採用此類授權條款的程式碼。
-	4.簡單的免責條款。
-	5.三條款BSD是由自由軟體基金會（FSF）所認可的自由軟體授權條款，也被開放源碼組織（OSI）認可為開放源碼授權條款。並與GPL相容。
+3.在沒有事前書面同意的情況下，版權人的名稱及其貢獻者的姓名均不得被用於支持或宣傳從既有軟體衍生出的產品（不為產品背書）。版權人组织则視使用BSD的使用者名稱而定。
+
+其他重要特性
+1.可與其他授權條款並存。
+2.是一個近乎公共領域的授權條款，一般個人或組織可以為了使授權條款內容符合自身需求而更改”University of California”此一標示。
+3.使用BSD的軟體程式碼可以被任意使用，代表的是在開放源碼和封閉源碼軟體上均可利用採用此類授權條款的程式碼。
+4.簡單的免責條款。
+5.三條款BSD是由自由軟體基金會（FSF）所認可的自由軟體授權條款，也被開放源碼組織（OSI）認可為開放源碼授權條款。並與GPL相容。
  
+------------------------------------ Simplified Chinese -----------------------------------------------------------------------------------
 
-----------------------------------------------------------------------------------------------------------------------------------
+版权所有（c）2015，ArmyAnt
 
-一、概览
-	The BSD License（BSD）是Berkeley Software Distribution License（柏克莱软体散布授权条款）的缩写，许多软体是在此一授权条款下发佈的。因为BSD起源自加州大学柏克莱分校，所以最原始散布的BSD拥有者是加州大学董事会。又因一些软体设计师修订BSD的部份内容以做为其软体程式授权使用，造成BSD有多种不同条款内容，统称BSD-style授权条款。
-	最初的BSD是由四个主要条款构成的，其中广告条款的存在让许多后来参与修改原始码的使用者均会将其名字加入声明之中，而遭受GNU计画（GNU Project）的批评：该广告条款造成非常冗长的声明内容，是相当不便利，且易发生使用上困扰而与GPL不相容。而为了回应Richard Stallman（GNU 计画的主导者与GPL的起草者），BSD的官方主导人William Hoskins遂在一九九九年七月二十二日率先将该广告条款自BSD中删除，也引发其他使用BSD者的跟进，删除广告条款之后的BSD被称为「三条款 BSD」（3-clause BSD），而原本的被称为「四条款BSD」（4-clause BSD）。
-	而BSD与其他授权条款如GPL条款内容相比，是几乎没有限制的，因此是更接近公共领域（public domain）的。
+被授权人无论修改或不修改本源码，无轮发布源码或二进位形式产品，均需要满足以下条件：
 
-二、运用状况
-	目前实际上的使用是以三条款BSD为主，而又因为BSD可以任由他人修改条款部份内容以符合使用上需求，因此实务上有许多BSD-style授权条款存在。
-	目前实际使用上，只有NetBSD仍然使用四条款BSD；而在某些包含在KDE裡面的程式库使用了二条款BSD，除删除广告条款外，亦将着作权所有者名称作为背书使用许可的禁止规定去除，而这样的二条款BSD在功能上相当于MIT；FreeBSD也是使用二条款BSD，但另增加了后继贡献者的观点并非 FreeBSD计画的官方观点的额外声明。
+1.在原始码的衍生产品中一定要保有本授权条款的著作权标示内容。
 
-三、权利义务
-	（一） 被授权人权利
-		允许任何商业上或私有使用。
-	（二） 被授权人义务
-		1. 在原始码的重製物中一定要保有本授权条款的着作权标示内容。
-		2. 以二进位制格式呈现的重製物必须再现本授权条款的着作权声明和内容。
-		3. 在没有事前书面同意的情况下，「the name of the 」及「the names of its contributors」均不得被用于支持或宣传从既有软体衍生出的产品（不为产品背书）。ORGANIZATION视使用BSD的使用者名称而定。
+2.以二进位制格式呈现的衍生产品必须再现本授权条款的著作权声明和内容。
 
-四、其他重要特性
-	1. 可与其他授权条款并存。
-	2. 是一个近乎公共领域的授权条款，一般个人或组织可以为了使授权条款内容符合自身需求而更改”University of California”此一标示。
-	3. 使用BSD的软体程式码可以被任意使用，代表的是在开放源码和封闭源码软体上均可利用採用此类授权条款的程式码。
-	4. 简单的免责条款。
-	5. 三条款BSD是由自由软体基金会（FSF）所认可的自由软体授权条款，也被开放源码组织（OSI）认可为开放源码授权条款。并与GPL相容。
+3.在没有事前书面同意的情况下，版权人的名称及其贡献者的姓名均不得被用于支持或宣传从既有软件衍生出的产品（不为产品背书）。版权人组织则视使用BSD的使用者名称而定。
+
+其他重要特性
+1.可与其他授权条款并存。
+2.是一个近乎公共领域的授权条款，一般个人或组织可以为了使授权条款内容符合自身需求而更改”University of California”此一标示。
+3.使用BSD的软件代码可以被任意使用，代表的是在开放源码和封闭源码软件上均可利用采用此类授权条款的代码。
+4.简单的免责条款。
+5.三条款BSD是由自由软件基金会（FSF）所认可的自由软件授权条款，也被开放源码组织（OSI）认可为开放源码授权条款。并与GPL兼容。

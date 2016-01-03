@@ -1,7 +1,6 @@
 ﻿#ifndef CLASS_PRIVATE_HANDLE_HPP_2015_11_13
 #define CLASS_PRIVATE_HANDLE_HPP_2015_11_13
 
-#include "AADefine.h"
 #include "AATripleMap.hpp"
 
 namespace ArmyAnt {
@@ -67,7 +66,7 @@ void ArmyAnt::ClassPrivateHandleManager<T_Out, T_In, T_Handle>::ReleaseHandle(T_
 	//销毁内部实例，解除关联
 	if(ret != handleMap.End())
 	{
-		AA_SAFE_DEL(ret->third);
+		SafeDel(ret->third);
 		handleMap.Erase(handle);
 	}
 }

@@ -32,13 +32,13 @@ struct State
 
 }
 
-class ARMYANTLIB_API StateMachine
+class ARMYANTLIB_API FiniteStateMachine
 {
 public:
-	StateMachine();
-	StateMachine(const StateMachine&value);
-	StateMachine&operator=(const StateMachine&value);
-	~StateMachine();
+	FiniteStateMachine();
+	FiniteStateMachine(const FiniteStateMachine&value);
+	FiniteStateMachine&operator=(const FiniteStateMachine&value);
+	~FiniteStateMachine();
 
 public:
 	bool InsertState(const StateMachineHelper::State&state, bool isDefaultState = false);
@@ -60,11 +60,11 @@ public:
 	bool IsRunning()const;
 
 public:
-	StateMachine& operator+=(StateMachineHelper::State&state);
-	StateMachine& operator-=(StateMachineHelper::State&state);
+	FiniteStateMachine& operator+=(StateMachineHelper::State&state);
+	FiniteStateMachine& operator-=(StateMachineHelper::State&state);
 	StateMachineHelper::State& operator[](const char*name);
 	const StateMachineHelper::State& operator[](const char*name)const;
-	StateMachine& operator>>(const char*name);
+	FiniteStateMachine& operator>>(const char*name);
 
 public:
 	const DWORD handle;

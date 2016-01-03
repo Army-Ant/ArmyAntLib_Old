@@ -222,5 +222,4 @@ $RECYCLE.BIN/
 # Build logs
 *.tlog
 *.idb
-*.tlog
-*.idb
+*.lastbuildstate

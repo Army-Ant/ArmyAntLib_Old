@@ -72,11 +72,11 @@
     <ClInclude Include="include\AAAes.h">
       <Filter>3.CppLibCode</Filter>
     </ClInclude>
-    <ClInclude Include="include\AATree.hpp">
-      <Filter>3.CppLibCode</Filter>
-    </ClInclude>
     <ClInclude Include="include\AAFragment.h">
       <Filter>2.mainOutput\defination</Filter>
+    </ClInclude>
+    <ClInclude Include="include\AATree.hpp">
+      <Filter>3.CppLibCode\templateClasses</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

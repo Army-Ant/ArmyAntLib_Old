@@ -1,4 +1,5 @@
 ﻿#include "main.h"
+using namespace ArmyAnt::Fragment;
 
 static const int s_exitCode = 0xffffffff;
 

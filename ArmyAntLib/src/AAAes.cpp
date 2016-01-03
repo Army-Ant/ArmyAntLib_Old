@@ -91,7 +91,7 @@ bool ByteEncoder_Private::TurnToBack(bool withCheck/* = false*/)
 	else for(int i = 0; i < 256; i++)
 	{
 		//不检查，单纯转换数据，如果原S盒不符合规则，可能发生数据覆盖等问题
-		tmp[this->data[i]] = i;
+		tmp[this->data[i]] = BYTE(i);
 	}
 	//更新数据
 	memcpy(this->data, tmp, 256);
@@ -191,7 +191,7 @@ bool ByteEncoder::CopiedFromAnother(const ByteEncoder another, bool needCheck /*
 	if(--byteEncoder_manager[handle]->refCount <= 0)
 		byteEncoder_manager.ReleaseHandle(handle);
 	//绑定目标数据类的句柄，引用计数器+1
-	*(DWORD*)(&this->handle) = another.handle;
+	*const_cast<DWORD*>(&this->handle) = another.handle;
 	byteEncoder_manager[handle]->refCount++;
 	return true;
 }
@@ -267,17 +267,17 @@ public:
 	void ResetEncoder();
 	inline bool CheckCanDo();
 
-	bool ByteEncode(void* dest, const char*src, LWORD length);
-	bool ByteDecode(void* dest, const char*src, LWORD length);
+	inline bool ByteEncode(void* dest, const char*src, LWORD length);
+	inline bool ByteDecode(void* dest, const char*src, LWORD length);
 	static bool ByteEncode(DWORD encoder, void* dest, const char*src, LWORD length);
 	static bool ByteDecode(DWORD encoder, void* dest, const char*src, LWORD length);
 
-	bool LineMove(void*dest, const char*src, LWORD length);
-	bool LineMoveBack(void*dest, const char*src, LWORD length);
+	inline bool LineMove(void*dest, const char*src, LWORD length);
+	inline bool LineMoveBack(void*dest, const char*src, LWORD length);
 	static bool LineMove(BYTE rectWidth, void*dest, const char*src, LWORD length, bool isBack = false);
 	static bool RowMix(void*dest, const char*src, LWORD length, bool isBack = false);
 
-	bool Lock(void*dest, const char*src, LWORD length);
+	inline bool Lock(void*dest, const char*src, LWORD length);
 	static bool Lock(void*dest, const char*src, LWORD length, BYTE pwd[16]);
 
 public:
