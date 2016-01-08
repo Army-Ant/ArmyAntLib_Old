@@ -124,6 +124,7 @@
   <ItemGroup>
     <None Include="base\build_end.bat" />
     <None Include="base\build_start.bat" />
+    <None Include="base\build_start.sh" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="base\ProgrammerRule.txt" />

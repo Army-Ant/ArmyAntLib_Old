@@ -13,30 +13,45 @@ class TripleMap;
 template <class _Key, class _Value1, class _Value2>
 class Iterator_TripleMap;
 
-
+// 三元组
 template <class _First, class _Second, class _Third>
 class Triad
 {
 public:
 	typedef Triad<_First, _Second, _Third> SelfType;
+	//三元表的迭代器
 	typedef Iterator_TripleMap<_First, _Second, _Third> Iterator;
 
 public:
+	//默认空构造函数
 	Triad();
+	//带值构造函数
 	Triad(const _First&, const  _Second&, const  _Third&);
+	//复制构造函数
 	Triad(const Triad&);
+	//从迭代器复制值的构造函数
 	Triad(const Iterator&);
+	//拷贝赋值
 	Triad&operator=(const SelfType&);
+	//从迭代器拷贝赋值
 	Triad&operator=(const Iterator&);
+	//析构函数
 	~Triad();
 
 public:
+	//判断是否相等
 	bool Equals(const SelfType&) const;
+	//交换内容12
 	inline Triad<_Second, _First, _Third> Swap12() const;
+	//交换内容13
 	inline Triad<_Third, _Second, _First> Swap13() const;
+	//交换内容23
 	inline Triad<_First, _Third, _Second> Swap23() const;
+	//获取二元组12
 	inline std::pair<_First, _Second> GetValue12() const;
+	//获取二元组13
 	inline std::pair<_First, _Third> GetValue13() const;
+	//获取二元组23
 	inline std::pair<_Second, _Third> GetValue23() const;
 
 public:
@@ -64,29 +79,48 @@ public:
 	~TripleMap();
 
 public:
+	//判断是否相等
 	bool Equals(const SelfMap&) const;
+	//判断是否为空
 	inline bool Empty() const;
+	//获取对应键处的值
 	std::pair<_Value1, _Value2> GetValues(const _Key&) const;
+	//获取数据总量
 	DWORD Size() const;
 
+	//插入键值
 	bool Insert(const _Key&, const  _Value1&, const  _Value2&);
+	//插入迭代器所指内容
 	bool Insert(const Iterator&);
+	//插入元素
 	inline bool Insert(const Element&);
+	//插入键值
 	inline bool Insert(const _Key&, const std::pair<_Value1, _Value2>&);
+	//清除迭代器所指位置的内容
 	bool Erase(const Iterator&);
+	//清除键所对应处的内容
 	bool Erase(const _Key&);
 
+	//查找指定键的位置
 	Iterator Find(const _Key&);
 	const Iterator Find(const _Key&) const;
+	//获取指向开头的迭代器
 	Iterator Begin();
 	const Iterator Begin() const;
+	//令迭代器向前指
 	Iterator&Before(const Iterator&, int num = 1);
+	//令迭代器向后指
 	Iterator&After(const Iterator&, int num = 1);
+	//迭代器末尾,即空值
 	inline static const Iterator&End();
 
+	//排序算法
 	typedef std::function<bool(const Iterator&, const Iterator&)> SortFunc;
+	//按指定算法进行排序
 	void Sort(SortFunc);
+	//清空三元表
 	bool Clear();
+	//清空所有值,但保留键
 	bool ClearValues();
 
 public:

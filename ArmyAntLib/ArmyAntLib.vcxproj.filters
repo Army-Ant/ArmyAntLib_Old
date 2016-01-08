@@ -100,6 +100,9 @@
     <None Include="base\build_end.bat">
       <Filter>1.base</Filter>
     </None>
+    <None Include="base\build_start.sh">
+      <Filter>1.base</Filter>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <Text Include="base\ProgrammerRule.txt">
