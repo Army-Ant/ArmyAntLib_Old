@@ -63,9 +63,6 @@
     <ClInclude Include="include\AATripleMap.hpp">
       <Filter>3.CppLibCode\templateClasses</Filter>
     </ClInclude>
-    <ClInclude Include="include\AAStateMachine.h">
-      <Filter>3.CppLibCode</Filter>
-    </ClInclude>
     <ClInclude Include="include\AABinary.h">
       <Filter>3.CppLibCode</Filter>
     </ClInclude>
@@ -78,6 +75,12 @@
     <ClInclude Include="include\AATree.hpp">
       <Filter>3.CppLibCode\templateClasses</Filter>
     </ClInclude>
+    <ClInclude Include="include\AADigraph.hpp">
+      <Filter>3.CppLibCode\templateClasses</Filter>
+    </ClInclude>
+    <ClInclude Include="include\AAStateMachine.hpp">
+      <Filter>3.CppLibCode\templateClasses</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\AAFile.cpp">
@@ -87,9 +90,6 @@
       <Filter>4.CRefCode</Filter>
     </ClCompile>
     <ClCompile Include="src\AAAes.cpp">
-      <Filter>3.CppLibCode</Filter>
-    </ClCompile>
-    <ClCompile Include="src\AAStateMachine.cpp">
       <Filter>3.CppLibCode</Filter>
     </ClCompile>
   </ItemGroup>

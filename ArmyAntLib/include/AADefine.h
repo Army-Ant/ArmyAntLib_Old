@@ -8,6 +8,9 @@
 typedef unsigned long long LWORD;
 #endif
 
+#define AA_SAFE_DEL(x) if(x != nullptr){delete x; x = nullptr;}else;
+#define AA_SAFE_DELALL(x) if(x != nullptr){delete[] x; x = nullptr;}else;
+
 #define AA_FORBID_ASSGN_OPR(typen) public: typen& operator=(typen&)=delete
 #define AA_FORBID_COPY_CTOR(typen) public: typen(typen&)=delete
 

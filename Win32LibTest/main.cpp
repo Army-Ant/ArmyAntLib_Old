@@ -58,7 +58,7 @@ int FileStreamTest(const std::string& cmd)
 			return Error("The file stream has not been created !");
 		else
 		{
-			SafeDel(file);
+			AA_SAFE_DEL(file);
 			std::cout << "The file stream has been destroyed !" << std::endl;
 		}
 	}

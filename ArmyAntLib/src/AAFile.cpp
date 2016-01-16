@@ -20,6 +20,7 @@
 #ifdef OS_ANDROID
 
 #elif OS_MAC
+
 #endif
 
 #endif
@@ -37,7 +38,7 @@ public:
 		{
 			pipeReader->join();
 		}
-		SafeDel(pipeReader);
+		AA_SAFE_DEL(pipeReader);
 	};
 
 	//流的类型
@@ -309,7 +310,7 @@ bool FileStream::Close()
 				hd->pipeHandle = nullptr;
 				fclose(hd->file);
 				hd->pipeReader->join();
-				SafeDel(hd->pipeReader);
+				AA_SAFE_DEL(hd->pipeReader);
 			}
 			hd->file = nullptr;
 			break;
@@ -646,7 +647,7 @@ bool FileStream::CopyFile(const char*srcPath, const char*dstPath)
 	fclose(srcfp);
 	fclose(dstfp);
 	//释放内存
-	SafeDelAll(cpmem);
+	AA_SAFE_DELALL(cpmem);
 	return true;
 }
 

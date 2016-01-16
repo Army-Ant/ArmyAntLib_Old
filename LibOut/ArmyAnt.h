@@ -14,10 +14,14 @@
 
 // Base symbol defination
 #include "include/AADefine.h"
+
 // Template class of C++ class helper
 #include "include/AAClassPrivateHandle.hpp"
 // Template class for a map with two values
 #include "include/AATripleMap.hpp"
+// Template class for tree
+#include "include/AATree.hpp"
+
 // File stream class, to work in disk file, memory, name pipe, com, network
 #include "include/AAFile.h"
 // AES encoding and decoding class

@@ -189,7 +189,7 @@ public:
 	inline Iterator& operator --();
 	inline Iterator operator --(int);
 
-	inline Element* operator->() const;
+	inline const Element* operator->() const;
 	inline Element operator *();
 	inline const Element operator *() const;
 
@@ -871,7 +871,7 @@ Iterator_TripleMap<_Key, _Value1, _Value2> Iterator_TripleMap<_Key, _Value1, _Va
 }
 
 template <class _Key, class _Value1, class _Value2>
-Triad<_Key, _Value1, _Value2>* Iterator_TripleMap<_Key, _Value1, _Value2>::operator->() const
+const Triad<_Key, _Value1, _Value2>* Iterator_TripleMap<_Key, _Value1, _Value2>::operator->() const
 {
 	if(End())
 		return nullptr;

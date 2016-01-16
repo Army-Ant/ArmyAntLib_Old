@@ -62,11 +62,11 @@ T_Handle ArmyAnt::ClassPrivateHandleManager<T_Out, T_In, T_Handle>::GetHandle(T_
 template <class T_Out, class T_In, class T_Handle>
 void ArmyAnt::ClassPrivateHandleManager<T_Out, T_In, T_Handle>::ReleaseHandle(T_Handle handle)
 {
-	auto ret = handleMap.Find(handle);
+	Iterator_TripleMap<T_Handle, T_Out*, T_In*> ret = handleMap.Find(handle);
 	//销毁内部实例，解除关联
 	if(ret != handleMap.End())
 	{
-		SafeDel(ret->third);
+		delete ret->third;
 		handleMap.Erase(handle);
 	}
 }

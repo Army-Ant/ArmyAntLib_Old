@@ -42,26 +42,6 @@ inline void Assert(bool x)
 #endif
 }
 
-template <class PTR>
-inline void SafeDel(PTR&ptr)
-{
-	if(ptr != nullptr)
-	{
-		delete ptr;
-		ptr = nullptr;
-	}
-}
-
-template <class PTR>
-inline void SafeDelAll(PTR&ptr)
-{
-	if(ptr != nullptr)
-	{
-		delete[] ptr;
-		ptr = nullptr;
-	}
-}
-
 }
 
 }

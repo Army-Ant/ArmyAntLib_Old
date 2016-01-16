@@ -103,8 +103,9 @@
     <ClInclude Include="base\base.hpp" />
     <ClInclude Include="include\AAAes.h" />
     <ClInclude Include="include\AABinary.h" />
+    <ClInclude Include="include\AADigraph.hpp" />
     <ClInclude Include="include\AAFragment.h" />
-    <ClInclude Include="include\AAStateMachine.h" />
+    <ClInclude Include="include\AAStateMachine.hpp" />
     <ClInclude Include="include\AATree.hpp" />
     <ClInclude Include="include\AATripleMap.hpp" />
     <ClInclude Include="include\AA_end.h" />
@@ -118,7 +119,6 @@
   <ItemGroup>
     <ClCompile Include="src\AAAes.cpp" />
     <ClCompile Include="src\AAFile.cpp" />
-    <ClCompile Include="src\AAStateMachine.cpp" />
     <ClCompile Include="src\C_AAFile.cpp" />
   </ItemGroup>
   <ItemGroup>
