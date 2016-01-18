@@ -1,6 +1,16 @@
 ﻿#ifndef ARMY_ANT_TRIPLE_MAP_2015_11_19
 #define ARMY_ANT_TRIPLE_MAP_2015_11_19
 
+/*	* @ author			: Jason
+	* @ date			: 11/21/2015
+	* @ nearly update	: 12/18/2015
+	* @ small version	: 0.2
+	* @ summary			: 三元组及具有双值的键值map
+	* @ uncompleted		:
+	* @ untested		: all 已经在使用中,但不保证没有bug
+	* @ tested			:
+	*/
+
 #include <cstddef>
 #include <functional>
 #include <vector>

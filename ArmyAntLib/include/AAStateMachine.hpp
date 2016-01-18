@@ -39,7 +39,7 @@ public:
 	FiniteStateMachine();
 	FiniteStateMachine(const FiniteStateMachine&value);
 	FiniteStateMachine&operator=(const FiniteStateMachine&value);
-	~FiniteStateMachine();
+	virtual ~FiniteStateMachine();
 
 public:
 	bool InsertState(const StateMachineHelper::State<T_Tag>&state, bool isDefaultState = false);

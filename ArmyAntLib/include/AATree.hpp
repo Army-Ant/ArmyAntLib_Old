@@ -1,6 +1,16 @@
 #ifndef A_A_TREE_HPP_2015_12_26
 #define A_A_TREE_HPP_2015_12_26
 
+/*	* @ author			: Jason
+	* @ date			: 12/26/2015
+	* @ nearly update	: 01/18/2016
+	* @ small version	: 0.2
+	* @ summary			: 树及其遍历迭代器
+	* @ uncompleted		: 
+	* @ untested		: all
+	* @ tested			:
+	*/
+
 #include "AADefine.h"
 #include <functional>
 
