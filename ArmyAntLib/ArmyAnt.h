@@ -21,6 +21,12 @@
 #include "include/AATripleMap.hpp"
 // Template class for tree
 #include "include/AATree.hpp"
+// Template class for digraph
+#include "include/AADigraph.hpp"
+// Template class for state machine
+#include "include/AAStateMachine.hpp"
+// Template class for neuron struct
+#include "include/AANeuron.hpp"
 
 // File stream class, to work in disk file, memory, name pipe, com, network
 #include "include/AAFile.h"
@@ -28,8 +34,8 @@
 #include "include/AAAes.h"
 // Binary data packer and unpacker class, used to make file or socket datas for program
 #include "include/AABinary.h"
-// State Machine class, the key is a string
-#include "include/AAStateMachine.h"
+// Message queue
+#include "include/AAMessageQueue.h"
 
 
 

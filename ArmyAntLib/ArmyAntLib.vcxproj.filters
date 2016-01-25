@@ -28,6 +28,9 @@
     <Filter Include="3.CppLibCode\templateClasses">
       <UniqueIdentifier>{d5c166c9-3636-4581-90c6-7bf459fd2df2}</UniqueIdentifier>
     </Filter>
+    <Filter Include="5.Third-party-libraries\boost">
+      <UniqueIdentifier>{cbc60180-7af5-48d9-97bf-f48b2108da1d}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="base\base.hpp">
@@ -80,6 +83,405 @@
     </ClInclude>
     <ClInclude Include="include\AAStateMachine.hpp">
       <Filter>3.CppLibCode\templateClasses</Filter>
+    </ClInclude>
+    <ClInclude Include="include\AANeuron.hpp">
+      <Filter>3.CppLibCode\templateClasses</Filter>
+    </ClInclude>
+    <ClInclude Include="include\AAMessageQueue.h">
+      <Filter>3.CppLibCode</Filter>
+    </ClInclude>
+    <ClInclude Include="externals\boost\boost\align.hpp">
+      <Filter>5.Third-party-libraries\boost</Filter>
+    </ClInclude>
+    <ClInclude Include="externals\boost\boost\aligned_storage.hpp">
+      <Filter>5.Third-party-libraries\boost</Filter>
+    </ClInclude>
+    <ClInclude Include="externals\boost\boost\any.hpp">
+      <Filter>5.Third-party-libraries\boost</Filter>
+    </ClInclude>
+    <ClInclude Include="externals\boost\boost\array.hpp">
+      <Filter>5.Third-party-libraries\boost</Filter>
+    </ClInclude>
+    <ClInclude Include="externals\boost\boost\asio.hpp">
+      <Filter>5.Third-party-libraries\boost</Filter>
+    </ClInclude>
+    <ClInclude Include="externals\boost\boost\assert.hpp">
+      <Filter>5.Third-party-libraries\boost</Filter>
+    </ClInclude>
+    <ClInclude Include="externals\boost\boost\assign.hpp">
+      <Filter>5.Third-party-libraries\boost</Filter>
+    </ClInclude>
+    <ClInclude Include="externals\boost\boost\atomic.hpp">
+      <Filter>5.Third-party-libraries\boost</Filter>
+    </ClInclude>
+    <ClInclude Include="externals\boost\boost\bimap.hpp">
+      <Filter>5.Third-party-libraries\boost</Filter>
+    </ClInclude>
+    <ClInclude Include="externals\boost\boost\bind.hpp">
+      <Filter>5.Third-party-libraries\boost</Filter>
+    </ClInclude>
+    <ClInclude Include="externals\boost\boost\blank.hpp">
+      <Filter>5.Third-party-libraries\boost</Filter>
+    </ClInclude>
+    <ClInclude Include="externals\boost\boost\blank_fwd.hpp">
+      <Filter>5.Third-party-libraries\boost</Filter>
+    </ClInclude>
+    <ClInclude Include="externals\boost\boost\call_traits.hpp">
+      <Filter>5.Third-party-libraries\boost</Filter>
+    </ClInclude>
+    <ClInclude Include="externals\boost\boost\cast.hpp">
+      <Filter>5.Third-party-libraries\boost</Filter>
+    </ClInclude>
+    <ClInclude Include="externals\boost\boost\cerrno.hpp">
+      <Filter>5.Third-party-libraries\boost</Filter>
+    </ClInclude>
+    <ClInclude Include="externals\boost\boost\checked_delete.hpp">
+      <Filter>5.Third-party-libraries\boost</Filter>
+    </ClInclude>
+    <ClInclude Include="externals\boost\boost\chrono.hpp">
+      <Filter>5.Third-party-libraries\boost</Filter>
+    </ClInclude>
+    <ClInclude Include="externals\boost\boost\circular_buffer.hpp">
+      <Filter>5.Third-party-libraries\boost</Filter>
+    </ClInclude>
+    <ClInclude Include="externals\boost\boost\circular_buffer_fwd.hpp">
+      <Filter>5.Third-party-libraries\boost</Filter>
+    </ClInclude>
+    <ClInclude Include="externals\boost\boost\compressed_pair.hpp">
+      <Filter>5.Third-party-libraries\boost</Filter>
+    </ClInclude>
+    <ClInclude Include="externals\boost\boost\concept_archetype.hpp">
+      <Filter>5.Third-party-libraries\boost</Filter>
+    </ClInclude>
+    <ClInclude Include="externals\boost\boost\concept_check.hpp">
+      <Filter>5.Third-party-libraries\boost</Filter>
+    </ClInclude>
+    <ClInclude Include="externals\boost\boost\config.hpp">
+      <Filter>5.Third-party-libraries\boost</Filter>
+    </ClInclude>
+    <ClInclude Include="externals\boost\boost\convert.hpp">
+      <Filter>5.Third-party-libraries\boost</Filter>
+    </ClInclude>
+    <ClInclude Include="externals\boost\boost\crc.hpp">
+      <Filter>5.Third-party-libraries\boost</Filter>
+    </ClInclude>
+    <ClInclude Include="externals\boost\boost\cregex.hpp">
+      <Filter>5.Third-party-libraries\boost</Filter>
+    </ClInclude>
+    <ClInclude Include="externals\boost\boost\cstdfloat.hpp">
+      <Filter>5.Third-party-libraries\boost</Filter>
+    </ClInclude>
+    <ClInclude Include="externals\boost\boost\cstdint.hpp">
+      <Filter>5.Third-party-libraries\boost</Filter>
+    </ClInclude>
+    <ClInclude Include="externals\boost\boost\cstdlib.hpp">
+      <Filter>5.Third-party-libraries\boost</Filter>
+    </ClInclude>
+    <ClInclude Include="externals\boost\boost\current_function.hpp">
+      <Filter>5.Third-party-libraries\boost</Filter>
+    </ClInclude>
+    <ClInclude Include="externals\boost\boost\cxx11_char_types.hpp">
+      <Filter>5.Third-party-libraries\boost</Filter>
+    </ClInclude>
+    <ClInclude Include="externals\boost\boost\date_time.hpp">
+      <Filter>5.Third-party-libraries\boost</Filter>
+    </ClInclude>
+    <ClInclude Include="externals\boost\boost\dynamic_bitset.hpp">
+      <Filter>5.Third-party-libraries\boost</Filter>
+    </ClInclude>
+    <ClInclude Include="externals\boost\boost\dynamic_bitset_fwd.hpp">
+      <Filter>5.Third-party-libraries\boost</Filter>
+    </ClInclude>
+    <ClInclude Include="externals\boost\boost\enable_shared_from_this.hpp">
+      <Filter>5.Third-party-libraries\boost</Filter>
+    </ClInclude>
+    <ClInclude Include="externals\boost\boost\exception_ptr.hpp">
+      <Filter>5.Third-party-libraries\boost</Filter>
+    </ClInclude>
+    <ClInclude Include="externals\boost\boost\filesystem.hpp">
+      <Filter>5.Third-party-libraries\boost</Filter>
+    </ClInclude>
+    <ClInclude Include="externals\boost\boost\flyweight.hpp">
+      <Filter>5.Third-party-libraries\boost</Filter>
+    </ClInclude>
+    <ClInclude Include="externals\boost\boost\foreach.hpp">
+      <Filter>5.Third-party-libraries\boost</Filter>
+    </ClInclude>
+    <ClInclude Include="externals\boost\boost\foreach_fwd.hpp">
+      <Filter>5.Third-party-libraries\boost</Filter>
+    </ClInclude>
+    <ClInclude Include="externals\boost\boost\format.hpp">
+      <Filter>5.Third-party-libraries\boost</Filter>
+    </ClInclude>
+    <ClInclude Include="externals\boost\boost\function.hpp">
+      <Filter>5.Third-party-libraries\boost</Filter>
+    </ClInclude>
+    <ClInclude Include="externals\boost\boost\function_equal.hpp">
+      <Filter>5.Third-party-libraries\boost</Filter>
+    </ClInclude>
+    <ClInclude Include="externals\boost\boost\function_output_iterator.hpp">
+      <Filter>5.Third-party-libraries\boost</Filter>
+    </ClInclude>
+    <ClInclude Include="externals\boost\boost\functional.hpp">
+      <Filter>5.Third-party-libraries\boost</Filter>
+    </ClInclude>
+    <ClInclude Include="externals\boost\boost\generator_iterator.hpp">
+      <Filter>5.Third-party-libraries\boost</Filter>
+    </ClInclude>
+    <ClInclude Include="externals\boost\boost\geometry.hpp">
+      <Filter>5.Third-party-libraries\boost</Filter>
+    </ClInclude>
+    <ClInclude Include="externals\boost\boost\get_pointer.hpp">
+      <Filter>5.Third-party-libraries\boost</Filter>
+    </ClInclude>
+    <ClInclude Include="externals\boost\boost\implicit_cast.hpp">
+      <Filter>5.Third-party-libraries\boost</Filter>
+    </ClInclude>
+    <ClInclude Include="externals\boost\boost\indirect_reference.hpp">
+      <Filter>5.Third-party-libraries\boost</Filter>
+    </ClInclude>
+    <ClInclude Include="externals\boost\boost\integer.hpp">
+      <Filter>5.Third-party-libraries\boost</Filter>
+    </ClInclude>
+    <ClInclude Include="externals\boost\boost\integer_fwd.hpp">
+      <Filter>5.Third-party-libraries\boost</Filter>
+    </ClInclude>
+    <ClInclude Include="externals\boost\boost\integer_traits.hpp">
+      <Filter>5.Third-party-libraries\boost</Filter>
+    </ClInclude>
+    <ClInclude Include="externals\boost\boost\intrusive_ptr.hpp">
+      <Filter>5.Third-party-libraries\boost</Filter>
+    </ClInclude>
+    <ClInclude Include="externals\boost\boost\io_fwd.hpp">
+      <Filter>5.Third-party-libraries\boost</Filter>
+    </ClInclude>
+    <ClInclude Include="externals\boost\boost\is_placeholder.hpp">
+      <Filter>5.Third-party-libraries\boost</Filter>
+    </ClInclude>
+    <ClInclude Include="externals\boost\boost\iterator.hpp">
+      <Filter>5.Third-party-libraries\boost</Filter>
+    </ClInclude>
+    <ClInclude Include="externals\boost\boost\iterator_adaptors.hpp">
+      <Filter>5.Third-party-libraries\boost</Filter>
+    </ClInclude>
+    <ClInclude Include="externals\boost\boost\last_value.hpp">
+      <Filter>5.Third-party-libraries\boost</Filter>
+    </ClInclude>
+    <ClInclude Include="externals\boost\boost\lexical_cast.hpp">
+      <Filter>5.Third-party-libraries\boost</Filter>
+    </ClInclude>
+    <ClInclude Include="externals\boost\boost\limits.hpp">
+      <Filter>5.Third-party-libraries\boost</Filter>
+    </ClInclude>
+    <ClInclude Include="externals\boost\boost\local_function.hpp">
+      <Filter>5.Third-party-libraries\boost</Filter>
+    </ClInclude>
+    <ClInclude Include="externals\boost\boost\locale.hpp">
+      <Filter>5.Third-party-libraries\boost</Filter>
+    </ClInclude>
+    <ClInclude Include="externals\boost\boost\make_default.hpp">
+      <Filter>5.Third-party-libraries\boost</Filter>
+    </ClInclude>
+    <ClInclude Include="externals\boost\boost\make_shared.hpp">
+      <Filter>5.Third-party-libraries\boost</Filter>
+    </ClInclude>
+    <ClInclude Include="externals\boost\boost\make_unique.hpp">
+      <Filter>5.Third-party-libraries\boost</Filter>
+    </ClInclude>
+    <ClInclude Include="externals\boost\boost\math_fwd.hpp">
+      <Filter>5.Third-party-libraries\boost</Filter>
+    </ClInclude>
+    <ClInclude Include="externals\boost\boost\mem_fn.hpp">
+      <Filter>5.Third-party-libraries\boost</Filter>
+    </ClInclude>
+    <ClInclude Include="externals\boost\boost\memory_order.hpp">
+      <Filter>5.Third-party-libraries\boost</Filter>
+    </ClInclude>
+    <ClInclude Include="externals\boost\boost\mpi.hpp">
+      <Filter>5.Third-party-libraries\boost</Filter>
+    </ClInclude>
+    <ClInclude Include="externals\boost\boost\multi_array.hpp">
+      <Filter>5.Third-party-libraries\boost</Filter>
+    </ClInclude>
+    <ClInclude Include="externals\boost\boost\multi_index_container.hpp">
+      <Filter>5.Third-party-libraries\boost</Filter>
+    </ClInclude>
+    <ClInclude Include="externals\boost\boost\multi_index_container_fwd.hpp">
+      <Filter>5.Third-party-libraries\boost</Filter>
+    </ClInclude>
+    <ClInclude Include="externals\boost\boost\next_prior.hpp">
+      <Filter>5.Third-party-libraries\boost</Filter>
+    </ClInclude>
+    <ClInclude Include="externals\boost\boost\non_type.hpp">
+      <Filter>5.Third-party-libraries\boost</Filter>
+    </ClInclude>
+    <ClInclude Include="externals\boost\boost\noncopyable.hpp">
+      <Filter>5.Third-party-libraries\boost</Filter>
+    </ClInclude>
+    <ClInclude Include="externals\boost\boost\nondet_random.hpp">
+      <Filter>5.Third-party-libraries\boost</Filter>
+    </ClInclude>
+    <ClInclude Include="externals\boost\boost\none.hpp">
+      <Filter>5.Third-party-libraries\boost</Filter>
+    </ClInclude>
+    <ClInclude Include="externals\boost\boost\none_t.hpp">
+      <Filter>5.Third-party-libraries\boost</Filter>
+    </ClInclude>
+    <ClInclude Include="externals\boost\boost\operators.hpp">
+      <Filter>5.Third-party-libraries\boost</Filter>
+    </ClInclude>
+    <ClInclude Include="externals\boost\boost\optional.hpp">
+      <Filter>5.Third-party-libraries\boost</Filter>
+    </ClInclude>
+    <ClInclude Include="externals\boost\boost\parameter.hpp">
+      <Filter>5.Third-party-libraries\boost</Filter>
+    </ClInclude>
+    <ClInclude Include="externals\boost\boost\phoenix.hpp">
+      <Filter>5.Third-party-libraries\boost</Filter>
+    </ClInclude>
+    <ClInclude Include="externals\boost\boost\pointee.hpp">
+      <Filter>5.Third-party-libraries\boost</Filter>
+    </ClInclude>
+    <ClInclude Include="externals\boost\boost\pointer_cast.hpp">
+      <Filter>5.Third-party-libraries\boost</Filter>
+    </ClInclude>
+    <ClInclude Include="externals\boost\boost\pointer_to_other.hpp">
+      <Filter>5.Third-party-libraries\boost</Filter>
+    </ClInclude>
+    <ClInclude Include="externals\boost\boost\polymorphic_cast.hpp">
+      <Filter>5.Third-party-libraries\boost</Filter>
+    </ClInclude>
+    <ClInclude Include="externals\boost\boost\polymorphic_pointer_cast.hpp">
+      <Filter>5.Third-party-libraries\boost</Filter>
+    </ClInclude>
+    <ClInclude Include="externals\boost\boost\predef.h">
+      <Filter>5.Third-party-libraries\boost</Filter>
+    </ClInclude>
+    <ClInclude Include="externals\boost\boost\preprocessor.hpp">
+      <Filter>5.Third-party-libraries\boost</Filter>
+    </ClInclude>
+    <ClInclude Include="externals\boost\boost\program_options.hpp">
+      <Filter>5.Third-party-libraries\boost</Filter>
+    </ClInclude>
+    <ClInclude Include="externals\boost\boost\progress.hpp">
+      <Filter>5.Third-party-libraries\boost</Filter>
+    </ClInclude>
+    <ClInclude Include="externals\boost\boost\python.hpp">
+      <Filter>5.Third-party-libraries\boost</Filter>
+    </ClInclude>
+    <ClInclude Include="externals\boost\boost\random.hpp">
+      <Filter>5.Third-party-libraries\boost</Filter>
+    </ClInclude>
+    <ClInclude Include="externals\boost\boost\range.hpp">
+      <Filter>5.Third-party-libraries\boost</Filter>
+    </ClInclude>
+    <ClInclude Include="externals\boost\boost\ratio.hpp">
+      <Filter>5.Third-party-libraries\boost</Filter>
+    </ClInclude>
+    <ClInclude Include="externals\boost\boost\rational.hpp">
+      <Filter>5.Third-party-libraries\boost</Filter>
+    </ClInclude>
+    <ClInclude Include="externals\boost\boost\ref.hpp">
+      <Filter>5.Third-party-libraries\boost</Filter>
+    </ClInclude>
+    <ClInclude Include="externals\boost\boost\regex.h">
+      <Filter>5.Third-party-libraries\boost</Filter>
+    </ClInclude>
+    <ClInclude Include="externals\boost\boost\regex.hpp">
+      <Filter>5.Third-party-libraries\boost</Filter>
+    </ClInclude>
+    <ClInclude Include="externals\boost\boost\regex_fwd.hpp">
+      <Filter>5.Third-party-libraries\boost</Filter>
+    </ClInclude>
+    <ClInclude Include="externals\boost\boost\scope_exit.hpp">
+      <Filter>5.Third-party-libraries\boost</Filter>
+    </ClInclude>
+    <ClInclude Include="externals\boost\boost\scoped_array.hpp">
+      <Filter>5.Third-party-libraries\boost</Filter>
+    </ClInclude>
+    <ClInclude Include="externals\boost\boost\scoped_ptr.hpp">
+      <Filter>5.Third-party-libraries\boost</Filter>
+    </ClInclude>
+    <ClInclude Include="externals\boost\boost\shared_array.hpp">
+      <Filter>5.Third-party-libraries\boost</Filter>
+    </ClInclude>
+    <ClInclude Include="externals\boost\boost\shared_container_iterator.hpp">
+      <Filter>5.Third-party-libraries\boost</Filter>
+    </ClInclude>
+    <ClInclude Include="externals\boost\boost\shared_ptr.hpp">
+      <Filter>5.Third-party-libraries\boost</Filter>
+    </ClInclude>
+    <ClInclude Include="externals\boost\boost\signal.hpp">
+      <Filter>5.Third-party-libraries\boost</Filter>
+    </ClInclude>
+    <ClInclude Include="externals\boost\boost\signals.hpp">
+      <Filter>5.Third-party-libraries\boost</Filter>
+    </ClInclude>
+    <ClInclude Include="externals\boost\boost\signals2.hpp">
+      <Filter>5.Third-party-libraries\boost</Filter>
+    </ClInclude>
+    <ClInclude Include="externals\boost\boost\smart_ptr.hpp">
+      <Filter>5.Third-party-libraries\boost</Filter>
+    </ClInclude>
+    <ClInclude Include="externals\boost\boost\spirit.hpp">
+      <Filter>5.Third-party-libraries\boost</Filter>
+    </ClInclude>
+    <ClInclude Include="externals\boost\boost\static_assert.hpp">
+      <Filter>5.Third-party-libraries\boost</Filter>
+    </ClInclude>
+    <ClInclude Include="externals\boost\boost\swap.hpp">
+      <Filter>5.Third-party-libraries\boost</Filter>
+    </ClInclude>
+    <ClInclude Include="externals\boost\boost\thread.hpp">
+      <Filter>5.Third-party-libraries\boost</Filter>
+    </ClInclude>
+    <ClInclude Include="externals\boost\boost\throw_exception.hpp">
+      <Filter>5.Third-party-libraries\boost</Filter>
+    </ClInclude>
+    <ClInclude Include="externals\boost\boost\timer.hpp">
+      <Filter>5.Third-party-libraries\boost</Filter>
+    </ClInclude>
+    <ClInclude Include="externals\boost\boost\token_functions.hpp">
+      <Filter>5.Third-party-libraries\boost</Filter>
+    </ClInclude>
+    <ClInclude Include="externals\boost\boost\token_iterator.hpp">
+      <Filter>5.Third-party-libraries\boost</Filter>
+    </ClInclude>
+    <ClInclude Include="externals\boost\boost\tokenizer.hpp">
+      <Filter>5.Third-party-libraries\boost</Filter>
+    </ClInclude>
+    <ClInclude Include="externals\boost\boost\type.hpp">
+      <Filter>5.Third-party-libraries\boost</Filter>
+    </ClInclude>
+    <ClInclude Include="externals\boost\boost\type_index.hpp">
+      <Filter>5.Third-party-libraries\boost</Filter>
+    </ClInclude>
+    <ClInclude Include="externals\boost\boost\type_traits.hpp">
+      <Filter>5.Third-party-libraries\boost</Filter>
+    </ClInclude>
+    <ClInclude Include="externals\boost\boost\unordered_map.hpp">
+      <Filter>5.Third-party-libraries\boost</Filter>
+    </ClInclude>
+    <ClInclude Include="externals\boost\boost\unordered_set.hpp">
+      <Filter>5.Third-party-libraries\boost</Filter>
+    </ClInclude>
+    <ClInclude Include="externals\boost\boost\utility.hpp">
+      <Filter>5.Third-party-libraries\boost</Filter>
+    </ClInclude>
+    <ClInclude Include="externals\boost\boost\variant.hpp">
+      <Filter>5.Third-party-libraries\boost</Filter>
+    </ClInclude>
+    <ClInclude Include="externals\boost\boost\version.hpp">
+      <Filter>5.Third-party-libraries\boost</Filter>
+    </ClInclude>
+    <ClInclude Include="externals\boost\boost\visit_each.hpp">
+      <Filter>5.Third-party-libraries\boost</Filter>
+    </ClInclude>
+    <ClInclude Include="externals\boost\boost\wave.hpp">
+      <Filter>5.Third-party-libraries\boost</Filter>
+    </ClInclude>
+    <ClInclude Include="externals\boost\boost\weak_ptr.hpp">
+      <Filter>5.Third-party-libraries\boost</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

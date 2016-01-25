@@ -8,7 +8,7 @@
 #undef CopyFile
 #undef DeleteFile
 
-#elif defined OS_UNIX
+#elif defined OS_UNIX // ifdef OS_WINDOWS
 #define _FILE_OFFSET_BITS 64
 #include <sys/stat.h>
 #include <fcntl.h>
@@ -19,11 +19,11 @@
 
 #ifdef OS_ANDROID
 
-#elif OS_MAC
+#elif defined OS_MAC  // ifdef OS_ANDROID
 
-#endif
+#endif // ifdef OS_ANDROID    elif defined OS_MAC
 
-#endif
+#endif // ifdef OS_WINDOWS    elif defined OS_UNIX
 
 namespace ArmyAnt {
 

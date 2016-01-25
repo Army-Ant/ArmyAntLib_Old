@@ -6,6 +6,8 @@ static const int s_exitCode = 0xffffffff;
 int FileStreamTest(const std::string&);
 int AESTest(const std::string&);
 
+int TripleMapTest(const std::string&);
+
 inline int Error(const std::string& errmsg, const char* errmsg2 = "")
 {
 	SetConsoleTextAttribute(GetStdHandle(STD_ERROR_HANDLE), 0x0064);
@@ -342,5 +344,10 @@ int AESTest(const std::string&cmd)
 	{
 		Error("Wrong command word : ", cmd.c_str());
 	}
+	return 0;
+}
+
+int TripleMapTest(const std::string&cmd)
+{
 	return 0;
 }
