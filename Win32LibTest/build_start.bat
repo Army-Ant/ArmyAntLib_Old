@@ -7,13 +7,11 @@
 set SolutionD=%1
 set ProjectD=%2
 
-:: Need to got administor access here if you don't run VS or CL with it;
+:: Need to got administor access here if you don't run VS or CL with it
 
 :CopyExtensionLibFiles
-xcopy %SolutionD%LibOut\include %ProjectD%include /D /C /Q /K /X /Y
-xcopy %SolutionD%LibOut\lib %ProjectD%lib  /D /C /Q /K /X /Y
-copy %SolutionD%LibOut\*.h %ProjectD%\*.h  /Y
-xcopy %SolutionD%LibOut\bin %ProjectD%bin  /D /C /Q /K /X /Y
+xcopy %SolutionD%LibOut\lib %ProjectD%lib\  /D /C /Q /K /X /Y
+xcopy %SolutionD%LibOut\bin %ProjectD%bin\  /D /C /Q /K /X /Y
 
 :End
 @echo on

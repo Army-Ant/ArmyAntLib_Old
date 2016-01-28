@@ -15,9 +15,13 @@ move %ProjectPath%bin\%TargetName%.lib %ProjectPath%lib\
 
 :CopyUsingFiles
 set OutDir=%ProjectPath%..\LibOut\
-xcopy %ProjectPath%include %OutDir%include /D /C /Q /K /X /Y
-xcopy %ProjectPath%lib %OutDir%lib  /D /C /Q /K /X /Y
+del  %OutDir%* /Q
 copy %ProjectPath%*.h %OutDir%\ /Y
+del  %OutDir%include\* /Q
+xcopy %ProjectPath%include %OutDir%include /D /C /Q /K /X /Y
+del  %OutDir%lib\* /Q
+xcopy %ProjectPath%lib %OutDir%lib  /D /C /Q /K /X /Y
+del  %OutDir%bin\* /Q
 xcopy %ProjectPath%bin %OutDir%bin  /D /C /Q /K /X /Y
 
 :End

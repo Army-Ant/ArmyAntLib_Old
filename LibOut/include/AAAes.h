@@ -7,8 +7,9 @@
 	* @ small version	: 0.1
 	* @ summary			: AES数据加密转换器
 	* @ uncompleted		: 均已完成
-	* @ untested		: 编码和反编码计算结果有误，但是不会crush了
-	* @ tested			: 函数正确使用，数据和设置录入
+	* @ untested		: 编码然后反编码，无法回到原来内容，因此计算结果有误，但是不会crush了。秘钥扩展算法尚未验证正确性
+							ByteEncoder单独输入数据并验证，能否顺利完成也尚未验证
+	* @ tested			: 函数正确使用，数据和设置录入，转码方阵的验证和反转
 	*/
 
 #include "AADefine.h"

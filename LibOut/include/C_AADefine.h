@@ -34,9 +34,9 @@ const int false = FALSE;
 #define max(x,y) ((x<y)?y:x)
 #endif
 
-#define SafeDel(x) if(x != NULL){free(x); x = NULL;}else;
-#define SafeFree SafeDel
-#define SafeDelAll SafeDel
+#define AA_SAFE_DEL(x) if(x != NULL){free(x); x = NULL;}else;
+#define AA_SAFE_FREE AA_SAFE_DEL
+#define AA_SAFE_DELALL AA_SAFE_DEL
 
 #if defined DEBUG
 #include <assert.h>

@@ -6,6 +6,6 @@
 #include <sstream>
 #include <windows.h>
 
-#include "ArmyAnt.h"
+#include "../LibOut/ArmyAnt.h"
 
 #endif // MAIN_H_2015_11_12

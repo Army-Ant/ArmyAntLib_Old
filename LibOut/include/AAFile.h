@@ -95,11 +95,11 @@ public:
 
 	/*	* @ summary : 检查流的长度
 		*/
-	fpos_t GetLength() const;
+	DWORD GetLength() const;
 
 	/*	* @ summary : 检查当前读写指针的位置
 		*/
-	fpos_t GetPos() const;
+	DWORD GetPos() const;
 
 	/*	* @ summary : 读写指针是否已到流末尾
 		*/
@@ -108,7 +108,7 @@ public:
 	/*	* @ summary : 将读写指针移动到指定位置
 		* @ param = "pos" : 从流开头算起，要移动到的位置。此参数默认值为移动到流尾部
 		*/
-	bool MovePos(fpos_t pos = FILE_LONG_POS_END) const;
+	bool MovePos(LWORD pos = FILE_LONG_POS_END) const;
 
 	/*	* @ summary : 获取流源的文件名，对于文件指其路径名称，对于管道则是管道全名，对于串口则是串口名，对于内存和共享内存，则是内存地址号，对于网络，则是其域名或者ip地址和端口
 		*/
@@ -120,7 +120,7 @@ public:
 		* @ param = "pos" : 要读取的开始位置，不传此参数则从当前位置就地读取
 		* @ return : 读取到的实际长度，如果为0，可能发生了错误
 		*/
-	DWORD Read(void*buffer, DWORD len = FILE_SHORT_POS_END, fpos_t pos = FILE_LONG_POS_END);
+	DWORD Read(void*buffer, DWORD len = FILE_SHORT_POS_END, LWORD pos = FILE_LONG_POS_END);
 
 	/*	* @ summary : 读取流中的数据
 		* @ param = "buffer" : 要将数据保存到的位置
@@ -189,7 +189,7 @@ public:
 
 public:
 	// 最大文件长度
-	static const fpos_t FILE_LONG_POS_END = 0x7fffffffffffffff;
+	static const LWORD FILE_LONG_POS_END = 0x7fffffffffffffff;
 	static const DWORD FILE_SHORT_POS_END = 0xffffffff;
 
 public:
