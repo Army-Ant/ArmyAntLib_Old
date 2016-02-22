@@ -344,8 +344,6 @@ bool Triad<_First, _Second, _Third>::operator!=(const Iterator&i) const
 template <class _Key, class _Value1, class _Value2>
 TripleMap<_Key,_Value1,_Value2>::TripleMap(Triad<_Key, _Value1, _Value2>* dataArray/* = nullptr*/, DWORD num/* = 0*/)
 {
-	if(dataArray == nullptr || num == 0)
-		return;
 	for(DWORD i = 0; i < num; i++)
 	{
 		datas.push_back(dataArray[i]);

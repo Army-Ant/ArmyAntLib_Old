@@ -8,7 +8,7 @@
 extern "C" {
 #endif
 
-	typedef enum AA_StreamType
+	typedef enum
 	{
 		None,
 		File,

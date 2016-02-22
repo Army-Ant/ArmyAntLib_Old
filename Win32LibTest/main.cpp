@@ -7,6 +7,10 @@ int FileStreamTest(const std::string&);
 int AESTest(const std::string&);
 
 int TripleMapTest(const std::string&);
+int TreeTest(const std::string&);
+int DigraphTest(const std::string&);
+int StateMachineTest(const std::string&);
+int NeuronTest(const std::string&);
 
 inline int Error(const std::string& errmsg, const char* errmsg2 = "")
 {
@@ -21,7 +25,7 @@ inline int Error(const std::string& errmsg, const char* errmsg2 = "")
 int main(int argc, char* argv[])
 {
 	std::string str;
-	auto func = AESTest;
+	auto func = TripleMapTest;
 	do
 	{
 		std::cin >> str;
@@ -349,5 +353,35 @@ int AESTest(const std::string&cmd)
 
 int TripleMapTest(const std::string&cmd)
 {
+	static ArmyAnt::TripleMap<int, float, std::string> map;
+	if(cmd == "exit")
+		return s_exitCode;
+	else if(cmd == "compareself")
+	{
+		auto tmp = map;
+		if(tmp.Equals(map))
+			std::cout << "Comparation excuted successful !";
+		else return Error("Compare with itself returns false !");
+	}
+	else
+	{
+		Error("Wrong command word : ", cmd.c_str());
+	}
+	return 0;
+}
+
+int TreeTest(const std::string&cmd)
+{
+	static ArmyAnt::Tree<std::string> tr(&ArmyAnt::TreeNode<std::string>(std::string("root"), 0));
+	if(cmd == "exit")
+		return s_exitCode;
+	else if(cmd == "")
+	{
+
+	}
+	else
+	{
+		Error("Wrong command word : ", cmd.c_str());
+	}
 	return 0;
 }

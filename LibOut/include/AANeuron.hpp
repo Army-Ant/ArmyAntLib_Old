@@ -1,11 +1,11 @@
-#ifndef AA_NEURON_HPP_2016_1_21
+﻿#ifndef AA_NEURON_HPP_2016_1_21
 #define AA_NEURON_HPP_2016_1_21
 
 /*	* @ author			: Jason
 	* @ date			: 01/21/2016
 	* @ nearly update	: 01/21/2016
 	* @ small version	: 0.1
-	* @ summary			: ��Ԫ
+	* @ summary			: 神经元
 	* @ uncompleted		: all
 	* @ untested		:
 	* @ tested			:

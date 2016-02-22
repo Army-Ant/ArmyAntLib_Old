@@ -1,4 +1,4 @@
-#ifndef AA_FRAGMENT_H_2015_12_31
+﻿#ifndef AA_FRAGMENT_H_2015_12_31
 #define AA_FRAGMENT_H_2015_12_31
 
 #if defined DEBUG
@@ -19,6 +19,8 @@
 namespace ArmyAnt {
 
 namespace Fragment {
+
+static double s_aa_natrualBase = 2.7182818284590452353;
 
 template <class NUM1, class NUM2> 
 inline NUM1 min(NUM1 num1, NUM2 num2)
@@ -63,8 +65,8 @@ inline void AA_SAFE_DELALL(PTR&ptr)
 	}
 }
 
-}
+} // namespace Fragment
 
-}
+} // namespace ArmyAnt
 
 #endif

@@ -9,7 +9,7 @@ set ProjectPath=%2
 set TargetName=%3
  
 :CopyStaticLibFile
-move %ProjectPath%bin\%TargetName%.lib %ProjectPath%lib\
+copy %ProjectPath%bin\%TargetName%.lib %ProjectPath%lib\
 
 :: Need to got administor access here if you don't run VS or CL with it;
 

@@ -1,11 +1,11 @@
-#ifndef AA_MESSAGE_QUEUE_H_2016_1_22
+ï»¿#ifndef AA_MESSAGE_QUEUE_H_2016_1_22
 #define AA_MESSAGE_QUEUE_H_2016_1_22
 
 /*	* @ author			: Jason
 	* @ date			: 01/22/2016
 	* @ nearly update	: 01/22/2015
 	* @ small version	: 0.1
-	* @ summary			: ÏûÏ¢¶ÓÁĞ
+	* @ summary			: æ¶ˆæ¯é˜Ÿåˆ—
 	* @ uncompleted		: all
 	* @ untested		:
 	* @ tested			:

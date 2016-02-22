@@ -1,11 +1,11 @@
-#ifndef A_A_TREE_HPP_2015_12_26
+ï»¿#ifndef A_A_TREE_HPP_2015_12_26
 #define A_A_TREE_HPP_2015_12_26
 
 /*	* @ author			: Jason
 	* @ date			: 12/26/2015
 	* @ nearly update	: 01/18/2016
 	* @ small version	: 0.2
-	* @ summary			: Ê÷¼°Æä±éÀúµü´úÆ÷
+	* @ summary			: æ ‘åŠå…¶éå†è¿­ä»£å™¨
 	* @ uncompleted		: 
 	* @ untested		: all
 	* @ tested			:
@@ -29,84 +29,84 @@ template <class T_Val, class T_Tag>
 class TreeNode
 {
 public:
-	//¸ù¾İ¼üÖµ¶Ô´´½¨½Úµã
+	//æ ¹æ®é”®å€¼å¯¹åˆ›å»ºèŠ‚ç‚¹
 	TreeNode(T_Val&element, T_Tag tag);
-	//¸´ÖÆ½Úµã,²»»á¸´ÖÆ¸¸½Úµã¹ØÏµ
+	//å¤åˆ¶èŠ‚ç‚¹,ä¸ä¼šå¤åˆ¶çˆ¶èŠ‚ç‚¹å…³ç³»
 	TreeNode(const TreeNode<T_Val, T_Tag>&value, bool withChildren = false);
-	//¿½±´½ÚµãÄÚÈİ,²»»á¸´ÖÆ¸¸½Úµã¹ØÏµ,µ«»á¸´ÖÆÈ«²¿×Ó½Úµã
+	//æ‹·è´èŠ‚ç‚¹å†…å®¹,ä¸ä¼šå¤åˆ¶çˆ¶èŠ‚ç‚¹å…³ç³»,ä½†ä¼šå¤åˆ¶å…¨éƒ¨å­èŠ‚ç‚¹
 	TreeNode<T_Val, T_Tag>&operator=(const TreeNode<T_Val, T_Tag>&value);
-	//Îö¹¹º¯Êı
+	//ææ„å‡½æ•°
 	virtual ~TreeNode();
 
 public:
-	//È¡µÃ½ÚµãµÄ¼ü
+	//å–å¾—èŠ‚ç‚¹çš„é”®
 	T_Tag GetTag()const;
-	//È¡µÃ½ÚµãµÄÖµÄÚÈİ
+	//å–å¾—èŠ‚ç‚¹çš„å€¼å†…å®¹
 	T_Val*GetValue();
 	inline const T_Val*GetValue()const;
-	//È¡µÃ½ÚµãËùÔÚµÄ¸¸½Úµã
+	//å–å¾—èŠ‚ç‚¹æ‰€åœ¨çš„çˆ¶èŠ‚ç‚¹
 	TreeNode<T_Val, T_Tag>*GetParent();
 	inline const TreeNode<T_Val, T_Tag>*GetParent()const;
-	//È¡µÃ½ÚµãµÄÖ¸¶¨¼ü¶ÔÓ¦µÄ×Ó½Úµã
+	//å–å¾—èŠ‚ç‚¹çš„æŒ‡å®šé”®å¯¹åº”çš„å­èŠ‚ç‚¹
 	TreeNode<T_Val, T_Tag>*GetChild(T_Tag tag);
 	inline const TreeNode<T_Val, T_Tag>*GetChild(T_Tag tag)const;
-	//È¡µÃµÚÒ»¸ö×Ó½Úµã
+	//å–å¾—ç¬¬ä¸€ä¸ªå­èŠ‚ç‚¹
 	TreeNode<T_Val, T_Tag>*GetFirstChild();
 	inline const TreeNode<T_Val, T_Tag>* GetFirstChild()const;
-	//È¡µÃ×îºóÒ»¸ö×Ó½Úµã
+	//å–å¾—æœ€åä¸€ä¸ªå­èŠ‚ç‚¹
 	TreeNode<T_Val, T_Tag>*GetLastChild();
 	inline const TreeNode<T_Val, T_Tag>* GetLastChild()const;
-	//È¡µÃÎ»ÓÚÄ³¸ö½ÚµãÖ®ºóµÄ×Ó½Úµã
+	//å–å¾—ä½äºæŸä¸ªèŠ‚ç‚¹ä¹‹åçš„å­èŠ‚ç‚¹
 	TreeNode<T_Val, T_Tag>*GetNextChild(T_Tag tag);
 	inline const TreeNode<T_Val, T_Tag>*GetNextChild(T_Tag tag)const;
-	//È¡µÃÎ»ÓÚÄ³¸ö½ÚµãÖ®Ç°µÄ×Ó½Úµã
+	//å–å¾—ä½äºæŸä¸ªèŠ‚ç‚¹ä¹‹å‰çš„å­èŠ‚ç‚¹
 	TreeNode<T_Val, T_Tag>*GetBackChild(T_Tag tag);
 	inline const TreeNode<T_Val, T_Tag>*GetBackChild(T_Tag tag)const;
-	//È¡µÃËùÓĞ×Ó½Úµã,·µ»Ø×Ó½Úµã¸öÊı
+	//å–å¾—æ‰€æœ‰å­èŠ‚ç‚¹,è¿”å›å­èŠ‚ç‚¹ä¸ªæ•°
 	T_Tag GetChildren(TreeNode<T_Val, T_Tag>*children);
 
 public:
-	//È¡µÃËùÔÚµÄÊ÷
+	//å–å¾—æ‰€åœ¨çš„æ ‘
 	Tree<T_Val, T_Tag> GetTree();
 	inline const Tree<T_Val, T_Tag> GetTree()const;
-	//ĞŞ¸Ä¼ü
+	//ä¿®æ”¹é”®
 	bool SetTag(T_Tag tag);
-	//ĞŞ¸ÄÖµÄÚÈİ
+	//ä¿®æ”¹å€¼å†…å®¹
 	bool SetValue(T_Val&value);
-	//ÖØÖÃÖµÄÚÈİ
+	//é‡ç½®å€¼å†…å®¹
 	bool SetValue();
-	//´Ó¸¸½ÚµãºÍ¸¸Ê÷ÖĞÒÆ³ı
+	//ä»çˆ¶èŠ‚ç‚¹å’Œçˆ¶æ ‘ä¸­ç§»é™¤
 	bool RemoveFromParent();
-	//Ìí¼Óµ½Ä³¸ö½ÚµãÖ®ÏÂ(Èç¹ûÔ­ÏÈÓĞ¸¸½Úµã,Ôò»áÏÈ´Ó¸¸½ÚµãÉÏÒÆ³ı)
+	//æ·»åŠ åˆ°æŸä¸ªèŠ‚ç‚¹ä¹‹ä¸‹(å¦‚æœåŸå…ˆæœ‰çˆ¶èŠ‚ç‚¹,åˆ™ä¼šå…ˆä»çˆ¶èŠ‚ç‚¹ä¸Šç§»é™¤)
 	bool SetParent(TreeNode<T_Val, T_Tag>*parent);
 
 public:
-	//Ìí¼ÓÒ»¸ö×Ó½Úµã(Èç¹û±»Ìí¼ÓµÄ½ÚµãÔ­ÏÈÓĞ¸¸½Úµã,Ôò»áÏÈ´Ó¸¸½ÚµãÉÏÒÆ³ı)
+	//æ·»åŠ ä¸€ä¸ªå­èŠ‚ç‚¹(å¦‚æœè¢«æ·»åŠ çš„èŠ‚ç‚¹åŸå…ˆæœ‰çˆ¶èŠ‚ç‚¹,åˆ™ä¼šå…ˆä»çˆ¶èŠ‚ç‚¹ä¸Šç§»é™¤)
 	bool AddChild(const TreeNode<T_Val, T_Tag>*child);
-	//ÒÔÖ¸¶¨µÄÄÚÈİ,ĞÂ½¨Ò»¸ö×Ó½Úµã
+	//ä»¥æŒ‡å®šçš„å†…å®¹,æ–°å»ºä¸€ä¸ªå­èŠ‚ç‚¹
 	bool AddChild(T_Tag tag, T_Val value);
-	//ÒÆ³ıÖ¸¶¨¼ü¶ÔÓ¦µÄ×Ó½Úµã
+	//ç§»é™¤æŒ‡å®šé”®å¯¹åº”çš„å­èŠ‚ç‚¹
 	bool RemoveChild(T_Tag tag);
-	//ÒÆ³ıÖ¸¶¨×Ó½Úµã
+	//ç§»é™¤æŒ‡å®šå­èŠ‚ç‚¹
 	bool RemoveChild(const TreeNode<T_Val, T_Tag>*child);
-	//ÒÆ³ıËùÓĞ×Ó½Úµã
+	//ç§»é™¤æ‰€æœ‰å­èŠ‚ç‚¹
 	bool ClearChildren();
 
 public:
-	//Çå¿Õ½ÚµãÖµÄÚÈİ
+	//æ¸…ç©ºèŠ‚ç‚¹å€¼å†…å®¹
 	inline T_Val* operator=(std::nullptr_t);
-	//»ñÈ¡Ö¸¶¨¼ü´¦µÄ½Úµã
+	//è·å–æŒ‡å®šé”®å¤„çš„èŠ‚ç‚¹
 	inline TreeNode<T_Val, T_Tag>* operator[](T_Tag tag);
 	inline const TreeNode<T_Val, T_Tag>* operator[](T_Tag tag)const;
 
 private:
-	//¼ü
+	//é”®
 	T_Tag tag;
-	//Öµ
+	//å€¼
 	T_Val* value = nullptr;
-	//¸¸½Úµã
+	//çˆ¶èŠ‚ç‚¹
 	TreeNode<T_Val, T_Tag>* parent = nullptr;
-	//×Ó½ÚµãÊı×é
+	//å­èŠ‚ç‚¹æ•°ç»„
 	std::vector<TreeNode<T_Val, T_Tag>*> children;
 };
 
@@ -119,105 +119,105 @@ public:
 	virtual ~Tree();
 
 public:
-	//È¡µÃ¸ù½Úµã
+	//å–å¾—æ ¹èŠ‚ç‚¹
 	TreeNode<T_Val, T_Tag>*GetRoot();
 	inline const TreeNode<T_Val, T_Tag>*GetRoot()const;
-	//È¡µÃ¸ù½ÚµãµÄ¼ü
+	//å–å¾—æ ¹èŠ‚ç‚¹çš„é”®
 	inline T_Tag GetTag()const;
-	//È¡µÃÊ÷ÖĞ¾ßÓĞÖ¸¶¨¼üµÄËùÓĞ×Ó½Úµã,·µ»ØÈ¡µÃµÄ×Ü¸öÊı
+	//å–å¾—æ ‘ä¸­å…·æœ‰æŒ‡å®šé”®çš„æ‰€æœ‰å­èŠ‚ç‚¹,è¿”å›å–å¾—çš„æ€»ä¸ªæ•°
 	int GetChild(T_Tag tag, TreeNode<T_Val, T_Tag>**rets);
-	//È¡µÃµÚÒ»¸öËÑÑ°µ½µÄ¾ßÓĞÖ¸¶¨¼üµÄ×Ó½Úµã,ËÑÑ°·½Ê½ÎªÖğ²ã±éÀú
+	//å–å¾—ç¬¬ä¸€ä¸ªæœå¯»åˆ°çš„å…·æœ‰æŒ‡å®šé”®çš„å­èŠ‚ç‚¹,æœå¯»æ–¹å¼ä¸ºé€å±‚éå†
 	TreeNode<T_Val, T_Tag>*GetFirstChild(T_Tag tag);
 	inline const TreeNode<T_Val, T_Tag>*GetFirstChild(T_Tag tag)const;
-	//»ñÈ¡×ÓÊ÷,½öËÑÑ°¸ù½ÚµãµÄ×Ó½Úµã
+	//è·å–å­æ ‘,ä»…æœå¯»æ ¹èŠ‚ç‚¹çš„å­èŠ‚ç‚¹
 	Tree<T_Val, T_Tag>*GetChildTree(T_Tag tag);
 	inline const Tree<T_Val, T_Tag>*GetChildTree(T_Tag tag)const;
-	//»ñÈ¡Ê÷µÄ¸¸½Úµã,Èç¹ûÃ»ÓĞ,·µ»Ønullptr
+	//è·å–æ ‘çš„çˆ¶èŠ‚ç‚¹,å¦‚æœæ²¡æœ‰,è¿”å›nullptr
 	inline TreeNode<T_Val, T_Tag>*GetParent();
 	inline const TreeNode<T_Val, T_Tag>*GetParent()const;
-	//»ñÈ¡¸¸Ê÷,Èç¹ûÃ»ÓĞ,·µ»Ønullptr
+	//è·å–çˆ¶æ ‘,å¦‚æœæ²¡æœ‰,è¿”å›nullptr
 	Tree<T_Val, T_Tag>*GetParentTree();
 	inline const Tree<T_Val, T_Tag>*GetParentTree()const;
 
 public:
-	// Recursion traversal, ¿Éµİ¹éµÄ±éÀúËã·¨
-	// ÏÈĞò±éÀú£¨Éî¶ÈÓÅÏÈ±éÀú£©
+	// Recursion traversal, å¯é€’å½’çš„éå†ç®—æ³•
+	// å…ˆåºéå†ï¼ˆæ·±åº¦ä¼˜å…ˆéå†ï¼‰
 	Iterator_Tree<T_Val, T_Tag> GetPreorderTraversal(T_Tag first);
 	inline const Iterator_Tree<T_Val, T_Tag> GetPreorderTraversal(T_Tag first)const;
-	// ºóĞò±éÀú
+	// ååºéå†
 	Iterator_Tree<T_Val, T_Tag> GetPostorderTraversal(T_Tag first);
 	inline const Iterator_Tree<T_Val, T_Tag> GetPostorderTraversal(T_Tag first)const;
 
-	// Un-recursion-able traversal, ²»¿Éµİ¹éµÄ±éÀúËã·¨
-	// Öğ²ã±éÀú£¨¹ã¶ÈÓÅÏÈ±éÀú£©
+	// Un-recursion-able traversal, ä¸å¯é€’å½’çš„éå†ç®—æ³•
+	// é€å±‚éå†ï¼ˆå¹¿åº¦ä¼˜å…ˆéå†ï¼‰
 	Iterator_Tree<T_Val, T_Tag> GetLayerorderTraversal(T_Tag first);
 	inline const Iterator_Tree<T_Val, T_Tag> GetLayerorderTraversal(T_Tag first)const;
-	// Ëæ»ú±éÀú
+	// éšæœºéå†
 	Iterator_Tree<T_Val, T_Tag> GetRandomTraversal();
 	inline const Iterator_Tree<T_Val, T_Tag> GetRandomTraversal()const;
 
 public:
-	//»ñÈ¡Ò»¸ö¿ÕµÄµü´úÆ÷,Ò²¾ÍÊÇÄ©Î²
+	//è·å–ä¸€ä¸ªç©ºçš„è¿­ä»£å™¨,ä¹Ÿå°±æ˜¯æœ«å°¾
 	inline const Iterator_Tree<T_Val, T_Tag> End() const;
 
 private:
-	//¸ù½Úµã
+	//æ ¹èŠ‚ç‚¹
 	TreeNode<T_Val, T_Tag>* root = nullptr;
 
 	AA_FORBID_ASSGN_OPR(Tree);
 	AA_FORBID_COPY_CTOR(Tree);
 };
 
-//±éÀú·½Ê½
+//éå†æ–¹å¼
 enum class TraversalType : BYTE
 {
 	Unknown,
-	PreorderTraversal,	//ÏÈĞò±éÀú£¨Éî¶ÈÓÅÏÈ±éÀú£©
-	InorderTraversal,	//ÖĞĞò±éÀú
-	PostorderTraversal,	//ºóĞò±éÀú	
-	LayerorderTraversal,//Öğ²ã±éÀú£¨¹ã¶ÈÓÅÏÈ±éÀú£©
-	RandomTraversal		//Ëæ»ú±éÀú
+	PreorderTraversal,	//å…ˆåºéå†ï¼ˆæ·±åº¦ä¼˜å…ˆéå†ï¼‰
+	InorderTraversal,	//ä¸­åºéå†
+	PostorderTraversal,	//ååºéå†	
+	LayerorderTraversal,//é€å±‚éå†ï¼ˆå¹¿åº¦ä¼˜å…ˆéå†ï¼‰
+	RandomTraversal		//éšæœºéå†
 };
 
 template <class T_Val, class T_Tag>
 class Iterator_Tree
 {
 public:
-	//°´Ê÷ºÍ±éÀú·½Ê½´´½¨µü´úÆ÷,·Ç¶ş²æÊ÷²»ÄÜÊ¹ÓÃÖĞĞò±éÀú
+	//æŒ‰æ ‘å’Œéå†æ–¹å¼åˆ›å»ºè¿­ä»£å™¨,éäºŒå‰æ ‘ä¸èƒ½ä½¿ç”¨ä¸­åºéå†
 	Iterator_Tree(TraversalType type, const Tree<T_Val, T_Tag>&tree);
-	//¸´ÖÆµü´úÆ÷
+	//å¤åˆ¶è¿­ä»£å™¨
 	Iterator_Tree(const Iterator_Tree<T_Val, T_Tag>&value);
-	//¸´ÖÆµü´úÆ÷µÄÖµ
+	//å¤åˆ¶è¿­ä»£å™¨çš„å€¼
 	Iterator_Tree&operator=(const Iterator_Tree<T_Val, T_Tag>&value);
-	//Îö¹¹º¯Êı
+	//ææ„å‡½æ•°
 	virtual ~Iterator_Tree();
 
 public:
-	//µü´úÆ÷°´ÕÕ¹æ¶¨µÄ±éÀú·½Ê½,Ìø×ªµ½ÏÂÒ»¸ö
+	//è¿­ä»£å™¨æŒ‰ç…§è§„å®šçš„éå†æ–¹å¼,è·³è½¬åˆ°ä¸‹ä¸€ä¸ª
 	inline bool Next();
-	//µü´úÆ÷Ìø×ªµ½ÉÏÒ»¸ö
+	//è¿­ä»£å™¨è·³è½¬åˆ°ä¸Šä¸€ä¸ª
 	inline bool Back();
-	//ÅĞ¶Ïµü´úÆ÷ÊÇ·ñÔÚ¿ªÍ·(Ëæ»ú±éÀúÓÀÔ¶·µ»Øfalse)
+	//åˆ¤æ–­è¿­ä»£å™¨æ˜¯å¦åœ¨å¼€å¤´(éšæœºéå†æ°¸è¿œè¿”å›false)
 	bool IsBegin();
-	//ÅĞ¶Ïµü´úÆ÷ÊÇ·ñÔÚ½áÎ²
+	//åˆ¤æ–­è¿­ä»£å™¨æ˜¯å¦åœ¨ç»“å°¾
 	bool IsEnd();
 
 public:
-	//»ñÈ¡µü´úÆ÷ËùÊôµÄÊ÷
+	//è·å–è¿­ä»£å™¨æ‰€å±çš„æ ‘
 	Tree<T_Val, T_Tag>* GetTree();
 	const Tree<T_Val, T_Tag>* GetTree()const;
-	//»ñÈ¡µü´úÆ÷Ö¸ÏòµÄ½Úµã
+	//è·å–è¿­ä»£å™¨æŒ‡å‘çš„èŠ‚ç‚¹
 	TreeNode<T_Val, T_Tag>* GetNode();
 	const TreeNode<T_Val, T_Tag>* GetNode()const;
-	//»ñÈ¡µü´úÆ÷µÄ±éÀú·½Ê½
+	//è·å–è¿­ä»£å™¨çš„éå†æ–¹å¼
 	TraversalType GetTraversalType()const;
-	//ÖØÉèµü´úÆ÷µÄ±éÀú·½Ê½
+	//é‡è®¾è¿­ä»£å™¨çš„éå†æ–¹å¼
 	bool SetTraversalType(TraversalType type);
-	//´ÓÊ÷ÖĞÇå³ıµü´úÆ÷ËùÖ¸µÄ½Úµã,²¢½«µü´úÆ÷Ö¸Ïò¸Ã½ÚµãµÄÉÏÒ»¸öÄ¿±ê
+	//ä»æ ‘ä¸­æ¸…é™¤è¿­ä»£å™¨æ‰€æŒ‡çš„èŠ‚ç‚¹,å¹¶å°†è¿­ä»£å™¨æŒ‡å‘è¯¥èŠ‚ç‚¹çš„ä¸Šä¸€ä¸ªç›®æ ‡
 	bool Erase();
 
 public:
-	//¼ìÑéµü´úÆ÷ÊÇ·ñÎªÄ©Î²
+	//æ£€éªŒè¿­ä»£å™¨æ˜¯å¦ä¸ºæœ«å°¾
 	inline bool operator==(std::nullptr_t);
 	inline bool operator!=(std::nullptr_t);
 	inline operator bool();
@@ -889,7 +889,7 @@ bool Iterator_Tree<T_Val, T_Tag>::Go(bool isNext)
 		return false;
 	switch(type)
 	{
-		case TraversalType::PreorderTraversal: // ÏÈĞò±éÀú,Éî¶ÈÓÅÏÈ±éÀú
+		case TraversalType::PreorderTraversal: // å…ˆåºéå†,æ·±åº¦ä¼˜å…ˆéå†
 			if(isNext)
 			{
 				if(nownode->GetFirstChild() != nullptr)
@@ -924,7 +924,7 @@ bool Iterator_Tree<T_Val, T_Tag>::Go(bool isNext)
 					nownode = nownode->GetParent();
 			}
 			break;
-		case TraversalType::PostorderTraversal: // ºóĞò±éÀú,ÄæÏò±éÀú
+		case TraversalType::PostorderTraversal: // ååºéå†,é€†å‘éå†
 			if(isNext)
 			{
 				if(nownode == tree->root)
@@ -959,9 +959,9 @@ bool Iterator_Tree<T_Val, T_Tag>::Go(bool isNext)
 					return false;
 			}
 			break;
-		case TraversalType::LayerorderTraversal: // Öğ²ã±éÀú,¹ã¶ÈÓÅÏÈ±éÀú
+		case TraversalType::LayerorderTraversal: // é€å±‚éå†,å¹¿åº¦ä¼˜å…ˆéå†
 			{
-				//ÏÈ²é³öËùÓĞÍ¬²ãÔªËØ
+				//å…ˆæŸ¥å‡ºæ‰€æœ‰åŒå±‚å…ƒç´ 
 				int depth = 0;
 				auto ptr = nownode;
 				while(ptr != tree->root)
@@ -1029,7 +1029,7 @@ bool Iterator_Tree<T_Val, T_Tag>::Go(bool isNext)
 				}
 			}
 			break;
-		case TraversalType::RandomTraversal: // Ëæ»ú±éÀú,»ú»á¾ùµÈ,ÓëÊ÷ĞÎÎŞ¹Ø
+		case TraversalType::RandomTraversal: // éšæœºéå†,æœºä¼šå‡ç­‰,ä¸æ ‘å½¢æ— å…³
 			{
 				const TreeNode<T_Val, T_Tag>* firstC = tree->root;
 				std::vector<TreeNode<T_Val, T_Tag>*> coll;
