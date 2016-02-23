@@ -1,4 +1,4 @@
-﻿/*	*
+/*	*
 	* Created by Jason ZJ 11/7/2015
 
 	* This is the C-language version of the library

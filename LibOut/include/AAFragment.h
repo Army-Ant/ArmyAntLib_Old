@@ -20,6 +20,8 @@ namespace ArmyAnt {
 
 namespace Fragment {
 
+static const double s_aa_natrualBase = 2.7182818284590452353;
+
 template <class NUM1, class NUM2> 
 inline NUM1 min(NUM1 num1, NUM2 num2)
 {

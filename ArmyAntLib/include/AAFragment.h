@@ -1,4 +1,4 @@
-﻿#ifndef AA_FRAGMENT_H_2015_12_31
+#ifndef AA_FRAGMENT_H_2015_12_31
 #define AA_FRAGMENT_H_2015_12_31
 
 #if defined DEBUG
@@ -13,6 +13,8 @@
 #ifdef _cplusplus
 #undef max
 #undef min
+#undef AA_SAFE_DEL
+#undef AA_SAFE_DELALL
 #endif
 
 
@@ -20,7 +22,7 @@ namespace ArmyAnt {
 
 namespace Fragment {
 
-static double s_aa_natrualBase = 2.7182818284590452353;
+static const double s_aa_natrualBase = 2.7182818284590452353;
 
 template <class NUM1, class NUM2> 
 inline NUM1 min(NUM1 num1, NUM2 num2)

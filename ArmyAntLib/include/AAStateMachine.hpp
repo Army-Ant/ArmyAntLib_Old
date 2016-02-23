@@ -1,4 +1,4 @@
-﻿#ifndef AA_STATE_MACHINE_HPP_2015_12_2
+#ifndef AA_STATE_MACHINE_HPP_2015_12_2
 #define AA_STATE_MACHINE_HPP_2015_12_2
 
 /*	* @ author			: Jason
@@ -13,6 +13,7 @@
 
 #include <functional>
 #include "AADigraph.hpp"
+#include "AATripleMap.hpp"
 
 namespace ArmyAnt {
 

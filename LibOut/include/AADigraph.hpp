@@ -12,6 +12,7 @@
 */
 
 #include "AADefine.h"
+#include <vector>
 
 namespace  ArmyAnt {
 

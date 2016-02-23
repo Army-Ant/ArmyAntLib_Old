@@ -1,5 +1,5 @@
-﻿#ifndef C_BS_FILE_H_2015_11_6
-#define C_BS_FILE_H_2015_11_6
+#ifndef C_AA_FILE_H_2015_11_6
+#define C_AA_FILE_H_2015_11_6
 
 #include "C_AADefine.h"
 #include "AA_start.h"
@@ -23,7 +23,7 @@ extern "C" {
 
 	ARMYANT_CLIB_API AA_CFileStream AA_Stream_Create();
 	ARMYANT_CLIB_API void AA_Stream_Release(AA_CFileStream stream);
-	ARMYANT_CLIB_API BOOL AA_Stream_SetMode(AA_CFileStream stream, bool nocreate, bool noexist);
+	ARMYANT_CLIB_API BOOL AA_Stream_SetMode(AA_CFileStream stream, BOOL nocreate, BOOL noexist);
 
 	ARMYANT_CLIB_API BOOL AA_Stream_OpenFile(AA_CFileStream stream, const char* filename);
 	ARMYANT_CLIB_API BOOL AA_Stream_OpenMemoryByAddr(AA_CFileStream stream, DWORD memaddr, WORD len);

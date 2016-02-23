@@ -1,4 +1,4 @@
-﻿#ifndef AA_FILE_H_2015_11_11
+#ifndef AA_FILE_H_2015_11_11
 #define AA_FILE_H_2015_11_11
 
 /*	* @ author			: Jason

@@ -47,13 +47,13 @@
     <IntDir />
     <TargetName>$(ProjectName)d</TargetName>
     <CodeAnalysisRuleSet>SecurityRules.ruleset</CodeAnalysisRuleSet>
-    <IncludePath>$(ProjectDir)externals\boost\;$(IncludePath)</IncludePath>
+    <IncludePath>$(ProjectDir)externals\boost\;$(JAVA_HOME)\include\;$(JAVA_HOME)\include\win32\;$(IncludePath)</IncludePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <TargetExt>.dll</TargetExt>
     <OutDir>$(ProjectDir)bin\</OutDir>
     <IntDir />
-    <IncludePath>$(ProjectDir)externals\boost\;$(IncludePath)</IncludePath>
+    <IncludePath>$(ProjectDir)externals\boost\;$(JAVA_HOME)\include\;$(JAVA_HOME)\include\win32\;$(IncludePath)</IncludePath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
@@ -238,6 +238,7 @@
     <ClInclude Include="include\AABinary.h" />
     <ClInclude Include="include\AADigraph.hpp" />
     <ClInclude Include="include\AAFragment.h" />
+    <ClInclude Include="include\AAJNITools.hpp" />
     <ClInclude Include="include\AAMessageQueue.h" />
     <ClInclude Include="include\AANeuron.hpp" />
     <ClInclude Include="include\AAStateMachine.hpp" />
@@ -248,21 +249,27 @@
     <ClInclude Include="include\AADefine.h" />
     <ClInclude Include="include\AAFile.h" />
     <ClInclude Include="include\AAClassPrivateHandle.hpp" />
+    <ClInclude Include="include\ArmyAnt_Java_AAFile.h" />
     <ClInclude Include="include\C_AADefine.h" />
     <ClInclude Include="include\C_AAFile.h" />
+    <ClInclude Include="include\C_AANeuron.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\AAAes.cpp" />
     <ClCompile Include="src\AAFile.cpp" />
+    <ClCompile Include="src\ArmyAnt_Java_AAFile.cpp" />
     <ClCompile Include="src\C_AAFile.cpp" />
+    <ClCompile Include="src\C_AANeuron.cpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="base\build_end.bat" />
     <None Include="base\build_start.bat" />
     <None Include="base\build_start.sh" />
+    <None Include="languages\Java\src\Java_AAFile.java" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="base\ProgrammerRule.txt" />
+    <Text Include="CMakeLists.txt" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

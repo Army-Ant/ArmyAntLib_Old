@@ -1,4 +1,4 @@
-﻿#ifndef ARMY_ANT_TRIPLE_MAP_2015_11_19
+#ifndef ARMY_ANT_TRIPLE_MAP_2015_11_19
 #define ARMY_ANT_TRIPLE_MAP_2015_11_19
 
 /*	* @ author			: Jason

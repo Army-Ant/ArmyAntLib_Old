@@ -6,13 +6,14 @@
 	* @ nearly update	: 12/02/2015
 	* @ small version	: 0.1
 	* @ summary			: 状态机
-	* @ uncompleted		: all
-	* @ untested		: 
+	* @ uncompleted		: 
+	* @ untested		: all
 	* @ tested			: 
 */
 
 #include <functional>
 #include "AADigraph.hpp"
+#include "AATripleMap.hpp"
 
 namespace ArmyAnt {
 

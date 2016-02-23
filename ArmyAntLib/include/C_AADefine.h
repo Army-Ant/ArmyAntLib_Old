@@ -1,4 +1,4 @@
-﻿#ifndef C_A_A_DEFINE_H_2015_11_11
+#ifndef C_A_A_DEFINE_H_2015_11_11
 #define C_A_A_DEFINE_H_2015_11_11
 
 //#include <yvals.h>
@@ -16,16 +16,18 @@ typedef unsigned long DWORD;
 #ifndef BOOL
 typedef int BOOL;
 #ifndef TRUE
-const int TRUE = 1;
-const int FALSE = 0;
+static const int TRUE = 1;
+static const int FALSE = 0;
 #endif
 #endif
 
 #ifndef _cplusplus
 
 typedef _Bool bool;
-const int true = TRUE;
-const int false = FALSE;
+static const int true = TRUE;
+static const int false = FALSE;
+
+static const double s_aa_natrualBase = 2.7182818284590452353;
 
 #ifndef min
 #define min(x,y) ((x>y)?y:x)

@@ -5,13 +5,14 @@
 * @ date			: 01/18/2016
 * @ nearly update	: 01/18/2016
 * @ small version	: 0.1
-* @ summary			: ÓĞÏòÍ¼¼°Æä±éÀúµü´úÆ÷
-* @ uncompleted		: µü´úÆ÷ºÍÍ¼
+* @ summary			: æœ‰å‘å›¾åŠå…¶éå†è¿­ä»£å™¨
+* @ uncompleted		: è¿­ä»£å™¨å’Œå›¾
 * @ untested		: all
 * @ tested			:
 */
 
 #include "AADefine.h"
+#include <vector>
 
 namespace  ArmyAnt {
 
@@ -26,89 +27,89 @@ template <class T_Val, class T_Tag, class T_Weight>
 class GraphNode
 {
 public:
-	//´´½¨¿Õ½Úµã
+	//åˆ›å»ºç©ºèŠ‚ç‚¹
 	GraphNode();
-	//¸ù¾İ¼üÖµ¶Ô´´½¨½Úµã
+	//æ ¹æ®é”®å€¼å¯¹åˆ›å»ºèŠ‚ç‚¹
 	GraphNode(T_Tag tag, const T_Val&element, T_Weight weight = T_Weight(1));
-	//¸´ÖÆ½Úµã
+	//å¤åˆ¶èŠ‚ç‚¹
 	GraphNode(const GraphNode<T_Val, T_Tag, T_Weight>&value);
-	//¿½±´½ÚµãÄÚÈİ
+	//æ‹·è´èŠ‚ç‚¹å†…å®¹
 	GraphNode<T_Val, T_Tag, T_Weight>&operator=(const GraphNode<T_Val, T_Tag, T_Weight>&value);
-	//Îö¹¹º¯Êı
+	//ææ„å‡½æ•°
 	virtual ~GraphNode();
 
 public:
-	//È¡µÃ½ÚµãµÄ¼ü
+	//å–å¾—èŠ‚ç‚¹çš„é”®
 	T_Tag GetTag()const;
-	//È¡µÃ½ÚµãµÄÖµÄÚÈİ
+	//å–å¾—èŠ‚ç‚¹çš„å€¼å†…å®¹
 	T_Val*GetValue();
 	inline const T_Val*GetValue()const;
-	//È¡µÃ½ÚµãµÄÈ¨ÖØ
+	//å–å¾—èŠ‚ç‚¹çš„æƒé‡
 	T_Weight GetWeight()const;
 
 public:
-	//È¡µÃËùÔÚµÄÍ¼
+	//å–å¾—æ‰€åœ¨çš„å›¾
 	Digraph<T_Val, T_Tag, T_Weight>*GetGraph();
 	inline const Digraph<T_Val, T_Tag, T_Weight>*GetGraph()const;
-	//ÉèÖÃËùÔÚÍ¼
+	//è®¾ç½®æ‰€åœ¨å›¾
 	bool SetGraph(const Digraph<T_Val, T_Tag, T_Weight>*graph);
-	//ĞŞ¸Ä¼ü
+	//ä¿®æ”¹é”®
 	bool SetTag(T_Tag tag);
-	//ĞŞ¸ÄÖµÄÚÈİ
+	//ä¿®æ”¹å€¼å†…å®¹
 	bool SetValue(T_Val&value);
-	//ÖØÖÃÖµÄÚÈİ
+	//é‡ç½®å€¼å†…å®¹
 	bool SetValue();
-	//ĞŞ¸ÄÈ¨ÖØ
+	//ä¿®æ”¹æƒé‡
 	bool SetWeight(T_Weight weight);
 
 public:
-	//Á¬³öµ½Ä³¸ö½Úµã
+	//è¿å‡ºåˆ°æŸä¸ªèŠ‚ç‚¹
 	bool LinkTo(const GraphNode&target, T_Weight weight = T_TargetLineWeight(1));
-	//´ÓÄ³¸ö½ÚµãÁ¬Èë
+	//ä»æŸä¸ªèŠ‚ç‚¹è¿å…¥
 	bool LinkFrom(const GraphNode&target, T_Weight weight = T_TargetLineWeight(1));
-	//¶Ï¿ª¶ÔÄ³¸ö½ÚµãµÄÁ¬½Ó(°üÀ¨Á¬ÈëºÍÁ¬³ö)
+	//æ–­å¼€å¯¹æŸä¸ªèŠ‚ç‚¹çš„è¿æ¥(åŒ…æ‹¬è¿å…¥å’Œè¿å‡º)
 	bool DeLink(const GraphNode*target);
 	bool DeLink(T_Tag tag);
-	//¶Ï¿ª¶ÔÄ³¸ö½ÚµãµÄÁ¬Èë»òÁ¬³ö
+	//æ–­å¼€å¯¹æŸä¸ªèŠ‚ç‚¹çš„è¿å…¥æˆ–è¿å‡º
 	bool DeLink(const GraphNode*target, bool isOut);
 	bool DeLink(T_Tag tag, bool isOut);
-	//¶Ï¿ªËùÓĞÁ¬½Ó,°üÀ¨Á¬ÈëµÄºÍÁ¬³öµÄ
+	//æ–­å¼€æ‰€æœ‰è¿æ¥,åŒ…æ‹¬è¿å…¥çš„å’Œè¿å‡ºçš„
 	bool DeLinkAll();
-	//¶Ï¿ªËùÓĞÁ¬³öµÄÁ¬½Ó,»òÕß¶Ï¿ªËùÓĞÁ¬ÈëµÄÁ¬½Ó
+	//æ–­å¼€æ‰€æœ‰è¿å‡ºçš„è¿æ¥,æˆ–è€…æ–­å¼€æ‰€æœ‰è¿å…¥çš„è¿æ¥
 	bool DeLinkAll(bool isOut);
 
 public:
-	//²éÑ¯ÊÇ·ñÁ¬½Óµ½Ö¸¶¨½Úµã
+	//æŸ¥è¯¢æ˜¯å¦è¿æ¥åˆ°æŒ‡å®šèŠ‚ç‚¹
 	bool IsLinkedTo(T_Tag tar);
 	bool IsLinkedTo(const GraphNode* tar);
-	//»ñÈ¡ÒÑÁ¬³öµÄÁ¬Ïß
+	//è·å–å·²è¿å‡ºçš„è¿çº¿
 	GraphLine<T_Val, T_Tag, T_Weight>* GetLinkedOut(T_Tag tag);
 	const GraphLine<T_Val, T_Tag, T_Weight>* GetLinkedOut(T_Tag tag)const;
-	//»ñÈ¡ÒÑÁ¬ÈëµÄÁ¬Ïß
+	//è·å–å·²è¿å…¥çš„è¿çº¿
 	GraphLine<T_Val, T_Tag, T_Weight>* GetLinkedIn(T_Tag tag);
 	const GraphLine<T_Val, T_Tag, T_Weight>* GetLinkedIn(T_Tag tag)const;
-	//»ñÈ¡ËùÓĞÁ¬³öµÄÁ¬Ïß,·µ»Ø¸öÊı
+	//è·å–æ‰€æœ‰è¿å‡ºçš„è¿çº¿,è¿”å›ä¸ªæ•°
 	T_Tag GetAllLinkedOut(GraphLine<T_Val, T_Tag, T_Weight>** linked);
-	//»ñÈ¡ËùÓĞÁ¬ÈëµÄÁ¬Ïß,·µ»Ø¸öÊı
+	//è·å–æ‰€æœ‰è¿å…¥çš„è¿çº¿,è¿”å›ä¸ªæ•°
 	T_Tag GetAllLinkedIn(GraphLine<T_Val, T_Tag, T_Weight>* linked);
 
 public:
-	//Çå¿Õ½ÚµãÄÚÈİ
+	//æ¸…ç©ºèŠ‚ç‚¹å†…å®¹
 	inline T_Val* operator=(std::nullptr_t);
-	//»ñÈ¡Ö¸¶¨¼ü´¦µÄ½Úµã
+	//è·å–æŒ‡å®šé”®å¤„çš„èŠ‚ç‚¹
 	inline GraphNode& operator[](T_Tag tag);
 	inline const GraphNode& operator[](T_Tag tag)const;
 
 private:
-	//¼ü
+	//é”®
 	T_Tag tag;
-	//Öµ
+	//å€¼
 	T_Val* value = nullptr;
-	//È¨ÖØ
+	//æƒé‡
 	T_Weight weight;
-	//ËùÔÚµÄÍ¼
+	//æ‰€åœ¨çš„å›¾
 	Digraph<T_Val, T_Tag, T_Weight>* parent = nullptr;
-	//Á¬³ö½ÚµãÊı×é
+	//è¿å‡ºèŠ‚ç‚¹æ•°ç»„
 	std::vector<GraphLine<T_Val, T_Tag, T_Weight>> children;
 };
 
@@ -121,13 +122,13 @@ public:
 	virtual ~GraphLine();
 
 public:
-	//»ñµÃÁ¬ÏßµÄÆğµã
+	//è·å¾—è¿çº¿çš„èµ·ç‚¹
 	const GraphNode<T_Val, T_Tag, T_Weight>* GetStartNode()const;
-	//»ñµÃÁ¬ÏßµÄÖÕµã
+	//è·å¾—è¿çº¿çš„ç»ˆç‚¹
 	const GraphNode<T_Val, T_Tag, T_Weight>* GetEndNode()const;
-	//»ñµÃÁ¬ÏßµÄÈ¨ÖØ
+	//è·å¾—è¿çº¿çš„æƒé‡
 	T_Weight GetWeight()const;
-	//Éè¶¨Á¬ÏßµÄÈ¨ÖØ
+	//è®¾å®šè¿çº¿çš„æƒé‡
 	bool SetWeight(T_Weight weight);
 
 private:
@@ -148,30 +149,30 @@ public:
 	virtual ~Digraph();
 
 public:
-	//È¡µÃÍ¼ÖĞ¾ßÓĞÖ¸¶¨¼üµÄÎ¨Ò»½Úµã
+	//å–å¾—å›¾ä¸­å…·æœ‰æŒ‡å®šé”®çš„å”¯ä¸€èŠ‚ç‚¹
 	inline GraphNode<T_Val, T_Tag, T_Weight>*GetChild(T_Tag tag);
 	inline const GraphNode<T_Val, T_Tag, T_Weight>*GetChild(T_Tag tag)const;
-	//È¡µÃÍ¼ÖĞËùÓĞ½Úµã,·µ»Ø½ÚµãÊı
+	//å–å¾—å›¾ä¸­æ‰€æœ‰èŠ‚ç‚¹,è¿”å›èŠ‚ç‚¹æ•°
 	inline T_Tag GetAllNode(GraphNode<T_Val, T_Tag, T_Weight>* linked = nullptr);
 
 public:
-	//Ìí¼Ó½Úµã
+	//æ·»åŠ èŠ‚ç‚¹
 	bool AddNode(const GraphNode<T_Val, T_Tag, T_Weight>&value);
 	bool AddNode(T_Val value, T_Tag tag, T_Weight weight = T_Weight(1));
-	//É¾³ı½Úµã
+	//åˆ é™¤èŠ‚ç‚¹
 	bool RemoveNode(T_Tag tag);
-	//Á¬½Ó½Úµã
+	//è¿æ¥èŠ‚ç‚¹
 	bool LinkNode(T_Tag src, T_Tag dest, T_Weight weight = T_Weight(1));
-	//¶Ï¿ª½ÚµãµÄÁ¬½Ó
+	//æ–­å¼€èŠ‚ç‚¹çš„è¿æ¥
 	bool DelinkNode(T_Tag src, T_Tag dest);
-	//²éÑ¯Á½½ÚµãÁ¬ÏßÊÇ·ñ´æÔÚ
+	//æŸ¥è¯¢ä¸¤èŠ‚ç‚¹è¿çº¿æ˜¯å¦å­˜åœ¨
 	bool IsLinkedTo(T_Tag src, T_Tag dst);
-	//¶Ï¿ªÄ³¸ö½ÚµãµÄËùÓĞÁ¬½Ó
+	//æ–­å¼€æŸä¸ªèŠ‚ç‚¹çš„æ‰€æœ‰è¿æ¥
 	bool DeLinkNodeAll(T_Tag target, bool isOut);
 	bool DeLinkNodeAll(T_Tag target);
-	//¶Ï¿ªÍ¼ÖĞËùÓĞÁ¬½Ó
+	//æ–­å¼€å›¾ä¸­æ‰€æœ‰è¿æ¥
 	bool DeLinkAll();
-	//Çå¿ÕÍ¼ÖĞËùÓĞ½ÚµãºÍÁ¬Ïß
+	//æ¸…ç©ºå›¾ä¸­æ‰€æœ‰èŠ‚ç‚¹å’Œè¿çº¿
 	bool Clear();
 
 private:

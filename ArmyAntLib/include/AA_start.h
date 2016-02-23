@@ -1,4 +1,4 @@
-﻿#ifndef AA_START_H_2015_11_11
+#ifndef AA_START_H_2015_11_11
 #define AA_START_H_2015_11_11
 
 #ifdef _WIN32

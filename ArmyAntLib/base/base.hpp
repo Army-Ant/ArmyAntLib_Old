@@ -1,4 +1,4 @@
-﻿#ifndef BASE_HPP_2015_11_11
+#ifndef BASE_HPP_2015_11_11
 #define BASE_HPP_2015_11_11
 
 #include "../include/AADefine.h"

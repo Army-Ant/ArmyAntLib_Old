@@ -1,4 +1,4 @@
-﻿#ifndef A_A_DEFINE_H_2015_11_11
+#ifndef A_A_DEFINE_H_2015_11_11
 #define A_A_DEFINE_H_2015_11_11
 
 #include "C_AADefine.h"

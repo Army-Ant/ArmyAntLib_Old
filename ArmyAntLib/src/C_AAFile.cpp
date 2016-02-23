@@ -1,4 +1,4 @@
-﻿#include "../include/C_AAFile.h"
+#include "../include/C_AAFile.h"
 #include "../include/AAFile.h"
 using namespace ArmyAnt;
 
@@ -12,7 +12,7 @@ ARMYANT_CLIB_API void AA_Stream_Release(AA_CFileStream stream)
 	delete FileStream::GetStream(stream);
 }
 
-ARMYANT_CLIB_API BOOL AA_Stream_SetMode(AA_CFileStream stream, bool nocreate, bool noexist)
+ARMYANT_CLIB_API BOOL AA_Stream_SetMode(AA_CFileStream stream, BOOL nocreate, BOOL noexist)
 {
 	return FileStream::GetStream(stream)->SetStreamMode(nocreate, noexist) ? TRUE : FALSE;
 }
