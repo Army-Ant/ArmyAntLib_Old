@@ -1,4 +1,4 @@
-#ifndef AA_MESSAGE_QUEUE_H_2016_1_22
+﻿#ifndef AA_MESSAGE_QUEUE_H_2016_1_22
 #define AA_MESSAGE_QUEUE_H_2016_1_22
 
 /*	* @ author			: Jason

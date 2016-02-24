@@ -1,4 +1,4 @@
-#ifndef AA_NEURON_HPP_2016_1_21
+﻿#ifndef AA_NEURON_HPP_2016_1_21
 #define AA_NEURON_HPP_2016_1_21
 
 /*	* @ author			: Jason

@@ -1,4 +1,4 @@
-#ifndef AA_BINARY_H_2015_12_8
+﻿#ifndef AA_BINARY_H_2015_12_8
 #define AA_BINARY_H_2015_12_8
 
 /*	* @ author			: Jason

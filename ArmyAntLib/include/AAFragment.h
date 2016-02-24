@@ -1,4 +1,4 @@
-#ifndef AA_FRAGMENT_H_2015_12_31
+﻿#ifndef AA_FRAGMENT_H_2015_12_31
 #define AA_FRAGMENT_H_2015_12_31
 
 #if defined DEBUG

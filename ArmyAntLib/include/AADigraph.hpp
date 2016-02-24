@@ -1,4 +1,4 @@
-#ifndef A_A_DIGRAPH_HPP_2016_1_13
+﻿#ifndef A_A_DIGRAPH_HPP_2016_1_13
 #define A_A_DIGRAPH_HPP_2016_1_13
 
 /*	* @ author			: Jason

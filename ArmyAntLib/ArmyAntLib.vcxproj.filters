@@ -40,6 +40,9 @@
     <Filter Include="4.CppLibCode\languageResolves">
       <UniqueIdentifier>{0df4c468-efa9-4784-82dd-b47557e5795d}</UniqueIdentifier>
     </Filter>
+    <Filter Include="7.PythonRefCode">
+      <UniqueIdentifier>{22b8189a-0f9d-4041-b1d4-3e8636d0099a}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="base\base.hpp">
@@ -495,11 +498,14 @@
     <ClInclude Include="include\C_AANeuron.h">
       <Filter>5.CRefCode</Filter>
     </ClInclude>
-    <ClInclude Include="include\ArmyAnt_Java_AAFile.h">
-      <Filter>6.JavaRefCode</Filter>
-    </ClInclude>
     <ClInclude Include="include\AAJNITools.hpp">
       <Filter>4.CppLibCode\languageResolves</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Java_AAFile.h">
+      <Filter>6.JavaRefCode</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Java_AANeuron.h">
+      <Filter>6.JavaRefCode</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -515,7 +521,10 @@
     <ClCompile Include="src\C_AANeuron.cpp">
       <Filter>5.CRefCode</Filter>
     </ClCompile>
-    <ClCompile Include="src\ArmyAnt_Java_AAFile.cpp">
+    <ClCompile Include="src\Java_AAFile.cpp">
+      <Filter>6.JavaRefCode</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Java_AANeuron.cpp">
       <Filter>6.JavaRefCode</Filter>
     </ClCompile>
   </ItemGroup>
@@ -530,6 +539,9 @@
       <Filter>1.base</Filter>
     </None>
     <None Include="languages\Java\src\Java_AAFile.java">
+      <Filter>6.JavaRefCode</Filter>
+    </None>
+    <None Include="languages\Java\src\Java_AANeuron.java">
       <Filter>6.JavaRefCode</Filter>
     </None>
   </ItemGroup>

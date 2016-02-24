@@ -1,4 +1,4 @@
-#ifndef C_AA_NEURON_H_2016_2_23
+﻿#ifndef C_AA_NEURON_H_2016_2_23
 #define C_AA_NEURON_H_2016_2_23
 
 #include "C_AADefine.h"
@@ -47,6 +47,12 @@ extern "C" {
 
 #ifdef _cplusplus
 }
+
+namespace ArmyAnt {
+template <class T_Weight> class NeuronAlgorithm;
+ARMYANTLIB_API ArmyAnt::NeuronAlgorithm<double>*  NeuronAlgorithm_GetCppObject(AA_CNeuronAlgorithm value);
+}
+
 #endif
 
 #endif // C_AA_NEURON_H_2016_2_23

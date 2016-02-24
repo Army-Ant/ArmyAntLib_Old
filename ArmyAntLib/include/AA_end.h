@@ -1,4 +1,4 @@
-#ifndef A_A_END_2015_11_11
+﻿#ifndef A_A_END_2015_11_11
 #define A_A_END_2015_11_11
 
 #ifndef ARMYANTLIB_EXPORTS

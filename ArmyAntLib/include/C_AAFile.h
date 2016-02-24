@@ -1,4 +1,4 @@
-#ifndef C_AA_FILE_H_2015_11_6
+﻿#ifndef C_AA_FILE_H_2015_11_6
 #define C_AA_FILE_H_2015_11_6
 
 #include "C_AADefine.h"
@@ -18,7 +18,7 @@ extern "C" {
 		Network
 	} AA_StreamType;
 
-	DWORD AA_FILE_MAX_LENGTH = 0xffffffff;
+	extern DWORD AA_FILE_MAX_LENGTH;
 	typedef DWORD AA_CFileStream;
 
 	ARMYANT_CLIB_API AA_CFileStream AA_Stream_Create();

@@ -1,4 +1,4 @@
-/*	*
+﻿/*	*
 	* Created by Jason ZJ 10/17/2015
 
 	* You need only include this header file when you use this library

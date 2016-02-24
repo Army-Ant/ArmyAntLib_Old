@@ -1,4 +1,4 @@
-#ifndef C_A_A_DEFINE_H_2015_11_11
+﻿#ifndef C_A_A_DEFINE_H_2015_11_11
 #define C_A_A_DEFINE_H_2015_11_11
 
 //#include <yvals.h>

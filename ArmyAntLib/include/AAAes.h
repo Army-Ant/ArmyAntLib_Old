@@ -1,4 +1,4 @@
-#ifndef AA_AES_H_2015_12_8
+﻿#ifndef AA_AES_H_2015_12_8
 #define AA_AES_H_2015_12_8
 
 /*	* @ author			: Jason

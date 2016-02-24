@@ -1,4 +1,4 @@
-#include "../include/AANeuron.hpp"
+﻿#include "../include/AANeuron.hpp"
 #include "../include/C_AANeuron.h"
 
 #include <map>
@@ -123,4 +123,10 @@ ARMYANT_CLIB_API double AA_NeuronAlgorithm_GetThreshold(AA_CNeuronAlgorithm valu
 ARMYANT_CLIB_API BOOL AA_NeuronAlgorithm_SetThreshold(AA_CNeuronAlgorithm value, double threshold)
 {
 	return manager.find(value)->second->SetThreshold(threshold) ? TRUE : FALSE;
+}
+
+ARMYANTLIB_API ArmyAnt::NeuronAlgorithm<double>* ArmyAnt::NeuronAlgorithm_GetCppObject(AA_CNeuronAlgorithm value)
+{
+	auto ret = manager.find(value);
+	return (ret != manager.end()) ? ret->second : nullptr;
 }

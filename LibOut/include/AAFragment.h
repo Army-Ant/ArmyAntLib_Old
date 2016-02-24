@@ -13,6 +13,8 @@
 #ifdef _cplusplus
 #undef max
 #undef min
+#undef AA_SAFE_DEL
+#undef AA_SAFE_DELALL
 #endif
 
 

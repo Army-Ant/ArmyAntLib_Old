@@ -1,4 +1,4 @@
-#include "../include/AAAes.h"
+﻿#include "../include/AAAes.h"
 #include "../include/AAClassPrivateHandle.hpp"
 #include <ctime>
 #include <cstdlib>

@@ -1,4 +1,4 @@
-#include "../include/AAFile.h"
+﻿#include "../include/AAFile.h"
 #include "../include/AAClassPrivateHandle.hpp"
 #include <thread>
 #include <list>

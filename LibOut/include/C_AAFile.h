@@ -18,12 +18,12 @@ extern "C" {
 		Network
 	} AA_StreamType;
 
-	DWORD AA_FILE_MAX_LENGTH = 0xffffffff;
+	extern DWORD AA_FILE_MAX_LENGTH;
 	typedef DWORD AA_CFileStream;
 
 	ARMYANT_CLIB_API AA_CFileStream AA_Stream_Create();
 	ARMYANT_CLIB_API void AA_Stream_Release(AA_CFileStream stream);
-	ARMYANT_CLIB_API BOOL AA_Stream_SetMode(AA_CFileStream stream, bool nocreate, bool noexist);
+	ARMYANT_CLIB_API BOOL AA_Stream_SetMode(AA_CFileStream stream, BOOL nocreate, BOOL noexist);
 
 	ARMYANT_CLIB_API BOOL AA_Stream_OpenFile(AA_CFileStream stream, const char* filename);
 	ARMYANT_CLIB_API BOOL AA_Stream_OpenMemoryByAddr(AA_CFileStream stream, DWORD memaddr, WORD len);
