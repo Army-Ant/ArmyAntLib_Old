@@ -3,14 +3,19 @@
 
 //#include <yvals.h>
 
-#ifndef BYTE
-typedef unsigned char BYTE;
-#endif
-#ifndef WORD
-typedef unsigned short WORD;
-#endif
-#ifndef DWORD
-typedef unsigned long DWORD;
+typedef char int8;
+typedef unsigned char uint8;
+typedef short int16;
+typedef unsigned short uint16;
+typedef int int32;
+typedef unsigned int uint32;
+
+#ifdef _x86
+typedef int mac_int;
+typedef unsigned int mac_uint;
+#else
+typedef long long mac_int;
+typedef unsigned long long mac_uint;
 #endif
 
 #ifndef BOOL

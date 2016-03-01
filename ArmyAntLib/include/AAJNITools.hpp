@@ -7,13 +7,11 @@
 
 namespace ArmyAnt {
 
-class JNITools
-{
-public:
-	template <class T = std::string>
-	inline static T JstringToCstring(JNIEnv* env,jstring jstr)
+namespace JNITools{
+
+	inline static std::string JstringToCstring(JNIEnv* env,jstring jstr)
 	{
-		T rtn = "";
+		std::string rtn = "";
 		jclass clsstring = env->FindClass("java/lang/String");
 		Assert(clsstring != nullptr);
 		jstring strencode = env->NewStringUTF("GB2312");
@@ -34,27 +32,20 @@ public:
 		return rtn;
 	};
 
-	template <class T = std::string>
 	inline static jstring CstringToJstring(JNIEnv*env, std::string str)
 	{
 		return env->NewStringUTF(str.c_str());
 	}
 
-	template <class T = std::string>
-	inline static jmethodID GetInterfaceMethodID(JNIEnv *env, T interfaceName, T methodName, T methodSig)
+	inline static jmethodID GetInterfaceMethodID(JNIEnv *env, const char* interfaceName, const char* methodName, const char* methodSig)
 	{
 		auto cls = env->FindClass(interfaceName);
 		Assert(cls != nullptr);
 		return env->GetMethodID(cls, methodName, methodSig);
 	}
 
+} // namespace ArmyAnt::JNITools
 
-private:
-	JNITools() = delete;
-	AA_FORBID_ASSGN_OPR(JNITools);
-	AA_FORBID_COPY_CTOR(JNITools);
-};
-
-}
+} // namespace ArmyAnt
 
 #endif

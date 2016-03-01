@@ -21,11 +21,11 @@ template <class T_Tag>
 struct StateValue
 {
 	typedef std::function<bool(T_Tag lastState, T_Tag nextState, void*params)> StateChangeFunc;
-	typedef std::function<bool(T_Tag thisState, DWORD eventId, void*params)>StateEventFunc;
+	typedef std::function<bool(T_Tag thisState, uint32 eventId, void*params)>StateEventFunc;
 	bool enabled = true;
 	StateChangeFunc OnEnter = nullptr;
 	StateChangeFunc OnLeave = nullptr;
-	TripleMap<DWORD, bool, StateEventFunc> OnUpdate;
+	TripleMap<uint32, bool, StateEventFunc> OnUpdate;
 };
 
 // 同步状态机, 不具有独自的线程, 采用被动事件触发的方式, defaultAllow表示新建的状态是否默认允许与已存在的所有状态互转
@@ -52,7 +52,7 @@ public:
 	//判断是否存在指定名称的状态
 	bool IsStateExist(const T_Tag&name)const;
 	//获取所有状态的名称
-	DWORD GetAllStates(T_Tag* dest = nullptr)const;
+	uint32 GetAllStates(T_Tag* dest = nullptr)const;
 
 	//跳转到默认状态,跳转被禁止或状态机不可用则返回false
 	bool GoToState();
@@ -70,9 +70,9 @@ public:
 	//查看目前状态是否可跳至指定状态
 	bool IsAllowed(T_Tag dst)const;
 	//查看指定状态可跳转到的所有目标状态
-	DWORD GetAllAllowedOut(T_Tag src, T_Tag*dst)const;
+	uint32 GetAllAllowedOut(T_Tag src, T_Tag*dst)const;
 	//查看指定状态可由哪些状态跳转至
-	DWORD GetAllAllowedIn(T_Tag dst, T_Tag*src)const;
+	uint32 GetAllAllowedIn(T_Tag dst, T_Tag*src)const;
 
 	//获取当前激活的状态
 	const T_Tag& GetCurrentState()const;
@@ -94,9 +94,9 @@ public:
 	//查询状态机是否可用
 	bool IsEnabled()const;
 	//触发事件
-	void DispatchEvent(DWORD eventId);
+	void DispatchEvent(uint32 eventId);
 	template<class T_Param>
-	void DispatchEvent(DWORD eventId, T_Param*params);
+	void DispatchEvent(uint32 eventId, T_Param*params);
 
 public:
 	//获取指定状态
@@ -180,7 +180,7 @@ bool FiniteStateMachine<T_Tag, defaultAllow>::IsStateExist(const T_Tag & name) c
 }
 
 template<class T_Tag, bool defaultAllow>
-DWORD FiniteStateMachine<T_Tag, defaultAllow>::GetAllStates(T_Tag* dest) const
+uint32 FiniteStateMachine<T_Tag, defaultAllow>::GetAllStates(T_Tag* dest) const
 {
 	int n = 0;
 	for(auto i = nodes.begin(); i != states.end(); ++i)
@@ -260,7 +260,7 @@ bool FiniteStateMachine<T_Tag, defaultAllow>::IsAllowed(T_Tag dst) const
 }
 
 template<class T_Tag, bool defaultAllow>
-DWORD FiniteStateMachine<T_Tag, defaultAllow>::GetAllAllowedOut(T_Tag src, T_Tag * dst) const
+uint32 FiniteStateMachine<T_Tag, defaultAllow>::GetAllAllowedOut(T_Tag src, T_Tag * dst) const
 {
 	auto target = GetChild(src);
 	if(target == nullptr)
@@ -278,7 +278,7 @@ DWORD FiniteStateMachine<T_Tag, defaultAllow>::GetAllAllowedOut(T_Tag src, T_Tag
 }
 
 template<class T_Tag, bool defaultAllow>
-DWORD FiniteStateMachine<T_Tag, defaultAllow>::GetAllAllowedIn(T_Tag dst, T_Tag * src) const
+uint32 FiniteStateMachine<T_Tag, defaultAllow>::GetAllAllowedIn(T_Tag dst, T_Tag * src) const
 {
 	auto target = GetChild(src);
 	if(target == nullptr)
@@ -366,14 +366,14 @@ bool FiniteStateMachine<T_Tag, defaultAllow>::IsEnabled() const
 }
 
 template<class T_Tag, bool defaultAllow>
-void FiniteStateMachine<T_Tag, defaultAllow>::DispatchEvent(DWORD eventId)
+void FiniteStateMachine<T_Tag, defaultAllow>::DispatchEvent(uint32 eventId)
 {
 	DispatchEvent<std::nullptr_t>(eventId, nullptr);
 }
 
 template<class T_Tag, bool defaultAllow>
 template<class T_Param>
-void FiniteStateMachine<T_Tag, defaultAllow>::DispatchEvent(DWORD eventId, T_Param * params)
+void FiniteStateMachine<T_Tag, defaultAllow>::DispatchEvent(uint32 eventId, T_Param * params)
 {
 	if(!enabled)
 		return;

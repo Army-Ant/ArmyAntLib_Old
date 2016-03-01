@@ -85,7 +85,7 @@ public:
 	typedef Triad<_Key, _Value1, _Value2> Element;
 
 public:
-	TripleMap(Triad<_Key, _Value1, _Value2>* dataArray = nullptr, DWORD num = 0);
+	TripleMap(Triad<_Key, _Value1, _Value2>* dataArray = nullptr, uint32 num = 0);
 	~TripleMap();
 
 public:
@@ -96,7 +96,7 @@ public:
 	//获取对应键处的值
 	std::pair<_Value1, _Value2> GetValues(const _Key&) const;
 	//获取数据总量
-	DWORD Size() const;
+	uint32 Size() const;
 
 	//插入键值
 	bool Insert(const _Key&, const  _Value1&, const  _Value2&);
@@ -212,7 +212,7 @@ public:
 	friend Iterator&SelfMap::After(const Iterator&, int num /* = 1 */);
 
 private:
-	DWORD num;
+	uint32 num;
 	SelfMap* parent;
 
 private:
@@ -342,9 +342,9 @@ bool Triad<_First, _Second, _Third>::operator!=(const Iterator&i) const
 
 
 template <class _Key, class _Value1, class _Value2>
-TripleMap<_Key,_Value1,_Value2>::TripleMap(Triad<_Key, _Value1, _Value2>* dataArray/* = nullptr*/, DWORD num/* = 0*/)
+TripleMap<_Key,_Value1,_Value2>::TripleMap(Triad<_Key, _Value1, _Value2>* dataArray/* = nullptr*/, uint32 num/* = 0*/)
 {
-	for(DWORD i = 0; i < num; i++)
+	for(uint32 i = 0; i < num; i++)
 	{
 		datas.push_back(dataArray[i]);
 	}
@@ -368,7 +368,7 @@ bool TripleMap<_Key, _Value1, _Value2>::Equals(const TripleMap<_Key, _Value1, _V
 	auto size = value.datas.size();
 	if(datas.size() != size)
 		return false;
-	for(DWORD i = 0; i < size; i++)
+	for(uint32 i = 0; i < size; i++)
 	{
 		if(datas.at(i) != value.datas.at(i))
 			return false;
@@ -390,9 +390,9 @@ std::pair<_Value1, _Value2> TripleMap<_Key, _Value1, _Value2>::GetValues(const _
 }
 
 template <class _Key, class _Value1, class _Value2>
-DWORD TripleMap<_Key, _Value1, _Value2>::Size() const
+uint32 TripleMap<_Key, _Value1, _Value2>::Size() const
 {
-	return datas.size();
+	return uint32(datas.size());
 }
 
 
@@ -532,7 +532,7 @@ const Iterator_TripleMap<_Key, _Value1, _Value2>&TripleMap<_Key, _Value1, _Value
 template <class _Key, class _Value1, class _Value2>
 void TripleMap<_Key, _Value1, _Value2>::Sort(SortFunc sortFunc)
 {
-	DWORD times = 1;
+	uint32 times = 1;
 	auto size = datas.size()-1;
 	while(size>0&&times != 0)
 	{

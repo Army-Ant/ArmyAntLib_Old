@@ -8,7 +8,7 @@
 extern "C" {
 #endif
 
-	typedef DWORD AA_CNeuronAlgorithm;
+	typedef uint32 AA_CNeuronAlgorithm;
 	typedef double(*AA_Neuron_ActiveFunc)(double input);
 
 	ARMYANT_CLIB_API double AA_Math_Liner(double input, double slope, double bias);

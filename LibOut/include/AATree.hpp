@@ -18,11 +18,11 @@ namespace  ArmyAnt {
 
 typedef std::function<void(void*node, void*param)> BrowseFunc;
 
-template <class T_Val, class T_Tag = DWORD>
+template <class T_Val, class T_Tag = uint32>
 class TreeNode;
-template <class T_Val, class T_Tag = DWORD>
+template <class T_Val, class T_Tag = uint32>
 class Tree;
-template <class T_Val, class T_Tag = DWORD>
+template <class T_Val, class T_Tag = uint32>
 class Iterator_Tree;
 
 template <class T_Val, class T_Tag>
@@ -169,7 +169,7 @@ private:
 };
 
 //遍历方式
-enum class TraversalType : BYTE
+enum class TraversalType : uint8
 {
 	Unknown,
 	PreorderTraversal,	//先序遍历（深度优先遍历）
@@ -239,13 +239,13 @@ private:
 /******************************* Source : TreeNode ***********************************************************/
 
 
-template <class T_Val, class T_Tag /*= DWORD*/>
+template <class T_Val, class T_Tag /*= uint32*/>
 TreeNode<T_Val, T_Tag>::TreeNode(T_Val&element, T_Tag tag)
 	:tag(tag), value(&element), parent(nullptr), children()
 {
 }
 
-template <class T_Val, class T_Tag /*= DWORD*/>
+template <class T_Val, class T_Tag /*= uint32*/>
 TreeNode<T_Val, T_Tag>::TreeNode(const TreeNode<T_Val, T_Tag>&value, bool withChildren/* = false*/)
 	: tag(value.tag), value(&value.value), parent(nullptr), children()
 {
@@ -257,7 +257,7 @@ TreeNode<T_Val, T_Tag>::TreeNode(const TreeNode<T_Val, T_Tag>&value, bool withCh
 		}
 }
 
-template <class T_Val, class T_Tag /*= DWORD*/>
+template <class T_Val, class T_Tag /*= uint32*/>
 TreeNode<T_Val, T_Tag>& TreeNode<T_Val, T_Tag>::operator=(const TreeNode<T_Val, T_Tag>&value)
 {
 	this->tag = value.tag;
@@ -269,7 +269,7 @@ TreeNode<T_Val, T_Tag>& TreeNode<T_Val, T_Tag>::operator=(const TreeNode<T_Val, 
 	}
 }
 
-template <class T_Val, class T_Tag /*= DWORD*/>
+template <class T_Val, class T_Tag /*= uint32*/>
 TreeNode<T_Val, T_Tag>::~TreeNode()
 {
 }

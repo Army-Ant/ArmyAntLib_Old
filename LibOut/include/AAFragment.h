@@ -47,14 +47,14 @@ inline void Assert(bool x)
 }
 
 template<class PTR>
-inline PTR AA_SAFE_DEL(PTR ptr)
+inline PTR&AA_SAFE_DEL(PTR&ptr)
 {
 	if(ptr != nullptr)
 	{
 		delete ptr;
 		ptr = nullptr;
 	}
-	return nullptr;
+	return ptr;
 }
 
 template <class PTR>

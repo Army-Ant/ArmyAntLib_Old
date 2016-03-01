@@ -39,7 +39,7 @@ JNIEXPORT jboolean JNICALL Java_ArmyAnt_Java_1AAFile_Native_1OpenMemoryByAddr(JN
 {
 	if(stream < 0 || memaddr <= 0 || len <= 0)
 		return JNI_FALSE;
-	return jboolean(AA_Stream_OpenMemoryByAddr(AA_CFileStream(stream), DWORD(memaddr), WORD(len)));
+	return jboolean(AA_Stream_OpenMemoryByAddr(AA_CFileStream(stream), mac_uint(memaddr), uint32(len)));
 }
 
 JNIEXPORT jboolean JNICALL Java_ArmyAnt_Java_1AAFile_Native_1OpenNamePipe(JNIEnv * env, jclass, jlong stream, jstring pipename, jstring pipepath, jstring pipeserver)
@@ -53,21 +53,21 @@ JNIEXPORT jboolean JNICALL Java_ArmyAnt_Java_1AAFile_Native_1OpenCom(JNIEnv *, j
 {
 	if(stream < 0 || comNum < 0)
 		return JNI_FALSE;
-	return jboolean(AA_Stream_OpenCom(AA_CFileStream(stream), BYTE(comNum)));
+	return jboolean(AA_Stream_OpenCom(AA_CFileStream(stream), uint8(comNum)));
 }
 
 JNIEXPORT jboolean JNICALL Java_ArmyAnt_Java_1AAFile_Native_1OpenNetWithName(JNIEnv * env, jclass, jlong stream, jstring netAddr, jshort protocol)
 {
 	if(stream < 0 || protocol < 0)
 		return JNI_FALSE;
-	return jboolean(AA_Stream_OpenNetWithName(AA_CFileStream(stream), ArmyAnt::JNITools::JstringToCstring(env, netAddr).c_str(), BYTE(protocol)));
+	return jboolean(AA_Stream_OpenNetWithName(AA_CFileStream(stream), ArmyAnt::JNITools::JstringToCstring(env, netAddr).c_str(), uint8(protocol)));
 }
 
 JNIEXPORT jboolean JNICALL Java_ArmyAnt_Java_1AAFile_Native_1OpenNetWithAddr(JNIEnv *, jclass, jlong stream, jlong netIp, jint port, jshort protocol)
 {
 	if(stream < 0 || netIp < 0 || port < 0 || protocol < 0)
 		return JNI_FALSE;
-	return jboolean(AA_Stream_OpenNetWithAddr(AA_CFileStream(stream), DWORD(netIp), WORD(port), BYTE(protocol)));
+	return jboolean(AA_Stream_OpenNetWithAddr(AA_CFileStream(stream), uint32(netIp), uint16(port), uint8(protocol)));
 }
 
 JNIEXPORT jboolean JNICALL Java_ArmyAnt_Java_1AAFile_Native_1Close(JNIEnv *, jclass, jlong stream)
@@ -116,7 +116,7 @@ JNIEXPORT jboolean JNICALL Java_ArmyAnt_Java_1AAFile_Native_1MovePos(JNIEnv *, j
 {
 	if(stream < 0 || pos < 0)
 		return JNI_FALSE;
-	return jboolean(AA_Stream_MovePos(AA_CFileStream(stream), DWORD(pos)));
+	return jboolean(AA_Stream_MovePos(AA_CFileStream(stream), uint32(pos)));
 }
 
 JNIEXPORT jstring JNICALL Java_ArmyAnt_Java_1AAFile_Native_1GetStreamName(JNIEnv * env, jclass, jlong stream)
@@ -132,14 +132,14 @@ JNIEXPORT jlong JNICALL Java_ArmyAnt_Java_1AAFile_Native_1ReadSome(JNIEnv * env,
 		return jlong(-1);
 	if(len > env->GetArrayLength(buffer))
 		return jlong(-1);
-	auto tmparray = new BYTE[DWORD(len)];
-	auto ret = jlong(AA_Stream_ReadSome(AA_CFileStream(stream), tmparray, DWORD(len), DWORD(pos)));
-	auto tmpjarray = new jbyte[DWORD(len)];
+	auto tmparray = new uint8[uint32(len)];
+	auto ret = jlong(AA_Stream_ReadSome(AA_CFileStream(stream), tmparray, uint32(len), uint32(pos)));
+	auto tmpjarray = new jbyte[uint32(len)];
 	for(jsize i = 0; i < len; ++i)
 	{
 		tmpjarray[i] = jbyte(tmparray[i]);
 	}
-	env->GetByteArrayRegion(buffer, 0, DWORD(len), tmpjarray);
+	env->GetByteArrayRegion(buffer, 0, uint32(len), tmpjarray);
 	AA_SAFE_DELALL(tmparray);
 	AA_SAFE_DELALL(tmpjarray);
 	return ret;
@@ -151,15 +151,15 @@ JNIEXPORT jlong JNICALL Java_ArmyAnt_Java_1AAFile_Native_1ReadTo(JNIEnv *env, jc
 		return jlong(-1);
 	if(maxlen > env->GetArrayLength(buffer))
 		return jlong(-1);
-	auto tmparray = new BYTE[DWORD(maxlen)];
+	auto tmparray = new uint8[uint32(maxlen)];
 	// TODO : 这里是否需要endtag字符的转码?
-	auto ret = jlong(AA_Stream_ReadTo(AA_CFileStream(stream), tmparray, BYTE(endtag), DWORD(maxlen)));
-	auto tmpjarray = new jbyte[DWORD(maxlen)];
+	auto ret = jlong(AA_Stream_ReadTo(AA_CFileStream(stream), tmparray, uint8(endtag), uint32(maxlen)));
+	auto tmpjarray = new jbyte[uint32(maxlen)];
 	for(jsize i = 0; i < maxlen; ++i)
 	{
 		tmpjarray[i] = jbyte(tmparray[i]);
 	}
-	env->GetByteArrayRegion(buffer, 0, DWORD(maxlen), tmpjarray);
+	env->GetByteArrayRegion(buffer, 0, uint32(maxlen), tmpjarray);
 	AA_SAFE_DELALL(tmparray);
 	AA_SAFE_DELALL(tmpjarray);
 	return ret;
@@ -172,7 +172,7 @@ JNIEXPORT jlong JNICALL Java_ArmyAnt_Java_1AAFile_Native_1Write(JNIEnv *env, jcl
 	if(len > env->GetArrayLength(buffer))
 		return jlong(-1);
 	auto bts = env->GetByteArrayElements(buffer, JNI_FALSE);
-	auto ret = jlong(AA_Stream_Write(AA_CFileStream(stream), bts, DWORD(len)));
+	auto ret = jlong(AA_Stream_Write(AA_CFileStream(stream), bts, uint32(len)));
 	env->ReleaseByteArrayElements(buffer, bts, JNI_ABORT);
 	return ret;
 }

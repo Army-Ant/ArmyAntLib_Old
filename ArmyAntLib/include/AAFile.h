@@ -22,7 +22,7 @@
 
 namespace ArmyAnt {
 
-enum class StreamType : BYTE
+enum class StreamType : uint8
 {
 	None,
 	File,
@@ -54,13 +54,13 @@ public:
 		* @ param = "memaddr" : 要内存地址编号
 		* @ param = "len" : 可读写的内存块总大小
 		*/
-	bool Open(DWORD memaddr, fpos_t len);
+	bool Open(mac_uint memaddr, uint64 len);
 
 	/*	* @ summary : 按内存指针打开内存或共享内存
 		* @ param = "memaddr" : 要内存起始指针
 		* @ param = "len" : 可读写的内存块总大小
 		*/
-	bool Open(BYTE* memaddr, fpos_t len);
+	bool Open(void* memaddr, uint64 len);
 
 	/*	* @ summary : 打开命名管道
 		* @ param = "pipename" : 管道名，自定义
@@ -72,12 +72,12 @@ public:
 	/*	* @ summary : 打开串口
 		* @ param = "comNum" : 串口序号
 	*/
-	bool Open(BYTE comNum);
+	bool Open(uint8 comNum);
 
 	//打开指定域名的网络通信（暂未实现）
-	bool Open(const char* netAddr, BYTE protocol);
+	bool Open(const char* netAddr, uint8 protocol);
 	//打开指定IP和端口的网络通信（暂未实现）
-	bool Open(DWORD netIp, WORD port, BYTE protocol);
+	bool Open(uint32 netIp, uint16 port, uint8 protocol);
 
 	/*	* @ summary : 关闭流，任何类型的流都要用此方式关闭
 		*/
@@ -95,11 +95,11 @@ public:
 
 	/*	* @ summary : 检查流的长度
 		*/
-	DWORD GetLength() const;
+	uint64 GetLength() const;
 
 	/*	* @ summary : 检查当前读写指针的位置
 		*/
-	DWORD GetPos() const;
+	uint64 GetPos() const;
 
 	/*	* @ summary : 读写指针是否已到流末尾
 		*/
@@ -108,7 +108,7 @@ public:
 	/*	* @ summary : 将读写指针移动到指定位置
 		* @ param = "pos" : 从流开头算起，要移动到的位置。此参数默认值为移动到流尾部
 		*/
-	bool MovePos(LWORD pos = FILE_LONG_POS_END) const;
+	bool MovePos(uint64 pos = FILE_LONG_POS_END) const;
 
 	/*	* @ summary : 获取流源的文件名，对于文件指其路径名称，对于管道则是管道全名，对于串口则是串口名，对于内存和共享内存，则是内存地址号，对于网络，则是其域名或者ip地址和端口
 		*/
@@ -120,7 +120,7 @@ public:
 		* @ param = "pos" : 要读取的开始位置，不传此参数则从当前位置就地读取
 		* @ return : 读取到的实际长度，如果为0，可能发生了错误
 		*/
-	DWORD Read(void*buffer, DWORD len = FILE_SHORT_POS_END, LWORD pos = FILE_LONG_POS_END);
+	uint64 Read(void*buffer, uint32 len = FILE_SHORT_POS_END, uint64 pos = FILE_LONG_POS_END);
 
 	/*	* @ summary : 读取流中的数据
 		* @ param = "buffer" : 要将数据保存到的位置
@@ -128,14 +128,14 @@ public:
 		* @ param = "maxlen" : 要读取的最大长度
 		* @ return : 读取到的实际长度，如果为0，可能发生了错误
 		*/
-	DWORD Read(void*buffer, BYTE endtag, DWORD maxlen = FILE_SHORT_POS_END);
+	uint64 Read(void*buffer, uint8 endtag, uint64 maxlen = FILE_SHORT_POS_END);
 
 	/*	* @ summary : 将数据写入流
 		* @ param = "buffer" : 要写入的数据所在的位置
 		* @ param = "len" : 要写入的长度，不传此参数，则当遇到数据中的0值（字符串结尾）时停止写入
 		* @ return : 写入的实际长度，如果为0，可能发生了错误
 		*/
-	DWORD Write(void*buffer, DWORD len = 0);
+	uint64 Write(void*buffer, uint64 len = 0);
 
 public:
 	//以下仅限文件操作
@@ -189,13 +189,13 @@ public:
 
 public:
 	// 最大文件长度
-	static const LWORD FILE_LONG_POS_END = 0x7fffffffffffffff;
-	static const DWORD FILE_SHORT_POS_END = 0xffffffff;
+	static const uint64 FILE_LONG_POS_END = 0xffffffffffffffff;
+	static const uint32 FILE_SHORT_POS_END = 0xffffffff;
 
 public:
 	// 内部数据句柄，对外无用
-	const DWORD handle;
-	static FileStream*GetStream(DWORD handle);
+	const uint32 handle;
+	static FileStream*GetStream(uint32 handle);
 
 	AA_FORBID_ASSGN_OPR(FileStream);
 	AA_FORBID_COPY_CTOR(FileStream);

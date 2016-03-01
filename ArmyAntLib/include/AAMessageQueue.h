@@ -16,7 +16,7 @@
 
 namespace ArmyAnt {
 
-typedef std::function<void(DWORD eventid, void*params)> EventCall;
+typedef std::function<void(uint32 eventid, void*params)> EventCall;
 
 class MessageQueue
 {
@@ -25,13 +25,13 @@ public:
 	~MessageQueue();
 
 public:
-	bool RegisterEvent(DWORD eventid);
-	bool UnRegisterEvent(DWORD eventid);
-	bool IsEventRegistered(DWORD eventid);
-	bool EnableEvent(DWORD eventid);
-	bool DisableEvent(DWORD eventid);
-	bool IsEventDisabled(DWORD eventid);
-	bool DispatchEvent(DWORD eventid, void*params);
+	bool RegisterEvent(uint32 eventid);
+	bool UnRegisterEvent(uint32 eventid);
+	bool IsEventRegistered(uint32 eventid);
+	bool EnableEvent(uint32 eventid);
+	bool DisableEvent(uint32 eventid);
+	bool IsEventDisabled(uint32 eventid);
+	bool DispatchEvent(uint32 eventid, void*params);
 
 	AA_FORBID_ASSGN_OPR(MessageQueue);
 	AA_FORBID_COPY_CTOR(MessageQueue);

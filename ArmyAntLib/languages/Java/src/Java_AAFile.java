@@ -3,6 +3,9 @@ package ArmyAnt;
 import java.lang.String;
 
 public class Java_AAFile{
+	static{
+		
+	}
 
 	private native static long Native_Create();
 	private native static void Native_Release(long stream);

@@ -527,6 +527,9 @@
     <ClCompile Include="src\Java_AANeuron.cpp">
       <Filter>6.JavaRefCode</Filter>
     </ClCompile>
+    <ClCompile Include="src\AAPythonExport.cpp">
+      <Filter>4.CppLibCode\languageResolves</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="base\build_start.bat">
@@ -543,6 +546,9 @@
     </None>
     <None Include="languages\Java\src\Java_AANeuron.java">
       <Filter>6.JavaRefCode</Filter>
+    </None>
+    <None Include="languages\Python\ArmyAnt.py">
+      <Filter>7.PythonRefCode</Filter>
     </None>
   </ItemGroup>
   <ItemGroup>

@@ -541,7 +541,7 @@ template<class T_Val, class T_Tag, class T_Weight>
 T_Tag GraphNode<T_Val, T_Tag, T_Weight>::GetAllLinkedOut(GraphLine<T_Val, T_Tag, T_Weight>** linked)
 {
 	if(linked != nullptr)
-		for(DWORD i = 0; i < children.size(); ++i)
+		for(uint32 i = 0; i < children.size(); ++i)
 		{
 			linked[i] = children[i]->GetEndNode();
 		}

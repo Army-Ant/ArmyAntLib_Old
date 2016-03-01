@@ -37,7 +37,7 @@ int main(int argc, char* argv[])
 int FileStreamTest(const std::string& cmd)
 {
 	static ArmyAnt::FileStream*file = nullptr;
-	static BYTE memoryTest[2048] = {0};
+	static uint8 memoryTest[2048] = {0};
 	static bool memInit = false;
 	if(!memInit)
 	{
@@ -156,7 +156,7 @@ int FileStreamTest(const std::string& cmd)
 		if(!file->IsOpened())
 			return Error("File stream disconnected !");
 		char buf[1024] = "";
-		if(0 == file->Read(buf, BYTE('\n')))
+		if(0 == file->Read(buf, uint8('\n')))
 			return Error("Reading file failed");
 		std::cout << "Read file successfully, its content is :" << std::endl;
 		std::cout << buf << std::endl;
@@ -233,7 +233,7 @@ int FileStreamTest(const std::string& cmd)
 
 int AESTest(const std::string&cmd)
 {
-	static BYTE enc[16] = {'?','z','j','l','j',0xc,'y','1',1,'2',9,'0',1,'1',2,'!'};
+	static uint8 enc[16] = {'?','z','j','l','j',0xc,'y','1',1,'2',9,'0',1,'1',2,'!'};
 	static auto parser = ArmyAnt::AES::Parser::GetQuickParser(enc);
 	static ArmyAnt::FileStream file;
 	static bool isEncoded = false;
@@ -241,10 +241,10 @@ int AESTest(const std::string&cmd)
 		return s_exitCode;
 	else if(cmd == "chbenc")
 	{
-		static BYTE tst[256] = {0};
+		static uint8 tst[256] = {0};
 		for(int i = 0; i < 256; i++)
 		{
-			tst[i] = BYTE(i);
+			tst[i] = uint8(i);
 		}
 		ArmyAnt::AES::ByteEncoder tstecd;
 		if(!tstecd.InputData(tst, true))
@@ -289,7 +289,7 @@ int AESTest(const std::string&cmd)
 		if(!file.Open("test.txt"))
 			return Error("Open the data file failed");
 		BYTE datas[128] = {0};
-		if(0 >= file.Read(datas, DWORD(128)))
+		if(0 >= file.Read(datas, uint32(128)))
 		{
 			file.Close();
 			return Error("Read the data file failed");

@@ -10,25 +10,25 @@ namespace Infos {
 union Version
 {
 public:
-	DWORD ver;
+	uint32 ver;
 	struct VerChar
 	{
-		WORD bigVer;
-		WORD smallVer;
-		WORD patchVer;
-		WORD testVer;
+		uint16 bigVer;
+		uint16 smallVer;
+		uint16 patchVer;
+		uint16 testVer;
 
-		VerChar(WORD bigVer, WORD smallVer, WORD patchVer, WORD testVer)
+		VerChar(uint16 bigVer, uint16 smallVer, uint16 patchVer, uint16 testVer)
 			:bigVer(bigVer), smallVer(smallVer), patchVer(patchVer), testVer(testVer)
 		{
 		}
 	}sver;
 
-	Version(DWORD ver)
+	Version(uint32 ver)
 		:ver(ver)
 	{
 	}
-	Version(WORD bigVer, WORD smallVer, WORD patchVer, WORD testVer)
+	Version(uint16 bigVer, uint16 smallVer, uint16 patchVer, uint16 testVer)
 		:sver(bigVer, smallVer, patchVer, testVer)
 	{
 	}

@@ -23,6 +23,7 @@ del  %OutDir%lib\* /Q
 xcopy %ProjectPath%lib %OutDir%lib  /D /C /Q /K /X /Y
 del  %OutDir%bin\* /Q
 xcopy %ProjectPath%bin %OutDir%bin  /D /C /Q /K /X /Y
+copy %ProjectPath%languages\Python\* %OutDir%bin /Y
 
 :End
 @echo on

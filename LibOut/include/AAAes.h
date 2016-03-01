@@ -30,25 +30,25 @@ public:
 	~Parser();
 
 public:
-	bool SetFirstlyPwd(BYTE pwd[16]);
+	bool SetFirstlyPwd(uint8 pwd[16]);
 	bool SetRounds(const RoundSetting settingArray[], int roundsCount);
-	bool SetRound(BYTE round, const RoundSetting setting);
-	bool SetData(void*data, LWORD length);
+	bool SetRound(uint8 round, const RoundSetting setting);
+	bool SetData(void*data, uint64 length);
 
 public:
-	RoundSetting GetSetting(BYTE round)const;
-	BYTE GetRoundCount()const;
+	RoundSetting GetSetting(uint8 round)const;
+	uint8 GetRoundCount()const;
 
 public:
-	bool Encode(void*dest, void*data = nullptr, LWORD length = 0);
-	bool Decode(void*dest, void*data = nullptr, LWORD length = 0);
+	bool Encode(void*dest, void*data = nullptr, uint64 length = 0);
+	bool Decode(void*dest, void*data = nullptr, uint64 length = 0);
 
 public:
-	static bool GetExtendPwds(BYTE initPwd[16], BYTE gettedPwd[176]);
-	static Parser GetQuickParser(BYTE initPwd[16], BYTE byteEncoder[256] = nullptr);
+	static bool GetExtendPwds(uint8 initPwd[16], uint8 gettedPwd[176]);
+	static Parser GetQuickParser(uint8 initPwd[16], uint8 byteEncoder[256] = nullptr);
 
 public:
-	const DWORD handle;
+	const uint32 handle;
 
 	AA_FORBID_ASSGN_OPR(Parser);
 };
@@ -58,25 +58,25 @@ class ARMYANTLIB_API RoundSetting
 public:
 	RoundSetting();
 	RoundSetting(const RoundSetting&setting);
-	RoundSetting(DWORD settingHandle);
+	RoundSetting(uint32 settingHandle);
 	~RoundSetting();
 
 public:
-	bool SetRoundPassword(const BYTE pwd[16]);
+	bool SetRoundPassword(const uint8 pwd[16]);
 	bool SetByteEncoder(const ByteEncoder bEncoder);
-	bool SetLineMoving(BYTE rectWidth = 4);
+	bool SetLineMoving(uint8 rectWidth = 4);
 
 public:
 	ByteEncoder GetByteEncoder();
 	const ByteEncoder GetByteEncoder()const;
-	BYTE GetLineMoving()const;
+	uint8 GetLineMoving()const;
 
 public:
-	bool Encode(void* dest, const char*src, LWORD length, bool withRowMix = true);
-	bool Decode(void* dest, const char*src, LWORD length, bool withRowMix = true);
+	bool Encode(void* dest, const char*src, uint64 length, bool withRowMix = true);
+	bool Decode(void* dest, const char*src, uint64 length, bool withRowMix = true);
 
 public:
-	const DWORD handle;
+	const uint32 handle;
 
 	AA_FORBID_ASSGN_OPR(RoundSetting);
 };
@@ -86,28 +86,28 @@ class ARMYANTLIB_API ByteEncoder
 public:
 	ByteEncoder();
 	ByteEncoder(const ByteEncoder&value);
-	ByteEncoder(DWORD encoderHandle);
+	ByteEncoder(uint32 encoderHandle);
 	ByteEncoder&operator=(const ByteEncoder&value);
 	~ByteEncoder();
 
 public:
-	bool InputData(const BYTE elems[256], bool needCheck = false);
-	bool InputBackData(const BYTE elems[256], bool needCheck = false);
+	bool InputData(const uint8 elems[256], bool needCheck = false);
+	bool InputBackData(const uint8 elems[256], bool needCheck = false);
 	bool CopiedFromAnother(const ByteEncoder another, bool needCheck = false);
 
 public:
-	bool GetData(BYTE elems[256])const;
-	bool GetBackData(BYTE elems[256])const;
+	bool GetData(uint8 elems[256])const;
+	bool GetBackData(uint8 elems[256])const;
 	ByteEncoder GetBack()const;
 
 public:
-	BYTE&operator[](BYTE src);
-	const BYTE operator[](BYTE src)const;
+	uint8&operator[](uint8 src);
+	const uint8 operator[](uint8 src)const;
 	ByteEncoder operator*()const;
 
 public:
 	static const ByteEncoder GetRandomEncoder();
-	const DWORD handle;
+	const uint32 handle;
 };
 
 }
