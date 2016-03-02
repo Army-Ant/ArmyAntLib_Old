@@ -3,10 +3,24 @@ package ArmyAnt;
 import java.lang.String;
 
 public class Java_AAFile{
-	static{
-		
+	
+	private long c_handle;
+	
+	public Java_AAFile()
+	{
+		c_handle = Native_Create();
 	}
-
+	
+	Finalizer()
+	{
+		Native_Release(c_handle);
+	}
+	
+	public boolean SetMode(boolean nocreate, boolean noexist)
+	{
+		return Native_SetMode(c_handle, nocreate, noexist);
+	}
+	
 	private native static long Native_Create();
 	private native static void Native_Release(long stream);
 	private native static boolean Native_SetMode(long stream, boolean nocreate, boolean noexist);
