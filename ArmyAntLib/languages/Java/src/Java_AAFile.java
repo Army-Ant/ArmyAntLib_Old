@@ -5,13 +5,23 @@ import java.lang.String;
 public class Java_AAFile{
 	
 	private long c_handle;
+
+	public enum StreamType
+	{
+		None,
+		File,
+		Memory,
+		NamePipe,
+		ComData,
+		Network
+	}
 	
 	public Java_AAFile()
 	{
 		c_handle = Native_Create();
 	}
 	
-	Finalizer()
+	protected void finalize()
 	{
 		Native_Release(c_handle);
 	}
@@ -19,6 +29,91 @@ public class Java_AAFile{
 	public boolean SetMode(boolean nocreate, boolean noexist)
 	{
 		return Native_SetMode(c_handle, nocreate, noexist);
+	}
+
+	public boolean IsOpened()
+	{
+		return Native_IsOpened(c_handle);
+	}
+
+	public StreamType NowType()
+	{
+		return (StreamType)Native_NowType(c_handle);
+	}
+
+	public boolean Open(String filename)
+	{
+		return Native_OpenFile(c_handle, filename);
+	}
+
+	public boolean Open(long memaddr, int len)
+	{
+		return Native_OpenFile(c_handle, memaddr, len);
+	}
+
+	public boolean Open(String pipename, String pipepath, String pipeserver)
+	{
+		return Native_OpenNamePipe(c_handle, pipename, pipepath, pipeserver);
+	}
+
+	public boolean Open(short comNum)
+	{
+		return Native_OpenCom(c_handle, comNum);
+	}
+
+	public boolean Open(String netAddr,short protocol)
+	{
+		return Native_OpenNetWithName(c_handle, netAddr, protocol);
+	}
+
+	public boolean Open(long netIp, int port, short protocol)
+	{
+		return Native_OpenNetWithAddr(c_handle, netIp, port, protocol);
+	}
+
+	public boolean Close()
+	{
+		return Native_Close(c_handle);
+	}
+
+	public long GetLength()
+	{
+		return Native_GetLength(c_handle);
+	}
+
+	public long GetPos()
+	{
+		return Native_GetPos(c_handle);
+	}
+
+	public boolean IsEndPos()
+	{
+		return Native_IsEndPos(c_handle);
+	}
+
+	public boolean MovePos(long targetPos)
+	{
+		return Native_MovePos(c_handle, targetPos);
+	}
+
+	public String GetStringName()
+	{
+		return Native_GetStreamName(c_handle);
+	}
+
+	public long Read(byte[]buffer, long pos, long len)
+	{
+		return Native_ReadSome(c_handle, buffer, pos, len);
+	}
+
+	public long Read(byte[] buffer, short endtag)
+	{
+		return Native_ReadTo(c_handle, endtag, 0xffffffff);
+	}
+
+	public long Write(byte[] buffer, long len)
+	{
+		return Native_Write(c_handle, buffer, len);
 	}
 	
 	private native static long Native_Create();

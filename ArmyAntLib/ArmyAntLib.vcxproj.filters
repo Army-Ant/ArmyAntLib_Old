@@ -550,13 +550,16 @@
     <None Include="languages\Python\ArmyAnt.py">
       <Filter>7.PythonRefCode</Filter>
     </None>
+    <None Include="..\ArmyAnt.license">
+      <Filter>9.docs</Filter>
+    </None>
   </ItemGroup>
   <ItemGroup>
-    <Text Include="base\ProgrammerRule.txt">
-      <Filter>9.docs</Filter>
-    </Text>
     <Text Include="CMakeLists.txt">
       <Filter>0.linux-Project</Filter>
+    </Text>
+    <Text Include="base\Readme.txt">
+      <Filter>9.docs</Filter>
     </Text>
   </ItemGroup>
 </Project>
