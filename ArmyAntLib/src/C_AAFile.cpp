@@ -31,7 +31,7 @@ ARMYANT_CLIB_API BOOL AA_Stream_OpenMemoryByAddr(AA_CFileStream stream, mac_uint
 
 ARMYANT_CLIB_API BOOL AA_Stream_OpenMemoryByPtr(AA_CFileStream stream, void* memaddr, uint32 len)
 {
-	return FileStream::GetStream(stream)->Open(memaddr, fpos_t(len)) ? TRUE : FALSE;
+	return FileStream::GetStream(stream)->Open(memaddr, len) ? TRUE : FALSE;
 }
 
 ARMYANT_CLIB_API BOOL AA_Stream_OpenNamePipe(AA_CFileStream stream, const char* pipename, const char*pipePath, const char*pipeServer)
@@ -96,7 +96,7 @@ ARMYANT_CLIB_API const char* AA_Stream_GetStreamName(AA_CFileStream stream)
 
 ARMYANT_CLIB_API uint32 AA_Stream_ReadSome(AA_CFileStream stream, void*buffer, uint32 len, uint32 pos)
 {
-	return FileStream::GetStream(stream)->Read(buffer, len, fpos_t(pos));
+	return FileStream::GetStream(stream)->Read(buffer, len, pos);
 }
 
 ARMYANT_CLIB_API uint32 AA_Stream_ReadTo(AA_CFileStream stream, void*buffer, uint8 endtag, uint32 maxlen)

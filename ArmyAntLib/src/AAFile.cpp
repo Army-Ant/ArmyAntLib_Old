@@ -199,10 +199,10 @@ bool FileStream::Open(mac_uint memaddr, uint64 len)
 		p[0] = 1;
 		p[0] = 2;
 		p[0] = a;
-		a = (reinterpret_cast<uint8*>(hd->mem))[FsPrivate::GetFPos(len) - 1];
-		p[FsPrivate::GetFPos(len) - 1] = 1;
-		p[FsPrivate::GetFPos(len) - 1] = 2;
-		p[FsPrivate::GetFPos(len) - 1] = a;
+		a = (reinterpret_cast<uint8*>(hd->mem))[len - 1];
+		p[len - 1] = 1;
+		p[len - 1] = 2;
+		p[len - 1] = a;
 	}
 	//如果不能读写，则取消打开该流
 	catch(std::exception&)
@@ -218,7 +218,7 @@ bool FileStream::Open(mac_uint memaddr, uint64 len)
 	sprintf(name, "%X%X", uint32(memaddr/0xffffffff), uint32(memaddr%0xffffffff));
 #endif
 	hd->name = name;
-	hd->len = FsPrivate::GetFPos(len);
+	hd->len = len;
 	hd->type = StreamType::Memory;
 	return true;
 }

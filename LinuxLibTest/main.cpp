@@ -9,9 +9,6 @@ int AESTest(const std::string&);
 int TripleMapTest(const std::string&);
 
 
-
-
-
 int main(int argc, char* argv[])
 {
 	std::string str;

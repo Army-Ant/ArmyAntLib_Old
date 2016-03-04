@@ -6,8 +6,8 @@ set(CMAKE_TAR_NAME ArmyAntLib)
 
 if(CMAKE_BUILD_TYPE STREQUAL Debug)
     add_definitions(
-            -DDEBUG=1
-    )
+			-DDEBUG=1
+	)
 else()
     add_definitions(
             -DNDEBUG=1
