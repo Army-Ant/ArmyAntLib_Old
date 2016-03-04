@@ -2,6 +2,9 @@
 #include "../include/C_AANeuron.h"
 
 #include <map>
+#include <cmath>
+
+const double ArmyAnt::Fragment::s_aa_natrualBase = 2.7182818284590452353;
 
 typedef ArmyAnt::NeuronAlgorithm<double> C_AA_NeuronAlgorithm;
 

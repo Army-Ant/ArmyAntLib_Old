@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/ArmyAntLib/languages/Java/languages.iml" filepath="$PROJECT_DIR$/ArmyAntLib/languages/Java/languages.iml" />
+      <module fileurl="file://$PROJECT_DIR$/ArmyAntLib/languages/Java/ArmyAnt.iml" filepath="$PROJECT_DIR$/ArmyAntLib/languages/Java/ArmyAnt.iml" />
     </modules>
   </component>
 </project>

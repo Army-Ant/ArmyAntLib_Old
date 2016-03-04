@@ -38,7 +38,7 @@ public class Java_AAFile{
 
 	public StreamType NowType()
 	{
-		return (StreamType)Native_NowType(c_handle);
+		return StreamType.values()[(int)Native_NowType(c_handle)];
 	}
 
 	public boolean Open(String filename)
@@ -48,7 +48,7 @@ public class Java_AAFile{
 
 	public boolean Open(long memaddr, int len)
 	{
-		return Native_OpenFile(c_handle, memaddr, len);
+		return Native_OpenMemoryByAddr(c_handle, memaddr, len);
 	}
 
 	public boolean Open(String pipename, String pipepath, String pipeserver)
@@ -108,7 +108,7 @@ public class Java_AAFile{
 
 	public long Read(byte[] buffer, short endtag)
 	{
-		return Native_ReadTo(c_handle, endtag, 0xffffffff);
+		return Native_ReadTo(c_handle, buffer, endtag, 0xffffffff);
 	}
 
 	public long Write(byte[] buffer, long len)

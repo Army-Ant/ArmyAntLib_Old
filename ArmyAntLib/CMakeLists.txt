@@ -1,23 +1,22 @@
 cmake_minimum_required(VERSION 3.3)
 project(ArmyAntLib)
 
-set(CMAKE_BUILD_TYPE Debug)
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11")
+set(CMAKE_TAR_NAME ArmyAntLib)
 
 if(CMAKE_BUILD_TYPE STREQUAL Debug)
-    set(CMAKE_TAR_NAME ArmyAntLibd)
     add_definitions(
             -DDEBUG=1
     )
 else()
-    set(CMAKE_TAR_NAME ArmyAntLib)
     add_definitions(
             -DNDEBUG=1
     )
 endif()
 
 add_definitions(
-		-D_cplusplus=1
+		-D_cplusplus=201412L
+		-D_x86_64=1
 		-D_CMAKE=1
 		-DOS_UNIX=1
 		-DARMYANTLIB_EXPORTS

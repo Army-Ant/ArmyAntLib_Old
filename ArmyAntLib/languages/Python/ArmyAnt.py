@@ -8,6 +8,7 @@ from ctypes import *
 # Please use the latest Python 3.x version
 # 请使用最新版本的python3
 
+__lib=None
 print(platform.architecture()[0])
 if platform.architecture()[0]=="32bit":
 	if platform.system() == "Windows":
@@ -28,9 +29,9 @@ else:
 			__lib = cdll.LoadLibrary("ArmyAntLib_64.dll")
 	else:
 		try:
-			__lib = cdll.LoadLibrary("libArmyAntd_64.so")
+			__lib = cdll.LoadLibrary("libArmyAntd.so")
 		except:
-			__lib = cdll.LoadLibrary("libArmyAnt_64.so")
+			__lib = cdll.LoadLibrary("libArmyAnt.so")
 
 #classes
 
@@ -109,7 +110,7 @@ class Stream:
 		'''
 			OpenNetWithName方法和OpenNetWithAddr方法的合并,参数列表相同,根据net参数的类型来决定
 		'''
-		if(arg2==None):
+		if(protocolOrPort==None):
 			return self.OpenNetWithName(net,protocolOrPort)
 		return self.OpenNetWithAddr(net,protocolOrPort,protocol)
 
@@ -210,7 +211,7 @@ class Stream:
 		'''
 			将指定的bytearray或者str写入流中,返回实际写入的长度
 		'''
-		if type(content)==str
+		if type(content)==str:
 			return __lib.AA_Stream_WriteTo(self.__handle__lib, str.encode(content), content.count())	
 		return __lib.AA_Stream_WriteTo(self.__handle__lib, content, content.count())
 

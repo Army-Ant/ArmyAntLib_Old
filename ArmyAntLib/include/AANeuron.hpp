@@ -11,6 +11,7 @@
 	* @ tested			:
 	*/
 
+#include "AADefine.h"
 #include "AADigraph.hpp"
 #include "AAStateMachine.hpp"
 
@@ -110,20 +111,20 @@ inline typename NeuronAlgorithm<T_Weight>::ActiveFunc NeuronAlgorithm<T_Weight>:
 template<class T_Weight>
 inline typename NeuronAlgorithm<T_Weight>::ActiveFunc NeuronAlgorithm<T_Weight>::GetSigmoidFunc(T_Weight coef)
 {
-	return [=](T_Weight input){return 1 / (1 + pow(s_aa_natrualBase, -coef*input));};
+	return [=](T_Weight input){return 1 / (1 + pow(ArmyAnt::Fragment::s_aa_natrualBase, -coef*input));};
 }
 
 template<class T_Weight>
 inline typename NeuronAlgorithm<T_Weight>::ActiveFunc NeuronAlgorithm<T_Weight>::GetDoubleSigmoidFunc(T_Weight coef)
 {
-	return [=](T_Weight input){return 2 / (1 + pow(s_aa_natrualBase, -coef*input)) - 1;};
+	return [=](T_Weight input){return 2 / (1 + pow(ArmyAnt::Fragment::s_aa_natrualBase, -coef*input)) - 1;};
 }
 
 template<class T_Weight>
 NeuronAlgorithm<T_Weight>::NeuronAlgorithm(ActiveFunc activationFunc, T_Weight threshold)
 	: activationFunc(activationFunc), threshold(threshold)
 {
-	Assert(activationFunc != nullptr);
+	ArmyAnt::Fragment::Assert(activationFunc != nullptr);
 }
 
 template<class T_Weight>

@@ -16,7 +16,6 @@
 #include <sys/errno.h>
 #include <unistd.h>
 #include <sys/types.h>
-#include <_G_config.h>
 
 #ifdef OS_ANDROID
 

@@ -1,7 +1,5 @@
 package ArmyAnt;
 
-import java.lang.String;
-
 public class Java_AANeuron{
 
 	private long c_handle;

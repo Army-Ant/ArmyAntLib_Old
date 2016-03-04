@@ -4,7 +4,7 @@
 #if defined DEBUG
 #include <assert.h>
 #elif defined _cplusplus
-#include <exception>
+#include <stdexcept>
 #else
 
 #endif
@@ -22,7 +22,7 @@ namespace ArmyAnt {
 
 namespace Fragment {
 
-static const double s_aa_natrualBase = 2.7182818284590452353;
+extern const double s_aa_natrualBase;
 
 template <class NUM1, class NUM2> 
 inline NUM1 min(NUM1 num1, NUM2 num2)
@@ -42,7 +42,7 @@ inline void Assert(bool x)
 	assert(x);
 #elif defined _cplusplus
 	if(!(x))
-		throw std::exception("assert failed !");
+		throw std::invalid_argument("assert failed !");
 #endif
 }
 
