@@ -37,9 +37,6 @@
     <Filter Include="6.JavaRefCode">
       <UniqueIdentifier>{ff4d5be0-281a-4afa-9901-cfa64d85b7a1}</UniqueIdentifier>
     </Filter>
-    <Filter Include="4.CppLibCode\languageResolves">
-      <UniqueIdentifier>{0df4c468-efa9-4784-82dd-b47557e5795d}</UniqueIdentifier>
-    </Filter>
     <Filter Include="7.PythonRefCode">
       <UniqueIdentifier>{22b8189a-0f9d-4041-b1d4-3e8636d0099a}</UniqueIdentifier>
     </Filter>
@@ -499,12 +496,12 @@
       <Filter>5.CRefCode</Filter>
     </ClInclude>
     <ClInclude Include="include\AAJNITools.hpp">
-      <Filter>4.CppLibCode\languageResolves</Filter>
+      <Filter>4.CppLibCode\templateClasses</Filter>
     </ClInclude>
-    <ClInclude Include="include\Java_AAFile.h">
+    <ClInclude Include="base\Java_AAFile.h">
       <Filter>6.JavaRefCode</Filter>
     </ClInclude>
-    <ClInclude Include="include\Java_AANeuron.h">
+    <ClInclude Include="base\Java_AANeuron.h">
       <Filter>6.JavaRefCode</Filter>
     </ClInclude>
   </ItemGroup>
@@ -528,7 +525,7 @@
       <Filter>6.JavaRefCode</Filter>
     </ClCompile>
     <ClCompile Include="src\AAPythonExport.cpp">
-      <Filter>4.CppLibCode\languageResolves</Filter>
+      <Filter>7.PythonRefCode</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -550,8 +547,8 @@
     <None Include="languages\Python\ArmyAnt.py">
       <Filter>7.PythonRefCode</Filter>
     </None>
-    <None Include="..\ArmyAnt.license">
-      <Filter>9.docs</Filter>
+    <None Include="base\build_end.sh">
+      <Filter>1.base</Filter>
     </None>
   </ItemGroup>
   <ItemGroup>

@@ -188,6 +188,8 @@
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="base\Java_AAFile.h" />
+    <ClInclude Include="base\Java_AANeuron.h" />
     <ClInclude Include="C_ArmyAnt.h" />
     <ClInclude Include="ArmyAnt.h" />
     <ClInclude Include="base\base.hpp" />
@@ -337,8 +339,6 @@
     <ClInclude Include="include\AADefine.h" />
     <ClInclude Include="include\AAFile.h" />
     <ClInclude Include="include\AAClassPrivateHandle.hpp" />
-    <ClInclude Include="include\Java_AAFile.h" />
-    <ClInclude Include="include\Java_AANeuron.h" />
     <ClInclude Include="include\C_AADefine.h" />
     <ClInclude Include="include\C_AAFile.h" />
     <ClInclude Include="include\C_AANeuron.h" />
@@ -353,8 +353,8 @@
     <ClCompile Include="src\C_AANeuron.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="..\ArmyAnt.license" />
     <None Include="base\build_end.bat" />
+    <None Include="base\build_end.sh" />
     <None Include="base\build_start.bat" />
     <None Include="base\build_start.sh" />
     <None Include="languages\Java\src\Java_AAFile.java" />

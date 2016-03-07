@@ -1,3 +1,4 @@
+@echo %~dp0
 @echo off
 
 :: Copyright (c) 2015 ArmyAnt
@@ -12,25 +13,27 @@
 :: You may also obtain a copy of the License at 
 :: 您也可以在此处获得协议的副本:
 :: 
-::     http://opensource.org/licenses/BSD-3-Clause
+::     http://en.wikipedia.org/wiki/BSD_licenses
 :: 
 :: Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an AS IS BASIS, 
 :: WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. 
 :: 除非法律要求或者版权所有者书面同意,本软件在本协议基础上的发布没有任何形式的条件和担保,无论明示的或默许的.
-:: See the License for the specific language governing permissions and limitations under the License. 
-:: 请在特定限制或语言管理权限下阅读协议
-:: This file is the internal source file of this project, is not contained by the closed source release part of this software
-:: 本文件为内部源码文件, 不会包含在闭源发布的本软件中
 
+:: Created by Jason 3/7/2016
+:: This is a batch command script file used to compile the Java library file
 
-:: Created by Jason 11/12/2015
-:: This is a batch command script file used to do something before build in Visual Studio project
-:: Please edit it in notepad++ or another text editor, instead of visual studio editor
+set ThisDir=%~dp0
+set OutDir=%ThisDir%..\..\..\LibOut\bin\
+set TestDir=%ThisDir%..\..\..\JavaLibTest\lib\
 
-:CmdStart
-set ConfigType=%1
-set ProjectPath=%2
-set TargetName=%3
+:: Compile to java class files
+javac -g -deprecation -encoding utf-8 -d %ThisDir%bin -s %ThisDir%bin %ThisDir%src\ArmyAnt\*.java
+:: Pack to jar library file
+jar cnf %ThisDir%bin\ArmyAntLib.jar %ThisDir%bin\ArmyAnt\*.class
+:: Copy the jar file to output directory
+copy /Y %ThisDir%bin\ArmyAntLib.jar %OutDir%
+:: Copy the jar file to test Project directory
+copy /Y %ThisDir%bin\ArmyAntLib.jar %TestDir%
 
-:End
+@echo "The Java library compiled successful !"
 @echo on
