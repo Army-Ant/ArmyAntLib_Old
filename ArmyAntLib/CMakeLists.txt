@@ -26,12 +26,30 @@ project(ArmyAntLib)
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11")
 set(CMAKE_TAR_NAME ArmyAntLib)
 
-#include_directories($ENV{JAVA_HOME}/include)
-#include_directories($ENV{PYTHON_INCLUDE})
 find_path(JNI_INCLUDE_DIR jni.h $ENV{JAVA_HOME}/include)
-find_path(PY_INCLUDE_DIR Python.h $ENV{PYTHON_INCLUDE})
-include_directories($JNI_INCLUDE_DIR)
-include_directories($PY_INCLUDE_DIR)
+include_directories(${JNI_INCLUDE_DIR})
+
+IF (CMAKE_SYSTEM_NAME MATCHES "Linux")
+	find_path(PY_INCLUDE_DIR Python.h $ENV{PYTHON_INCLUDE})
+	add_definitions(
+			-DOS_UNIX=1
+			-DOS_LINUX=1
+	)
+ELSEIF (CMAKE_SYSTEM_NAME MATCHES "Windows")
+	include_directories(${JNI_INCLUDE_DIR}/win32)
+	find_path(PY_INCLUDE_DIR Python.h $ENV{PYTHON_HOME}/include)
+	add_definitions(
+			-DOS_WINDOWS=1
+	)
+ELSEIF (CMAKE_SYSTEM_NAME MATCHES "FreeBSD")
+	add_definitions(
+			-DOS_FREEBSD=1
+	)
+ELSE ()
+
+ENDIF (CMAKE_SYSTEM_NAME MATCHES "Linux")
+
+include_directories(${PY_INCLUDE_DIR})
 
 MESSAGE(This is $ENV{PYTHON_INCLUDE})
 
@@ -49,7 +67,6 @@ add_definitions(
 		-D_cplusplus=201412L
 		-D_x86_64=1
 		-D_CMAKE=1
-		-DOS_UNIX=1
 		-DARMYANTLIB_EXPORTS
 )
 
