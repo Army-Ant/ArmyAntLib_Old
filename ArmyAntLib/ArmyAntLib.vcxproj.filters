@@ -40,6 +40,15 @@
     <Filter Include="7.PythonRefCode">
       <UniqueIdentifier>{22b8189a-0f9d-4041-b1d4-3e8636d0099a}</UniqueIdentifier>
     </Filter>
+    <Filter Include="2.Third-party-libraries\python3.5.1">
+      <UniqueIdentifier>{b46cb657-5ca0-4c67-8739-276d92057925}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="2.Third-party-libraries\python3.5.1\x86">
+      <UniqueIdentifier>{892982b3-09c2-458e-90e9-fd5bc8f1242a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="2.Third-party-libraries\python3.5.1\x64">
+      <UniqueIdentifier>{fbba3da3-518e-4b9a-923a-b41cb7e50b60}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="base\base.hpp">
@@ -549,6 +558,9 @@
     </None>
     <None Include="base\build_end.sh">
       <Filter>1.base</Filter>
+    </None>
+    <None Include="languages\Java\buildJava.bat">
+      <Filter>6.JavaRefCode</Filter>
     </None>
   </ItemGroup>
   <ItemGroup>

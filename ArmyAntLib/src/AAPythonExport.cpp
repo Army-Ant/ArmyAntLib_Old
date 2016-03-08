@@ -1,4 +1,4 @@
-/*  
+﻿/*  
  * Copyright (c) 2015 ArmyAnt
  * 版权所有 (c) 2015 ArmyAnt
  *
@@ -26,10 +26,12 @@
 #include "../include/AAFile.h"
 #include "../include/C_AAFile.h"
 
-#include <Python.h>
+#include "../externals/python3.5.1/include/Python.h"
 #include <map>
 #include "../include/AANeuron.hpp"
 #include "../include/C_AANeuron.h"
+
+//#pragma comment(lib, "python35.lib")
 
 extern "C" {
 
@@ -98,6 +100,7 @@ extern "C" {
 				return i;
 			}
 		Assert(false);
+		return -1;
 	}
 
 	ARMYANT_CLIB_API BOOL AA_NeuronAlgorithm_PythonChangeActFunc(AA_CNeuronAlgorithm handle)

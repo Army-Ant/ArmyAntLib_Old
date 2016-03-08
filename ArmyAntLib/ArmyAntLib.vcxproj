@@ -74,28 +74,32 @@
     <IntDir />
     <TargetName>$(ProjectName)d</TargetName>
     <CodeAnalysisRuleSet>SecurityRules.ruleset</CodeAnalysisRuleSet>
-    <IncludePath>$(ProjectDir)externals\boost\;$(JAVA_HOME)\include\;$(JAVA_HOME)\include\win32\;$(PYTHON_HOME)include\;$(IncludePath)</IncludePath>
+    <IncludePath>$(ProjectDir)externals\boost\;$(JAVA_HOME)\include\;$(JAVA_HOME)\include\win32\;$(IncludePath)</IncludePath>
+    <LibraryPath>$(ProjectDir)externals\python3.5.1\x86;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <TargetName>$(ProjectName)d_64</TargetName>
     <CodeAnalysisRuleSet>SecurityRules.ruleset</CodeAnalysisRuleSet>
-    <IncludePath>$(ProjectDir)externals\boost\;$(JAVA_HOME)\include\;$(JAVA_HOME)\include\win32\;$(PYTHON_HOME)include\;$(IncludePath)</IncludePath>
+    <IncludePath>$(ProjectDir)externals\boost\;$(JAVA_HOME)\include\;$(JAVA_HOME)\include\win32\;$(IncludePath)</IncludePath>
     <TargetExt>.dll</TargetExt>
     <OutDir>$(ProjectDir)bin\</OutDir>
     <IntDir />
+    <LibraryPath>$(ProjectDir)externals\python3.5.1\x64;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <TargetExt>.dll</TargetExt>
     <OutDir>$(ProjectDir)bin\</OutDir>
     <IntDir />
-    <IncludePath>$(ProjectDir)externals\boost\;$(JAVA_HOME)\include\;$(JAVA_HOME)\include\win32\;$(PYTHON_HOME)include\;$(IncludePath)</IncludePath>
+    <IncludePath>$(ProjectDir)externals\boost\;$(JAVA_HOME)\include\;$(JAVA_HOME)\include\win32\;$(IncludePath)</IncludePath>
+    <LibraryPath>$(ProjectDir)externals\python3.5.1\x86;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
-    <IncludePath>$(ProjectDir)externals\boost\;$(JAVA_HOME)\include\;$(JAVA_HOME)\include\win32\;$(PYTHON_HOME)include\;$(IncludePath)</IncludePath>
+    <IncludePath>$(ProjectDir)externals\boost\;$(JAVA_HOME)\include\;$(JAVA_HOME)\include\win32\;$(IncludePath)</IncludePath>
     <TargetExt>.dll</TargetExt>
     <OutDir>$(ProjectDir)bin\</OutDir>
     <IntDir />
     <TargetName>$(ProjectName)_64</TargetName>
+    <LibraryPath>$(ProjectDir)externals\python3.5.1\x64;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
@@ -107,15 +111,17 @@
       <PrecompiledHeaderFile>base.hpp</PrecompiledHeaderFile>
       <StringPooling>true</StringPooling>
       <DebugInformationFormat>OldStyle</DebugInformationFormat>
+      <RuntimeLibrary>
+      </RuntimeLibrary>
     </ClCompile>
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>
     </Link>
     <PreBuildEvent>
-      <Command>$(ProjectDir)base\build_start.bat $(Configuration) $(ProjectDir) $(TargetName)</Command>
+      <Command>$(ProjectDir)base\build_start.bat $(Configuration) $(ProjectDir) $(TargetName) $(PlatformTarget)</Command>
     </PreBuildEvent>
     <PostBuildEvent>
-      <Command>$(ProjectDir)base\build_end.bat $(Configuration) $(ProjectDir) $(TargetName)</Command>
+      <Command>$(ProjectDir)base\build_end.bat $(Configuration) $(ProjectDir) $(TargetName) $(PlatformTarget)</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
@@ -129,15 +135,17 @@
       <StringPooling>true</StringPooling>
       <DebugInformationFormat>OldStyle</DebugInformationFormat>
       <OmitFramePointers>false</OmitFramePointers>
+      <RuntimeLibrary>
+      </RuntimeLibrary>
     </ClCompile>
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>
     </Link>
     <PreBuildEvent>
-      <Command>$(ProjectDir)base\build_start.bat $(Configuration) $(ProjectDir) $(TargetName)</Command>
+      <Command>$(ProjectDir)base\build_start.bat $(Configuration) $(ProjectDir) $(TargetName) $(PlatformTarget)</Command>
     </PreBuildEvent>
     <PostBuildEvent>
-      <Command>$(ProjectDir)base\build_end.bat $(Configuration) $(ProjectDir) $(TargetName)</Command>
+      <Command>$(ProjectDir)base\build_end.bat $(Configuration) $(ProjectDir) $(TargetName) $(PlatformTarget)</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -150,6 +158,7 @@
       <PreprocessorDefinitions>_cplusplus;_x86;OS_WINDOWS;_WIN32;ARMYANTLIB_EXPORTS;_CRT_SECURE_NO_WARNINGS;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <EnableParallelCodeGeneration>true</EnableParallelCodeGeneration>
       <PrecompiledHeaderFile>base.hpp</PrecompiledHeaderFile>
+      <RuntimeLibrary />
     </ClCompile>
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>
@@ -157,10 +166,10 @@
       <OptimizeReferences>true</OptimizeReferences>
     </Link>
     <PreBuildEvent>
-      <Command>$(ProjectDir)base\build_start.bat $(Configuration) $(ProjectDir) $(TargetName)</Command>
+      <Command>$(ProjectDir)base\build_start.bat $(Configuration) $(ProjectDir) $(TargetName) $(PlatformTarget)</Command>
     </PreBuildEvent>
     <PostBuildEvent>
-      <Command>$(ProjectDir)base\build_end.bat $(Configuration) $(ProjectDir) $(TargetName)</Command>
+      <Command>$(ProjectDir)base\build_end.bat $(Configuration) $(ProjectDir) $(TargetName) $(PlatformTarget)</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -174,6 +183,7 @@
       <EnableParallelCodeGeneration>true</EnableParallelCodeGeneration>
       <PrecompiledHeaderFile>base.hpp</PrecompiledHeaderFile>
       <OmitFramePointers>false</OmitFramePointers>
+      <RuntimeLibrary />
     </ClCompile>
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>
@@ -181,10 +191,10 @@
       <OptimizeReferences>true</OptimizeReferences>
     </Link>
     <PreBuildEvent>
-      <Command>$(ProjectDir)base\build_start.bat $(Configuration) $(ProjectDir) $(TargetName)</Command>
+      <Command>$(ProjectDir)base\build_start.bat $(Configuration) $(ProjectDir) $(TargetName) $(PlatformTarget)</Command>
     </PreBuildEvent>
     <PostBuildEvent>
-      <Command>$(ProjectDir)base\build_end.bat $(Configuration) $(ProjectDir) $(TargetName)</Command>
+      <Command>$(ProjectDir)base\build_end.bat $(Configuration) $(ProjectDir) $(TargetName) $(PlatformTarget)</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
@@ -357,6 +367,7 @@
     <None Include="base\build_end.sh" />
     <None Include="base\build_start.bat" />
     <None Include="base\build_start.sh" />
+    <None Include="languages\Java\buildJava.bat" />
     <None Include="languages\Java\src\Java_AAFile.java" />
     <None Include="languages\Java\src\Java_AANeuron.java" />
     <None Include="languages\Python\ArmyAnt.py" />

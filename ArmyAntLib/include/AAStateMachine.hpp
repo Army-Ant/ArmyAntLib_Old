@@ -354,7 +354,7 @@ template<class T_Tag, bool defaultAllow>
 bool FiniteStateMachine<T_Tag, defaultAllow>::IsStateEnable(const T_Tag & name) const
 {
 	auto target = GetChild(name);
-	Assert(target == nullptr);
+	Assert(target != nullptr);
 	return target->value->enabled;
 }
 

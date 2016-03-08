@@ -24,6 +24,7 @@
 
 #include "../include/C_AAFile.h"
 #include "../include/AAFile.h"
+#include <iostream>
 using namespace ArmyAnt;
 
 uint32 AA_FILE_MAX_LENGTH = 0xffffffff;

@@ -31,6 +31,7 @@
 set ConfigType=%1
 set ProjectPath=%2
 set TargetName=%3
+set TargetPlatform=%4
 
 :End
 @echo on

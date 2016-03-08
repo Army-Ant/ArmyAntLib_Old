@@ -33,10 +33,18 @@ import java.lang.String;
 public class Java_AAFile {
 
 	static {
-		if (java.lang.System.getProperty("os.arch") == "x86")
-			java.lang.System.loadLibrary("ArmyAnt");
-		else
-			java.lang.System.loadLibrary("ArmyAnt_64");
+		if (java.lang.System.getProperty("os.name").indexOf("windows")>=0||java.lang.System.getProperty("os.name").indexOf("Windows")>=0)  {
+			if (java.lang.System.getProperty("os.arch") == "x86")
+				java.lang.System.loadLibrary("ArmyAntLibd");
+			else
+				java.lang.System.loadLibrary("ArmyAntLibd_64");
+		}
+		else{
+			if (java.lang.System.getProperty("os.arch") == "x86")
+				java.lang.System.loadLibrary("ArmyAntd");
+			else
+				java.lang.System.loadLibrary("ArmyAntd_64");
+		}
 	}
 
 	private long c_handle;

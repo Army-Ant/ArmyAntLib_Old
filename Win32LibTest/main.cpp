@@ -25,7 +25,7 @@ inline int Error(const std::string& errmsg, const char* errmsg2 = "")
 int main(int argc, char* argv[])
 {
 	std::string str;
-	auto func = TripleMapTest;
+	auto func = NeuronTest;
 	do
 	{
 		std::cin >> str;
@@ -385,3 +385,45 @@ int TreeTest(const std::string&cmd)
 	}
 	return 0;
 }
+
+int NeuronTest(const std::string&cmd)
+{
+	static ArmyAnt::NeuronAlgorithm<> neuron([](double input) { return input * 2; }, 0.0);
+	if(cmd == "exit")
+		return s_exitCode;
+	else if(cmd == "input")
+	{
+		if(!neuron.JoinActive(2, 3))
+			Error("Join activation failed !");
+		else
+			std::cout << "OK!" << std::endl;
+	}
+	else if(cmd == "getin")
+	{
+		std::cout << "Active total is " << neuron.GetAllActive() << std::endl;
+	}
+	else if(cmd == "getout")
+	{
+		std::cout << "Output total is " << neuron.GetOutput() << std::endl;
+	}
+	else if(cmd == "setliner")
+	{
+		if(!neuron.SetActivationFunction(neuron.GetLinerFunc(2, 4)))
+			Error("Set Liner activation function failed !");
+		else
+			std::cout << "Set OK!" << std::endl;
+	}
+	else if(cmd == "setramp")
+	{
+		if(!neuron.SetActivationFunction(neuron.GetRampFunc(2, 4)))
+			Error("Set Ramp activation function failed !");
+		else
+			std::cout << "Set OK!" << std::endl;
+	}
+	else
+	{
+		Error("Wrong command word : ", cmd.c_str());
+	}
+	return 0;
+}
+

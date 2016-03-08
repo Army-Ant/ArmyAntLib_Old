@@ -26,6 +26,7 @@
 #include "../include/C_AANeuron.h"
 #include "../include/AANeuron.hpp"
 #include "../include/AAJNITools.hpp"
+#include <map>
 
 #define ActiveClassName "ArmyAnt/Java_AANeuron$INeuronActive"
 #define ActiveMethodName "ActiveFunc"
@@ -78,17 +79,24 @@ JNIEXPORT jlong JNICALL Java_ArmyAnt_Java_1AANeuron_Native_1Create(JNIEnv *env, 
 	return jlong(ret);
 }
 
+static std::map<uint32, jobject> s_funcInterfaceGlobal;
+
 JNIEXPORT jlong JNICALL Java_ArmyAnt_Java_1AANeuron_Native_1Clone(JNIEnv *, jclass, jlong value)
 {
 	if(value < 0)
 		return jlong(-1);
-	return jlong(AA_NeuronAlgorithm_Clone(uint32(value)));
+	if(jlong(AA_NeuronAlgorithm_Clone(uint32(value))))
+		s_funcInterfaceGlobal.insert(std::pair<uint32,jobject>(value, nullptr));
 }
 
-JNIEXPORT void JNICALL Java_ArmyAnt_Java_1AANeuron_Native_1Release(JNIEnv *, jclass, jlong value)
+
+JNIEXPORT void JNICALL Java_ArmyAnt_Java_1AANeuron_Native_1Release(JNIEnv * env, jclass, jlong value)
 {
 	if(value >= 0)
 		AA_NeuronAlgorithm_Release(uint32(value));
+	if(s_funcInterfaceGlobal.find(value)->second != nullptr)
+		env->DeleteGlobalRef(s_funcInterfaceGlobal.find(value)->second);
+	s_funcInterfaceGlobal.erase(value);
 }
 
 JNIEXPORT jboolean JNICALL Java_ArmyAnt_Java_1AANeuron_Native_1JoinActive(JNIEnv *, jclass, jlong value, jdouble input, jdouble weight)
@@ -114,13 +122,13 @@ JNIEXPORT jboolean JNICALL Java_ArmyAnt_Java_1AANeuron_Native_1ClearActive(JNIEn
 
 JNIEXPORT jdouble JNICALL Java_ArmyAnt_Java_1AANeuron_Native_1GetOutput(JNIEnv *, jclass, jlong value)
 {
-	Assert(value < 0);
+	Assert(value >= 0);
 	return AA_NeuronAlgorithm_GetOutput(uint32(value));
 }
 
 JNIEXPORT jdouble JNICALL Java_ArmyAnt_Java_1AANeuron_Native_1GetAllActive(JNIEnv *, jclass, jlong value)
 {
-	Assert(value < 0);
+	Assert(value >= 0);
 	return AA_NeuronAlgorithm_GetAllActive(uint32(value));
 }
 
@@ -129,12 +137,22 @@ JNIEXPORT jboolean JNICALL Java_ArmyAnt_Java_1AANeuron_Native_1SetActiveInterfac
 	if(value < 0 || funcInterface == nullptr)
 		return JNI_FALSE;
 	auto obj = ArmyAnt::NeuronAlgorithm_GetCppObject(uint32(value));
-	return obj->SetActivationFunction([env, funcInterface](double input) { auto mid = ActiveMethodID(env); return env->CallDoubleMethod(funcInterface, mid, input); }) ? JNI_TRUE : JNI_FALSE;
+	if(s_funcInterfaceGlobal.find(value)->second != nullptr)
+		env->DeleteGlobalRef(s_funcInterfaceGlobal.find(value)->second);
+	s_funcInterfaceGlobal.erase(value);
+	s_funcInterfaceGlobal.insert(std::pair<uint32, jobject>(value, env->NewGlobalRef(funcInterface)));
+	return obj->SetActivationFunction([env, value](double input)
+	{
+		Log_Debug("Start Java activation function");
+		auto mid = ActiveMethodID(env);
+		Log_Debug("Get method id successful");
+		return env->CallDoubleMethod(s_funcInterfaceGlobal.find(value)->second, mid, input);
+	}) ? JNI_TRUE : JNI_FALSE;
 }
 
 JNIEXPORT jdouble JNICALL Java_ArmyAnt_Java_1AANeuron_Native_1GetThreshold(JNIEnv *, jclass, jlong value)
 {
-	Assert(value < 0);
+	Assert(value >= 0);
 	return AA_NeuronAlgorithm_GetThreshold(uint32(value));
 }
 

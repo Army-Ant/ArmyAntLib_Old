@@ -675,7 +675,7 @@ bool FileStream::CopyFile(const char*srcPath, const char*dstPath)
 	{
 		memlen = 1024;
 		cpmem = new char[memlen];
-		Assert(cpmem == nullptr);
+		Assert(cpmem != nullptr);
 	}
 	//检测源文件的长度
 	fpos_t flen;
@@ -761,7 +761,7 @@ bool FileStream::operator^=(const char* filename)
 	{
 		memlen = 1024;
 		cpmem = new char[memlen];
-		Assert(cpmem == nullptr);
+		Assert(cpmem != nullptr);
 	}
 	//进行数据拷贝
 	for(uint64 i = 0; i < flen; i += memlen)

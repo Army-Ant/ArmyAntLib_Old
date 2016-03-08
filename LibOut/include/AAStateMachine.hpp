@@ -1,4 +1,26 @@
-﻿#ifndef AA_STATE_MACHINE_HPP_2015_12_2
+﻿/*  
+ * Copyright (c) 2015 ArmyAnt
+ * 版权所有 (c) 2015 ArmyAnt
+ *
+ * Licensed under the BSD License, Version 2.0 (the License); 
+ * 本软件使用BSD协议保护, 协议版本:2.0
+ * you may not use this file except in compliance with the License. 
+ * 使用本开源代码文件的内容, 视为同意协议
+ * You can read the license content in the file "ARMYANT.COPYRIGHT.BSD_LICENSE.MD" at the root of this project
+ * 您可以在本项目的根目录找到名为"ARMYANT.COPYRIGHT.BSD_LICENSE.MD"的文件, 来阅读协议内容
+ * You may also obtain a copy of the License at 
+ * 您也可以在此处获得协议的副本:
+ * 
+ *     http://opensource.org/licenses/BSD-3-Clause
+ * 
+ * Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an AS IS BASIS, 
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. 
+ * 除非法律要求或者版权所有者书面同意,本软件在本协议基础上的发布没有任何形式的条件和担保,无论明示的或默许的.
+ * See the License for the specific language governing permissions and limitations under the License. 
+ * 请在特定限制或语言管理权限下阅读协议
+ */
+
+#ifndef AA_STATE_MACHINE_HPP_2015_12_2
 #define AA_STATE_MACHINE_HPP_2015_12_2
 
 /*	* @ author			: Jason
@@ -30,7 +52,7 @@ struct StateValue
 
 // 同步状态机, 不具有独自的线程, 采用被动事件触发的方式, defaultAllow表示新建的状态是否默认允许与已存在的所有状态互转
 template <class T_Tag, bool defaultAllow = true>
-class FiniteStateMachine : private Digraph<StateValue<T_Tag>, T_Tag>
+class FiniteStateMachine : public Digraph<StateValue<T_Tag>, T_Tag>
 {
 	typedef GraphNode<StateValue<T_Tag>, T_Tag> State;
 
@@ -117,16 +139,16 @@ protected:
 
 template<class T_Tag, bool defaultAllow>
 FiniteStateMachine<T_Tag, defaultAllow>::FiniteStateMachine()
-	:Digraph()
+	:Digraph<StateValue<T_Tag>, T_Tag>()
 {
 }
 
 template<class T_Tag, bool defaultAllow>
 FiniteStateMachine<T_Tag, defaultAllow>::FiniteStateMachine(const FiniteStateMachine & value)
-	: Digraph(), enabled(value.enabled)
+	: Digraph<StateValue<T_Tag>, T_Tag>(), enabled(value.enabled)
 {
 	for(auto i = value.nodes.Begin(); i != value.nodes.End(); ++i)
-		nodes.Insert(i);
+		this->nodes.insert(i);
 	defaultState = GetChild(value.defaultState->tag);
 	currState = GetChild(value.currState->tag);
 }
@@ -135,7 +157,7 @@ template<class T_Tag, bool defaultAllow>
 FiniteStateMachine<T_Tag, defaultAllow> & FiniteStateMachine<T_Tag, defaultAllow>::operator=(const FiniteStateMachine & value)
 {
 	for(auto i = value.nodes.Begin(); i != value.nodes.End(); ++i)
-		nodes.Insert(i);
+		this->nodes.Insert(i);
 	defaultState = GetChild(value.defaultState->tag);
 	currState = GetChild(value.currState->tag);
 	return *this;
@@ -156,7 +178,7 @@ bool FiniteStateMachine<T_Tag, defaultAllow>::InsertState(const State & state, b
 		defaultState = state.tag;
 	if(isAllowAll)
 	{
-		for(auto i = nodes.begin(); i != nodes.end(); ++i)
+		for(auto i = this->nodes.begin(); i != this->nodes.end(); ++i)
 			if(!LinkNode(state.tag, i->tag) || !LinkNode(i->tag.state.tag))
 				return false;
 	}
@@ -168,7 +190,7 @@ bool FiniteStateMachine<T_Tag, defaultAllow>::DeleteState(const T_Tag & name)
 {
 	if(name == defaultState || name == currState)
 		return false;
-	for(auto i = nodes.begin(); i != nodes.end(); ++i)
+	for(auto i = this->nodes.begin(); i != this->nodes.end(); ++i)
 		DelinkNode(i->tag.name);
 	return RemoveNode(name);
 }
@@ -183,11 +205,11 @@ template<class T_Tag, bool defaultAllow>
 uint32 FiniteStateMachine<T_Tag, defaultAllow>::GetAllStates(T_Tag* dest) const
 {
 	int n = 0;
-	for(auto i = nodes.begin(); i != states.end(); ++i)
+	for(auto i = this->nodes.begin(); i != this->states.end(); ++i)
 	{
 		dest[n++] = i->tag;
 	}
-	return nodes.size();
+	return this->nodes.size();
 }
 
 template<class T_Tag, bool defaultAllow>
@@ -199,6 +221,8 @@ bool FiniteStateMachine<T_Tag, defaultAllow>::GoToState()
 template<class T_Tag, bool defaultAllow>
 bool FiniteStateMachine<T_Tag, defaultAllow>::GoToState(const T_Tag & name)
 {
+	auto dest = GetChild(name);
+	auto curr = currState;
 	//检查跳转是否被允许
 	if(!IsAllowed(dest))
 		return false;
@@ -221,7 +245,7 @@ template<class T_Tag, bool defaultAllow>
 bool FiniteStateMachine<T_Tag, defaultAllow>::AbortToState(const T_Tag & name, typename StateValue<T_Tag>::StateChangeFunc dealFunc)
 {
 	//检测状态机是否可用,目标状态是否存在,及是否可用
-	auto next = states.Find(name);
+	auto next = this->states.Find(name);
 	if(!enabled || next == nullptr || !currState->value->enabled || !next->value->enabled)
 		return false;
 	//调用强制离开的处理事件
@@ -268,7 +292,7 @@ uint32 FiniteStateMachine<T_Tag, defaultAllow>::GetAllAllowedOut(T_Tag src, T_Ta
 	auto sz = target->GetAllLinkedOut();
 	if(dst != nullptr)
 	{
-		auto ret = new GraphLine<T_Val, T_Tag, T_Weight>*[sz];
+		auto ret = new GraphLine<StateValue<T_Tag>, T_Tag>*[sz];
 		for(int i = 0; i < sz; i++)
 		{
 			dst[i] = ret[i]->GetEndNode()->tag;
@@ -286,7 +310,7 @@ uint32 FiniteStateMachine<T_Tag, defaultAllow>::GetAllAllowedIn(T_Tag dst, T_Tag
 	auto sz = target->GetAllLinkedIn();
 	if(dst != nullptr)
 	{
-		auto ret = new GraphLine<T_Val, T_Tag, T_Weight>*[sz];
+		auto ret = new GraphLine<StateValue<T_Tag>, T_Tag>*[sz];
 		for(int i = 0; i < sz; i++)
 		{
 			dst[i] = ret[i]->GetEndNode()->tag;
@@ -330,7 +354,7 @@ template<class T_Tag, bool defaultAllow>
 bool FiniteStateMachine<T_Tag, defaultAllow>::IsStateEnable(const T_Tag & name) const
 {
 	auto target = GetChild(name);
-	Assert(target == nullptr);
+	Assert(target != nullptr);
 	return target->value->enabled;
 }
 
@@ -394,7 +418,7 @@ typename FiniteStateMachine<T_Tag, defaultAllow>::State & FiniteStateMachine<T_T
 template<class T_Tag, bool defaultAllow>
 const typename FiniteStateMachine<T_Tag, defaultAllow>::State & FiniteStateMachine<T_Tag, defaultAllow>::operator[](const T_Tag & name) const
 {
-	return const_cast(this)->operator [](name);
+	return const_cast<typename FiniteStateMachine<T_Tag, defaultAllow>::State>(this)->operator [](name);
 }
 
 template<class T_Tag, bool defaultAllow>

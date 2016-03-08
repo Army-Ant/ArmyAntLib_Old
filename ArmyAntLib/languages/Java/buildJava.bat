@@ -1,4 +1,3 @@
-@echo %~dp0
 @echo off
 
 :: Copyright (c) 2015 ArmyAnt
@@ -25,15 +24,22 @@
 set ThisDir=%~dp0
 set OutDir=%ThisDir%..\..\..\LibOut\bin\
 set TestDir=%ThisDir%..\..\..\JavaLibTest\lib\
+set TestOut=%ThisDir%..\..\..\JavaLibTest\out\
 
 :: Compile to java class files
 javac -g -deprecation -encoding utf-8 -d %ThisDir%bin -s %ThisDir%bin %ThisDir%src\ArmyAnt\*.java
+:: Goto the source code file directory
+cd %ThisDir%bin
 :: Pack to jar library file
-jar cnf %ThisDir%bin\ArmyAntLib.jar %ThisDir%bin\ArmyAnt\*.class
-:: Copy the jar file to output directory
-copy /Y %ThisDir%bin\ArmyAntLib.jar %OutDir%
+jar cnf ArmyAntLib.jar ArmyAnt\*.class
 :: Copy the jar file to test Project directory
-copy /Y %ThisDir%bin\ArmyAntLib.jar %TestDir%
+copy /Y ArmyAntLib.jar %TestDir%
+:: Copy the dynamic library to test Project directory
+copy /Y %OutDir%*.dll %TestDir%
+copy /Y %OutDir%*.so %TestDir%
+:: Copy the dynamic library to test Project directory
+copy /Y %OutDir%*.dll %TestOut%
+copy /Y %OutDir%*.so %TestOut%
 
 @echo "The Java library compiled successful !"
 @echo on

@@ -31,6 +31,7 @@
 set ConfigType=%1
 set ProjectPath=%2
 set TargetName=%3
+set TargetPlatform=%4
  
 :CopyStaticLibFile
 copy %ProjectPath%bin\%TargetName%.lib %ProjectPath%lib\
@@ -48,6 +49,7 @@ xcopy %ProjectPath%lib %OutDir%lib  /D /C /Q /K /X /Y
 del  %OutDir%bin\* /Q
 xcopy %ProjectPath%bin %OutDir%bin  /D /C /Q /K /X /Y
 copy %ProjectPath%languages\Python\* %OutDir%bin /Y
+copy %ProjectPath%externals\python3.5.1\%TargetPlatform%\*.dll %OutDir%bin /Y
 
 :End
 @echo on

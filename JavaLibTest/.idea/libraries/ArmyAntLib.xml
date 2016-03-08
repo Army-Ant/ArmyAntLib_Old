@@ -1,0 +1,9 @@
+<component name="libraryTable">
+  <library name="ArmyAntLib">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/lib/ArmyAntLib.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>
