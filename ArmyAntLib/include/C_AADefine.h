@@ -25,6 +25,7 @@
 
 //#include <yvals.h>
 
+// 定长整数定义
 typedef char int8;
 typedef unsigned char uint8;
 typedef short int16;
@@ -32,6 +33,7 @@ typedef unsigned short uint16;
 typedef int int32;
 typedef unsigned int uint32;
 
+// 变长整数定义
 #ifdef _x86
 typedef int mac_int;
 typedef unsigned int mac_uint;
@@ -40,6 +42,7 @@ typedef long long mac_int;
 typedef unsigned long long mac_uint;
 #endif
 
+// C通用布尔类型
 #ifndef BOOL
 typedef int BOOL;
 #ifndef TRUE
@@ -50,12 +53,15 @@ static const int FALSE = 0;
 
 #ifndef _cplusplus
 
+// C99的布尔转C++布尔
 typedef _Bool bool;
 static const int true = TRUE;
 static const int false = FALSE;
 
+// C语言自然对数底
 static const double s_aa_natrualBase = 2.7182818284590452353;
 
+// C语言定义的宏, 同AAFragment的同名函数
 #ifndef min
 #define min(x,y) ((x>y)?y:x)
 #endif
@@ -63,10 +69,12 @@ static const double s_aa_natrualBase = 2.7182818284590452353;
 #define max(x,y) ((x<y)?y:x)
 #endif
 
+// 安全释放内存(置空指针)宏定义, 同AAFragment
 #define AA_SAFE_DEL(x) if(x != NULL){free(x); x = NULL;}else;
 #define AA_SAFE_FREE AA_SAFE_DEL
 #define AA_SAFE_DELALL AA_SAFE_DEL
 
+// Debug断言宏的定义, 同AAFragment的同名函数
 #if defined DEBUG
 #include <assert.h>
 #define Assert(x) assert(x)

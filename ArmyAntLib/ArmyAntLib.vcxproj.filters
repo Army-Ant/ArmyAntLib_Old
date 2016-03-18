@@ -43,11 +43,8 @@
     <Filter Include="2.Third-party-libraries\python3.5.1">
       <UniqueIdentifier>{b46cb657-5ca0-4c67-8739-276d92057925}</UniqueIdentifier>
     </Filter>
-    <Filter Include="2.Third-party-libraries\python3.5.1\x86">
-      <UniqueIdentifier>{892982b3-09c2-458e-90e9-fd5bc8f1242a}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="2.Third-party-libraries\python3.5.1\x64">
-      <UniqueIdentifier>{fbba3da3-518e-4b9a-923a-b41cb7e50b60}</UniqueIdentifier>
+    <Filter Include="2.Third-party-libraries\tbox">
+      <UniqueIdentifier>{1e02256c-e47c-412e-a9b0-b984c53216b6}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -512,6 +509,330 @@
     </ClInclude>
     <ClInclude Include="base\Java_AANeuron.h">
       <Filter>6.JavaRefCode</Filter>
+    </ClInclude>
+    <ClInclude Include="externals\python3.5.1\include\abstract.h">
+      <Filter>2.Third-party-libraries\python3.5.1</Filter>
+    </ClInclude>
+    <ClInclude Include="externals\python3.5.1\include\accu.h">
+      <Filter>2.Third-party-libraries\python3.5.1</Filter>
+    </ClInclude>
+    <ClInclude Include="externals\python3.5.1\include\archive.h">
+      <Filter>2.Third-party-libraries\python3.5.1</Filter>
+    </ClInclude>
+    <ClInclude Include="externals\python3.5.1\include\asdl.h">
+      <Filter>2.Third-party-libraries\python3.5.1</Filter>
+    </ClInclude>
+    <ClInclude Include="externals\python3.5.1\include\ast.h">
+      <Filter>2.Third-party-libraries\python3.5.1</Filter>
+    </ClInclude>
+    <ClInclude Include="externals\python3.5.1\include\bitset.h">
+      <Filter>2.Third-party-libraries\python3.5.1</Filter>
+    </ClInclude>
+    <ClInclude Include="externals\python3.5.1\include\bltinmodule.h">
+      <Filter>2.Third-party-libraries\python3.5.1</Filter>
+    </ClInclude>
+    <ClInclude Include="externals\python3.5.1\include\boolobject.h">
+      <Filter>2.Third-party-libraries\python3.5.1</Filter>
+    </ClInclude>
+    <ClInclude Include="externals\python3.5.1\include\bytearrayobject.h">
+      <Filter>2.Third-party-libraries\python3.5.1</Filter>
+    </ClInclude>
+    <ClInclude Include="externals\python3.5.1\include\bytes_methods.h">
+      <Filter>2.Third-party-libraries\python3.5.1</Filter>
+    </ClInclude>
+    <ClInclude Include="externals\python3.5.1\include\bytesobject.h">
+      <Filter>2.Third-party-libraries\python3.5.1</Filter>
+    </ClInclude>
+    <ClInclude Include="externals\python3.5.1\include\cellobject.h">
+      <Filter>2.Third-party-libraries\python3.5.1</Filter>
+    </ClInclude>
+    <ClInclude Include="externals\python3.5.1\include\ceval.h">
+      <Filter>2.Third-party-libraries\python3.5.1</Filter>
+    </ClInclude>
+    <ClInclude Include="externals\python3.5.1\include\classobject.h">
+      <Filter>2.Third-party-libraries\python3.5.1</Filter>
+    </ClInclude>
+    <ClInclude Include="externals\python3.5.1\include\code.h">
+      <Filter>2.Third-party-libraries\python3.5.1</Filter>
+    </ClInclude>
+    <ClInclude Include="externals\python3.5.1\include\codecs.h">
+      <Filter>2.Third-party-libraries\python3.5.1</Filter>
+    </ClInclude>
+    <ClInclude Include="externals\python3.5.1\include\compile.h">
+      <Filter>2.Third-party-libraries\python3.5.1</Filter>
+    </ClInclude>
+    <ClInclude Include="externals\python3.5.1\include\complexobject.h">
+      <Filter>2.Third-party-libraries\python3.5.1</Filter>
+    </ClInclude>
+    <ClInclude Include="externals\python3.5.1\include\datetime.h">
+      <Filter>2.Third-party-libraries\python3.5.1</Filter>
+    </ClInclude>
+    <ClInclude Include="externals\python3.5.1\include\descrobject.h">
+      <Filter>2.Third-party-libraries\python3.5.1</Filter>
+    </ClInclude>
+    <ClInclude Include="externals\python3.5.1\include\dictobject.h">
+      <Filter>2.Third-party-libraries\python3.5.1</Filter>
+    </ClInclude>
+    <ClInclude Include="externals\python3.5.1\include\dtoa.h">
+      <Filter>2.Third-party-libraries\python3.5.1</Filter>
+    </ClInclude>
+    <ClInclude Include="externals\python3.5.1\include\dynamic_annotations.h">
+      <Filter>2.Third-party-libraries\python3.5.1</Filter>
+    </ClInclude>
+    <ClInclude Include="externals\python3.5.1\include\enumobject.h">
+      <Filter>2.Third-party-libraries\python3.5.1</Filter>
+    </ClInclude>
+    <ClInclude Include="externals\python3.5.1\include\errcode.h">
+      <Filter>2.Third-party-libraries\python3.5.1</Filter>
+    </ClInclude>
+    <ClInclude Include="externals\python3.5.1\include\errmap.h">
+      <Filter>2.Third-party-libraries\python3.5.1</Filter>
+    </ClInclude>
+    <ClInclude Include="externals\python3.5.1\include\eval.h">
+      <Filter>2.Third-party-libraries\python3.5.1</Filter>
+    </ClInclude>
+    <ClInclude Include="externals\python3.5.1\include\fileobject.h">
+      <Filter>2.Third-party-libraries\python3.5.1</Filter>
+    </ClInclude>
+    <ClInclude Include="externals\python3.5.1\include\fileutils.h">
+      <Filter>2.Third-party-libraries\python3.5.1</Filter>
+    </ClInclude>
+    <ClInclude Include="externals\python3.5.1\include\floatobject.h">
+      <Filter>2.Third-party-libraries\python3.5.1</Filter>
+    </ClInclude>
+    <ClInclude Include="externals\python3.5.1\include\frameobject.h">
+      <Filter>2.Third-party-libraries\python3.5.1</Filter>
+    </ClInclude>
+    <ClInclude Include="externals\python3.5.1\include\funcobject.h">
+      <Filter>2.Third-party-libraries\python3.5.1</Filter>
+    </ClInclude>
+    <ClInclude Include="externals\python3.5.1\include\genobject.h">
+      <Filter>2.Third-party-libraries\python3.5.1</Filter>
+    </ClInclude>
+    <ClInclude Include="externals\python3.5.1\include\graminit.h">
+      <Filter>2.Third-party-libraries\python3.5.1</Filter>
+    </ClInclude>
+    <ClInclude Include="externals\python3.5.1\include\grammar.h">
+      <Filter>2.Third-party-libraries\python3.5.1</Filter>
+    </ClInclude>
+    <ClInclude Include="externals\python3.5.1\include\import.h">
+      <Filter>2.Third-party-libraries\python3.5.1</Filter>
+    </ClInclude>
+    <ClInclude Include="externals\python3.5.1\include\intrcheck.h">
+      <Filter>2.Third-party-libraries\python3.5.1</Filter>
+    </ClInclude>
+    <ClInclude Include="externals\python3.5.1\include\iterobject.h">
+      <Filter>2.Third-party-libraries\python3.5.1</Filter>
+    </ClInclude>
+    <ClInclude Include="externals\python3.5.1\include\listobject.h">
+      <Filter>2.Third-party-libraries\python3.5.1</Filter>
+    </ClInclude>
+    <ClInclude Include="externals\python3.5.1\include\longintrepr.h">
+      <Filter>2.Third-party-libraries\python3.5.1</Filter>
+    </ClInclude>
+    <ClInclude Include="externals\python3.5.1\include\longobject.h">
+      <Filter>2.Third-party-libraries\python3.5.1</Filter>
+    </ClInclude>
+    <ClInclude Include="externals\python3.5.1\include\marshal.h">
+      <Filter>2.Third-party-libraries\python3.5.1</Filter>
+    </ClInclude>
+    <ClInclude Include="externals\python3.5.1\include\memoryobject.h">
+      <Filter>2.Third-party-libraries\python3.5.1</Filter>
+    </ClInclude>
+    <ClInclude Include="externals\python3.5.1\include\metagrammar.h">
+      <Filter>2.Third-party-libraries\python3.5.1</Filter>
+    </ClInclude>
+    <ClInclude Include="externals\python3.5.1\include\methodobject.h">
+      <Filter>2.Third-party-libraries\python3.5.1</Filter>
+    </ClInclude>
+    <ClInclude Include="externals\python3.5.1\include\modsupport.h">
+      <Filter>2.Third-party-libraries\python3.5.1</Filter>
+    </ClInclude>
+    <ClInclude Include="externals\python3.5.1\include\moduleobject.h">
+      <Filter>2.Third-party-libraries\python3.5.1</Filter>
+    </ClInclude>
+    <ClInclude Include="externals\python3.5.1\include\msvcrtmodule.c.h">
+      <Filter>2.Third-party-libraries\python3.5.1</Filter>
+    </ClInclude>
+    <ClInclude Include="externals\python3.5.1\include\namespaceobject.h">
+      <Filter>2.Third-party-libraries\python3.5.1</Filter>
+    </ClInclude>
+    <ClInclude Include="externals\python3.5.1\include\node.h">
+      <Filter>2.Third-party-libraries\python3.5.1</Filter>
+    </ClInclude>
+    <ClInclude Include="externals\python3.5.1\include\object.h">
+      <Filter>2.Third-party-libraries\python3.5.1</Filter>
+    </ClInclude>
+    <ClInclude Include="externals\python3.5.1\include\objimpl.h">
+      <Filter>2.Third-party-libraries\python3.5.1</Filter>
+    </ClInclude>
+    <ClInclude Include="externals\python3.5.1\include\odictobject.h">
+      <Filter>2.Third-party-libraries\python3.5.1</Filter>
+    </ClInclude>
+    <ClInclude Include="externals\python3.5.1\include\opcode.h">
+      <Filter>2.Third-party-libraries\python3.5.1</Filter>
+    </ClInclude>
+    <ClInclude Include="externals\python3.5.1\include\osdefs.h">
+      <Filter>2.Third-party-libraries\python3.5.1</Filter>
+    </ClInclude>
+    <ClInclude Include="externals\python3.5.1\include\parsetok.h">
+      <Filter>2.Third-party-libraries\python3.5.1</Filter>
+    </ClInclude>
+    <ClInclude Include="externals\python3.5.1\include\patchlevel.h">
+      <Filter>2.Third-party-libraries\python3.5.1</Filter>
+    </ClInclude>
+    <ClInclude Include="externals\python3.5.1\include\pgen.h">
+      <Filter>2.Third-party-libraries\python3.5.1</Filter>
+    </ClInclude>
+    <ClInclude Include="externals\python3.5.1\include\pgenheaders.h">
+      <Filter>2.Third-party-libraries\python3.5.1</Filter>
+    </ClInclude>
+    <ClInclude Include="externals\python3.5.1\include\py_curses.h">
+      <Filter>2.Third-party-libraries\python3.5.1</Filter>
+    </ClInclude>
+    <ClInclude Include="externals\python3.5.1\include\pyarena.h">
+      <Filter>2.Third-party-libraries\python3.5.1</Filter>
+    </ClInclude>
+    <ClInclude Include="externals\python3.5.1\include\pyatomic.h">
+      <Filter>2.Third-party-libraries\python3.5.1</Filter>
+    </ClInclude>
+    <ClInclude Include="externals\python3.5.1\include\pycapsule.h">
+      <Filter>2.Third-party-libraries\python3.5.1</Filter>
+    </ClInclude>
+    <ClInclude Include="externals\python3.5.1\include\pyconfig.h">
+      <Filter>2.Third-party-libraries\python3.5.1</Filter>
+    </ClInclude>
+    <ClInclude Include="externals\python3.5.1\include\pyctype.h">
+      <Filter>2.Third-party-libraries\python3.5.1</Filter>
+    </ClInclude>
+    <ClInclude Include="externals\python3.5.1\include\pydebug.h">
+      <Filter>2.Third-party-libraries\python3.5.1</Filter>
+    </ClInclude>
+    <ClInclude Include="externals\python3.5.1\include\pyerrors.h">
+      <Filter>2.Third-party-libraries\python3.5.1</Filter>
+    </ClInclude>
+    <ClInclude Include="externals\python3.5.1\include\pyexpat.h">
+      <Filter>2.Third-party-libraries\python3.5.1</Filter>
+    </ClInclude>
+    <ClInclude Include="externals\python3.5.1\include\pyfpe.h">
+      <Filter>2.Third-party-libraries\python3.5.1</Filter>
+    </ClInclude>
+    <ClInclude Include="externals\python3.5.1\include\pygetopt.h">
+      <Filter>2.Third-party-libraries\python3.5.1</Filter>
+    </ClInclude>
+    <ClInclude Include="externals\python3.5.1\include\pyhash.h">
+      <Filter>2.Third-party-libraries\python3.5.1</Filter>
+    </ClInclude>
+    <ClInclude Include="externals\python3.5.1\include\pylifecycle.h">
+      <Filter>2.Third-party-libraries\python3.5.1</Filter>
+    </ClInclude>
+    <ClInclude Include="externals\python3.5.1\include\pymacconfig.h">
+      <Filter>2.Third-party-libraries\python3.5.1</Filter>
+    </ClInclude>
+    <ClInclude Include="externals\python3.5.1\include\pymacro.h">
+      <Filter>2.Third-party-libraries\python3.5.1</Filter>
+    </ClInclude>
+    <ClInclude Include="externals\python3.5.1\include\pymath.h">
+      <Filter>2.Third-party-libraries\python3.5.1</Filter>
+    </ClInclude>
+    <ClInclude Include="externals\python3.5.1\include\pymem.h">
+      <Filter>2.Third-party-libraries\python3.5.1</Filter>
+    </ClInclude>
+    <ClInclude Include="externals\python3.5.1\include\pyport.h">
+      <Filter>2.Third-party-libraries\python3.5.1</Filter>
+    </ClInclude>
+    <ClInclude Include="externals\python3.5.1\include\pystate.h">
+      <Filter>2.Third-party-libraries\python3.5.1</Filter>
+    </ClInclude>
+    <ClInclude Include="externals\python3.5.1\include\pystrcmp.h">
+      <Filter>2.Third-party-libraries\python3.5.1</Filter>
+    </ClInclude>
+    <ClInclude Include="externals\python3.5.1\include\pystrhex.h">
+      <Filter>2.Third-party-libraries\python3.5.1</Filter>
+    </ClInclude>
+    <ClInclude Include="externals\python3.5.1\include\pystrtod.h">
+      <Filter>2.Third-party-libraries\python3.5.1</Filter>
+    </ClInclude>
+    <ClInclude Include="externals\python3.5.1\include\Python.h">
+      <Filter>2.Third-party-libraries\python3.5.1</Filter>
+    </ClInclude>
+    <ClInclude Include="externals\python3.5.1\include\python_ver_rc.h">
+      <Filter>2.Third-party-libraries\python3.5.1</Filter>
+    </ClInclude>
+    <ClInclude Include="externals\python3.5.1\include\Python-ast.h">
+      <Filter>2.Third-party-libraries\python3.5.1</Filter>
+    </ClInclude>
+    <ClInclude Include="externals\python3.5.1\include\pythonnt_rc.h">
+      <Filter>2.Third-party-libraries\python3.5.1</Filter>
+    </ClInclude>
+    <ClInclude Include="externals\python3.5.1\include\pythonnt_rc_d.h">
+      <Filter>2.Third-party-libraries\python3.5.1</Filter>
+    </ClInclude>
+    <ClInclude Include="externals\python3.5.1\include\pythonrun.h">
+      <Filter>2.Third-party-libraries\python3.5.1</Filter>
+    </ClInclude>
+    <ClInclude Include="externals\python3.5.1\include\pythread.h">
+      <Filter>2.Third-party-libraries\python3.5.1</Filter>
+    </ClInclude>
+    <ClInclude Include="externals\python3.5.1\include\pytime.h">
+      <Filter>2.Third-party-libraries\python3.5.1</Filter>
+    </ClInclude>
+    <ClInclude Include="externals\python3.5.1\include\rangeobject.h">
+      <Filter>2.Third-party-libraries\python3.5.1</Filter>
+    </ClInclude>
+    <ClInclude Include="externals\python3.5.1\include\resource.h">
+      <Filter>2.Third-party-libraries\python3.5.1</Filter>
+    </ClInclude>
+    <ClInclude Include="externals\python3.5.1\include\setobject.h">
+      <Filter>2.Third-party-libraries\python3.5.1</Filter>
+    </ClInclude>
+    <ClInclude Include="externals\python3.5.1\include\sliceobject.h">
+      <Filter>2.Third-party-libraries\python3.5.1</Filter>
+    </ClInclude>
+    <ClInclude Include="externals\python3.5.1\include\structmember.h">
+      <Filter>2.Third-party-libraries\python3.5.1</Filter>
+    </ClInclude>
+    <ClInclude Include="externals\python3.5.1\include\structseq.h">
+      <Filter>2.Third-party-libraries\python3.5.1</Filter>
+    </ClInclude>
+    <ClInclude Include="externals\python3.5.1\include\symtable.h">
+      <Filter>2.Third-party-libraries\python3.5.1</Filter>
+    </ClInclude>
+    <ClInclude Include="externals\python3.5.1\include\sysmodule.h">
+      <Filter>2.Third-party-libraries\python3.5.1</Filter>
+    </ClInclude>
+    <ClInclude Include="externals\python3.5.1\include\token.h">
+      <Filter>2.Third-party-libraries\python3.5.1</Filter>
+    </ClInclude>
+    <ClInclude Include="externals\python3.5.1\include\traceback.h">
+      <Filter>2.Third-party-libraries\python3.5.1</Filter>
+    </ClInclude>
+    <ClInclude Include="externals\python3.5.1\include\tupleobject.h">
+      <Filter>2.Third-party-libraries\python3.5.1</Filter>
+    </ClInclude>
+    <ClInclude Include="externals\python3.5.1\include\typeslots.h">
+      <Filter>2.Third-party-libraries\python3.5.1</Filter>
+    </ClInclude>
+    <ClInclude Include="externals\python3.5.1\include\ucnhash.h">
+      <Filter>2.Third-party-libraries\python3.5.1</Filter>
+    </ClInclude>
+    <ClInclude Include="externals\python3.5.1\include\unicodeobject.h">
+      <Filter>2.Third-party-libraries\python3.5.1</Filter>
+    </ClInclude>
+    <ClInclude Include="externals\python3.5.1\include\warnings.h">
+      <Filter>2.Third-party-libraries\python3.5.1</Filter>
+    </ClInclude>
+    <ClInclude Include="externals\python3.5.1\include\weakrefobject.h">
+      <Filter>2.Third-party-libraries\python3.5.1</Filter>
+    </ClInclude>
+    <ClInclude Include="externals\python3.5.1\include\winreg.c.h">
+      <Filter>2.Third-party-libraries\python3.5.1</Filter>
+    </ClInclude>
+    <ClInclude Include="externals\python3.5.1\include\winsound.c.h">
+      <Filter>2.Third-party-libraries\python3.5.1</Filter>
+    </ClInclude>
+    <ClInclude Include="externals\tbox\bin\tbox\tbox.h">
+      <Filter>2.Third-party-libraries\tbox</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

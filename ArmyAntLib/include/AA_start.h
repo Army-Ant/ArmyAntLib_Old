@@ -38,6 +38,7 @@
 #endif // _WIN32
 
 #ifdef ARMYANTLIB_EXPORTS
+// Have to create the namespace firstly
 namespace ArmyAnt {
     namespace Fragment {
     }

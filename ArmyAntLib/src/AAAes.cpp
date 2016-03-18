@@ -340,7 +340,7 @@ bool RoundSetting_Private::ByteDecode(void* dest, const char*src, uint64 length)
 
 bool RoundSetting_Private::RowMix(void*dest, const char*src, uint64 length, bool isBack/* = false*/)
 {
-	uint8*pdest = reinterpret_cast<uint8*>(dest);
+	uint8*pdest = static_cast<uint8*>(dest);
 	static uint8 len[4][4] = {2,3,1,1,1,2,3,1,1,1,2,3,3,1,1,2};
 	static uint8 backLen[4][4] = {14,11,13,9,9,14,11,13,13,9,14,11,11,13,9,14};
 	if(isBack)
@@ -369,7 +369,7 @@ bool RoundSetting_Private::Lock(void*dest, const char*src, uint64 length)
 
 bool RoundSetting_Private::Lock(void*dest, const char*src, uint64 length, uint8 pwd[16])
 {
-	uint8*pdest = reinterpret_cast<uint8*>(dest);
+	uint8*pdest = static_cast<uint8*>(dest);
 	for(uint64 i = 0; i + 16 < length; i += 16)
 	{
 		for(int j = 0; j < 16; j++)
@@ -405,7 +405,7 @@ bool RoundSetting_Private::LineMove(uint8 rectWidth, void*dest, const char*src, 
 		else
 			return uint8(num - line);
 	};
-	uint8*pdest = reinterpret_cast<uint8*>(dest);
+	uint8*pdest = static_cast<uint8*>(dest);
 	uint64 nowPos = 0;
 	for(nowPos = 0; nowPos + rectWidth*rectWidth < length; nowPos += rectWidth*rectWidth)
 	{
@@ -433,7 +433,7 @@ bool RoundSetting_Private::LineMoveBack(void*dest, const char*src, uint64 length
 bool RoundSetting_Private::ByteEncode(uint32 encoder, void* dest, const char*src, uint64 length)
 {
 	auto bhd = byteEncoder_manager[encoder];
-	uint8* pdest = reinterpret_cast<uint8*>(dest);
+	uint8* pdest = static_cast<uint8*>(dest);
 	for(uint64 i = 0; i < length; i++)
 	{
 		pdest[i] = bhd->data[src[i]];
@@ -658,7 +658,7 @@ uint8 Parser::GetRoundCount() const
 bool Parser::Encode(void*dest, void*data /*= nullptr*/, uint64 length /*= 0*/)
 {
 	auto hd = parserManager[handle];
-	if(!RoundSetting_Private::Lock(dest, reinterpret_cast<char*>(data), length, hd->fpwd))
+	if(!RoundSetting_Private::Lock(dest, static_cast<char*>(data), length, hd->fpwd))
 		return false;
 	int rounds = GetRoundCount();
 	if(data == nullptr)
@@ -667,10 +667,10 @@ bool Parser::Encode(void*dest, void*data /*= nullptr*/, uint64 length /*= 0*/)
 		length = hd->length;
 	for(int i = 0; i < rounds - 1; i++)
 	{
-		if(!RoundSetting(hd->settings[i]).Encode(dest, reinterpret_cast<char*>(data), length))
+		if(!RoundSetting(hd->settings[i]).Encode(dest, static_cast<char*>(data), length))
 			return false;
 	}
-	return RoundSetting(hd->settings[rounds - 1]).Encode(dest, reinterpret_cast<char*>(data), length, false);
+	return RoundSetting(hd->settings[rounds - 1]).Encode(dest, static_cast<char*>(data), length, false);
 }
 
 
@@ -682,14 +682,14 @@ bool Parser::Decode(void*dest, void*data /*= nullptr*/, uint64 length /*= 0*/)
 		data = hd->data;
 	if(length == 0)
 		length = hd->length;
-	if(!RoundSetting(hd->settings[rounds - 1]).Decode(dest, reinterpret_cast<char*>(data), length, false))
+	if(!RoundSetting(hd->settings[rounds - 1]).Decode(dest, static_cast<char*>(data), length, false))
 		return false;
 	for(int i = rounds - 2; i >= 0; i--)
 	{
-		if(!RoundSetting(hd->settings[i]).Decode(dest, reinterpret_cast<char*>(data), length))
+		if(!RoundSetting(hd->settings[i]).Decode(dest, static_cast<char*>(data), length))
 			return false;
 	}
-	return RoundSetting_Private::Lock(dest, reinterpret_cast<char*>(data), length, hd->fpwd);
+	return RoundSetting_Private::Lock(dest, static_cast<char*>(data), length, hd->fpwd);
 }
 
 

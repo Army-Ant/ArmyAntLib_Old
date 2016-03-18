@@ -65,7 +65,7 @@ static std::map<AA_CNeuronAlgorithm, ArmyAnt::NeuronAlgorithm<double>*> manager;
 
 ARMYANT_CLIB_API AA_CNeuronAlgorithm AA_NeuronAlgorithm_Create(AA_Neuron_ActiveFunc activationFunc, double threshold)
 {
-	uint32 len = manager.size();
+	uint32 len = uint32(manager.size());
 	//获取当前未使用的最小句柄号
 	for(uint32 n = 0; n < len; n++)
 	{
@@ -79,13 +79,12 @@ ARMYANT_CLIB_API AA_CNeuronAlgorithm AA_NeuronAlgorithm_Create(AA_Neuron_ActiveF
 	//没有未使用的中间句柄号，则在结尾添加新最大句柄号，并创建内部实例、关联到外部实例
 	manager.insert(std::pair<uint32, ArmyAnt::NeuronAlgorithm<double>*>(len, new ArmyAnt::NeuronAlgorithm<double>(activationFunc, threshold)));
 	return len;
-
 }
 
 ARMYANT_CLIB_API AA_CNeuronAlgorithm AA_NeuronAlgorithm_Clone(AA_CNeuronAlgorithm value)
 {
 	Assert(manager.find(value)!=manager.end());
-	uint32 len = manager.size();
+	uint32 len = uint32(manager.size());
 	//获取当前未使用的最小句柄号
 	for(uint32 n = 0; n < len; n++)
 	{

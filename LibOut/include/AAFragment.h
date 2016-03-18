@@ -23,6 +23,11 @@
 #ifndef AA_FRAGMENT_H_2015_12_31
 #define AA_FRAGMENT_H_2015_12_31
 
+/*
+ * The base tool functions and datas in the library
+ * 本库的一些基础工具和数据.如果是数据, 实现在base.hpp中
+ */
+
 #if defined DEBUG
 #include <assert.h>
 #elif defined _cplusplus
@@ -92,6 +97,7 @@ inline void AA_SAFE_DELALL(PTR&ptr)
 
 inline void Log_Debug(const char* msg)
 {
+	msg;
 #ifdef DEBUG
 	std::cout << msg << std::endl;
 #endif

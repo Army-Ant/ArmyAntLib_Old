@@ -116,6 +116,7 @@
     </ClCompile>
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalDependencies>$(ProjectDir)externals\tbox\bin\tbox.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
     <PreBuildEvent>
       <Command>$(ProjectDir)base\build_start.bat $(Configuration) $(ProjectDir) $(TargetName) $(PlatformTarget)</Command>
@@ -140,6 +141,7 @@
     </ClCompile>
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalDependencies>$(ProjectDir)externals\tbox\bin\tbox.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
     <PreBuildEvent>
       <Command>$(ProjectDir)base\build_start.bat $(Configuration) $(ProjectDir) $(TargetName) $(PlatformTarget)</Command>
@@ -334,6 +336,114 @@
     <ClInclude Include="externals\boost\boost\visit_each.hpp" />
     <ClInclude Include="externals\boost\boost\wave.hpp" />
     <ClInclude Include="externals\boost\boost\weak_ptr.hpp" />
+    <ClInclude Include="externals\python3.5.1\include\abstract.h" />
+    <ClInclude Include="externals\python3.5.1\include\accu.h" />
+    <ClInclude Include="externals\python3.5.1\include\archive.h" />
+    <ClInclude Include="externals\python3.5.1\include\asdl.h" />
+    <ClInclude Include="externals\python3.5.1\include\ast.h" />
+    <ClInclude Include="externals\python3.5.1\include\bitset.h" />
+    <ClInclude Include="externals\python3.5.1\include\bltinmodule.h" />
+    <ClInclude Include="externals\python3.5.1\include\boolobject.h" />
+    <ClInclude Include="externals\python3.5.1\include\bytearrayobject.h" />
+    <ClInclude Include="externals\python3.5.1\include\bytesobject.h" />
+    <ClInclude Include="externals\python3.5.1\include\bytes_methods.h" />
+    <ClInclude Include="externals\python3.5.1\include\cellobject.h" />
+    <ClInclude Include="externals\python3.5.1\include\ceval.h" />
+    <ClInclude Include="externals\python3.5.1\include\classobject.h" />
+    <ClInclude Include="externals\python3.5.1\include\code.h" />
+    <ClInclude Include="externals\python3.5.1\include\codecs.h" />
+    <ClInclude Include="externals\python3.5.1\include\compile.h" />
+    <ClInclude Include="externals\python3.5.1\include\complexobject.h" />
+    <ClInclude Include="externals\python3.5.1\include\datetime.h" />
+    <ClInclude Include="externals\python3.5.1\include\descrobject.h" />
+    <ClInclude Include="externals\python3.5.1\include\dictobject.h" />
+    <ClInclude Include="externals\python3.5.1\include\dtoa.h" />
+    <ClInclude Include="externals\python3.5.1\include\dynamic_annotations.h" />
+    <ClInclude Include="externals\python3.5.1\include\enumobject.h" />
+    <ClInclude Include="externals\python3.5.1\include\errcode.h" />
+    <ClInclude Include="externals\python3.5.1\include\errmap.h" />
+    <ClInclude Include="externals\python3.5.1\include\eval.h" />
+    <ClInclude Include="externals\python3.5.1\include\fileobject.h" />
+    <ClInclude Include="externals\python3.5.1\include\fileutils.h" />
+    <ClInclude Include="externals\python3.5.1\include\floatobject.h" />
+    <ClInclude Include="externals\python3.5.1\include\frameobject.h" />
+    <ClInclude Include="externals\python3.5.1\include\funcobject.h" />
+    <ClInclude Include="externals\python3.5.1\include\genobject.h" />
+    <ClInclude Include="externals\python3.5.1\include\graminit.h" />
+    <ClInclude Include="externals\python3.5.1\include\grammar.h" />
+    <ClInclude Include="externals\python3.5.1\include\import.h" />
+    <ClInclude Include="externals\python3.5.1\include\intrcheck.h" />
+    <ClInclude Include="externals\python3.5.1\include\iterobject.h" />
+    <ClInclude Include="externals\python3.5.1\include\listobject.h" />
+    <ClInclude Include="externals\python3.5.1\include\longintrepr.h" />
+    <ClInclude Include="externals\python3.5.1\include\longobject.h" />
+    <ClInclude Include="externals\python3.5.1\include\marshal.h" />
+    <ClInclude Include="externals\python3.5.1\include\memoryobject.h" />
+    <ClInclude Include="externals\python3.5.1\include\metagrammar.h" />
+    <ClInclude Include="externals\python3.5.1\include\methodobject.h" />
+    <ClInclude Include="externals\python3.5.1\include\modsupport.h" />
+    <ClInclude Include="externals\python3.5.1\include\moduleobject.h" />
+    <ClInclude Include="externals\python3.5.1\include\msvcrtmodule.c.h" />
+    <ClInclude Include="externals\python3.5.1\include\namespaceobject.h" />
+    <ClInclude Include="externals\python3.5.1\include\node.h" />
+    <ClInclude Include="externals\python3.5.1\include\object.h" />
+    <ClInclude Include="externals\python3.5.1\include\objimpl.h" />
+    <ClInclude Include="externals\python3.5.1\include\odictobject.h" />
+    <ClInclude Include="externals\python3.5.1\include\opcode.h" />
+    <ClInclude Include="externals\python3.5.1\include\osdefs.h" />
+    <ClInclude Include="externals\python3.5.1\include\parsetok.h" />
+    <ClInclude Include="externals\python3.5.1\include\patchlevel.h" />
+    <ClInclude Include="externals\python3.5.1\include\pgen.h" />
+    <ClInclude Include="externals\python3.5.1\include\pgenheaders.h" />
+    <ClInclude Include="externals\python3.5.1\include\pyarena.h" />
+    <ClInclude Include="externals\python3.5.1\include\pyatomic.h" />
+    <ClInclude Include="externals\python3.5.1\include\pycapsule.h" />
+    <ClInclude Include="externals\python3.5.1\include\pyconfig.h" />
+    <ClInclude Include="externals\python3.5.1\include\pyctype.h" />
+    <ClInclude Include="externals\python3.5.1\include\pydebug.h" />
+    <ClInclude Include="externals\python3.5.1\include\pyerrors.h" />
+    <ClInclude Include="externals\python3.5.1\include\pyexpat.h" />
+    <ClInclude Include="externals\python3.5.1\include\pyfpe.h" />
+    <ClInclude Include="externals\python3.5.1\include\pygetopt.h" />
+    <ClInclude Include="externals\python3.5.1\include\pyhash.h" />
+    <ClInclude Include="externals\python3.5.1\include\pylifecycle.h" />
+    <ClInclude Include="externals\python3.5.1\include\pymacconfig.h" />
+    <ClInclude Include="externals\python3.5.1\include\pymacro.h" />
+    <ClInclude Include="externals\python3.5.1\include\pymath.h" />
+    <ClInclude Include="externals\python3.5.1\include\pymem.h" />
+    <ClInclude Include="externals\python3.5.1\include\pyport.h" />
+    <ClInclude Include="externals\python3.5.1\include\pystate.h" />
+    <ClInclude Include="externals\python3.5.1\include\pystrcmp.h" />
+    <ClInclude Include="externals\python3.5.1\include\pystrhex.h" />
+    <ClInclude Include="externals\python3.5.1\include\pystrtod.h" />
+    <ClInclude Include="externals\python3.5.1\include\Python-ast.h" />
+    <ClInclude Include="externals\python3.5.1\include\Python.h" />
+    <ClInclude Include="externals\python3.5.1\include\pythonnt_rc.h" />
+    <ClInclude Include="externals\python3.5.1\include\pythonnt_rc_d.h" />
+    <ClInclude Include="externals\python3.5.1\include\pythonrun.h" />
+    <ClInclude Include="externals\python3.5.1\include\python_ver_rc.h" />
+    <ClInclude Include="externals\python3.5.1\include\pythread.h" />
+    <ClInclude Include="externals\python3.5.1\include\pytime.h" />
+    <ClInclude Include="externals\python3.5.1\include\py_curses.h" />
+    <ClInclude Include="externals\python3.5.1\include\rangeobject.h" />
+    <ClInclude Include="externals\python3.5.1\include\resource.h" />
+    <ClInclude Include="externals\python3.5.1\include\setobject.h" />
+    <ClInclude Include="externals\python3.5.1\include\sliceobject.h" />
+    <ClInclude Include="externals\python3.5.1\include\structmember.h" />
+    <ClInclude Include="externals\python3.5.1\include\structseq.h" />
+    <ClInclude Include="externals\python3.5.1\include\symtable.h" />
+    <ClInclude Include="externals\python3.5.1\include\sysmodule.h" />
+    <ClInclude Include="externals\python3.5.1\include\token.h" />
+    <ClInclude Include="externals\python3.5.1\include\traceback.h" />
+    <ClInclude Include="externals\python3.5.1\include\tupleobject.h" />
+    <ClInclude Include="externals\python3.5.1\include\typeslots.h" />
+    <ClInclude Include="externals\python3.5.1\include\ucnhash.h" />
+    <ClInclude Include="externals\python3.5.1\include\unicodeobject.h" />
+    <ClInclude Include="externals\python3.5.1\include\warnings.h" />
+    <ClInclude Include="externals\python3.5.1\include\weakrefobject.h" />
+    <ClInclude Include="externals\python3.5.1\include\winreg.c.h" />
+    <ClInclude Include="externals\python3.5.1\include\winsound.c.h" />
+    <ClInclude Include="externals\tbox\bin\tbox\tbox.h" />
     <ClInclude Include="include\AAAes.h" />
     <ClInclude Include="include\AABinary.h" />
     <ClInclude Include="include\AADigraph.hpp" />

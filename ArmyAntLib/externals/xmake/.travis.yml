@@ -1,0 +1,13 @@
+sudo: required
+language: C
+os:
+  - linux
+  - osx
+
+install:
+  - sudo ./install
+
+script:
+  - xmake create -P ./test 
+  - cd ./test
+  - xmake -v

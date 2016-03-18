@@ -26,6 +26,7 @@
 #include "../include/AAClassPrivateHandle.hpp"
 #include <thread>
 #include <list>
+#include "../externals/tbox/bin/tbox/tbox.h"
 
 #ifdef OS_WINDOWS
 #include <windows.h>
@@ -81,10 +82,13 @@ public:
 	uint64 len = 0;
 	//内存读写指针的位置
 	uint64 pos = 0;;
-	//打开命名管道时，是否自动创建了此管道
+	//命名管道句柄
 	void* pipeHandle = nullptr;
+	//命名管道读写线程
 	std::thread* pipeReader = nullptr;
 	std::list<char> inners;
+	//网络通讯tbox句柄
+	tb_stream_ref_t sockHandle = nullptr;
 
 	static void NamePipeReader(FsPrivate*self);
 	std::list<char> ReadNamePipe(uint64 length, const uint8* endtag = nullptr);
@@ -218,12 +222,12 @@ bool FileStream::Open(mac_uint memaddr, uint64 len)
 	//测试内存能否读写
 	try
 	{
-		uint8 a = (reinterpret_cast<uint8*>(hd->mem))[0];
-		char*p = reinterpret_cast<char*>(hd->mem);
+		uint8 a = (static_cast<uint8*>(hd->mem))[0];
+		char*p = static_cast<char*>(hd->mem);
 		p[0] = 1;
 		p[0] = 2;
 		p[0] = a;
-		a = (reinterpret_cast<uint8*>(hd->mem))[len - 1];
+		a = (static_cast<uint8*>(hd->mem))[len - 1];
 		p[len - 1] = 1;
 		p[len - 1] = 2;
 		p[len - 1] = a;
@@ -278,7 +282,7 @@ bool FileStream::Open(const char* pipename, const char*pipePath, const char*pipe
 		hd->pipeHandle = CreateNamedPipeA(hd->name.c_str(), PIPE_ACCESS_DUPLEX | FILE_FLAG_OVERLAPPED, PIPE_TYPE_MESSAGE | PIPE_READMODE_MESSAGE | PIPE_WAIT, PIPE_UNLIMITED_INSTANCES - 1, 0, 0, 0, 0);
 		if(hd->pipeHandle==nullptr
 #else
-		if(0 == (hd->pipeHandle = reinterpret_cast<void*>(!mkfifo(hd->name.c_str(), O_RDWR | O_CREAT)))
+		if(0 == (hd->pipeHandle = static_cast<void*>(!mkfifo(hd->name.c_str(), O_RDWR | O_CREAT)))
 #endif
 		   || nullptr == (hd->file = fopen(hd->name.c_str(), "wb+")))
 		{
@@ -316,9 +320,14 @@ bool FileStream::Open(const char* netAddr, uint8 protocol)
 	if(hd->type != StreamType::None)
 		return false;
 	Assert(netAddr != nullptr && protocol != 0);
+	hd->sockHandle = tb_stream_init_from_url(netAddr);
+	if(hd->sockHandle == nullptr)
+		return false;
+	if(tb_stream_open(hd->sockHandle) == tb_false)
+		return false;
 	hd->name = netAddr;
-	//填充网络通信连接操作
-	return false;
+	hd->type = StreamType::Network;
+	return true;
 }
 
 bool FileStream::Open(uint32 netIp, uint16 port, uint8 protocol)
@@ -329,13 +338,20 @@ bool FileStream::Open(uint32 netIp, uint16 port, uint8 protocol)
 	Assert(port != 0 && protocol != 0);
 	char name[32] = "";
 	sprintf(name, "%d.%d.%d.%d:%d", netIp / 256 / 256 / 256, netIp / 256 / 256 % 256, netIp / 256 % 256, netIp % 256, int(port));
-	hd->name = name;
 	//填充网络通信连接操作
-	return false;
+	hd->sockHandle = tb_stream_init_from_sock(name, port, protocol, tb_true);
+	if(hd->sockHandle == nullptr)
+		return false;
+	if(tb_stream_open(hd->sockHandle) == tb_false)
+		return false;
+	hd->name = name;
+	hd->type = StreamType::Network;
+	return true;
 }
 
 bool FileStream::Close()
 {
+	bool ret = true;
 	auto hd = handleManager[handle];
 	//根据相应的类型进行关闭
 	switch(hd->type)
@@ -362,14 +378,17 @@ bool FileStream::Close()
 			hd->len = 0;
 			break;
 		case StreamType::Network:
-			Assert(0);	//修改为网络关闭操作
+			ret = tb_false != tb_stream_clos(hd->sockHandle);
+			if(ret)
+				hd->sockHandle = nullptr;
 			break;
 		case StreamType::None:
 		default:
 			break;
 	}
+	hd->name = "";
 	hd->type = StreamType::None;
-	return true;
+	return ret;
 }
 
 bool FileStream::IsOpened(bool dynamicCheck/* = true*/)
@@ -392,7 +411,7 @@ bool FileStream::IsOpened(bool dynamicCheck/* = true*/)
 		case StreamType::ComData:
 			try
 			{
-				if(Read(reinterpret_cast<void*>(&c), uint32(1), 0))
+				if(Read(static_cast<void*>(&c), uint32(1), 0))
 					return true;
 			}
 			catch(std::exception)
@@ -401,6 +420,7 @@ bool FileStream::IsOpened(bool dynamicCheck/* = true*/)
 			}
 			break;
 		case StreamType::Network:
+			return tb_stream_is_opened(hd->sockHandle) != tb_false;
 		default:
 			return false;
 	}
@@ -436,6 +456,7 @@ uint64 FileStream::GetLength() const
 		case StreamType::Memory:
 			return hd->len;
 		case StreamType::Network:
+			return uint64(tb_stream_size(hd->sockHandle));
 		default:
 			return 0;
 	}
@@ -456,6 +477,7 @@ uint64 FileStream::GetPos() const
 		case StreamType::Memory:
 			return hd->pos;
 		case StreamType::Network:
+			return uint64(tb_stream_left(hd->sockHandle));
 		default:
 			return 0;
 	}
@@ -473,6 +495,7 @@ bool FileStream::IsEndPos() const
 		case StreamType::Memory:
 			return hd->pos >= hd->len;
 		case StreamType::Network:
+			return tb_stream_left(hd->sockHandle) >= tb_stream_size(hd->sockHandle);
 		default:
 			return false;
 	}
@@ -492,6 +515,7 @@ bool FileStream::MovePos(uint64 pos /*= FILE_POS_END*/) const
 			hd->pos = pos;
 			break;
 		case StreamType::Network:
+			return tb_false != tb_stream_ctrl(hd->sockHandle, pos);
 		default:
 			return false;
 	}
@@ -539,7 +563,7 @@ uint64 FileStream::Read(void*buffer, uint32 len /*= FILE_SHORT_POS_END*/, uint64
 			auto reti = ret.begin();
 			for(uint32 i = 0; i < thislen; i++)
 			{
-				reinterpret_cast<uint8*>(buffer)[i] = *reti;
+				static_cast<uint8*>(buffer)[i] = *reti;
 				reti++;
 			}
 			return thislen;
@@ -553,12 +577,15 @@ uint64 FileStream::Read(void*buffer, uint32 len /*= FILE_SHORT_POS_END*/, uint64
 			//内存拷贝
 			fpos_t reallen ;
 			FsPrivate::SetPos(reallen, min(hd->len - hd->pos, len));
-			memcpy(reinterpret_cast<char*>(buffer), reinterpret_cast<char*>(hd->mem) + pos, uint32(FsPrivate::GetFPos(reallen)));
+			memcpy(static_cast<char*>(buffer), static_cast<char*>(hd->mem) + pos, uint32(FsPrivate::GetFPos(reallen)));
 			if(pos == hd->pos)
 				pos += min(hd->len - hd->pos, len);
 			return uint64(min(hd->len - hd->pos, len));
 		}
 		case StreamType::Network:
+		{
+			tb_stream_read(hd->sockHandle, static_cast<tb_byte_t*>(buffer), len);
+		}
 		default:
 			return 0;
 	}
@@ -590,7 +617,7 @@ uint64 FileStream::Read(void*buffer, uint8 endtag, uint64 maxlen/* = FILE_SHORT_
 					return len;
 				else
 				{
-					reinterpret_cast<uint8*>(buffer)[len++] = a;
+					static_cast<uint8*>(buffer)[len++] = a;
 				}
 			}
 			return len;
@@ -602,7 +629,7 @@ uint64 FileStream::Read(void*buffer, uint8 endtag, uint64 maxlen/* = FILE_SHORT_
 			auto reti = ret.begin();
 			for(uint64 i = 0; i < thislen; i++)
 			{
-				reinterpret_cast<uint8*>(buffer)[i] = *reti;
+				static_cast<uint8*>(buffer)[i] = *reti;
 				reti++;
 			}
 			return thislen;
@@ -613,10 +640,10 @@ uint64 FileStream::Read(void*buffer, uint8 endtag, uint64 maxlen/* = FILE_SHORT_
 			
 			for(auto nowPos = hd->pos; ; nowPos++)
 			{
-				if(nowPos < hd->len || reinterpret_cast<uint8*>(hd->mem)[nowPos] == endtag || nowPos-hd->pos== maxlen)
+				if(nowPos < hd->len || static_cast<uint8*>(hd->mem)[nowPos] == endtag || nowPos-hd->pos== maxlen)
 				{
 					auto alllen = uint64(nowPos - hd->pos);
-					memcpy(reinterpret_cast<char*>(buffer), reinterpret_cast<char*>(hd->mem) + hd->pos, alllen);
+					memcpy(static_cast<char*>(buffer), static_cast<char*>(hd->mem) + hd->pos, alllen);
 					hd->pos = nowPos;
 					return alllen;
 				}
@@ -634,7 +661,7 @@ uint64 FileStream::Write(void*buffer, uint64 len /*= 0*/)
 	auto hd = handleManager[handle];
 	//如果len参数没有传入，则写内存到流，直至遇到0，这相当于写入字符串至流
 	if(len == 0)
-		while(reinterpret_cast<uint8*>(buffer)[len] != 0)
+		while(static_cast<uint8*>(buffer)[len] != 0)
 			len++;
 
 	switch(hd->type)

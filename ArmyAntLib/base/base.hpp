@@ -64,6 +64,9 @@ static const Version version = Version(0, 0, 0, 1);
 //The version of boost library we used
 static const Version boostVer = Version(1, 59, 0, 0);
 
+//The version of Python source library we used
+static const Version pythonVer = Version(3, 5, 1, 0);
+
 }
 
 } // namespace ArmyAnt

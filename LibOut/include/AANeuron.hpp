@@ -36,6 +36,8 @@
 #include "AADefine.h"
 #include "AADigraph.hpp"
 #include "AAStateMachine.hpp"
+#include <iostream>
+
 
 namespace ArmyAnt {
 
