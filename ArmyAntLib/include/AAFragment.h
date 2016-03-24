@@ -25,7 +25,7 @@
 
 /*
  * The base tool functions and datas in the library
- * 本库的一些基础工具和数据.如果是数据, 实现在base.hpp中
+ * 本库的一些基础工具和数据.如果是数据, 实现在ArmyAntLib.cpp中
  */
 
 #if defined DEBUG

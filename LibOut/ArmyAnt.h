@@ -36,6 +36,8 @@
 
 // Base symbol defination
 #include "include/AADefine.h"
+// Base information interface
+
 
 // Template class of C++ class helper
 #include "include/AAClassPrivateHandle.hpp"

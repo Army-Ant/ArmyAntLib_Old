@@ -26,7 +26,7 @@
 #include "../include/AAClassPrivateHandle.hpp"
 #include <thread>
 #include <list>
-#include "../externals/tbox/bin/tbox/tbox.h"
+#include "../externals/boost/boost/asio.hpp"
 
 #ifdef OS_WINDOWS
 #include <windows.h>
@@ -88,7 +88,7 @@ public:
 	std::thread* pipeReader = nullptr;
 	std::list<char> inners;
 	//网络通讯tbox句柄
-	tb_stream_ref_t sockHandle = nullptr;
+	//boost::asio::handler_type<> sockHandle = nullptr;
 
 	static void NamePipeReader(FsPrivate*self);
 	std::list<char> ReadNamePipe(uint64 length, const uint8* endtag = nullptr);
@@ -320,10 +320,11 @@ bool FileStream::Open(const char* netAddr, uint8 protocol)
 	if(hd->type != StreamType::None)
 		return false;
 	Assert(netAddr != nullptr && protocol != 0);
-	hd->sockHandle = tb_stream_init_from_url(netAddr);
+	// TODO : 填充网络通信连接操作
+	/*hd->sockHandle = tb_stream_init_from_url(netAddr);
 	if(hd->sockHandle == nullptr)
 		return false;
-	if(tb_stream_open(hd->sockHandle) == tb_false)
+	if(tb_stream_open(hd->sockHandle) == tb_false)*/
 		return false;
 	hd->name = netAddr;
 	hd->type = StreamType::Network;
@@ -338,11 +339,11 @@ bool FileStream::Open(uint32 netIp, uint16 port, uint8 protocol)
 	Assert(port != 0 && protocol != 0);
 	char name[32] = "";
 	sprintf(name, "%d.%d.%d.%d:%d", netIp / 256 / 256 / 256, netIp / 256 / 256 % 256, netIp / 256 % 256, netIp % 256, int(port));
-	//填充网络通信连接操作
-	hd->sockHandle = tb_stream_init_from_sock(name, port, protocol, tb_true);
+	// TODO : 填充网络通信连接操作
+	/*hd->sockHandle = tb_stream_init_from_sock(name, port, protocol, tb_true);
 	if(hd->sockHandle == nullptr)
 		return false;
-	if(tb_stream_open(hd->sockHandle) == tb_false)
+	if(tb_stream_open(hd->sockHandle) == tb_false)*/
 		return false;
 	hd->name = name;
 	hd->type = StreamType::Network;
@@ -378,9 +379,10 @@ bool FileStream::Close()
 			hd->len = 0;
 			break;
 		case StreamType::Network:
-			ret = tb_false != tb_stream_clos(hd->sockHandle);
+			// TODO : 填充网络通信关闭操作
+			/*ret = tb_false != tb_stream_clos(hd->sockHandle);
 			if(ret)
-				hd->sockHandle = nullptr;
+				hd->sockHandle = nullptr;*/
 			break;
 		case StreamType::None:
 		default:
@@ -420,7 +422,8 @@ bool FileStream::IsOpened(bool dynamicCheck/* = true*/)
 			}
 			break;
 		case StreamType::Network:
-			return tb_stream_is_opened(hd->sockHandle) != tb_false;
+			// TODO : 填充网络通信检测操作
+//			return tb_stream_is_opened(hd->sockHandle) != tb_false;
 		default:
 			return false;
 	}
@@ -456,7 +459,8 @@ uint64 FileStream::GetLength() const
 		case StreamType::Memory:
 			return hd->len;
 		case StreamType::Network:
-			return uint64(tb_stream_size(hd->sockHandle));
+			// TODO : 填充网络通信检测操作
+//			return uint64(tb_stream_size(hd->sockHandle));
 		default:
 			return 0;
 	}
@@ -477,7 +481,8 @@ uint64 FileStream::GetPos() const
 		case StreamType::Memory:
 			return hd->pos;
 		case StreamType::Network:
-			return uint64(tb_stream_left(hd->sockHandle));
+			// TODO : 填充网络通信检测操作
+//			return uint64(tb_stream_left(hd->sockHandle));
 		default:
 			return 0;
 	}
@@ -495,7 +500,8 @@ bool FileStream::IsEndPos() const
 		case StreamType::Memory:
 			return hd->pos >= hd->len;
 		case StreamType::Network:
-			return tb_stream_left(hd->sockHandle) >= tb_stream_size(hd->sockHandle);
+			// TODO : 填充网络通信检测操作
+			//return tb_stream_left(hd->sockHandle) >= tb_stream_size(hd->sockHandle);
 		default:
 			return false;
 	}
@@ -515,7 +521,8 @@ bool FileStream::MovePos(uint64 pos /*= FILE_POS_END*/) const
 			hd->pos = pos;
 			break;
 		case StreamType::Network:
-			return tb_false != tb_stream_ctrl(hd->sockHandle, pos);
+			// TODO : 填充网络通信检测操作
+			//return tb_false != tb_stream_ctrl(hd->sockHandle, pos);
 		default:
 			return false;
 	}
@@ -584,7 +591,8 @@ uint64 FileStream::Read(void*buffer, uint32 len /*= FILE_SHORT_POS_END*/, uint64
 		}
 		case StreamType::Network:
 		{
-			tb_stream_read(hd->sockHandle, static_cast<tb_byte_t*>(buffer), len);
+			// TODO : 填充网络通信检测操作
+			//tb_stream_read(hd->sockHandle, static_cast<tb_byte_t*>(buffer), len);
 		}
 		default:
 			return 0;

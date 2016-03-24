@@ -116,7 +116,7 @@
     </ClCompile>
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalDependencies>$(ProjectDir)externals\tbox\bin\tbox.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
     <PreBuildEvent>
       <Command>$(ProjectDir)base\build_start.bat $(Configuration) $(ProjectDir) $(TargetName) $(PlatformTarget)</Command>
@@ -141,7 +141,7 @@
     </ClCompile>
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalDependencies>$(ProjectDir)externals\tbox\bin\tbox.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
     <PreBuildEvent>
       <Command>$(ProjectDir)base\build_start.bat $(Configuration) $(ProjectDir) $(TargetName) $(PlatformTarget)</Command>
@@ -166,6 +166,7 @@
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
     <PreBuildEvent>
       <Command>$(ProjectDir)base\build_start.bat $(Configuration) $(ProjectDir) $(TargetName) $(PlatformTarget)</Command>
@@ -191,6 +192,7 @@
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
     <PreBuildEvent>
       <Command>$(ProjectDir)base\build_start.bat $(Configuration) $(ProjectDir) $(TargetName) $(PlatformTarget)</Command>
@@ -443,7 +445,6 @@
     <ClInclude Include="externals\python3.5.1\include\weakrefobject.h" />
     <ClInclude Include="externals\python3.5.1\include\winreg.c.h" />
     <ClInclude Include="externals\python3.5.1\include\winsound.c.h" />
-    <ClInclude Include="externals\tbox\bin\tbox\tbox.h" />
     <ClInclude Include="include\AAAes.h" />
     <ClInclude Include="include\AABinary.h" />
     <ClInclude Include="include\AADigraph.hpp" />
@@ -459,14 +460,17 @@
     <ClInclude Include="include\AADefine.h" />
     <ClInclude Include="include\AAFile.h" />
     <ClInclude Include="include\AAClassPrivateHandle.hpp" />
+    <ClInclude Include="include\ArmyAntLib.h" />
     <ClInclude Include="include\C_AADefine.h" />
     <ClInclude Include="include\C_AAFile.h" />
     <ClInclude Include="include\C_AANeuron.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\AAAes.cpp" />
+    <ClCompile Include="src\AABinary.cpp" />
     <ClCompile Include="src\AAFile.cpp" />
     <ClCompile Include="src\AAPythonExport.cpp" />
+    <ClCompile Include="src\ArmyAntLib.cpp" />
     <ClCompile Include="src\Java_AAFile.cpp" />
     <ClCompile Include="src\Java_AANeuron.cpp" />
     <ClCompile Include="src\C_AAFile.cpp" />

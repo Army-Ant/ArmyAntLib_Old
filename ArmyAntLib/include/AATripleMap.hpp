@@ -129,7 +129,7 @@ public:
 	//插入键值
 	inline bool Insert(const _Key&, const std::pair<_Value1, _Value2>&);
 	//清除迭代器所指位置的内容
-	bool Erase(const Iterator&);
+	bool Erase(Iterator&);
 	//清除键所对应处的内容
 	bool Erase(const _Key&);
 
@@ -465,9 +465,9 @@ bool TripleMap<_Key, _Value1, _Value2>::Insert(const _Key&key, const std::pair<_
 }
 
 template <class _Key, class _Value1, class _Value2>
-bool TripleMap<_Key, _Value1, _Value2>::Erase(const Iterator&i)
+bool TripleMap<_Key, _Value1, _Value2>::Erase(Iterator&i)
 {
-	return i->Erase();
+	return i.Erase();
 }
 
 template <class _Key, class _Value1, class _Value2>
@@ -514,7 +514,8 @@ Iterator_TripleMap<_Key, _Value1, _Value2> TripleMap<_Key, _Value1, _Value2>::Be
 {
 	if(Empty())
 		return End();
-	return Iterator(*this);
+	auto ret = Iterator_TripleMap<_Key, _Value1, _Value2>(*this);
+	return ret;
 }
 
 template <class _Key, class _Value1, class _Value2>
@@ -522,7 +523,7 @@ const Iterator_TripleMap<_Key, _Value1, _Value2> TripleMap<_Key, _Value1, _Value
 {
 	if(Empty())
 		return End();
-	return (const Iterator)(*this);
+	return const_cast<TripleMap<_Key, _Value1, _Value2>*>(this)->Begin();
 }
 
 template <class _Key, class _Value1, class _Value2>
