@@ -22,6 +22,7 @@
  * 本文件为内部源码文件, 不会包含在闭源发布的本软件中
  */
 
+#include "../base/base.hpp"
 #include "../include/AANeuron.hpp"
 #include "../include/C_AANeuron.h"
 
@@ -81,7 +82,7 @@ ARMYANT_CLIB_API AA_CNeuronAlgorithm AA_NeuronAlgorithm_Create(AA_Neuron_ActiveF
 
 ARMYANT_CLIB_API AA_CNeuronAlgorithm AA_NeuronAlgorithm_Clone(AA_CNeuronAlgorithm value)
 {
-	Assert(manager.find(value)!=manager.end());
+	AAAssert(manager.find(value)!=manager.end());
 	uint32 len = uint32(manager.size());
 	//获取当前未使用的最小句柄号
 	for(uint32 n = 0; n < len; n++)

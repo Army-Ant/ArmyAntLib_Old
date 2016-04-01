@@ -51,6 +51,18 @@ static const int FALSE = 0;
 #endif
 #endif
 
+// Debug断言宏的定义, 同AAFragment的同名函数
+#ifndef AAAssert
+#if defined DEBUG
+#include <assert.h>
+#define AAAssert(x) assert(x)
+#elif defined _cplusplus
+#define AAAssert(x) if(!(x))throw std::invalid_argument("assert failed !");else;
+#else
+#define AAAssert(x) x
+#endif // ifdef DEBUG
+#endif // ifndef AAAssert
+
 #ifndef _cplusplus
 
 // C99的布尔转C++布尔
@@ -73,14 +85,6 @@ static const double s_aa_natrualBase = 2.7182818284590452353;
 #define AA_SAFE_DEL(x) if(x != NULL){free(x); x = NULL;}else;
 #define AA_SAFE_FREE AA_SAFE_DEL
 #define AA_SAFE_DELALL AA_SAFE_DEL
-
-// Debug断言宏的定义, 同AAFragment的同名函数
-#if defined DEBUG
-#include <assert.h>
-#define Assert(x) assert(x)
-#else
-#define Assert(x) x
-#endif
 
 #endif
 

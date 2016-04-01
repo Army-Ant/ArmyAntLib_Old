@@ -788,7 +788,7 @@ bool Iterator_Tree<T_Val, T_Tag>::IsBegin()
 		case TraversalType::Unknown:
 			return false;
 		default:
-			Assert(type <= TraversalType::RandomTraversal);
+			AAAssert(type <= TraversalType::RandomTraversal);
 			return false;
 	}
 }
@@ -807,7 +807,7 @@ bool Iterator_Tree<T_Val, T_Tag>::IsEnd()
 		case TraversalType::Unknown:
 			return false;
 		default:
-			Assert(type <= TraversalType::RandomTraversal);
+			AAAssert(type <= TraversalType::RandomTraversal);
 			return false;
 	}
 }
@@ -1026,7 +1026,7 @@ bool Iterator_Tree<T_Val, T_Tag>::Go(bool isNext)
 						return true;
 					}
 				}
-				Assert(nownode != coll[coll.size() - 1] && nownode != coll[0]);
+				AAAssert(nownode != coll[coll.size() - 1] && nownode != coll[0]);
 				nownode = nullptr;
 				if(isNext)
 				{

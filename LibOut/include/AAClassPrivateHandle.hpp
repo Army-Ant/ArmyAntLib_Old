@@ -40,7 +40,7 @@ public:
 	~ClassPrivateHandleManager() {}
 
 	//创建一个内部类实例，这通常是在建立外部实例时进行调用的
-	T_Handle GetHandle(T_Out* src);
+	T_Handle GetHandle(T_Out* src, T_In* newObject = new T_In());
 	//销毁内部实例，这通常是与外部实例的析构一起进行的
 	void ReleaseHandle(T_Handle handle);
 
@@ -63,7 +63,7 @@ public:
 /******************************** Source Code *********************************/
 
 template <class T_Out, class T_In, class T_Handle>
-T_Handle ArmyAnt::ClassPrivateHandleManager<T_Out, T_In, T_Handle>::GetHandle(T_Out* src)
+T_Handle ArmyAnt::ClassPrivateHandleManager<T_Out, T_In, T_Handle>::GetHandle(T_Out* src, T_In* newObject)
 {
 	auto len = handleMap.Size();
 	//获取当前未使用的最小句柄号
@@ -72,12 +72,12 @@ T_Handle ArmyAnt::ClassPrivateHandleManager<T_Out, T_In, T_Handle>::GetHandle(T_
 		//设置句柄，创建内部实例，并关联到外部实例
 		if(handleMap.Find(n) == handleMap.End())
 		{
-			handleMap.Insert(n, src, new T_In());
+			handleMap.Insert(n, src, newObject);
 			return n;
 		}
 	}
 	//没有未使用的中间句柄号，则在结尾添加新最大句柄号，并创建内部实例、关联到外部实例
-	handleMap.Insert(len, src, new T_In());
+	handleMap.Insert(len, src, newObject);
 	return len;
 }
 

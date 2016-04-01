@@ -64,16 +64,6 @@ inline NUM1 max(NUM1 num1, NUM2 num2)
 	return num1 < num2 ? NUM1(num2) : num1;
 }
 
-inline void Assert(bool x)
-{
-#if defined DEBUG
-	assert(x);
-#elif defined _cplusplus
-	if(!(x))
-		throw std::invalid_argument("assert failed !");
-#endif
-}
-
 template<class PTR>
 inline PTR&AA_SAFE_DEL(PTR&ptr)
 {

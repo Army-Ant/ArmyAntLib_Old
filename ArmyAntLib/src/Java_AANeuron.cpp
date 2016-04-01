@@ -22,7 +22,8 @@
  * 本文件为内部源码文件, 不会包含在闭源发布的本软件中
  */
 
-#include "../base/Java_AANeuron.h"
+#include "../base/base.hpp"
+#include <jni.h>
 #include "../include/C_AANeuron.h"
 #include "../include/AANeuron.hpp"
 #include "../include/AAJNITools.hpp"
@@ -44,34 +45,34 @@ static double MethodTemplate(double)
 	return 0;
 }
 
-JNIEXPORT jdouble JNICALL Java_ArmyAnt_Java_1AANeuron_Liner(JNIEnv *, jclass, jdouble input, jdouble slope, jdouble bias)
+JNIEXPORT jdouble JNICALL Java_ArmyAnt_Neuron_Algorithm_Liner(JNIEnv *, jclass, jdouble input, jdouble slope, jdouble bias)
 {
 	return AA_Math_Liner(input, slope, bias);
 }
 
-JNIEXPORT jdouble JNICALL Java_ArmyAnt_Java_1AANeuron_Ramp(JNIEnv *, jclass, jdouble input, jdouble width, jdouble height)
+JNIEXPORT jdouble JNICALL Java_ArmyAnt_Neuron_Algorithm_Ramp(JNIEnv *, jclass, jdouble input, jdouble width, jdouble height)
 {
 	return AA_Math_Ramp(input, width, height);
 }
 
-JNIEXPORT jdouble JNICALL Java_ArmyAnt_Java_1AANeuron_Threshold(JNIEnv *, jclass, jdouble input, jdouble amplitude, jdouble threshold)
+JNIEXPORT jdouble JNICALL Java_ArmyAnt_Neuron_Algorithm_Threshold(JNIEnv *, jclass, jdouble input, jdouble amplitude, jdouble threshold)
 {
 	return AA_Math_Threshold(input, amplitude, threshold);
 }
 
-JNIEXPORT jdouble JNICALL Java_ArmyAnt_Java_1AANeuron_Sigmoid(JNIEnv *, jclass, jdouble input, jdouble coef)
+JNIEXPORT jdouble JNICALL Java_ArmyAnt_Neuron_Algorithm_Sigmoid(JNIEnv *, jclass, jdouble input, jdouble coef)
 {
 	return AA_Math_Sigmoid(input, coef);
 }
 
-JNIEXPORT jdouble JNICALL Java_ArmyAnt_Java_1AANeuron_DoubleSigmoid(JNIEnv *, jclass, jdouble input, jdouble coef)
+JNIEXPORT jdouble JNICALL Java_ArmyAnt_Neuron_Algorithm_DoubleSigmoid(JNIEnv *, jclass, jdouble input, jdouble coef)
 {
 	return AA_Math_DoubleSigmoid(input, coef);
 }
 
 static std::map<uint32, jobject> s_funcInterfaceGlobal;
 
-JNIEXPORT jlong JNICALL Java_ArmyAnt_Java_1AANeuron_Native_1Create(JNIEnv *env, jclass, jobject funcInterface, jdouble threshold)
+JNIEXPORT jlong JNICALL Java_ArmyAnt_Neuron_Algorithm_Native_1Create(JNIEnv *env, jclass, jobject funcInterface, jdouble threshold)
 {
 	if(funcInterface == nullptr)
 		return -1;
@@ -90,7 +91,7 @@ JNIEXPORT jlong JNICALL Java_ArmyAnt_Java_1AANeuron_Native_1Create(JNIEnv *env, 
 	return jlong(ret);
 }
 
-JNIEXPORT jlong JNICALL Java_ArmyAnt_Java_1AANeuron_Native_1Clone(JNIEnv *, jclass, jlong value)
+JNIEXPORT jlong JNICALL Java_ArmyAnt_Neuron_Algorithm_Native_1Clone(JNIEnv *, jclass, jlong value)
 {
 	if(value < 0)
 		return jlong(-1);
@@ -100,7 +101,7 @@ JNIEXPORT jlong JNICALL Java_ArmyAnt_Java_1AANeuron_Native_1Clone(JNIEnv *, jcla
 }
 
 
-JNIEXPORT void JNICALL Java_ArmyAnt_Java_1AANeuron_Native_1Release(JNIEnv * env, jclass, jlong value)
+JNIEXPORT void JNICALL Java_ArmyAnt_Neuron_Algorithm_Native_1Release(JNIEnv * env, jclass, jlong value)
 {
 	if(value >= 0)
 		AA_NeuronAlgorithm_Release(uint32(value));
@@ -109,40 +110,40 @@ JNIEXPORT void JNICALL Java_ArmyAnt_Java_1AANeuron_Native_1Release(JNIEnv * env,
 	s_funcInterfaceGlobal.erase(uint32(value));
 }
 
-JNIEXPORT jboolean JNICALL Java_ArmyAnt_Java_1AANeuron_Native_1JoinActive(JNIEnv *, jclass, jlong value, jdouble input, jdouble weight)
+JNIEXPORT jboolean JNICALL Java_ArmyAnt_Neuron_Algorithm_Native_1JoinActive(JNIEnv *, jclass, jlong value, jdouble input, jdouble weight)
 {
 	if(value < 0)
 		return JNI_FALSE;
 	return jboolean(AA_NeuronAlgorithm_JoinActive(uint32(value),input,weight));
 }
 
-JNIEXPORT jboolean JNICALL Java_ArmyAnt_Java_1AANeuron_Native_1LeaveActive(JNIEnv *, jclass, jlong value, jdouble input, jdouble weight)
+JNIEXPORT jboolean JNICALL Java_ArmyAnt_Neuron_Algorithm_Native_1LeaveActive(JNIEnv *, jclass, jlong value, jdouble input, jdouble weight)
 {
 	if(value < 0)
 		return JNI_FALSE;
 	return jboolean(AA_NeuronAlgorithm_LeaveActive(uint32(value), input, weight));
 }
 
-JNIEXPORT jboolean JNICALL Java_ArmyAnt_Java_1AANeuron_Native_1ClearActive(JNIEnv *, jclass, jlong value)
+JNIEXPORT jboolean JNICALL Java_ArmyAnt_Neuron_Algorithm_Native_1ClearActive(JNIEnv *, jclass, jlong value)
 {
 	if(value < 0)
 		return JNI_FALSE;
 	return jboolean(AA_NeuronAlgorithm_ClearActive(uint32(value)));
 }
 
-JNIEXPORT jdouble JNICALL Java_ArmyAnt_Java_1AANeuron_Native_1GetOutput(JNIEnv *, jclass, jlong value)
+JNIEXPORT jdouble JNICALL Java_ArmyAnt_Neuron_Algorithm_Native_1GetOutput(JNIEnv *, jclass, jlong value)
 {
-	Assert(value >= 0);
+	AAAssert(value >= 0);
 	return AA_NeuronAlgorithm_GetOutput(uint32(value));
 }
 
-JNIEXPORT jdouble JNICALL Java_ArmyAnt_Java_1AANeuron_Native_1GetAllActive(JNIEnv *, jclass, jlong value)
+JNIEXPORT jdouble JNICALL Java_ArmyAnt_Neuron_Algorithm_Native_1GetAllActive(JNIEnv *, jclass, jlong value)
 {
-	Assert(value >= 0);
+	AAAssert(value >= 0);
 	return AA_NeuronAlgorithm_GetAllActive(uint32(value));
 }
 
-JNIEXPORT jboolean JNICALL Java_ArmyAnt_Java_1AANeuron_Native_1SetActiveInterface(JNIEnv *env, jclass, jlong value, jobject funcInterface)
+JNIEXPORT jboolean JNICALL Java_ArmyAnt_Neuron_Algorithm_Native_1SetActiveInterface(JNIEnv *env, jclass, jlong value, jobject funcInterface)
 {
 	if(value < 0 || funcInterface == nullptr)
 		return JNI_FALSE;
@@ -158,13 +159,13 @@ JNIEXPORT jboolean JNICALL Java_ArmyAnt_Java_1AANeuron_Native_1SetActiveInterfac
 	}) ? JNI_TRUE : JNI_FALSE;
 }
 
-JNIEXPORT jdouble JNICALL Java_ArmyAnt_Java_1AANeuron_Native_1GetThreshold(JNIEnv *, jclass, jlong value)
+JNIEXPORT jdouble JNICALL Java_ArmyAnt_Neuron_Algorithm_Native_1GetThreshold(JNIEnv *, jclass, jlong value)
 {
-	Assert(value >= 0);
+	AAAssert(value >= 0);
 	return AA_NeuronAlgorithm_GetThreshold(uint32(value));
 }
 
-JNIEXPORT jboolean JNICALL Java_ArmyAnt_Java_1AANeuron_Native_1SetThreshold(JNIEnv *, jclass, jlong value, jdouble threshold)
+JNIEXPORT jboolean JNICALL Java_ArmyAnt_Neuron_Algorithm_Native_1SetThreshold(JNIEnv *, jclass, jlong value, jdouble threshold)
 {
 	if(value < 0)
 		return JNI_FALSE;

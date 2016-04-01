@@ -74,49 +74,59 @@
     <IntDir />
     <TargetName>$(ProjectName)d</TargetName>
     <CodeAnalysisRuleSet>SecurityRules.ruleset</CodeAnalysisRuleSet>
-    <IncludePath>$(ProjectDir)externals\boost\;$(JAVA_HOME)\include\;$(JAVA_HOME)\include\win32\;$(IncludePath)</IncludePath>
-    <LibraryPath>$(ProjectDir)externals\python3.5.1\x86;$(LibraryPath)</LibraryPath>
+    <IncludePath>$(ProjectDir)externals\boost;$(JAVA_HOME)\include;$(JAVA_HOME)\include\win32;$(IncludePath)</IncludePath>
+    <LibraryPath>$(ProjectDir)externals\python3.5.1\x86;$(ProjectDir)externals\boost\stage\lib;$(LibraryPath)</LibraryPath>
+    <LibraryWPath>$(LibraryWPath)</LibraryWPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <TargetName>$(ProjectName)d_64</TargetName>
     <CodeAnalysisRuleSet>SecurityRules.ruleset</CodeAnalysisRuleSet>
-    <IncludePath>$(ProjectDir)externals\boost\;$(JAVA_HOME)\include\;$(JAVA_HOME)\include\win32\;$(IncludePath)</IncludePath>
+    <IncludePath>$(ProjectDir)externals\boost;$(JAVA_HOME)\include;$(JAVA_HOME)\include\win32;$(IncludePath)</IncludePath>
     <TargetExt>.dll</TargetExt>
     <OutDir>$(ProjectDir)bin\</OutDir>
     <IntDir />
-    <LibraryPath>$(ProjectDir)externals\python3.5.1\x64;$(LibraryPath)</LibraryPath>
+    <LibraryPath>$(ProjectDir)externals\python3.5.1\x64;$(ProjectDir)externals\boost\stage\lib64;$(LibraryPath)</LibraryPath>
+    <LibraryWPath>$(LibraryWPath)</LibraryWPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <TargetExt>.dll</TargetExt>
     <OutDir>$(ProjectDir)bin\</OutDir>
     <IntDir />
-    <IncludePath>$(ProjectDir)externals\boost\;$(JAVA_HOME)\include\;$(JAVA_HOME)\include\win32\;$(IncludePath)</IncludePath>
-    <LibraryPath>$(ProjectDir)externals\python3.5.1\x86;$(LibraryPath)</LibraryPath>
+    <IncludePath>$(ProjectDir)externals\boost;$(JAVA_HOME)\include;$(JAVA_HOME)\include\win32;$(IncludePath)</IncludePath>
+    <LibraryPath>$(ProjectDir)externals\python3.5.1\x86;$(ProjectDir)externals\boost\stage\lib;$(LibraryPath)</LibraryPath>
+    <LibraryWPath>$(LibraryWPath)</LibraryWPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
-    <IncludePath>$(ProjectDir)externals\boost\;$(JAVA_HOME)\include\;$(JAVA_HOME)\include\win32\;$(IncludePath)</IncludePath>
+    <IncludePath>$(ProjectDir)externals\boost;$(JAVA_HOME)\include;$(JAVA_HOME)\include\win32;$(IncludePath)</IncludePath>
     <TargetExt>.dll</TargetExt>
     <OutDir>$(ProjectDir)bin\</OutDir>
     <IntDir />
     <TargetName>$(ProjectName)_64</TargetName>
-    <LibraryPath>$(ProjectDir)externals\python3.5.1\x64;$(LibraryPath)</LibraryPath>
+    <LibraryPath>$(ProjectDir)externals\python3.5.1\x64;$(ProjectDir)externals\boost\stage\lib64;$(LibraryPath)</LibraryPath>
+    <LibraryWPath>$(LibraryWPath)</LibraryWPath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
       <WarningLevel>Level4</WarningLevel>
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
-      <PreprocessorDefinitions>_cplusplus;_x86;OS_WINDOWS;_WIN32;ARMYANTLIB_EXPORTS;_CRT_SECURE_NO_WARNINGS;DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>_cplusplus;_SCL_SECURE_NO_WARNINGS;_x86;OS_WINDOWS;WIN32;_WIN32;ARMYANTLIB_EXPORTS;_CRT_SECURE_NO_WARNINGS;_DLL;DEBUG;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <EnableParallelCodeGeneration>true</EnableParallelCodeGeneration>
       <PrecompiledHeaderFile>base.hpp</PrecompiledHeaderFile>
       <StringPooling>true</StringPooling>
-      <DebugInformationFormat>OldStyle</DebugInformationFormat>
-      <RuntimeLibrary>
-      </RuntimeLibrary>
+      <DebugInformationFormat>EditAndContinue</DebugInformationFormat>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <ForceConformanceInForLoopScope />
+      <AdditionalOptions>
+      </AdditionalOptions>
     </ClCompile>
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+      <IgnoreAllDefaultLibraries>
+      </IgnoreAllDefaultLibraries>
+      <IgnoreSpecificDefaultLibraries>
+      </IgnoreSpecificDefaultLibraries>
     </Link>
     <PreBuildEvent>
       <Command>$(ProjectDir)base\build_start.bat $(Configuration) $(ProjectDir) $(TargetName) $(PlatformTarget)</Command>
@@ -130,18 +140,23 @@
       <WarningLevel>Level4</WarningLevel>
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
-      <PreprocessorDefinitions>_cplusplus;_x64;_x86_64;OS_WINDOWS;_WIN64;ARMYANTLIB_EXPORTS;_CRT_SECURE_NO_WARNINGS;DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>_cplusplus;_SCL_SECURE_NO_WARNINGS;_x64;_x86_64;OS_WINDOWS;WIN64;_WIN64;ARMYANTLIB_EXPORTS;_CRT_SECURE_NO_WARNINGS;_DLL;DEBUG;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <EnableParallelCodeGeneration>true</EnableParallelCodeGeneration>
       <PrecompiledHeaderFile>base.hpp</PrecompiledHeaderFile>
       <StringPooling>true</StringPooling>
       <DebugInformationFormat>OldStyle</DebugInformationFormat>
       <OmitFramePointers>false</OmitFramePointers>
-      <RuntimeLibrary>
-      </RuntimeLibrary>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <AdditionalOptions>
+      </AdditionalOptions>
     </ClCompile>
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+      <IgnoreAllDefaultLibraries>
+      </IgnoreAllDefaultLibraries>
+      <IgnoreSpecificDefaultLibraries>
+      </IgnoreSpecificDefaultLibraries>
     </Link>
     <PreBuildEvent>
       <Command>$(ProjectDir)base\build_start.bat $(Configuration) $(ProjectDir) $(TargetName) $(PlatformTarget)</Command>
@@ -157,16 +172,22 @@
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>true</SDLCheck>
-      <PreprocessorDefinitions>_cplusplus;_x86;OS_WINDOWS;_WIN32;ARMYANTLIB_EXPORTS;_CRT_SECURE_NO_WARNINGS;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>_cplusplus;_SCL_SECURE_NO_WARNINGS;_x86;OS_WINDOWS;WIN32;_WIN32;ARMYANTLIB_EXPORTS;_CRT_SECURE_NO_WARNINGS;_DLL;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <EnableParallelCodeGeneration>true</EnableParallelCodeGeneration>
       <PrecompiledHeaderFile>base.hpp</PrecompiledHeaderFile>
-      <RuntimeLibrary />
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+      <AdditionalOptions>
+      </AdditionalOptions>
     </ClCompile>
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
       <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+      <IgnoreAllDefaultLibraries>
+      </IgnoreAllDefaultLibraries>
+      <IgnoreSpecificDefaultLibraries>
+      </IgnoreSpecificDefaultLibraries>
     </Link>
     <PreBuildEvent>
       <Command>$(ProjectDir)base\build_start.bat $(Configuration) $(ProjectDir) $(TargetName) $(PlatformTarget)</Command>
@@ -182,17 +203,23 @@
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>true</SDLCheck>
-      <PreprocessorDefinitions>_cplusplus;_x64;_x86_64;OS_WINDOWS;_WIN64;ARMYANTLIB_EXPORTS;_CRT_SECURE_NO_WARNINGS;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>_cplusplus;_SCL_SECURE_NO_WARNINGS;_x64;_x86_64;OS_WINDOWS;WIN64;_WIN64;ARMYANTLIB_EXPORTS;_CRT_SECURE_NO_WARNINGS;_DLL;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <EnableParallelCodeGeneration>true</EnableParallelCodeGeneration>
       <PrecompiledHeaderFile>base.hpp</PrecompiledHeaderFile>
       <OmitFramePointers>false</OmitFramePointers>
-      <RuntimeLibrary />
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+      <AdditionalOptions>
+      </AdditionalOptions>
     </ClCompile>
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
       <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+      <IgnoreAllDefaultLibraries>
+      </IgnoreAllDefaultLibraries>
+      <IgnoreSpecificDefaultLibraries>
+      </IgnoreSpecificDefaultLibraries>
     </Link>
     <PreBuildEvent>
       <Command>$(ProjectDir)base\build_start.bat $(Configuration) $(ProjectDir) $(TargetName) $(PlatformTarget)</Command>
@@ -202,8 +229,6 @@
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClInclude Include="base\Java_AAFile.h" />
-    <ClInclude Include="base\Java_AANeuron.h" />
     <ClInclude Include="C_ArmyAnt.h" />
     <ClInclude Include="ArmyAnt.h" />
     <ClInclude Include="base\base.hpp" />
@@ -447,11 +472,13 @@
     <ClInclude Include="externals\python3.5.1\include\winsound.c.h" />
     <ClInclude Include="include\AAAes.h" />
     <ClInclude Include="include\AABinary.h" />
+    <ClInclude Include="include\AAConfiguration.h" />
     <ClInclude Include="include\AADigraph.hpp" />
     <ClInclude Include="include\AAFragment.h" />
     <ClInclude Include="include\AAJNITools.hpp" />
     <ClInclude Include="include\AAMessageQueue.h" />
     <ClInclude Include="include\AANeuron.hpp" />
+    <ClInclude Include="include\AASocket.h" />
     <ClInclude Include="include\AAStateMachine.hpp" />
     <ClInclude Include="include\AATree.hpp" />
     <ClInclude Include="include\AATripleMap.hpp" />
@@ -470,6 +497,7 @@
     <ClCompile Include="src\AABinary.cpp" />
     <ClCompile Include="src\AAFile.cpp" />
     <ClCompile Include="src\AAPythonExport.cpp" />
+    <ClCompile Include="src\AASocket.cpp" />
     <ClCompile Include="src\ArmyAntLib.cpp" />
     <ClCompile Include="src\Java_AAFile.cpp" />
     <ClCompile Include="src\Java_AANeuron.cpp" />
@@ -482,8 +510,8 @@
     <None Include="base\build_start.bat" />
     <None Include="base\build_start.sh" />
     <None Include="languages\Java\buildJava.bat" />
-    <None Include="languages\Java\src\Java_AAFile.java" />
-    <None Include="languages\Java\src\Java_AANeuron.java" />
+    <None Include="languages\Java\src\ArmyAnt\FileStream.java" />
+    <None Include="languages\Java\src\ArmyAnt\NeuronAlgorithm.java" />
     <None Include="languages\Python\ArmyAnt.py" />
   </ItemGroup>
   <ItemGroup>

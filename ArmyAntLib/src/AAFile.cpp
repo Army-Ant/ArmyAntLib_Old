@@ -22,11 +22,11 @@
  * 本文件为内部源码文件, 不会包含在闭源发布的本软件中
  */
 
+#include "../base/base.hpp"
 #include "../include/AAFile.h"
 #include "../include/AAClassPrivateHandle.hpp"
 #include <thread>
 #include <list>
-#include "../externals/boost/boost/asio.hpp"
 
 #ifdef OS_WINDOWS
 #include <windows.h>
@@ -182,7 +182,7 @@ bool FileStream::Open(const char* filepath)
 	//type没有重置，说明本流尚未关闭
 	if(hd->type != StreamType::None)
 		return false;
-	Assert(filepath != nullptr);
+	AAAssert(filepath != nullptr);
 	//根据exist和created的允许设定，判断文件存在情况
 	bool fexist = IsFileExist(filepath);
 	if(hd->nocreate&&!fexist)
@@ -214,7 +214,7 @@ bool FileStream::Open(mac_uint memaddr, uint64 len)
 	//type没有重置，说明本流尚未关闭
 	if(hd->type != StreamType::None)
 		return false;
-	Assert(memaddr != 0);
+	AAAssert(memaddr != 0);
 	if(hd->noexist)
 		return false;
 	//保存内存地址
@@ -261,7 +261,7 @@ bool FileStream::Open(const char* pipename, const char*pipePath, const char*pipe
 	auto hd = handleManager[handle];
 	if(hd->type != StreamType::None)
 		return false;
-	Assert(pipename != nullptr);
+	AAAssert(pipename != nullptr);
 	//打开命名管道
 	hd->name = std::string("\\\\") + pipeServer + "\\pipe\\" + pipePath + pipename;
 	hd->file = fopen(hd->name.c_str(), "wb+");
@@ -301,7 +301,7 @@ bool FileStream::Open(uint8 comNum)
 	auto hd = handleManager[handle];
 	if(hd->type != StreamType::None)
 		return false;
-	Assert(comNum != 0);
+	AAAssert(comNum != 0);
 	//打开串口
 	hd->name = std::string("com") + char((comNum / 10 > 0) ? (comNum / 10 + 48) : 0) + char(comNum % 10 + 48);
 	hd->file = fopen(hd->name.c_str(), "wb+");
@@ -319,7 +319,7 @@ bool FileStream::Open(const char* netAddr, uint8 protocol)
 	auto hd = handleManager[handle];
 	if(hd->type != StreamType::None)
 		return false;
-	Assert(netAddr != nullptr && protocol != 0);
+	AAAssert(netAddr != nullptr && protocol != 0);
 	// TODO : 填充网络通信连接操作
 	/*hd->sockHandle = tb_stream_init_from_url(netAddr);
 	if(hd->sockHandle == nullptr)
@@ -336,7 +336,7 @@ bool FileStream::Open(uint32 netIp, uint16 port, uint8 protocol)
 	auto hd = handleManager[handle];
 	if(hd->type != StreamType::None)
 		return false;
-	Assert(port != 0 && protocol != 0);
+	AAAssert(port != 0 && protocol != 0);
 	char name[32] = "";
 	sprintf(name, "%d.%d.%d.%d:%d", netIp / 256 / 256 / 256, netIp / 256 / 256 % 256, netIp / 256 % 256, netIp % 256, int(port));
 	// TODO : 填充网络通信连接操作
@@ -536,7 +536,7 @@ const char* FileStream::GetSourceName() const
 
 uint64 FileStream::Read(void*buffer, uint32 len /*= FILE_SHORT_POS_END*/, uint64 pos /*= FILE_LONG_POS_END*/)
 {
-	Assert(buffer != nullptr);
+	AAAssert(buffer != nullptr);
 	auto hd = handleManager[handle];
 	//根据类型进行读取。磁盘文件、命名管道和串口可以统一调用库函数
 	switch(hd->type)
@@ -601,7 +601,7 @@ uint64 FileStream::Read(void*buffer, uint32 len /*= FILE_SHORT_POS_END*/, uint64
 
 uint64 FileStream::Read(void*buffer, uint8 endtag, uint64 maxlen/* = FILE_SHORT_POS_END*/)
 {
-	Assert(buffer != nullptr);
+	AAAssert(buffer != nullptr);
 	auto hd = handleManager[handle];
 	uint64 len = 0;
 	fpos_t wholeLen;
@@ -665,7 +665,7 @@ uint64 FileStream::Read(void*buffer, uint8 endtag, uint64 maxlen/* = FILE_SHORT_
 
 uint64 FileStream::Write(void*buffer, uint64 len /*= 0*/)
 {
-	Assert(buffer != nullptr);
+	AAAssert(buffer != nullptr);
 	auto hd = handleManager[handle];
 	//如果len参数没有传入，则写内存到流，直至遇到0，这相当于写入字符串至流
 	if(len == 0)
@@ -710,7 +710,7 @@ bool FileStream::CopyFile(const char*srcPath, const char*dstPath)
 	{
 		memlen = 1024;
 		cpmem = new char[memlen];
-		Assert(cpmem != nullptr);
+		AAAssert(cpmem != nullptr);
 	}
 	//检测源文件的长度
 	fpos_t flen;
@@ -796,7 +796,7 @@ bool FileStream::operator^=(const char* filename)
 	{
 		memlen = 1024;
 		cpmem = new char[memlen];
-		Assert(cpmem != nullptr);
+		AAAssert(cpmem != nullptr);
 	}
 	//进行数据拷贝
 	for(uint64 i = 0; i < flen; i += memlen)

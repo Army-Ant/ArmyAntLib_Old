@@ -37,11 +37,11 @@ namespace JNITools{
 		// 获取Java字符串类
 		std::string rtn = "";
 		jclass clsstring = env->FindClass("java/lang/String");
-		Assert(clsstring != nullptr);
+		AAAssert(clsstring != nullptr);
 		// 获取Java的字符串转字节流函数
 		jstring strencode = env->NewStringUTF("GB2312");
 		static jmethodID mid = env->GetMethodID(clsstring, "getBytes", "(Ljava/lang/String;)[B");
-		Assert(mid != nullptr);
+		AAAssert(mid != nullptr);
 		// 执行Java的转换函数
 		jbyteArray barr = (jbyteArray)(env->CallObjectMethod(jstr, mid, strencode));
 		jsize alen = env->GetArrayLength(barr);
@@ -71,7 +71,7 @@ namespace JNITools{
 	inline static jmethodID GetInterfaceMethodID(JNIEnv *env, const char* interfaceName, const char* methodName, const char* methodSig)
 	{
 		auto cls = env->FindClass(interfaceName);
-		Assert(cls != nullptr);
+		AAAssert(cls != nullptr);
 		return env->GetMethodID(cls, methodName, methodSig);
 	}
 

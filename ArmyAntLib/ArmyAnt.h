@@ -37,7 +37,7 @@
 // Base symbol defination
 #include "include/AADefine.h"
 // Base information interface
-
+#include "include/ArmyAntLib.h"
 
 // Template class of C++ class helper
 #include "include/AAClassPrivateHandle.hpp"

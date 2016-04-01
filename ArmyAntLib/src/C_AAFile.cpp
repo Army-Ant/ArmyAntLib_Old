@@ -22,6 +22,7 @@
  * 本文件为内部源码文件, 不会包含在闭源发布的本软件中
  */
 
+#include "../base/base.hpp"
 #include "../include/C_AAFile.h"
 #include "../include/AAFile.h"
 #include <iostream>

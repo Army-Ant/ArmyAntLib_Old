@@ -102,6 +102,11 @@ public:
 
 } // namespace Infos
 
+namespace Utils {
+
+
+}
+
 } // namespace ArmyAnt
 
 #endif // ARMYANT_LIB_H_2016_3_19

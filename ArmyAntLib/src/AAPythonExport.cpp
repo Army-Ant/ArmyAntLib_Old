@@ -22,6 +22,7 @@
  * 本文件为内部源码文件, 不会包含在闭源发布的本软件中
  */
 
+#include "../base/base.hpp"
 #include <string>
 #include "../include/AAFile.h"
 #include "../include/C_AAFile.h"
@@ -99,7 +100,7 @@ extern "C" {
 				intDoubleDict.insert(std::pair<int, double>(i, value));
 				return i;
 			}
-		Assert(false);
+		AAAssert(false);
 		return -1;
 	}
 

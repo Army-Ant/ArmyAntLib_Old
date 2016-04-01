@@ -22,10 +22,10 @@
  * 本文件为内部源码文件, 不会包含在闭源发布的本软件中
  */
 
+#include "../base/base.hpp"
 #include "../include/AAAes.h"
 #include "../include/AAClassPrivateHandle.hpp"
-#include <ctime>
-#include <cstdlib>
+#include <boost/random.hpp>
 #include <memory.h>
 
 namespace ArmyAnt {
@@ -75,15 +75,16 @@ void ByteEncoder_Private::MakeRandomSBox()
 	//清空数据
 	memset(data, 0, 256);
 	//重置随机种子
-	srand(int(time(nullptr)));
+	boost::mt19937 gen;
+	boost::random::uniform_smallint<uint32> r(0, 255);
+	boost::variate_generator<boost::mt19937&, boost::uniform_smallint<uint32>>die(gen, r);
+
 	//摇出第一个数
-	uint8 start = rand() % 256;
+	uint8 start = uint8(die());
 	//摇出剩余的数
 	for(int i = 1; i < 256; i++)
 	{
-		if(i % 16 == 0)
-			srand(int(time(nullptr)));
-		uint8 c = rand() % 256;
+		uint8 c = uint8(die());
 		while(c == start || data[c] > 0)
 		{
 			if(++c > 255)
@@ -150,7 +151,7 @@ ByteEncoder::ByteEncoder()
 ByteEncoder::ByteEncoder(const ByteEncoder&value)
 	: handle(value.handle)
 {
-	Assert(byteEncoder_manager[value.handle] != nullptr);
+	AAAssert(byteEncoder_manager[value.handle] != nullptr);
 	byteEncoder_manager[value.handle]->refCount++;
 }
 
@@ -158,7 +159,7 @@ ByteEncoder::ByteEncoder(const ByteEncoder&value)
 ByteEncoder::ByteEncoder(uint32 encoderHandle)
 	:handle(encoderHandle)
 {
-	Assert(byteEncoder_manager[encoderHandle] != nullptr);
+	AAAssert(byteEncoder_manager[encoderHandle] != nullptr);
 	byteEncoder_manager[encoderHandle]->refCount++;
 }
 
@@ -171,7 +172,7 @@ ByteEncoder::~ByteEncoder()
 
 bool ByteEncoder::InputData(const uint8 elems[256], bool needCheck/* = false*/)
 {
-	Assert(elems != nullptr);
+	AAAssert(elems != nullptr);
 	auto hd = byteEncoder_manager[handle];
 	if(needCheck)
 	{
@@ -223,7 +224,7 @@ bool ByteEncoder::CopiedFromAnother(const ByteEncoder another, bool needCheck /*
 
 bool ByteEncoder::GetData(uint8 elems[256]) const
 {
-	Assert(elems != nullptr);
+	AAAssert(elems != nullptr);
 	memcpy(elems, byteEncoder_manager[handle]->data, 256);
 	return true;
 }
@@ -249,8 +250,8 @@ ByteEncoder ByteEncoder::GetBack() const
 
 ByteEncoder& ByteEncoder::operator= (const ByteEncoder&value)
 {
-	Assert(byteEncoder_manager[value.handle] != nullptr);
-	Assert(CopiedFromAnother(value));
+	AAAssert(byteEncoder_manager[value.handle] != nullptr);
+	AAAssert(CopiedFromAnother(value));
 	return *this;
 }
 
@@ -460,7 +461,7 @@ RoundSetting::RoundSetting()
 RoundSetting::RoundSetting(const RoundSetting&setting)
 	: handle(setting.handle)
 {
-	Assert(roundSetting_manager[setting.handle] != nullptr);
+	AAAssert(roundSetting_manager[setting.handle] != nullptr);
 	roundSetting_manager[setting.handle]->refCount++;
 }
 
@@ -468,7 +469,7 @@ RoundSetting::RoundSetting(const RoundSetting&setting)
 RoundSetting::RoundSetting(uint32 settingHandle)
 	:handle(settingHandle)
 {
-	Assert(roundSetting_manager[settingHandle] != nullptr);
+	AAAssert(roundSetting_manager[settingHandle] != nullptr);
 	roundSetting_manager[settingHandle]->refCount++;
 }
 
@@ -480,7 +481,7 @@ RoundSetting::~RoundSetting()
 
 bool RoundSetting::SetRoundPassword(const uint8 pwd[16])
 {
-	Assert(pwd != nullptr);
+	AAAssert(pwd != nullptr);
 	memcpy(roundSetting_manager[handle]->pwd, pwd, 16);
 	return true;
 }
@@ -568,7 +569,7 @@ public:
 
 uint32 Parser_Private::GetGPwd(uint32 src, uint8 rank)
 {
-	Assert(rank > 3 && rank < 44);
+	AAAssert(rank > 3 && rank < 44);
 	if(src >> 31 > 0)
 		src = (src << 1) + 1;
 	else src = src << 1;
@@ -716,20 +717,20 @@ Parser Parser::GetQuickParser(uint8 initPwd[16], uint8 byteEncoder[256] /*= null
 {
 	Parser ret;
 	uint8 pwds[176] = {0};
-	Assert(GetExtendPwds(initPwd, pwds));
-	Assert(ret.SetFirstlyPwd(pwds));
+	AAAssert(GetExtendPwds(initPwd, pwds));
+	AAAssert(ret.SetFirstlyPwd(pwds));
 	RoundSetting setting[10];
 	ByteEncoder bencoder;
 	if(byteEncoder == nullptr)
 		bencoder = ByteEncoder::GetRandomEncoder();
 	else
-		Assert(bencoder.InputData(byteEncoder, true));
+		AAAssert(bencoder.InputData(byteEncoder, true));
 	for(int i = 0; i < 10; i++)
 	{
-		Assert(setting[i].SetByteEncoder(bencoder));
-		Assert(setting[i].SetRoundPassword(pwds + 16 + 16 * i));
+		AAAssert(setting[i].SetByteEncoder(bencoder));
+		AAAssert(setting[i].SetRoundPassword(pwds + 16 + 16 * i));
 	}
-	Assert(ret.SetRounds(setting, 10));
+	AAAssert(ret.SetRounds(setting, 10));
 	return ret;
 	//这里返回时会不会导致数据被销毁？需要谨慎定义赋值运算符和拷贝构造函数
 }

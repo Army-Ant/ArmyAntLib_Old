@@ -46,6 +46,9 @@
     <Filter Include="0.docs">
       <UniqueIdentifier>{b54891ba-0f44-427d-8458-326b09b23eba}</UniqueIdentifier>
     </Filter>
+    <Filter Include="09.SwiftRefCode">
+      <UniqueIdentifier>{05c00f0d-f030-4df7-9a9f-043812510688}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="base\base.hpp">
@@ -504,12 +507,6 @@
     <ClInclude Include="include\AAJNITools.hpp">
       <Filter>04.CppLibCode\cpptools</Filter>
     </ClInclude>
-    <ClInclude Include="base\Java_AAFile.h">
-      <Filter>06.JavaRefCode</Filter>
-    </ClInclude>
-    <ClInclude Include="base\Java_AANeuron.h">
-      <Filter>06.JavaRefCode</Filter>
-    </ClInclude>
     <ClInclude Include="externals\python3.5.1\include\abstract.h">
       <Filter>02.Third-party-libraries\python3.5.1</Filter>
     </ClInclude>
@@ -834,6 +831,12 @@
     <ClInclude Include="include\ArmyAntLib.h">
       <Filter>04.CppLibCode</Filter>
     </ClInclude>
+    <ClInclude Include="include\AASocket.h">
+      <Filter>04.CppLibCode</Filter>
+    </ClInclude>
+    <ClInclude Include="include\AAConfiguration.h">
+      <Filter>04.CppLibCode</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\AAFile.cpp">
@@ -863,6 +866,9 @@
     <ClCompile Include="src\AABinary.cpp">
       <Filter>04.CppLibCode</Filter>
     </ClCompile>
+    <ClCompile Include="src\AASocket.cpp">
+      <Filter>04.CppLibCode</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="base\build_start.bat">
@@ -874,12 +880,6 @@
     <None Include="base\build_start.sh">
       <Filter>01.base</Filter>
     </None>
-    <None Include="languages\Java\src\Java_AAFile.java">
-      <Filter>06.JavaRefCode</Filter>
-    </None>
-    <None Include="languages\Java\src\Java_AANeuron.java">
-      <Filter>06.JavaRefCode</Filter>
-    </None>
     <None Include="languages\Python\ArmyAnt.py">
       <Filter>07.PythonRefCode</Filter>
     </None>
@@ -887,6 +887,12 @@
       <Filter>01.base</Filter>
     </None>
     <None Include="languages\Java\buildJava.bat">
+      <Filter>06.JavaRefCode</Filter>
+    </None>
+    <None Include="languages\Java\src\ArmyAnt\FileStream.java">
+      <Filter>06.JavaRefCode</Filter>
+    </None>
+    <None Include="languages\Java\src\ArmyAnt\NeuronAlgorithm.java">
       <Filter>06.JavaRefCode</Filter>
     </None>
   </ItemGroup>

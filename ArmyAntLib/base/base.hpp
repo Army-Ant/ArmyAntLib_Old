@@ -27,8 +27,30 @@
 
 #include "../include/AADefine.h"
 
+/*
+#ifdef DEBUG
+#define BOOST_ENABLE_ASSERT_DEBUG_HANDLER
+#else
+#define BOOST_ENABLE_ASSERT_HANDLER
+#endif
+*/
+#include <boost/assert.hpp>
+
+
 namespace ArmyAnt {
 
+#ifdef OS_WINDOWS
+
+#ifndef _WIN32_WINNT
+#define _WIN32_WINNT 0x0600
+#endif
+
+
+#undef AAAssert
+#define AAAssert(x) BOOST_ASSERT(x)
+
+
+#endif
 
 } // namespace ArmyAnt
 
