@@ -53,8 +53,10 @@ const Version Version::GetVersion(const char* obj)
 		return Version(1, 59, 0, 0);
 	else if(objstr == "python")
 		return Version(3, 5, 1, 0);
+/*
 	else if(objstr == "tbox")
 		return Version(1, 5, 1, 0);
+*/
 	else if(objstr == "")	// Self library's version
 		return Version(0, 0, 0, 1);
 	else return Version(0, 0, 0, 0);

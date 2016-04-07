@@ -55,11 +55,9 @@ static const int FALSE = 0;
 #ifndef AAAssert
 #if defined DEBUG
 #include <assert.h>
-#define AAAssert(x) assert(x)
-#elif defined _cplusplus
-#define AAAssert(x) if(!(x))throw std::invalid_argument("assert failed !");else;
+#define AAAssert(x,y) assert(x)
 #else
-#define AAAssert(x) x
+#define AAAssert(x,y) if(!(x))return y;
 #endif // ifdef DEBUG
 #endif // ifndef AAAssert
 

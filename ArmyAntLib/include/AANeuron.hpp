@@ -148,7 +148,7 @@ template<class T_Weight>
 NeuronAlgorithm<T_Weight>::NeuronAlgorithm(ActiveFunc activationFunc, T_Weight threshold)
 	: activationFunc(activationFunc), threshold(threshold)
 {
-	AAAssert(activationFunc != nullptr);
+	AAAssert(activationFunc != nullptr, );
 }
 
 template<class T_Weight>

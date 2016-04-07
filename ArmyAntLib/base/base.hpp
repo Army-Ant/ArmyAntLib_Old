@@ -46,9 +46,10 @@ namespace ArmyAnt {
 #endif
 
 
+#ifdef DEBUG
 #undef AAAssert
-#define AAAssert(x) BOOST_ASSERT(x)
-
+#define AAAssert(x,y) BOOST_ASSERT(x)
+#endif
 
 #endif
 

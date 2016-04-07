@@ -85,11 +85,13 @@ inline void AA_SAFE_DELALL(PTR&ptr)
 	}
 }
 
-inline void Log_Debug(const char* msg)
-{
-	msg;
+inline void Log_Debug(const char*
 #ifdef DEBUG
+					  msg)
+{
 	std::cout << msg << std::endl;
+#else
+){
 #endif
 }
 

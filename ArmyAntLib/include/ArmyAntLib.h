@@ -50,7 +50,7 @@ public:
 public:
 	// The version of our library and other referenced libraries
 	// Get our library's version without param
-	// Avaliable param values: boost python tbox
+	// Avaliable param values: boost python
 	static const Version GetVersion(const char* obj = nullptr);
 };
 
@@ -93,6 +93,43 @@ public:
 		_32bits,
 		_64bits,
 		_128bits
+	};
+
+	enum class DevLanguage : int8
+	{
+		Unknown,
+		Assembly_Intel,
+		Assembly_ARM,
+		COBOL,
+		Fortrain,
+		Basic,
+		C,
+		SmartTalk,
+		Matlab,
+		Perl,
+		Shell,
+		CPlusPlus,
+		VisualBasic,
+		Batch,
+		Java,
+		Javascript,
+		PHP,
+		ObjectiveC,
+		CSharp,
+		Python,
+		Lua,
+		Ruby,
+		Go,
+		FSharp,
+		Swift,
+		ActionScript,
+		Delphi,
+		R,
+		D,
+		Groovy,
+		Lisp,
+		Scala,
+		Ada
 	};
 
 	static OS GetOSType();

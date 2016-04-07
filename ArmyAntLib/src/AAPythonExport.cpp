@@ -94,13 +94,15 @@ extern "C" {
 
 	ARMYANT_CLIB_API int AA_NeuronAlgorithm_RecordDoubleToInt(double value)
 	{
-		for(int i = 0; i < intDoubleDict.size() + 2; i++)
+		if(intDoubleDict.size() > INT_MAX - 2)
+			AAAssert(false, -1);
+		for(int i = 0; i < int(intDoubleDict.size()) + 2; i++)
 			if(intDoubleDict.find(i) == intDoubleDict.end())
 			{
-				intDoubleDict.insert(std::pair<int, double>(i, value));
+				intDoubleDict.insert(std::pair<int, double>(int(i), value));
 				return i;
 			}
-		AAAssert(false);
+		AAAssert(false, 0);
 		return -1;
 	}
 

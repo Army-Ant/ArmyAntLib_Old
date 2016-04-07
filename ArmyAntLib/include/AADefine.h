@@ -34,6 +34,6 @@ typedef unsigned long long uint64;
 // 添加在类中, 禁止默认的拷贝赋值运算符(需要重载拷贝赋值运算符时请勿使用)
 #define AA_FORBID_ASSGN_OPR(typen) public: typen& operator=(typen&)=delete
 // 添加在类中, 将类变为抽象类,禁止创建类的任何实例
-#define AA_FORBID_CREATE_OB(typen) public: virtual void Forbid_Create_##typen##_Virtual_Function()=0
+#define AA_FORBID_CREATE_OB(typen) public: virtual void Forbid_Create___##typen##_____Real____Virtual__Function()=0
 
 #endif // A_A_DEFINE_H_2015_11_11

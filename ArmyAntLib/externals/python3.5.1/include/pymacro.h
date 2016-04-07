@@ -21,7 +21,7 @@
 /* Argument must be a char or an int in [-128, 127] or [0, 255]. */
 #define Py_CHARMASK(c) ((unsigned char)((c) & 0xff))
 
-/* AAAssert a build-time dependency, as an expression.
+/* Assert a build-time dependency, as an expression.
 
    Your compile will fail if the condition isn't true, or can't be evaluated
    by the compiler. This can be used in an expression: its value is 0.

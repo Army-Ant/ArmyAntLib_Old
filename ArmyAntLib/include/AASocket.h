@@ -28,6 +28,9 @@
 
 namespace ArmyAnt {
 
+class IPAddr_v4;
+class IPAddr_v6;
+
 class ARMYANTLIB_API IPAddr
 {
 public:
@@ -39,9 +42,21 @@ public:
 
 public:
 	virtual const char*GetStr()const = 0;
-	virtual uint8 GetIPVer()const = 0;
+	virtual uint8 GetIPVer()const;
 	virtual bool operator==(const char*value)const;
 	virtual bool operator!=(const char*value)const;
+	bool operator==(const IPAddr&value)const;
+	bool operator!=(const IPAddr&value)const;
+
+public:
+	operator IPAddr_v4 ();
+	operator const IPAddr_v4 ()const;
+	operator IPAddr_v6 ();
+	operator const IPAddr_v6 ()const;
+
+public:
+	static IPAddr* Create(const char*ipStr);
+	static IPAddr* Clone(const IPAddr& value);
 
 protected:
 	virtual void ParseFromString(const char* str);
@@ -79,6 +94,7 @@ public:
 	bool operator!=(uint32 ipNum)const;
 	bool operator==(const IPAddr_v4&value)const;
 	bool operator!=(const IPAddr_v4&value)const;
+	operator IPAddr&();
 
 protected:
 	void ParseFromString(const char* str)override;
@@ -118,6 +134,7 @@ public:
 	bool operator!=(const IPAddr_v6&value)const;
 	uint16& operator[](int index);
 	uint16 operator[](int index)const;
+	operator IPAddr&();
 
 protected:
 	void ParseFromString(const char* str)override;
@@ -132,30 +149,40 @@ private:
 	} addr;
 };
 
-struct IPAddrInfo
-{
-	IPAddr* addr;
-	uint16 port;
-};
-
 //作为通信操作的公共基类
 class ARMYANTLIB_API Socket
 {
 	//回调函数原型定义，请在实现任何回调函数体时注意效率，不要延时太长，否则会导致网络阻塞甚至丢失数据
 public:
 	//得到连接回调，参数分别为客户端IPv4，客户端端口号，用户传入参数, 返回true表示接受连接, 返回false表示拒绝连接
-	typedef std::function<bool(const IPAddr&, uint16, void*)> TCPConnectCall;
-	//服务器收到数据回调，参数分别为客户端IPv4，客户端端口号，数据包，数据包容量大小（不是数据包大小），用户传入参数
-	typedef std::function<void(const IPAddr&, uint16, uint8*, uint16, void*)> GettingCall;
+	typedef std::function<bool(const IPAddr&clientAddr, uint16 clientPort, void*pUser)> TCPConnectCall;
+	//收到数据回调，参数分别为对方IPv4，对方端口号，数据包，数据包容量大小（不是数据包大小），用户传入参数
+	typedef std::function<void(const IPAddr&addr, uint16 port, uint8*data, mac_uint datalen, void*pUser)> GettingCall;
+	//异步发送回执
+	typedef std::function<bool(mac_uint sendedSize, uint32 retriedTimes, int32 index, void*data, uint64 len, void* pUser)> SendingResp;
 	//断开连接回调，参数分别为客户端IPv4，客户端端口号，用户传入参数
-	typedef std::function<void(const IPAddr&, uint16, void*)> ServerLostCall;
+	typedef std::function<void(const IPAddr& clientAddr , uint16 clientPort, void*pUser)> ServerLostCall;
 	//断开连接回调，参数为用户传入参数, 返回false表示要求重新连接
-	typedef std::function<bool(void*)> ClientLostCall;
+	typedef std::function<bool(void*pUser)> ClientLostCall;
 
-protected:
-	Socket(void*innerType/* new Socket_Private()*/);
 public:
+	Socket(void*innerType/* new Socket_Private()*/);
 	virtual ~Socket(void);
+
+public:
+	enum class ProtocolType :uint8
+	{
+#include "AASocket$ProtocolTypes"
+	};
+	struct IPAddrInfo
+	{
+		IPAddr* clientAddr;
+		uint16 clientPort;
+		IPAddr* serverAddr;
+		uint16 serverPort;
+	};
+
+
 public:
 	//设定收到信息回调
 	bool SetGettingCallBack(GettingCall recvCB, void*pUser = nullptr);
@@ -177,10 +204,9 @@ public:
 	//			连接服务器失败！请使用WSAGetLaseError获取错误信息
 	//			发送数据失败！请使用WSAGetLaseError获取错误信息
 	
-protected:
+public:
 	const uint32 handle;
 
-	AA_FORBID_CREATE_OB(Socket);
 	AA_FORBID_COPY_CTOR(Socket);
 	AA_FORBID_ASSGN_OPR(Socket);
 };
@@ -221,10 +247,10 @@ public:
 	bool StopServer(uint32 waitTime);
 	//断开客户端
 	bool GivenUpClient(int32 index);
-	bool GivenUpClient(IPAddrInfo cl);
+	bool GivenUpClient(const IPAddr& addr, uint16 port);
 	bool GivenUpAllClients();
 	//向指定索引的客户端发送数据
-	bool Send(int32 index, void*data, uint64 len);
+	mac_uint Send(int32 index, void*data, uint64 len, bool isAsync = true, const SendingResp&asyncResp = nullptr, void* asyncRespUserData = nullptr);
 
 public:
 	//以下是获取状态
@@ -236,7 +262,7 @@ public:
 	//根据索引获取对应客户端的基本信息
 	IPAddrInfo GetClientByIndex(int index) const;
 	//根据地址和端口号获取客户端索引
-	int GetIndexByAddrPort(const IPAddrInfo& info);
+	int GetIndexByAddrPort(const IPAddr& clientAddr, uint16 port);
 	//服务器是否正在监听
 	bool IsStarting() const;
 
@@ -256,7 +282,7 @@ public:
 	// nLocalPort：本地客户端所使用端口号,详见SetClientPort函数说明
 	// RecvCB：收到消息的回调函数
 	// pRecvUser：收到消息的回调函数用户参数
-	TCPClient(uint16 svrPort = 0);
+	TCPClient();
 	//虽然本析构函数中检测并关闭了未断开的连接,但析构函数不应负责断开连接
 	//请调用者务必遵守调用规则,自行调用断开连接的函数,以此规范代码层次结构
 	//如果Debug中析构时连接未断开,会弹出assert警告
@@ -276,11 +302,11 @@ public:
 	//以下是连接和实际收发操作
 
 	//连接服务器
-	bool ConnectServer(bool isAsync);
+	bool ConnectServer(bool isAsync, TCPConnectCall asyncConnectCallBack = nullptr, void* asyncConnetcCallData = nullptr);
 	//断开连接
 	bool DisconnectServer(uint32 waitTime);
 	//向服务器发送消息
-	bool Send(void*pUser, size_t len);
+	mac_uint Send(void*pUser, size_t len, bool isAsync = false, const SendingResp&asyncResp = nullptr, void* asyncRespUserData = nullptr);
 
 public:
 	//以下是获取状态
@@ -289,6 +315,8 @@ public:
 	const IPAddr& GetServerAddr() const;
 	//获取服务器端口
 	uint16 GetServerPort() const;
+	const IPAddr& GetLocalAddr()const;
+	uint16 GetLocalPort()const;
 	//是否在连接状态
 	bool IsConnection() const;
 
@@ -314,17 +342,17 @@ public:
 	//以下是实际收发操作
 
 	//开始监听
-	bool StartListening(bool isAsync);
+	bool StartListening(bool isIPv4 = true);
 	//向指定地址和端口发送（无须初始化套接字）
-	bool Send(const IPAddr& addr, uint16 nPort, void*data, size_t len);
+	mac_uint Send(const IPAddr& addr, uint16 port, void*data, size_t len, bool isAsync = false, const SendingResp&asyncResp = nullptr, void* asyncRespUserData = nullptr);
 	//关闭收发端口套接字
-	bool CloseUDPSocket(uint32 waitTime);
+	bool StopListening(uint32 waitTime);
 
 public:
 	//以下是获取状态
 
 	//UDP是否正在监听
-	bool IsStarting() const;
+	bool IsListening() const;
 
 	AA_FORBID_COPY_CTOR(UDPSilgle);
 	AA_FORBID_ASSGN_OPR(UDPSilgle);

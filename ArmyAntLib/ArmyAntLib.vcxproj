@@ -478,6 +478,7 @@
     <ClInclude Include="include\AAJNITools.hpp" />
     <ClInclude Include="include\AAMessageQueue.h" />
     <ClInclude Include="include\AANeuron.hpp" />
+    <ClInclude Include="include\AASocket%24ProtocolTypes" />
     <ClInclude Include="include\AASocket.h" />
     <ClInclude Include="include\AAStateMachine.hpp" />
     <ClInclude Include="include\AATree.hpp" />
@@ -515,7 +516,8 @@
     <None Include="languages\Python\ArmyAnt.py" />
   </ItemGroup>
   <ItemGroup>
-    <Text Include="base\Readme.txt" />
+    <Text Include="..\ReadMe.txt" />
+    <Text Include="base\DeveloperReadme.txt" />
     <Text Include="CMakeLists.txt" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

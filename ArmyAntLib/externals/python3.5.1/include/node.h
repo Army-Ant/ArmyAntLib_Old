@@ -33,7 +33,7 @@ PyAPI_FUNC(Py_ssize_t) _PyNode_SizeOf(node *n);
 #define STR(n)		((n)->n_str)
 #define LINENO(n)       ((n)->n_lineno)
 
-/* AAAssert that the type of a node is what we expect */
+/* Assert that the type of a node is what we expect */
 #define REQ(n, type) assert(TYPE(n) == (type))
 
 PyAPI_FUNC(void) PyNode_ListTree(node *);

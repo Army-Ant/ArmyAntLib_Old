@@ -82,7 +82,7 @@ ARMYANT_CLIB_API AA_CNeuronAlgorithm AA_NeuronAlgorithm_Create(AA_Neuron_ActiveF
 
 ARMYANT_CLIB_API AA_CNeuronAlgorithm AA_NeuronAlgorithm_Clone(AA_CNeuronAlgorithm value)
 {
-	AAAssert(manager.find(value)!=manager.end());
+	AAAssert(manager.find(value)!=manager.end(), 0U);
 	uint32 len = uint32(manager.size());
 	//获取当前未使用的最小句柄号
 	for(uint32 n = 0; n < len; n++)

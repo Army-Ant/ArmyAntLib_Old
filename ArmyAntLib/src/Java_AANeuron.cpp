@@ -133,13 +133,13 @@ JNIEXPORT jboolean JNICALL Java_ArmyAnt_Neuron_Algorithm_Native_1ClearActive(JNI
 
 JNIEXPORT jdouble JNICALL Java_ArmyAnt_Neuron_Algorithm_Native_1GetOutput(JNIEnv *, jclass, jlong value)
 {
-	AAAssert(value >= 0);
+	AAAssert(value >= 0, -1.);
 	return AA_NeuronAlgorithm_GetOutput(uint32(value));
 }
 
 JNIEXPORT jdouble JNICALL Java_ArmyAnt_Neuron_Algorithm_Native_1GetAllActive(JNIEnv *, jclass, jlong value)
 {
-	AAAssert(value >= 0);
+	AAAssert(value >= 0, -1.);
 	return AA_NeuronAlgorithm_GetAllActive(uint32(value));
 }
 
@@ -161,7 +161,7 @@ JNIEXPORT jboolean JNICALL Java_ArmyAnt_Neuron_Algorithm_Native_1SetActiveInterf
 
 JNIEXPORT jdouble JNICALL Java_ArmyAnt_Neuron_Algorithm_Native_1GetThreshold(JNIEnv *, jclass, jlong value)
 {
-	AAAssert(value >= 0);
+	AAAssert(value >= 0, -1.);
 	return AA_NeuronAlgorithm_GetThreshold(uint32(value));
 }
 

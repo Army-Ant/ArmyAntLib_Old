@@ -68,7 +68,7 @@ BinaryParser_Private::BinaryParser_Private()
 
 BinaryParser_Private::~BinaryParser_Private()
 {
-	AAAssert(ClearData());
+	AAAssert(ClearData(), );
 }
 
 bool BinaryParser_Private::InsertData(std::string tag, DataType tp, uint32 len, const void * buffer)
@@ -156,7 +156,7 @@ uint64 BinaryParser::GetBytes(void * buffer) const
 
 bool BinaryParser::SetBytes(const void * buffer, uint32 len)
 {
-	AAAssert(len > 0);
+	AAAssert(len > 0, false);
 	auto hd = s_manager.GetDataByHandle(handle);
 	uint8*ret = new uint8[len];
 	memcpy(ret, buffer, len);
@@ -197,77 +197,77 @@ bool BinaryParser::SetInfo(const char * tag, void * values, uint32 len)
 bool BinaryParser::GetBoolInfo(const char * tag)const
 {
 	auto hd = s_manager.GetDataByHandle(handle)->data.Find(tag);
-	AAAssert(hd != nullptr&&hd->second.first == BinaryParser_Private::DataType::Bool);
+	AAAssert(hd != nullptr&&hd->second.first == BinaryParser_Private::DataType::Bool, false);
 	return *reinterpret_cast<bool*>(hd->third);
 }
 
 char BinaryParser::GetInt8Info(const char * tag)const
 {
 	auto hd = s_manager.GetDataByHandle(handle)->data.Find(tag);
-	AAAssert(hd != nullptr&&hd->second.first == BinaryParser_Private::DataType::Int);
+	AAAssert(hd != nullptr&&hd->second.first == BinaryParser_Private::DataType::Int, char(0));
 	return char(*reinterpret_cast<uint64*>(hd->third));
 }
 
 uint8 BinaryParser::GetUInt8Info(const char * tag)const
 {
 	auto hd = s_manager.GetDataByHandle(handle)->data.Find(tag);
-	AAAssert(hd != nullptr&&hd->second.first == BinaryParser_Private::DataType::UInt);
+	AAAssert(hd != nullptr&&hd->second.first == BinaryParser_Private::DataType::UInt, uint8(0));
 	return uint8(*reinterpret_cast<uint64*>(hd->third));
 }
 
 int16 BinaryParser::GetInt16Info(const char * tag)const
 {
 	auto hd = s_manager.GetDataByHandle(handle)->data.Find(tag);
-	AAAssert(hd != nullptr&&hd->second.first == BinaryParser_Private::DataType::Int);
+	AAAssert(hd != nullptr&&hd->second.first == BinaryParser_Private::DataType::Int, int16(0));
 	return int16(*reinterpret_cast<uint64*>(hd->third));
 }
 
 uint16 BinaryParser::GetUInt16Info(const char * tag)const
 {
 	auto hd = s_manager.GetDataByHandle(handle)->data.Find(tag);
-	AAAssert(hd != nullptr&&hd->second.first == BinaryParser_Private::DataType::UInt);
+	AAAssert(hd != nullptr&&hd->second.first == BinaryParser_Private::DataType::UInt, uint16(0));
 	return uint16(*reinterpret_cast<uint64*>(hd->third));
 }
 
 int32 BinaryParser::GetInt32Info(const char * tag)const
 {
 	auto hd = s_manager.GetDataByHandle(handle)->data.Find(tag);
-	AAAssert(hd != nullptr&&hd->second.first == BinaryParser_Private::DataType::Int);
+	AAAssert(hd != nullptr&&hd->second.first == BinaryParser_Private::DataType::Int, 0);
 	return int32(*reinterpret_cast<uint64*>(hd->third));
 }
 
 uint32 BinaryParser::GetUInt32Info(const char * tag)const
 {
 	auto hd = s_manager.GetDataByHandle(handle)->data.Find(tag);
-	AAAssert(hd != nullptr&&hd->second.first == BinaryParser_Private::DataType::UInt);
+	AAAssert(hd != nullptr&&hd->second.first == BinaryParser_Private::DataType::UInt, 0U);
 	return uint32(*reinterpret_cast<uint64*>(hd->third));
 }
 
 int64 BinaryParser::GetInt64Info(const char * tag)const
 {
 	auto hd = s_manager.GetDataByHandle(handle)->data.Find(tag);
-	AAAssert(hd != nullptr&&hd->second.first == BinaryParser_Private::DataType::Int);
+	AAAssert(hd != nullptr&&hd->second.first == BinaryParser_Private::DataType::Int, int64(0));
 	return int64(*reinterpret_cast<uint64*>(hd->third));
 }
 
 uint64 BinaryParser::GetUInt64Info(const char * tag)const
 {
 	auto hd = s_manager.GetDataByHandle(handle)->data.Find(tag);
-	AAAssert(hd != nullptr&&hd->second.first == BinaryParser_Private::DataType::UInt);
+	AAAssert(hd != nullptr&&hd->second.first == BinaryParser_Private::DataType::UInt, uint64(0));
 	return uint64(*reinterpret_cast<uint64*>(hd->third));
 }
 
 double BinaryParser::GetFloatInfo(const char * tag)const
 {
 	auto hd = s_manager.GetDataByHandle(handle)->data.Find(tag);
-	AAAssert(hd != nullptr&&hd->second.first == BinaryParser_Private::DataType::Double);
+	AAAssert(hd != nullptr&&hd->second.first == BinaryParser_Private::DataType::Double, .0);
 	return *reinterpret_cast<double*>(hd->third);
 }
 
 const char * BinaryParser::GetStrInfo(const char * tag, char * buffer)const
 {
 	auto hd = s_manager.GetDataByHandle(handle)->data.Find(tag);
-	AAAssert(hd != nullptr&&hd->second.first == BinaryParser_Private::DataType::String);
+	AAAssert(hd != nullptr&&hd->second.first == BinaryParser_Private::DataType::String, nullptr);
 	memcpy(buffer, hd->third, hd->second.second);
 	return buffer;
 }
@@ -275,7 +275,7 @@ const char * BinaryParser::GetStrInfo(const char * tag, char * buffer)const
 const void * BinaryParser::GetBinaryInfo(const char * tag, void * buffer, uint32&len)const
 {
 	auto hd = s_manager.GetDataByHandle(handle)->data.Find(tag);
-	AAAssert(hd != nullptr&&hd->second.first == BinaryParser_Private::DataType::Binary);
+	AAAssert(hd != nullptr&&hd->second.first == BinaryParser_Private::DataType::Binary, nullptr);
 	len = hd->second.second;
 	memcpy(buffer, hd->third, len);
 	return buffer;

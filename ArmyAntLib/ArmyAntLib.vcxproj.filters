@@ -837,6 +837,9 @@
     <ClInclude Include="include\AAConfiguration.h">
       <Filter>04.CppLibCode</Filter>
     </ClInclude>
+    <ClInclude Include="include\AASocket%24ProtocolTypes">
+      <Filter>04.CppLibCode</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\AAFile.cpp">
@@ -900,7 +903,10 @@
     <Text Include="CMakeLists.txt">
       <Filter>00.other-Projects</Filter>
     </Text>
-    <Text Include="base\Readme.txt">
+    <Text Include="base\DeveloperReadme.txt">
+      <Filter>0.docs</Filter>
+    </Text>
+    <Text Include="..\ReadMe.txt">
       <Filter>0.docs</Filter>
     </Text>
   </ItemGroup>
