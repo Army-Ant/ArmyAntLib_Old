@@ -25,57 +25,33 @@
 
 #ifndef ARMYANTLIB_EXPORTS
 
+#if defined DEBUG || defined _DEBUG
+#define AA_IS_DEBUG "d"
+#else 
+#define AA_IS_DEBUG
+#endif
 
+#if defined _x64
+#define AA_TARGET_MACHINE "_64"
+#else
+#define AA_TARGET_MACHINE
+#endif
+
+#if defined AA_USE_STATIC
+#define AA_LIB_TYPE "_s"
+#else
+#define AA_LIB_TYPE
+#endif
 
 #ifdef OS_WINDOWS
-
-
-#ifdef NDEBUG
-
-#ifdef _x86
-#pragma comment(lib,"lib\\ArmyAntLib.lib")
-#else
-#pragma comment(lib,"lib\\ArmyAntLib_64.lib")
-#endif
-
-#else	// NDEBUG
-
-#ifdef _x86
-#pragma comment(lib,"lib\\ArmyAntLibd.lib")
-#else
-#pragma comment(lib,"lib\\ArmyAntLibd_64.lib")
-#endif
-
-#endif // NDEBUG
-
-
+#pragma comment(lib,"lib\\ArmyAntLib" AA_IS_DEBUG AA_TARGET_MACHINE AA_LIB_TYPE ".lib")
 #else // OS_WINDOWS
-namespace ArmyAnt{
-
-
-#ifdef NDEBUG
-
-#ifdef _x86
-static auto&armyAnt = []() { class ArmyAnt { ArmyAnt() { ptr = dlopen("libArmyAnt.so"); } ~ArmyAnt() { dlclose(ptr); } char*ptr = nullptr; }; static ArmyAnt ret; return ret; };
-#else
-static auto&armyAnt = []() { class ArmyAnt { ArmyAnt() { ptr = dlopen("libArmyAnt_64.so"); } ~ArmyAnt() { dlclose(ptr); } char*ptr = nullptr; }; static ArmyAnt ret; return ret; };
-#endif
-
-#else // NDEBUG
-
-#ifdef _x86
-static auto&armyAnt = []() { class ArmyAnt { ArmyAnt() { ptr = dlopen("libArmyAntd.so"); } ~ArmyAnt() { dlclose(ptr); } char*ptr = nullptr; }; static ArmyAnt ret; return ret; };
-#else
-static auto&armyAnt = []() { class ArmyAnt { ArmyAnt() { ptr = dlopen("libArmyAntd_64.so"); } ~ArmyAnt() { dlclose(ptr); } char*ptr = nullptr; }; static ArmyAnt ret; return ret; };
-#endif
-
-#endif // NDEBUG
-
-
-}
+namespace ArmyAnt{static auto&armyAnt = []() { class ArmyAnt { ArmyAnt() { ptr = dlopen("libArmyAnt" AA_IS_DEBUG AA_TARGET_MACHINE AA_LIB_TYPE ".so"); } ~ArmyAnt() { dlclose(ptr); } char*ptr = nullptr; }; static ArmyAnt ret; return ret; };}
 #endif // OS_WINDOWS
 
-
+#undef AA_IS_DEBUG
+#undef AA_TARGET_MACHINE
+#undef AA_LIB_TYPE
 
 #endif // ARMYANTLIB_EXPORTS
 

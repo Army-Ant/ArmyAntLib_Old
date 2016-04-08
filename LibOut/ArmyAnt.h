@@ -60,6 +60,10 @@
 #include "include/AABinary.h"
 // Message queue
 #include "include/AAMessageQueue.h"
+// Socket
+#include "include/AASocket.h"
+// Configuration text (xml, ini, json)
+#include "include/AAConfiguration.h"
 
 
 

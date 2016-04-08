@@ -25,7 +25,8 @@
 
 #ifdef _WIN32
 
-#ifdef ARMYANTLIB_EXPORTS
+#ifndef AA_USE_STATIC
+#if defined ARMYANTLIB_EXPORTS
 #define ARMYANTLIB_API __declspec(dllexport)
 #else
 #define ARMYANTLIB_API __declspec(dllimport)
@@ -36,6 +37,12 @@
 #define ARMYANTLIB_API
 
 #endif // _WIN32
+
+#else // AA_USE_STATIC
+
+#define ARMYANTLIB_API
+
+#endif // AA_USE_STATIC
 
 #ifdef ARMYANTLIB_EXPORTS
 // Have to create the namespace firstly

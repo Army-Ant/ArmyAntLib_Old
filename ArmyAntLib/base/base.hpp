@@ -45,6 +45,7 @@ namespace ArmyAnt {
 #define _WIN32_WINNT 0x0600
 #endif
 
+#define BOOST_LIB_DIAGNOSTIC
 
 #ifdef DEBUG
 #undef AAAssert
