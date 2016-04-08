@@ -354,7 +354,7 @@ template<class T_Tag, bool defaultAllow>
 bool FiniteStateMachine<T_Tag, defaultAllow>::IsStateEnable(const T_Tag & name) const
 {
 	auto target = GetChild(name);
-	AAAssert(target != nullptr);
+	AAAssert(target != nullptr, false);
 	return target->value->enabled;
 }
 
@@ -411,7 +411,7 @@ template<class T_Tag, bool defaultAllow>
 typename FiniteStateMachine<T_Tag, defaultAllow>::State & FiniteStateMachine<T_Tag, defaultAllow>::operator[](const T_Tag & name)
 {
 	auto ret = GetChild(name);
-	AAAssert(ret != nullptr);
+	AAAssert(ret != nullptr, ret->third);
 	return ret->third;
 }
 
@@ -424,7 +424,7 @@ const typename FiniteStateMachine<T_Tag, defaultAllow>::State & FiniteStateMachi
 template<class T_Tag, bool defaultAllow>
 FiniteStateMachine<T_Tag, defaultAllow> & FiniteStateMachine<T_Tag, defaultAllow>::operator>>(const T_Tag & name)
 {
-	AAAssert(GoToState(name));
+	AAAssert(GoToState(name), *this);
 	return *this;
 }
 
