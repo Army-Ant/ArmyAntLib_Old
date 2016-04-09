@@ -96,7 +96,7 @@ public:
 
 	static inline int Fseek(FILE*stream, uint64 offset,int whence)
 	{
-#ifdef OS_WINDOWS
+#if defined OS_WINDOWS && !defined _CMAKE
         return _fseeki64(stream, offset, whence);
 #else
         return fseek(stream, offset, whence);

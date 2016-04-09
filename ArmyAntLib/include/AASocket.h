@@ -172,7 +172,7 @@ public:
 public:
 	enum class ProtocolType :uint8
 	{
-#include "AASocket$ProtocolTypes"
+#include "AASocket_ProtocolTypes"
 	};
 	struct IPAddrInfo
 	{

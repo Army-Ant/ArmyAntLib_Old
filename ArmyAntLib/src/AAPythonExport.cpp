@@ -23,7 +23,6 @@
  */
 
 #include "../base/base.hpp"
-#include <string>
 #include "../include/AAFile.h"
 #include "../include/C_AAFile.h"
 

@@ -23,35 +23,42 @@
 cmake_minimum_required(VERSION 3.3)
 project(ArmyAntLib)
 
-set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11")
+set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11 -m64")
 set(CMAKE_TAR_NAME ArmyAntLib)
 
 find_path(JNI_INCLUDE_DIR jni.h $ENV{JAVA_HOME}/include)
+MESSAGE(STATUS "The JNI directory is ${JNI_INCLUDE_DIR}")
 include_directories(${JNI_INCLUDE_DIR})
 
-IF (CMAKE_SYSTEM_NAME MATCHES "Linux")
+MESSAGE("Target platform is ${CMAKE_SYSTEM_NAME}")
+IF ((CMAKE_SYSTEM_NAME MATCHES "Windows") OR (CMAKE_SYSTEM_NAME MATCHES "CYGWIN"))
+	include_directories(${JNI_INCLUDE_DIR}/win32)
+	link_directories(externals/python3.5.1/x64)
+	set(PY_INCLUDE_DIR externals/python3.5.1/include)
+	add_definitions(
+			-DOS_WINDOWS=1
+			-D__USE_W32_SOCKETS
+	)
+ELSEIF (CMAKE_SYSTEM_NAME MATCHES "Linux")
 	find_path(PY_INCLUDE_DIR Python.h $ENV{PYTHON_INCLUDE})
 	add_definitions(
 			-DOS_UNIX=1
 			-DOS_LINUX=1
 	)
-ELSEIF (CMAKE_SYSTEM_NAME MATCHES "Windows")
-	include_directories(${JNI_INCLUDE_DIR}/win32)
-	find_path(PY_INCLUDE_DIR Python.h $ENV{PYTHON_HOME}/include)
-	add_definitions(
-			-DOS_WINDOWS=1
-	)
 ELSEIF (CMAKE_SYSTEM_NAME MATCHES "FreeBSD")
+	find_path(PY_INCLUDE_DIR Python.h $ENV{PYTHON_INCLUDE})
 	add_definitions(
+			-DOS_UNIX=1
 			-DOS_FREEBSD=1
 	)
 ELSE ()
 
-ENDIF (CMAKE_SYSTEM_NAME MATCHES "Linux")
+ENDIF ((CMAKE_SYSTEM_NAME MATCHES "Windows") OR (CMAKE_SYSTEM_NAME MATCHES "CYGWIN"))
 
 include_directories(${PY_INCLUDE_DIR})
+include_directories(externals/boost)
 
-MESSAGE(This is $ENV{PYTHON_INCLUDE})
+MESSAGE("This is $ENV{PYTHON_INCLUDE}")
 
 if(CMAKE_BUILD_TYPE STREQUAL Debug)
     add_definitions(
@@ -70,21 +77,20 @@ add_definitions(
 		-DARMYANTLIB_EXPORTS
 )
 
-set(C_SOURCE_FILES
+set(CXX_SOURCE_FILES
+        src/ArmyAntLib.cpp
+        src/AAAes.cpp
+        src/AABinary.cpp
+        src/AAFile.cpp
+		src/AASocket.cpp
         src/C_AAFile.cpp
         src/C_AANeuron.cpp
-)
-
-set(CXX_SOURCE_FILES
-        src/AAAes.cpp
-        src/AAFile.cpp
-		src/AAPythonExport.cpp
 		src/Java_AAFile.cpp
 		src/Java_AANeuron.cpp
-		${C_SOURCE_FILES}
+		src/AAPythonExport.cpp
 )
 
 add_library(${CMAKE_TAR_NAME} SHARED ${CXX_SOURCE_FILES})
 
-MESSAGE(This is ${PROJECT_BINARY_DIR})
+MESSAGE("This is ${PROJECT_BINARY_DIR}")
 SET_TARGET_PROPERTIES(${CMAKE_TAR_NAME} PROPERTIES OUTPUT_NAME ArmyAnt)

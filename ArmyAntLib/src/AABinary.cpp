@@ -27,6 +27,7 @@
 #include "../include/AAClassPrivateHandle.hpp"
 #include "../include/AATripleMap.hpp"
 #include <iostream>
+#include <cstring>
 
 namespace ArmyAnt {
 

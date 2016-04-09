@@ -26,6 +26,7 @@
 #include "AADefine.h"
 #include <jni.h>
 #include <string>
+#include <cstring>
 
 namespace ArmyAnt {
 
@@ -57,7 +58,7 @@ namespace JNITools{
 		rtn = tmp;
 		// 释放Java字节流
 		env->ReleaseByteArrayElements(barr, ba, 0);
-		AA_SAFE_DELALL(tmp);
+		Fragment::AA_SAFE_DELALL(tmp);
 		return rtn;
 	};
 

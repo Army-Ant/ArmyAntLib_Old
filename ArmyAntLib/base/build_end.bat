@@ -50,6 +50,7 @@ echo "Move the reference static library"
 copy %ProjectPath%bin\%TargetName%.lib %ProjectPath%lib\
 del %ProjectPath%bin\%TargetName%.lib
 )
+
 :CopyUsingFiles
 :: TODO: Need to got administor access here if you don't run VS or CL with it;
 del  %OutDir%* /Q
@@ -66,7 +67,6 @@ del  %OutDir%bin\*.lib /Q
 ::del  %OutDir%bin\*.pdb /Q
 copy %ProjectPath%languages\Python\* %OutDir%bin /Y
 copy %ProjectPath%externals\python3.5.1\%TargetPlatform%\*.dll %OutDir%bin /Y
-
 
 :End
 @echo on

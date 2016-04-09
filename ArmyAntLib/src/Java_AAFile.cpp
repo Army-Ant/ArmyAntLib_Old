@@ -23,9 +23,8 @@
  */
 
 #include "../base/base.hpp"
-#include <jni.h>
-#include "../include/C_AAFile.h"
 #include "../include/AAJNITools.hpp"
+#include "../include/C_AAFile.h"
 
 #include <string>
 

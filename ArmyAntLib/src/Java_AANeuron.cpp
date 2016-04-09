@@ -23,7 +23,6 @@
  */
 
 #include "../base/base.hpp"
-#include <jni.h>
 #include "../include/C_AANeuron.h"
 #include "../include/AANeuron.hpp"
 #include "../include/AAJNITools.hpp"
