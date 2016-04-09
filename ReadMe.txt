@@ -1,145 +1,158 @@
 ------------------------------------ English ----------------------------------------------------------------------------------------------
 
-Library Name		:	ArmyAntLib(Win32) / libArmyAnt(Unix)
-Development Language:	C++
-Supported Languages	:	C++, C, Java, Python, C#(Unrealized), Swift(Unrealized)
-Supported Platform	:	Win32, DotNet, Linux, FreeBSD, Android, macOS, iOS
-Development IDEs	:	Microsoft Visual Studio 2015, JetBrains CLion, Apple XCode(Unrealized)
-Usage				:	The C++ basic classes library for multi platforms, and its bridge interface for many other languages
-SUGGESTED CONTENT	:	Stream (Include filesystem, network, pipe, etc.)
-						Socket
-						AES and MD5 algorithm
-						Data structs and its algorithm (Tree, Multi-Value-Dictionary(map), Digraph, State-Machine, Message-Queue, Neuron and Neural-Network, etc.)
-						Binary encoder and decoder
+Library Name			:	ArmyAntLib(Win32) / libArmyAnt(Unix)
+Development Language	:	C++
+Supported Languages		:	C++, C, Java, Python, C#(Unrealized), Swift(Unrealized)
+Supported Platform		:	Win32, DotNet, Linux, FreeBSD, Android, macOS, iOS
+Development IDEs		:	Microsoft Visual Studio 2015, JetBrains CLion, Apple XCode(Unrealized)
+Usage					:	The C++ basic classes library for multi platforms, and its bridge interface for many other languages
+SUGGESTED CONTENT		:	Stream (Include filesystem, network, pipe, etc.)
+							Socket
+							AES and MD5 algorithm
+							Data structs and its algorithm (Tree, Multi-Value-Dictionary(map), Digraph, State-Machine, Message-Queue, Neuron and Neural-Network, etc.)
+							Binary encoder and decoder
 						
 Welcome to view and use this library named ArmyAntLib
 This library is a base class library developed for Group ArmyAnt, used for work and research. The copyright of this library is protected by BSD lisence, everyone whoever obey the lisence can use the library and its source code.
-You can view the lisence in the file ARMYANT.COPYRIGHT.BSD_LICENSE.MD at the root of our project directory
-This ReadMe file is written to introduce the structure, development way, and some notice for this library.
+You can view the lisence in the file ARMYANT.COPYRIGHT.BSD_LICENSE.MD at the root of our project directory.
+If you want to view the source code project structure, please read the text file "ArmyAntLib/base/DeveloperReadme.txt"
+This ReadMe file is written to introduce the use way and build way of the library, and some notice in using and building.
 
-The file directory structure and some brief introduction is as follows:
-	<Root>
-		.idea <DIR>			This is the project config files directory for JetBrains CLion
-		ArmyAntLib <DIR>	This is the main source code project directory for this library
-		iOSLibTest <DIR>	This is the test project directory for iOS platform
-		JavaLibTest <DIR>	This is the test project directory for Java
-		LibOut <DIR>		Here are all the files what this library compiled, and what the users for library needed. You can copy the content out to use this library, do not need any other file operations
-		LinuxLibTest <DIR>	This is the test project directory for Linux platform
-		macOSLibTest <DIR>	This is the test project directory for mac OS platform
-		Win32LibTest <DIR>	This is the test project directory for Win32 platform
-		.gitattributes		This is the git attributes file
-		.gitignore			This is the gitignore file
-		ARMYANT.COPYRIGHT.BSD_LICENSE.MD	This is the text file about BSD lisence, include translation for Chinese
-		ArmyAntLib.sln		This is the solution file for Microsoft Visual Studio 2015,include a project for the main source code project and the Win32LibTest project
+Building in Windows platform:
+1. Open the solution file "ArmyAntLib.sln" by Microsoft Visual Studio 2015, then right-click at the project "ArmyAntLib", choose to execute the item "build", to build the library
+2. Before build the library, you can choose different configurations among Debug, Release, Debug_Static(to build the static library), and Release_Static(to build the static library too)
+3. You can also choose the different target machine type like x86(Win32) and x86_64(x64)
 
-The structure for the main source code project directory "ArmyAntLib" is as follows:
-	ArmyAntLib <DIR>
-		.idea <DIR>			This is the project config files directory for JetBrains CLion
-		base <DIR>			Here are some basic c + + code files and other code files, these files has particularity in the structure, cannot be classified into "include" or "src" directory. They are all internal code files.
-		bin <DIR>			Build target directory, contains all the generated files, as well as some debug symbol files
-		docs <DIR>			Many useful documents about this library
-		externals <DIR>		When reference the third party codes and projects, they will be joined to this directory. Currently, only Python3.5 and boost 1.59 are joined to this library
-		include <DIR>		All C/C++ header files except the main out header(ArmyAntLib.h and C_ArmyAntLib.h) is palced into this directory. In particular, the C++ template class files will be named with ".hpp" extension
-		languages <DIR>		All other language interface programs and their codes without C++
-		lib <DIR>			All build static library files
-		src <DIR>			All C++ source code files is placed here except which in "base"
-		tools <DIR>			Third party development tools, include these tools developed by AnmyAnt, which is used in building this library
-		ArmyAnt.h			The main C++ out header, user need only include this header to use the library in C++ in any platform
-		C_ArmyAnt.h			The main C out header, user need only include this header to use the library in C in any platform
-		vc140.idb			Visual Studio 2015 minimum rebuild dependency file
-		ArmyAntLib.vcxproj	Visual Studio 2015 project file
-		ArmyAntLib.vcxproj.filters	Visual Studio 2015 project filters file
-		CMakeLists.txt		The project file for cmake, used for JetBrains CLion
-		
-The above is the file directory structure. Most IDEs use the file directory structure as the project structure, but Visual Studio does not. We use the VS 2015 to manage the project mainly, so we will introduce the project in VC++.
-Open the file "ArmyAntLib.sln" in Visual Studio 2015, you will see the projects in this solution. There are 2 projects : main pro. named "ArmyAntLib", and the test pro. named "Win32LibTest", as they are in file directory.
-We will primarily introduce the project "ArmyAntLib", the structure of this project is as follow:
-	ArmyAntLib <vc14proj>
-		00.other-Projects
-		0.docs
-		01.base
-		02.Third-party-libraries
-		03.mainOutput
-			defination
-			onlyIncludeFile
-		04.CppLibCode
-			cpptools
-		05.CRefCode
-		06.JavaRefCode
-		07.PythonRefCode
-		08.CSharpRefCode
-		09.SwiftRefCode
+Building in Linux platform:
+1. Open the JetBrains Clion project in the subdirectory (not the root directory) named "ArmyAntLib", config the CMakelist.txt and the project configuration, and build it.
+2. The configuration items you can change in CMakeList.txt contains:
+	(1) set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11 -m64") use "-m32" to build for 32 bits, and "-m64" for 64 bits. You can also build 32bits target in 32bits system without "-m32"
+3. The configuration of CLion project has 4 types: Debug+Shared, Release+Shared, Debug+Static, Release+Static
+
+Building in FreeBSD platform:
+
+Building in macOS platform:
+
+Building notice at all platforms:
+1. You need to setup the latest Java Development Kits and Python 3 at your computer, and set the enviroment variable "JAVA_HOME" in your system. You need also set the "PYTHON_INCLUDE" envvar as the header files of python when you build at any platform except Windows.
+2. The building out files is in ArmyAntLib/bin, but you can get them in ./LibOut, with all necessary headers and libraries.
+
+Using in any platform:
+1. Copy out all files from LibOut directory
+2. You need only include the header "ArmyAnt.h" to use this library. If you use the static library, you need to define "AA_USE_STATIC" before include the header
+3. If you use the static library, you need join the directory "LibOut/lib/lib"(for 32 bits) or "LibOut/lib/lib64"(for 64 bits) into the library path
+4. You should make sure that there has defined "DEBUG" or "_DEBUG" before include the header when you want to use the debug version, and there has defined "_x64" before include when you want to use the 64 bits version.
+
+Building the Java library:
+1. After building the C++ shared library, You can run the script file "buildJava.sh" or "buildJava.bat" at the directory "ArmyAntLib/languages/Java", to build the jar file. You can find the out jar file in "LibOut"
+
+Using the Java library:
+1. Join the jar file and the shared library file to your Java project, to use the library in Java.
+
+Using the Python library:
+1. The .py file will be copied to LibOut automatically after build the shared library. You can inport the module in .py file to use it.
 
 ------------------------------------ Traditional Chinese ----------------------------------------------------------------------------------
 
+庫名		：	ArmyAntLib（Win32）/ libArmyAnt（Unix）
+開發語言	：	C++
+支持語言	：	C++，C，Java，Python，C#（未實現），Swift（未實現）
+支持平臺	：	Win32，DotNet，Linux，FreeBSD，Android，macOS，iOS
+生成工具	：	Microsoft Visual Studio 2015，JetBrains CLion，Apple XCode（未實現）
+作用		：	跨平臺基礎操作類別庫
+包含模塊	：	統一流操作（統一介面訪問檔案、網絡、筦道等等所有流），
+				Socket，
+				加密（包括AES和MD5），
+				資料結構（樹，多值字典，圖，狀態機，消息隊列，神經網路等），
+				二進位資料轉換
+
+歡迎瞭解和使用本庫.
+本庫是為了ArmyAnt團隊進行工作和開發研究所編寫的基礎類別庫.本庫採用BSD協定進行版權保護.任何同意遵守BSD協定的團體和個人，都可以自由免費使用本庫及原始程式碼. BSD協定的詳細內容可以參考根目錄檔案：ARMYANT.COPYRIGHT.BSD_LICENSE.MD
+本庫開發者如想獲取本庫的程式碼工程結構等相關資訊，可以閱讀ArmyAntLib/base/DeveloperReadme.txt文字.
+本檔案主要介紹庫的使用方法和生成方法，以及生成和使用過程中的一些注意事項.
+
+在Windows平臺下的生成：
+1.用Microsoft Visual Studio 2015打開根目錄的ArmyAntLib.sln解決方案檔案.在項目ArmyAntLib上按一下右鍵，選擇生成，即可生成庫
+2.生成之前，可以選擇不同的配寘類型，包括Debug，Release，Debug_Static（生成靜態庫），Release_Static（靜態庫）四種配寘，以及x86（Win32）和x86_64（x64）兩種目標平臺
+
+在Linux平臺下的生成：
+1.使用JetBrains CLion打開ArmyAntLib子目錄（而不是根目錄）中的工程，對CMakelist.txt以及CLion的項目配寘作相應配寘修改，然後生成
+2.對CMakeList.txt檔案可做的修改包括：
+（1）set（CMAKE_CXX_FLAGS“${CMAKE_CXX_FLAGS} -std=c++11 -m64”）這裡-m32代表編譯為32比特庫，-m64代表編譯為64比特庫.
+3.對CLion項目配寘有四種選擇，即Debug靜態庫，Release靜態庫，Debug動態庫，Release動態庫
+
+在FreeBSD平臺下的生成：
+
+在macOS平臺下的生成：
+
+所有平臺下C/C++庫生成注意事項：
+1.你需要在你的機器上安裝最新的Java Development Kits和Python 3，並配寘好JAVA_HOME環境變數，非Windows平臺還需要定義PYTHON_INCLUDE環境變數（Python標頭檔目錄）
+2.理論上，直接生成的檔案在ArmyAntLib/bin中.但是你可以直接從本工程的根目錄的LibOut目錄中獲得生成的庫，包括所需的標頭檔
+
+所有平臺下C/C++庫使用方法：
+1.將LibOut裡面的全部內容拷貝出來，到你自己選擇的合適位置，它們就是本庫使用時需要的全部內容
+2.在你的C++程式碼中包含標頭檔“ArmyAnt.h”，即可使用本庫.如果要使用本庫的靜態版，還需要在包含ArmyAnt.h之前define AA_USE_STATIC，或者在你的程式編譯器配寘（例如Windows平臺下就是VC++項目配寘的預處理器定義宏）中直接定義此宏.
+3.要使用靜態庫，還需要將LibOut/lib/lib（32比特）或者LibOut/lib/lib64（64比特）加入到庫目錄路徑中
+4.如果使用本庫調試版本，你需要保證程式中define了DEBUG或者_DEBUG；如果要是用本庫的64比特版本，你需要保證程式中define了_x64
+
+生成Java語言版的庫：
+1.將C++動態庫生成成功後，運行ArmyAntLib/languages/Java目錄下的buildJava.bat或者buildJava.sh，即可生成jar庫，生成的jar庫可在LibOut中找到
+
+使用Java語言版的庫：
+1.將生成的jar庫和C++動態庫添加到你的Java項目中，即可使用
+
+使用Python語言版的庫：
+1.在生成C++動態庫後，會將py檔案一同拷貝到LibOut目錄中，直接import此py檔案即可使用本庫的python版功能
 
 ------------------------------------ Simplified Chinese -----------------------------------------------------------------------------------
 
-库名	:	ArmyAntLib(Win32) / libArmyAnt(Unix)
-开发语言:	C++
-支持语言:	C++, C, Java, Python, C#(未实现), Swift(未实现)
-支持平台:	Win32, DotNet, Linux, FreeBSD, Android, macOS, iOS
-支持工具:	Microsoft Visual Studio 2015, JetBrains CLion, Apple XCode(未实现)
-作用	:	跨平台基础操作类库
-包含模块:	统一流操作(统一接口访问文件、网络、管道等等所有流), 
-			Socket, 
-			加密(包括AES和MD5),
-			数据结构(树,多值字典,图,状态机,消息队列,神经网络等),
-			二进制数据转换
+库名		:	ArmyAntLib(Win32) / libArmyAnt(Unix)
+开发语言	:	C++
+支持语言	:	C++, C, Java, Python, C#(未实现), Swift(未实现)
+支持平台	:	Win32, DotNet, Linux, FreeBSD, Android, macOS, iOS
+生成工具	:	Microsoft Visual Studio 2015, JetBrains CLion, Apple XCode(未实现)
+作用		:	跨平台基础操作类库
+包含模块	:	统一流操作(统一接口访问文件、网络、管道等等所有流), 
+				Socket, 
+				加密(包括AES和MD5),
+				数据结构(树,多值字典,图,状态机,消息队列,神经网络等),
+				二进制数据转换
 
 欢迎了解和使用本库.
-本库是为了ArmyAnt团队进行工作和开发研究所编写的基础类库.本库采用BSD协议进行版权保护.任何同意遵守BSD协议的团体和个人, 都可以自由免费使用本库及源代码. BSD协议的详细内容可以参考根目录文件: ARMYANT.COPYRIGHT.BSD_LICENSE.MD
-本文件主要介绍本库的开发结构, 开发方式, 以及一些注意事项.
+本库是为了ArmyAnt团队进行工作和开发研究所编写的基础类库.本库采用BSD协议进行版权保护. 任何同意遵守BSD协议的团体和个人, 都可以自由免费使用本库及源代码. BSD协议的详细内容可以参考根目录文件: ARMYANT.COPYRIGHT.BSD_LICENSE.MD
+本库开发者如想获取本库的代码工程结构等相关信息, 可以阅读ArmyAntLib/base/DeveloperReadme.txt文本.
+本文件主要介绍库的使用方法和生成方法, 以及生成和使用过程中的一些注意事项.
 
-整个库的文件系统目录结构如下:
-	<Root>
-		.idea <DIR>			这是JetBrains CLion的工程数据文件, 不要手动更改
-		ArmyAntLib <DIR>	这是本库源代码工程的主文件夹
-		iOSLibTest <DIR>	这是用于iOS平台测试的工程目录, 涉及到C和Swift
-		JavaLibTest <DIR>	这是用于本库的Java接口在Java上的测试工程目录
-		LibOut <DIR>		这是本库的编译后生成总汇目录. 你可以直接将此目录内容复制出来进行使用, 根目录下的很多测试工程会引用此目录
-		LinuxLibTest <DIR>	这是本库在Linux平台下进行测试的工程目录
-		macOSLibTest <DIR>	这是本库在macOS平台下进行测试的工程目录
-		Win32LibTest <DIR>	这是本库在Win32平台下进行测试的工程目录
-		.gitattributes		本库Git版本控制系统的配置文件
-		.gitignore			本库Git版本控制系统的提交忽略选项文件
-		ARMYANT.COPYRIGHT.BSD_LICENSE.MD	这是BSD开源协议的原文副本, 包括中文译文
-		ArmyAntLib.sln		这是Microsoft Visual Studio 2015的解决方案文件,包含类库源工程和Win32LibTest工程.对于此解决方案的工程详细结构,将在下面进行详细描述
 
-对于库的源代码主文件夹, 其结构说明如下:
-	ArmyAntLib <DIR>
-		.idea <DIR>			这是JetBrains CLion的工程数据文件, 不要手动更改
-		base <DIR>			存放了一些基础C++代码文件和其他代码文件, 这些文件在结构上具有特殊性, 不能归入include或者src中.它们均是内部代码, 不会在外部使用本库时用到
-		bin <DIR>			生成目录, 包含全部生成的文件, 以及一些调试符号文件
-		docs <DIR>			一些关于本库的有用的开发者文档
-		externals <DIR>		引用了第三方库时,第三方库的相关文件或工程会加入到这个目录. 目前只有python3.5和boost1.59这两个第三方库
-		include <DIR>		除库的独立输出头文件(ArmyAntLib.h和C_ArmyAntLib.h)以外, 所有随库一同生成的C/C++标头文件, 都会放置在这个目录. 包含模板类的头文件将会以.hpp为扩展名
-		languages <DIR>		所有用于生成其他语言接口的工程和非C/C++代码, 都会放在这里, 并归入各自语言的工程之中
-		lib <DIR>			Win32生成的动态库需要配合一个标静态库使用,它们被添加在这里. 本库直接生成的静态版本也会生成在此处, 目前本库暂时没有配置静态生成功能
-		src <DIR>			除base中的一些特例外, 所有C++源文件都会被放置在这里
-		tools <DIR>			引用了第三方的(或者ArmyAnt开发的)开发便利性工具时, 工具会被放置在这里
-		ArmyAnt.h			库的C++独立输出头文件. 任何平台使用本库时只需要include本文件即可
-		C_ArmyAnt.h			库的C语言独立输出头文件, 任何平台使用纯C语言开发时, 只需要include本文件即可
-		vc140.idb			Visual Studio 2015 最小重生成数据库文件
-		ArmyAntLib.vcxproj	Visual Studio 2015 工程管理文件
-		ArmyAntLib.vcxproj.filters	Visual Studio 2015 工程生成配置文件
-		CMakeLists.txt		CMake工程文件, 由JetBrain CLion管理工程时使用
-		
-以上是文件目录结构.对于大多数IDE, 直接用文件系统的结构作为工程结构. 本项目工程主要用Visual Studio 2015进行管理, 而VC++工程并不与文件目录结构关联. 因此对于工程和代码文件的说明, 将在VC工程说明中一同进行.
-用VS2015打开根目录的ArmyAntLib.sln文件, 可以看到整个工程, 目前包含两个项目, 分别是ArmyAntlib主项目和Win32LibTest即Win32下的测试项目. 本文主要对ArmyAntLib项目进行说明
-项目结构如下:
-	ArmyAntLib <vc14proj>
-		00.other-Projects
-		0.docs
-		01.base
-		02.Third-party-libraries
-		03.mainOutput
-			defination
-			onlyIncludeFile
-		04.CppLibCode
-			cpptools
-		05.CRefCode
-		06.JavaRefCode
-		07.PythonRefCode
-		08.CSharpRefCode
-		09.SwiftRefCode
+在Windows平台下的生成:
+1. 用Microsoft Visual Studio 2015打开根目录的ArmyAntLib.sln解决方案文件. 在项目ArmyAntLib上单击右键,选择生成, 即可生成库
+2. 生成之前,可以选择不同的配置类型, 包括Debug, Release, Debug_Static(生成静态库), Release_Static(静态库)四种配置, 以及x86(Win32)和x86_64(x64)两种目标平台
+
+在Linux平台下的生成:
+1. 使用JetBrains CLion打开ArmyAntLib子目录(而不是根目录)中的工程, 对CMakelist.txt以及CLion的项目配置作相应配置修改, 然后生成
+2. 对CMakeList.txt文件可做的修改包括:
+	(1) set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11 -m64") 这里-m32代表编译为32位库, -m64代表编译为64位库.
+3. 对CLion项目配置有四种选择,即Debug静态库, Release静态库, Debug动态库, Release动态库
+
+在FreeBSD平台下的生成:
+
+在macOS平台下的生成:
+
+所有平台下C/C++库生成注意事项:
+1. 你需要在你的机器上安装最新的Java Development Kits和Python 3, 并配置好JAVA_HOME环境变量, 非Windows平台还需要定义PYTHON_INCLUDE环境变量(Python头文件目录)
+2. 理论上,直接生成的文件在ArmyAntLib/bin中. 但是你可以直接从本工程的根目录的LibOut目录中获得生成的库,包括所需的头文件
+
+所有平台下C/C++库使用方法:
+1. 将LibOut里面的全部内容拷贝出来, 到你自己选择的合适位置, 它们就是本库使用时需要的全部内容
+2. 在你的C++代码中包含头文件"ArmyAnt.h", 即可使用本库. 如果要使用本库的静态版,还需要在包含ArmyAnt.h之前define AA_USE_STATIC, 或者在你的程序编译器配置(例如Windows平台下就是VC++项目配置的预处理器定义宏)中直接定义此宏. 
+3. 要使用静态库, 还需要将LibOut/lib/lib(32位)或者LibOut/lib/lib64(64位)加入到库目录路径中
+4. 如果使用本库调试版本, 你需要保证程序中define了DEBUG或者_DEBUG; 如果要是用本库的64位版本, 你需要保证程序中define了_x64
+
+生成Java语言版的库:
+1. 将C++动态库生成成功后, 运行ArmyAntLib/languages/Java目录下的buildJava.bat或者buildJava.sh, 即可生成jar库,生成的jar库可在LibOut中找到
+
+使用Java语言版的库:
+1. 将生成的jar库和C++动态库添加到你的Java项目中,即可使用
+
+使用Python语言版的库:
+1. 在生成C++动态库后, 会将py文件一同拷贝到LibOut目录中,直接import此py文件即可使用本库的python版功能

@@ -27,7 +27,6 @@
 #include "../include/AAClassPrivateHandle.hpp"
 #include <map>
 #include <boost/asio.hpp>
-#include <netinet/in.h>
 
 #ifdef OS_WINDOWS
 #include <WinSock2.h>
@@ -35,6 +34,7 @@
 #include <ws2tcpip.h>
 #else
 #include <list>
+#include <netinet/in.h>
 #endif
 
 namespace ArmyAnt {
