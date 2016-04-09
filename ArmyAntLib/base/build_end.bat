@@ -35,12 +35,16 @@ set TargetPlatform=%4
 set OutDir=%ProjectPath%..\LibOut\
 
 :CopyStaticLibFile or resolve the static library dependencies
-if %TargetPlatform%=="x64" (set TargetLib=lib64) else (set TargetLib=lib)
+if "%TargetPlatform%"=="x64" (set TargetLib=lib64) else (set TargetLib=lib)
 if "%ConfigType:~-5%"=="tatic" (
-echo "Combine the dependenced static libraries"
-lib /out:%ProjectPath%bin\%TargetName%_tmp.lib %ProjectPath%lib\%TargetName%.lib %ProjectPath%externals\boost\stage\%TargetLib%\libboost_system-vc140-mt-gd-1_59.lib %ProjectPath%externals\boost\stage\%TargetLib%\libboost_date_time-vc140-mt-gd-1_59.lib %ProjectPath%externals\boost\stage\%TargetLib%\libboost_regex-vc140-mt-gd-1_59.lib
-del %ProjectPath%lib\%TargetName%.lib
-rename %ProjectPath%lib\%TargetName%_tmp.lib %ProjectPath%lib\%TargetName%.lib
+echo "Copy the dependenced static libraries"
+if not exist %OutDir%lib\%TargetLib% (mkdir %OutDir%lib\%TargetLib%)
+copy %ProjectPath%externals\boost\stage\%TargetLib%\libboost_system-vc140-mt-gd-1_59.lib %OutDir%lib\%TargetLib%\ /Y
+copy %ProjectPath%externals\boost\stage\%TargetLib%\libboost_system-vc140-mt-1_59.lib %OutDir%lib\%TargetLib%\ /Y
+copy %ProjectPath%externals\boost\stage\%TargetLib%\libboost_date_time-vc140-mt-gd-1_59.lib %OutDir%lib\%TargetLib%\ /Y
+copy %ProjectPath%externals\boost\stage\%TargetLib%\libboost_date_time-vc140-mt-1_59.lib %OutDir%lib\%TargetLib%\ /Y
+copy %ProjectPath%externals\boost\stage\%TargetLib%\libboost_regex-vc140-mt-gd-1_59.lib %OutDir%lib\%TargetLib%\ /Y
+copy %ProjectPath%externals\boost\stage\%TargetLib%\libboost_regex-vc140-mt-1_59.lib %OutDir%lib\%TargetLib%\ /Y
 ) else (
 echo "Move the reference static library"
 copy %ProjectPath%bin\%TargetName%.lib %ProjectPath%lib\
@@ -56,12 +60,12 @@ del  %OutDir%lib\* /Q
 xcopy %ProjectPath%lib %OutDir%lib  /D /C /Q /K /X /Y
 del  %OutDir%bin\* /Q
 xcopy %ProjectPath%bin %OutDir%bin  /D /C /Q /K /X /Y
-del  %OutDir%bin\*.exp /Q
 del  %OutDir%bin\*.lib /Q
-del  %OutDir%bin\*.i* /Q
-del  %OutDir%bin\*.pdb /Q
+::del  %OutDir%bin\*.exp /Q
+::del  %OutDir%bin\*.i* /Q
+::del  %OutDir%bin\*.pdb /Q
 copy %ProjectPath%languages\Python\* %OutDir%bin /Y
-copy %ProjectPath%externals\python3.5.1\%TargetPlatform%\*.dll %OutDir%bin /Yboost\stage\%TargetLib%\libboost_regex-vc140-mt-gd-1_59.lib %OutDir%lib
+copy %ProjectPath%externals\python3.5.1\%TargetPlatform%\*.dll %OutDir%bin /Y
 
 
 :End
