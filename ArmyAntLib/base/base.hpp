@@ -39,6 +39,8 @@
 
 namespace ArmyAnt {
 
+#define BOOST_NO_AUTO_PTR
+
 #ifdef OS_WINDOWS
 
 #ifndef _WIN32_WINNT

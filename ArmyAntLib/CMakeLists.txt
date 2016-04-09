@@ -27,7 +27,7 @@ set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11 -m64")
 set(CMAKE_TAR_NAME ArmyAntLib)
 
 find_path(JNI_INCLUDE_DIR jni.h $ENV{JAVA_HOME}/include)
-MESSAGE(STATUS "The JNI directory is ${JNI_INCLUDE_DIR}")
+MESSAGE("The JNI directory is ${JNI_INCLUDE_DIR}")
 include_directories(${JNI_INCLUDE_DIR})
 
 MESSAGE("Target platform is ${CMAKE_SYSTEM_NAME}")
@@ -40,7 +40,9 @@ IF ((CMAKE_SYSTEM_NAME MATCHES "Windows") OR (CMAKE_SYSTEM_NAME MATCHES "CYGWIN"
 			-D__USE_W32_SOCKETS
 	)
 ELSEIF (CMAKE_SYSTEM_NAME MATCHES "Linux")
+	include_directories(${JNI_INCLUDE_DIR}/linux)
 	find_path(PY_INCLUDE_DIR Python.h $ENV{PYTHON_INCLUDE})
+	#set(PY_INCLUDE_DIR externals/python3.5.1/include)
 	add_definitions(
 			-DOS_UNIX=1
 			-DOS_LINUX=1

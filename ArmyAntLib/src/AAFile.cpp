@@ -82,9 +82,13 @@ public:
 	//内存长度
 	uint64 len = 0;
 	//内存读写指针的位置
-	uint64 pos = 0;;
+	uint64 pos = 0;
 	//命名管道句柄
+#ifdef OS_WINDOWS
 	void* pipeHandle = nullptr;
+#else
+    int pipeHandle = 0;
+#endif
 	//命名管道读写线程
 	std::thread* pipeReader = nullptr;
 	std::list<char> inners;
@@ -125,7 +129,7 @@ private:
 
 void FsPrivate::NamePipeReader(FsPrivate*self)
 {
-	while(self->pipeHandle != nullptr)
+	while(self->pipeHandle != 0)
 	{
 		char buffer = 0;
 		if(0<fread(&buffer, 1, 1, self->file))
@@ -268,13 +272,13 @@ bool FileStream::Open(const char* pipename, const char*pipePath, const char*pipe
 	hd->file = fopen(hd->name.c_str(), "wb+");
 	if(hd->file == nullptr)
 	{
-		if(hd->nocreate || nullptr == (hd->pipeHandle =
+		if(hd->nocreate || 0 == (hd->pipeHandle =
 
 #ifdef OS_WINDOWS
 
 		   CreateNamedPipeA(hd->name.c_str(), PIPE_ACCESS_DUPLEX | FILE_FLAG_OVERLAPPED, PIPE_TYPE_MESSAGE | PIPE_READMODE_MESSAGE | PIPE_WAIT, PIPE_UNLIMITED_INSTANCES - 1, 0, 0, 0, 0)
 #else
-		   static_cast<void*>(!mkfifo(hd->name.c_str(), O_RDWR | O_CREAT))
+		   mkfifo(hd->name.c_str(), O_RDWR | O_CREAT)
 #endif
 		   )|| nullptr == (hd->file = fopen(hd->name.c_str(), "wb+")))
 		{
@@ -359,14 +363,15 @@ bool FileStream::Close()
 		case StreamType::File:
 		case StreamType::NamePipe:
 		case StreamType::ComData:
-			if(hd->pipeHandle != nullptr)
+			if(hd->pipeHandle != 0)
 			{
 #ifdef OS_WINDOWS
 				CloseHandle(hd->pipeHandle);
+				hd->pipeHandle = nullptr;
 #else
 
 #endif
-				hd->pipeHandle = nullptr;
+
 				fclose(hd->file);
 				hd->pipeReader->join();
 				AA_SAFE_DEL(hd->pipeReader);

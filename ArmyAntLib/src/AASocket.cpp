@@ -27,11 +27,14 @@
 #include "../include/AAClassPrivateHandle.hpp"
 #include <map>
 #include <boost/asio.hpp>
+#include <netinet/in.h>
 
 #ifdef OS_WINDOWS
 #include <WinSock2.h>
 #include <in6addr.h>
 #include <ws2tcpip.h>
+#else
+#include <list>
 #endif
 
 namespace ArmyAnt {
@@ -42,13 +45,21 @@ namespace ArmyAnt {
 // 将socket的ipv4地址转换为ArmyAnt::IPAddr_v4
 inline static IPAddr_v4 ToAAAddr(in_addr addr) 
 {
+#ifdef OS_WINDOWS
 	return IPAddr_v4(addr.S_un.S_addr);
+#else
+    return IPAddr_v4(addr.s_addr);
+#endif
 }
 
 // 将socket的ipv6地址转换为ArmyAnt::IPAddr_v6
 inline static IPAddr_v6 ToAAAddr(in6_addr addr) 
 {
+#ifdef OS_WINDOWS
 	return IPAddr_v6(addr.u.Word);
+#else
+    return IPAddr_v6(addr.__in6_u.__u6_addr16);
+#endif
 }
 
 // 将socket的地址信息(不确定版本)转换为ArmyAnt::IPAddr(通用)
@@ -70,7 +81,11 @@ inline static IPAddr& ToAAAddr(addrinfo addr)
 inline static in_addr ToCAddr(const IPAddr_v4&addr)
 {
 	in_addr ret;
+#ifdef OS_WINDOWS
 	ret.S_un.S_addr = addr.GetNum();
+#else
+    ret.s_addr = addr.GetNum();
+#endif
 	return ret;
 }
 
@@ -80,7 +95,11 @@ inline static in6_addr ToCAddr(const IPAddr_v6&addr)
 	in6_addr ret;
 	for(uint8 i = 0; i < 8; i++)
 	{
+#ifdef OS_WINDOWS
 		ret.u.Word[i] = addr.GetWord(i);
+#else
+        ret.__in6_u.__u6_addr16[i] = addr.GetWord(i);
+#endif
 	}
 	return ret;
 }
@@ -88,10 +107,18 @@ inline static in6_addr ToCAddr(const IPAddr_v6&addr)
 // 将ArmyAnt::IPAddr(通用)转换成socket的ip不确定版本的地址结构
 inline static addrinfo ToCAddr(const IPAddr& addr)
 {
+	addrinfo ret;
 	if(addr.GetIPVer() == 4)
-		return *reinterpret_cast<addrinfo*>(&ToCAddr(static_cast<const IPAddr_v4>(addr)));
+	{
+		in_addr a = ToCAddr(static_cast<const IPAddr_v4>(addr));
+		ret = *reinterpret_cast<addrinfo*>(&a);
+	}
 	else
-		return *reinterpret_cast<addrinfo*>(&ToCAddr(static_cast<const IPAddr_v6>(addr)));
+	{
+		in6_addr a = ToCAddr(static_cast<const IPAddr_v6>(addr));
+		ret = *reinterpret_cast<addrinfo *>(&a);
+	}
+	return ret;
 }
 
 // 将boost的ip地址,转换成ArmyAnt::IPAddr
@@ -697,7 +724,7 @@ IPAddr_v4 Socket::GetLocalIPv4Addr(int index)
 
 	char tszHost[256];
 	gethostname(tszHost, 256);
-	PADDRINFOA hostaddrinfo;
+	addrinfo* hostaddrinfo;
 	//获取主机地址列表
 	getaddrinfo(tszHost, "80", nullptr, &hostaddrinfo);
 	//按索引选择
@@ -726,7 +753,7 @@ IPAddr_v6 Socket::GetLocalIpv6Addr(int index)
 
 	char tszHost[256];
 	gethostname(tszHost, 256);
-	PADDRINFOA hostaddrinfo;
+	addrinfo* hostaddrinfo;
 	//获取主机地址列表
 	getaddrinfo(tszHost, "80", nullptr, &hostaddrinfo);
 	//按索引选择

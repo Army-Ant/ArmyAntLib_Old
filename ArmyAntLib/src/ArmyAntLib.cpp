@@ -23,7 +23,7 @@
 */
 
 #include "../base/base.hpp"
-#include "..\include\ArmyAntLib.h"
+#include "../include/ArmyAntLib.h"
 
 namespace ArmyAnt {
 

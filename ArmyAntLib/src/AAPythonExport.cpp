@@ -26,7 +26,12 @@
 #include "../include/AAFile.h"
 #include "../include/C_AAFile.h"
 
+#ifdef OS_WINDOWS
 #include "../externals/python3.5.1/include/Python.h"
+#else
+
+#include <Python.h>
+#endif
 #include <map>
 #include "../include/AANeuron.hpp"
 #include "../include/C_AANeuron.h"
