@@ -23,15 +23,15 @@
 #ifndef A_A_DIGRAPH_HPP_2016_1_13
 #define A_A_DIGRAPH_HPP_2016_1_13
 
-/*	* @ author			: Jason
-* @ date			: 01/18/2016
-* @ nearly update	: 01/18/2016
-* @ small version	: 0.1
-* @ summary			: 有向图及其遍历迭代器
-* @ uncompleted		: 迭代器和图
-* @ untested		: all
-* @ tested			:
-*/
+/* @ author			: Jason
+ * @ date			: 01/18/2016
+ * @ nearly update	: 01/18/2016
+ * @ small version	: 0.1
+ * @ summary		: 有向图及其遍历迭代器
+ * @ uncompleted	: none
+ * @ untested		: all
+ * @ tested			:
+ */
 
 #include "AADefine.h"
 #include <vector>
@@ -45,43 +45,101 @@ class GraphLine;
 template <class T_Val, class T_Tag, class T_Weight = float>
 class Digraph;
 
+/*	The node of digraph
+ *	定义有向图的节点
+ *	@ type = "T_Val" :	The value context for digraph node
+						节点的值内容
+ *	@ type = "T_Tag":	The tag for digraph node, what is used to search
+						节点的标签名称, 搜索节点是根据标签进行的
+ *	@ type = "T_Weight":The weight for digraph node, used to do some calculation, the default of this type is float
+						节点的权重, 用于某些计算, 默认类型是float
+ */
 template <class T_Val, class T_Tag, class T_Weight>
 class GraphNode
 {
 public:
-	//创建空节点
+	/*	Create an empty node
+		创建空节点
+	 */
 	GraphNode();
-	//根据键值对创建节点
+
+	/*	Create a node with value and tag
+	 *	根据键值对创建节点
+	 *	@ param = "tag" :	The tag of this node
+							节点的标签
+	 *	@ param = "element":The value of this node
+							节点的值内容
+	 *	@ param = "weight":	The weight of this node, default value is 1
+							节点的权重, 可用默认值1
+	 */
 	GraphNode(T_Tag tag, const T_Val&element, T_Weight weight = T_Weight(1));
-	//复制节点
+
+	/*	Copied from another node
+		复制节点
+	 *	@ param = "value" :	The node this copied from
+							要复制的源节点
+	 */
 	GraphNode(const GraphNode<T_Val, T_Tag, T_Weight>&value);
-	//拷贝节点内容
+
+	/*	Copied all attributes and values from another node
+		拷贝节点内容
+		@ param = "value" :	The node this copied from
+							要复制的源节点
+	 */
 	GraphNode<T_Val, T_Tag, T_Weight>&operator=(const GraphNode<T_Val, T_Tag, T_Weight>&value);
-	//析构函数
+
+	/*	Destructor
+		析构函数
+	 */
 	virtual ~GraphNode();
 
 public:
-	//取得节点的键
+	/*	取得节点的键
+	 */
 	T_Tag GetTag()const;
-	//取得节点的值内容
+
+	/*	取得节点的值内容
+	 */
 	T_Val*GetValue();
+
+	/*	取得节点的值内容
+	 */
 	inline const T_Val*GetValue()const;
-	//取得节点的权重
+
+	/*	取得节点的权重
+	 */
 	T_Weight GetWeight()const;
 
 public:
-	//取得所在的图
+	/*	Get the digraph this node is in, returns nullptr when this node is in no digraph
+	 *	取得所在的图, 如果此节点不属于任何图, 则会返回nullptr
+	 */
 	Digraph<T_Val, T_Tag, T_Weight>*GetGraph();
 	inline const Digraph<T_Val, T_Tag, T_Weight>*GetGraph()const;
-	//设置所在图
+
+	/*	Enter this node to a digraph. If this belongs to one digraph before, it will be removed first
+	 *	设置所在图, 若之前属于某图, 则会先从原来的图中移除
+	 *	@ param = "graph" :	The digraph which will this join into
+							要加入的图
+	 */
 	bool SetGraph(const Digraph<T_Val, T_Tag, T_Weight>*graph);
-	//修改键
+
+	/*	修改标签
+	 */
 	bool SetTag(T_Tag tag);
-	//修改值内容
+
+	/*	Change the value
+		修改值内容
+	 */
 	bool SetValue(T_Val&value);
-	//重置值内容
+
+	/*	Reset the value to empty
+		重置值内容
+	 */
 	bool SetValue();
-	//修改权重
+
+	/*	修改权重
+	 */
 	bool SetWeight(T_Weight weight);
 
 public:
@@ -464,7 +522,7 @@ bool GraphNode<T_Val, T_Tag, T_Weight>::DeLinkAll(bool isOut)
 				}
 			}
 		}
-		AA_SAFE_DELALL(ret);
+		Fragment::AA_SAFE_DELALL(ret);
 	}
 	return true;
 }
@@ -528,7 +586,7 @@ GraphLine<T_Val, T_Tag, T_Weight>* GraphNode<T_Val, T_Tag, T_Weight>::GetLinkedI
 			}
 		}
 	}
-	AA_SAFE_DELALL(ret);
+	Fragment::AA_SAFE_DELALL(ret);
 	return res;
 }
 
@@ -568,7 +626,7 @@ T_Tag GraphNode<T_Val, T_Tag, T_Weight>::GetAllLinkedIn(GraphLine<T_Val, T_Tag, 
 			}
 		}
 	}
-	AA_SAFE_DELALL(ret);
+	Fragment::AA_SAFE_DELALL(ret);
 	return count;
 }
 

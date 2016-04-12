@@ -33,6 +33,8 @@
 
 #if defined _x64
 #define AA_TARGET_MACHINE "_64"
+#elif defined _ARM
+#define AA_TARGET_MACHINE "_arm"
 #else
 #define AA_TARGET_MACHINE
 #endif

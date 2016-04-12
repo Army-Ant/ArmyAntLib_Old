@@ -27,8 +27,6 @@
 
 namespace ArmyAnt {
 
-const double Fragment::s_aa_natrualBase = 2.7182818284590452353;
-
 namespace Infos {
 
 Version::VerChar::VerChar(uint16 bigVer, uint16 smallVer, uint16 patchVer, uint16 testVer)

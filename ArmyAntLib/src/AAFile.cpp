@@ -248,7 +248,7 @@ bool FileStream::Open(mac_uint memaddr, uint64 len)
 #ifdef _x86
 	sprintf(name, "%X", memaddr);
 #else
-	sprintf(name, "%X%X", uint32(memaddr/0xffffffff), uint32(memaddr%0xffffffff));
+	sprintf(name, "%X%X", uint32(memaddr/Constant::c_uint32Max), uint32(memaddr%Constant::c_uint32Max));
 #endif
 	hd->name = name;
 	hd->len = len;
@@ -337,7 +337,7 @@ bool FileStream::Open(uint32 netIp, uint16 port, uint8 protocol)
 		return false;
 	AAAssert(port != 0 && protocol != 0, false);
 	char name[32] = "";
-	sprintf(name, "%d.%d.%d.%d:%d", netIp / 256 / 256 / 256, netIp / 256 / 256 % 256, netIp / 256 % 256, netIp % 256, int(port));
+	sprintf(name, "%d.%d.%d.%d:%d", netIp / Constant::c_uint8Max / Constant::c_uint8Max / Constant::c_uint8Max, netIp / Constant::c_uint8Max / Constant::c_uint8Max % Constant::c_uint8Max, netIp / Constant::c_uint8Max % Constant::c_uint8Max, netIp % Constant::c_uint8Max, int(port));
 	// TODO : 填充网络通信回调函数
 	hd->sockHandle = new TCPClient();
 	if(hd->sockHandle->SetServerAddr(IPAddr_v4(netIp)) && hd->sockHandle->SetServerPort(port) &&

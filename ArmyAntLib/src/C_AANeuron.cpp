@@ -52,12 +52,12 @@ ARMYANT_CLIB_API double AA_Math_Threshold(double input, double amplitude, double
 
 ARMYANT_CLIB_API double AA_Math_Sigmoid(double input, double coef)
 {
-	return 1 / (1 + pow(s_aa_natrualBase, -coef*input));
+	return 1 / (1 + pow(ArmyAnt::Constant::c_natrualBase, -coef*input));
 }
 
 ARMYANT_CLIB_API double AA_Math_DoubleSigmoid(double input, double coef)
 {
-	return 2 / (1 + pow(s_aa_natrualBase, -coef*input)) - 1;
+	return 2 / (1 + pow(ArmyAnt::Constant::c_natrualBase, -coef*input)) - 1;
 }
 
 static std::map<AA_CNeuronAlgorithm, ArmyAnt::NeuronAlgorithm<double>*> manager;

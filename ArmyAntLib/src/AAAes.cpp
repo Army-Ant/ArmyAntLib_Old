@@ -60,6 +60,9 @@ public:
 
 	uint8 data[256] = {0};
 	uint16 refCount = 1;
+
+public:
+	static const int16 c_SBoxLength = 256;
 };
 
 ByteEncoder_Private::ByteEncoder_Private()
@@ -73,21 +76,21 @@ ByteEncoder_Private::~ByteEncoder_Private()
 void ByteEncoder_Private::MakeRandomSBox()
 {
 	//清空数据
-	memset(data, 0, 256);
+	memset(data, 0, c_SBoxLength);
 	//重置随机种子
 	boost::mt19937 gen;
-	boost::random::uniform_smallint<uint32> r(0, 255);
+	boost::random::uniform_smallint<uint32> r(0, c_SBoxLength - 1);
 	boost::variate_generator<boost::mt19937&, boost::uniform_smallint<uint32>>die(gen, r);
 
 	//摇出第一个数
 	uint8 start = uint8(die());
 	//摇出剩余的数
-	for(int i = 1; i < 256; i++)
+	for(int16 i = 1; i < c_SBoxLength; i++)
 	{
 		uint8 c = uint8(die());
 		while(c == start || data[c] > 0)
 		{
-			if(++c > 255)
+			if(++c > c_SBoxLength - 1)
 				c = 0;
 		}
 		data[c] = uint8(i);
@@ -97,12 +100,12 @@ void ByteEncoder_Private::MakeRandomSBox()
 bool ByteEncoder_Private::TurnToBack(bool withCheck/* = false*/)
 {
 	//存放反转后数据的临时数组
-	uint8 tmp[256] = {0};
+	uint8 tmp[c_SBoxLength] = {0};
 	if(withCheck)
 	{
 		//索引为0的数的值，将变为转化后值为0的索引
 		uint8 zeropos = this->data[0];
-		for(int i = 0; i < 256; i++)
+		for(int16 i = 0; i < c_SBoxLength; i++)
 		{
 			//如果值为zeropos，则表明另一个索引不为0的数(i)占用该处，这不符合规则
 			if(i > 0 && this->data[i] == zeropos)
@@ -113,13 +116,13 @@ bool ByteEncoder_Private::TurnToBack(bool withCheck/* = false*/)
 			tmp[this->data[i]] = uint8(i);
 		}
 	}
-	else for(int i = 0; i < 256; i++)
+	else for(int16 i = 0; i < c_SBoxLength; i++)
 	{
 		//不检查，单纯转换数据，如果原S盒不符合规则，可能发生数据覆盖等问题
 		tmp[this->data[i]] = uint8(i);
 	}
 	//更新数据
-	memcpy(this->data, tmp, 256);
+	memcpy(this->data, tmp, c_SBoxLength);
 	return true;
 }
 
@@ -170,32 +173,32 @@ ByteEncoder::~ByteEncoder()
 }
 
 
-bool ByteEncoder::InputData(const uint8 elems[256], bool needCheck/* = false*/)
+bool ByteEncoder::InputData(const uint8 elems[ByteEncoder_Private::c_SBoxLength], bool needCheck/* = false*/)
 {
 	AAAssert(elems != nullptr,false);
 	auto hd = byteEncoder_manager[handle];
 	if(needCheck)
 	{
 		//将元数据拷贝到临时区域，失败时将还原
-		uint8 tmp[256];
-		memcpy(tmp, hd->data, 256);
-		memcpy(hd->data, elems, 256);
+		uint8 tmp[ByteEncoder_Private::c_SBoxLength];
+		memcpy(tmp, hd->data, ByteEncoder_Private::c_SBoxLength);
+		memcpy(hd->data, elems, ByteEncoder_Private::c_SBoxLength);
 		//验证是否符合规则
 		if(hd->CheckObayRule())
 			return true;
-		memcpy(hd->data, tmp, 256);
+		memcpy(hd->data, tmp, ByteEncoder_Private::c_SBoxLength);
 		return false;
 	}
 	else
 	{
 		//不验证，仅输入数据
-		memcpy(hd->data, elems, 256);
+		memcpy(hd->data, elems, ByteEncoder_Private::c_SBoxLength);
 	}
 	return true;
 }
 
 
-bool ByteEncoder::InputBackData(const uint8 elems[256], bool needCheck/* = false*/)
+bool ByteEncoder::InputBackData(const uint8 elems[ByteEncoder_Private::c_SBoxLength], bool needCheck/* = false*/)
 {
 	//输入数据，然后求反
 	if(!InputData(elems, needCheck))
@@ -222,20 +225,20 @@ bool ByteEncoder::CopiedFromAnother(const ByteEncoder another, bool needCheck /*
 }
 
 
-bool ByteEncoder::GetData(uint8 elems[256]) const
+bool ByteEncoder::GetData(uint8 elems[ByteEncoder_Private::c_SBoxLength]) const
 {
 	AAAssert(elems != nullptr,false);
-	memcpy(elems, byteEncoder_manager[handle]->data, 256);
+	memcpy(elems, byteEncoder_manager[handle]->data, ByteEncoder_Private::c_SBoxLength);
 	return true;
 }
 
 
-bool ByteEncoder::GetBackData(uint8 elems[256]) const
+bool ByteEncoder::GetBackData(uint8 elems[ByteEncoder_Private::c_SBoxLength]) const
 {
 	ByteEncoder_Private tmp;
 	memcpy(&tmp, byteEncoder_manager[handle], sizeof(ByteEncoder_Private));
 	tmp.TurnToBack();
-	memcpy(elems, tmp.data, 256);
+	memcpy(elems, tmp.data, ByteEncoder_Private::c_SBoxLength);
 	return true;
 }
 
@@ -243,7 +246,7 @@ bool ByteEncoder::GetBackData(uint8 elems[256]) const
 ByteEncoder ByteEncoder::GetBack() const
 {
 	ByteEncoder ret;
-	memcpy(byteEncoder_manager[ret.handle]->data, byteEncoder_manager[handle]->data, 256);
+	memcpy(byteEncoder_manager[ret.handle]->data, byteEncoder_manager[handle]->data, ByteEncoder_Private::c_SBoxLength);
 	byteEncoder_manager[ret.handle]->TurnToBack();
 	return ret;
 }

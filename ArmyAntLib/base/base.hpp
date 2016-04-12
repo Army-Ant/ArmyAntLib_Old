@@ -36,9 +36,6 @@
 */
 #include <boost/assert.hpp>
 
-
-namespace ArmyAnt {
-
 #define BOOST_NO_AUTO_PTR
 
 #ifdef OS_WINDOWS
@@ -53,6 +50,14 @@ namespace ArmyAnt {
 #undef AAAssert
 #define AAAssert(x,y) BOOST_ASSERT(x)
 #endif
+
+using namespace ArmyAnt::Fragment;
+
+namespace ArmyAnt {
+
+namespace Constant {
+
+}
 
 #endif
 

@@ -32,17 +32,23 @@ namespace ArmyAnt {
 
 namespace JNITools{
 
-	// 将Java的String转化为C++的string输出
+const char* c_javaStringSig = "java/lang/String";
+const char* c_javaStringGetBytes = "getBytes";
+const char* c_javaStringGetBytesSig = "(Ljava/lang/String;)[B";
+
+	/*	Convert the Java string to C++ string
+	 *	将Java的String转化为C++的string输出
+	 */
 	inline static std::string JstringToCstring(JNIEnv* env,jstring jstr)
 	{
 		// 获取Java字符串类
 		std::string rtn = "";
-		jclass clsstring = env->FindClass("java/lang/String");
-		AAAssert(clsstring != nullptr, "");
+		jclass clsstring = env->FindClass(c_javaStringSig);
+		Fragment::AAAssert(clsstring != nullptr, "");
 		// 获取Java的字符串转字节流函数
 		jstring strencode = env->NewStringUTF("GB2312");
-		static jmethodID mid = env->GetMethodID(clsstring, "getBytes", "(Ljava/lang/String;)[B");
-		AAAssert(mid != nullptr, "");
+		static jmethodID mid = env->GetMethodID(clsstring, c_javaStringGetBytes, c_javaStringGetBytesSig);
+		Fragment::AAAssert(mid != nullptr, "");
 		// 执行Java的转换函数
 		jbyteArray barr = (jbyteArray)(env->CallObjectMethod(jstr, mid, strencode));
 		jsize alen = env->GetArrayLength(barr);
@@ -62,17 +68,21 @@ namespace JNITools{
 		return rtn;
 	};
 
-	// 将C++的string转化为Java的String输出
+	/*	Convert the C++ string to Java string
+	 *	将C++的string转化为Java的String输出
+	 */
 	inline static jstring CstringToJstring(JNIEnv*env, std::string str)
 	{
 		return env->NewStringUTF(str.c_str());
 	}
 
-	// 获取指定接口的指定Java函数ID
+	/*	Get the Java method ID from a named method in named Java class or interface
+	 *	获取指定接口的指定Java函数ID
+	 */
 	inline static jmethodID GetInterfaceMethodID(JNIEnv *env, const char* interfaceName, const char* methodName, const char* methodSig)
 	{
 		auto cls = env->FindClass(interfaceName);
-		AAAssert(cls != nullptr, nullptr);
+		Fragment::AAAssert(cls != nullptr, nullptr);
 		return env->GetMethodID(cls, methodName, methodSig);
 	}
 

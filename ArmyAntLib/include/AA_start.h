@@ -44,13 +44,4 @@
 
 #endif // AA_USE_STATIC
 
-#ifdef ARMYANTLIB_EXPORTS
-// Have to create the namespace firstly
-namespace ArmyAnt {
-    namespace Fragment {
-    }
-}
-using namespace ArmyAnt::Fragment;
-#endif // ARMYANTLIB_EXPORTS
-
 #endif // AA_START_H_2015_11_11

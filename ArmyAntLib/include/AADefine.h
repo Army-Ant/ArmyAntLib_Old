@@ -26,13 +26,6 @@
 #include "C_AADefine.h"
 #include "AAFragment.h"
 
-typedef long long int64;
-typedef unsigned long long uint64;
-
-#ifdef _CMAKE
-typedef long long __int64;
-#endif
-
 // 添加在类中, 禁止默认的拷贝构造函数(需要自定义拷贝构造函数时请勿使用)
 #define AA_FORBID_COPY_CTOR(typen) public: typen(typen&)=delete
 // 添加在类中, 禁止默认的拷贝赋值运算符(需要重载拷贝赋值运算符时请勿使用)

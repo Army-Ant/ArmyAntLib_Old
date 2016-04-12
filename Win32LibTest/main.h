@@ -8,4 +8,7 @@
 
 #include "../LibOut/ArmyAnt.h"
 
+using namespace ArmyAnt;
+using namespace ArmyAnt::Fragment;
+
 #endif // MAIN_H_2015_11_12

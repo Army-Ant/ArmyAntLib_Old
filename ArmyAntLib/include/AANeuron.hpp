@@ -49,21 +49,31 @@ public:
 
 public: // Some normal activation functions
 
-	// Liner function
-	// 线性函数, 默认值为单位正比例函数
+	/*	Liner function
+	 *	线性函数, 默认值为单位正比例函数
+	 */
 	inline static ActiveFunc GetLinerFunc(T_Weight  slope = T_Weight(1), T_Weight bias = T_Weight(0));
-	// Ramp function
-	// 对称斜坡函数 , 默认值为单位斜坡函数
+
+	/*	Ramp function
+	 *	对称斜坡函数 , 默认值为单位斜坡函数
+	 */
 	inline static ActiveFunc GetRampFunc(T_Weight  width = T_Weight(1), T_Weight height = T_Weight(1));
-	// Step function (Threshold function)
-	// 阶跃函数 (门阀函数) , 默认值为单位阶跃函数
+
+	/*	Step function (Threshold function)
+	 *	阶跃函数 (门阀函数) , 默认值为单位阶跃函数
+	 */
 	inline static ActiveFunc GetThresholdFunc(T_Weight  amplitude = T_Weight(1), T_Weight threshold = T_Weight(0));
-	// Sigmoid function
-	// S形函数
+
+	/*	Sigmoid function
+	 *	S形函数
+	 */
 	inline static ActiveFunc GetSigmoidFunc(T_Weight  coef = T_Weight(1));
-	// Double-sigmoid function
-	// 双S形函数
+
+	/*	Double-sigmoid function
+	 *	双S形函数
+	 */
 	inline static ActiveFunc GetDoubleSigmoidFunc(T_Weight  coef = T_Weight(1));
+
 
 public:
 	NeuronAlgorithm(ActiveFunc activationFunc, T_Weight threshold = T_Weight(0));
@@ -135,20 +145,20 @@ inline typename NeuronAlgorithm<T_Weight>::ActiveFunc NeuronAlgorithm<T_Weight>:
 template<class T_Weight>
 inline typename NeuronAlgorithm<T_Weight>::ActiveFunc NeuronAlgorithm<T_Weight>::GetSigmoidFunc(T_Weight coef)
 {
-	return [=](T_Weight input){return 1 / (1 + pow(ArmyAnt::Fragment::s_aa_natrualBase, -coef*input));};
+	return [=](T_Weight input){return 1 / (1 + pow(ArmyAnt::Constant::c_natrualBase, -coef*input));};
 }
 
 template<class T_Weight>
 inline typename NeuronAlgorithm<T_Weight>::ActiveFunc NeuronAlgorithm<T_Weight>::GetDoubleSigmoidFunc(T_Weight coef)
 {
-	return [=](T_Weight input){return 2 / (1 + pow(ArmyAnt::Fragment::s_aa_natrualBase, -coef*input)) - 1;};
+	return [=](T_Weight input){return 2 / (1 + pow(ArmyAnt::Constant::c_natrualBase, -coef*input)) - 1;};
 }
 
 template<class T_Weight>
 NeuronAlgorithm<T_Weight>::NeuronAlgorithm(ActiveFunc activationFunc, T_Weight threshold)
 	: activationFunc(activationFunc), threshold(threshold)
 {
-	AAAssert(activationFunc != nullptr, );
+	Fragment::AAAssert(activationFunc != nullptr, );
 }
 
 template<class T_Weight>
@@ -188,7 +198,7 @@ bool NeuronAlgorithm<T_Weight>::LeaveActive(T_Weight input, T_Weight weight)
 template<class T_Weight>
 bool NeuronAlgorithm<T_Weight>::ClearActive()
 {
-	inputAll -= 0;
+	inputAll = 0;
 	return true;
 }
 

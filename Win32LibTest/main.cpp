@@ -1,10 +1,13 @@
 ﻿#include "main.h"
-using namespace ArmyAnt::Fragment;
 
 static const int s_exitCode = 0xffffffff;
 
 int FileStreamTest(const std::string&);
 int AESTest(const std::string&);
+int BinaryTest(const std::string&);
+int SocketTest(const std::string&);
+int ConfigurationTest(const std::string&);
+int MessageQueueTest(const std::string&);
 
 int TripleMapTest(const std::string&);
 int TreeTest(const std::string&);
@@ -25,7 +28,62 @@ inline int Error(const std::string& errmsg, const char* errmsg2 = "")
 int main(int argc, char* argv[])
 {
 	std::string str;
-	auto func = NeuronTest;
+	char choose = 0;
+	SetConsoleTextAttribute(GetStdHandle(STD_ERROR_HANDLE), 0x000F);
+	std::cout << "Welcome to the ArmAntLib Test for Windows platform" << std::endl;
+	std::cout << "欢迎使用ArmyAntLib的Windows平台测试器" << std::endl << std::endl;
+	std::cout << "Please choose your test unit:" << std::endl;
+	std::cout << "请选择您要测试的单元:" << std::endl;
+	std::cout << "1. FileStream" << std::endl;
+	std::cout << "2. AES" << std::endl;
+	std::cout << "3. Binary" << std::endl;
+	std::cout << "4. Socket" << std::endl;
+	std::cout << "5. Configuration" << std::endl;
+	std::cout << "6. MessageQueue" << std::endl;
+	std::cout << "7. TripleMap" << std::endl;
+	std::cout << "8. Tree" << std::endl;
+	std::cout << "9. Digraph" << std::endl;
+	std::cout << "0. StateMachine" << std::endl;
+	std::cout << "-. Neuron" << std::endl;
+	std::cout << "Please enter key to choose:";
+	std::cin >> choose;
+	int(*func)(const std::string&cmd);
+	switch(choose)
+	{
+		case '1':
+			func = FileStreamTest;
+			break;
+		case '2':
+			func = AESTest;
+			break;
+		case '3':
+			func = BinaryTest;
+			break;
+		case '4':
+			func = SocketTest;
+			break;
+		case '5':
+			func = ConfigurationTest;
+			break;
+		case '6':
+			func = MessageQueueTest;
+			break;
+		case '7':
+			func = TripleMapTest;
+			break;
+		case '8':
+			func = TreeTest;
+			break;
+		case '9':
+			func = DigraphTest;
+			break;
+		case '0':
+			func = StateMachineTest;
+			break;
+		case '-':
+			func = NeuronTest;
+			break;
+	}
 	do
 	{
 		std::cin >> str;
@@ -36,7 +94,7 @@ int main(int argc, char* argv[])
 
 int FileStreamTest(const std::string& cmd)
 {
-	static ArmyAnt::FileStream*file = nullptr;
+	static FileStream*file = nullptr;
 	static uint8 memoryTest[2048] = {0};
 	static bool memInit = false;
 	if(!memInit)
@@ -53,7 +111,7 @@ int FileStreamTest(const std::string& cmd)
 			return Error("The file stream has been created !");
 		else
 		{
-			file = new ArmyAnt::FileStream();
+			file = new FileStream();
 			file->SetStreamMode(false);
 			std::cout << "The file stream created successfully !" << std::endl;
 		}
@@ -169,19 +227,19 @@ int FileStreamTest(const std::string& cmd)
 			std::cout << "The stream has not been opened." << std::endl;
 		else switch(file->NowType())
 		{
-			case ArmyAnt::StreamType::File:
+			case StreamType::File:
 				std::cout << "The stream type is diskfile." << std::endl;
 				break;
-			case ArmyAnt::StreamType::Memory:
+			case StreamType::Memory:
 				std::cout << "The stream type is memory." << std::endl;
 				break;
-			case ArmyAnt::StreamType::NamePipe:
+			case StreamType::NamePipe:
 				std::cout << "The stream type is name pipe." << std::endl;
 				break;
-			case ArmyAnt::StreamType::ComData:
+			case StreamType::ComData:
 				std::cout << "The stream type is COM." << std::endl;
 				break;
-			case ArmyAnt::StreamType::Network:
+			case StreamType::Network:
 				std::cout << "The stream type is network." << std::endl;
 				break;
 			default:
@@ -234,8 +292,8 @@ int FileStreamTest(const std::string& cmd)
 int AESTest(const std::string&cmd)
 {
 	static uint8 enc[16] = {'?','z','j','l','j',0xc,'y','1',1,'2',9,'0',1,'1',2,'!'};
-	static auto parser = ArmyAnt::AES::Parser::GetQuickParser(enc);
-	static ArmyAnt::FileStream file;
+	static auto parser = AES::Parser::GetQuickParser(enc);
+	static FileStream file;
 	static bool isEncoded = false;
 	if(cmd == "exit")
 		return s_exitCode;
@@ -246,7 +304,7 @@ int AESTest(const std::string&cmd)
 		{
 			tst[i] = uint8(i);
 		}
-		ArmyAnt::AES::ByteEncoder tstecd;
+		AES::ByteEncoder tstecd;
 		if(!tstecd.InputData(tst, true))
 			return Error("Check failed !");
 		std::cout << "Check passed !" << std::endl;
@@ -351,9 +409,70 @@ int AESTest(const std::string&cmd)
 	return 0;
 }
 
+int BinaryTest(const std::string&cmd)
+{
+	if(cmd == "exit")
+		return s_exitCode;
+	else if(cmd == "")
+	{
+
+	}
+	else
+	{
+		Error("Wrong command word : ", cmd.c_str());
+	}
+	return 0;
+}
+
+int SocketTest(const std::string&cmd)
+{
+	if(cmd == "exit")
+		return s_exitCode;
+	else if(cmd == "")
+	{
+
+	}
+	else
+	{
+		Error("Wrong command word : ", cmd.c_str());
+	}
+	return 0;
+}
+
+int ConfigurationTest(const std::string&cmd)
+{
+	if(cmd == "exit")
+		return s_exitCode;
+	else if(cmd == "")
+	{
+
+	}
+	else
+	{
+		Error("Wrong command word : ", cmd.c_str());
+	}
+	return 0;
+}
+
+
+int MessageQueueTest(const std::string&cmd)
+{
+	if(cmd == "exit")
+		return s_exitCode;
+	else if(cmd == "")
+	{
+
+	}
+	else
+	{
+		Error("Wrong command word : ", cmd.c_str());
+	}
+	return 0;
+}
+
 int TripleMapTest(const std::string&cmd)
 {
-	static ArmyAnt::TripleMap<int, float, std::string> map;
+	static TripleMap<int, float, std::string> map;
 	if(cmd == "exit")
 		return s_exitCode;
 	else if(cmd == "compareself")
@@ -372,7 +491,37 @@ int TripleMapTest(const std::string&cmd)
 
 int TreeTest(const std::string&cmd)
 {
-	static ArmyAnt::Tree<std::string> tr(&ArmyAnt::TreeNode<std::string>(std::string("root"), 0));
+	static Tree<std::string> tr(&TreeNode<std::string>(std::string("root"), 0));
+	if(cmd == "exit")
+		return s_exitCode;
+	else if(cmd == "")
+	{
+
+	}
+	else
+	{
+		Error("Wrong command word : ", cmd.c_str());
+	}
+	return 0;
+}
+
+int DigraphTest(const std::string&cmd)
+{
+	if(cmd == "exit")
+		return s_exitCode;
+	else if(cmd == "")
+	{
+
+	}
+	else
+	{
+		Error("Wrong command word : ", cmd.c_str());
+	}
+	return 0;
+}
+
+int StateMachineTest(const std::string&cmd)
+{
 	if(cmd == "exit")
 		return s_exitCode;
 	else if(cmd == "")
@@ -388,7 +537,7 @@ int TreeTest(const std::string&cmd)
 
 int NeuronTest(const std::string&cmd)
 {
-	static ArmyAnt::NeuronAlgorithm<> neuron([](double input) { return input * 2; }, 0.0);
+	static NeuronAlgorithm<> neuron([](double input) { return input * 2; }, 0.0);
 	if(cmd == "exit")
 		return s_exitCode;
 	else if(cmd == "input")
