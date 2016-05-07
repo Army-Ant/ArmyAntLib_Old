@@ -504,9 +504,6 @@
     <ClInclude Include="include\C_AANeuron.h">
       <Filter>05.CRefCode</Filter>
     </ClInclude>
-    <ClInclude Include="include\AAJNITools.hpp">
-      <Filter>04.CppLibCode\cpptools</Filter>
-    </ClInclude>
     <ClInclude Include="externals\python3.5.1\include\abstract.h">
       <Filter>02.Third-party-libraries\python3.5.1</Filter>
     </ClInclude>
@@ -840,6 +837,9 @@
     <ClInclude Include="include\AASocket%24ProtocolTypes">
       <Filter>04.CppLibCode</Filter>
     </ClInclude>
+    <ClInclude Include="include\AAJNITools.h">
+      <Filter>04.CppLibCode</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\AAFile.cpp">
@@ -870,6 +870,9 @@
       <Filter>04.CppLibCode</Filter>
     </ClCompile>
     <ClCompile Include="src\AASocket.cpp">
+      <Filter>04.CppLibCode</Filter>
+    </ClCompile>
+    <ClCompile Include="src\AAJNITools.cpp">
       <Filter>04.CppLibCode</Filter>
     </ClCompile>
   </ItemGroup>

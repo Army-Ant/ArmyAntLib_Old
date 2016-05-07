@@ -729,7 +729,7 @@
     <ClInclude Include="include\AAConfiguration.h" />
     <ClInclude Include="include\AADigraph.hpp" />
     <ClInclude Include="include\AAFragment.h" />
-    <ClInclude Include="include\AAJNITools.hpp" />
+    <ClInclude Include="include\AAJNITools.h" />
     <ClInclude Include="include\AAMessageQueue.h" />
     <ClInclude Include="include\AANeuron.hpp" />
     <ClInclude Include="include\AASocket%24ProtocolTypes" />
@@ -751,6 +751,7 @@
     <ClCompile Include="src\AAAes.cpp" />
     <ClCompile Include="src\AABinary.cpp" />
     <ClCompile Include="src\AAFile.cpp" />
+    <ClCompile Include="src\AAJNITools.cpp" />
     <ClCompile Include="src\AAPythonExport.cpp" />
     <ClCompile Include="src\AASocket.cpp" />
     <ClCompile Include="src\ArmyAntLib.cpp" />

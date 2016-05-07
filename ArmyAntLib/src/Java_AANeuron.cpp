@@ -25,7 +25,7 @@
 #include "../base/base.hpp"
 #include "../include/C_AANeuron.h"
 #include "../include/AANeuron.hpp"
-#include "../include/AAJNITools.hpp"
+#include "../include/AAJNITools.h"
 #include <map>
 
 #define ActiveClassName "ArmyAnt/Java_AANeuron$INeuronActive"

@@ -23,7 +23,7 @@
  */
 
 #include "../base/base.hpp"
-#include "../include/AAJNITools.hpp"
+#include "../include/AAJNITools.h"
 #include "../include/C_AAFile.h"
 
 #include <string>

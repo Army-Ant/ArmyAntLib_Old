@@ -15,6 +15,7 @@
     <ClInclude Include="main.h">
       <Filter>源文件</Filter>
     </ClInclude>
+    <ClInclude Include="constants.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="build_start.bat">
