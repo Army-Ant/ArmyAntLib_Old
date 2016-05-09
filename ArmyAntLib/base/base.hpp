@@ -44,6 +44,8 @@
 #define _WIN32_WINNT 0x0600
 #endif
 
+#endif
+
 #define BOOST_LIB_DIAGNOSTIC
 
 #ifdef DEBUG
@@ -59,8 +61,7 @@ namespace Constant {
 
 }
 
-#endif
-
 } // namespace ArmyAnt
+
 
 #endif // BASE_HPP_2015_11_11

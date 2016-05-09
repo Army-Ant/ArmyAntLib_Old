@@ -29,7 +29,6 @@
 #ifdef OS_WINDOWS
 #include "../externals/python3.5.1/include/Python.h"
 #else
-
 #include <Python.h>
 #endif
 #include <map>
@@ -98,7 +97,7 @@ extern "C" {
 
 	ARMYANT_CLIB_API int AA_NeuronAlgorithm_RecordDoubleToInt(double value)
 	{
-		if(intDoubleDict.size() > INT_MAX - 2)
+		if(intDoubleDict.size() > ArmyAnt::Constant::c_int32Max - 2)
 			AAAssert(false, -1);
 		for(int i = 0; i < int(intDoubleDict.size()) + 2; i++)
 			if(intDoubleDict.find(i) == intDoubleDict.end())

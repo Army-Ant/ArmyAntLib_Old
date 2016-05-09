@@ -33,9 +33,9 @@ namespace ArmyAnt {
 
 namespace JNITools{
 
-extern ARMYANTLIB_API const char* c_javaStringSig;
-extern ARMYANTLIB_API const char* c_javaStringGetBytes;
-extern ARMYANTLIB_API const char* c_javaStringGetBytesSig;
+	extern const char* const c_javaStringSig;
+	extern const char* const c_javaStringGetBytes;
+	extern const char* const c_javaStringGetBytesSig;
 
 	/*	Convert the Java string to C++ string
 	 *	将Java的String转化为C++的string输出
@@ -53,8 +53,7 @@ ARMYANTLIB_API jstring CstringToJstring(JNIEnv*env, std::string str);
 	 */
 ARMYANTLIB_API jmethodID GetInterfaceMethodID(JNIEnv *env, const char* interfaceName, const char* methodName, const char* methodSig);
 
-
-} // namespace ArmyAnt::JNITools
+};
 
 } // namespace ArmyAnt
 
