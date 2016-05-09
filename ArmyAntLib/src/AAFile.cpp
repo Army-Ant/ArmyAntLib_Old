@@ -98,7 +98,7 @@ public:
 	static void NamePipeReader(FsPrivate*self);
 	std::list<char> ReadNamePipe(uint64 length, const uint8* endtag = nullptr);
 
-	static inline int Fseek(FILE*stream, uint64 offset,int whence)
+	static inline int Fseek(FILE*stream, int64 offset,int whence)
 	{
 #if defined OS_WINDOWS && !defined _CMAKE
         return _fseeki64(stream, offset, whence);
@@ -555,15 +555,15 @@ uint64 FileStream::Read(void*buffer, uint32 len /*= FILE_SHORT_POS_END*/, uint64
 			fpos_t wholelen;
 			fgetpos(hd->file, &wholelen);
 			//标记是否在读取结束后返回初始位置
-			bool gostart = true;
+			bool isCurPos = false;
 			if(pos == FILE_LONG_POS_END)
 			{
-				gostart = false;
+				isCurPos = true;
 				pos = FsPrivate::GetFPos(now);
 			}
 			FsPrivate::Fseek(hd->file, pos, SEEK_SET);
 			fread(buffer, uint32(min(FsPrivate::GetFPos(wholelen), len)), 1, hd->file);
-			if(gostart)
+			if(!isCurPos)
 				FsPrivate::Fseek(hd->file, FsPrivate::GetFPos(now), SEEK_SET);
 			return uint64(min(FsPrivate::GetFPos(wholelen), len));
 		}
@@ -581,17 +581,20 @@ uint64 FileStream::Read(void*buffer, uint32 len /*= FILE_SHORT_POS_END*/, uint64
 		}
 		case StreamType::Memory:
 		{
+			bool isCurPos = false;
 			if(pos == FILE_LONG_POS_END)
+			{
+				isCurPos = true;
 				pos = hd->pos;
+			}
 			if(pos >= hd->len)
 				return false;
 			//内存拷贝
-			fpos_t reallen ;
-			FsPrivate::SetPos(reallen, min(hd->len - hd->pos, len));
-			memcpy(static_cast<char*>(buffer), static_cast<char*>(hd->mem) + pos, uint32(FsPrivate::GetFPos(reallen)));
-			if(pos == hd->pos)
-				pos += min(hd->len - hd->pos, len);
-			return uint64(min(hd->len - hd->pos, len));
+			uint64 reallen = min(hd->len - pos, len);
+			memcpy(static_cast<char*>(buffer), static_cast<char*>(hd->mem) + pos, uint32(reallen));
+			if(isCurPos)
+				hd->pos += reallen;
+			return reallen;
 		}
 		case StreamType::Network:
 		{
@@ -652,7 +655,7 @@ uint64 FileStream::Read(void*buffer, uint8 endtag, uint64 maxlen/* = FILE_SHORT_
 			
 			for(auto nowPos = hd->pos; ; nowPos++)
 			{
-				if(nowPos < hd->len || static_cast<uint8*>(hd->mem)[nowPos] == endtag || nowPos-hd->pos== maxlen)
+				if(nowPos < hd->len && static_cast<uint8*>(hd->mem)[nowPos] == endtag || nowPos-hd->pos== maxlen)
 				{
 					auto alllen = uint64(nowPos - hd->pos);
 					memcpy(static_cast<char*>(buffer), static_cast<char*>(hd->mem) + hd->pos, alllen);
@@ -676,23 +679,35 @@ uint64 FileStream::Write(void*buffer, uint64 len /*= 0*/)
 		while(static_cast<uint8*>(buffer)[len] != 0)
 			len++;
 
+	uint64 writeLen = 0;
+
 	switch(hd->type)
 	{
 		case StreamType::File:
 		case StreamType::NamePipe:
 		case StreamType::ComData:
-
-			return fwrite(buffer, len, 1, hd->file);
+#ifdef OS_WINDOWS
+			// So much posix old OS file reading and writing operation need to call the "fseek" function between the nearly fwrite and fread,
+			// The modern Unix system do not have this problem any more, but Windows still have
+			FsPrivate::Fseek(hd->file, 0L, 1);
+#endif
+			fflush(hd->file);
+			writeLen = fwrite(buffer, 1, len, hd->file);
+			fflush(hd->file);
+#ifdef OS_WINDOWS
+			FsPrivate::Fseek(hd->file, 0L, 1);
+#endif
+			break;
 		case StreamType::Memory:
-		{
-			auto realLen = uint64(min(len, hd->len - hd->pos));
-			memcpy(hd->mem, buffer, realLen);
-			return realLen;
-		}
+			writeLen = uint64(min(len, hd->len - hd->pos));
+			memcpy(static_cast<uint8*>(hd->mem) + hd->pos, buffer, writeLen);
+			hd->pos += writeLen;
+			break;
 		case StreamType::Network:
 		default:
-			return 0;
+			break;
 	}
+	return writeLen;
 }
 
 bool FileStream::CopyFile(const char*srcPath, const char*dstPath)

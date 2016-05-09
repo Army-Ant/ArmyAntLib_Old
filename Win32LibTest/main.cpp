@@ -39,8 +39,8 @@ int main(int argc, char* argv[])
 			if(g_moduleList[i].keyCode == choose)
 			{
 				g_moduleList[i].callback();
-				std::cout << "Test Over ! Press any key to exit";
-				getchar();
+				std::cout << "Test Over ! Press Enter to exit";
+				std::cin >> argv[0];
 				return 0;
 			}
 		}
@@ -56,8 +56,13 @@ void ExitTest()
 void FileStreamTest()
 {
 	static FileStream*file = nullptr;
-	static uint8 memoryTest[2048] = {0};
+	static const uint16 memTestLen = 2048;
+	static uint8 memoryTest[memTestLen] = {0};
 	static bool memInit = false;
+
+	const uint16 bufLen = 2048;
+	char buf[bufLen] = "";
+
 	if(!memInit)
 	{
 		memInit = true;
@@ -65,7 +70,6 @@ void FileStreamTest()
 	}
 
 	file = new FileStream();
-	char buf[2048] = "";
 	CHECK_EXIT_SUCCESS(file->SetStreamMode(false), "The file stream created");
 	CHECK_EXIT_SUCCESS(!file->IsOpened(), "The stream dynamic checked");
 	CHECK_EXIT_SUCCESS(!file->IsOpened(false), "The stream without dynamic checked");
@@ -79,9 +83,14 @@ void FileStreamTest()
 		std::cout << "The reading pointer of the stream is " << file->GetPos() << std::endl;
 		CHECK_EXIT_SUCCESS(0 < file->Read(buf), "The stream read");
 		std::cout << "Read context is :" << std::endl;
-		std::wcout << buf << std::endl;
+		std::cout << buf << std::endl;
 		std::cout << "The reading pointer of the stream is " << file->GetPos() << std::endl;
 		CHECK_EXIT_SUCCESS(file->MovePos(file->GetPos() + 1), "The stream pointer position move next");
+		std::cout << "The reading pointer of the stream is " << file->GetPos() << std::endl;
+		CHECK_EXIT_SUCCESS(file->MovePos(file->GetPos() - 1), "The stream pointer position move back");
+		std::cout << "The reading pointer of the stream is " << file->GetPos() << std::endl;
+		CHECK_EXIT_SUCCESS(file->MovePos(0), "The stream pointer position move to beginning position");
+		std::cout << "The reading pointer of the stream is " << file->GetPos() << std::endl;
 		switch(file->NowType())
 		{
 			case StreamType::File:
@@ -100,23 +109,33 @@ void FileStreamTest()
 				std::cout << "The stream type is network." << std::endl;
 				break;
 		}
+		ZeroMemory(buf, bufLen);
 		CHECK_EXIT_SUCCESS(0 < file->Read(buf, uint8('\n')), "The stream line read");
 		std::cout << "Read context is :" << std::endl;
-		std::wcout << buf << std::endl;
+		std::cout << buf << std::endl;
 		std::cout << "The reading pointer of the stream is " << file->GetPos() << std::endl;
+		ZeroMemory(buf, bufLen);
+		strcpy(buf, "*** Writing Test ***");
 		std::cout << "Writing context is :" << std::endl;
-		std::wcout << reinterpret_cast<char*>(memoryTest) << std::endl;
-		CHECK_EXIT_SUCCESS(0 < file->Write(memoryTest), "The stream write");
+		std::cout << buf << std::endl;
+		CHECK_EXIT_SUCCESS(0 < file->Write(buf), "The stream write");
+		std::cout << "The reading pointer of the stream is " << file->GetPos() << std::endl;
+		CHECK_EXIT_SUCCESS(file->MovePos(0), "The stream pointer position move to beginning position");
+		std::cout << "The reading pointer of the stream is " << file->GetPos() << std::endl;
+		ZeroMemory(buf, bufLen);
+		CHECK_EXIT_SUCCESS(0 < file->Read(buf), "The stream read");
+		std::cout << "Read context is :" << std::endl;
+		std::cout << buf << std::endl;
 
 		CHECK_EXIT_SUCCESS(file->Close(), "The stream closed");
 		CHECK_EXIT_SUCCESS(!file->IsOpened(), "The stream dynamic checked");
 		CHECK_EXIT_SUCCESS(!file->IsOpened(false), "The stream without dynamic checked");
 	};
 
-	CHECK_EXIT_SUCCESS(file->Open("test.txt"), "The file 'test.txt' opened");
-	testfunc();
-	CHECK_EXIT_SUCCESS(file->Open(memoryTest, 204), "The memory opened");
-	testfunc();
+	//CHECK_EXIT_SUCCESS(file->Open("test.txt"), "The file 'test.txt' opened");					// disk file passed test
+	//testfunc();
+	//CHECK_EXIT_SUCCESS(file->Open(memoryTest, memTestLen - 1), "The memory opened");			// memory passed test
+	//testfunc();
 	CHECK_EXIT_SUCCESS(file->Open("jason_1", ""), "The pipe 'jason_1' opened");
 	testfunc();
 	CHECK_EXIT_SUCCESS(file->Open(1), "The com 1 opened");
