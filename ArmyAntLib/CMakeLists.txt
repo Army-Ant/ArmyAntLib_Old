@@ -20,13 +20,21 @@
 # This file is the internal source file of this project, is not contained by the closed source release part of this software
 # 本文件为内部源码文件, 不会包含在闭源发布的本软件中
 
-cmake_minimum_required(VERSION 3.3)
+cmake_minimum_required(VERSION 3.2)
 project(ArmyAntLib)
 
-set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11 -m64")
+if(TAR_MAC STREQUAL arm)
+	set(CMAKE_CXX_COMPILER "arm-linux-g++")
+endif()
+
+if(TAR_MAC STREQUAL x86)
+	set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=gnu++11 -m32")
+else()
+	set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=gnu++11 -m64")
+endif()
 set(CMAKE_TAR_NAME ArmyAntLib)
 
-find_path(JNI_INCLUDE_DIR jni.h $ENV{JAVA_HOME}/include)
+set(JNI_INCLUDE_DIR $ENV{JAVA_HOME}/include)
 MESSAGE("The JNI directory is ${JNI_INCLUDE_DIR}")
 include_directories(${JNI_INCLUDE_DIR})
 
@@ -41,14 +49,14 @@ IF ((CMAKE_SYSTEM_NAME MATCHES "Windows") OR (CMAKE_SYSTEM_NAME MATCHES "CYGWIN"
 	)
 ELSEIF (CMAKE_SYSTEM_NAME MATCHES "Linux")
 	include_directories(${JNI_INCLUDE_DIR}/linux)
-	find_path(PY_INCLUDE_DIR Python.h $ENV{PYTHON_INCLUDE})
+	set(PY_INCLUDE_DIR  $ENV{PYTHON_INCLUDE})
 	#set(PY_INCLUDE_DIR externals/python3.5.1/include)
 	add_definitions(
 			-DOS_UNIX=1
 			-DOS_LINUX=1
 	)
 ELSEIF (CMAKE_SYSTEM_NAME MATCHES "FreeBSD")
-	find_path(PY_INCLUDE_DIR Python.h $ENV{PYTHON_INCLUDE})
+	set(PY_INCLUDE_DIR $ENV{PYTHON_INCLUDE})
 	add_definitions(
 			-DOS_UNIX=1
 			-DOS_FREEBSD=1
@@ -72,9 +80,19 @@ else()
     )
 endif()
 
+if(TAR_MAC STREQUAL x86)
+	add_definitions(
+			-D_x86=1
+	)
+else()
+	add_definitions(
+			-D_x86_64=1
+			-D_x64=1
+	)
+endif()
+
 add_definitions(
 		-D_cplusplus=201412L
-		-D_x86_64=1
 		-D_CMAKE=1
 		-DARMYANTLIB_EXPORTS
 )
@@ -90,9 +108,25 @@ set(CXX_SOURCE_FILES
 		src/Java_AAFile.cpp
 		src/Java_AANeuron.cpp
 		src/AAPythonExport.cpp
-)
+		src/AAJNITools.cpp)
 
 add_library(${CMAKE_TAR_NAME} SHARED ${CXX_SOURCE_FILES})
 
 MESSAGE("This is ${PROJECT_BINARY_DIR}")
-SET_TARGET_PROPERTIES(${CMAKE_TAR_NAME} PROPERTIES OUTPUT_NAME ArmyAnt)
+
+if(CMAKE_BUILD_TYPE STREQUAL Debug)
+	set(IS_DEBUG ArmyAntd)
+else()
+	set(IS_DEBUG ArmyAnt)
+endif()
+
+MESSAGE("This is ${TAR_MAC}")
+
+if(TAR_MAC STREQUAL x86)
+	SET_TARGET_PROPERTIES(${CMAKE_TAR_NAME} PROPERTIES OUTPUT_NAME ${IS_DEBUG})
+elseif(TAR_MAC STREQUAL x64)
+	SET_TARGET_PROPERTIES(${CMAKE_TAR_NAME} PROPERTIES OUTPUT_NAME ${IS_DEBUG}_64)
+else()
+	SET_TARGET_PROPERTIES(${CMAKE_TAR_NAME} PROPERTIES OUTPUT_NAME ${IS_DEBUG}_${TAR_MAC})
+endif()
+
