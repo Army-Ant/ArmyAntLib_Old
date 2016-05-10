@@ -834,9 +834,6 @@
     <ClInclude Include="include\AAConfiguration.h">
       <Filter>04.CppLibCode</Filter>
     </ClInclude>
-    <ClInclude Include="include\AASocket%24ProtocolTypes">
-      <Filter>04.CppLibCode</Filter>
-    </ClInclude>
     <ClInclude Include="include\AAJNITools.h">
       <Filter>04.CppLibCode</Filter>
     </ClInclude>
@@ -900,6 +897,9 @@
     </None>
     <None Include="languages\Java\src\ArmyAnt\NeuronAlgorithm.java">
       <Filter>06.JavaRefCode</Filter>
+    </None>
+    <None Include="include\AASocket_ProtocolTypes">
+      <Filter>04.CppLibCode</Filter>
     </None>
   </ItemGroup>
   <ItemGroup>

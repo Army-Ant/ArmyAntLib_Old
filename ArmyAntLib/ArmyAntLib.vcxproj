@@ -732,7 +732,6 @@
     <ClInclude Include="include\AAJNITools.h" />
     <ClInclude Include="include\AAMessageQueue.h" />
     <ClInclude Include="include\AANeuron.hpp" />
-    <ClInclude Include="include\AASocket%24ProtocolTypes" />
     <ClInclude Include="include\AASocket.h" />
     <ClInclude Include="include\AAStateMachine.hpp" />
     <ClInclude Include="include\AATree.hpp" />
@@ -765,6 +764,7 @@
     <None Include="base\build_end.sh" />
     <None Include="base\build_start.bat" />
     <None Include="base\build_start.sh" />
+    <None Include="include\AASocket_ProtocolTypes" />
     <None Include="languages\Java\buildJava.bat" />
     <None Include="languages\Java\src\ArmyAnt\FileStream.java" />
     <None Include="languages\Java\src\ArmyAnt\NeuronAlgorithm.java" />
