@@ -31,12 +31,14 @@
 #define AA_IS_DEBUG
 #endif
 
-#if defined _x64
+#if defined _64BIT && defined _arm
+#define AA_TARGET_MACHINE "_arm64"
+#elif defined _64BIT
 #define AA_TARGET_MACHINE "_64"
-#elif defined _ARM
+#elif defined _arm
 #define AA_TARGET_MACHINE "_arm"
 #else
-#define AA_TARGET_MACHINE
+#define AA_TARGET_MACHINE ""
 #endif
 
 #if defined AA_USE_STATIC

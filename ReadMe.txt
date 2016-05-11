@@ -49,6 +49,12 @@ Building the Java library:
 Using the Java library:
 1. Join the jar file and the shared library file to your Java project, to use the library in Java.
 
+Building the Android Native Library
+1.
+
+Using the Android Native Library
+1.
+
 Using the Python library:
 1. The .py file will be copied to LibOut automatically after build the shared library. You can inport the module in .py file to use it.
 
@@ -100,6 +106,12 @@ Using the Python library:
 
 使用Java語言版的庫：
 1.將生成的jar庫和C++動態庫添加到你的Java項目中，即可使用
+
+生成Android Native動態庫：
+1.
+
+使用Android Native動態庫：
+1.
 
 使用Python語言版的庫：
 1.在生成C++動態庫後，會將py檔案一同拷貝到LibOut目錄中，直接import此py檔案即可使用本庫的python版功能
@@ -153,6 +165,12 @@ Using the Python library:
 
 使用Java语言版的库:
 1. 将生成的jar库和C++动态库添加到你的Java项目中,即可使用
+
+生成Android Native动态库：
+1.
+
+使用Android Native动态库：
+1.
 
 使用Python语言版的库:
 1. 在生成C++动态库后, 会将py文件一同拷贝到LibOut目录中,直接import此py文件即可使用本库的python版功能

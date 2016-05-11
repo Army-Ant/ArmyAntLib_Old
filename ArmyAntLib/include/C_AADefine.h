@@ -48,7 +48,7 @@ const int32 AA_INT32_MIN = AA_INTEGER(0x80000000, i32);
 typedef unsigned int uint32;
 const uint32 AA_UINT32_MAX = AA_INTEGER(0xffffffff, ui32);
 
-#if defined _x64 || defined _cplusplus
+#if defined _64BIT || defined _cplusplus
 typedef long long int64;
 const int64 AA_INT64_MAX = AA_INTEGER(0x7fffffffffffffff, i64);
 const int64 AA_INT64_MIN = AA_INTEGER(0x8000000000000000, i64);
@@ -57,7 +57,7 @@ const uint64 AA_UINT64_MAX = AA_INTEGER(0xffffffffffffffff, ui64);
 #endif
 
 // 变长整数定义
-#ifdef _x86
+#ifdef _32BIT
 typedef int mac_int;
 typedef unsigned int mac_uint;
 const mac_int AA_MAC_INT_MAX = AA_INT32_MAX;

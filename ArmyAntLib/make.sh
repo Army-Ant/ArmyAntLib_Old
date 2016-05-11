@@ -29,6 +29,7 @@
 debugType=""
 targetPlatform=""
 
+# Check the debug type
 if (($#<=0)); then
     echo "Do you want to built it in release mode ? Input nothing to agree or anything not empty to disagree : "
     read debugType
@@ -46,31 +47,70 @@ if [ "${debugType}" != "Debug" ] && [ "${debugType}" != "Release" ] ;then
     echo "Build failed !"
     exit -1
 fi
+
+# Check the target machine
 if (($#<=1)); then
-    echo "Please set your target platform before build it;"
-    echo "The platform you can choose contains x86, x64, arm"
-    echo "Input the name of the platform to choose : "
+    echo ""Do you want to built it for x86 platform ? Input nothing to agree or anything not empty to disagree : "
     read targetPlatform
-    if [ "${targetPlatform}" != "x86" ] && [ "${targetPlatform}" != "x64" ] && [ "${targetPlatform}" != "arm" ] ;then
-	    echo "Error target platform name : ${targetPlatform} !"
-        echo "Build failed !"
-        exit -1
+    targetPlatform="$targetPlatform rr"
+    if [[ ${targetPlatform}==" rr" ]];then
+        targetPlatform=x86
+    else
+        targetPlatform=arm
     fi
 else
     targetPlatform=$2
 fi
+if [ "${targetPlatform}" != "x86" ] && [ "${targetPlatform}" != "arm" ] ;then
+    echo "Error target machine name : ${targetPlatform} !"
+    echo "Build failed !"
+    exit -1
+fi
 
+# Check the target bits
+if (($#<=2); then
+    echo ""Do you want to built it for 64 Bits platform ? Input nothing to agree or anything not empty to disagree : "
+    read targetBits
+    targetBits="$targetBits rr"
+    if [[ ${targetBits}==" rr" ]];then
+        targetBits=64
+    else
+        targetBits=32
+    fi
+else
+	targetBits=$3
+fi
+if [ "${targetBits}" != "64" ] && [ "${targetBits}" != "32" ] ;then
+    echo "Error target machine name : ${targetBits} !"
+    echo "Build failed !"
+    exit -1
+fi
+
+# Target name
 if [[ $debugType=="Debug" ]];then
     TarName=ArmyAntLibd
 else
     TarName=ArmyAntLib
 fi
-    echo $TarName
-source ./base/build_start.sh $debugType ./ $TarName $targetPlatform
-cmake ./ -DCMAKE_BUILD_TYPE=$debugType -DTAR_MAC=$targetPlatform
+if [[ $targetPlatform=="arm" ]];then
+	if [[ $targetBits=="64 ]];then
+		TarName=${TarName}_arm64
+	else
+		TarName=${TarName}_arm64
+	fi
+else
+	if [[ $targetBits=="64 ]];then
+		TarName=${TarName}_64
+	fi
+fi
+echo $TarName
+
+# Building source
+source ./base/build_start.sh $debugType ./ $TarName $targetPlatform $targetBits
+cmake ./ -DCMAKE_BUILD_TYPE=$debugType -DTAR_MAC=$targetPlatform -DTAR_BITS=$targetBits -DTAR_NAME=$TarName
 make
 mv *.so bin
 rm -rf CMakeCache.txt
 rm -rf *.*~
-#source ./base/build_end.sh $debugType ./ $TarName $targetPlatform
+#source ./base/build_end.sh $debugType ./ $TarName $targetPlatform $targetBits
 

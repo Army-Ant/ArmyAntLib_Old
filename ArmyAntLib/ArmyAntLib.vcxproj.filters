@@ -925,6 +925,12 @@
     <None Include="include\AASocket_ProtocolTypes">
       <Filter>04.CppLibCode\network</Filter>
     </None>
+    <None Include="make.sh">
+      <Filter>00.other-Projects</Filter>
+    </None>
+    <None Include="make_all.sh">
+      <Filter>00.other-Projects</Filter>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <Text Include="CMakeLists.txt">

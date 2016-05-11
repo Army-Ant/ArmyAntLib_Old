@@ -57,7 +57,10 @@ We will primarily introduce the project "ArmyAntLib", the structure of this proj
 			defination				Special defination header
 			onlyIncludeFile			Header files only need to include in using
 		04.CppLibCode				There are references of main library source files
-			cpptools				There are references of all C++ template modules
+			cppTemplateUtils		There are references of all C++ template modules
+			encoding
+			network
+			stream
 		05.CRefCode					There are references of interface code files for C
 		06.JavaRefCode				There are references of interface code files for Java，contains C++ code，java code，and building script
 		07.PythonRefCode			There are references of interface code files for Python，contains C++ code and Python code
@@ -114,7 +117,10 @@ We will primarily introduce the project "ArmyAntLib", the structure of this proj
 			defination				特殊定義標頭檔
 			onlyIncludeFile			使用時僅需要包含的兩個標頭檔
 		04.CppLibCode				這裡引用C++庫邏輯的所有標頭檔和原始檔案
-			cpptools				這裡集中引用所有C++範本類別模組檔案（都是.hpp尾碼）
+			cppTemplateUtils		這裡集中引用所有C++範本類別模組檔案（都是.hpp尾碼）
+			encoding
+			network
+			stream
 		05.CRefCode					這裡引用純C語言介面的標頭檔和邏輯原始檔案
 		06.JavaRefCode				這裡引用與Java介面相關的檔案，包括邏輯C++原始檔案，java檔案，以及編譯腳本
 		07.PythonRefCode			這裡引用與Python介面相關的檔案，包括邏輯C++原始檔案和Python檔案
@@ -171,7 +177,10 @@ We will primarily introduce the project "ArmyAntLib", the structure of this proj
 			defination				特殊定义头文件
 			onlyIncludeFile			使用时仅需要包含的两个头文件
 		04.CppLibCode				这里引用C++库逻辑的所有头文件和源文件
-			cpptools				这里集中引用所有C++模板类模块文件(都是.hpp后缀)
+			cppTemplateUtils		这里集中引用所有C++模板类模块文件(都是.hpp后缀)
+			encoding
+			network
+			stream
 		05.CRefCode					这里引用纯C语言接口的头文件和逻辑源文件
 		06.JavaRefCode				这里引用与Java接口相关的文件, 包括逻辑C++源文件, java文件, 以及编译脚本
 		07.PythonRefCode			这里引用与Python接口相关的文件, 包括逻辑C++源文件和Python文件

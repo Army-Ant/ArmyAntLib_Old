@@ -31,4 +31,4 @@ function ArmyAntLib_PreBuilt()
     return 0;
 }
 
-ArmyAntLib_PreBuilt $1 $2 $3
+ArmyAntLib_PreBuilt $1 $2 $3 $4

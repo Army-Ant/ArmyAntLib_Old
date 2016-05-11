@@ -25,9 +25,11 @@
 # Created by Jason 4/18/2016
 # This is a shell script file used to build the debug bin for x86 machine in linux platform
 
-bash make.sh Debug x86
-bash make.sh Debug x64
-bash make.sh Debug arm
-bash make.sh Release x86
-bash make.sh Release x64
-bash make.sh Release arm
+bash make.sh Debug x86 64
+bash make.sh Debug x86 32
+bash make.sh Debug arm 64
+bash make.sh Debug arm 32
+bash make.sh Release x86 64
+bash make.sh Release x86 32
+bash make.sh Release arm 64
+bash make.sh Release arm 32

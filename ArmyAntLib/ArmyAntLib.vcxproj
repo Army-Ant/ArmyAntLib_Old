@@ -202,7 +202,7 @@
       <WarningLevel>Level4</WarningLevel>
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
-      <PreprocessorDefinitions>_cplusplus;_SCL_SECURE_NO_WARNINGS;_x86;OS_WINDOWS;WIN32;_WIN32;ARMYANTLIB_EXPORTS;_CRT_SECURE_NO_WARNINGS;_DLL;_SHARED;DEBUG;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>_cplusplus;_SCL_SECURE_NO_WARNINGS;_32BIT;_x86;OS_WINDOWS;WIN32;_WIN32;ARMYANTLIB_EXPORTS;_CRT_SECURE_NO_WARNINGS;_DLL;_SHARED;DEBUG;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <EnableParallelCodeGeneration>true</EnableParallelCodeGeneration>
       <PrecompiledHeaderFile>base.hpp</PrecompiledHeaderFile>
       <StringPooling>true</StringPooling>
@@ -241,7 +241,7 @@
       <WarningLevel>Level4</WarningLevel>
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
-      <PreprocessorDefinitions>_cplusplus;_SCL_SECURE_NO_WARNINGS;_x86;OS_WINDOWS;WIN32;_WIN32;ARMYANTLIB_EXPORTS;_CRT_SECURE_NO_WARNINGS;_LIB;_STATIC;DEBUG;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>_cplusplus;_SCL_SECURE_NO_WARNINGS;_32BIT;_x86;OS_WINDOWS;WIN32;_WIN32;ARMYANTLIB_EXPORTS;_CRT_SECURE_NO_WARNINGS;_LIB;_STATIC;DEBUG;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <EnableParallelCodeGeneration>true</EnableParallelCodeGeneration>
       <PrecompiledHeaderFile>base.hpp</PrecompiledHeaderFile>
       <StringPooling>true</StringPooling>
@@ -288,7 +288,7 @@
       <WarningLevel>Level4</WarningLevel>
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
-      <PreprocessorDefinitions>_cplusplus;_SCL_SECURE_NO_WARNINGS;_x64;_x86_64;OS_WINDOWS;WIN64;_WIN64;ARMYANTLIB_EXPORTS;_CRT_SECURE_NO_WARNINGS;_DLL;_SHARED;DEBUG;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>_cplusplus;_SCL_SECURE_NO_WARNINGS;_64BIT;_x86;OS_WINDOWS;WIN64;_WIN64;ARMYANTLIB_EXPORTS;_CRT_SECURE_NO_WARNINGS;_DLL;_SHARED;DEBUG;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <EnableParallelCodeGeneration>true</EnableParallelCodeGeneration>
       <PrecompiledHeaderFile>base.hpp</PrecompiledHeaderFile>
       <StringPooling>true</StringPooling>
@@ -327,7 +327,7 @@
       <WarningLevel>Level4</WarningLevel>
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
-      <PreprocessorDefinitions>_cplusplus;_SCL_SECURE_NO_WARNINGS;_x64;_x86_64;OS_WINDOWS;WIN64;_WIN64;ARMYANTLIB_EXPORTS;_CRT_SECURE_NO_WARNINGS;_LIB;_STATIC;DEBUG;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>_cplusplus;_SCL_SECURE_NO_WARNINGS;_64BIT;_x86;OS_WINDOWS;WIN64;_WIN64;ARMYANTLIB_EXPORTS;_CRT_SECURE_NO_WARNINGS;_LIB;_STATIC;DEBUG;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <EnableParallelCodeGeneration>true</EnableParallelCodeGeneration>
       <PrecompiledHeaderFile>base.hpp</PrecompiledHeaderFile>
       <StringPooling>true</StringPooling>
@@ -374,7 +374,7 @@
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>true</SDLCheck>
-      <PreprocessorDefinitions>_cplusplus;_SCL_SECURE_NO_WARNINGS;_x86;OS_WINDOWS;WIN32;_WIN32;ARMYANTLIB_EXPORTS;_CRT_SECURE_NO_WARNINGS;_DLL;_SHARED;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>_cplusplus;_SCL_SECURE_NO_WARNINGS;_32BIT;_x86;OS_WINDOWS;WIN32;_WIN32;ARMYANTLIB_EXPORTS;_CRT_SECURE_NO_WARNINGS;_DLL;_SHARED;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <EnableParallelCodeGeneration>true</EnableParallelCodeGeneration>
       <PrecompiledHeaderFile>base.hpp</PrecompiledHeaderFile>
       <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
@@ -413,7 +413,7 @@
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>true</SDLCheck>
-      <PreprocessorDefinitions>_cplusplus;_SCL_SECURE_NO_WARNINGS;_x86;OS_WINDOWS;WIN32;_WIN32;ARMYANTLIB_EXPORTS;_CRT_SECURE_NO_WARNINGS;_LIB;_STATIC;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>_cplusplus;_SCL_SECURE_NO_WARNINGS;_32BIT;_x86;OS_WINDOWS;WIN32;_WIN32;ARMYANTLIB_EXPORTS;_CRT_SECURE_NO_WARNINGS;_LIB;_STATIC;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <EnableParallelCodeGeneration>true</EnableParallelCodeGeneration>
       <PrecompiledHeaderFile>base.hpp</PrecompiledHeaderFile>
       <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
@@ -459,7 +459,7 @@
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>true</SDLCheck>
-      <PreprocessorDefinitions>_cplusplus;_SCL_SECURE_NO_WARNINGS;_x64;_x86_64;OS_WINDOWS;WIN64;_WIN64;ARMYANTLIB_EXPORTS;_CRT_SECURE_NO_WARNINGS;_DLL;_SHARED;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>_cplusplus;_SCL_SECURE_NO_WARNINGS;_64BIT;_x86;OS_WINDOWS;WIN64;_WIN64;ARMYANTLIB_EXPORTS;_CRT_SECURE_NO_WARNINGS;_DLL;_SHARED;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <EnableParallelCodeGeneration>true</EnableParallelCodeGeneration>
       <PrecompiledHeaderFile>base.hpp</PrecompiledHeaderFile>
       <OmitFramePointers>false</OmitFramePointers>
@@ -499,7 +499,7 @@
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>true</SDLCheck>
-      <PreprocessorDefinitions>_cplusplus;_SCL_SECURE_NO_WARNINGS;_x64;_x86_64;OS_WINDOWS;WIN64;_WIN64;ARMYANTLIB_EXPORTS;_CRT_SECURE_NO_WARNINGS;_LIB;_STATIC;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>_cplusplus;_SCL_SECURE_NO_WARNINGS;_64BIT;_x86;OS_WINDOWS;WIN64;_WIN64;ARMYANTLIB_EXPORTS;_CRT_SECURE_NO_WARNINGS;_LIB;_STATIC;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <EnableParallelCodeGeneration>true</EnableParallelCodeGeneration>
       <PrecompiledHeaderFile>base.hpp</PrecompiledHeaderFile>
       <OmitFramePointers>false</OmitFramePointers>
@@ -830,6 +830,8 @@
     <None Include="languages\Java\buildJava.bat" />
     <None Include="languages\Java\src\ArmyAnt\NeuronAlgorithm.java" />
     <None Include="languages\Python\ArmyAnt.py" />
+    <None Include="make.sh" />
+    <None Include="make_all.sh" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="..\ReadMe.txt" />

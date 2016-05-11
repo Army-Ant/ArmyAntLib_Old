@@ -28,12 +28,8 @@
 
 function ArmyAntLib_AfterBuilt()
 {
-    if [$1 = "debug"]; then
-    cp -avx bin/Debug/* ../LibOut/bin/
-    else
-    cp -avx bin/Release/* ../LibOut/bin/
-    fi
+    cp -avx bin/* ../LibOut/bin/
     return 0;
 }
 
-ArmyAntLib_AfterBuilt $1 $2 $3
+ArmyAntLib_AfterBuilt $1 $2 $3 $4

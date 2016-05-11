@@ -21,20 +21,17 @@
 # 本文件为内部源码文件, 不会包含在闭源发布的本软件中
 
 cmake_minimum_required(VERSION 3.2)
-project(ArmyAntLib)
+project(${TAR_NAME})
 
 if(TAR_MAC STREQUAL arm)
-endif()
-
-if(TAR_MAC STREQUAL x86)
-	set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=gnu++11 -m32")
-elseif(TAR_MAC STREQUAL arm)
 	set(CMAKE_CXX_COMPILER "arm-linux-gnueabi-g++")
-	set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=gnu++11")
+elseif(TAR_BITS STREQUAL 32)
+	set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=gnu++11 -m32")
 else()
 	set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=gnu++11 -m64")
 endif()
-set(CMAKE_TAR_NAME ArmyAntLib)
+
+set(CMAKE_TAR_NAME ${TAR_NAME})
 
 set(JNI_INCLUDE_DIR $ENV{JAVA_HOME}/include)
 MESSAGE("The JNI directory is ${JNI_INCLUDE_DIR}")
@@ -86,10 +83,20 @@ if(TAR_MAC STREQUAL x86)
 	add_definitions(
 			-D_x86=1
 	)
+elseif(TAR_MAC STREQUAL arm)
+	add_definitions(
+			-D_arm=1
+	)
+else()
+endif()
+
+if(TAR_BITS STREQUAL 32)
+	add_definitions(
+			-D_32BIT=1
+	)
 else()
 	add_definitions(
-			-D_x86_64=1
-			-D_x64=1
+			-D_64BIT=1
 	)
 endif()
 
@@ -118,19 +125,5 @@ set(PROJECT_BINARY_DIR ${PROJECT_BINARY_DIR}/bin)
 
 MESSAGE("The binary directory is ${PROJECT_BINARY_DIR}")
 
-if(CMAKE_BUILD_TYPE STREQUAL Debug)
-	set(IS_DEBUG ArmyAntd)
-else()
-	set(IS_DEBUG ArmyAnt)
-endif()
-
-MESSAGE("This is ${TAR_MAC}")
-
-if(TAR_MAC STREQUAL x86)
-	SET_TARGET_PROPERTIES(${CMAKE_TAR_NAME} PROPERTIES OUTPUT_NAME ${IS_DEBUG})
-elseif(TAR_MAC STREQUAL x64)
-	SET_TARGET_PROPERTIES(${CMAKE_TAR_NAME} PROPERTIES OUTPUT_NAME ${IS_DEBUG}_64)
-else()
-	SET_TARGET_PROPERTIES(${CMAKE_TAR_NAME} PROPERTIES OUTPUT_NAME ${IS_DEBUG}_${TAR_MAC})
-endif()
+SET_TARGET_PROPERTIES(${CMAKE_TAR_NAME} PROPERTIES OUTPUT_NAME ${TAR_NAME})
 
