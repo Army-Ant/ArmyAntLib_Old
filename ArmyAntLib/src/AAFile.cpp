@@ -562,10 +562,10 @@ uint64 FileStream::Read(void*buffer, uint32 len /*= FILE_SHORT_POS_END*/, uint64
 				pos = FsPrivate::GetFPos(now);
 			}
 			FsPrivate::Fseek(hd->file, pos, SEEK_SET);
-			fread(buffer, uint32(min(FsPrivate::GetFPos(wholelen), len)), 1, hd->file);
+			auto realReaded = fread(buffer, 1, uint32(min(FsPrivate::GetFPos(wholelen), len)), hd->file);
 			if(!isCurPos)
 				FsPrivate::Fseek(hd->file, FsPrivate::GetFPos(now), SEEK_SET);
-			return uint64(min(FsPrivate::GetFPos(wholelen), len));
+			return uint64(realReaded);
 		}
 		case StreamType::NamePipe:
 		{

@@ -24,7 +24,6 @@
 
 #include "../include/AAJNITools.h"
 
-<<<<<<< HEAD
 namespace ArmyAnt {
 
 namespace JNITools {
@@ -33,7 +32,7 @@ const char* const c_javaStringSig = "java/lang/String";
 const char* const c_javaStringGetBytes = "getBytes";
 const char* const c_javaStringGetBytesSig = "(Ljava/lang/String;)[B";
 
-std::string ArmyAnt::JNITools::JstringToCstring(JNIEnv* env, jstring jstr)
+std::string JstringToCstring(JNIEnv* env, jstring jstr)
 {
 	// 获取Java字符串类
 	std::string rtn = "";

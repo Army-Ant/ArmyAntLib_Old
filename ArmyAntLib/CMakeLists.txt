@@ -24,11 +24,13 @@ cmake_minimum_required(VERSION 3.2)
 project(ArmyAntLib)
 
 if(TAR_MAC STREQUAL arm)
-	set(CMAKE_CXX_COMPILER "arm-linux-g++")
 endif()
 
 if(TAR_MAC STREQUAL x86)
 	set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=gnu++11 -m32")
+elseif(TAR_MAC STREQUAL arm)
+	set(CMAKE_CXX_COMPILER "arm-linux-gnueabi-g++")
+	set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=gnu++11")
 else()
 	set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=gnu++11 -m64")
 endif()
@@ -38,7 +40,7 @@ set(JNI_INCLUDE_DIR $ENV{JAVA_HOME}/include)
 MESSAGE("The JNI directory is ${JNI_INCLUDE_DIR}")
 include_directories(${JNI_INCLUDE_DIR})
 
-MESSAGE("Target platform is ${CMAKE_SYSTEM_NAME}")
+MESSAGE("Current platform is ${CMAKE_SYSTEM_NAME}")
 IF ((CMAKE_SYSTEM_NAME MATCHES "Windows") OR (CMAKE_SYSTEM_NAME MATCHES "CYGWIN"))
 	include_directories(${JNI_INCLUDE_DIR}/win32)
 	link_directories(externals/python3.5.1/x64)
@@ -68,7 +70,7 @@ ENDIF ((CMAKE_SYSTEM_NAME MATCHES "Windows") OR (CMAKE_SYSTEM_NAME MATCHES "CYGW
 include_directories(${PY_INCLUDE_DIR})
 include_directories(externals/boost)
 
-MESSAGE("This is $ENV{PYTHON_INCLUDE}")
+MESSAGE("This python header directory is $ENV{PYTHON_INCLUDE}")
 
 if(CMAKE_BUILD_TYPE STREQUAL Debug)
     add_definitions(
@@ -111,8 +113,9 @@ set(CXX_SOURCE_FILES
 		src/AAJNITools.cpp)
 
 add_library(${CMAKE_TAR_NAME} SHARED ${CXX_SOURCE_FILES})
+set(PROJECT_BINARY_DIR ${PROJECT_BINARY_DIR}/bin)
 
-MESSAGE("This is ${PROJECT_BINARY_DIR}")
+MESSAGE("The binary directory is ${PROJECT_BINARY_DIR}")
 
 if(CMAKE_BUILD_TYPE STREQUAL Debug)
 	set(IS_DEBUG ArmyAntd)

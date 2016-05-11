@@ -53,15 +53,15 @@ CMakeFiles/ArmyAntLib.dir/src/ArmyAntLib.cpp.o: CMakeFiles/ArmyAntLib.dir/flags.
 CMakeFiles/ArmyAntLib.dir/src/ArmyAntLib.cpp.o: src/ArmyAntLib.cpp
 	$(CMAKE_COMMAND) -E cmake_progress_report /home/jason/MyGitWorks/ArmyAntLib/ArmyAntLib/CMakeFiles $(CMAKE_PROGRESS_1)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object CMakeFiles/ArmyAntLib.dir/src/ArmyAntLib.cpp.o"
-	arm-linux-g++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/ArmyAntLib.dir/src/ArmyAntLib.cpp.o -c /home/jason/MyGitWorks/ArmyAntLib/ArmyAntLib/src/ArmyAntLib.cpp
+	arm-linux-gnueabi-g++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/ArmyAntLib.dir/src/ArmyAntLib.cpp.o -c /home/jason/MyGitWorks/ArmyAntLib/ArmyAntLib/src/ArmyAntLib.cpp
 
 CMakeFiles/ArmyAntLib.dir/src/ArmyAntLib.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/ArmyAntLib.dir/src/ArmyAntLib.cpp.i"
-	arm-linux-g++  $(CXX_DEFINES) $(CXX_FLAGS) -E /home/jason/MyGitWorks/ArmyAntLib/ArmyAntLib/src/ArmyAntLib.cpp > CMakeFiles/ArmyAntLib.dir/src/ArmyAntLib.cpp.i
+	arm-linux-gnueabi-g++  $(CXX_DEFINES) $(CXX_FLAGS) -E /home/jason/MyGitWorks/ArmyAntLib/ArmyAntLib/src/ArmyAntLib.cpp > CMakeFiles/ArmyAntLib.dir/src/ArmyAntLib.cpp.i
 
 CMakeFiles/ArmyAntLib.dir/src/ArmyAntLib.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/ArmyAntLib.dir/src/ArmyAntLib.cpp.s"
-	arm-linux-g++  $(CXX_DEFINES) $(CXX_FLAGS) -S /home/jason/MyGitWorks/ArmyAntLib/ArmyAntLib/src/ArmyAntLib.cpp -o CMakeFiles/ArmyAntLib.dir/src/ArmyAntLib.cpp.s
+	arm-linux-gnueabi-g++  $(CXX_DEFINES) $(CXX_FLAGS) -S /home/jason/MyGitWorks/ArmyAntLib/ArmyAntLib/src/ArmyAntLib.cpp -o CMakeFiles/ArmyAntLib.dir/src/ArmyAntLib.cpp.s
 
 CMakeFiles/ArmyAntLib.dir/src/ArmyAntLib.cpp.o.requires:
 .PHONY : CMakeFiles/ArmyAntLib.dir/src/ArmyAntLib.cpp.o.requires
@@ -76,15 +76,15 @@ CMakeFiles/ArmyAntLib.dir/src/AAAes.cpp.o: CMakeFiles/ArmyAntLib.dir/flags.make
 CMakeFiles/ArmyAntLib.dir/src/AAAes.cpp.o: src/AAAes.cpp
 	$(CMAKE_COMMAND) -E cmake_progress_report /home/jason/MyGitWorks/ArmyAntLib/ArmyAntLib/CMakeFiles $(CMAKE_PROGRESS_2)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object CMakeFiles/ArmyAntLib.dir/src/AAAes.cpp.o"
-	arm-linux-g++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/ArmyAntLib.dir/src/AAAes.cpp.o -c /home/jason/MyGitWorks/ArmyAntLib/ArmyAntLib/src/AAAes.cpp
+	arm-linux-gnueabi-g++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/ArmyAntLib.dir/src/AAAes.cpp.o -c /home/jason/MyGitWorks/ArmyAntLib/ArmyAntLib/src/AAAes.cpp
 
 CMakeFiles/ArmyAntLib.dir/src/AAAes.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/ArmyAntLib.dir/src/AAAes.cpp.i"
-	arm-linux-g++  $(CXX_DEFINES) $(CXX_FLAGS) -E /home/jason/MyGitWorks/ArmyAntLib/ArmyAntLib/src/AAAes.cpp > CMakeFiles/ArmyAntLib.dir/src/AAAes.cpp.i
+	arm-linux-gnueabi-g++  $(CXX_DEFINES) $(CXX_FLAGS) -E /home/jason/MyGitWorks/ArmyAntLib/ArmyAntLib/src/AAAes.cpp > CMakeFiles/ArmyAntLib.dir/src/AAAes.cpp.i
 
 CMakeFiles/ArmyAntLib.dir/src/AAAes.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/ArmyAntLib.dir/src/AAAes.cpp.s"
-	arm-linux-g++  $(CXX_DEFINES) $(CXX_FLAGS) -S /home/jason/MyGitWorks/ArmyAntLib/ArmyAntLib/src/AAAes.cpp -o CMakeFiles/ArmyAntLib.dir/src/AAAes.cpp.s
+	arm-linux-gnueabi-g++  $(CXX_DEFINES) $(CXX_FLAGS) -S /home/jason/MyGitWorks/ArmyAntLib/ArmyAntLib/src/AAAes.cpp -o CMakeFiles/ArmyAntLib.dir/src/AAAes.cpp.s
 
 CMakeFiles/ArmyAntLib.dir/src/AAAes.cpp.o.requires:
 .PHONY : CMakeFiles/ArmyAntLib.dir/src/AAAes.cpp.o.requires
@@ -99,15 +99,15 @@ CMakeFiles/ArmyAntLib.dir/src/AABinary.cpp.o: CMakeFiles/ArmyAntLib.dir/flags.ma
 CMakeFiles/ArmyAntLib.dir/src/AABinary.cpp.o: src/AABinary.cpp
 	$(CMAKE_COMMAND) -E cmake_progress_report /home/jason/MyGitWorks/ArmyAntLib/ArmyAntLib/CMakeFiles $(CMAKE_PROGRESS_3)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object CMakeFiles/ArmyAntLib.dir/src/AABinary.cpp.o"
-	arm-linux-g++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/ArmyAntLib.dir/src/AABinary.cpp.o -c /home/jason/MyGitWorks/ArmyAntLib/ArmyAntLib/src/AABinary.cpp
+	arm-linux-gnueabi-g++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/ArmyAntLib.dir/src/AABinary.cpp.o -c /home/jason/MyGitWorks/ArmyAntLib/ArmyAntLib/src/AABinary.cpp
 
 CMakeFiles/ArmyAntLib.dir/src/AABinary.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/ArmyAntLib.dir/src/AABinary.cpp.i"
-	arm-linux-g++  $(CXX_DEFINES) $(CXX_FLAGS) -E /home/jason/MyGitWorks/ArmyAntLib/ArmyAntLib/src/AABinary.cpp > CMakeFiles/ArmyAntLib.dir/src/AABinary.cpp.i
+	arm-linux-gnueabi-g++  $(CXX_DEFINES) $(CXX_FLAGS) -E /home/jason/MyGitWorks/ArmyAntLib/ArmyAntLib/src/AABinary.cpp > CMakeFiles/ArmyAntLib.dir/src/AABinary.cpp.i
 
 CMakeFiles/ArmyAntLib.dir/src/AABinary.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/ArmyAntLib.dir/src/AABinary.cpp.s"
-	arm-linux-g++  $(CXX_DEFINES) $(CXX_FLAGS) -S /home/jason/MyGitWorks/ArmyAntLib/ArmyAntLib/src/AABinary.cpp -o CMakeFiles/ArmyAntLib.dir/src/AABinary.cpp.s
+	arm-linux-gnueabi-g++  $(CXX_DEFINES) $(CXX_FLAGS) -S /home/jason/MyGitWorks/ArmyAntLib/ArmyAntLib/src/AABinary.cpp -o CMakeFiles/ArmyAntLib.dir/src/AABinary.cpp.s
 
 CMakeFiles/ArmyAntLib.dir/src/AABinary.cpp.o.requires:
 .PHONY : CMakeFiles/ArmyAntLib.dir/src/AABinary.cpp.o.requires
@@ -122,15 +122,15 @@ CMakeFiles/ArmyAntLib.dir/src/AAFile.cpp.o: CMakeFiles/ArmyAntLib.dir/flags.make
 CMakeFiles/ArmyAntLib.dir/src/AAFile.cpp.o: src/AAFile.cpp
 	$(CMAKE_COMMAND) -E cmake_progress_report /home/jason/MyGitWorks/ArmyAntLib/ArmyAntLib/CMakeFiles $(CMAKE_PROGRESS_4)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object CMakeFiles/ArmyAntLib.dir/src/AAFile.cpp.o"
-	arm-linux-g++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/ArmyAntLib.dir/src/AAFile.cpp.o -c /home/jason/MyGitWorks/ArmyAntLib/ArmyAntLib/src/AAFile.cpp
+	arm-linux-gnueabi-g++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/ArmyAntLib.dir/src/AAFile.cpp.o -c /home/jason/MyGitWorks/ArmyAntLib/ArmyAntLib/src/AAFile.cpp
 
 CMakeFiles/ArmyAntLib.dir/src/AAFile.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/ArmyAntLib.dir/src/AAFile.cpp.i"
-	arm-linux-g++  $(CXX_DEFINES) $(CXX_FLAGS) -E /home/jason/MyGitWorks/ArmyAntLib/ArmyAntLib/src/AAFile.cpp > CMakeFiles/ArmyAntLib.dir/src/AAFile.cpp.i
+	arm-linux-gnueabi-g++  $(CXX_DEFINES) $(CXX_FLAGS) -E /home/jason/MyGitWorks/ArmyAntLib/ArmyAntLib/src/AAFile.cpp > CMakeFiles/ArmyAntLib.dir/src/AAFile.cpp.i
 
 CMakeFiles/ArmyAntLib.dir/src/AAFile.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/ArmyAntLib.dir/src/AAFile.cpp.s"
-	arm-linux-g++  $(CXX_DEFINES) $(CXX_FLAGS) -S /home/jason/MyGitWorks/ArmyAntLib/ArmyAntLib/src/AAFile.cpp -o CMakeFiles/ArmyAntLib.dir/src/AAFile.cpp.s
+	arm-linux-gnueabi-g++  $(CXX_DEFINES) $(CXX_FLAGS) -S /home/jason/MyGitWorks/ArmyAntLib/ArmyAntLib/src/AAFile.cpp -o CMakeFiles/ArmyAntLib.dir/src/AAFile.cpp.s
 
 CMakeFiles/ArmyAntLib.dir/src/AAFile.cpp.o.requires:
 .PHONY : CMakeFiles/ArmyAntLib.dir/src/AAFile.cpp.o.requires
@@ -145,15 +145,15 @@ CMakeFiles/ArmyAntLib.dir/src/AASocket.cpp.o: CMakeFiles/ArmyAntLib.dir/flags.ma
 CMakeFiles/ArmyAntLib.dir/src/AASocket.cpp.o: src/AASocket.cpp
 	$(CMAKE_COMMAND) -E cmake_progress_report /home/jason/MyGitWorks/ArmyAntLib/ArmyAntLib/CMakeFiles $(CMAKE_PROGRESS_5)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object CMakeFiles/ArmyAntLib.dir/src/AASocket.cpp.o"
-	arm-linux-g++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/ArmyAntLib.dir/src/AASocket.cpp.o -c /home/jason/MyGitWorks/ArmyAntLib/ArmyAntLib/src/AASocket.cpp
+	arm-linux-gnueabi-g++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/ArmyAntLib.dir/src/AASocket.cpp.o -c /home/jason/MyGitWorks/ArmyAntLib/ArmyAntLib/src/AASocket.cpp
 
 CMakeFiles/ArmyAntLib.dir/src/AASocket.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/ArmyAntLib.dir/src/AASocket.cpp.i"
-	arm-linux-g++  $(CXX_DEFINES) $(CXX_FLAGS) -E /home/jason/MyGitWorks/ArmyAntLib/ArmyAntLib/src/AASocket.cpp > CMakeFiles/ArmyAntLib.dir/src/AASocket.cpp.i
+	arm-linux-gnueabi-g++  $(CXX_DEFINES) $(CXX_FLAGS) -E /home/jason/MyGitWorks/ArmyAntLib/ArmyAntLib/src/AASocket.cpp > CMakeFiles/ArmyAntLib.dir/src/AASocket.cpp.i
 
 CMakeFiles/ArmyAntLib.dir/src/AASocket.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/ArmyAntLib.dir/src/AASocket.cpp.s"
-	arm-linux-g++  $(CXX_DEFINES) $(CXX_FLAGS) -S /home/jason/MyGitWorks/ArmyAntLib/ArmyAntLib/src/AASocket.cpp -o CMakeFiles/ArmyAntLib.dir/src/AASocket.cpp.s
+	arm-linux-gnueabi-g++  $(CXX_DEFINES) $(CXX_FLAGS) -S /home/jason/MyGitWorks/ArmyAntLib/ArmyAntLib/src/AASocket.cpp -o CMakeFiles/ArmyAntLib.dir/src/AASocket.cpp.s
 
 CMakeFiles/ArmyAntLib.dir/src/AASocket.cpp.o.requires:
 .PHONY : CMakeFiles/ArmyAntLib.dir/src/AASocket.cpp.o.requires
@@ -168,15 +168,15 @@ CMakeFiles/ArmyAntLib.dir/src/C_AAFile.cpp.o: CMakeFiles/ArmyAntLib.dir/flags.ma
 CMakeFiles/ArmyAntLib.dir/src/C_AAFile.cpp.o: src/C_AAFile.cpp
 	$(CMAKE_COMMAND) -E cmake_progress_report /home/jason/MyGitWorks/ArmyAntLib/ArmyAntLib/CMakeFiles $(CMAKE_PROGRESS_6)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object CMakeFiles/ArmyAntLib.dir/src/C_AAFile.cpp.o"
-	arm-linux-g++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/ArmyAntLib.dir/src/C_AAFile.cpp.o -c /home/jason/MyGitWorks/ArmyAntLib/ArmyAntLib/src/C_AAFile.cpp
+	arm-linux-gnueabi-g++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/ArmyAntLib.dir/src/C_AAFile.cpp.o -c /home/jason/MyGitWorks/ArmyAntLib/ArmyAntLib/src/C_AAFile.cpp
 
 CMakeFiles/ArmyAntLib.dir/src/C_AAFile.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/ArmyAntLib.dir/src/C_AAFile.cpp.i"
-	arm-linux-g++  $(CXX_DEFINES) $(CXX_FLAGS) -E /home/jason/MyGitWorks/ArmyAntLib/ArmyAntLib/src/C_AAFile.cpp > CMakeFiles/ArmyAntLib.dir/src/C_AAFile.cpp.i
+	arm-linux-gnueabi-g++  $(CXX_DEFINES) $(CXX_FLAGS) -E /home/jason/MyGitWorks/ArmyAntLib/ArmyAntLib/src/C_AAFile.cpp > CMakeFiles/ArmyAntLib.dir/src/C_AAFile.cpp.i
 
 CMakeFiles/ArmyAntLib.dir/src/C_AAFile.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/ArmyAntLib.dir/src/C_AAFile.cpp.s"
-	arm-linux-g++  $(CXX_DEFINES) $(CXX_FLAGS) -S /home/jason/MyGitWorks/ArmyAntLib/ArmyAntLib/src/C_AAFile.cpp -o CMakeFiles/ArmyAntLib.dir/src/C_AAFile.cpp.s
+	arm-linux-gnueabi-g++  $(CXX_DEFINES) $(CXX_FLAGS) -S /home/jason/MyGitWorks/ArmyAntLib/ArmyAntLib/src/C_AAFile.cpp -o CMakeFiles/ArmyAntLib.dir/src/C_AAFile.cpp.s
 
 CMakeFiles/ArmyAntLib.dir/src/C_AAFile.cpp.o.requires:
 .PHONY : CMakeFiles/ArmyAntLib.dir/src/C_AAFile.cpp.o.requires
@@ -191,15 +191,15 @@ CMakeFiles/ArmyAntLib.dir/src/C_AANeuron.cpp.o: CMakeFiles/ArmyAntLib.dir/flags.
 CMakeFiles/ArmyAntLib.dir/src/C_AANeuron.cpp.o: src/C_AANeuron.cpp
 	$(CMAKE_COMMAND) -E cmake_progress_report /home/jason/MyGitWorks/ArmyAntLib/ArmyAntLib/CMakeFiles $(CMAKE_PROGRESS_7)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object CMakeFiles/ArmyAntLib.dir/src/C_AANeuron.cpp.o"
-	arm-linux-g++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/ArmyAntLib.dir/src/C_AANeuron.cpp.o -c /home/jason/MyGitWorks/ArmyAntLib/ArmyAntLib/src/C_AANeuron.cpp
+	arm-linux-gnueabi-g++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/ArmyAntLib.dir/src/C_AANeuron.cpp.o -c /home/jason/MyGitWorks/ArmyAntLib/ArmyAntLib/src/C_AANeuron.cpp
 
 CMakeFiles/ArmyAntLib.dir/src/C_AANeuron.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/ArmyAntLib.dir/src/C_AANeuron.cpp.i"
-	arm-linux-g++  $(CXX_DEFINES) $(CXX_FLAGS) -E /home/jason/MyGitWorks/ArmyAntLib/ArmyAntLib/src/C_AANeuron.cpp > CMakeFiles/ArmyAntLib.dir/src/C_AANeuron.cpp.i
+	arm-linux-gnueabi-g++  $(CXX_DEFINES) $(CXX_FLAGS) -E /home/jason/MyGitWorks/ArmyAntLib/ArmyAntLib/src/C_AANeuron.cpp > CMakeFiles/ArmyAntLib.dir/src/C_AANeuron.cpp.i
 
 CMakeFiles/ArmyAntLib.dir/src/C_AANeuron.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/ArmyAntLib.dir/src/C_AANeuron.cpp.s"
-	arm-linux-g++  $(CXX_DEFINES) $(CXX_FLAGS) -S /home/jason/MyGitWorks/ArmyAntLib/ArmyAntLib/src/C_AANeuron.cpp -o CMakeFiles/ArmyAntLib.dir/src/C_AANeuron.cpp.s
+	arm-linux-gnueabi-g++  $(CXX_DEFINES) $(CXX_FLAGS) -S /home/jason/MyGitWorks/ArmyAntLib/ArmyAntLib/src/C_AANeuron.cpp -o CMakeFiles/ArmyAntLib.dir/src/C_AANeuron.cpp.s
 
 CMakeFiles/ArmyAntLib.dir/src/C_AANeuron.cpp.o.requires:
 .PHONY : CMakeFiles/ArmyAntLib.dir/src/C_AANeuron.cpp.o.requires
@@ -214,15 +214,15 @@ CMakeFiles/ArmyAntLib.dir/src/Java_AAFile.cpp.o: CMakeFiles/ArmyAntLib.dir/flags
 CMakeFiles/ArmyAntLib.dir/src/Java_AAFile.cpp.o: src/Java_AAFile.cpp
 	$(CMAKE_COMMAND) -E cmake_progress_report /home/jason/MyGitWorks/ArmyAntLib/ArmyAntLib/CMakeFiles $(CMAKE_PROGRESS_8)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object CMakeFiles/ArmyAntLib.dir/src/Java_AAFile.cpp.o"
-	arm-linux-g++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/ArmyAntLib.dir/src/Java_AAFile.cpp.o -c /home/jason/MyGitWorks/ArmyAntLib/ArmyAntLib/src/Java_AAFile.cpp
+	arm-linux-gnueabi-g++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/ArmyAntLib.dir/src/Java_AAFile.cpp.o -c /home/jason/MyGitWorks/ArmyAntLib/ArmyAntLib/src/Java_AAFile.cpp
 
 CMakeFiles/ArmyAntLib.dir/src/Java_AAFile.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/ArmyAntLib.dir/src/Java_AAFile.cpp.i"
-	arm-linux-g++  $(CXX_DEFINES) $(CXX_FLAGS) -E /home/jason/MyGitWorks/ArmyAntLib/ArmyAntLib/src/Java_AAFile.cpp > CMakeFiles/ArmyAntLib.dir/src/Java_AAFile.cpp.i
+	arm-linux-gnueabi-g++  $(CXX_DEFINES) $(CXX_FLAGS) -E /home/jason/MyGitWorks/ArmyAntLib/ArmyAntLib/src/Java_AAFile.cpp > CMakeFiles/ArmyAntLib.dir/src/Java_AAFile.cpp.i
 
 CMakeFiles/ArmyAntLib.dir/src/Java_AAFile.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/ArmyAntLib.dir/src/Java_AAFile.cpp.s"
-	arm-linux-g++  $(CXX_DEFINES) $(CXX_FLAGS) -S /home/jason/MyGitWorks/ArmyAntLib/ArmyAntLib/src/Java_AAFile.cpp -o CMakeFiles/ArmyAntLib.dir/src/Java_AAFile.cpp.s
+	arm-linux-gnueabi-g++  $(CXX_DEFINES) $(CXX_FLAGS) -S /home/jason/MyGitWorks/ArmyAntLib/ArmyAntLib/src/Java_AAFile.cpp -o CMakeFiles/ArmyAntLib.dir/src/Java_AAFile.cpp.s
 
 CMakeFiles/ArmyAntLib.dir/src/Java_AAFile.cpp.o.requires:
 .PHONY : CMakeFiles/ArmyAntLib.dir/src/Java_AAFile.cpp.o.requires
@@ -237,15 +237,15 @@ CMakeFiles/ArmyAntLib.dir/src/Java_AANeuron.cpp.o: CMakeFiles/ArmyAntLib.dir/fla
 CMakeFiles/ArmyAntLib.dir/src/Java_AANeuron.cpp.o: src/Java_AANeuron.cpp
 	$(CMAKE_COMMAND) -E cmake_progress_report /home/jason/MyGitWorks/ArmyAntLib/ArmyAntLib/CMakeFiles $(CMAKE_PROGRESS_9)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object CMakeFiles/ArmyAntLib.dir/src/Java_AANeuron.cpp.o"
-	arm-linux-g++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/ArmyAntLib.dir/src/Java_AANeuron.cpp.o -c /home/jason/MyGitWorks/ArmyAntLib/ArmyAntLib/src/Java_AANeuron.cpp
+	arm-linux-gnueabi-g++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/ArmyAntLib.dir/src/Java_AANeuron.cpp.o -c /home/jason/MyGitWorks/ArmyAntLib/ArmyAntLib/src/Java_AANeuron.cpp
 
 CMakeFiles/ArmyAntLib.dir/src/Java_AANeuron.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/ArmyAntLib.dir/src/Java_AANeuron.cpp.i"
-	arm-linux-g++  $(CXX_DEFINES) $(CXX_FLAGS) -E /home/jason/MyGitWorks/ArmyAntLib/ArmyAntLib/src/Java_AANeuron.cpp > CMakeFiles/ArmyAntLib.dir/src/Java_AANeuron.cpp.i
+	arm-linux-gnueabi-g++  $(CXX_DEFINES) $(CXX_FLAGS) -E /home/jason/MyGitWorks/ArmyAntLib/ArmyAntLib/src/Java_AANeuron.cpp > CMakeFiles/ArmyAntLib.dir/src/Java_AANeuron.cpp.i
 
 CMakeFiles/ArmyAntLib.dir/src/Java_AANeuron.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/ArmyAntLib.dir/src/Java_AANeuron.cpp.s"
-	arm-linux-g++  $(CXX_DEFINES) $(CXX_FLAGS) -S /home/jason/MyGitWorks/ArmyAntLib/ArmyAntLib/src/Java_AANeuron.cpp -o CMakeFiles/ArmyAntLib.dir/src/Java_AANeuron.cpp.s
+	arm-linux-gnueabi-g++  $(CXX_DEFINES) $(CXX_FLAGS) -S /home/jason/MyGitWorks/ArmyAntLib/ArmyAntLib/src/Java_AANeuron.cpp -o CMakeFiles/ArmyAntLib.dir/src/Java_AANeuron.cpp.s
 
 CMakeFiles/ArmyAntLib.dir/src/Java_AANeuron.cpp.o.requires:
 .PHONY : CMakeFiles/ArmyAntLib.dir/src/Java_AANeuron.cpp.o.requires
@@ -260,15 +260,15 @@ CMakeFiles/ArmyAntLib.dir/src/AAPythonExport.cpp.o: CMakeFiles/ArmyAntLib.dir/fl
 CMakeFiles/ArmyAntLib.dir/src/AAPythonExport.cpp.o: src/AAPythonExport.cpp
 	$(CMAKE_COMMAND) -E cmake_progress_report /home/jason/MyGitWorks/ArmyAntLib/ArmyAntLib/CMakeFiles $(CMAKE_PROGRESS_10)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object CMakeFiles/ArmyAntLib.dir/src/AAPythonExport.cpp.o"
-	arm-linux-g++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/ArmyAntLib.dir/src/AAPythonExport.cpp.o -c /home/jason/MyGitWorks/ArmyAntLib/ArmyAntLib/src/AAPythonExport.cpp
+	arm-linux-gnueabi-g++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/ArmyAntLib.dir/src/AAPythonExport.cpp.o -c /home/jason/MyGitWorks/ArmyAntLib/ArmyAntLib/src/AAPythonExport.cpp
 
 CMakeFiles/ArmyAntLib.dir/src/AAPythonExport.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/ArmyAntLib.dir/src/AAPythonExport.cpp.i"
-	arm-linux-g++  $(CXX_DEFINES) $(CXX_FLAGS) -E /home/jason/MyGitWorks/ArmyAntLib/ArmyAntLib/src/AAPythonExport.cpp > CMakeFiles/ArmyAntLib.dir/src/AAPythonExport.cpp.i
+	arm-linux-gnueabi-g++  $(CXX_DEFINES) $(CXX_FLAGS) -E /home/jason/MyGitWorks/ArmyAntLib/ArmyAntLib/src/AAPythonExport.cpp > CMakeFiles/ArmyAntLib.dir/src/AAPythonExport.cpp.i
 
 CMakeFiles/ArmyAntLib.dir/src/AAPythonExport.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/ArmyAntLib.dir/src/AAPythonExport.cpp.s"
-	arm-linux-g++  $(CXX_DEFINES) $(CXX_FLAGS) -S /home/jason/MyGitWorks/ArmyAntLib/ArmyAntLib/src/AAPythonExport.cpp -o CMakeFiles/ArmyAntLib.dir/src/AAPythonExport.cpp.s
+	arm-linux-gnueabi-g++  $(CXX_DEFINES) $(CXX_FLAGS) -S /home/jason/MyGitWorks/ArmyAntLib/ArmyAntLib/src/AAPythonExport.cpp -o CMakeFiles/ArmyAntLib.dir/src/AAPythonExport.cpp.s
 
 CMakeFiles/ArmyAntLib.dir/src/AAPythonExport.cpp.o.requires:
 .PHONY : CMakeFiles/ArmyAntLib.dir/src/AAPythonExport.cpp.o.requires
@@ -283,15 +283,15 @@ CMakeFiles/ArmyAntLib.dir/src/AAJNITools.cpp.o: CMakeFiles/ArmyAntLib.dir/flags.
 CMakeFiles/ArmyAntLib.dir/src/AAJNITools.cpp.o: src/AAJNITools.cpp
 	$(CMAKE_COMMAND) -E cmake_progress_report /home/jason/MyGitWorks/ArmyAntLib/ArmyAntLib/CMakeFiles $(CMAKE_PROGRESS_11)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object CMakeFiles/ArmyAntLib.dir/src/AAJNITools.cpp.o"
-	arm-linux-g++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/ArmyAntLib.dir/src/AAJNITools.cpp.o -c /home/jason/MyGitWorks/ArmyAntLib/ArmyAntLib/src/AAJNITools.cpp
+	arm-linux-gnueabi-g++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/ArmyAntLib.dir/src/AAJNITools.cpp.o -c /home/jason/MyGitWorks/ArmyAntLib/ArmyAntLib/src/AAJNITools.cpp
 
 CMakeFiles/ArmyAntLib.dir/src/AAJNITools.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/ArmyAntLib.dir/src/AAJNITools.cpp.i"
-	arm-linux-g++  $(CXX_DEFINES) $(CXX_FLAGS) -E /home/jason/MyGitWorks/ArmyAntLib/ArmyAntLib/src/AAJNITools.cpp > CMakeFiles/ArmyAntLib.dir/src/AAJNITools.cpp.i
+	arm-linux-gnueabi-g++  $(CXX_DEFINES) $(CXX_FLAGS) -E /home/jason/MyGitWorks/ArmyAntLib/ArmyAntLib/src/AAJNITools.cpp > CMakeFiles/ArmyAntLib.dir/src/AAJNITools.cpp.i
 
 CMakeFiles/ArmyAntLib.dir/src/AAJNITools.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/ArmyAntLib.dir/src/AAJNITools.cpp.s"
-	arm-linux-g++  $(CXX_DEFINES) $(CXX_FLAGS) -S /home/jason/MyGitWorks/ArmyAntLib/ArmyAntLib/src/AAJNITools.cpp -o CMakeFiles/ArmyAntLib.dir/src/AAJNITools.cpp.s
+	arm-linux-gnueabi-g++  $(CXX_DEFINES) $(CXX_FLAGS) -S /home/jason/MyGitWorks/ArmyAntLib/ArmyAntLib/src/AAJNITools.cpp -o CMakeFiles/ArmyAntLib.dir/src/AAJNITools.cpp.s
 
 CMakeFiles/ArmyAntLib.dir/src/AAJNITools.cpp.o.requires:
 .PHONY : CMakeFiles/ArmyAntLib.dir/src/AAJNITools.cpp.o.requires

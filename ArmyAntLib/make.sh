@@ -23,7 +23,7 @@
 # 本文件为内部源码文件, 不会包含在闭源发布的本软件中
 
 # Created by Jason 4/18/2016
-# This is a shell script file used to build the debug bin for x86 machine in linux platform
+# This is a shell script file used to build in linux platform
 
 
 debugType=""
@@ -41,13 +41,18 @@ if (($#<=0)); then
 else
     debugType=$1
 fi
+if [ "${debugType}" != "Debug" ] && [ "${debugType}" != "Release" ] ;then
+    echo "Error debug type name : ${debugType} !"
+    echo "Build failed !"
+    exit -1
+fi
 if (($#<=1)); then
     echo "Please set your target platform before build it;"
     echo "The platform you can choose contains x86, x64, arm"
     echo "Input the name of the platform to choose : "
     read targetPlatform
     if [ "${targetPlatform}" != "x86" ] && [ "${targetPlatform}" != "x64" ] && [ "${targetPlatform}" != "arm" ] ;then
-	echo "Error target platform name : ${targetPlatform} !"
+	    echo "Error target platform name : ${targetPlatform} !"
         echo "Build failed !"
         exit -1
     fi
@@ -56,12 +61,16 @@ else
 fi
 
 if [[ $debugType=="Debug" ]];then
-    TarName=ArmyAntLibd$targetPlatform
+    TarName=ArmyAntLibd
 else
-    TarName=ArmyAntLib$targetPlatform
+    TarName=ArmyAntLib
 fi
+    echo $TarName
 source ./base/build_start.sh $debugType ./ $TarName $targetPlatform
 cmake ./ -DCMAKE_BUILD_TYPE=$debugType -DTAR_MAC=$targetPlatform
 make
+mv *.so bin
+rm -rf CMakeCache.txt
+rm -rf *.*~
 #source ./base/build_end.sh $debugType ./ $TarName $targetPlatform
 
