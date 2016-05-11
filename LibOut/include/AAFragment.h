@@ -45,6 +45,12 @@
 #undef AA_SAFE_DELALL
 #endif
 
+#ifdef OS_WINDOWS
+#define AA_INTEGER(num, len) num##len
+#else
+#define AA_INTEGER(num, len) num
+#endif
+
 typedef long long int64;
 typedef unsigned long long uint64;
 
@@ -62,35 +68,21 @@ const double c_pi =	3.1415926535897932384;			// 圆周率
 const double c_goldenScale = 0.6180339887498948482;	// 黄金分割比
 
 // Physics constants
-const int32 c_lightVacuum = 299792458i32;	// (m/s)	光速
+const int32 c_lightVacuum = AA_INTEGER(299792458,i32);	// (m/s)	光速
 const float c_gravitation = 6.67310e-11f;	// (m^3/(kg*s^2))	引力常数
 const double c_planck = 6.6260687652e-34;	// (J*s)	普朗克常量
 const double c_elementaryCharge = 1.60217646263e-19;	// (C)	电子电荷量
-const int64 c_lightYear = 9460730472580800i64;	// (m)	光年
+const int64 c_lightYear = AA_INTEGER(9460730472580800,i64);	// (m)	光年
 const double c_electronVolt = 1.60217646263e-19;	// (J)	电子伏
 const double c_avogadro = 6.0221422026e23;		// 阿伏伽德罗常量(常数), 摩尔质量系数
 
-// Integer limits
-const int8 c_int8Max = 0x7fi8;
-const int8 c_int8Min = 0x80i8;
-const uint8 c_uint8Max = 0xffui8;
-const int16 c_int16Max = 0x7fffi16;
-const int16 c_int16Min = 0x8000i16;
-const uint16 c_uint16Max = 0xffffui16;
-const int32 c_int32Max = 0x7fffffffi32;
-const int32 c_int32Min = 0x80000000i32;
-const uint32 c_uint32Max = 0xffffffffui32;
-const int64 c_int64Max = 0x7fffffffffffffffi64;
-const int64 c_int64Min = 0x8000000000000000i64;
-const uint64 c_uint64Max = 0xffffffffffffffffui64;
-
 // Binary units conversion
-const int16 c_2xK = 0b10000000000i16;
-const int32 c_2xM = 0b100000000000000000000i32;
-const int32 c_2xG = 0b1000000000000000000000000000000i32;
-const int64 c_2xT = 0b10000000000000000000000000000000000000000i64;
-const int64 c_2xP = 0b100000000000000000000000000000000000000000000000000i64;
-const int64 c_2xE = 0b1000000000000000000000000000000000000000000000000000000000000i64;
+const int16 c_2xK = AA_INTEGER(0b10000000000,i16);
+const int32 c_2xM = AA_INTEGER(0b100000000000000000000,i32);
+const int32 c_2xG = AA_INTEGER(0b1000000000000000000000000000000,i32);
+const int64 c_2xT = AA_INTEGER(0b10000000000000000000000000000000000000000,i64);
+const int64 c_2xP = AA_INTEGER(0b100000000000000000000000000000000000000000000000000,i64);
+const int64 c_2xE = AA_INTEGER(0b1000000000000000000000000000000000000000000000000000000000000,i64);
 
 }
 
@@ -153,5 +145,7 @@ inline void Log_Error(const char* msg)
 } // namespace Fragment
 
 } // namespace ArmyAnt
+
+#undef AA_INTEGER
 
 #endif

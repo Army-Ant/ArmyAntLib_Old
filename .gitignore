@@ -219,3 +219,7 @@ $RECYCLE.BIN/
 /ArmyAntLib/CMakeFiles/ArmyAntLib.dir
 /ArmyAntLib/bin/*.so
 /ArmyAntLib/Makefile
+/ArmyAntLib/bin
+/ArmyAntLib/lib
+*.xdc
+*.iobj

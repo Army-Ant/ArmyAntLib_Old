@@ -55,7 +55,7 @@ void ExitTest()
 
 void FileStreamTest()
 {
-	static FileStream*file = nullptr;
+	static File*file = nullptr;
 	static const uint16 memTestLen = 2048;
 	static uint8 memoryTest[memTestLen] = {0};
 	static bool memInit = false;
@@ -69,7 +69,7 @@ void FileStreamTest()
 		strcpy(reinterpret_cast<char*>(memoryTest), "I am a small sentence of memory test !\n\tPlease amazing me !");
 	}
 
-	file = new FileStream();
+	file = new File();
 	CHECK_EXIT_SUCCESS(file->SetStreamMode(false), "The file stream created");
 	CHECK_EXIT_SUCCESS(!file->IsOpened(), "The stream dynamic checked");
 	CHECK_EXIT_SUCCESS(!file->IsOpened(false), "The stream without dynamic checked");
@@ -151,7 +151,7 @@ void AESTest()
 {/*
 	static uint8 enc[16] = {'?','z','j','l','j',0xc,'y','1',1,'2',9,'0',1,'1',2,'!'};
 	static auto parser = AES::Parser::GetQuickParser(enc);
-	static FileStream file;
+	static File file;
 	static bool isEncoded = false;
 	if(cmd == "chbenc")
 	{

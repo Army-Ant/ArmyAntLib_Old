@@ -28,9 +28,6 @@
     <Filter Include="04.CppLibCode">
       <UniqueIdentifier>{09386418-a31d-4aae-9a6e-950db72c5a64}</UniqueIdentifier>
     </Filter>
-    <Filter Include="04.CppLibCode\cpptools">
-      <UniqueIdentifier>{d5c166c9-3636-4581-90c6-7bf459fd2df2}</UniqueIdentifier>
-    </Filter>
     <Filter Include="05.CRefCode">
       <UniqueIdentifier>{ac785b23-3647-4f04-88a8-206444e89428}</UniqueIdentifier>
     </Filter>
@@ -49,16 +46,22 @@
     <Filter Include="09.SwiftRefCode">
       <UniqueIdentifier>{05c00f0d-f030-4df7-9a9f-043812510688}</UniqueIdentifier>
     </Filter>
+    <Filter Include="04.CppLibCode\cppTemplateUtils">
+      <UniqueIdentifier>{d5c166c9-3636-4581-90c6-7bf459fd2df2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="04.CppLibCode\stream">
+      <UniqueIdentifier>{9cd01c3d-e9bf-49ce-b6a0-dbae3485a4b6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="04.CppLibCode\network">
+      <UniqueIdentifier>{dfb894a1-f0c7-45b7-9c04-0799c35e7732}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="04.CppLibCode\encoding">
+      <UniqueIdentifier>{19868861-5788-476b-9653-3573549f4d6f}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="base\base.hpp">
       <Filter>01.base</Filter>
-    </ClInclude>
-    <ClInclude Include="include\C_AAFile.h">
-      <Filter>05.CRefCode</Filter>
-    </ClInclude>
-    <ClInclude Include="include\AAFile.h">
-      <Filter>04.CppLibCode</Filter>
     </ClInclude>
     <ClInclude Include="include\AA_end.h">
       <Filter>03.mainOutput\defination</Filter>
@@ -79,31 +82,25 @@
       <Filter>03.mainOutput\onlyIncludeFile</Filter>
     </ClInclude>
     <ClInclude Include="include\AAClassPrivateHandle.hpp">
-      <Filter>04.CppLibCode\cpptools</Filter>
+      <Filter>04.CppLibCode\cppTemplateUtils</Filter>
     </ClInclude>
     <ClInclude Include="include\AATripleMap.hpp">
-      <Filter>04.CppLibCode\cpptools</Filter>
-    </ClInclude>
-    <ClInclude Include="include\AABinary.h">
-      <Filter>04.CppLibCode</Filter>
-    </ClInclude>
-    <ClInclude Include="include\AAAes.h">
-      <Filter>04.CppLibCode</Filter>
+      <Filter>04.CppLibCode\cppTemplateUtils</Filter>
     </ClInclude>
     <ClInclude Include="include\AAFragment.h">
       <Filter>03.mainOutput\defination</Filter>
     </ClInclude>
     <ClInclude Include="include\AATree.hpp">
-      <Filter>04.CppLibCode\cpptools</Filter>
+      <Filter>04.CppLibCode\cppTemplateUtils</Filter>
     </ClInclude>
     <ClInclude Include="include\AADigraph.hpp">
-      <Filter>04.CppLibCode\cpptools</Filter>
+      <Filter>04.CppLibCode\cppTemplateUtils</Filter>
     </ClInclude>
     <ClInclude Include="include\AAStateMachine.hpp">
-      <Filter>04.CppLibCode\cpptools</Filter>
+      <Filter>04.CppLibCode\cppTemplateUtils</Filter>
     </ClInclude>
     <ClInclude Include="include\AANeuron.hpp">
-      <Filter>04.CppLibCode\cpptools</Filter>
+      <Filter>04.CppLibCode\cppTemplateUtils</Filter>
     </ClInclude>
     <ClInclude Include="include\AAMessageQueue.h">
       <Filter>04.CppLibCode</Filter>
@@ -828,31 +825,46 @@
     <ClInclude Include="include\ArmyAntLib.h">
       <Filter>04.CppLibCode</Filter>
     </ClInclude>
-    <ClInclude Include="include\AASocket.h">
-      <Filter>04.CppLibCode</Filter>
-    </ClInclude>
-    <ClInclude Include="include\AAConfiguration.h">
-      <Filter>04.CppLibCode</Filter>
-    </ClInclude>
     <ClInclude Include="include\AAJNITools.h">
       <Filter>04.CppLibCode</Filter>
     </ClInclude>
+    <ClInclude Include="src\AAIStream_Private">
+      <Filter>04.CppLibCode\stream</Filter>
+    </ClInclude>
+    <ClInclude Include="include\AAIStream_Com.h">
+      <Filter>04.CppLibCode\stream</Filter>
+    </ClInclude>
+    <ClInclude Include="include\AAIStream_File.h">
+      <Filter>04.CppLibCode\stream</Filter>
+    </ClInclude>
+    <ClInclude Include="include\AAIStream.h">
+      <Filter>04.CppLibCode\stream</Filter>
+    </ClInclude>
+    <ClInclude Include="include\AAIStream_Memory.h">
+      <Filter>04.CppLibCode\stream</Filter>
+    </ClInclude>
+    <ClInclude Include="include\AAIStream_Pipe.h">
+      <Filter>04.CppLibCode\stream</Filter>
+    </ClInclude>
+    <ClInclude Include="include\AASocket.h">
+      <Filter>04.CppLibCode\network</Filter>
+    </ClInclude>
+    <ClInclude Include="include\AAAes.h">
+      <Filter>04.CppLibCode\encoding</Filter>
+    </ClInclude>
+    <ClInclude Include="include\AABinary.h">
+      <Filter>04.CppLibCode\encoding</Filter>
+    </ClInclude>
+    <ClInclude Include="include\AAConfiguration.h">
+      <Filter>04.CppLibCode\encoding</Filter>
+    </ClInclude>
+    <ClInclude Include="include\C_AAStream.h">
+      <Filter>05.CRefCode</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="src\AAFile.cpp">
-      <Filter>04.CppLibCode</Filter>
-    </ClCompile>
-    <ClCompile Include="src\C_AAFile.cpp">
-      <Filter>05.CRefCode</Filter>
-    </ClCompile>
-    <ClCompile Include="src\AAAes.cpp">
-      <Filter>04.CppLibCode</Filter>
-    </ClCompile>
     <ClCompile Include="src\C_AANeuron.cpp">
       <Filter>05.CRefCode</Filter>
-    </ClCompile>
-    <ClCompile Include="src\Java_AAFile.cpp">
-      <Filter>06.JavaRefCode</Filter>
     </ClCompile>
     <ClCompile Include="src\Java_AANeuron.cpp">
       <Filter>06.JavaRefCode</Filter>
@@ -863,14 +875,29 @@
     <ClCompile Include="src\ArmyAntLib.cpp">
       <Filter>04.CppLibCode</Filter>
     </ClCompile>
-    <ClCompile Include="src\AABinary.cpp">
-      <Filter>04.CppLibCode</Filter>
-    </ClCompile>
-    <ClCompile Include="src\AASocket.cpp">
-      <Filter>04.CppLibCode</Filter>
-    </ClCompile>
     <ClCompile Include="src\AAJNITools.cpp">
       <Filter>04.CppLibCode</Filter>
+    </ClCompile>
+    <ClCompile Include="src\AAIStream_File.cpp">
+      <Filter>04.CppLibCode\stream</Filter>
+    </ClCompile>
+    <ClCompile Include="src\AAIStream.cpp">
+      <Filter>04.CppLibCode\stream</Filter>
+    </ClCompile>
+    <ClCompile Include="src\AASocket.cpp">
+      <Filter>04.CppLibCode\network</Filter>
+    </ClCompile>
+    <ClCompile Include="src\AAAes.cpp">
+      <Filter>04.CppLibCode\encoding</Filter>
+    </ClCompile>
+    <ClCompile Include="src\AABinary.cpp">
+      <Filter>04.CppLibCode\encoding</Filter>
+    </ClCompile>
+    <ClCompile Include="src\C_AAStream.cpp">
+      <Filter>05.CRefCode</Filter>
+    </ClCompile>
+    <ClCompile Include="src\AAIStream_Memory.cpp">
+      <Filter>04.CppLibCode\stream</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -892,14 +919,11 @@
     <None Include="languages\Java\buildJava.bat">
       <Filter>06.JavaRefCode</Filter>
     </None>
-    <None Include="languages\Java\src\ArmyAnt\FileStream.java">
-      <Filter>06.JavaRefCode</Filter>
-    </None>
     <None Include="languages\Java\src\ArmyAnt\NeuronAlgorithm.java">
       <Filter>06.JavaRefCode</Filter>
     </None>
     <None Include="include\AASocket_ProtocolTypes">
-      <Filter>04.CppLibCode</Filter>
+      <Filter>04.CppLibCode\network</Filter>
     </None>
   </ItemGroup>
   <ItemGroup>

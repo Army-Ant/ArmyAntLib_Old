@@ -25,22 +25,53 @@
 
 //#include <yvals.h>
 
+#ifdef OS_WINDOWS
+#define AA_INTEGER(num, len) num##len
+#else
+#define AA_INTEGER(num, len) num
+#endif
+
 // 定长整数定义
 typedef char int8;
+const int8 AA_INT8_MAX = AA_INTEGER(0x7f, i8);
+const int8 AA_INT8_MIN = AA_INTEGER(0x80, i8);
 typedef unsigned char uint8;
+const uint8 AA_UINT8_MAX = AA_INTEGER(0xff, ui8);
 typedef short int16;
+const int16 AA_INT16_MAX = AA_INTEGER(0x7fff, i16);
+const int16 AA_INT16_MIN = AA_INTEGER(0x8000, i16);
 typedef unsigned short uint16;
+const uint16 AA_UINT16_MAX = AA_INTEGER(0xffff, ui16);
 typedef int int32;
+const int32 AA_INT32_MAX = AA_INTEGER(0x7fffffff, i32);
+const int32 AA_INT32_MIN = AA_INTEGER(0x80000000, i32);
 typedef unsigned int uint32;
+const uint32 AA_UINT32_MAX = AA_INTEGER(0xffffffff, ui32);
+
+#if defined _x64 || defined _cplusplus
+typedef long long int64;
+const int64 AA_INT64_MAX = AA_INTEGER(0x7fffffffffffffff, i64);
+const int64 AA_INT64_MIN = AA_INTEGER(0x8000000000000000, i64);
+typedef unsigned long long uint64;
+const uint64 AA_UINT64_MAX = AA_INTEGER(0xffffffffffffffff, ui64);
+#endif
 
 // 变长整数定义
 #ifdef _x86
 typedef int mac_int;
 typedef unsigned int mac_uint;
+const mac_int AA_MAC_INT_MAX = AA_INT32_MAX;
+const mac_int AA_MAC_INT_MIN = AA_INT32_MIN;
+const mac_uint AA_MAC_UINT_MAX = AA_UINT32_MAX;
 #else
 typedef long long mac_int;
 typedef unsigned long long mac_uint;
+const mac_int AA_MAC_INT_MAX = AA_INT64_MAX;
+const mac_int AA_MAC_INT_MIN = AA_INT64_MIN;
+const mac_uint AA_MAC_UINT_MAX = AA_UINT64_MAX;
 #endif
+
+#undef AA_INTEGER
 
 // C通用布尔类型
 #ifndef BOOL

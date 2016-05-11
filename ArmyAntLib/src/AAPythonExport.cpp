@@ -23,8 +23,8 @@
  */
 
 #include "../base/base.hpp"
-#include "../include/AAFile.h"
-#include "../include/C_AAFile.h"
+#include "../include/AAIStream_File.h"
+#include "../include/C_AAStream.h"
 
 #ifdef OS_WINDOWS
 #include "../externals/python3.5.1/include/Python.h"
@@ -39,16 +39,16 @@
 
 extern "C" {
 
-	ARMYANT_CLIB_API const char*AA_Stream_GetReadedSome(AA_CFileStream stream, uint32 len, uint32 pos)
+	ARMYANT_CLIB_API const char*AA_StaticStream_GetReadedSome(AA_CStream stream, uint32 len, uint32 pos)
 	{
 		if(len <= 0)
-			len = AA_Stream_GetLength(stream);
+			len = AA_StaticStream_GetLength(stream);
 		if(len <= 0)
 			return nullptr;
 		static std::string readed;
 		readed.clear();
 		char* reded = new char[len+2];
-		if(!ArmyAnt::FileStream::GetStream(stream)->Read(reded, len, pos))
+		if(!ArmyAnt::StaticStream::GetStream(stream)->Read(reded, len, pos))
 		{
 			AA_SAFE_DELALL(reded);
 			return nullptr;
@@ -58,16 +58,16 @@ extern "C" {
 		return readed.c_str();
 	}
 
-	ARMYANT_CLIB_API const char*AA_Stream_GetReadedTo(AA_CFileStream stream, char endtag, uint32 len)
+	ARMYANT_CLIB_API const char*AA_StaticStream_GetReadedTo(AA_CStream stream, char endtag, uint32 len)
 	{
 		if(len <= 0)
-			len = AA_Stream_GetLength(stream);
+			len = AA_StaticStream_GetLength(stream);
 		if(len <= 0)
 			return nullptr;
 		static std::string readed;
 		readed.clear();
 		char* reded = new char[len + 2];
-		if(!ArmyAnt::FileStream::GetStream(stream)->Read(reded, uint8(endtag), len))
+		if(!ArmyAnt::StaticStream::GetStream(stream)->Read(reded, uint8(endtag), len))
 		{
 			AA_SAFE_DELALL(reded);
 			return nullptr;
@@ -77,9 +77,9 @@ extern "C" {
 		return readed.c_str();
 	}
 	
-	ARMYANT_CLIB_API BOOL AA_Stream_WriteTo(AA_CFileStream stream, char*buffer, uint32 len)
+	ARMYANT_CLIB_API BOOL AA_StaticStream_WriteTo(AA_CStream stream, char*buffer, uint32 len)
 	{
-		return 0 < AA_Stream_Write(stream, buffer, len) ? TRUE : FALSE;
+		return 0 < AA_StaticStream_Write(stream, buffer, len) ? TRUE : FALSE;
 	}
 
 	static double MethodTemplate(double)
@@ -97,7 +97,7 @@ extern "C" {
 
 	ARMYANT_CLIB_API int AA_NeuronAlgorithm_RecordDoubleToInt(double value)
 	{
-		if(intDoubleDict.size() > ArmyAnt::Constant::c_int32Max - 2)
+		if(intDoubleDict.size() > AA_INT64_MAX - 2)
 			AAAssert(false, -1);
 		for(int i = 0; i < int(intDoubleDict.size()) + 2; i++)
 			if(intDoubleDict.find(i) == intDoubleDict.end())

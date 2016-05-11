@@ -103,11 +103,12 @@ set(CXX_SOURCE_FILES
         src/ArmyAntLib.cpp
         src/AAAes.cpp
         src/AABinary.cpp
-        src/AAFile.cpp
+        src/AAIStream.cpp
+        src/AAIStream_File.cpp
+        src/AAIStream_Memory.cpp
 		src/AASocket.cpp
         src/C_AAFile.cpp
         src/C_AANeuron.cpp
-		src/Java_AAFile.cpp
 		src/Java_AANeuron.cpp
 		src/AAPythonExport.cpp
 		src/AAJNITools.cpp)

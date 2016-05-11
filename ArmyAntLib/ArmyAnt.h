@@ -53,7 +53,13 @@
 #include "include/AANeuron.hpp"
 
 // File stream class, to work in disk file, memory, name pipe, com, network
-#include "include/AAFile.h"
+#include "include/AAIStream.h"
+#include "include/AAIStream_File.h"
+#include "include/AAIStream_Pipe.h"
+#include "include/AAIStream_Memory.h"
+#include "include/AAIStream_Com.h"
+// Java native interface using tools
+#include "include/AAJNITools.h"
 // AES encoding and decoding class
 #include "include/AAAes.h"
 // Binary data packer and unpacker class, used to make file or socket datas for program

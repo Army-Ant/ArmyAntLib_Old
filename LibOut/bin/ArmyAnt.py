@@ -29,6 +29,8 @@ from ctypes import *
 # Please use the latest Python 3.x version
 # 请使用最新版本的python3
 
+# TODO: 因Stream类的变更，此代码文件需要大批量重构
+
 __lib=None
 print(platform.architecture()[0])
 if platform.architecture()[0]=="32bit":

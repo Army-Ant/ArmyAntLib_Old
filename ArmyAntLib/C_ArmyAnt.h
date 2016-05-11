@@ -37,7 +37,7 @@
 #define C_ARMY_ANT_H_2015_11_7
 
 #include "include/C_AADefine.h"
-#include "include/C_AAFile.h"
+#include "include/C_AAStream.h"
 #include "include/C_AANeuron.h"
 
 

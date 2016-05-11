@@ -125,7 +125,7 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <TargetExt>.dll</TargetExt>
     <OutDir>$(ProjectDir)bin\</OutDir>
-    <IntDir />
+    <IntDir>$(ProjectDir)log\$(Configuration)</IntDir>
     <TargetName>$(ProjectName)d</TargetName>
     <CodeAnalysisRuleSet>SecurityRules.ruleset</CodeAnalysisRuleSet>
     <IncludePath>$(ProjectDir)externals\boost;$(JAVA_HOME)\include;$(JAVA_HOME)\include\win32;$(IncludePath)</IncludePath>
@@ -135,7 +135,7 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug_Static|Win32'">
     <TargetExt>.lib</TargetExt>
     <OutDir>$(ProjectDir)lib\</OutDir>
-    <IntDir />
+    <IntDir>$(ProjectDir)log\$(Configuration)</IntDir>
     <TargetName>$(ProjectName)d_s</TargetName>
     <CodeAnalysisRuleSet>SecurityRules.ruleset</CodeAnalysisRuleSet>
     <IncludePath>$(ProjectDir)externals\boost;$(JAVA_HOME)\include;$(JAVA_HOME)\include\win32;$(IncludePath)</IncludePath>
@@ -148,7 +148,7 @@
     <IncludePath>$(ProjectDir)externals\boost;$(JAVA_HOME)\include;$(JAVA_HOME)\include\win32;$(IncludePath)</IncludePath>
     <TargetExt>.dll</TargetExt>
     <OutDir>$(ProjectDir)bin\</OutDir>
-    <IntDir />
+    <IntDir>$(ProjectDir)log\$(Configuration)</IntDir>
     <LibraryPath>$(ProjectDir)externals\python3.5.1\x64;$(ProjectDir)externals\boost\stage\lib64;$(LibraryPath)</LibraryPath>
     <LibraryWPath>$(LibraryWPath)</LibraryWPath>
   </PropertyGroup>
@@ -158,14 +158,14 @@
     <IncludePath>$(ProjectDir)externals\boost;$(JAVA_HOME)\include;$(JAVA_HOME)\include\win32;$(IncludePath)</IncludePath>
     <TargetExt>.lib</TargetExt>
     <OutDir>$(ProjectDir)lib\</OutDir>
-    <IntDir />
+    <IntDir>$(ProjectDir)log\$(Configuration)</IntDir>
     <LibraryPath>$(ProjectDir)externals\python3.5.1\x64;$(ProjectDir)externals\boost\stage\lib64;$(LibraryPath)</LibraryPath>
     <LibraryWPath>$(LibraryWPath)</LibraryWPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <TargetExt>.dll</TargetExt>
     <OutDir>$(ProjectDir)bin\</OutDir>
-    <IntDir />
+    <IntDir>$(ProjectDir)log\$(Configuration)</IntDir>
     <IncludePath>$(ProjectDir)externals\boost;$(JAVA_HOME)\include;$(JAVA_HOME)\include\win32;$(IncludePath)</IncludePath>
     <LibraryPath>$(ProjectDir)externals\python3.5.1\x86;$(ProjectDir)externals\boost\stage\lib;$(LibraryPath)</LibraryPath>
     <LibraryWPath>$(LibraryWPath)</LibraryWPath>
@@ -173,7 +173,7 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release_Static|Win32'">
     <TargetExt>.lib</TargetExt>
     <OutDir>$(ProjectDir)lib\</OutDir>
-    <IntDir />
+    <IntDir>$(ProjectDir)log\$(Configuration)</IntDir>
     <IncludePath>$(ProjectDir)externals\boost;$(JAVA_HOME)\include;$(JAVA_HOME)\include\win32;$(IncludePath)</IncludePath>
     <LibraryPath>$(ProjectDir)externals\python3.5.1\x86;$(ProjectDir)externals\boost\stage\lib;$(LibraryPath)</LibraryPath>
     <LibraryWPath>$(LibraryWPath)</LibraryWPath>
@@ -183,7 +183,7 @@
     <IncludePath>$(ProjectDir)externals\boost;$(JAVA_HOME)\include;$(JAVA_HOME)\include\win32;$(IncludePath)</IncludePath>
     <TargetExt>.dll</TargetExt>
     <OutDir>$(ProjectDir)bin\</OutDir>
-    <IntDir />
+    <IntDir>$(ProjectDir)log\$(Configuration)</IntDir>
     <TargetName>$(ProjectName)_64</TargetName>
     <LibraryPath>$(ProjectDir)externals\python3.5.1\x64;$(ProjectDir)externals\boost\stage\lib64;$(LibraryPath)</LibraryPath>
     <LibraryWPath>$(LibraryWPath)</LibraryWPath>
@@ -192,7 +192,7 @@
     <IncludePath>$(ProjectDir)externals\boost;$(JAVA_HOME)\include;$(JAVA_HOME)\include\win32;$(IncludePath)</IncludePath>
     <TargetExt>.lib</TargetExt>
     <OutDir>$(ProjectDir)lib\</OutDir>
-    <IntDir />
+    <IntDir>$(ProjectDir)log\$(Configuration)</IntDir>
     <TargetName>$(ProjectName)_64_s</TargetName>
     <LibraryPath>$(ProjectDir)externals\python3.5.1\x64;$(ProjectDir)externals\boost\stage\lib64;$(LibraryPath)</LibraryPath>
     <LibraryWPath>$(LibraryWPath)</LibraryWPath>
@@ -213,6 +213,10 @@
       </AdditionalOptions>
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
       <MinimalRebuild>false</MinimalRebuild>
+      <ObjectFileName>$(IntDir)obj/$(Configuration)/</ObjectFileName>
+      <ProgramDataBaseFileName>$(IntDir)obj/$(Configuration)/vc$(PlatformToolsetVersion).pdb</ProgramDataBaseFileName>
+      <GenerateXMLDocumentationFiles>true</GenerateXMLDocumentationFiles>
+      <XMLDocumentationFileName>$(ProjectDir)bin\</XMLDocumentationFileName>
     </ClCompile>
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>
@@ -228,6 +232,9 @@
     <PostBuildEvent>
       <Command>$(ProjectDir)base\build_end.bat $(Configuration) $(ProjectDir) $(TargetName) $(PlatformTarget)</Command>
     </PostBuildEvent>
+    <BuildLog>
+      <Path>$(IntDir)log\$(TargetName).log</Path>
+    </BuildLog>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug_Static|Win32'">
     <ClCompile>
@@ -246,6 +253,10 @@
       </AdditionalOptions>
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
       <MinimalRebuild>false</MinimalRebuild>
+      <ObjectFileName>$(IntDir)obj/$(Configuration)/</ObjectFileName>
+      <ProgramDataBaseFileName>$(IntDir)obj/$(Configuration)/vc$(PlatformToolsetVersion).pdb</ProgramDataBaseFileName>
+      <GenerateXMLDocumentationFiles>true</GenerateXMLDocumentationFiles>
+      <XMLDocumentationFileName>$(ProjectDir)bin\</XMLDocumentationFileName>
     </ClCompile>
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>
@@ -268,6 +279,9 @@
     <ProjectReference>
       <LinkLibraryDependencies>true</LinkLibraryDependencies>
     </ProjectReference>
+    <BuildLog>
+      <Path>$(IntDir)log\$(TargetName).log</Path>
+    </BuildLog>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <ClCompile>
@@ -285,6 +299,10 @@
       </AdditionalOptions>
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
       <MinimalRebuild>false</MinimalRebuild>
+      <ObjectFileName>$(IntDir)obj/$(Configuration)/</ObjectFileName>
+      <ProgramDataBaseFileName>$(IntDir)obj/$(Configuration)/vc$(PlatformToolsetVersion).pdb</ProgramDataBaseFileName>
+      <GenerateXMLDocumentationFiles>true</GenerateXMLDocumentationFiles>
+      <XMLDocumentationFileName>$(ProjectDir)bin\</XMLDocumentationFileName>
     </ClCompile>
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>
@@ -300,6 +318,9 @@
     <PostBuildEvent>
       <Command>$(ProjectDir)base\build_end.bat $(Configuration) $(ProjectDir) $(TargetName) $(PlatformTarget)</Command>
     </PostBuildEvent>
+    <BuildLog>
+      <Path>$(IntDir)log\$(TargetName).log</Path>
+    </BuildLog>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug_Static|x64'">
     <ClCompile>
@@ -317,6 +338,10 @@
       </AdditionalOptions>
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
       <MinimalRebuild>false</MinimalRebuild>
+      <ObjectFileName>$(IntDir)obj/$(Configuration)/</ObjectFileName>
+      <ProgramDataBaseFileName>$(IntDir)obj/$(Configuration)/vc$(PlatformToolsetVersion).pdb</ProgramDataBaseFileName>
+      <GenerateXMLDocumentationFiles>true</GenerateXMLDocumentationFiles>
+      <XMLDocumentationFileName>$(ProjectDir)bin\</XMLDocumentationFileName>
     </ClCompile>
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>
@@ -338,6 +363,9 @@
     <Lib>
       <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
     </Lib>
+    <BuildLog>
+      <Path>$(IntDir)log\$(TargetName).log</Path>
+    </BuildLog>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <ClCompile>
@@ -353,6 +381,10 @@
       <AdditionalOptions>
       </AdditionalOptions>
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <ObjectFileName>$(IntDir)obj/$(Configuration)/</ObjectFileName>
+      <ProgramDataBaseFileName>$(IntDir)obj/$(Configuration)/vc$(PlatformToolsetVersion).pdb</ProgramDataBaseFileName>
+      <GenerateXMLDocumentationFiles>true</GenerateXMLDocumentationFiles>
+      <XMLDocumentationFileName>$(ProjectDir)bin\</XMLDocumentationFileName>
     </ClCompile>
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>
@@ -370,6 +402,9 @@
     <PostBuildEvent>
       <Command>$(ProjectDir)base\build_end.bat $(Configuration) $(ProjectDir) $(TargetName) $(PlatformTarget)</Command>
     </PostBuildEvent>
+    <BuildLog>
+      <Path>$(IntDir)log\$(TargetName).log</Path>
+    </BuildLog>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release_Static|Win32'">
     <ClCompile>
@@ -385,6 +420,10 @@
       <AdditionalOptions>
       </AdditionalOptions>
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <ObjectFileName>$(IntDir)obj/$(Configuration)/</ObjectFileName>
+      <ProgramDataBaseFileName>$(IntDir)obj/$(Configuration)/vc$(PlatformToolsetVersion).pdb</ProgramDataBaseFileName>
+      <GenerateXMLDocumentationFiles>true</GenerateXMLDocumentationFiles>
+      <XMLDocumentationFileName>$(ProjectDir)bin\</XMLDocumentationFileName>
     </ClCompile>
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>
@@ -409,6 +448,9 @@
     <ProjectReference>
       <LinkLibraryDependencies>true</LinkLibraryDependencies>
     </ProjectReference>
+    <BuildLog>
+      <Path>$(IntDir)log\$(TargetName).log</Path>
+    </BuildLog>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <ClCompile>
@@ -425,6 +467,10 @@
       <AdditionalOptions>
       </AdditionalOptions>
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <ObjectFileName>$(IntDir)obj/$(Configuration)/</ObjectFileName>
+      <ProgramDataBaseFileName>$(IntDir)obj/$(Configuration)/vc$(PlatformToolsetVersion).pdb</ProgramDataBaseFileName>
+      <GenerateXMLDocumentationFiles>true</GenerateXMLDocumentationFiles>
+      <XMLDocumentationFileName>$(ProjectDir)bin\</XMLDocumentationFileName>
     </ClCompile>
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>
@@ -442,6 +488,9 @@
     <PostBuildEvent>
       <Command>$(ProjectDir)base\build_end.bat $(Configuration) $(ProjectDir) $(TargetName) $(PlatformTarget)</Command>
     </PostBuildEvent>
+    <BuildLog>
+      <Path>$(IntDir)log\$(TargetName).log</Path>
+    </BuildLog>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release_Static|x64'">
     <ClCompile>
@@ -458,6 +507,10 @@
       <AdditionalOptions>
       </AdditionalOptions>
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <ObjectFileName>$(IntDir)obj/$(Configuration)/</ObjectFileName>
+      <ProgramDataBaseFileName>$(IntDir)obj/$(Configuration)/vc$(PlatformToolsetVersion).pdb</ProgramDataBaseFileName>
+      <GenerateXMLDocumentationFiles>true</GenerateXMLDocumentationFiles>
+      <XMLDocumentationFileName>$(ProjectDir)bin\</XMLDocumentationFileName>
     </ClCompile>
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>
@@ -481,6 +534,9 @@
     <Lib>
       <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
     </Lib>
+    <BuildLog>
+      <Path>$(IntDir)log\$(TargetName).log</Path>
+    </BuildLog>
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="C_ArmyAnt.h" />
@@ -729,6 +785,10 @@
     <ClInclude Include="include\AAConfiguration.h" />
     <ClInclude Include="include\AADigraph.hpp" />
     <ClInclude Include="include\AAFragment.h" />
+    <ClInclude Include="include\AAIStream.h" />
+    <ClInclude Include="include\AAIStream_Com.h" />
+    <ClInclude Include="include\AAIStream_Memory.h" />
+    <ClInclude Include="include\AAIStream_Pipe.h" />
     <ClInclude Include="include\AAJNITools.h" />
     <ClInclude Include="include\AAMessageQueue.h" />
     <ClInclude Include="include\AANeuron.hpp" />
@@ -739,24 +799,26 @@
     <ClInclude Include="include\AA_end.h" />
     <ClInclude Include="include\AA_start.h" />
     <ClInclude Include="include\AADefine.h" />
-    <ClInclude Include="include\AAFile.h" />
+    <ClInclude Include="include\AAIStream_File.h" />
     <ClInclude Include="include\AAClassPrivateHandle.hpp" />
     <ClInclude Include="include\ArmyAntLib.h" />
     <ClInclude Include="include\C_AADefine.h" />
-    <ClInclude Include="include\C_AAFile.h" />
+    <ClInclude Include="include\C_AAStream.h" />
     <ClInclude Include="include\C_AANeuron.h" />
+    <ClInclude Include="src\AAIStream_Private" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\AAAes.cpp" />
     <ClCompile Include="src\AABinary.cpp" />
-    <ClCompile Include="src\AAFile.cpp" />
+    <ClCompile Include="src\AAIStream_File.cpp" />
+    <ClCompile Include="src\AAIStream.cpp" />
+    <ClCompile Include="src\AAIStream_Memory.cpp" />
     <ClCompile Include="src\AAJNITools.cpp" />
     <ClCompile Include="src\AAPythonExport.cpp" />
     <ClCompile Include="src\AASocket.cpp" />
     <ClCompile Include="src\ArmyAntLib.cpp" />
-    <ClCompile Include="src\Java_AAFile.cpp" />
     <ClCompile Include="src\Java_AANeuron.cpp" />
-    <ClCompile Include="src\C_AAFile.cpp" />
+    <ClCompile Include="src\C_AAStream.cpp" />
     <ClCompile Include="src\C_AANeuron.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -766,7 +828,6 @@
     <None Include="base\build_start.sh" />
     <None Include="include\AASocket_ProtocolTypes" />
     <None Include="languages\Java\buildJava.bat" />
-    <None Include="languages\Java\src\ArmyAnt\FileStream.java" />
     <None Include="languages\Java\src\ArmyAnt\NeuronAlgorithm.java" />
     <None Include="languages\Python\ArmyAnt.py" />
   </ItemGroup>

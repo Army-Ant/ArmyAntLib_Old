@@ -21,6 +21,8 @@
 :: Created by Jason 3/7/2016
 :: This is a batch command script file used to compile the Java library file
 
+:: TODO: 因FileStream类的修改，Java中的对应类代码需要大批量重构。为保证C++库的正常编译，已将相关代码文件删除，需要重新编写
+
 set ThisDir=%~dp0
 set OutDir=%ThisDir%..\..\..\LibOut\bin\
 set TestDir=%ThisDir%..\..\..\JavaLibTest\lib\

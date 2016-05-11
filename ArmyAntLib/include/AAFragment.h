@@ -76,20 +76,6 @@ const int64 c_lightYear = AA_INTEGER(9460730472580800,i64);	// (m)	光年
 const double c_electronVolt = 1.60217646263e-19;	// (J)	电子伏
 const double c_avogadro = 6.0221422026e23;		// 阿伏伽德罗常量(常数), 摩尔质量系数
 
-// Integer limits
-const int8 c_int8Max = AA_INTEGER(0x7f,i8);
-const int8 c_int8Min = AA_INTEGER(0x80,i8);
-const uint8 c_uint8Max = AA_INTEGER(0xff,ui8);
-const int16 c_int16Max = AA_INTEGER(0x7fff,i16);
-const int16 c_int16Min = AA_INTEGER(0x8000,i16);
-const uint16 c_uint16Max = AA_INTEGER(0xffff,ui16);
-const int32 c_int32Max = AA_INTEGER(0x7fffffff,i32);
-const int32 c_int32Min = AA_INTEGER(0x80000000,i32);
-const uint32 c_uint32Max = AA_INTEGER(0xffffffff,ui32);
-const int64 c_int64Max = AA_INTEGER(0x7fffffffffffffff,i64);
-const int64 c_int64Min = AA_INTEGER(0x8000000000000000,i64);
-const uint64 c_uint64Max = AA_INTEGER(0xffffffffffffffff,ui64);
-
 // Binary units conversion
 const int16 c_2xK = AA_INTEGER(0b10000000000,i16);
 const int32 c_2xM = AA_INTEGER(0b100000000000000000000,i32);
@@ -159,5 +145,7 @@ inline void Log_Error(const char* msg)
 } // namespace Fragment
 
 } // namespace ArmyAnt
+
+#undef AA_INTEGER
 
 #endif

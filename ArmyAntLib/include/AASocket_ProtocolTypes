@@ -1,4 +1,4 @@
-HOPOPT = 0,	// 保留字段，用于IPv6(跳跃点到跳跃点选项) 
+﻿HOPOPT = 0,	// 保留字段，用于IPv6(跳跃点到跳跃点选项) 
 ICMP = 1,	// Internet Control Message Protocol version 4, Internet控制消息 
 IGMP = 2,	// Internet Group Management Protocol, Internet组管理 
 GGP = 3,	// 网关到网关 
