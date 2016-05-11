@@ -216,3 +216,6 @@ $RECYCLE.BIN/
 *.lastbuildstate
 *.exp
 *.ipdb
+/ArmyAntLib/CMakeFiles/ArmyAntLib.dir
+/ArmyAntLib/bin/*.so
+/ArmyAntLib/Makefile
