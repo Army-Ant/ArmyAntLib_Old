@@ -32,6 +32,12 @@ set ConfigType=%1
 set ProjectPath=%2
 set TargetName=%3
 set TargetPlatform=%4
+set OutDir=%ProjectPath%..\LibOut
+
+if exist "%OutDir%" ( echo "%OutDir% exist" ) else ( mkdir %OutDir% )
+if exist "%OutDir%\include" ( echo "%OutDir%\include exist" ) else ( mkdir %OutDir%\include )
+if exist "%OutDir%\lib" ( echo "%OutDir%\lib exist" ) else ( mkdir %OutDir%\lib )
+if exist "%OutDir%\bin" ( echo "%OutDir%\bin exist" ) else ( mkdir %OutDir%\bin )
 
 :End
 @echo on

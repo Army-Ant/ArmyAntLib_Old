@@ -28,6 +28,25 @@
 
 function ArmyAntLib_PreBuilt()
 {
+	outDir=$2../LibOut
+	if [ ! -d "${outDir}" ]; then
+		mkdir ${outDir}
+	fi
+	if [ ! -d "${outDir}/lib" ]; then
+		mkdir ${outDir}/lib
+	fi
+	if [ ! -d "${outDir}/bin" ]; then
+		mkdir ${outDir}/bin
+	fi
+	if [ ! -d "${outDir}/include" ]; then
+		mkdir ${outDir}/include
+	fi
+	if [ ! -d "$2bin" ]; then
+		mkdir $2bin
+	fi
+	if [ ! -d "$2lib" ]; then
+		mkdir $2lib
+	fi
     return 0;
 }
 

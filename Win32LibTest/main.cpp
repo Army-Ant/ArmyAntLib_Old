@@ -55,97 +55,117 @@ void ExitTest()
 
 void FileStreamTest()
 {
-	static File*file = nullptr;
-	static const uint16 memTestLen = 2048;
-	static uint8 memoryTest[memTestLen] = {0};
-	static bool memInit = false;
-
+	ArmyAnt::IStream*stream = nullptr;
+	auto GetStaticStream = [&stream]() {return static_cast<StaticStream*>(stream); };
 	const uint16 bufLen = 2048;
 	char buf[bufLen] = "";
 
-	if(!memInit)
+	stream = new File();
+	CHECK_EXIT_SUCCESS(static_cast<ArmyAnt::File*>(stream)->SetStreamMode(false), "The file stream created");
+	CHECK_EXIT_SUCCESS(!stream->IsOpened(), "The stream dynamic checked");
+	CHECK_EXIT_SUCCESS(!stream->IsOpened(false), "The stream without dynamic checked");
+	CHECK_EXIT_SUCCESS(stream->Open("test.txt"), "The file 'test.txt' opened");
+	CHECK_EXIT_SUCCESS(stream->IsOpened(), "The stream dynamic checked");
+	CHECK_EXIT_SUCCESS(stream->IsOpened(false), "The stream without dynamic checked");
+	std::cout << "The length of the stream is " << GetStaticStream()->GetLength() << std::endl;
+	std::cout << "The source name of the stream is " << stream->GetSourceName() << std::endl;
+	std::cout << "The reading pointer of the stream is " << GetStaticStream()->GetPos() << std::endl;
+	CHECK_EXIT_SUCCESS(0 < GetStaticStream()->Read(buf), "The stream read");
+	std::cout << "Read context is :" << std::endl;
+	std::cout << buf << std::endl;
+	std::cout << "The reading pointer of the stream is " << GetStaticStream()->GetPos() << std::endl;
+	CHECK_EXIT_SUCCESS(GetStaticStream()->MovePos(GetStaticStream()->GetPos() + 1), "The stream pointer position move next");
+	std::cout << "The reading pointer of the stream is " << GetStaticStream()->GetPos() << std::endl;
+	CHECK_EXIT_SUCCESS(GetStaticStream()->MovePos(GetStaticStream()->GetPos() - 1), "The stream pointer position move back");
+	std::cout << "The reading pointer of the stream is " << GetStaticStream()->GetPos() << std::endl;
+	CHECK_EXIT_SUCCESS(GetStaticStream()->MovePos(0), "The stream pointer position move to beginning position");
+	std::cout << "The reading pointer of the stream is " << GetStaticStream()->GetPos() << std::endl;
+	switch (stream->GetType())
+	{
+	case StreamType::File:
+		std::cout << "The stream type is diskfile." << std::endl;
+		break;
+	case StreamType::Memory:
+		std::cout << "The stream type is memory." << std::endl;
+		break;
+	case StreamType::NamePipe:
+		std::cout << "The stream type is name pipe." << std::endl;
+		break;
+	case StreamType::ComData:
+		std::cout << "The stream type is COM." << std::endl;
+		break;
+	case StreamType::Network:
+		std::cout << "The stream type is network." << std::endl;
+		break;
+	}
+	ZeroMemory(buf, bufLen);
+	CHECK_EXIT_SUCCESS(0 < GetStaticStream()->Read(buf, uint8('\n')), "The stream line read");
+	std::cout << "Read context is :" << std::endl;
+	std::cout << buf << std::endl;
+	std::cout << "The reading pointer of the stream is " << GetStaticStream()->GetPos() << std::endl;
+	ZeroMemory(buf, bufLen);
+	strcpy(buf, "*** Writing Test ***");
+	std::cout << "Writing context is :" << std::endl;
+	std::cout << buf << std::endl;
+	CHECK_EXIT_SUCCESS(0 < GetStaticStream()->Write(buf), "The stream write");
+	std::cout << "The reading pointer of the stream is " << GetStaticStream()->GetPos() << std::endl;
+	CHECK_EXIT_SUCCESS(GetStaticStream()->MovePos(0), "The stream pointer position move to beginning position");
+	std::cout << "The reading pointer of the stream is " << GetStaticStream()->GetPos() << std::endl;
+	ZeroMemory(buf, bufLen);
+	CHECK_EXIT_SUCCESS(0 < GetStaticStream()->Read(buf), "The stream read");
+	std::cout << "Read context is :" << std::endl;
+	std::cout << buf << std::endl;
+
+	CHECK_EXIT_SUCCESS(stream->Close(), "The stream closed");
+	CHECK_EXIT_SUCCESS(!stream->IsOpened(), "The stream dynamic checked");
+	CHECK_EXIT_SUCCESS(!stream->IsOpened(false), "The stream without dynamic checked");
+	CHECK_EXIT_SUCCESS(AA_SAFE_DEL(stream) == nullptr, "The file stream destroyed");
+}
+
+void MemoryStreamTest()
+{
+	static const uint16 memTestLen = 2048;
+	static uint8 memoryTest[memTestLen] = { 0 };
+	static bool memInit = false;
+	if (!memInit)
 	{
 		memInit = true;
 		strcpy(reinterpret_cast<char*>(memoryTest), "I am a small sentence of memory test !\n\tPlease amazing me !");
 	}
+	ArmyAnt::IStream*stream = nullptr;
+	auto GetStaticStream = [&stream]() {return static_cast<StaticStream*>(stream); };
+	const uint16 bufLen = 2048;
+	char buf[bufLen] = "";
 
-	file = new File();
-	CHECK_EXIT_SUCCESS(file->SetStreamMode(false), "The file stream created");
-	CHECK_EXIT_SUCCESS(!file->IsOpened(), "The stream dynamic checked");
-	CHECK_EXIT_SUCCESS(!file->IsOpened(false), "The stream without dynamic checked");
 
-	auto testfunc = [&]()
-	{
-		CHECK_EXIT_SUCCESS(file->IsOpened(), "The stream dynamic checked");
-		CHECK_EXIT_SUCCESS(file->IsOpened(false), "The stream without dynamic checked");
-		std::cout << "The length of the stream is " << file->GetLength() << std::endl;
-		std::cout << "The source name of the stream is " << file->GetSourceName() << std::endl;
-		std::cout << "The reading pointer of the stream is " << file->GetPos() << std::endl;
-		CHECK_EXIT_SUCCESS(0 < file->Read(buf), "The stream read");
-		std::cout << "Read context is :" << std::endl;
-		std::cout << buf << std::endl;
-		std::cout << "The reading pointer of the stream is " << file->GetPos() << std::endl;
-		CHECK_EXIT_SUCCESS(file->MovePos(file->GetPos() + 1), "The stream pointer position move next");
-		std::cout << "The reading pointer of the stream is " << file->GetPos() << std::endl;
-		CHECK_EXIT_SUCCESS(file->MovePos(file->GetPos() - 1), "The stream pointer position move back");
-		std::cout << "The reading pointer of the stream is " << file->GetPos() << std::endl;
-		CHECK_EXIT_SUCCESS(file->MovePos(0), "The stream pointer position move to beginning position");
-		std::cout << "The reading pointer of the stream is " << file->GetPos() << std::endl;
-		switch(file->NowType())
-		{
-			case StreamType::File:
-				std::cout << "The stream type is diskfile." << std::endl;
-				break;
-			case StreamType::Memory:
-				std::cout << "The stream type is memory." << std::endl;
-				break;
-			case StreamType::NamePipe:
-				std::cout << "The stream type is name pipe." << std::endl;
-				break;
-			case StreamType::ComData:
-				std::cout << "The stream type is COM." << std::endl;
-				break;
-			case StreamType::Network:
-				std::cout << "The stream type is network." << std::endl;
-				break;
-		}
-		ZeroMemory(buf, bufLen);
-		CHECK_EXIT_SUCCESS(0 < file->Read(buf, uint8('\n')), "The stream line read");
-		std::cout << "Read context is :" << std::endl;
-		std::cout << buf << std::endl;
-		std::cout << "The reading pointer of the stream is " << file->GetPos() << std::endl;
-		ZeroMemory(buf, bufLen);
-		strcpy(buf, "*** Writing Test ***");
-		std::cout << "Writing context is :" << std::endl;
-		std::cout << buf << std::endl;
-		CHECK_EXIT_SUCCESS(0 < file->Write(buf), "The stream write");
-		std::cout << "The reading pointer of the stream is " << file->GetPos() << std::endl;
-		CHECK_EXIT_SUCCESS(file->MovePos(0), "The stream pointer position move to beginning position");
-		std::cout << "The reading pointer of the stream is " << file->GetPos() << std::endl;
-		ZeroMemory(buf, bufLen);
-		CHECK_EXIT_SUCCESS(0 < file->Read(buf), "The stream read");
-		std::cout << "Read context is :" << std::endl;
-		std::cout << buf << std::endl;
-
-		CHECK_EXIT_SUCCESS(file->Close(), "The stream closed");
-		CHECK_EXIT_SUCCESS(!file->IsOpened(), "The stream dynamic checked");
-		CHECK_EXIT_SUCCESS(!file->IsOpened(false), "The stream without dynamic checked");
-	};
-
-	//CHECK_EXIT_SUCCESS(file->Open("test.txt"), "The file 'test.txt' opened");					// disk file passed test
-	//testfunc();
-	//CHECK_EXIT_SUCCESS(file->Open(memoryTest, memTestLen - 1), "The memory opened");			// memory passed test
-	//testfunc();
-	CHECK_EXIT_SUCCESS(file->Open("jason_1", ""), "The pipe 'jason_1' opened");
-	testfunc();
-	CHECK_EXIT_SUCCESS(file->Open(1), "The com 1 opened");
-	testfunc();
-	//EXIT_SUCCESS(file->Open("test.txt"), "The network opened");
-	//testfunc();
-
-	CHECK_EXIT_SUCCESS(AA_SAFE_DEL(file) == nullptr, "The file stream destroyed");
 }
 
+void ComStreamTest()
+{
+	ArmyAnt::IStream*stream = nullptr;
+	const uint16 bufLen = 2048;
+	char buf[bufLen] = "";
+	auto GetDynamicStream = [&stream]() {return static_cast<StaticStream*>(stream); };
+
+}
+
+void PipeStreamTest()
+{
+	ArmyAnt::IStream*stream = nullptr;
+	const uint16 bufLen = 2048;
+	char buf[bufLen] = "";
+	auto GetDynamicStream = [&stream]() {return static_cast<StaticStream*>(stream); };
+
+}
+
+void NetworkStreamTest()
+{
+	ArmyAnt::IStream*stream = nullptr;
+	const uint16 bufLen = 2048;
+	char buf[bufLen] = "";
+	auto GetDynamicStream = [&stream]() {return static_cast<StaticStream*>(stream); };
+
+}
 
 void AESTest()
 {/*

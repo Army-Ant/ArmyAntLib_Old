@@ -15,6 +15,10 @@ struct ModuleList
 void ExitTest();
 
 void FileStreamTest();
+void MemoryStreamTest();
+void ComStreamTest();
+void PipeStreamTest();
+void NetworkStreamTest();
 void AESTest();
 void BinaryTest();
 void SocketTest();
@@ -37,20 +41,24 @@ const char* g_welcomeStr[] = {
 };
 
 const ModuleList g_moduleList[] = {
-	{'1',"FileStream",FileStreamTest},
-	{'2',"AES",AESTest},
-	{'3',"Binary",BinaryTest},
-	{'4',"Socket",SocketTest},
-	{'5',"Configuration",ConfigurationTest},
-	{'6',"MessageQueue",MessageQueueTest},
-	{'7',"TripleMap",TripleMapTest},
-	{'8',"Tree",TreeTest},
-	{'9',"Digraph",DigraphTest},
-	{'0',"StateMachine",StateMachineTest},
-	{'-',"Neuron",NeuronTest},
+	{ '1',"FileStream",FileStreamTest },
+	{ '2',"MemoryStream",MemoryStreamTest },
+	{ '3',"ComStream",ComStreamTest },
+	{ '4',"PipeStream",PipeStreamTest },
+	{ '5',"NetworkStream",NetworkStreamTest },
+	{ '6',"AES",AESTest },
+	{ '7',"Binary",BinaryTest },
+	{ '8',"Socket",SocketTest },
+	{ '9',"Configuration",ConfigurationTest },
+	{ '0',"MessageQueue",MessageQueueTest },
+	{ '-',"TripleMap",TripleMapTest },
+	{ '=',"Tree",TreeTest },
+	{ 'q',"Digraph",DigraphTest },
+	{ 'w',"StateMachine",StateMachineTest },
+	{ 'e',"Neuron",NeuronTest },
 
-	{'q',"ExitTest",ExitTest},
-	{0,nullptr,nullptr}
+	{ '`',"ExitTest",ExitTest },
+	{ 0,nullptr,nullptr }
 };
 
 const char* g_beforeChoose = "Please enter key to choose:";
