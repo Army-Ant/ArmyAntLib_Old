@@ -36,7 +36,7 @@ if (($#<=0)); then
     echo "Do you want to built it in release mode ? Input nothing to agree or anything not empty to disagree : "
     read debugType
     debugType="$debugType rr"
-    if [[ ${debugType}==" rr" ]];then
+    if [[ ${debugType} == " rr" ]];then
         debugType=Release
     else
         debugType=Debug
@@ -55,7 +55,7 @@ if (($#<=1)); then
     echo "Do you want to built it for x86 platform ? Input nothing to agree or anything not empty to disagree : "
     read targetPlatform
     targetPlatform="$targetPlatform rr"
-    if [[ ${targetPlatform}==" rr" ]];then
+    if [[ ${targetPlatform} == " rr" ]];then
         targetPlatform=x86
     else
         targetPlatform=arm
@@ -74,7 +74,7 @@ if (($#<=2)); then
     echo "Do you want to built it for 64 Bits platform ? Input nothing to agree or anything not empty to disagree : "
     read targetBits
     targetBits="$targetBits rr"
-    if [[ ${targetBits}==" rr" ]];then
+    if [[ ${targetBits} == " rr" ]];then
         targetBits=64
     else
         targetBits=32
@@ -89,25 +89,15 @@ if [ "${targetBits}" != "64" ] && [ "${targetBits}" != "32" ] ;then
 fi
 
 # Target nameb
-if [[ ${debugType}=="Debug" ]];then
-    TarName=${TarName}d
-    echo debugtype
-fi
+[[ $debugType == "Debug" ]] && TarName=${TarName}d
 
-if [ "${targetPlatform}"=="arm" ];then
-	if [ "${targetBits}"=="64" ];then
-		TarName=${TarName}_arm64
-		echo arm64
-	else
-		TarName=${TarName}_arm
-		echo arm32
-	fi
-else
-	if [ "${targetBits}"=="64" ];then
-		TarName=${TarName}_64
-		echo x86_64
-	fi
-fi
+[[ $targetPlatform == "arm" ]] && [[ $targetBits == "64" ]] && TarName=${TarName}_arm64
+[[ $targetPlatform == "arm" ]] && [[ $targetBits == "32" ]] && TarName=${TarName}_arm
+[[ $targetPlatform == "x86" ]] && [[ $targetBits == "64" ]] && TarName=${TarName}_64
+
+echo $debugType
+echo $targetPlatform
+echo $targetBits
 echo $TarName
 
 # Building source

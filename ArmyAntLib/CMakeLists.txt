@@ -20,7 +20,7 @@
 # This file is the internal source file of this project, is not contained by the closed source release part of this software
 # 本文件为内部源码文件, 不会包含在闭源发布的本软件中
 
-cmake_minimum_required(VERSION 3.2)
+cmake_minimum_required(VERSION 3.0)
 project(${TAR_NAME})
 
 if(TAR_MAC STREQUAL arm)

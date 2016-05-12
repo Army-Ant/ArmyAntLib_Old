@@ -1,29 +1,33 @@
 /*	*
 	* Copyright (c) 2015 ArmyAnt
-	* °æÈ¨ËùÓĞ (c) 2015 ArmyAnt
+	* ç‰ˆæƒæ‰€æœ‰ (c) 2015 ArmyAnt
 	*
 	* Licensed under the BSD License, Version 2.0 (the License);
-	* ±¾Èí¼şÊ¹ÓÃBSDĞ­Òé±£»¤, Ğ­Òé°æ±¾:2.0
+	* æœ¬è½¯ä»¶ä½¿ç”¨BSDåè®®ä¿æŠ¤, åè®®ç‰ˆæœ¬:2.0
 	* you may not use this file except in compliance with the License.
-	* Ê¹ÓÃ±¾¿ªÔ´´úÂëÎÄ¼şµÄÄÚÈİ, ÊÓÎªÍ¬ÒâĞ­Òé
+	* ä½¿ç”¨æœ¬å¼€æºä»£ç æ–‡ä»¶çš„å†…å®¹, è§†ä¸ºåŒæ„åè®®
 	* You can read the license content in the file "ARMYANT.COPYRIGHT.BSD_LICENSE.MD" at the root of this project
-	* Äú¿ÉÒÔÔÚ±¾ÏîÄ¿µÄ¸ùÄ¿Â¼ÕÒµ½ÃûÎª"ARMYANT.COPYRIGHT.BSD_LICENSE.MD"µÄÎÄ¼ş, À´ÔÄ¶ÁĞ­ÒéÄÚÈİ
+	* æ‚¨å¯ä»¥åœ¨æœ¬é¡¹ç›®çš„æ ¹ç›®å½•æ‰¾åˆ°åä¸º"ARMYANT.COPYRIGHT.BSD_LICENSE.MD"çš„æ–‡ä»¶, æ¥é˜…è¯»åè®®å†…å®¹
 	* You may also obtain a copy of the License at
-	* ÄúÒ²¿ÉÒÔÔÚ´Ë´¦»ñµÃĞ­ÒéµÄ¸±±¾:
+	* æ‚¨ä¹Ÿå¯ä»¥åœ¨æ­¤å¤„è·å¾—åè®®çš„å‰¯æœ¬:
 	*
 	*     http://opensource.org/licenses/BSD-3-Clause
 	*
 	* Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an AS IS BASIS,
 	* WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-	* ³ı·Ç·¨ÂÉÒªÇó»òÕß°æÈ¨ËùÓĞÕßÊéÃæÍ¬Òâ,±¾Èí¼şÔÚ±¾Ğ­Òé»ù´¡ÉÏµÄ·¢²¼Ã»ÓĞÈÎºÎĞÎÊ½µÄÌõ¼şºÍµ£±£,ÎŞÂÛÃ÷Ê¾µÄ»òÄ¬ĞíµÄ.
+	* é™¤éæ³•å¾‹è¦æ±‚æˆ–è€…ç‰ˆæƒæ‰€æœ‰è€…ä¹¦é¢åŒæ„,æœ¬è½¯ä»¶åœ¨æœ¬åè®®åŸºç¡€ä¸Šçš„å‘å¸ƒæ²¡æœ‰ä»»ä½•å½¢å¼çš„æ¡ä»¶å’Œæ‹…ä¿,æ— è®ºæ˜ç¤ºçš„æˆ–é»˜è®¸çš„.
 	* See the License for the specific language governing permissions and limitations under the License.
-	* ÇëÔÚÌØ¶¨ÏŞÖÆ»òÓïÑÔ¹ÜÀíÈ¨ÏŞÏÂÔÄ¶ÁĞ­Òé
+	* è¯·åœ¨ç‰¹å®šé™åˆ¶æˆ–è¯­è¨€ç®¡ç†æƒé™ä¸‹é˜…è¯»åè®®
 	* This file is the internal source file of this project, is not contained by the closed source release part of this software
-	* ±¾ÎÄ¼şÎªÄÚ²¿Ô´ÂëÎÄ¼ş, ²»»á°üº¬ÔÚ±ÕÔ´·¢²¼µÄ±¾Èí¼şÖĞ
+	* æœ¬æ–‡ä»¶ä¸ºå†…éƒ¨æºç æ–‡ä»¶, ä¸ä¼šåŒ…å«åœ¨é—­æºå‘å¸ƒçš„æœ¬è½¯ä»¶ä¸­
 	*/
 
 #include "../include/AAIStream_Memory.h"
 #include "AAIStream_Private"
+
+#ifdef OS_UNIX
+#include <memory.h>
+#endif
 
 namespace ArmyAnt {
 
@@ -71,13 +75,13 @@ bool Memory::Open(uint32 len)
 bool Memory::Open(mac_uint memaddr, uint64 len)
 {
 	auto hd = static_cast<IStream_Memory_Private*>(IStream_Private::handleManager[handle]);
-	//typeÃ»ÓĞÖØÖÃ£¬ËµÃ÷±¾Á÷ÉĞÎ´¹Ø±Õ
+	//typeæ²¡æœ‰é‡ç½®ï¼Œè¯´æ˜æœ¬æµå°šæœªå…³é—­
 	if(hd->mem != nullptr)
 		return false;
 	AAAssert(memaddr != 0, false);
-	//±£´æÄÚ´æµØÖ·
+	//ä¿å­˜å†…å­˜åœ°å€
 	hd->mem = reinterpret_cast<void*>(memaddr);
-	//²âÊÔÄÚ´æÄÜ·ñ¶ÁĞ´
+	//æµ‹è¯•å†…å­˜èƒ½å¦è¯»å†™
 	try
 	{
 		uint8 a = (static_cast<uint8*>(hd->mem))[0];
@@ -90,7 +94,7 @@ bool Memory::Open(mac_uint memaddr, uint64 len)
 		p[len - 1] = 2;
 		p[len - 1] = a;
 	}
-	//Èç¹û²»ÄÜ¶ÁĞ´£¬ÔòÈ¡Ïû´ò¿ª¸ÃÁ÷
+	//å¦‚æœä¸èƒ½è¯»å†™ï¼Œåˆ™å–æ¶ˆæ‰“å¼€è¯¥æµ
 	catch(std::exception&)
 	{
 		hd->mem = nullptr;
@@ -158,7 +162,7 @@ const char * Memory::GetSourceName() const
 		return nullptr;
 	lock = true;
 	auto hd = static_cast<IStream_Memory_Private*>(IStream_Private::handleManager[handle]);
-	//±£´æÄÚ´æµØÖ·¡¢³¤¶ÈµÈĞÅÏ¢
+	//ä¿å­˜å†…å­˜åœ°å€ã€é•¿åº¦ç­‰ä¿¡æ¯
 #ifdef _32BIT
 	sprintf(name, "%X", hd->mem);
 #else
@@ -190,7 +194,7 @@ uint64 Memory::Read(void * buffer, uint32 len, uint64 pos)
 	}
 	if(pos >= hd->len)
 		return false;
-	//ÄÚ´æ¿½±´
+	//å†…å­˜æ‹·è´
 	uint64 reallen = Fragment::min(hd->len - pos, len);
 	memcpy(static_cast<char*>(buffer), static_cast<char*>(hd->mem) + pos, uint32(reallen));
 	if(isCurPos)
@@ -202,7 +206,7 @@ uint64 Memory::Read(void * buffer, uint8 endtag, uint64 maxlen)
 {
 	AAAssert(buffer != nullptr, uint64(0));
 	auto hd = static_cast<IStream_Memory_Private*>(IStream_Private::handleManager[handle]);
-	//Öğ×Ö¶ÁÈ¡
+	//é€å­—è¯»å–
 	for(auto nowPos = hd->pos; ; nowPos++)
 	{
 		if(nowPos < hd->len && static_cast<uint8*>(hd->mem)[nowPos] == endtag || nowPos - hd->pos == maxlen)
@@ -219,7 +223,7 @@ uint64 Memory::Write(void * buffer, uint64 len)
 {
 	AAAssert(buffer != nullptr, uint64(0));
 	auto hd = static_cast<IStream_Memory_Private*>(IStream_Private::handleManager[handle]);
-	//Èç¹ûlen²ÎÊıÃ»ÓĞ´«Èë£¬ÔòĞ´ÄÚ´æµ½Á÷£¬Ö±ÖÁÓöµ½0£¬ÕâÏàµ±ÓÚĞ´Èë×Ö·û´®ÖÁÁ÷
+	//å¦‚æœlenå‚æ•°æ²¡æœ‰ä¼ å…¥ï¼Œåˆ™å†™å†…å­˜åˆ°æµï¼Œç›´è‡³é‡åˆ°0ï¼Œè¿™ç›¸å½“äºå†™å…¥å­—ç¬¦ä¸²è‡³æµ
 	if(len == 0)
 		while(static_cast<uint8*>(buffer)[len] != 0)
 			len++;

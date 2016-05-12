@@ -1,4 +1,4 @@
-# Install script for directory: /home/jason/MyGitWorks/ArmyAntLib/ArmyAntLib
+# Install script for directory: /home/jason/workdir/ArmyAntLib/ArmyAntLib
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)
@@ -38,7 +38,7 @@ else()
   set(CMAKE_INSTALL_MANIFEST "install_manifest.txt")
 endif()
 
-string(REPLACE ";" "\n" CMAKE_INSTALL_MANIFEST_CONTENT
-       "${CMAKE_INSTALL_MANIFEST_FILES}")
-file(WRITE "/home/jason/MyGitWorks/ArmyAntLib/ArmyAntLib/${CMAKE_INSTALL_MANIFEST}"
-     "${CMAKE_INSTALL_MANIFEST_CONTENT}")
+file(WRITE "/home/jason/workdir/ArmyAntLib/ArmyAntLib/${CMAKE_INSTALL_MANIFEST}" "")
+foreach(file ${CMAKE_INSTALL_MANIFEST_FILES})
+  file(APPEND "/home/jason/workdir/ArmyAntLib/ArmyAntLib/${CMAKE_INSTALL_MANIFEST}" "${file}\n")
+endforeach()
