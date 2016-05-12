@@ -28,6 +28,8 @@
 
 debugType=""
 targetPlatform=""
+targetBits=""
+TarName=ArmyAntLib
 
 # Check the debug type
 if (($#<=0)); then
@@ -50,7 +52,7 @@ fi
 
 # Check the target machine
 if (($#<=1)); then
-    echo ""Do you want to built it for x86 platform ? Input nothing to agree or anything not empty to disagree : "
+    echo "Do you want to built it for x86 platform ? Input nothing to agree or anything not empty to disagree : "
     read targetPlatform
     targetPlatform="$targetPlatform rr"
     if [[ ${targetPlatform}==" rr" ]];then
@@ -68,8 +70,8 @@ if [ "${targetPlatform}" != "x86" ] && [ "${targetPlatform}" != "arm" ] ;then
 fi
 
 # Check the target bits
-if (($#<=2); then
-    echo ""Do you want to built it for 64 Bits platform ? Input nothing to agree or anything not empty to disagree : "
+if (($#<=2)); then
+    echo "Do you want to built it for 64 Bits platform ? Input nothing to agree or anything not empty to disagree : "
     read targetBits
     targetBits="$targetBits rr"
     if [[ ${targetBits}==" rr" ]];then
@@ -86,21 +88,24 @@ if [ "${targetBits}" != "64" ] && [ "${targetBits}" != "32" ] ;then
     exit -1
 fi
 
-# Target name
-if [[ $debugType=="Debug" ]];then
-    TarName=ArmyAntLibd
-else
-    TarName=ArmyAntLib
+# Target nameb
+if [[ ${debugType}=="Debug" ]];then
+    TarName=${TarName}d
+    echo debugtype
 fi
-if [[ $targetPlatform=="arm" ]];then
-	if [[ $targetBits=="64 ]];then
+
+if [ "${targetPlatform}"=="arm" ];then
+	if [ "${targetBits}"=="64" ];then
 		TarName=${TarName}_arm64
+		echo arm64
 	else
-		TarName=${TarName}_arm64
+		TarName=${TarName}_arm
+		echo arm32
 	fi
 else
-	if [[ $targetBits=="64 ]];then
+	if [ "${targetBits}"=="64" ];then
 		TarName=${TarName}_64
+		echo x86_64
 	fi
 fi
 echo $TarName

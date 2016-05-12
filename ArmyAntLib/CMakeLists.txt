@@ -25,6 +25,7 @@ project(${TAR_NAME})
 
 if(TAR_MAC STREQUAL arm)
 	set(CMAKE_CXX_COMPILER "arm-linux-gnueabi-g++")
+	set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=gnu++11")
 elseif(TAR_BITS STREQUAL 32)
 	set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=gnu++11 -m32")
 else()
@@ -114,7 +115,7 @@ set(CXX_SOURCE_FILES
         src/AAIStream_File.cpp
         src/AAIStream_Memory.cpp
 		src/AASocket.cpp
-        src/C_AAFile.cpp
+        src/C_AAStream.cpp
         src/C_AANeuron.cpp
 		src/Java_AANeuron.cpp
 		src/AAPythonExport.cpp
@@ -126,4 +127,3 @@ set(PROJECT_BINARY_DIR ${PROJECT_BINARY_DIR}/bin)
 MESSAGE("The binary directory is ${PROJECT_BINARY_DIR}")
 
 SET_TARGET_PROPERTIES(${CMAKE_TAR_NAME} PROPERTIES OUTPUT_NAME ${TAR_NAME})
-

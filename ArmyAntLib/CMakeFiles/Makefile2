@@ -53,38 +53,38 @@ CMAKE_SOURCE_DIR = /home/jason/MyGitWorks/ArmyAntLib/ArmyAntLib
 CMAKE_BINARY_DIR = /home/jason/MyGitWorks/ArmyAntLib/ArmyAntLib
 
 #=============================================================================
-# Target rules for target CMakeFiles/ArmyAntLib.dir
+# Target rules for target CMakeFiles/ArmyAntLibd_arm64.dir
 
 # All Build rule for target.
-CMakeFiles/ArmyAntLib.dir/all:
-	$(MAKE) -f CMakeFiles/ArmyAntLib.dir/build.make CMakeFiles/ArmyAntLib.dir/depend
-	$(MAKE) -f CMakeFiles/ArmyAntLib.dir/build.make CMakeFiles/ArmyAntLib.dir/build
-	$(CMAKE_COMMAND) -E cmake_progress_report /home/jason/MyGitWorks/ArmyAntLib/ArmyAntLib/CMakeFiles  1 2 3 4 5 6 7 8 9 10 11
-	@echo "Built target ArmyAntLib"
-.PHONY : CMakeFiles/ArmyAntLib.dir/all
+CMakeFiles/ArmyAntLibd_arm64.dir/all:
+	$(MAKE) -f CMakeFiles/ArmyAntLibd_arm64.dir/build.make CMakeFiles/ArmyAntLibd_arm64.dir/depend
+	$(MAKE) -f CMakeFiles/ArmyAntLibd_arm64.dir/build.make CMakeFiles/ArmyAntLibd_arm64.dir/build
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/jason/MyGitWorks/ArmyAntLib/ArmyAntLib/CMakeFiles  1 2 3 4 5 6 7 8 9 10 11 12
+	@echo "Built target ArmyAntLibd_arm64"
+.PHONY : CMakeFiles/ArmyAntLibd_arm64.dir/all
 
 # Include target in all.
-all: CMakeFiles/ArmyAntLib.dir/all
+all: CMakeFiles/ArmyAntLibd_arm64.dir/all
 .PHONY : all
 
 # Build rule for subdir invocation for target.
-CMakeFiles/ArmyAntLib.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/jason/MyGitWorks/ArmyAntLib/ArmyAntLib/CMakeFiles 11
-	$(MAKE) -f CMakeFiles/Makefile2 CMakeFiles/ArmyAntLib.dir/all
+CMakeFiles/ArmyAntLibd_arm64.dir/rule: cmake_check_build_system
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/jason/MyGitWorks/ArmyAntLib/ArmyAntLib/CMakeFiles 12
+	$(MAKE) -f CMakeFiles/Makefile2 CMakeFiles/ArmyAntLibd_arm64.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/jason/MyGitWorks/ArmyAntLib/ArmyAntLib/CMakeFiles 0
-.PHONY : CMakeFiles/ArmyAntLib.dir/rule
+.PHONY : CMakeFiles/ArmyAntLibd_arm64.dir/rule
 
 # Convenience name for target.
-ArmyAntLib: CMakeFiles/ArmyAntLib.dir/rule
-.PHONY : ArmyAntLib
+ArmyAntLibd_arm64: CMakeFiles/ArmyAntLibd_arm64.dir/rule
+.PHONY : ArmyAntLibd_arm64
 
 # clean rule for target.
-CMakeFiles/ArmyAntLib.dir/clean:
-	$(MAKE) -f CMakeFiles/ArmyAntLib.dir/build.make CMakeFiles/ArmyAntLib.dir/clean
-.PHONY : CMakeFiles/ArmyAntLib.dir/clean
+CMakeFiles/ArmyAntLibd_arm64.dir/clean:
+	$(MAKE) -f CMakeFiles/ArmyAntLibd_arm64.dir/build.make CMakeFiles/ArmyAntLibd_arm64.dir/clean
+.PHONY : CMakeFiles/ArmyAntLibd_arm64.dir/clean
 
 # clean rule for target.
-clean: CMakeFiles/ArmyAntLib.dir/clean
+clean: CMakeFiles/ArmyAntLibd_arm64.dir/clean
 .PHONY : clean
 
 #=============================================================================
