@@ -87,6 +87,7 @@ if(TAR_MAC STREQUAL x86)
 elseif(TAR_MAC STREQUAL arm)
 	add_definitions(
 			-D_arm=1
+			-DAA_USE_PYTHON=0
 	)
 else()
 endif()
