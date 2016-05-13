@@ -229,3 +229,4 @@ $RECYCLE.BIN/
 /Win32LibTest/bin
 /Win32LibTest/lib
 /ArmyAntLib/CMakeFiles
+*.cmake

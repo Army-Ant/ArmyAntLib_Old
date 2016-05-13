@@ -35,8 +35,8 @@
 #endif
 */
 #include <boost/assert.hpp>
-
 #define BOOST_NO_AUTO_PTR
+#define BOOST_LIB_DIAGNOSTIC
 
 #ifdef OS_WINDOWS
 
@@ -46,8 +46,6 @@
 
 #endif
 
-#define BOOST_LIB_DIAGNOSTIC
-
 #ifdef DEBUG
 #undef AAAssert
 #define AAAssert(x,y) BOOST_ASSERT(x)
@@ -55,13 +53,8 @@
 
 using namespace ArmyAnt::Fragment;
 
-namespace ArmyAnt {
-
-namespace Constant {
-
-}
-
-} // namespace ArmyAnt
-
+#ifndef AA_USE_PYTHON
+#define AA_USE_PYTHON 1
+#endif
 
 #endif // BASE_HPP_2015_11_11
