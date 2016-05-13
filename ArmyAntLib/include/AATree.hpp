@@ -187,6 +187,8 @@ private:
 	//根节点
 	TreeNode<T_Val, T_Tag>* root = nullptr;
 
+	friend class Iterator_Tree<T_Val, T_Tag>;
+
 	AA_FORBID_ASSGN_OPR(Tree);
 	AA_FORBID_COPY_CTOR(Tree);
 };
@@ -254,7 +256,7 @@ private:
 
 private:
 	TraversalType type = TraversalType::Unknown;
-	Tree<T_Val, T_Tag>*tree = nullptr;
+	const Tree<T_Val, T_Tag>*tree = nullptr;
 	TreeNode<T_Val, T_Tag>* nownode = nullptr;
 };
 
@@ -673,55 +675,56 @@ const Tree<T_Val, T_Tag> * Tree<T_Val, T_Tag>::GetParentTree() const
 template<class T_Val, class T_Tag>
 Iterator_Tree<T_Val, T_Tag> Tree<T_Val, T_Tag>::GetPreorderTraversal(T_Tag first)
 {
-	return Iterator_Tree<T_Val, T_Tag>(Iterator_Tree::TraversalType::PreorderTraversal, this);
+	// TODO: solve the param "first"
+	return Iterator_Tree<T_Val, T_Tag>(TraversalType::PreorderTraversal, *this);
 }
 
 template<class T_Val, class T_Tag>
 const Iterator_Tree<T_Val, T_Tag> Tree<T_Val, T_Tag>::GetPreorderTraversal(T_Tag first) const
 {
-	return Iterator_Tree<T_Val, T_Tag>(Iterator_Tree::TraversalType::PreorderTraversal, this);
+	return Iterator_Tree<T_Val, T_Tag>(TraversalType::PreorderTraversal, *this);
 }
 
 template<class T_Val, class T_Tag>
 Iterator_Tree<T_Val, T_Tag> Tree<T_Val, T_Tag>::GetPostorderTraversal(T_Tag first)
 {
-	return Iterator_Tree<T_Val, T_Tag>(Iterator_Tree::TraversalType::PostorderTraversal, this);
+	return Iterator_Tree<T_Val, T_Tag>(TraversalType::PostorderTraversal, *this);
 }
 
 template<class T_Val, class T_Tag>
 const Iterator_Tree<T_Val, T_Tag> Tree<T_Val, T_Tag>::GetPostorderTraversal(T_Tag first) const
 {
-	return Iterator_Tree<T_Val, T_Tag>(Iterator_Tree::TraversalType::PostorderTraversal, this);
+	return Iterator_Tree<T_Val, T_Tag>(TraversalType::PostorderTraversal, *this);
 }
 
 template<class T_Val, class T_Tag>
 Iterator_Tree<T_Val, T_Tag> Tree<T_Val, T_Tag>::GetLayerorderTraversal(T_Tag first)
 {
-	return Iterator_Tree<T_Val, T_Tag>(Iterator_Tree::TraversalType::LayerorderTraversal, this);
+	return Iterator_Tree<T_Val, T_Tag>(TraversalType::LayerorderTraversal, *this);
 }
 
 template<class T_Val, class T_Tag>
 const Iterator_Tree<T_Val, T_Tag> Tree<T_Val, T_Tag>::GetLayerorderTraversal(T_Tag first) const
 {
-	return Iterator_Tree<T_Val, T_Tag>(Iterator_Tree::TraversalType::LayerorderTraversal, this);
+	return Iterator_Tree<T_Val, T_Tag>(TraversalType::LayerorderTraversal, *this);
 }
 
 template<class T_Val, class T_Tag>
 Iterator_Tree<T_Val, T_Tag> Tree<T_Val, T_Tag>::GetRandomTraversal()
 {
-	return Iterator_Tree<T_Val, T_Tag>(Iterator_Tree::TraversalType::RandomTraversal, this);
+	return Iterator_Tree<T_Val, T_Tag>(TraversalType::RandomTraversal, *this);
 }
 
 template<class T_Val, class T_Tag>
 const Iterator_Tree<T_Val, T_Tag> Tree<T_Val, T_Tag>::GetRandomTraversal() const
 {
-	return Iterator_Tree<T_Val, T_Tag>(Iterator_Tree::TraversalType::RandomTraversal, this);
+	return Iterator_Tree<T_Val, T_Tag>(TraversalType::RandomTraversal, *this);
 }
 
 template<class T_Val, class T_Tag>
 const Iterator_Tree<T_Val, T_Tag> Tree<T_Val, T_Tag>::End() const
 {
-	return Iterator_Tree<T_Val, T_Tag>(Iterator_Tree::TraversalType::Unknown, this);
+	return Iterator_Tree<T_Val, T_Tag>(TraversalType::Unknown, *this);
 }
 
 
