@@ -51,7 +51,7 @@
 #pragma comment(lib,"lib\\ArmyAntLib" AA_IS_DEBUG AA_TARGET_MACHINE AA_LIB_TYPE ".lib")
 #else // OS_WINDOWS
 #include <dlfcn.h>
-namespace ArmyAnt { static auto&armyAnt = []() { class ArmyAnt { public: ArmyAnt() { ptr = dlopen("libArmyAnt" AA_IS_DEBUG AA_TARGET_MACHINE AA_LIB_TYPE ".so"); } ~ArmyAnt() { dlclose(ptr); } char*ptr = nullptr; }; static ArmyAnt ret; return ret; }; }
+namespace ArmyAnt { static auto&armyAnt = []() { class ArmyAnt { public: ArmyAnt() { ptr = dlopen("libArmyAnt" AA_IS_DEBUG AA_TARGET_MACHINE AA_LIB_TYPE ".so", RTLD_NOW); } ~ArmyAnt() { dlclose(ptr); } char*ptr = nullptr; }; static ArmyAnt ret; return ret; }; }
 #endif // OS_WINDOWS
 
 #undef AA_IS_DEBUG
