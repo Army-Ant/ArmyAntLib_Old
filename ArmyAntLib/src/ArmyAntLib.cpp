@@ -60,6 +60,15 @@ const Version Version::GetVersion(const char* obj)
 	else return Version(0, 0, 0, 0);
 }
 
+Enviroment::BITS Enviroment::GetOSBits()
+{
+#if defined _32BIT
+	return Enviroment::BITS::_32bits;
+#elif defined _64BIT
+	return Enviroment::BITS::_64bits;
+#endif
+}
+
 } // namespace Infos
 
 } // namespace ArmyAnt

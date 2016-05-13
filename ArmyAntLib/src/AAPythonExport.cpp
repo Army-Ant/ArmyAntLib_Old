@@ -26,6 +26,7 @@
 #include "../include/AAIStream_File.h"
 #include "../include/C_AAStream.h"
 
+#if AA_USE_PYTHON
 #ifdef OS_WINDOWS
 #include "../externals/python3.5.1/include/Python.h"
 #else
@@ -127,3 +128,6 @@ extern "C" {
 	}
 
 }
+
+
+#endif
