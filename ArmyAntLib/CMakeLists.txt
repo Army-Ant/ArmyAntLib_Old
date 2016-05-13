@@ -31,7 +31,6 @@ elseif(TAR_BITS STREQUAL 32)
 else()
 	set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=gnu++11 -m64")
 endif()
-
 set(CMAKE_TAR_NAME ${TAR_NAME})
 
 set(JNI_INCLUDE_DIR $ENV{JAVA_HOME}/include)
@@ -123,6 +122,7 @@ set(CXX_SOURCE_FILES
 		src/AAJNITools.cpp)
 
 add_library(${CMAKE_TAR_NAME} SHARED ${CXX_SOURCE_FILES})
+TARGET_LINK_LIBRARIES(${CMAKE_TAR_NAME} dl)
 set(PROJECT_BINARY_DIR ${PROJECT_BINARY_DIR}/bin)
 
 MESSAGE("The binary directory is ${PROJECT_BINARY_DIR}")
