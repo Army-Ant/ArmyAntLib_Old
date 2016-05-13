@@ -273,7 +273,7 @@ TreeNode<T_Val, T_Tag>::TreeNode(const TreeNode<T_Val, T_Tag>&value, bool withCh
 {
 	this->children.clear();
 	if(withChildren)
-		for(auto i = value.children, begin(); i != value.children.end(); i++)
+		for(auto i = value.children.begin(); i != value.children.end(); i++)
 		{
 			children.push_back(*i);
 		}
@@ -285,7 +285,7 @@ TreeNode<T_Val, T_Tag>& TreeNode<T_Val, T_Tag>::operator=(const TreeNode<T_Val, 
 	this->tag = value.tag;
 	this->value = value.value;
 	this->children.clear();
-	for(auto i = value.children, begin(); i != value.children.end(); i++)
+	for(auto i = value.children.begin(); i != value.children.end(); i++)
 	{
 		children.push_back(*i);
 	}
@@ -340,7 +340,7 @@ TreeNode<T_Val, T_Tag> * TreeNode<T_Val, T_Tag>::GetChild(T_Tag tag)
 template<class T_Val, class T_Tag>
 const TreeNode<T_Val, T_Tag> * TreeNode<T_Val, T_Tag>::GetChild(T_Tag tag) const
 {
-	return const_cast(this)->GetChild(tag);
+	return const_cast<TreeNode<T_Val, T_Tag> *>(this)->GetChild(tag);
 }
 
 template<class T_Val, class T_Tag>
@@ -394,7 +394,7 @@ TreeNode<T_Val, T_Tag> * TreeNode<T_Val, T_Tag>::GetNextChild(T_Tag tag)
 template<class T_Val, class T_Tag>
 const TreeNode<T_Val, T_Tag> * TreeNode<T_Val, T_Tag>::GetNextChild(T_Tag tag) const
 {
-	return const_cast(this)->GetNextChild(tag);
+	return const_cast<TreeNode<T_Val, T_Tag> *>(this)->GetNextChild(tag);
 }
 
 template<class T_Val, class T_Tag>
@@ -416,7 +416,7 @@ TreeNode<T_Val, T_Tag> * TreeNode<T_Val, T_Tag>::GetBackChild(T_Tag tag)
 template<class T_Val, class T_Tag>
 const TreeNode<T_Val, T_Tag> * TreeNode<T_Val, T_Tag>::GetBackChild(T_Tag tag) const
 {
-	return const_cast(this)->GetBackChild(tag);
+	return const_cast<TreeNode<T_Val, T_Tag> *>(this)->GetBackChild(tag);
 }
 
 template<class T_Val, class T_Tag>
@@ -438,7 +438,7 @@ Tree<T_Val, T_Tag> TreeNode<T_Val, T_Tag>::GetTree()
 template<class T_Val, class T_Tag>
 const Tree<T_Val, T_Tag> TreeNode<T_Val, T_Tag>::GetTree() const
 {
-	return const_cast(this)->GetTree();
+	return const_cast<TreeNode<T_Val, T_Tag> *>(this)->GetTree();
 }
 
 template<class T_Val, class T_Tag>
@@ -591,7 +591,7 @@ const TreeNode<T_Val, T_Tag> * Tree<T_Val, T_Tag>::GetRoot() const
 template<class T_Val, class T_Tag>
 T_Tag Tree<T_Val, T_Tag>::GetTag() const
 {
-	return tag;
+	return root->tag;
 }
 
 template<class T_Val, class T_Tag>
@@ -624,7 +624,7 @@ TreeNode<T_Val, T_Tag> * Tree<T_Val, T_Tag>::GetFirstChild(T_Tag tag)
 template<class T_Val, class T_Tag>
 const TreeNode<T_Val, T_Tag> * Tree<T_Val, T_Tag>::GetFirstChild(T_Tag tag) const
 {
-	return const_cast(this)->GetFirstChild(tag);
+	return const_cast<Tree<T_Val, T_Tag> *>(this)->GetFirstChild(tag);
 }
 
 template<class T_Val, class T_Tag>
@@ -638,7 +638,7 @@ Tree<T_Val, T_Tag> * Tree<T_Val, T_Tag>::GetChildTree(T_Tag tag)
 template<class T_Val, class T_Tag>
 const Tree<T_Val, T_Tag> * Tree<T_Val, T_Tag>::GetChildTree(T_Tag tag) const
 {
-	return const_cast(this)->GetChildTree(tag);
+	return const_cast<Tree<T_Val, T_Tag> *>(this)->GetChildTree(tag);
 }
 
 template<class T_Val, class T_Tag>

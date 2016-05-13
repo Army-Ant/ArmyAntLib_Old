@@ -28,8 +28,12 @@
 
 function ArmyAntLib_AfterBuilt()
 {
-    cp -avx bin/* ../LibOut/bin/
-    return 0;
+	outDir=$2../LibOut
+	cp -avx bin/* $outDir/bin/
+	cp -avx lib/* $outDir/lib/
+	cp -avx include/* $outDir/include/
+	cp -avx *.h $outDir/
+	return 0;
 }
 
 ArmyAntLib_AfterBuilt $1 $2 $3 $4
