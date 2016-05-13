@@ -35,6 +35,7 @@
 
 #include "AADefine.h"
 #include <functional>
+#include <vector>
 
 namespace  ArmyAnt {
 

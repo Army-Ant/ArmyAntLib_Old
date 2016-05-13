@@ -1,4 +1,4 @@
-/*	*
+﻿/*	*
 	* Copyright (c) 2015 ArmyAnt
 	* 版权所有 (c) 2015 ArmyAnt
 	*
@@ -164,7 +164,7 @@ const char * Memory::GetSourceName() const
 	auto hd = static_cast<IStream_Memory_Private*>(IStream_Private::handleManager[handle]);
 	//保存内存地址、长度等信息
 #ifdef _32BIT
-	sprintf(name, "%X", hd->mem);
+	sprintf(name, "%X", mac_uint(hd->mem));
 #else
 	sprintf(name, "%X%X", uint32(reinterpret_cast<mac_uint>(hd->mem) / AA_UINT32_MAX), uint32(reinterpret_cast<mac_uint>(hd->mem) % AA_UINT32_MAX));
 #endif
