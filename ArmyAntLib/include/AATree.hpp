@@ -1012,8 +1012,8 @@ bool Iterator_Tree<T_Val, T_Tag>::Go(bool isNext)
 						firstC = firstC->GetParent()->GetNextChild(firstC->tag);
 						while(firstC->GetFirstChild() != nullptr)
 						{
-							firstC = firstC->GetFirstChild()
-								nowdep++;;
+							firstC = firstC->GetFirstChild();
+								nowdep++;
 						}
 					}
 					else
