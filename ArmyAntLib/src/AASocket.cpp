@@ -401,6 +401,8 @@ IPAddr_v4::operator IPAddr&()
 	return *this;
 }
 
+IPAddr_v4 IPAddr_v4::localhost = IPAddr_v4(127ui8, 0ui8, 0ui8, 1ui8);
+
 void IPAddr_v4::ParseFromString(const char * str)
 {
 	//若为空字符串,则将地址复位
@@ -547,6 +549,8 @@ IPAddr_v6::operator IPAddr&()
 {
 	return *this;
 }
+
+IPAddr_v6 IPAddr_v6::localhost = IPAddr_v6("0:0:0:0:0:0:0:1");
 
 void IPAddr_v6::ParseFromString(const char * str)
 {

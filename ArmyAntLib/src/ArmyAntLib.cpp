@@ -24,7 +24,6 @@
 
 #include "../base/base.hpp"
 #include "../include/ArmyAntLib.h"
-#include "../include/AATree.hpp"
 
 namespace ArmyAnt {
 

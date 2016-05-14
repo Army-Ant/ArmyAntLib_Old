@@ -33,10 +33,6 @@ namespace ArmyAnt {
 
 namespace JNITools{
 
-	extern const char* const c_javaStringSig;
-	extern const char* const c_javaStringGetBytes;
-	extern const char* const c_javaStringGetBytesSig;
-
 	/*	Convert the Java string to C++ string
 	 *	将Java的String转化为C++的string输出
 	 */

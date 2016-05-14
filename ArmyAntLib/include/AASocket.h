@@ -96,6 +96,9 @@ public:
 	bool operator!=(const IPAddr_v4&value)const;
 	operator IPAddr&();
 
+public:
+	static IPAddr_v4 localhost;
+
 protected:
 	void ParseFromString(const char* str)override;
 
@@ -136,6 +139,9 @@ public:
 	uint16 operator[](int index)const;
 	operator IPAddr&();
 
+public:
+	static IPAddr_v6 localhost;
+
 protected:
 	void ParseFromString(const char* str)override;
 
@@ -160,9 +166,9 @@ public:
 	typedef std::function<void(const IPAddr&addr, uint16 port, uint8*data, mac_uint datalen, void*pUser)> GettingCall;
 	//异步发送回执
 	typedef std::function<bool(mac_uint sendedSize, uint32 retriedTimes, int32 index, void*data, uint64 len, void* pUser)> SendingResp;
-	//断开连接回调，参数分别为客户端IPv4，客户端端口号，用户传入参数
+	//服务器丢失客户端连接回调，参数分别为客户端IPv4，客户端端口号，用户传入参数
 	typedef std::function<void(const IPAddr& clientAddr , uint16 clientPort, void*pUser)> ServerLostCall;
-	//断开连接回调，参数为用户传入参数, 返回false表示要求重新连接
+	//客户端断开连接回调，参数为用户传入参数, 返回false表示要求重新连接
 	typedef std::function<bool(void*pUser)> ClientLostCall;
 
 public:
@@ -192,17 +198,6 @@ public:
 	//获取本机IP地址
 	static IPAddr_v4 GetLocalIPv4Addr(int index = 0);
 	static IPAddr_v6 GetLocalIpv6Addr(int index = 0);
-
-	//错误代码含义：
-	//		0：没有错误,或者在记录错误代码前出现意外;
-	//		1：输入参数错误！
-	//		2：成员变量不正确，无法初始化
-	//		3：套接字已经创建！或者UDP监听已经进行！
-	//		4：套接字创建失败！请使用WSAGetLaseError获取错误信息
-	//		5：绑定套接字失败！请使用WSAGetLaseError获取错误信息
-	//		6：开启服务器listen失败！请使用WSAGetLaseError获取错误信息
-	//			连接服务器失败！请使用WSAGetLaseError获取错误信息
-	//			发送数据失败！请使用WSAGetLaseError获取错误信息
 	
 public:
 	const uint32 handle;
@@ -216,16 +211,10 @@ class ARMYANTLIB_API TCPServer :public Socket
 {
 public:
 	//默认构造函数，参数为：
-	// nAddr：服务器所使用地址，详见SetServerAddr函数说明
-	// nPort：服务器所使用端口，详见SetServerPort函数说明
 	// nMaxConnNum：最大允许同时连接的数量
-	// RecvCB：收到消息的回调函数
-	// pUser：收到消息的回调函数用户参数
 	TCPServer(int32 maxConnNum = 5);
 
-	//虽然本析构函数中检测并关闭了未关闭的服务器,但析构函数不应负责关闭服务器
-	//请调用者务必遵守调用规则,自行调用关闭服务器的函数,以此规范代码层次结构
-	//如果Debug中析构时服务器未关闭,会弹出assert警告
+	//析构函数不应负责关闭服务器，请调用者务必遵守调用规则,自行调用关闭服务器的函数,以此规范代码层次结构
 	virtual ~TCPServer(void);
 
 public:
@@ -276,16 +265,9 @@ class ARMYANTLIB_API TCPClient : public Socket
 {
 public:
 
-	//默认构造函数，参数为：
-	// nServerAddr：服务器所使用地址，详见SetServerAddr函数说明
-	// nServerPort：服务器所使用端口号，详见SetServerPort函数说明
-	// nLocalPort：本地客户端所使用端口号,详见SetClientPort函数说明
-	// RecvCB：收到消息的回调函数
-	// pRecvUser：收到消息的回调函数用户参数
+	//默认构造函数
 	TCPClient();
-	//虽然本析构函数中检测并关闭了未断开的连接,但析构函数不应负责断开连接
-	//请调用者务必遵守调用规则,自行调用断开连接的函数,以此规范代码层次结构
-	//如果Debug中析构时连接未断开,会弹出assert警告
+	//析构函数不应负责关闭服务器，请调用者务必遵守调用规则,自行调用关闭服务器的函数,以此规范代码层次结构
 	virtual ~TCPClient();
 
 public:
@@ -330,11 +312,7 @@ class ARMYANTLIB_API UDPSilgle : public Socket
 {
 public:
 
-	//默认构造函数，参数为：
-	// nAddr：所使用地址，详见SetIPAddr函数说明
-	// nPort：所使用端口，详见SetUDPPort函数说明
-	// RecvCB：收到消息的回调函数
-	// pUser：收到消息的回调函数用户参数
+	//默认构造函数
 	UDPSilgle();
 	virtual ~UDPSilgle();
 
