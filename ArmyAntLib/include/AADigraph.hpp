@@ -38,11 +38,11 @@
 
 namespace  ArmyAnt {
 
-template <class T_Val, class T_Tag, class T_Weight = float>
+template <class T_Val, class T_Tag, class T_Weight = double>
 class GraphNode;
-template <class T_Val, class T_Tag, class T_Weight = float>
+template <class T_Val, class T_Tag, class T_Weight = double>
 class GraphLine;
-template <class T_Val, class T_Tag, class T_Weight = float>
+template <class T_Val, class T_Tag, class T_Weight = double>
 class Digraph;
 
 /*	The node of digraph

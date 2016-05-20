@@ -792,6 +792,7 @@
     <ClInclude Include="include\AAJNITools.h" />
     <ClInclude Include="include\AAMessageQueue.h" />
     <ClInclude Include="include\AANeuron.hpp" />
+    <ClInclude Include="include\AANeuronNetwork.hpp" />
     <ClInclude Include="include\AASocket.h" />
     <ClInclude Include="include\AAStateMachine.hpp" />
     <ClInclude Include="include\AATree.hpp" />

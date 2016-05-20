@@ -861,6 +861,9 @@
     <ClInclude Include="include\C_AAStream.h">
       <Filter>05.CRefCode</Filter>
     </ClInclude>
+    <ClInclude Include="include\AANeuronNetwork.hpp">
+      <Filter>04.CppLibCode\cppTemplateUtils</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\C_AANeuron.cpp">

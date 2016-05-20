@@ -41,7 +41,7 @@
 
 namespace ArmyAnt {
 
-template <class T_Weight = float>
+template <class T_Weight = double>
 class NeuronAlgorithm
 {
 public:
