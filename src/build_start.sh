@@ -28,19 +28,6 @@
 
 function ArmyAntLib_PreBuilt()
 {
-	outDir=$2../LibOut
-	if [ ! -d "${outDir}" ]; then
-		mkdir ${outDir}
-	fi
-	if [ ! -d "${outDir}/lib" ]; then
-		mkdir ${outDir}/lib
-	fi
-	if [ ! -d "${outDir}/bin" ]; then
-		mkdir ${outDir}/bin
-	fi
-	if [ ! -d "${outDir}/include" ]; then
-		mkdir ${outDir}/include
-	fi
 	if [ ! -d "$2bin" ]; then
 		mkdir $2bin
 	fi
@@ -50,4 +37,4 @@ function ArmyAntLib_PreBuilt()
     return 0;
 }
 
-ArmyAntLib_PreBuilt $1 $2 $3 $4
+ArmyAntLib_PreBuilt $1 $2 $3 $4 $5

@@ -40,8 +40,8 @@ include_directories(${JNI_INCLUDE_DIR})
 MESSAGE("Current platform is ${CMAKE_SYSTEM_NAME}")
 IF ((CMAKE_SYSTEM_NAME MATCHES "Windows") OR (CMAKE_SYSTEM_NAME MATCHES "CYGWIN"))
 	include_directories(${JNI_INCLUDE_DIR}/win32)
-	link_directories(externals/python3.5.1/x64)
-	set(PY_INCLUDE_DIR externals/python3.5.1/include)
+	link_directories(../external/python3.5.1/x64)
+	set(PY_INCLUDE_DIR ../external/python3.5.1/include)
 	add_definitions(
 			-DOS_WINDOWS=1
 			-D__USE_W32_SOCKETS
@@ -49,7 +49,7 @@ IF ((CMAKE_SYSTEM_NAME MATCHES "Windows") OR (CMAKE_SYSTEM_NAME MATCHES "CYGWIN"
 ELSEIF (CMAKE_SYSTEM_NAME MATCHES "Linux")
 	include_directories(${JNI_INCLUDE_DIR}/linux)
 	set(PY_INCLUDE_DIR  $ENV{PYTHON_INCLUDE})
-	#set(PY_INCLUDE_DIR externals/python3.5.1/include)
+	#set(PY_INCLUDE_DIR ../external/python3.5.1/include)
 	add_definitions(
 			-DOS_UNIX=1
 			-DOS_LINUX=1
@@ -65,7 +65,7 @@ ELSE ()
 ENDIF ((CMAKE_SYSTEM_NAME MATCHES "Windows") OR (CMAKE_SYSTEM_NAME MATCHES "CYGWIN"))
 
 include_directories(${PY_INCLUDE_DIR})
-include_directories(externals/boost)
+include_directories(../external/boost)
 
 MESSAGE("This python header directory is $ENV{PYTHON_INCLUDE}")
 
@@ -108,22 +108,19 @@ add_definitions(
 )
 
 set(CXX_SOURCE_FILES
-        src/ArmyAntLib.cpp
-        src/AAAes.cpp
-        src/AABinary.cpp
-        src/AAIStream.cpp
-        src/AAIStream_File.cpp
-        src/AAIStream_Memory.cpp
-		src/AASocket.cpp
-        src/C_AAStream.cpp
-        src/C_AANeuron.cpp
-		src/Java_AANeuron.cpp
-		src/AAPythonExport.cpp
-		src/AAJNITools.cpp)
+        ../src/ArmyAntLib.cpp
+        ../src/AAAes.cpp
+        ../src/AABinary.cpp
+        ../src/AAIStream.cpp
+        ../src/AAIStream_File.cpp
+        ../src/AAIStream_Memory.cpp
+		../src/AASocket.cpp
+        ../src/C_AAStream.cpp
+        ../src/C_AANeuron.cpp
+		../src/AAJNITools.cpp)
 
 add_library(${CMAKE_TAR_NAME} SHARED ${CXX_SOURCE_FILES})
 TARGET_LINK_LIBRARIES(${CMAKE_TAR_NAME} dl)
-set(PROJECT_BINARY_DIR ${PROJECT_BINARY_DIR}/bin)
 
 MESSAGE("The binary directory is ${PROJECT_BINARY_DIR}")
 

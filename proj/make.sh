@@ -101,12 +101,12 @@ echo $targetBits
 echo $TarName
 
 # Building source
-source ./base/build_start.sh $debugType ./ $TarName $targetPlatform $targetBits
+source ../src/build_start.sh $debugType ../ $TarName $targetPlatform $targetBits
 cmake ./ -DCMAKE_BUILD_TYPE=$debugType -DTAR_MAC=$targetPlatform -DTAR_BITS=$targetBits -DTAR_NAME=$TarName
 make
-mv *.so bin
-#mv *.o lib
+mv *.so ../bin
+#mv *.o ../lib
 rm -rf CMakeCache.txt
 rm -rf *.*~
-source ./base/build_end.sh $debugType ./ $TarName $targetPlatform $targetBits
+source ../src/build_end.sh $debugType ../ $TarName $targetPlatform $targetBits
 
