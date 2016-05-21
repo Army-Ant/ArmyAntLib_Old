@@ -189,10 +189,10 @@ $RECYCLE.BIN/
 *.db
 *.opendb
 *.cmake
-bin
-lib
-proj/Debug
-proj/Debug_Static
-proj/Release
-proj/Release_Static
-proj/out
+/bin
+/lib
+/proj/Debug
+/proj/Debug_Static
+/proj/Release
+/proj/Release_Static
+/proj/out
