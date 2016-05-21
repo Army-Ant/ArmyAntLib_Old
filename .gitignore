@@ -10,26 +10,7 @@
 # Roslyn cache directories
 *.ide/
 
-# MSTest test Results
-[Tt]est[Rr]esult*/
-[Bb]uild[Ll]og.*
-
-#NUNIT
-*.VisualState.xml
-TestResult.xml
-
-# Build Results of an ATL Project
-[Dd]ebugPS/
-[Rr]eleasePS/
-dlldata.c
-
-*_i.c
-*_p.c
-*_i.h
-*.ilk
-*.meta
 *.obj
-*.pch
 *.pdb
 *.pgc
 *.pgd
@@ -49,11 +30,7 @@ dlldata.c
 *.svclog
 *.scc
 
-# Chutzpah Test files
-_Chutzpah*
-
 # Visual C++ cache files
-ipch/
 *.aps
 *.ncb
 *.opensdf
@@ -64,9 +41,6 @@ ipch/
 *.psess
 *.vsp
 *.vspx
-
-# TFS 2012 Local Workspace
-$tf/
 
 # Guidance Automation Toolkit
 *.gpState
@@ -108,9 +82,6 @@ DocProject/Help/*.hhk
 DocProject/Help/*.hhp
 DocProject/Help/Html2
 DocProject/Help/html
-
-# Click-Once directory
-publish/
 
 # Publish Web Output
 *.[Pp]ublish.xml
@@ -204,9 +175,6 @@ Temporary Items
 Thumbs.db
 ehthumbs.db
 
-# Folder config file
-Desktop.ini
-
 # Recycle Bin used on file shares
 $RECYCLE.BIN/
 
@@ -221,15 +189,10 @@ $RECYCLE.BIN/
 *.db
 *.opendb
 *.cmake
-/LibOut
-/ArmyAntLib/bin
-/ArmyAntLib/lib
-/Win32LibTest/bin
-/Win32LibTest/lib
-/LinuxLibTest/bin
-/LinuxLibTest/lib
-/LinuxLibTest/LinuxLibTest
-/ArmyAntLib/Makefile
-/ArmyAntLib/CMakeFiles
-/LinuxLibTest/Makefile
-/LinuxLibTest/CMakeFiles
+bin
+lib
+proj/Debug
+proj/Debug_Static
+proj/Release
+proj/Release_Static
+proj/out

@@ -1,8 +1,0 @@
-<component name="ArtifactManager">
-  <artifact type="jar" build-on-make="true" name="ArmyAnt">
-    <output-path>$PROJECT_DIR$/LibOut/bin/Java/</output-path>
-    <root id="archive" name="ArmyAnt.jar">
-      <element id="dir-copy" path="$PROJECT_DIR$/ArmyAntLib/languages/Java/src" />
-    </root>
-  </artifact>
-</component>
