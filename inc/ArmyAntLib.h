@@ -36,16 +36,16 @@ public:
 	uint32 ver;
 	struct VerChar
 	{
-		uint16 bigVer;
-		uint16 smallVer;
-		uint16 patchVer;
-		uint16 testVer;
+		uint8 bigVer;
+		uint8 smallVer;
+		uint8 patchVer;
+		uint8 testVer;
 
-		VerChar(uint16 bigVer, uint16 smallVer, uint16 patchVer, uint16 testVer);
+		VerChar(uint8 bigVer, uint8 smallVer, uint8 patchVer, uint8 testVer);
 	}sver;
 
 	Version(uint32 ver);
-	Version(uint16 bigVer, uint16 smallVer, uint16 patchVer, uint16 testVer);
+	Version(uint8 bigVer, uint8 smallVer, uint8 patchVer, uint8 testVer);
 
 public:
 	// The version of our library and other referenced libraries

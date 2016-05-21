@@ -29,7 +29,7 @@ namespace ArmyAnt {
 
 namespace Infos {
 
-Version::VerChar::VerChar(uint16 bigVer, uint16 smallVer, uint16 patchVer, uint16 testVer)
+Version::VerChar::VerChar(uint8 bigVer, uint8 smallVer, uint8 patchVer, uint8 testVer)
 	:bigVer(bigVer), smallVer(smallVer), patchVer(patchVer), testVer(testVer)
 {
 }
@@ -39,7 +39,7 @@ Version::Version(uint32 ver)
 {
 }
 
-Version::Version(uint16 bigVer, uint16 smallVer, uint16 patchVer, uint16 testVer)
+Version::Version(uint8 bigVer, uint8 smallVer, uint8 patchVer, uint8 testVer)
 	: sver(bigVer, smallVer, patchVer, testVer)
 {
 }
