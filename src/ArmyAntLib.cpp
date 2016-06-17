@@ -24,6 +24,7 @@
 
 #include "base.hpp"
 #include "../inc/ArmyAntLib.h"
+#include <boost/random.hpp>
 
 namespace ArmyAnt {
 
@@ -66,5 +67,52 @@ Enviroment::BITS Enviroment::GetOSBits()
 }
 
 } // namespace Infos
+
+namespace Utils {
+	void Log::Log_Debug(const char*
+#ifdef DEBUG
+		msg)
+	{
+		std::cout << msg << std::endl;
+#else
+		){
+#endif
+	}
+
+	void Log::Log_Error(const char* msg)
+	{
+#ifdef OS_WINDOWS
+		std::cerr << msg << std::endl;
+#elif defined OS_UNIX
+		printf("\033[0;40;32m%s\033[0m \n", msg);
+#else
+		msg;
+#endif
+	}
+
+	double Math::GetRandom(double min, double max)
+	{
+		boost::uniform_real<double> ret(min, max);
+		boost::random::mt19937_64 eng(time_t(0));
+		return ret(eng);
+	}
+
+	bool Math::GetRoll(double percent)
+	{
+		return GetRandom(0,100)<percent;
+	}
+
+	uint32 Math::GetMultiRoll(double percent)
+	{
+		uint32 ret = 0;
+		if (percent >= 100)
+			return AA_UINT32_MAX;
+		while (GetRoll(percent)) {
+			ret++;
+		}
+		return ret;
+	}
+
+}
 
 } // namespace ArmyAnt

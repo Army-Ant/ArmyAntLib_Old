@@ -99,6 +99,7 @@ public:
 	{
 		Unknown,
 		Assembly_Intel,
+		Assembly_AMD,
 		Assembly_ARM,
 		COBOL,
 		Fortrain,
@@ -141,7 +142,16 @@ public:
 
 namespace Utils {
 
+	namespace Log {
+		void Log_Debug(const char* msg);
+		void Log_Error(const char* msg);
+	}
 
+	namespace Math {
+		double GetRandom(double min, double max);
+		bool GetRoll(double percent);
+		uint32 GetMultiRoll(double percent);
+	}
 }
 
 } // namespace ArmyAnt
