@@ -2,31 +2,31 @@
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
     <ClInclude Include="..\inc\AA_end.h">
-      <Filter>base</Filter>
+      <Filter>_base</Filter>
     </ClInclude>
     <ClInclude Include="..\inc\AA_start.h">
-      <Filter>base</Filter>
+      <Filter>_base</Filter>
     </ClInclude>
     <ClInclude Include="..\inc\AADefine.h">
-      <Filter>base</Filter>
+      <Filter>_base</Filter>
     </ClInclude>
     <ClInclude Include="..\inc\AAFragment.h">
-      <Filter>base</Filter>
+      <Filter>_base</Filter>
     </ClInclude>
     <ClInclude Include="..\inc\ArmyAnt.h">
-      <Filter>base</Filter>
+      <Filter>_base</Filter>
     </ClInclude>
     <ClInclude Include="..\inc\ArmyAntLib.h">
-      <Filter>base</Filter>
+      <Filter>_base</Filter>
     </ClInclude>
     <ClInclude Include="..\src\base.hpp">
-      <Filter>base</Filter>
+      <Filter>_base</Filter>
     </ClInclude>
     <ClInclude Include="..\inc\C_AADefine.h">
-      <Filter>base</Filter>
+      <Filter>_base</Filter>
     </ClInclude>
     <ClInclude Include="..\inc\C_ArmyAnt.h">
-      <Filter>base</Filter>
+      <Filter>_base</Filter>
     </ClInclude>
     <ClInclude Include="..\inc\AAAes.h">
       <Filter>data</Filter>
@@ -97,7 +97,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\src\ArmyAntLib.cpp">
-      <Filter>base</Filter>
+      <Filter>_base</Filter>
     </ClCompile>
     <ClCompile Include="..\src\AAAes.cpp">
       <Filter>data</Filter>
@@ -128,9 +128,6 @@
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <Filter Include="base">
-      <UniqueIdentifier>{8dc39b06-4978-4e74-b93b-8be70a06bba2}</UniqueIdentifier>
-    </Filter>
     <Filter Include="data">
       <UniqueIdentifier>{4cb56424-cd27-404a-8ab4-c7e380e6c7d6}</UniqueIdentifier>
     </Filter>
@@ -143,33 +140,36 @@
     <Filter Include="tool">
       <UniqueIdentifier>{ff2ae640-545f-4cb4-94c2-664a2b52283d}</UniqueIdentifier>
     </Filter>
-    <Filter Include="not_cpp">
+    <Filter Include="_base">
+      <UniqueIdentifier>{8dc39b06-4978-4e74-b93b-8be70a06bba2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="_not_cpp">
       <UniqueIdentifier>{2a4ad03f-f9df-4be7-a1f8-c52076c4e208}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
     <None Include="make.sh">
-      <Filter>not_cpp</Filter>
+      <Filter>_not_cpp</Filter>
     </None>
     <None Include="make_all.sh">
-      <Filter>not_cpp</Filter>
+      <Filter>_not_cpp</Filter>
     </None>
     <None Include="..\src\build_end.bat">
-      <Filter>not_cpp</Filter>
+      <Filter>_not_cpp</Filter>
     </None>
     <None Include="..\src\build_end.sh">
-      <Filter>not_cpp</Filter>
+      <Filter>_not_cpp</Filter>
     </None>
     <None Include="..\src\build_start.bat">
-      <Filter>not_cpp</Filter>
+      <Filter>_not_cpp</Filter>
     </None>
     <None Include="..\src\build_start.sh">
-      <Filter>not_cpp</Filter>
+      <Filter>_not_cpp</Filter>
     </None>
   </ItemGroup>
   <ItemGroup>
     <Text Include="CMakeLists.txt">
-      <Filter>not_cpp</Filter>
+      <Filter>_not_cpp</Filter>
     </Text>
   </ItemGroup>
 </Project>

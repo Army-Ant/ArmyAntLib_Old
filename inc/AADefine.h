@@ -6,8 +6,8 @@
  * 本软件使用BSD协议保护, 协议版本:2.0
  * you may not use this file except in compliance with the License. 
  * 使用本开源代码文件的内容, 视为同意协议
- * You can read the license content in the file "ARMYANT.COPYRIGHT.BSD_LICENSE.MD" at the root of this project
- * 您可以在本项目的根目录找到名为"ARMYANT.COPYRIGHT.BSD_LICENSE.MD"的文件, 来阅读协议内容
+ * You can read the license content in the file "LICENSE" at the root of this project
+ * 您可以在本项目的根目录找到名为"LICENSE"的文件, 来阅读协议内容
  * You may also obtain a copy of the License at 
  * 您也可以在此处获得协议的副本:
  * 
@@ -30,7 +30,7 @@
 #define AA_FORBID_COPY_CTOR(typen) public: typen(typen&)=delete
 // 添加在类中, 禁止默认的拷贝赋值运算符(需要重载拷贝赋值运算符时请勿使用)
 #define AA_FORBID_ASSGN_OPR(typen) public: typen& operator=(typen&)=delete
-// 添加在类中, 将类变为抽象类,禁止创建类的任何实例
+// 添加在类中, 将类变为静态抽象类,禁止创建类的任何实例，也禁止继承
 #define AA_FORBID_CREATE_OB(typen) public: virtual void Forbid_Create___##typen##_____Real____Virtual__Function()=0
 
 #endif // A_A_DEFINE_H_2015_11_11

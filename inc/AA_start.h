@@ -6,8 +6,8 @@
  * 本软件使用BSD协议保护, 协议版本:2.0
  * you may not use this file except in compliance with the License. 
  * 使用本开源代码文件的内容, 视为同意协议
- * You can read the license content in the file "ARMYANT.COPYRIGHT.BSD_LICENSE.MD" at the root of this project
- * 您可以在本项目的根目录找到名为"ARMYANT.COPYRIGHT.BSD_LICENSE.MD"的文件, 来阅读协议内容
+ * You can read the license content in the file "LICENSE" at the root of this project
+ * 您可以在本项目的根目录找到名为"LICENSE"的文件, 来阅读协议内容
  * You may also obtain a copy of the License at 
  * 您也可以在此处获得协议的副本:
  * 
@@ -26,22 +26,23 @@
 #ifdef _WIN32
 
 #ifndef AA_USE_STATIC
+
 #if defined ARMYANTLIB_EXPORTS
 #define ARMYANTLIB_API __declspec(dllexport)
 #else
 #define ARMYANTLIB_API __declspec(dllimport)
 #endif
 
-#else // _UNIX
-
-#define ARMYANTLIB_API
-
-#endif // _WIN32
-
 #else // AA_USE_STATIC
 
 #define ARMYANTLIB_API
 
 #endif // AA_USE_STATIC
+
+#else // _WIN32 -> _UNIX
+
+#define ARMYANTLIB_API
+
+#endif // _WIN32
 
 #endif // AA_START_H_2015_11_11
