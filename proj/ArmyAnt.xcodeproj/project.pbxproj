@@ -1,0 +1,998 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		3E12BD761DE5447C00B6195A /* C_AANeuron.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3E12BD181DE5356300B6195A /* C_AANeuron.cpp */; };
+		3E12BD771DE5449400B6195A /* AAAes.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3E12BD0E1DE5355600B6195A /* AAAes.cpp */; };
+		3E12BD781DE5449E00B6195A /* AABinary.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3E12BD0F1DE5355600B6195A /* AABinary.cpp */; };
+		3E12BD791DE544A200B6195A /* ArmyAntLib.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3E12BD161DE5355600B6195A /* ArmyAntLib.cpp */; };
+		3E12BD7A1DE544AB00B6195A /* AAIStream_File.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3E12BD101DE5355600B6195A /* AAIStream_File.cpp */; };
+		3E12BD7B1DE544AB00B6195A /* AAIStream_Memory.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3E12BD111DE5355600B6195A /* AAIStream_Memory.cpp */; };
+		3E12BD7C1DE544AB00B6195A /* AAIStream.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3E12BD131DE5355600B6195A /* AAIStream.cpp */; };
+		3E12BD7D1DE544AB00B6195A /* AASocket.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3E12BD151DE5355600B6195A /* AASocket.cpp */; };
+		3E12BD7E1DE544AB00B6195A /* C_AAStream.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3E12BD191DE5356300B6195A /* C_AAStream.cpp */; };
+		3E12BD811DE5454500B6195A /* AA_end.h in Headers */ = {isa = PBXBuildFile; fileRef = 3E12BD1A1DE5357400B6195A /* AA_end.h */; };
+		3E12BD821DE5454500B6195A /* AA_start.h in Headers */ = {isa = PBXBuildFile; fileRef = 3E12BD1B1DE5357400B6195A /* AA_start.h */; };
+		3E12BD831DE5454500B6195A /* AADefine.h in Headers */ = {isa = PBXBuildFile; fileRef = 3E12BD201DE5357400B6195A /* AADefine.h */; };
+		3E12BD841DE5454500B6195A /* AAFragment.h in Headers */ = {isa = PBXBuildFile; fileRef = 3E12BD221DE5357400B6195A /* AAFragment.h */; };
+		3E12BD851DE5454500B6195A /* ArmyAnt.h in Headers */ = {isa = PBXBuildFile; fileRef = 3E12BD311DE5357400B6195A /* ArmyAnt.h */; };
+		3E12BD861DE5454500B6195A /* ArmyAntLib.h in Headers */ = {isa = PBXBuildFile; fileRef = 3E12BD321DE5357400B6195A /* ArmyAntLib.h */; };
+		3E12BD871DE5454500B6195A /* base.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 3E12BD171DE5355600B6195A /* base.hpp */; };
+		3E12BD881DE5454500B6195A /* C_AADefine.h in Headers */ = {isa = PBXBuildFile; fileRef = 3E12BD331DE5357400B6195A /* C_AADefine.h */; };
+		3E12BD891DE5454500B6195A /* C_ArmyAnt.h in Headers */ = {isa = PBXBuildFile; fileRef = 3E12BD361DE5357400B6195A /* C_ArmyAnt.h */; };
+		3E12BD8A1DE5454500B6195A /* AADigraph.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 3E12BD211DE5357400B6195A /* AADigraph.hpp */; };
+		3E12BD8B1DE5454500B6195A /* AAMessageQueue.h in Headers */ = {isa = PBXBuildFile; fileRef = 3E12BD291DE5357400B6195A /* AAMessageQueue.h */; };
+		3E12BD8C1DE5454500B6195A /* AANeuron.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 3E12BD2A1DE5357400B6195A /* AANeuron.hpp */; };
+		3E12BD8D1DE5454500B6195A /* AANeuronNetwork.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 3E12BD2B1DE5357400B6195A /* AANeuronNetwork.hpp */; };
+		3E12BD8E1DE5454500B6195A /* AAStateMachine.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 3E12BD2E1DE5357400B6195A /* AAStateMachine.hpp */; };
+		3E12BD8F1DE5454500B6195A /* AATree.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 3E12BD2F1DE5357400B6195A /* AATree.hpp */; };
+		3E12BD901DE5454500B6195A /* AATripleMap.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 3E12BD301DE5357400B6195A /* AATripleMap.hpp */; };
+		3E12BD911DE5454500B6195A /* C_AANeuron.h in Headers */ = {isa = PBXBuildFile; fileRef = 3E12BD341DE5357400B6195A /* C_AANeuron.h */; };
+		3E12BD921DE5454500B6195A /* AAAes.h in Headers */ = {isa = PBXBuildFile; fileRef = 3E12BD1C1DE5357400B6195A /* AAAes.h */; };
+		3E12BD931DE5454500B6195A /* AABinary.h in Headers */ = {isa = PBXBuildFile; fileRef = 3E12BD1D1DE5357400B6195A /* AABinary.h */; };
+		3E12BD941DE5454500B6195A /* AAConfiguration.h in Headers */ = {isa = PBXBuildFile; fileRef = 3E12BD1F1DE5357400B6195A /* AAConfiguration.h */; };
+		3E12BD951DE5454500B6195A /* AAIStream_Com.h in Headers */ = {isa = PBXBuildFile; fileRef = 3E12BD231DE5357400B6195A /* AAIStream_Com.h */; };
+		3E12BD961DE5454500B6195A /* AAIStream_File.h in Headers */ = {isa = PBXBuildFile; fileRef = 3E12BD241DE5357400B6195A /* AAIStream_File.h */; };
+		3E12BD971DE5454500B6195A /* AAIStream_Memory.h in Headers */ = {isa = PBXBuildFile; fileRef = 3E12BD251DE5357400B6195A /* AAIStream_Memory.h */; };
+		3E12BD981DE5454500B6195A /* AAIStream_Pipe.h in Headers */ = {isa = PBXBuildFile; fileRef = 3E12BD261DE5357400B6195A /* AAIStream_Pipe.h */; };
+		3E12BD991DE5454500B6195A /* AAIStream_Private.hxx in Headers */ = {isa = PBXBuildFile; fileRef = 3E12BD121DE5355600B6195A /* AAIStream_Private.hxx */; };
+		3E12BD9A1DE5454500B6195A /* AAIStream.h in Headers */ = {isa = PBXBuildFile; fileRef = 3E12BD271DE5357400B6195A /* AAIStream.h */; };
+		3E12BD9B1DE5454500B6195A /* AASocket.h in Headers */ = {isa = PBXBuildFile; fileRef = 3E12BD2D1DE5357400B6195A /* AASocket.h */; };
+		3E12BD9C1DE5454500B6195A /* C_AAStream.h in Headers */ = {isa = PBXBuildFile; fileRef = 3E12BD351DE5357400B6195A /* C_AAStream.h */; };
+		3E12BD9D1DE5454500B6195A /* AAClassPrivateHandle.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 3E12BD1E1DE5357400B6195A /* AAClassPrivateHandle.hpp */; };
+		3E12BD9F1DE547E300B6195A /* ArmyAntLib.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3E12BD161DE5355600B6195A /* ArmyAntLib.cpp */; };
+		3E12BDA01DE547E300B6195A /* C_AANeuron.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3E12BD181DE5356300B6195A /* C_AANeuron.cpp */; };
+		3E12BDA11DE547E300B6195A /* AAAes.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3E12BD0E1DE5355600B6195A /* AAAes.cpp */; };
+		3E12BDA21DE547E300B6195A /* AABinary.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3E12BD0F1DE5355600B6195A /* AABinary.cpp */; };
+		3E12BDA31DE547E300B6195A /* AAIStream_File.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3E12BD101DE5355600B6195A /* AAIStream_File.cpp */; };
+		3E12BDA41DE547E300B6195A /* AAIStream_Memory.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3E12BD111DE5355600B6195A /* AAIStream_Memory.cpp */; };
+		3E12BDA51DE547E300B6195A /* AAIStream.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3E12BD131DE5355600B6195A /* AAIStream.cpp */; };
+		3E12BDA61DE547E300B6195A /* AASocket.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3E12BD151DE5355600B6195A /* AASocket.cpp */; };
+		3E12BDA71DE547E300B6195A /* C_AAStream.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3E12BD191DE5356300B6195A /* C_AAStream.cpp */; };
+		3E12BDA91DE5483300B6195A /* ArmyAntLib.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3E12BD161DE5355600B6195A /* ArmyAntLib.cpp */; };
+		3E12BDAA1DE5483300B6195A /* C_AANeuron.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3E12BD181DE5356300B6195A /* C_AANeuron.cpp */; };
+		3E12BDAB1DE5483300B6195A /* AAAes.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3E12BD0E1DE5355600B6195A /* AAAes.cpp */; };
+		3E12BDAC1DE5483300B6195A /* AABinary.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3E12BD0F1DE5355600B6195A /* AABinary.cpp */; };
+		3E12BDAD1DE5483300B6195A /* AAIStream_File.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3E12BD101DE5355600B6195A /* AAIStream_File.cpp */; };
+		3E12BDAE1DE5483300B6195A /* AAIStream_Memory.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3E12BD111DE5355600B6195A /* AAIStream_Memory.cpp */; };
+		3E12BDAF1DE5483300B6195A /* AAIStream.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3E12BD131DE5355600B6195A /* AAIStream.cpp */; };
+		3E12BDB01DE5483300B6195A /* AASocket.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3E12BD151DE5355600B6195A /* AASocket.cpp */; };
+		3E12BDB11DE5483300B6195A /* C_AAStream.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3E12BD191DE5356300B6195A /* C_AAStream.cpp */; };
+		3E12BDB31DE5484200B6195A /* AA_end.h in Headers */ = {isa = PBXBuildFile; fileRef = 3E12BD1A1DE5357400B6195A /* AA_end.h */; };
+		3E12BDB41DE5484200B6195A /* AA_start.h in Headers */ = {isa = PBXBuildFile; fileRef = 3E12BD1B1DE5357400B6195A /* AA_start.h */; };
+		3E12BDB51DE5484200B6195A /* AADefine.h in Headers */ = {isa = PBXBuildFile; fileRef = 3E12BD201DE5357400B6195A /* AADefine.h */; };
+		3E12BDB61DE5484200B6195A /* AAFragment.h in Headers */ = {isa = PBXBuildFile; fileRef = 3E12BD221DE5357400B6195A /* AAFragment.h */; };
+		3E12BDB71DE5484200B6195A /* ArmyAnt.h in Headers */ = {isa = PBXBuildFile; fileRef = 3E12BD311DE5357400B6195A /* ArmyAnt.h */; };
+		3E12BDB81DE5484200B6195A /* ArmyAntLib.h in Headers */ = {isa = PBXBuildFile; fileRef = 3E12BD321DE5357400B6195A /* ArmyAntLib.h */; };
+		3E12BDB91DE5484200B6195A /* base.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 3E12BD171DE5355600B6195A /* base.hpp */; };
+		3E12BDBA1DE5484200B6195A /* C_AADefine.h in Headers */ = {isa = PBXBuildFile; fileRef = 3E12BD331DE5357400B6195A /* C_AADefine.h */; };
+		3E12BDBB1DE5484200B6195A /* C_ArmyAnt.h in Headers */ = {isa = PBXBuildFile; fileRef = 3E12BD361DE5357400B6195A /* C_ArmyAnt.h */; };
+		3E12BDBC1DE5484200B6195A /* AADigraph.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 3E12BD211DE5357400B6195A /* AADigraph.hpp */; };
+		3E12BDBD1DE5484200B6195A /* AAMessageQueue.h in Headers */ = {isa = PBXBuildFile; fileRef = 3E12BD291DE5357400B6195A /* AAMessageQueue.h */; };
+		3E12BDBE1DE5484200B6195A /* AANeuron.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 3E12BD2A1DE5357400B6195A /* AANeuron.hpp */; };
+		3E12BDBF1DE5484200B6195A /* AANeuronNetwork.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 3E12BD2B1DE5357400B6195A /* AANeuronNetwork.hpp */; };
+		3E12BDC01DE5484200B6195A /* AAStateMachine.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 3E12BD2E1DE5357400B6195A /* AAStateMachine.hpp */; };
+		3E12BDC11DE5484200B6195A /* AATree.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 3E12BD2F1DE5357400B6195A /* AATree.hpp */; };
+		3E12BDC21DE5484200B6195A /* AATripleMap.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 3E12BD301DE5357400B6195A /* AATripleMap.hpp */; };
+		3E12BDC31DE5484200B6195A /* C_AANeuron.h in Headers */ = {isa = PBXBuildFile; fileRef = 3E12BD341DE5357400B6195A /* C_AANeuron.h */; };
+		3E12BDC41DE5484200B6195A /* AAAes.h in Headers */ = {isa = PBXBuildFile; fileRef = 3E12BD1C1DE5357400B6195A /* AAAes.h */; };
+		3E12BDC51DE5484200B6195A /* AABinary.h in Headers */ = {isa = PBXBuildFile; fileRef = 3E12BD1D1DE5357400B6195A /* AABinary.h */; };
+		3E12BDC61DE5484200B6195A /* AAConfiguration.h in Headers */ = {isa = PBXBuildFile; fileRef = 3E12BD1F1DE5357400B6195A /* AAConfiguration.h */; };
+		3E12BDC71DE5484200B6195A /* AAIStream_Com.h in Headers */ = {isa = PBXBuildFile; fileRef = 3E12BD231DE5357400B6195A /* AAIStream_Com.h */; };
+		3E12BDC81DE5484200B6195A /* AAIStream_File.h in Headers */ = {isa = PBXBuildFile; fileRef = 3E12BD241DE5357400B6195A /* AAIStream_File.h */; };
+		3E12BDC91DE5484200B6195A /* AAIStream_Memory.h in Headers */ = {isa = PBXBuildFile; fileRef = 3E12BD251DE5357400B6195A /* AAIStream_Memory.h */; };
+		3E12BDCA1DE5484200B6195A /* AAIStream_Pipe.h in Headers */ = {isa = PBXBuildFile; fileRef = 3E12BD261DE5357400B6195A /* AAIStream_Pipe.h */; };
+		3E12BDCB1DE5484200B6195A /* AAIStream_Private.hxx in Headers */ = {isa = PBXBuildFile; fileRef = 3E12BD121DE5355600B6195A /* AAIStream_Private.hxx */; };
+		3E12BDCC1DE5484200B6195A /* AAIStream.h in Headers */ = {isa = PBXBuildFile; fileRef = 3E12BD271DE5357400B6195A /* AAIStream.h */; };
+		3E12BDCD1DE5484200B6195A /* AASocket.h in Headers */ = {isa = PBXBuildFile; fileRef = 3E12BD2D1DE5357400B6195A /* AASocket.h */; };
+		3E12BDCE1DE5484200B6195A /* C_AAStream.h in Headers */ = {isa = PBXBuildFile; fileRef = 3E12BD351DE5357400B6195A /* C_AAStream.h */; };
+		3E12BDCF1DE5484200B6195A /* AAClassPrivateHandle.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 3E12BD1E1DE5357400B6195A /* AAClassPrivateHandle.hpp */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		3E12BD5C1DE53C0C00B6195A /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "include/$(PRODUCT_NAME)";
+			dstSubfolderSpec = 16;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
+/* Begin PBXFileReference section */
+		3E12BD0E1DE5355600B6195A /* AAAes.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = AAAes.cpp; path = ../src/AAAes.cpp; sourceTree = "<group>"; };
+		3E12BD0F1DE5355600B6195A /* AABinary.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = AABinary.cpp; path = ../src/AABinary.cpp; sourceTree = "<group>"; };
+		3E12BD101DE5355600B6195A /* AAIStream_File.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = AAIStream_File.cpp; path = ../src/AAIStream_File.cpp; sourceTree = "<group>"; };
+		3E12BD111DE5355600B6195A /* AAIStream_Memory.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = AAIStream_Memory.cpp; path = ../src/AAIStream_Memory.cpp; sourceTree = "<group>"; };
+		3E12BD121DE5355600B6195A /* AAIStream_Private.hxx */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; name = AAIStream_Private.hxx; path = ../src/AAIStream_Private.hxx; sourceTree = "<group>"; };
+		3E12BD131DE5355600B6195A /* AAIStream.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = AAIStream.cpp; path = ../src/AAIStream.cpp; sourceTree = "<group>"; };
+		3E12BD141DE5355600B6195A /* AAJNITools.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = AAJNITools.cpp; path = ../src/AAJNITools.cpp; sourceTree = "<group>"; };
+		3E12BD151DE5355600B6195A /* AASocket.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = AASocket.cpp; path = ../src/AASocket.cpp; sourceTree = "<group>"; };
+		3E12BD161DE5355600B6195A /* ArmyAntLib.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = ArmyAntLib.cpp; path = ../src/ArmyAntLib.cpp; sourceTree = "<group>"; };
+		3E12BD171DE5355600B6195A /* base.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; name = base.hpp; path = ../src/base.hpp; sourceTree = "<group>"; };
+		3E12BD181DE5356300B6195A /* C_AANeuron.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = C_AANeuron.cpp; path = ../src/C_AANeuron.cpp; sourceTree = "<group>"; };
+		3E12BD191DE5356300B6195A /* C_AAStream.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = C_AAStream.cpp; path = ../src/C_AAStream.cpp; sourceTree = "<group>"; };
+		3E12BD1A1DE5357400B6195A /* AA_end.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = AA_end.h; path = ../inc/AA_end.h; sourceTree = "<group>"; };
+		3E12BD1B1DE5357400B6195A /* AA_start.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = AA_start.h; path = ../inc/AA_start.h; sourceTree = "<group>"; };
+		3E12BD1C1DE5357400B6195A /* AAAes.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = AAAes.h; path = ../inc/AAAes.h; sourceTree = "<group>"; };
+		3E12BD1D1DE5357400B6195A /* AABinary.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = AABinary.h; path = ../inc/AABinary.h; sourceTree = "<group>"; };
+		3E12BD1E1DE5357400B6195A /* AAClassPrivateHandle.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; name = AAClassPrivateHandle.hpp; path = ../inc/AAClassPrivateHandle.hpp; sourceTree = "<group>"; };
+		3E12BD1F1DE5357400B6195A /* AAConfiguration.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = AAConfiguration.h; path = ../inc/AAConfiguration.h; sourceTree = "<group>"; };
+		3E12BD201DE5357400B6195A /* AADefine.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = AADefine.h; path = ../inc/AADefine.h; sourceTree = "<group>"; };
+		3E12BD211DE5357400B6195A /* AADigraph.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; name = AADigraph.hpp; path = ../inc/AADigraph.hpp; sourceTree = "<group>"; };
+		3E12BD221DE5357400B6195A /* AAFragment.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = AAFragment.h; path = ../inc/AAFragment.h; sourceTree = "<group>"; };
+		3E12BD231DE5357400B6195A /* AAIStream_Com.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = AAIStream_Com.h; path = ../inc/AAIStream_Com.h; sourceTree = "<group>"; };
+		3E12BD241DE5357400B6195A /* AAIStream_File.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = AAIStream_File.h; path = ../inc/AAIStream_File.h; sourceTree = "<group>"; };
+		3E12BD251DE5357400B6195A /* AAIStream_Memory.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = AAIStream_Memory.h; path = ../inc/AAIStream_Memory.h; sourceTree = "<group>"; };
+		3E12BD261DE5357400B6195A /* AAIStream_Pipe.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = AAIStream_Pipe.h; path = ../inc/AAIStream_Pipe.h; sourceTree = "<group>"; };
+		3E12BD271DE5357400B6195A /* AAIStream.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = AAIStream.h; path = ../inc/AAIStream.h; sourceTree = "<group>"; };
+		3E12BD281DE5357400B6195A /* AAJNITools.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = AAJNITools.h; path = ../inc/AAJNITools.h; sourceTree = "<group>"; };
+		3E12BD291DE5357400B6195A /* AAMessageQueue.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = AAMessageQueue.h; path = ../inc/AAMessageQueue.h; sourceTree = "<group>"; };
+		3E12BD2A1DE5357400B6195A /* AANeuron.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; name = AANeuron.hpp; path = ../inc/AANeuron.hpp; sourceTree = "<group>"; };
+		3E12BD2B1DE5357400B6195A /* AANeuronNetwork.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; name = AANeuronNetwork.hpp; path = ../inc/AANeuronNetwork.hpp; sourceTree = "<group>"; };
+		3E12BD2C1DE5357400B6195A /* AASocket_ProtocolTypes.txt */ = {isa = PBXFileReference; lastKnownFileType = text; name = AASocket_ProtocolTypes.txt; path = ../inc/AASocket_ProtocolTypes.txt; sourceTree = "<group>"; };
+		3E12BD2D1DE5357400B6195A /* AASocket.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = AASocket.h; path = ../inc/AASocket.h; sourceTree = "<group>"; };
+		3E12BD2E1DE5357400B6195A /* AAStateMachine.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; name = AAStateMachine.hpp; path = ../inc/AAStateMachine.hpp; sourceTree = "<group>"; };
+		3E12BD2F1DE5357400B6195A /* AATree.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; name = AATree.hpp; path = ../inc/AATree.hpp; sourceTree = "<group>"; };
+		3E12BD301DE5357400B6195A /* AATripleMap.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; name = AATripleMap.hpp; path = ../inc/AATripleMap.hpp; sourceTree = "<group>"; };
+		3E12BD311DE5357400B6195A /* ArmyAnt.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = ArmyAnt.h; path = ../inc/ArmyAnt.h; sourceTree = "<group>"; };
+		3E12BD321DE5357400B6195A /* ArmyAntLib.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = ArmyAntLib.h; path = ../inc/ArmyAntLib.h; sourceTree = "<group>"; };
+		3E12BD331DE5357400B6195A /* C_AADefine.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = C_AADefine.h; path = ../inc/C_AADefine.h; sourceTree = "<group>"; };
+		3E12BD341DE5357400B6195A /* C_AANeuron.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = C_AANeuron.h; path = ../inc/C_AANeuron.h; sourceTree = "<group>"; };
+		3E12BD351DE5357400B6195A /* C_AAStream.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = C_AAStream.h; path = ../inc/C_AAStream.h; sourceTree = "<group>"; };
+		3E12BD361DE5357400B6195A /* C_ArmyAnt.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = C_ArmyAnt.h; path = ../inc/C_ArmyAnt.h; sourceTree = "<group>"; };
+		3E12BD3D1DE5390C00B6195A /* DeveloperReadme.txt */ = {isa = PBXFileReference; lastKnownFileType = text; name = DeveloperReadme.txt; path = ../doc/DeveloperReadme.txt; sourceTree = "<group>"; };
+		3E12BD3E1DE5394000B6195A /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; name = README.md; path = ../README.md; sourceTree = "<group>"; };
+		3E12BD3F1DE5394C00B6195A /* LICENSE */ = {isa = PBXFileReference; lastKnownFileType = text; name = LICENSE; path = ../LICENSE; sourceTree = "<group>"; };
+		3E12BD401DE5396400B6195A /* build_end.bat */ = {isa = PBXFileReference; lastKnownFileType = text; name = build_end.bat; path = ../src/build_end.bat; sourceTree = "<group>"; };
+		3E12BD411DE5396400B6195A /* build_end.sh */ = {isa = PBXFileReference; lastKnownFileType = text.script.sh; name = build_end.sh; path = ../src/build_end.sh; sourceTree = "<group>"; };
+		3E12BD421DE5396400B6195A /* build_start.bat */ = {isa = PBXFileReference; lastKnownFileType = text; name = build_start.bat; path = ../src/build_start.bat; sourceTree = "<group>"; };
+		3E12BD431DE5396400B6195A /* build_start.sh */ = {isa = PBXFileReference; lastKnownFileType = text.script.sh; name = build_start.sh; path = ../src/build_start.sh; sourceTree = "<group>"; };
+		3E12BD441DE5397700B6195A /* ArmyAntLib.sln */ = {isa = PBXFileReference; lastKnownFileType = text; path = ArmyAntLib.sln; sourceTree = "<group>"; };
+		3E12BD451DE5397700B6195A /* ArmyAntLib.vcxproj */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = ArmyAntLib.vcxproj; sourceTree = "<group>"; };
+		3E12BD461DE5397700B6195A /* ArmyAntLib.vcxproj.filters */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = ArmyAntLib.vcxproj.filters; sourceTree = "<group>"; };
+		3E12BD471DE5397700B6195A /* CMakeLists.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = CMakeLists.txt; sourceTree = "<group>"; };
+		3E12BD481DE5397700B6195A /* make_all.sh */ = {isa = PBXFileReference; lastKnownFileType = text.script.sh; path = make_all.sh; sourceTree = "<group>"; };
+		3E12BD491DE5397700B6195A /* make.sh */ = {isa = PBXFileReference; lastKnownFileType = text.script.sh; path = make.sh; sourceTree = "<group>"; };
+		3E12BD4E1DE53B9800B6195A /* libArmyAntLib_mac.dylib */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.dylib"; includeInIndex = 0; path = libArmyAntLib_mac.dylib; sourceTree = BUILT_PRODUCTS_DIR; };
+		3E12BD511DE53B9900B6195A /* ArmyAntLib.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = ArmyAntLib.hpp; sourceTree = "<group>"; };
+		3E12BD531DE53B9900B6195A /* ArmyAntLibPriv.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = ArmyAntLibPriv.hpp; sourceTree = "<group>"; };
+		3E12BD551DE53B9900B6195A /* ArmyAntLib.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = ArmyAntLib.cpp; sourceTree = "<group>"; };
+		3E12BD5E1DE53C0C00B6195A /* libArmyAntLib_ios.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libArmyAntLib_ios.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		3E12BD601DE53C0C00B6195A /* ArmyAntLib_ios.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ArmyAntLib_ios.h; sourceTree = "<group>"; };
+		3E12BD611DE53C0C00B6195A /* ArmyAntLib_ios.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ArmyAntLib_ios.m; sourceTree = "<group>"; };
+		3E12BD6B1DE53C5000B6195A /* libArmyAntLib_static.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libArmyAntLib_static.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		3E12BD6D1DE53C5000B6195A /* ArmyAntLib_static.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = ArmyAntLib_static.hpp; sourceTree = "<group>"; };
+		3E12BD6F1DE53C5000B6195A /* ArmyAntLib_staticPriv.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = ArmyAntLib_staticPriv.hpp; sourceTree = "<group>"; };
+		3E12BD711DE53C5000B6195A /* ArmyAntLib_static.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = ArmyAntLib_static.cpp; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		3E12BD4B1DE53B9800B6195A /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		3E12BD5B1DE53C0C00B6195A /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		3E12BD681DE53C5000B6195A /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		3E12BD071DE534D300B6195A = {
+			isa = PBXGroup;
+			children = (
+				3E12BD371DE535C000B6195A /* _base */,
+				3E12BD3C1DE5373800B6195A /* _not_cpp */,
+				3E12BD3A1DE536A900B6195A /* algorithm */,
+				3E12BD381DE5369B00B6195A /* data */,
+				3E12BD391DE536A300B6195A /* io */,
+				3E12BD3B1DE536E700B6195A /* tool */,
+				3E12BD501DE53B9900B6195A /* ArmyAntLib */,
+				3E12BD5F1DE53C0C00B6195A /* ArmyAntLib_ios */,
+				3E12BD6C1DE53C5000B6195A /* ArmyAntLib_static */,
+				3E12BD4F1DE53B9800B6195A /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		3E12BD371DE535C000B6195A /* _base */ = {
+			isa = PBXGroup;
+			children = (
+				3E12BD1A1DE5357400B6195A /* AA_end.h */,
+				3E12BD1B1DE5357400B6195A /* AA_start.h */,
+				3E12BD201DE5357400B6195A /* AADefine.h */,
+				3E12BD221DE5357400B6195A /* AAFragment.h */,
+				3E12BD311DE5357400B6195A /* ArmyAnt.h */,
+				3E12BD161DE5355600B6195A /* ArmyAntLib.cpp */,
+				3E12BD321DE5357400B6195A /* ArmyAntLib.h */,
+				3E12BD171DE5355600B6195A /* base.hpp */,
+				3E12BD331DE5357400B6195A /* C_AADefine.h */,
+				3E12BD361DE5357400B6195A /* C_ArmyAnt.h */,
+			);
+			name = _base;
+			sourceTree = "<group>";
+		};
+		3E12BD381DE5369B00B6195A /* data */ = {
+			isa = PBXGroup;
+			children = (
+				3E12BD0E1DE5355600B6195A /* AAAes.cpp */,
+				3E12BD1C1DE5357400B6195A /* AAAes.h */,
+				3E12BD0F1DE5355600B6195A /* AABinary.cpp */,
+				3E12BD1D1DE5357400B6195A /* AABinary.h */,
+				3E12BD1F1DE5357400B6195A /* AAConfiguration.h */,
+			);
+			name = data;
+			sourceTree = "<group>";
+		};
+		3E12BD391DE536A300B6195A /* io */ = {
+			isa = PBXGroup;
+			children = (
+				3E12BD231DE5357400B6195A /* AAIStream_Com.h */,
+				3E12BD101DE5355600B6195A /* AAIStream_File.cpp */,
+				3E12BD241DE5357400B6195A /* AAIStream_File.h */,
+				3E12BD111DE5355600B6195A /* AAIStream_Memory.cpp */,
+				3E12BD251DE5357400B6195A /* AAIStream_Memory.h */,
+				3E12BD261DE5357400B6195A /* AAIStream_Pipe.h */,
+				3E12BD121DE5355600B6195A /* AAIStream_Private.hxx */,
+				3E12BD131DE5355600B6195A /* AAIStream.cpp */,
+				3E12BD271DE5357400B6195A /* AAIStream.h */,
+				3E12BD2C1DE5357400B6195A /* AASocket_ProtocolTypes.txt */,
+				3E12BD151DE5355600B6195A /* AASocket.cpp */,
+				3E12BD2D1DE5357400B6195A /* AASocket.h */,
+				3E12BD191DE5356300B6195A /* C_AAStream.cpp */,
+				3E12BD351DE5357400B6195A /* C_AAStream.h */,
+			);
+			name = io;
+			sourceTree = "<group>";
+		};
+		3E12BD3A1DE536A900B6195A /* algorithm */ = {
+			isa = PBXGroup;
+			children = (
+				3E12BD211DE5357400B6195A /* AADigraph.hpp */,
+				3E12BD291DE5357400B6195A /* AAMessageQueue.h */,
+				3E12BD2A1DE5357400B6195A /* AANeuron.hpp */,
+				3E12BD2B1DE5357400B6195A /* AANeuronNetwork.hpp */,
+				3E12BD2E1DE5357400B6195A /* AAStateMachine.hpp */,
+				3E12BD2F1DE5357400B6195A /* AATree.hpp */,
+				3E12BD301DE5357400B6195A /* AATripleMap.hpp */,
+				3E12BD181DE5356300B6195A /* C_AANeuron.cpp */,
+				3E12BD341DE5357400B6195A /* C_AANeuron.h */,
+			);
+			name = algorithm;
+			sourceTree = "<group>";
+		};
+		3E12BD3B1DE536E700B6195A /* tool */ = {
+			isa = PBXGroup;
+			children = (
+				3E12BD1E1DE5357400B6195A /* AAClassPrivateHandle.hpp */,
+				3E12BD141DE5355600B6195A /* AAJNITools.cpp */,
+				3E12BD281DE5357400B6195A /* AAJNITools.h */,
+			);
+			name = tool;
+			sourceTree = "<group>";
+		};
+		3E12BD3C1DE5373800B6195A /* _not_cpp */ = {
+			isa = PBXGroup;
+			children = (
+				3E12BD441DE5397700B6195A /* ArmyAntLib.sln */,
+				3E12BD451DE5397700B6195A /* ArmyAntLib.vcxproj */,
+				3E12BD461DE5397700B6195A /* ArmyAntLib.vcxproj.filters */,
+				3E12BD471DE5397700B6195A /* CMakeLists.txt */,
+				3E12BD481DE5397700B6195A /* make_all.sh */,
+				3E12BD491DE5397700B6195A /* make.sh */,
+				3E12BD401DE5396400B6195A /* build_end.bat */,
+				3E12BD411DE5396400B6195A /* build_end.sh */,
+				3E12BD421DE5396400B6195A /* build_start.bat */,
+				3E12BD431DE5396400B6195A /* build_start.sh */,
+				3E12BD3F1DE5394C00B6195A /* LICENSE */,
+				3E12BD3E1DE5394000B6195A /* README.md */,
+				3E12BD3D1DE5390C00B6195A /* DeveloperReadme.txt */,
+			);
+			name = _not_cpp;
+			sourceTree = "<group>";
+		};
+		3E12BD4F1DE53B9800B6195A /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				3E12BD4E1DE53B9800B6195A /* libArmyAntLib_mac.dylib */,
+				3E12BD5E1DE53C0C00B6195A /* libArmyAntLib_ios.a */,
+				3E12BD6B1DE53C5000B6195A /* libArmyAntLib_static.a */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		3E12BD501DE53B9900B6195A /* ArmyAntLib */ = {
+			isa = PBXGroup;
+			children = (
+				3E12BD511DE53B9900B6195A /* ArmyAntLib.hpp */,
+				3E12BD531DE53B9900B6195A /* ArmyAntLibPriv.hpp */,
+				3E12BD551DE53B9900B6195A /* ArmyAntLib.cpp */,
+			);
+			path = ArmyAntLib;
+			sourceTree = "<group>";
+		};
+		3E12BD5F1DE53C0C00B6195A /* ArmyAntLib_ios */ = {
+			isa = PBXGroup;
+			children = (
+				3E12BD601DE53C0C00B6195A /* ArmyAntLib_ios.h */,
+				3E12BD611DE53C0C00B6195A /* ArmyAntLib_ios.m */,
+			);
+			path = ArmyAntLib_ios;
+			sourceTree = "<group>";
+		};
+		3E12BD6C1DE53C5000B6195A /* ArmyAntLib_static */ = {
+			isa = PBXGroup;
+			children = (
+				3E12BD6D1DE53C5000B6195A /* ArmyAntLib_static.hpp */,
+				3E12BD6F1DE53C5000B6195A /* ArmyAntLib_staticPriv.hpp */,
+				3E12BD711DE53C5000B6195A /* ArmyAntLib_static.cpp */,
+			);
+			path = ArmyAntLib_static;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXHeadersBuildPhase section */
+		3E12BD4C1DE53B9800B6195A /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				3E12BD811DE5454500B6195A /* AA_end.h in Headers */,
+				3E12BD821DE5454500B6195A /* AA_start.h in Headers */,
+				3E12BD831DE5454500B6195A /* AADefine.h in Headers */,
+				3E12BD841DE5454500B6195A /* AAFragment.h in Headers */,
+				3E12BD851DE5454500B6195A /* ArmyAnt.h in Headers */,
+				3E12BD861DE5454500B6195A /* ArmyAntLib.h in Headers */,
+				3E12BD871DE5454500B6195A /* base.hpp in Headers */,
+				3E12BD881DE5454500B6195A /* C_AADefine.h in Headers */,
+				3E12BD891DE5454500B6195A /* C_ArmyAnt.h in Headers */,
+				3E12BD8A1DE5454500B6195A /* AADigraph.hpp in Headers */,
+				3E12BD8B1DE5454500B6195A /* AAMessageQueue.h in Headers */,
+				3E12BD8C1DE5454500B6195A /* AANeuron.hpp in Headers */,
+				3E12BD8D1DE5454500B6195A /* AANeuronNetwork.hpp in Headers */,
+				3E12BD8E1DE5454500B6195A /* AAStateMachine.hpp in Headers */,
+				3E12BD8F1DE5454500B6195A /* AATree.hpp in Headers */,
+				3E12BD901DE5454500B6195A /* AATripleMap.hpp in Headers */,
+				3E12BD911DE5454500B6195A /* C_AANeuron.h in Headers */,
+				3E12BD921DE5454500B6195A /* AAAes.h in Headers */,
+				3E12BD931DE5454500B6195A /* AABinary.h in Headers */,
+				3E12BD941DE5454500B6195A /* AAConfiguration.h in Headers */,
+				3E12BD951DE5454500B6195A /* AAIStream_Com.h in Headers */,
+				3E12BD961DE5454500B6195A /* AAIStream_File.h in Headers */,
+				3E12BD971DE5454500B6195A /* AAIStream_Memory.h in Headers */,
+				3E12BD981DE5454500B6195A /* AAIStream_Pipe.h in Headers */,
+				3E12BD991DE5454500B6195A /* AAIStream_Private.hxx in Headers */,
+				3E12BD9A1DE5454500B6195A /* AAIStream.h in Headers */,
+				3E12BD9B1DE5454500B6195A /* AASocket.h in Headers */,
+				3E12BD9C1DE5454500B6195A /* C_AAStream.h in Headers */,
+				3E12BD9D1DE5454500B6195A /* AAClassPrivateHandle.hpp in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		3E12BD691DE53C5000B6195A /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				3E12BDB31DE5484200B6195A /* AA_end.h in Headers */,
+				3E12BDB41DE5484200B6195A /* AA_start.h in Headers */,
+				3E12BDB51DE5484200B6195A /* AADefine.h in Headers */,
+				3E12BDB61DE5484200B6195A /* AAFragment.h in Headers */,
+				3E12BDB71DE5484200B6195A /* ArmyAnt.h in Headers */,
+				3E12BDB81DE5484200B6195A /* ArmyAntLib.h in Headers */,
+				3E12BDB91DE5484200B6195A /* base.hpp in Headers */,
+				3E12BDBA1DE5484200B6195A /* C_AADefine.h in Headers */,
+				3E12BDBB1DE5484200B6195A /* C_ArmyAnt.h in Headers */,
+				3E12BDBC1DE5484200B6195A /* AADigraph.hpp in Headers */,
+				3E12BDBD1DE5484200B6195A /* AAMessageQueue.h in Headers */,
+				3E12BDBE1DE5484200B6195A /* AANeuron.hpp in Headers */,
+				3E12BDBF1DE5484200B6195A /* AANeuronNetwork.hpp in Headers */,
+				3E12BDC01DE5484200B6195A /* AAStateMachine.hpp in Headers */,
+				3E12BDC11DE5484200B6195A /* AATree.hpp in Headers */,
+				3E12BDC21DE5484200B6195A /* AATripleMap.hpp in Headers */,
+				3E12BDC31DE5484200B6195A /* C_AANeuron.h in Headers */,
+				3E12BDC41DE5484200B6195A /* AAAes.h in Headers */,
+				3E12BDC51DE5484200B6195A /* AABinary.h in Headers */,
+				3E12BDC61DE5484200B6195A /* AAConfiguration.h in Headers */,
+				3E12BDC71DE5484200B6195A /* AAIStream_Com.h in Headers */,
+				3E12BDC81DE5484200B6195A /* AAIStream_File.h in Headers */,
+				3E12BDC91DE5484200B6195A /* AAIStream_Memory.h in Headers */,
+				3E12BDCA1DE5484200B6195A /* AAIStream_Pipe.h in Headers */,
+				3E12BDCB1DE5484200B6195A /* AAIStream_Private.hxx in Headers */,
+				3E12BDCC1DE5484200B6195A /* AAIStream.h in Headers */,
+				3E12BDCD1DE5484200B6195A /* AASocket.h in Headers */,
+				3E12BDCE1DE5484200B6195A /* C_AAStream.h in Headers */,
+				3E12BDCF1DE5484200B6195A /* AAClassPrivateHandle.hpp in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXHeadersBuildPhase section */
+
+/* Begin PBXNativeTarget section */
+		3E12BD4D1DE53B9800B6195A /* ArmyAntLib_mac */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 3E12BD571DE53B9900B6195A /* Build configuration list for PBXNativeTarget "ArmyAntLib_mac" */;
+			buildPhases = (
+				3E12BD4A1DE53B9800B6195A /* Sources */,
+				3E12BD4B1DE53B9800B6195A /* Frameworks */,
+				3E12BD4C1DE53B9800B6195A /* Headers */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = ArmyAntLib_mac;
+			productName = ArmyAntLib;
+			productReference = 3E12BD4E1DE53B9800B6195A /* libArmyAntLib_mac.dylib */;
+			productType = "com.apple.product-type.library.dynamic";
+		};
+		3E12BD5D1DE53C0C00B6195A /* ArmyAntLib_ios */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 3E12BD641DE53C0C00B6195A /* Build configuration list for PBXNativeTarget "ArmyAntLib_ios" */;
+			buildPhases = (
+				3E12BD5A1DE53C0C00B6195A /* Sources */,
+				3E12BD5B1DE53C0C00B6195A /* Frameworks */,
+				3E12BD5C1DE53C0C00B6195A /* CopyFiles */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = ArmyAntLib_ios;
+			productName = ArmyAntLib_ios;
+			productReference = 3E12BD5E1DE53C0C00B6195A /* libArmyAntLib_ios.a */;
+			productType = "com.apple.product-type.library.static";
+		};
+		3E12BD6A1DE53C5000B6195A /* ArmyAntLib_static */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 3E12BD731DE53C5000B6195A /* Build configuration list for PBXNativeTarget "ArmyAntLib_static" */;
+			buildPhases = (
+				3E12BD671DE53C5000B6195A /* Sources */,
+				3E12BD681DE53C5000B6195A /* Frameworks */,
+				3E12BD691DE53C5000B6195A /* Headers */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = ArmyAntLib_static;
+			productName = ArmyAntLib_static;
+			productReference = 3E12BD6B1DE53C5000B6195A /* libArmyAntLib_static.a */;
+			productType = "com.apple.product-type.library.static";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		3E12BD081DE534D300B6195A /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0800;
+				TargetAttributes = {
+					3E12BD4D1DE53B9800B6195A = {
+						CreatedOnToolsVersion = 8.0;
+						ProvisioningStyle = Automatic;
+					};
+					3E12BD5D1DE53C0C00B6195A = {
+						CreatedOnToolsVersion = 8.0;
+						ProvisioningStyle = Automatic;
+					};
+					3E12BD6A1DE53C5000B6195A = {
+						CreatedOnToolsVersion = 8.0;
+						ProvisioningStyle = Automatic;
+					};
+				};
+			};
+			buildConfigurationList = 3E12BD0B1DE534D300B6195A /* Build configuration list for PBXProject "ArmyAnt" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = 3E12BD071DE534D300B6195A;
+			productRefGroup = 3E12BD4F1DE53B9800B6195A /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				3E12BD4D1DE53B9800B6195A /* ArmyAntLib_mac */,
+				3E12BD5D1DE53C0C00B6195A /* ArmyAntLib_ios */,
+				3E12BD6A1DE53C5000B6195A /* ArmyAntLib_static */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXSourcesBuildPhase section */
+		3E12BD4A1DE53B9800B6195A /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				3E12BD7A1DE544AB00B6195A /* AAIStream_File.cpp in Sources */,
+				3E12BD7B1DE544AB00B6195A /* AAIStream_Memory.cpp in Sources */,
+				3E12BD7C1DE544AB00B6195A /* AAIStream.cpp in Sources */,
+				3E12BD7D1DE544AB00B6195A /* AASocket.cpp in Sources */,
+				3E12BD7E1DE544AB00B6195A /* C_AAStream.cpp in Sources */,
+				3E12BD791DE544A200B6195A /* ArmyAntLib.cpp in Sources */,
+				3E12BD781DE5449E00B6195A /* AABinary.cpp in Sources */,
+				3E12BD771DE5449400B6195A /* AAAes.cpp in Sources */,
+				3E12BD761DE5447C00B6195A /* C_AANeuron.cpp in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		3E12BD5A1DE53C0C00B6195A /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				3E12BD9F1DE547E300B6195A /* ArmyAntLib.cpp in Sources */,
+				3E12BDA01DE547E300B6195A /* C_AANeuron.cpp in Sources */,
+				3E12BDA11DE547E300B6195A /* AAAes.cpp in Sources */,
+				3E12BDA21DE547E300B6195A /* AABinary.cpp in Sources */,
+				3E12BDA31DE547E300B6195A /* AAIStream_File.cpp in Sources */,
+				3E12BDA41DE547E300B6195A /* AAIStream_Memory.cpp in Sources */,
+				3E12BDA51DE547E300B6195A /* AAIStream.cpp in Sources */,
+				3E12BDA61DE547E300B6195A /* AASocket.cpp in Sources */,
+				3E12BDA71DE547E300B6195A /* C_AAStream.cpp in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		3E12BD671DE53C5000B6195A /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				3E12BDA91DE5483300B6195A /* ArmyAntLib.cpp in Sources */,
+				3E12BDAA1DE5483300B6195A /* C_AANeuron.cpp in Sources */,
+				3E12BDAB1DE5483300B6195A /* AAAes.cpp in Sources */,
+				3E12BDAC1DE5483300B6195A /* AABinary.cpp in Sources */,
+				3E12BDAD1DE5483300B6195A /* AAIStream_File.cpp in Sources */,
+				3E12BDAE1DE5483300B6195A /* AAIStream_Memory.cpp in Sources */,
+				3E12BDAF1DE5483300B6195A /* AAIStream.cpp in Sources */,
+				3E12BDB01DE5483300B6195A /* AASocket.cpp in Sources */,
+				3E12BDB11DE5483300B6195A /* C_AAStream.cpp in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin XCBuildConfiguration section */
+		3E12BD0C1DE534D300B6195A /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				MAC = "";
+				PRODUCT_NAME = ArmyAntLib;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		3E12BD0D1DE534D300B6195A /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				MAC = "";
+				PRODUCT_NAME = ArmyAntLib;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+		3E12BD581DE53B9900B6195A /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVES = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "-";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				EXECUTABLE_PREFIX = lib;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_ENABLE_CPP_EXCEPTIONS = YES;
+				GCC_ENABLE_CPP_RTTI = YES;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					_cplusplus,
+					"$(inherited)",
+					ARMYANTLIB_EXPORTS,
+					_SHARED,
+					_DEBUG,
+					OS_MACOS,
+					OS_BSD,
+					OS_UNIX,
+					_64BIT,
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				HEADER_SEARCH_PATHS = "$(PROJECT_DIR)/../external/boost";
+				LIBRARY_SEARCH_PATHS = "$(PROJECT_DIR)/../external/boost/lib64-darwin";
+				MACOSX_DEPLOYMENT_TARGET = 10.12;
+				"MAC[sdk=macosx*][arch=x86_64]" = "";
+				MTL_ENABLE_DEBUG_INFO = YES;
+				"MTL_ENABLE_DEBUG_INFO[sdk=macosx*][arch=x86_64]" = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = macosx;
+				STRINGS_FILE_OUTPUT_ENCODING = "UTF-16";
+				"VALID_ARCHS[sdk=macosx*]" = "i386 x86_64";
+			};
+			name = Debug;
+		};
+		3E12BD591DE53B9900B6195A /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVES = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "-";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				EXECUTABLE_PREFIX = lib;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_ENABLE_CPP_EXCEPTIONS = YES;
+				GCC_ENABLE_CPP_RTTI = YES;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"NDEBUG=1",
+					_cplusplus,
+					ARMYANTLIB_EXPORTS,
+					_SHARED,
+					OS_MACOS,
+					OS_BSD,
+					OS_UNIX,
+					_64BIT,
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				HEADER_SEARCH_PATHS = "$(PROJECT_DIR)/../external/boost";
+				LIBRARY_SEARCH_PATHS = "$(PROJECT_DIR)/../external/boost/lib64-darwin";
+				MACOSX_DEPLOYMENT_TARGET = 10.12;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				ONLY_ACTIVE_ARCH = YES;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = macosx;
+				STRINGS_FILE_OUTPUT_ENCODING = "UTF-16";
+				"VALID_ARCHS[sdk=macosx*]" = "i386 x86_64";
+			};
+			name = Release;
+		};
+		3E12BD651DE53C0C00B6195A /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVES = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					_cplusplus,
+					"$(inherited)",
+					ARMYANTLIB_EXPORTS,
+					_STATIC,
+					_DEBUG,
+					OS_IOS,
+					OS_BSD,
+					OS_UNIX,
+					_64BIT,
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				HEADER_SEARCH_PATHS = "$(PROJECT_DIR)/../external/boost";
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				LIBRARY_SEARCH_PATHS = "$(PROJECT_DIR)/../external/boost/lib64-darwin";
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				OTHER_LDFLAGS = "-ObjC";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+			};
+			name = Debug;
+		};
+		3E12BD661DE53C0C00B6195A /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVES = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"NDEBUG=1",
+					_cplusplus,
+					ARMYANTLIB_EXPORTS,
+					_STATIC,
+					OS_IOS,
+					OS_BSD,
+					OS_UNIX,
+					_64BIT,
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				HEADER_SEARCH_PATHS = "$(PROJECT_DIR)/../external/boost";
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				LIBRARY_SEARCH_PATHS = "$(PROJECT_DIR)/../external/boost/lib64-darwin";
+				MTL_ENABLE_DEBUG_INFO = NO;
+				OTHER_LDFLAGS = "-ObjC";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		3E12BD741DE53C5000B6195A /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVES = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "-";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				EXECUTABLE_PREFIX = lib;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_ENABLE_CPP_EXCEPTIONS = YES;
+				GCC_ENABLE_CPP_RTTI = YES;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					_cplusplus,
+					"$(inherited)",
+					ARMYANTLIB_EXPORTS,
+					_STATIC,
+					_DEBUG,
+					OS_MACOS,
+					OS_BSD,
+					OS_UNIX,
+					_64BIT,
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				HEADER_SEARCH_PATHS = "$(PROJECT_DIR)/../external/boost";
+				LIBRARY_SEARCH_PATHS = "$(PROJECT_DIR)/../external/boost/lib64-darwin";
+				MACOSX_DEPLOYMENT_TARGET = 10.11;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = macosx;
+			};
+			name = Debug;
+		};
+		3E12BD751DE53C5000B6195A /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVES = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "-";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				EXECUTABLE_PREFIX = lib;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_ENABLE_CPP_EXCEPTIONS = YES;
+				GCC_ENABLE_CPP_RTTI = YES;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"NDEBUG=1",
+					_cplusplus,
+					ARMYANTLIB_EXPORTS,
+					_STATIC,
+					OS_MACOS,
+					OS_BSD,
+					OS_UNIX,
+					_64BIT,
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				HEADER_SEARCH_PATHS = "$(PROJECT_DIR)/../external/boost";
+				LIBRARY_SEARCH_PATHS = "$(PROJECT_DIR)/../external/boost/lib64-darwin";
+				MACOSX_DEPLOYMENT_TARGET = 10.11;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = macosx;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		3E12BD0B1DE534D300B6195A /* Build configuration list for PBXProject "ArmyAnt" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				3E12BD0C1DE534D300B6195A /* Debug */,
+				3E12BD0D1DE534D300B6195A /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		3E12BD571DE53B9900B6195A /* Build configuration list for PBXNativeTarget "ArmyAntLib_mac" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				3E12BD581DE53B9900B6195A /* Debug */,
+				3E12BD591DE53B9900B6195A /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		3E12BD641DE53C0C00B6195A /* Build configuration list for PBXNativeTarget "ArmyAntLib_ios" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				3E12BD651DE53C0C00B6195A /* Debug */,
+				3E12BD661DE53C0C00B6195A /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		3E12BD731DE53C5000B6195A /* Build configuration list for PBXNativeTarget "ArmyAntLib_static" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				3E12BD741DE53C5000B6195A /* Debug */,
+				3E12BD751DE53C5000B6195A /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 3E12BD081DE534D300B6195A /* Project object */;
+}

@@ -510,7 +510,7 @@ bool GraphNode<T_Val, T_Tag, T_Weight>::DeLinkAll(bool isOut)
 	{
 		auto size = parent->GetAllNode();
 		auto ret = new GraphNode[size];
-		parent.GetAllNode(ret);
+		parent->GetAllNode(ret);
 		for(int i = 0; i < size; ++i)
 		{
 			for(auto it = ret[i]->children.begin(); it != ret[i]->children.end(); it++)
@@ -574,7 +574,7 @@ GraphLine<T_Val, T_Tag, T_Weight>* GraphNode<T_Val, T_Tag, T_Weight>::GetLinkedI
 	auto size = parent->GetAllNode();
 	auto ret = new GraphNode[size];
 	GraphLine<T_Val,T_Tag, T_Weight>*res = nullptr;
-	parent.GetAllNode(ret);
+	parent->GetAllNode(ret);
 	for(int i = 0; i < size; ++i)
 	{
 		for(auto it = ret[i]->children.begin(); it != ret[i]->children.end(); it++)
@@ -613,7 +613,7 @@ T_Tag GraphNode<T_Val, T_Tag, T_Weight>::GetAllLinkedIn(GraphLine<T_Val, T_Tag, 
 	T_Tag count = 0;
 	auto size = parent->GetAllNode();
 	auto ret = new GraphNode[size];
-	parent.GetAllNode(ret);
+	parent->GetAllNode(ret);
 	for(int i = 0; i < size; ++i)
 	{
 		for(auto it = ret[i]->children.begin(); it != ret[i]->children.end(); it++)

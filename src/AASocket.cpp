@@ -55,8 +55,10 @@ inline static IPAddr_v4 ToAAAddr(in_addr addr)
 // 将socket的ipv6地址转换为ArmyAnt::IPAddr_v6
 inline static IPAddr_v6 ToAAAddr(in6_addr addr) 
 {
-#ifdef OS_WINDOWS
+#if defined OS_WINDOWS
 	return IPAddr_v6(addr.u.Word);
+#elif defined OS_BSD
+    return IPAddr_v6(addr.__u6_addr.__u6_addr16);
 #else
     return IPAddr_v6(addr.__in6_u.__u6_addr16);
 #endif
@@ -98,7 +100,7 @@ inline static in6_addr ToCAddr(const IPAddr_v6&addr)
 #ifdef OS_WINDOWS
 		ret.u.Word[i] = addr.GetWord(i);
 #else
-        ret.__in6_u.__u6_addr16[i] = addr.GetWord(i);
+        ret.__u6_addr.__u6_addr16[i] = addr.GetWord(i);
 #endif
 	}
 	return ret;
@@ -401,7 +403,7 @@ IPAddr_v4::operator IPAddr&()
 	return *this;
 }
 
-IPAddr_v4 IPAddr_v4::localhost = IPAddr_v4(127ui8, 0ui8, 0ui8, 1ui8);
+IPAddr_v4 IPAddr_v4::localhost = IPAddr_v4((unsigned char)127, (unsigned char)0, (unsigned char)0, (unsigned char)1);
 
 void IPAddr_v4::ParseFromString(const char * str)
 {

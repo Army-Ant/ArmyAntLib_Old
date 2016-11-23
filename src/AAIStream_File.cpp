@@ -87,14 +87,14 @@ public:
 	}
 
 	static inline uint64 GetFPos(fpos_t pos){
-#ifdef OS_WINDOWS
+#if defined OS_WINDOWS || defined OS_BSD
         return pos;
 #else
         return pos.__pos;
 #endif
 	}
-	static inline void SetPos(fpos_t&pos, uint64 value) {
-#ifdef OS_WINDOWS
+    static inline void SetPos(fpos_t&pos, uint64 value) {
+#if defined OS_WINDOWS || defined OS_BSD
 		pos=value;
 #else
 		pos.__pos = value;
