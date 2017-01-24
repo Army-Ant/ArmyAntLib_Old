@@ -38,7 +38,7 @@
     <ProjectGuid>{14FA4233-0D4C-46B8-82F1-44262938B95A}</ProjectGuid>
     <Keyword>Win32Proj</Keyword>
     <RootNamespace>ArmyAntLib</RootNamespace>
-    <WindowsTargetPlatformVersion>10.0.10586.0</WindowsTargetPlatformVersion>
+    <WindowsTargetPlatformVersion>8.1</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
@@ -407,6 +407,8 @@
     <ClInclude Include="..\inc\AAIStream_Memory.h" />
     <ClInclude Include="..\inc\AAIStream_Pipe.h" />
     <ClInclude Include="..\inc\AAJNITools.h" />
+    <ClInclude Include="..\inc\AAMath.h" />
+    <ClInclude Include="..\inc\AAMathStructs.h" />
     <ClInclude Include="..\inc\AAMessageQueue.h" />
     <ClInclude Include="..\inc\AANeuron.hpp" />
     <ClInclude Include="..\inc\AANeuronNetwork.hpp" />

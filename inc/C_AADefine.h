@@ -82,7 +82,7 @@ static const int FALSE = 0;
 #endif
 #endif
 
-// Debug断言宏的定义, 同AAFragment的同名函数
+// Debug断言宏的定义
 #ifndef AAAssert
 #if defined DEBUG
 #include <assert.h>
@@ -104,10 +104,10 @@ static const double s_aa_natrualBase = 2.7182818284590452353;
 
 // C语言定义的宏, 同AAFragment的同名函数
 #ifndef min
-#define min(x,y) ((x>y)?y:x)
+#define min(x,y) (((x)>(y))?(y):(x))
 #endif
 #ifndef max
-#define max(x,y) ((x<y)?y:x)
+#define max(x,y) (((x)<(y))?(y):(x))
 #endif
 
 // 安全释放内存(置空指针)宏定义, 同AAFragment

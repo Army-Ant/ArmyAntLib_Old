@@ -82,9 +82,6 @@
     <ClInclude Include="..\inc\AAClassPrivateHandle.hpp">
       <Filter>tool</Filter>
     </ClInclude>
-    <ClInclude Include="..\inc\AADigraph.hpp">
-      <Filter>tool</Filter>
-    </ClInclude>
     <ClInclude Include="..\inc\AAJNITools.h">
       <Filter>tool</Filter>
     </ClInclude>
@@ -93,6 +90,15 @@
     </ClInclude>
     <ClInclude Include="..\src\AAIStream_Private.hxx">
       <Filter>io</Filter>
+    </ClInclude>
+    <ClInclude Include="..\inc\AADigraph.hpp">
+      <Filter>algorithm</Filter>
+    </ClInclude>
+    <ClInclude Include="..\inc\AAMath.h">
+      <Filter>mathematic</Filter>
+    </ClInclude>
+    <ClInclude Include="..\inc\AAMathStructs.h">
+      <Filter>mathematic</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -145,6 +151,9 @@
     </Filter>
     <Filter Include="_not_cpp">
       <UniqueIdentifier>{2a4ad03f-f9df-4be7-a1f8-c52076c4e208}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="mathematic">
+      <UniqueIdentifier>{fa47124e-83a3-490c-91bd-23fca0349641}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>

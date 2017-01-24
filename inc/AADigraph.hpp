@@ -72,21 +72,21 @@ public:
 	 *	@ param = "weight":	The weight of this node, default value is 1
 							节点的权重, 可用默认值1
 	 */
-	GraphNode(T_Tag tag, const T_Val&element, T_Weight weight = T_Weight(1));
+	GraphNode(Digraph<T_Val, T_Tag, T_Weight>* parent, T_Val element, T_Tag tag, T_Weight weight = T_Weight(1));
 
 	/*	Copied from another node
 		复制节点
 	 *	@ param = "value" :	The node this copied from
 							要复制的源节点
 	 */
-	GraphNode(const GraphNode<T_Val, T_Tag, T_Weight>&value);
+	//GraphNode(const GraphNode<T_Val, T_Tag, T_Weight>&value);
 
 	/*	Copied all attributes and values from another node
 		拷贝节点内容
 		@ param = "value" :	The node this copied from
 							要复制的源节点
 	 */
-	GraphNode<T_Val, T_Tag, T_Weight>&operator=(const GraphNode<T_Val, T_Tag, T_Weight>&value);
+	//GraphNode<T_Val, T_Tag, T_Weight>&operator=(const GraphNode<T_Val, T_Tag, T_Weight>&value);
 
 	/*	Destructor
 		析构函数
@@ -100,11 +100,11 @@ public:
 
 	/*	取得节点的值内容
 	 */
-	T_Val*GetValue();
+	T_Val&GetValue();
 
 	/*	取得节点的值内容
 	 */
-	inline const T_Val*GetValue()const;
+	inline const T_Val& GetValue()const;
 
 	/*	取得节点的权重
 	 */
@@ -131,7 +131,7 @@ public:
 	/*	Change the value
 		修改值内容
 	 */
-	bool SetValue(T_Val&value);
+	bool SetValue(T_Val value);
 
 	/*	Reset the value to empty
 		重置值内容
@@ -169,13 +169,15 @@ public:
 	GraphLine<T_Val, T_Tag, T_Weight>* GetLinkedIn(T_Tag tag);
 	const GraphLine<T_Val, T_Tag, T_Weight>* GetLinkedIn(T_Tag tag)const;
 	//获取所有连出的连线,返回个数
-	T_Tag GetAllLinkedOut(GraphLine<T_Val, T_Tag, T_Weight>** linked);
+	T_Tag GetAllLinkedOut(GraphLine<T_Val, T_Tag, T_Weight>**& linked);
+	T_Tag GetAllLinkedOutSize();
 	//获取所有连入的连线,返回个数
-	T_Tag GetAllLinkedIn(GraphLine<T_Val, T_Tag, T_Weight>* linked);
+	T_Tag GetAllLinkedIn(GraphLine<T_Val, T_Tag, T_Weight>*& linked);
+	T_Tag GetAllLinkedInSize();
 
 public:
 	//清空节点内容
-	inline T_Val* operator=(std::nullptr_t);
+	inline T_Val&operator=(std::nullptr_t);
 	//获取指定键处的节点
 	inline GraphNode& operator[](T_Tag tag);
 	inline const GraphNode& operator[](T_Tag tag)const;
@@ -184,13 +186,16 @@ private:
 	//键
 	T_Tag tag;
 	//值
-	T_Val* value = nullptr;
+	T_Val value;
 	//权重
 	T_Weight weight;
 	//所在的图
-	Digraph<T_Val, T_Tag, T_Weight>* parent = nullptr;
+	const Digraph<T_Val, T_Tag, T_Weight>* parent = nullptr;
 	//连出节点数组
 	std::vector<GraphLine<T_Val, T_Tag, T_Weight>> children;
+
+	AA_FORBID_ASSGN_OPR(GraphNode);
+	AA_FORBID_COPY_CTOR(GraphNode);
 };
 
 
@@ -198,7 +203,7 @@ template <class T_Val, class T_Tag, class T_Weight>
 class GraphLine
 {
 public:
-	GraphLine(GraphNode<T_Val, T_Tag, T_Weight>* start, GraphNode<T_Val, T_Tag, T_Weight>* end, T_Weight weight);
+	GraphLine(const GraphNode<T_Val, T_Tag, T_Weight>* start, const GraphNode<T_Val, T_Tag, T_Weight>* end, T_Weight weight);
 	virtual ~GraphLine();
 
 public:
@@ -217,7 +222,7 @@ private:
 	T_Weight weight;
 
 	AA_FORBID_ASSGN_OPR(GraphLine);
-	AA_FORBID_COPY_CTOR(GraphLine);
+	//AA_FORBID_COPY_CTOR(GraphLine);
 };
 
 
@@ -230,15 +235,15 @@ public:
 
 public:
 	//取得图中具有指定键的唯一节点
-	inline GraphNode<T_Val, T_Tag, T_Weight>*GetChild(T_Tag tag);
-	inline const GraphNode<T_Val, T_Tag, T_Weight>*GetChild(T_Tag tag)const;
+	inline GraphNode<T_Val, T_Tag, T_Weight>&GetChild(T_Tag tag);
+	inline const GraphNode<T_Val, T_Tag, T_Weight>&GetChild(T_Tag tag)const;
 	//取得图中所有节点,返回节点数
-	inline T_Tag GetAllNode(GraphNode<T_Val, T_Tag, T_Weight>* linked = nullptr);
+	inline T_Tag GetAllNode(GraphNode<T_Val, T_Tag, T_Weight>**& linked);
+	inline T_Tag GetAllNodeSize();
 
 public:
 	//添加节点
-	bool AddNode(const GraphNode<T_Val, T_Tag, T_Weight>&value);
-	bool AddNode(T_Val value, T_Tag tag, T_Weight weight = T_Weight(1));
+	bool AddNode(GraphNode<T_Val, T_Tag, T_Weight>&value);
 	//删除节点
 	bool RemoveNode(T_Tag tag);
 	//连接节点
@@ -256,7 +261,7 @@ public:
 	bool Clear();
 
 private:
-	std::vector<GraphNode<T_Val, T_Tag, T_Weight>> nodes;
+	std::vector<GraphNode<T_Val, T_Tag, T_Weight>*> nodes;
 
 	AA_FORBID_ASSGN_OPR(Digraph);
 	AA_FORBID_COPY_CTOR(Digraph);
@@ -273,18 +278,19 @@ GraphNode<T_Val, T_Tag, T_Weight>::GraphNode()
 }
 
 template <class T_Val, class T_Tag, class T_Weight>
-GraphNode<T_Val, T_Tag, T_Weight>::GraphNode(T_Tag tag, const T_Val&element, T_Weight weight /*= T_Weight(1)*/)
-	: tag(tag), value(&element), weight(weight), children()
+GraphNode<T_Val, T_Tag, T_Weight>::GraphNode(Digraph<T_Val, T_Tag, T_Weight>* parent, T_Val element, T_Tag tag, T_Weight weight /*= T_Weight(1)*/)
+	: tag(tag), value(element), weight(weight), children(), parent(parent)
 {
+	parent->AddNode(*this);
 }
-
+/*
 template <class T_Val, class T_Tag, class T_Weight>
 GraphNode<T_Val, T_Tag, T_Weight>::GraphNode(const GraphNode<T_Val, T_Tag, T_Weight>&value)
-	: tag(value.tag), value(value.value), weight(weight.weight), children()
+	: tag(value.tag), value(value.value), weight(value.weight), children(), parent(value.parent)
 {
 	for(int i = 0; i < value.children.size(); ++i)
 	{
-		children[i] = value.children[i];
+		children.push_back(GraphLine<T_Val, T_Tag, T_Weight>(this,value.children[i].endnode, value.children[i]));
 	}
 }
 
@@ -301,7 +307,7 @@ GraphNode<T_Val, T_Tag, T_Weight> & GraphNode<T_Val, T_Tag, T_Weight>::operator=
 	}
 	return *this;
 }
-
+*/
 template<class T_Val, class T_Tag, class T_Weight>
 GraphNode<T_Val, T_Tag, T_Weight>::~GraphNode()
 {
@@ -314,13 +320,13 @@ T_Tag GraphNode<T_Val, T_Tag, T_Weight>::GetTag() const
 }
 
 template<class T_Val, class T_Tag, class T_Weight>
-T_Val * GraphNode<T_Val, T_Tag, T_Weight>::GetValue()
+T_Val& GraphNode<T_Val, T_Tag, T_Weight>::GetValue()
 {
 	return value;
 }
 
 template<class T_Val, class T_Tag, class T_Weight>
-const T_Val * GraphNode<T_Val, T_Tag, T_Weight>::GetValue() const
+const T_Val& GraphNode<T_Val, T_Tag, T_Weight>::GetValue() const
 {
 	return value;
 }
@@ -358,7 +364,7 @@ bool GraphNode<T_Val, T_Tag, T_Weight>::SetTag(T_Tag tag)
 }
 
 template<class T_Val, class T_Tag, class T_Weight>
-bool GraphNode<T_Val, T_Tag, T_Weight>::SetValue(T_Val & value)
+bool GraphNode<T_Val, T_Tag, T_Weight>::SetValue(T_Val value)
 {
 	this->value = value;
 	return true;
@@ -381,10 +387,10 @@ bool GraphNode<T_Val, T_Tag, T_Weight>::SetWeight(T_Weight weight)
 template<class T_Val, class T_Tag, class T_Weight>
 bool GraphNode<T_Val, T_Tag, T_Weight>::LinkTo(const GraphNode<T_Val, T_Tag, T_Weight> & target, T_Weight weight)
 {
-	if(parent == nullptr || target.parent == nullptr || parent->GetChild(target.tag) != &target)
+	if(parent == nullptr || target.parent == nullptr || &parent->GetChild(target.tag) == nullptr)
 		return false;
 	if(GetLinkedOut(target.tag) != nullptr)
-		return GetLinkedOut(target.tag) == &target;
+		return GetLinkedOut(target.tag)->GetEndNode()->tag == target.tag;
 	children.push_back(GraphLine<T_Val, T_Tag, T_Weight>(this, &target, weight));
 	return true;
 }
@@ -392,7 +398,7 @@ bool GraphNode<T_Val, T_Tag, T_Weight>::LinkTo(const GraphNode<T_Val, T_Tag, T_W
 template<class T_Val, class T_Tag, class T_Weight>
 bool GraphNode<T_Val, T_Tag, T_Weight>::LinkFrom(const GraphNode<T_Val, T_Tag, T_Weight> & target, T_Weight weight)
 {
-	if(parent == nullptr || target.parent == nullptr || target.GetChild(tag) != this)
+	if(parent == nullptr || target.parent == nullptr || &target.GetChild(tag) != this)
 		return false;
 	if(target.GetLinkedOut(tag) != nullptr)
 		return target.GetLinkedOut(tag) == this;
@@ -597,18 +603,24 @@ const GraphLine<T_Val, T_Tag, T_Weight>* GraphNode<T_Val, T_Tag, T_Weight>::GetL
 }
 
 template<class T_Val, class T_Tag, class T_Weight>
-T_Tag GraphNode<T_Val, T_Tag, T_Weight>::GetAllLinkedOut(GraphLine<T_Val, T_Tag, T_Weight>** linked)
+T_Tag GraphNode<T_Val, T_Tag, T_Weight>::GetAllLinkedOut(GraphLine<T_Val, T_Tag, T_Weight>**& linked)
 {
 	if(linked != nullptr)
 		for(uint32 i = 0; i < children.size(); ++i)
 		{
-			linked[i] = children[i]->GetEndNode();
+			linked[i] = &children[i];
 		}
 	return T_Tag(children.size());
 }
 
 template<class T_Val, class T_Tag, class T_Weight>
-T_Tag GraphNode<T_Val, T_Tag, T_Weight>::GetAllLinkedIn(GraphLine<T_Val, T_Tag, T_Weight>* linked)
+inline T_Tag GraphNode<T_Val, T_Tag, T_Weight>::GetAllLinkedOutSize()
+{
+	return T_Tag(children.size());
+}
+
+template<class T_Val, class T_Tag, class T_Weight>
+T_Tag GraphNode<T_Val, T_Tag, T_Weight>::GetAllLinkedIn(GraphLine<T_Val, T_Tag, T_Weight>*& linked)
 {
 	T_Tag count = 0;
 	auto size = parent->GetAllNode();
@@ -620,8 +632,7 @@ T_Tag GraphNode<T_Val, T_Tag, T_Weight>::GetAllLinkedIn(GraphLine<T_Val, T_Tag, 
 		{
 			if(it->GetEndNode() == this)
 			{
-				if(linked != nullptr)
-					linked[count++] = it->GetEndNode();
+				linked[count++] = it->GetEndNode();
 				break;
 			}
 		}
@@ -631,7 +642,29 @@ T_Tag GraphNode<T_Val, T_Tag, T_Weight>::GetAllLinkedIn(GraphLine<T_Val, T_Tag, 
 }
 
 template<class T_Val, class T_Tag, class T_Weight>
-T_Val * GraphNode<T_Val, T_Tag, T_Weight>::operator=(std::nullptr_t)
+inline T_Tag GraphNode<T_Val, T_Tag, T_Weight>::GetAllLinkedInSize()
+{
+	T_Tag count = 0;
+	auto size = parent->GetAllNodeSize();
+	auto ret = new GraphNode[size];
+	parent->GetAllNode(ret);
+	for (int i = 0; i < size; ++i)
+	{
+		for (auto it = ret[i]->children.begin(); it != ret[i]->children.end(); it++)
+		{
+			if (it->GetEndNode() == this)
+			{
+				++count;
+				break;
+			}
+		}
+	}
+	Fragment::AA_SAFE_DELALL(ret);
+	return count;
+}
+
+template<class T_Val, class T_Tag, class T_Weight>
+T_Val& GraphNode<T_Val, T_Tag, T_Weight>::operator=(std::nullptr_t)
 {
 	value = nullptr;
 	children.clear();
@@ -656,7 +689,7 @@ const GraphNode<T_Val, T_Tag, T_Weight> & GraphNode<T_Val, T_Tag, T_Weight>::ope
 
 
 template<class T_Val, class T_Tag, class T_Weight>
-GraphLine<T_Val, T_Tag, T_Weight>::GraphLine(GraphNode<T_Val, T_Tag, T_Weight>* start, GraphNode<T_Val, T_Tag, T_Weight>* end, T_Weight weight)
+GraphLine<T_Val, T_Tag, T_Weight>::GraphLine(const GraphNode<T_Val, T_Tag, T_Weight>* start, const GraphNode<T_Val, T_Tag, T_Weight>* end, T_Weight weight)
 	:startnode(start),endnode(end),weight(weight)
 {
 }
@@ -708,55 +741,61 @@ Digraph<T_Val, T_Tag, T_Weight>::~Digraph()
 }
 
 template<class T_Val, class T_Tag, class T_Weight>
-GraphNode<T_Val, T_Tag, T_Weight>* Digraph<T_Val, T_Tag, T_Weight>::GetChild(T_Tag tag)
+GraphNode<T_Val, T_Tag, T_Weight>& Digraph<T_Val, T_Tag, T_Weight>::GetChild(T_Tag tag)
 {
-	for(auto i = nodes.begin(); i != nodes.end(); ++i)
+	for (auto i = nodes.begin(); i != nodes.end(); ++i)
 	{
-		if(i->tag == tag)
-			return &*i;
+		if ((*i)->GetTag() == tag)
+			return **i;
 	}
-	return nullptr;
+	return *(GraphNode<T_Val, T_Tag, T_Weight>*)nullptr;
 }
 
 template<class T_Val, class T_Tag, class T_Weight>
-const GraphNode<T_Val, T_Tag, T_Weight>* Digraph<T_Val, T_Tag, T_Weight>::GetChild(T_Tag tag) const
+const GraphNode<T_Val, T_Tag, T_Weight>& Digraph<T_Val, T_Tag, T_Weight>::GetChild(T_Tag tag) const
 {
-	return const_cast<GraphLine<T_Val, T_Tag, T_Weight>*>(this)->GetChild(tag);
+	for (auto i = nodes.begin(); i != nodes.end(); ++i)
+	{
+		if ((*i)->GetTag() == tag)
+			return **i;
+	}
+	return *(GraphNode<T_Val, T_Tag, T_Weight>*)nullptr;
 }
 
 template<class T_Val, class T_Tag, class T_Weight>
-T_Tag Digraph<T_Val, T_Tag, T_Weight>::GetAllNode(GraphNode<T_Val, T_Tag, T_Weight>* linked/* = nullptr*/)
+T_Tag Digraph<T_Val, T_Tag, T_Weight>::GetAllNode(GraphNode<T_Val, T_Tag, T_Weight>**& linked/* = nullptr*/)
 {
 	for(T_Tag i = 0; i < nodes.size() && linked != nullptr; ++i)
 	{
-		linked[i] = &(nodes[i]);
+		linked[i] = (nodes[i]);
 	}
 	return T_Tag(nodes.size());
 }
 
 template<class T_Val, class T_Tag, class T_Weight>
-bool Digraph<T_Val, T_Tag, T_Weight>::AddNode(const GraphNode<T_Val, T_Tag, T_Weight>& value)
+inline T_Tag Digraph<T_Val, T_Tag, T_Weight>::GetAllNodeSize()
 {
-	if(GetChild(value.tag) != nullptr)
-		return false;
-	nodes.push_back(value);
-	value.SetGraph(this);
-	return true;
+	return T_Tag(nodes.size());
 }
 
+
 template<class T_Val, class T_Tag, class T_Weight>
-inline bool Digraph<T_Val, T_Tag, T_Weight>::AddNode(T_Val value, T_Tag tag, T_Weight weight)
+bool Digraph<T_Val, T_Tag, T_Weight>::AddNode(GraphNode<T_Val, T_Tag, T_Weight>&value)
 {
-	return AddNode(GraphNode<T_Val, T_Tag, T_Weight>(value, tag, weight));
+	if (nullptr != &GetChild(value.GetTag()))
+		return false;
+	value.SetGraph(this);
+	nodes.push_back(&value);
+	return true;
 }
 
 template<class T_Val, class T_Tag, class T_Weight>
 bool Digraph<T_Val, T_Tag, T_Weight>::RemoveNode(T_Tag tag)
 {
-	auto target = GetChild(tag);
+	auto target = &GetChild(tag);
 	if(target == nullptr)
 		return false;
-	target.SetGraph(nullptr);
+	target->SetGraph(nullptr);
 	nodes.erase(target);
 	return true;
 }
@@ -764,19 +803,18 @@ bool Digraph<T_Val, T_Tag, T_Weight>::RemoveNode(T_Tag tag)
 template<class T_Val, class T_Tag, class T_Weight>
 bool Digraph<T_Val, T_Tag, T_Weight>::LinkNode(T_Tag src, T_Tag dest, T_Weight weight/* = T_Weight(1)*/)
 {
-	auto source = GetChild(src);
-	auto target = GetChild(dest);
-	if(source == nullptr|| target == nullptr)
+	auto& source = GetChild(src);
+	auto& target = GetChild(dest);
+	if(&source == nullptr|| &target == nullptr)
 		return false;
-	return source->LinkTo(*target, weight);
-	return true;
+	return source.LinkTo(target, weight);
 }
 
 template<class T_Val, class T_Tag, class T_Weight>
 bool Digraph<T_Val, T_Tag, T_Weight>::DelinkNode(T_Tag src, T_Tag dest)
 {
-	auto source = GetChild(src);
-	auto target = GetChild(dest);
+	auto& source = GetChild(src);
+	auto& target = GetChild(dest);
 	if(source == nullptr || target == nullptr)
 		return false;
 	return source->DeLink(target, true);
@@ -785,8 +823,8 @@ bool Digraph<T_Val, T_Tag, T_Weight>::DelinkNode(T_Tag src, T_Tag dest)
 template<class T_Val, class T_Tag, class T_Weight>
 inline bool Digraph<T_Val, T_Tag, T_Weight>::IsLinkedTo(T_Tag src, T_Tag dst)
 {
-	auto source = GetChild(src);
-	auto target = GetChild(dst);
+	auto& source = GetChild(src);
+	auto& target = GetChild(dst);
 	if(source == nullptr || target == nullptr)
 		return false;
 	return source->IsLinkedTo(target);
@@ -795,7 +833,7 @@ inline bool Digraph<T_Val, T_Tag, T_Weight>::IsLinkedTo(T_Tag src, T_Tag dst)
 template<class T_Val, class T_Tag, class T_Weight>
 bool Digraph<T_Val, T_Tag, T_Weight>::DeLinkNodeAll(T_Tag target, bool isOut)
 {
-	auto source = GetChild(target);
+	auto& source = GetChild(target);
 	if(source == nullptr)
 		return false;
 	return source->DeLinkAll(isOut);
@@ -804,7 +842,7 @@ bool Digraph<T_Val, T_Tag, T_Weight>::DeLinkNodeAll(T_Tag target, bool isOut)
 template<class T_Val, class T_Tag, class T_Weight>
 bool Digraph<T_Val, T_Tag, T_Weight>::DeLinkNodeAll(T_Tag target)
 {
-	auto source = GetChild(target);
+	auto& source = GetChild(target);
 	if(source == nullptr)
 		return false;
 	return source->DeLinkAll();
@@ -815,7 +853,7 @@ bool Digraph<T_Val, T_Tag, T_Weight>::DeLinkAll()
 {
 	for(auto i = nodes.begin(); i != nodes.end(); ++i)
 	{
-		if(!i->DeLinkAll())
+		if(!(*i)->DeLinkAll())
 			return false;
 	}
 	return true;
