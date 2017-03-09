@@ -82,9 +82,6 @@
     <ClInclude Include="..\inc\AAClassPrivateHandle.hpp">
       <Filter>tool</Filter>
     </ClInclude>
-    <ClInclude Include="..\inc\AAJNITools.h">
-      <Filter>tool</Filter>
-    </ClInclude>
     <ClInclude Include="..\inc\AASocket_ProtocolTypes.txt">
       <Filter>io</Filter>
     </ClInclude>
@@ -99,6 +96,9 @@
     </ClInclude>
     <ClInclude Include="..\inc\AAMathStructs.h">
       <Filter>mathematic</Filter>
+    </ClInclude>
+    <ClInclude Include="..\inc\AAJson.h">
+      <Filter>data</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -128,9 +128,6 @@
     </ClCompile>
     <ClCompile Include="..\src\C_AANeuron.cpp">
       <Filter>algorithm</Filter>
-    </ClCompile>
-    <ClCompile Include="..\src\AAJNITools.cpp">
-      <Filter>tool</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

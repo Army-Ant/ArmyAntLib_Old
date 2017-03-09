@@ -63,7 +63,7 @@ public:
 	virtual bool Close() override;
 
 	/* 检验流是否打开中
-	 * @ param = "dynamicCheck" : 是否进行实时检查，当该参数为默认或者true时，在非联网状态下，将尝试读取流，联网状态下，将尝试ping目标地址
+	 * @ param = "dynamicCheck" : 是否进行实时检查，当该参数为默认或者true时，将尝试读取流
 	 */
 	virtual bool IsOpened(bool dynamicCheck = true) override;
 
@@ -89,7 +89,7 @@ public:
 	 */
 	virtual bool MovePos(uint64 pos = AA_UINT64_MAX) override;
 
-	/* 获取流源的文件名，对于文件指其路径名称，对于管道则是管道全名，对于串口则是串口名，对于内存和共享内存，则是内存地址号，对于网络，则是其域名或者ip地址和端口
+	/* 获取流源的文件名，全路径名称
 	 */
 	virtual const char* GetSourceName() const override;
 

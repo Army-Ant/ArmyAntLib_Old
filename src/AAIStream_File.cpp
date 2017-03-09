@@ -65,7 +65,7 @@ public:
 	bool noexist = false;
 	//文件名
 	std::string name = "";
-	//文件指针,包含串口的文件指针
+	//文件指针,
 	FILE*file = nullptr;
 
 	inline int Fseek(int64 offset, int whence)
@@ -77,7 +77,7 @@ public:
 #endif
 	}
 
-	static int Fseek(FILE*file, int64 offset, int whence)
+	static inline int Fseek(FILE*file, int64 offset, int whence)
 	{
 #if defined OS_WINDOWS && !defined _CMAKE
 		return _fseeki64(file, offset, whence);
@@ -95,7 +95,7 @@ public:
 	}
     static inline void SetPos(fpos_t&pos, uint64 value) {
 #if defined OS_WINDOWS || defined OS_BSD
-		pos=value;
+		pos = value;
 #else
 		pos.__pos = value;
 #endif
@@ -105,6 +105,9 @@ private:
 	AA_FORBID_COPY_CTOR(IStream_File_Private);
 	AA_FORBID_ASSGN_OPR(IStream_File_Private);
 };
+
+
+/******************************** Class File *********************************************************/
 
 File::File()
 	:StaticStream(IStream_Private::handleManager.GetHandle(this, new IStream_File_Private()))
@@ -232,7 +235,7 @@ uint64 File::GetLength() const
 	fpos_t nowpos;
 	IStream_File_Private::SetPos(nowpos, 0);
 	fgetpos(hd->file, &nowpos);
-	fseek(hd->file, 0, SEEK_END);
+	//fseek(hd->file, 0, SEEK_END);
 	hd->Fseek(0, SEEK_END);
 	fpos_t ret;
 	fgetpos(hd->file, &ret);
@@ -328,7 +331,7 @@ uint64 File::Write(void*buffer, uint64 len /*= 0*/)
 
 #ifdef OS_WINDOWS
 	// So much posix old OS file reading and writing operation need to call the "fseek" function between the nearly fwrite and fread,
-	// The modern Unix system do not have this problem any more, but Windows still have
+	// The modern Unix system do not have this problem any more, but Windows still do
 	hd->Fseek(0L, 1);
 #endif
 	fflush(hd->file);
