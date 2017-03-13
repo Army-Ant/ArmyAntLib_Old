@@ -129,6 +129,9 @@
     <ClCompile Include="..\src\C_AANeuron.cpp">
       <Filter>algorithm</Filter>
     </ClCompile>
+    <ClCompile Include="..\src\AAJson.cpp">
+      <Filter>data</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="data">

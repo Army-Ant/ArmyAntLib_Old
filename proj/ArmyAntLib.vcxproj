@@ -435,6 +435,7 @@
     <ClCompile Include="..\src\AAIStream.cpp" />
     <ClCompile Include="..\src\AAIStream_File.cpp" />
     <ClCompile Include="..\src\AAIStream_Memory.cpp" />
+    <ClCompile Include="..\src\AAJson.cpp" />
     <ClCompile Include="..\src\AASocket.cpp" />
     <ClCompile Include="..\src\ArmyAntLib.cpp" />
     <ClCompile Include="..\src\C_AANeuron.cpp" />

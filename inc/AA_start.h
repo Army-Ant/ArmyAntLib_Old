@@ -33,7 +33,7 @@
 #define ARMYANTLIB_API __declspec(dllimport)
 #endif
 
-#else // AA_USE_STATIC
+#else // AA_USE_STATIC -> true
 
 #define ARMYANTLIB_API
 
