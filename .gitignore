@@ -196,3 +196,4 @@ $RECYCLE.BIN/
 /proj/Release
 /proj/Release_Static
 /proj/out
+*.ipch
