@@ -24,9 +24,17 @@
 
 #include "../inc/AAJson.h"
 #include "../inc/ArmyAntLib.h"
+#include "../inc/AAClassPrivateHandle.hpp"
 
+#include <inttypes.h>
 
-static const ArmyAnt::JsonException unabledFunction = ArmyAnt::JsonException("Cannot call this function!");
+namespace ArmyAnt{
+struct JO_Private{ JsonUnit* keys; JsonUnit* values; uint32 length; };
+static ClassPrivateHandleManager < JsonObject, JO_Private > s_objDatas;
+
+static const JsonException unabledFunction = JsonException("Cannot call this function!");
+static const JsonException invalidNumber = JsonException("This is an invalid number value !");
+}
 
 static const auto AA_JSON_undefined = ([](){
 	static const class : public ArmyAnt::JsonUnit{
@@ -39,35 +47,35 @@ static const auto AA_JSON_undefined = ([](){
 		virtual bool fromJsonString(const char*)override{
 			return true;
 		}
-		virtual ArmyAnt::EJsonValueType getType()const{
+		virtual ArmyAnt::EJsonValueType getType()const override{
 			return ArmyAnt::EJsonValueType::Undefined;
 		}
-		virtual bool getBoolean()const{
-			throw unabledFunction;
+		virtual bool getBoolean()const override{
+			throw ArmyAnt::unabledFunction;
 		}
-		virtual int32 getInteger()const{
-			throw unabledFunction;
+		virtual int32 getInteger()const override{
+			throw ArmyAnt::unabledFunction;
 		}
-		virtual uint32 getUnsignedInteger()const{
-			throw unabledFunction;
+		virtual int64 getLong()const override{
+			throw ArmyAnt::unabledFunction;
 		}
-		virtual int64 getLong()const{
-			throw unabledFunction;
+		virtual double getDouble()const override{
+			throw ArmyAnt::unabledFunction;
 		}
-		virtual uint64 getUnsignedLong()const{
-			throw unabledFunction;
+		virtual const char* getString()const override{
+			throw ArmyAnt::unabledFunction;
 		}
-		virtual double getDouble()const{
-			throw unabledFunction;
+		virtual JsonUnit* getChild(const char*) override{
+			throw ArmyAnt::unabledFunction;
 		}
-		virtual const char* getString()const{
-			throw unabledFunction;
+		virtual const JsonUnit* getChild(const char*)const override{
+			throw ArmyAnt::unabledFunction;
 		}
-		virtual JsonUnit* getChild(const char*){
-			throw unabledFunction;
+		virtual JsonUnit* getChild(int32) override{
+			throw ArmyAnt::unabledFunction;
 		}
-		virtual JsonUnit* getChild(int32){
-			throw unabledFunction;
+		virtual const JsonUnit* getChild(int32)const override{
+			throw ArmyAnt::unabledFunction;
 		}
 	} ret;
 	return ret;
@@ -84,54 +92,106 @@ static const auto AA_JSON_null = [](){
 		virtual bool fromJsonString(const char*)override{
 			return true;
 		}
-		virtual ArmyAnt::EJsonValueType getType()const{
+		virtual ArmyAnt::EJsonValueType getType()const override{
 			return ArmyAnt::EJsonValueType::Null;
 		}
-		virtual bool getBoolean()const{
-			throw unabledFunction;
+		virtual bool getBoolean()const override{
+			throw ArmyAnt::unabledFunction;
 		}
-		virtual int32 getInteger()const{
-			throw unabledFunction;
+		virtual int32 getInteger()const override{
+			throw ArmyAnt::unabledFunction;
 		}
-		virtual uint32 getUnsignedInteger()const{
-			throw unabledFunction;
+		virtual int64 getLong()const override{
+			throw ArmyAnt::unabledFunction;
 		}
-		virtual int64 getLong()const{
-			throw unabledFunction;
+		virtual double getDouble()const override{
+			throw ArmyAnt::unabledFunction;
 		}
-		virtual uint64 getUnsignedLong()const{
-			throw unabledFunction;
+		virtual const char* getString()const override{
+			throw ArmyAnt::unabledFunction;
 		}
-		virtual double getDouble()const{
-			throw unabledFunction;
+		virtual JsonUnit* getChild(const char*) override{
+			throw ArmyAnt::unabledFunction;
 		}
-		virtual const char* getString()const{
-			throw unabledFunction;
+		virtual const JsonUnit* getChild(const char*)const override{
+			throw ArmyAnt::unabledFunction;
 		}
-		virtual JsonUnit* getChild(const char*){
-			return nullptr;
+		virtual JsonUnit* getChild(int32) override{
+			throw ArmyAnt::unabledFunction;
 		}
-		virtual JsonUnit* getChild(int32){
-			throw unabledFunction;
+		virtual const JsonUnit* getChild(int32)const override{
+			throw ArmyAnt::unabledFunction;
 		}
 	} ret;
 	return ret;
 }();
 
+static const auto AA_JSON_true = [](){
+	auto ret = ArmyAnt::JsonBoolean();
+	ret.fromJsonString("true");
+	return ret;
+}();
+
+static const auto AA_JSON_false = [](){
+	auto ret = ArmyAnt::JsonBoolean();
+	ret.fromJsonString("false");
+	return ret;
+}();
+
+static const auto AA_JSON_nan = [](){
+	static const class : public ArmyAnt::JsonNumeric{
+		virtual int toJsonString(char*str)const override{
+			if(str != nullptr){
+				strcpy(str, "NaN");
+			}
+			return 5;
+		}
+		virtual int32 getInteger()const override{
+			throw ArmyAnt::invalidNumber;
+		}
+		virtual int64 getLong()const override{
+			throw ArmyAnt::invalidNumber;
+		}
+		virtual double getDouble()const override{
+			throw ArmyAnt::invalidNumber;
+		}
+	}ret;
+	return ret;
+}();
+
+static const auto AA_JSON_infinity = [](){
+	static const class : public ArmyAnt::JsonNumeric{
+		virtual int toJsonString(char*str)const override{
+			if(str != nullptr){
+				strcpy(str, "infinity");
+			}
+			return 5;
+		}
+		virtual int32 getInteger()const override{
+			throw ArmyAnt::invalidNumber;
+		}
+		virtual int64 getLong()const override{
+			throw ArmyAnt::invalidNumber;
+		}
+		virtual double getDouble()const override{
+			throw ArmyAnt::invalidNumber;
+		}
+	}ret;
+	return ret;
+}();
+
 namespace ArmyAnt{
 
-const ArmyAnt::JsonUnit& ArmyAnt::JsonUnit::undefined = AA_JSON_undefined;
-const ArmyAnt::JsonUnit& ArmyAnt::JsonUnit::jsonNull = AA_JSON_null;
+const JsonUnit& JsonUnit::undefined = AA_JSON_undefined;
+const JsonUnit& JsonUnit::jsonNull = AA_JSON_null;
 
 JsonBoolean::JsonBoolean():value(false){
 
 }
 
-
 JsonBoolean::~JsonBoolean(){
 
 }
-
 
 int JsonBoolean::toJsonString(char*str) const{
 	strcpy(str, value ? "true" : "false");
@@ -149,6 +209,224 @@ bool JsonBoolean::fromJsonString(const char * str){
 	else
 		return false;
 	return true;
+}
+
+bool JsonBoolean::getBoolean() const{
+	return value;
+}
+
+int32 JsonBoolean::getInteger()const{
+	throw unabledFunction;
+}
+
+int64 JsonBoolean::getLong()const{
+	throw unabledFunction;
+}
+
+double JsonBoolean::getDouble()const{
+	throw unabledFunction;
+}
+
+const char* JsonBoolean::getString()const{
+	throw unabledFunction;
+}
+
+JsonUnit* JsonBoolean::getChild(const char*){
+	throw unabledFunction;
+}
+
+const JsonUnit* JsonBoolean::getChild(const char*key) const{
+	throw unabledFunction;
+}
+
+JsonUnit* JsonBoolean::getChild(int32){
+	throw unabledFunction;
+}
+
+const JsonUnit* JsonBoolean::getChild(int32)const{
+	throw unabledFunction;
+}
+
+const JsonBoolean& JsonBoolean::true_= AA_JSON_true;
+
+const JsonBoolean& JsonBoolean::false_= AA_JSON_false;
+
+JsonNumeric::JsonNumeric():whatvalue(0){
+	value.dvalue = 0.0;
+}
+
+JsonNumeric::~JsonNumeric(){
+
+}
+
+int JsonNumeric::toJsonString(char*str) const{
+	char tmpstr[64] = "";
+	if(str == nullptr)
+		str = tmpstr;
+	const char* format = nullptr;
+	switch(whatvalue){
+		case 1:
+			format = "%d";
+			break;
+		case 2:
+			format = "%lld";
+			break;
+		case 3:
+			format = "%f";
+			break;
+		default:
+			return 0;
+	}
+	sprintf(str, "");
+	return strlen(str);
+}
+
+bool JsonNumeric::fromJsonString(const char * str){
+	char* strtmp = new char[strlen(str)];
+	strcpy(strtmp, str);
+	Utils::CString::CleanStringSpaces(strtmp);
+	std::string num = strtmp;
+	if(num.find('.') == num.npos){
+		value.dvalue = atof(strtmp);
+		whatvalue = 3;
+	} else if(!strcmp(strtmp, "false")){
+		value.lvalue = atoll(strtmp);
+		if(value.lvalue <= AA_INT32_MAX){
+			value.ivalue = int32(value.lvalue);
+			whatvalue = 1;
+		} else whatvalue = 2;
+	}
+	else
+		return false;
+	return true;
+}
+
+bool JsonNumeric::getBoolean() const{
+	throw unabledFunction;
+}
+
+int32 JsonNumeric::getInteger()const{
+	return value.ivalue;
+}
+
+int64 JsonNumeric::getLong()const{
+	return value.lvalue;
+}
+
+double JsonNumeric::getDouble()const{
+	return value.dvalue;
+}
+
+const char* JsonNumeric::getString()const{
+	throw unabledFunction;
+}
+
+JsonUnit* JsonNumeric::getChild(const char*){
+	throw unabledFunction;
+}
+
+const JsonUnit* JsonNumeric::getChild(const char*key) const{
+	throw unabledFunction;
+}
+
+JsonUnit* JsonNumeric::getChild(int32){
+	throw unabledFunction;
+}
+
+const JsonUnit* JsonNumeric::getChild(int32)const{
+	throw unabledFunction;
+}
+
+const JsonNumeric& JsonNumeric::nan = AA_JSON_nan;
+
+const JsonNumeric& JsonNumeric::infinity = AA_JSON_infinity;
+
+JsonString::JsonString():value(nullptr),length(0){
+
+}
+
+JsonString::~JsonString(){
+	if(value != nullptr)
+		delete[] value;
+}
+
+int JsonString::toJsonString(char*str) const{
+	if(value == nullptr)
+		return 0;
+	if(str != nullptr){
+		str[0] = '"';
+		if(length > 0)
+			strcpy(str + 1, value);
+		str[length + 1] = '"';
+	}
+	return length + 2;
+}
+
+bool JsonString::fromJsonString(const char*str){
+	if(str == nullptr){
+		if(value != nullptr)
+			delete[] value;
+		length = 0;
+		return true;
+	}
+	char* tmp = new char[strlen(str)];
+	strcpy(tmp, str);
+	Utils::CString::CleanStringSpaces(tmp);
+	std::string strstr = tmp;
+	if(tmp[0] == '"'&&strstr[strstr.size() - 1] == '"'){
+		if(value != nullptr)
+			delete[] value;
+		length = strstr.size() - 1;
+		value = new char[length];
+		value[length - 1] = '\0';
+		memcpy(value, tmp + 1, length - 1);
+		return true;
+	}
+	return false;
+}
+
+bool JsonString::getBoolean() const{
+	throw unabledFunction;
+}
+
+int32 JsonString::getInteger()const{
+	throw unabledFunction;
+}
+
+int64 JsonString::getLong()const{
+	throw unabledFunction;
+}
+
+double JsonString::getDouble()const{
+	throw unabledFunction;
+}
+
+const char* JsonString::getString()const{
+	return value;
+}
+
+JsonUnit* JsonString::getChild(const char*key){
+	throw unabledFunction;
+}
+
+const JsonUnit* JsonString::getChild(const char*key) const{
+	throw unabledFunction;
+}
+
+JsonUnit* JsonString::getChild(int32 index){
+	throw unabledFunction;
+}
+
+const JsonUnit* JsonString::getChild(int32 index) const{
+	throw unabledFunction;
+}
+
+JsonObject::JsonObject():handle(s_objDatas.GetHandle(this)){
+
+}
+
+JsonObject::~JsonObject(){
+	s_objDatas.ReleaseHandle(handle);
 }
 
 }
