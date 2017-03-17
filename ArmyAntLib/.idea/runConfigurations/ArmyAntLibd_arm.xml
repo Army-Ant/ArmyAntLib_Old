@@ -1,8 +1,0 @@
-<component name="ProjectRunConfigurationManager">
-  <configuration default="false" name="ArmyAntLibd_arm" type="CMakeRunConfiguration" factoryName="Application" WORKING_DIR="" PASS_PARENT_ENVS="TRUE" PROJECT_NAME="ArmyAntLib" TARGET_NAME="ArmyAntLib" CONFIG_NAME="Debug">
-    <envs>
-      <env name="TAR_MAC" value="arm" />
-    </envs>
-    <method />
-  </configuration>
-</component>
