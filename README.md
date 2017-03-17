@@ -2,7 +2,6 @@
 
 Library Name			:	ArmyAntLib(Win32) / libArmyAnt(Unix)
 Development Language	:	C++
-Supported Languages		:	C++, C, Java, Python, C#(Unrealized), Swift(Unrealized)
 Supported Platform		:	Win32, DotNet, Linux, FreeBSD, Android, macOS, iOS
 Development IDEs		:	Microsoft Visual Studio 2015, JetBrains CLion, Apple XCode(Unrealized)
 Usage					:	The C++ basic classes library for multi platforms, and its bridge interface for many other languages
@@ -62,7 +61,6 @@ Using the Python library:
 
 庫名		：	ArmyAntLib（Win32）/ libArmyAnt（Unix）
 開發語言	：	C++
-支持語言	：	C++，C，Java，Python，C#（未實現），Swift（未實現）
 支持平臺	：	Win32，DotNet，Linux，FreeBSD，Android，macOS，iOS
 生成工具	：	Microsoft Visual Studio 2015，JetBrains CLion，Apple XCode（未實現）
 作用		：	跨平臺基礎操作類別庫
@@ -120,7 +118,6 @@ Using the Python library:
 
 库名		:	ArmyAntLib(Win32) / libArmyAnt(Unix)
 开发语言	:	C++
-支持语言	:	C++, C, Java, Python, C#(未实现), Swift(未实现)
 支持平台	:	Win32, DotNet, Linux, FreeBSD, Android, macOS, iOS
 生成工具	:	Microsoft Visual Studio 2015, JetBrains CLion, Apple XCode(未实现)
 作用		:	跨平台基础操作类库
