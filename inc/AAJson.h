@@ -44,22 +44,22 @@ public:
 	virtual ~JsonUnit(){};
 
 public:
-	virtual int toJsonString(char*str)const=0;
+	virtual uint32 toJsonString(char*str)const=0;
+	virtual uint32 getJsonStringLength()const = 0;
 	virtual bool fromJsonString(const char*str)=0;
 	virtual EJsonValueType getType()const=0;
-	virtual bool getBoolean()const = 0;
-	virtual int32 getInteger()const = 0;
-	virtual int64 getLong()const = 0;
-	virtual double getDouble()const = 0;
-	virtual const char* getString()const = 0;
-	virtual JsonUnit* getChild(const char*key) = 0;
-	virtual const JsonUnit* getChild(const char*key)const = 0;
-	virtual JsonUnit* getChild(int32 index) = 0;
-	virtual const JsonUnit* getChild(int32 index)const = 0;
+
 
 public:
-	static const JsonUnit& undefined;
-	static const JsonUnit& jsonNull;
+	static JsonUnit* Create(const char*value);
+	static bool Release(JsonUnit*& ptr);
+
+public:
+	static JsonUnit* undefined;
+	static JsonUnit* jsonNull;
+
+private:
+	bool isCreated = false;
 };
 
 class ARMYANTLIB_API JsonBoolean : public JsonUnit{
@@ -68,22 +68,17 @@ public:
 	virtual ~JsonBoolean();
 
 public:
-	virtual int toJsonString(char*str)const override;
+	virtual uint32 toJsonString(char*str)const override;
+	virtual uint32 getJsonStringLength()const override;
 	virtual bool fromJsonString(const char*str)override;
 	virtual EJsonValueType getType()const override{ return EJsonValueType::Boolean; };
-	virtual bool getBoolean()const override;
-	virtual int32 getInteger()const override;
-	virtual int64 getLong()const override;
-	virtual double getDouble()const override;
-	virtual const char* getString()const override;
-	virtual JsonUnit* getChild(const char*key) override;
-	virtual const JsonUnit* getChild(const char*key)const override;
-	virtual JsonUnit* getChild(int32 index) override;
-	virtual const JsonUnit* getChild(int32 index)const override;
 
 public:
-	static const JsonBoolean& true_;
-	static const JsonBoolean& false_;
+	bool getBoolean()const;
+
+public:
+	static JsonBoolean* true_;
+	static JsonBoolean* false_;
 
 private:
 	bool value;
@@ -95,22 +90,19 @@ public:
 	virtual ~JsonNumeric();
 
 public:
-	virtual int toJsonString(char*str)const override;
+	virtual uint32 toJsonString(char*str)const override;
+	virtual uint32 getJsonStringLength()const override;
 	virtual bool fromJsonString(const char*str)override;
 	virtual EJsonValueType getType()const override{ return EJsonValueType::Numeric; }
-	virtual bool getBoolean()const override;
-	virtual int32 getInteger()const override;
-	virtual int64 getLong()const override;
-	virtual double getDouble()const override;
-	virtual const char* getString()const override;
-	virtual JsonUnit* getChild(const char*key) override;
-	virtual const JsonUnit* getChild(const char*key)const override;
-	virtual JsonUnit* getChild(int32 index) override;
-	virtual const JsonUnit* getChild(int32 index)const override;
 
 public:
-	static const JsonNumeric& nan;
-	static const JsonNumeric& infinity;
+	virtual int32 getInteger()const;
+	virtual int64 getLong()const;
+	virtual double getDouble()const;
+
+public:
+	static JsonNumeric* nan;
+	static JsonNumeric* infinity;
 
 private:
 	union{
@@ -127,18 +119,13 @@ public:
 	virtual ~JsonString();
 
 public:
-	virtual int toJsonString(char*str)const override;
+	virtual uint32 toJsonString(char*str)const override;
+	virtual uint32 getJsonStringLength()const override;
 	virtual bool fromJsonString(const char*str)override;
 	virtual EJsonValueType getType()const override{ return EJsonValueType::String; };
-	virtual bool getBoolean()const override;
-	virtual int32 getInteger()const override;
-	virtual int64 getLong()const override;
-	virtual double getDouble()const override;
-	virtual const char* getString()const override;
-	virtual JsonUnit* getChild(const char*key) override;
-	virtual const JsonUnit* getChild(const char*key)const override;
-	virtual JsonUnit* getChild(int32 index) override;
-	virtual const JsonUnit* getChild(int32 index)const override;
+
+public:
+	const char* getString()const;
 
 private:
 	char* value;
@@ -151,18 +138,16 @@ public:
 	virtual ~JsonObject();
 
 public:
-	virtual int toJsonString(char*str)const override;
+	virtual uint32 toJsonString(char*str)const override;
+	virtual uint32 getJsonStringLength()const override;
 	virtual bool fromJsonString(const char*str)override;
 	virtual EJsonValueType getType()const override{ return EJsonValueType::Object; }
-	virtual bool getBoolean()const override;
-	virtual int32 getInteger()const override;
-	virtual int64 getLong()const override;
-	virtual double getDouble()const override;
-	virtual const char* getString()const override;
-	virtual JsonUnit* getChild(const char*key) override;
-	virtual const JsonUnit* getChild(const char*key)const override;
-	virtual JsonUnit* getChild(int32 index) override;
-	virtual const JsonUnit* getChild(int32 index)const override;
+
+public:
+	virtual JsonUnit* getChild(const char*key);
+	virtual const JsonUnit* getChild(const char*key)const;
+	virtual bool putChild(const char*key, JsonUnit*value);
+	virtual bool removeChild(const char*key);
 
 public:
 	const uint32 handle;
@@ -174,23 +159,28 @@ public:
 	virtual ~JsonArray();
 
 public:
-	virtual int toJsonString(char*str)const override;
+	virtual uint32 toJsonString(char*str)const override;
+	virtual uint32 getJsonStringLength()const override;
 	virtual bool fromJsonString(const char*str)override;
 	virtual EJsonValueType getType()const override{ return EJsonValueType::Array; };
-	virtual bool getBoolean()const override;
-	virtual int32 getInteger()const override;
-	virtual int64 getLong()const override;
-	virtual double getDouble()const override;
-	virtual const char* getString()const override;
-	virtual JsonUnit* getChild(const char*key) override;
+
+public:
+	virtual JsonUnit* getChild(const char*key)override;
 	virtual const JsonUnit* getChild(const char*key)const override;
-	virtual JsonUnit* getChild(int32 index) override;
-	virtual const JsonUnit* getChild(int32 index)const override;
+	virtual bool putChild(const char*, JsonUnit*value)override;
+	virtual bool removeChild(const char*key)override;
+
+public:
+	JsonUnit* getChild(int32 index);
+	const JsonUnit* getChild(int32 index)const;
+	int32 putChild(JsonUnit*value);
+	bool insertChild(int32 index, JsonUnit*value);
+	bool removeChild(int32 key);
 };
 
-class ARMYANTLIB_API JsonException : public std::exception{
+class JsonException : public std::exception{
 public:
-	JsonException(const char* msg);
+	JsonException(const char* msg) :std::exception(msg){};
 };
 
 }

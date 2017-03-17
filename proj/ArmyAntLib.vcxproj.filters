@@ -58,9 +58,6 @@
     <ClInclude Include="..\inc\AAConfiguration.h">
       <Filter>data</Filter>
     </ClInclude>
-    <ClInclude Include="..\inc\AAMessageQueue.h">
-      <Filter>algorithm</Filter>
-    </ClInclude>
     <ClInclude Include="..\inc\AANeuron.hpp">
       <Filter>algorithm</Filter>
     </ClInclude>
@@ -99,6 +96,9 @@
     </ClInclude>
     <ClInclude Include="..\inc\AAJson.h">
       <Filter>data</Filter>
+    </ClInclude>
+    <ClInclude Include="..\inc\AAMessageQueue.h">
+      <Filter>tool</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

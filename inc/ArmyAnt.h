@@ -34,10 +34,14 @@
 #ifndef ARMY_ANT_H_2015_11_11
 #define ARMY_ANT_H_2015_11_11
 
+// The common library header
+#include "AA_start.h"
 // Base symbol defination
 #include "AADefine.h"
 // Base information interface
 #include "ArmyAntLib.h"
+// Basic common fragment codes
+#include "AAFragment.h"
 
 // Template class of C++ class helper
 #include "AAClassPrivateHandle.hpp"
@@ -51,6 +55,8 @@
 #include "AAStateMachine.hpp"
 // Template class for neuron struct
 #include "AANeuron.hpp"
+// Template class for neuron network
+#include "AANeuronNetwork.hpp"
 
 // File stream class, to work in disk file, memory, name pipe, com, network
 #include "AAIStream.h"
@@ -58,21 +64,27 @@
 #include "AAIStream_Pipe.h"
 #include "AAIStream_Memory.h"
 #include "AAIStream_Com.h"
-// Java native interface using tools
-#include "AAJNITools.h"
+// Socket
+#include "AASocket.h"
+
 // AES encoding and decoding class
 #include "AAAes.h"
 // Binary data packer and unpacker class, used to make file or socket datas for program
 #include "AABinary.h"
-// Message queue
-#include "AAMessageQueue.h"
-// Socket
-#include "AASocket.h"
 // Configuration text (xml, ini, json)
 #include "AAConfiguration.h"
+// The JSON file encoder and decoder
+#include "AAJson.h"
+
+// Message queue
+#include "AAMessageQueue.h"
+
+// Mathematic library classes
+#include "AAMath.h"
+#include "AAMathStructs.h"
 
 
-
+// The common library header foot
 #include "AA_end.h"
 
 #endif // ARMY_ANT_H_2015_11_11
