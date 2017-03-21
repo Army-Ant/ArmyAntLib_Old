@@ -44,9 +44,9 @@
 
 #ifdef OS_ANDROID
 
-#elif defined OS_MAC  // ifdef OS_ANDROID
+#elif defined OS_MACOS  // ifdef OS_ANDROID
 
-#endif // ifdef OS_ANDROID    elif defined OS_MAC
+#endif // ifdef OS_ANDROID    elif defined OS_MACOS
 
 #endif // ifdef OS_WINDOWS    elif defined OS_UNIX
 

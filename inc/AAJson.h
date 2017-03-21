@@ -48,7 +48,14 @@ public:
 	virtual uint32 getJsonStringLength()const = 0;
 	virtual bool fromJsonString(const char*str)=0;
 	virtual EJsonValueType getType()const=0;
+	virtual bool isObject()const final;
+	virtual bool isDefined()const final;
+	virtual bool lowEquals(const JsonUnit&value)const;
+	virtual bool highEquals(const JsonUnit&value)const;
 
+public:
+	virtual bool operator ==(const JsonUnit&value)const;
+	virtual bool operator !=(const JsonUnit&value)const;
 
 public:
 	static JsonUnit* Create(const char*value);

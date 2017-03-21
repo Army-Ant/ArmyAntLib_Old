@@ -45,4 +45,49 @@
 
 #endif // _WIN32
 
+// Defination macros comments:
+
+//	language setting:
+//		_cplusplus:
+//	debug settings:
+//		DEBUG:
+//		NDEBUG:
+//		AA_IS_DEBUG:
+//	target machine bit setting:
+//		_32BIT:
+//		_64BIT:
+//	target machine type setting:
+//		_x86:
+//		_arm:
+//	used library type setting
+//		AA_USE_STATIC:
+//	target OS type setting:
+//		OS_WINDOWS:
+//			OS_WP8:
+//			OS_WINDOWS_SERVER:
+//			OS_WINDOWS_OLD:
+//		OS_UNIX:
+//			OS_LINUX:
+//				OS_DEBIAN:
+//				OS_UBUNTU:
+//				OS_CENTOS:
+//				OS_FEDORA:
+//				OS_ORACLE:
+//				OS_CHROMEOS:
+//				OS_ANDROID:
+//				OS_DEEPINOS:
+//				OS_YUNOS:
+//			OS_BSD:
+//				OS_FREEBSD:
+//				OS_MACOS:
+//				OS_IOS:
+//	compiler and build-tool setting:
+//		_MSVC:
+//		_CMAKE:
+//		_XCODE:
+//	The macros which will be added in future:
+//		
+
+
+
 #endif // AA_START_H_2015_11_11
