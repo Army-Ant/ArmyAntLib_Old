@@ -64,47 +64,48 @@ namespace Constant {
 
 // Mathimatic constants
 const double c_natrualBase = 2.7182818284590452353;	// 自然对数底
-const double c_pi =	3.1415926535897932384;			// 圆周率
+const double c_pi = 3.1415926535897932384;			// 圆周率
 const double c_goldenScale = 0.6180339887498948482;	// 黄金分割比
 
 // Physics constants
-const int32 c_lightVacuum = AA_INTEGER(299792458,i32);	// (m/s)	光速
+const int32 c_lightVacuum = AA_INTEGER(299792458, i32);	// (m/s)	光速
 const float c_gravitation = 6.67310e-11f;	// (m^3/(kg*s^2))	引力常数
 const double c_planck = 6.6260687652e-34;	// (J*s)	普朗克常量
 const double c_elementaryCharge = 1.60217646263e-19;	// (C)	电子电荷量
-const int64 c_lightYear = AA_INTEGER(9460730472580800,i64);	// (m)	光年
+const int64 c_lightYear = AA_INTEGER(9460730472580800, i64);	// (m)	光年
 const double c_electronVolt = 1.60217646263e-19;	// (J)	电子伏
 const double c_avogadro = 6.0221422026e23;		// 阿伏伽德罗常量(常数), 摩尔质量系数
 
 // Binary units conversion
-const int16 c_2xK = AA_INTEGER(0b10000000000,i16);
-const int32 c_2xM = AA_INTEGER(0b100000000000000000000,i32);
-const int32 c_2xG = AA_INTEGER(0b1000000000000000000000000000000,i32);
-const int64 c_2xT = AA_INTEGER(0b10000000000000000000000000000000000000000,i64);
-const int64 c_2xP = AA_INTEGER(0b100000000000000000000000000000000000000000000000000,i64);
-const int64 c_2xE = AA_INTEGER(0b1000000000000000000000000000000000000000000000000000000000000,i64);
+const int16 c_2xK = AA_INTEGER(0b10000000000, i16);
+const int32 c_2xM = AA_INTEGER(0b100000000000000000000, i32);
+const int32 c_2xG = AA_INTEGER(0b1000000000000000000000000000000, i32);
+const int64 c_2xT = AA_INTEGER(0b10000000000000000000000000000000000000000, i64);
+const int64 c_2xP = AA_INTEGER(0b100000000000000000000000000000000000000000000000000, i64);
+const int64 c_2xE = AA_INTEGER(0b1000000000000000000000000000000000000000000000000000000000000, i64);
 
 }
 
 namespace Fragment {
 
-template <class NUM1, class NUM2> 
-inline NUM1 min(NUM1 num1, NUM2 num2)
-{
+template <class NUM1, class NUM2>
+inline NUM1 min(NUM1 num1, NUM2 num2) {
 	return num1 > num2 ? NUM1(num2) : num1;
 }
 
-template <class NUM1, class NUM2> 
-inline NUM1 max(NUM1 num1, NUM2 num2)
-{
+template <class NUM1, class NUM2>
+inline NUM1 max(NUM1 num1, NUM2 num2) {
 	return num1 < num2 ? NUM1(num2) : num1;
 }
 
+template <class NUM>
+inline NUM abs(NUM num) {
+	return num < NUM(0) ? -num : num;
+}
+
 template<class PTR>
-inline PTR&AA_SAFE_DEL(PTR&ptr)
-{
-	if(ptr != nullptr)
-	{
+inline PTR&AA_SAFE_DEL(PTR&ptr) {
+	if (ptr != nullptr) {
 		delete ptr;
 		ptr = nullptr;
 	}
@@ -112,10 +113,8 @@ inline PTR&AA_SAFE_DEL(PTR&ptr)
 }
 
 template <class PTR>
-inline void AA_SAFE_DELALL(PTR&ptr)
-{
-	if(ptr != nullptr)
-	{
+inline void AA_SAFE_DELALL(PTR&ptr) {
+	if (ptr != nullptr) {
 		delete[] ptr;
 		ptr = nullptr;
 	}

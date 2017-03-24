@@ -26,11 +26,16 @@
 #include "AADefine.h"
 #include "AA_start.h"
 
+#include <cstring>
+
 namespace ArmyAnt {
 
 namespace Infos {
 
-union Version
+// define the version class to get the library version
+// 定义关于版本的结构，用于获取本库的版本
+// TODO: 是否需要附加宏以支持编译时判断库版本？
+union ARMYANTLIB_API Version
 {
 public:
 	uint32 ver;
@@ -48,12 +53,17 @@ public:
 	Version(uint8 bigVer, uint8 smallVer, uint8 patchVer, uint8 testVer);
 
 public:
-	// The version of our library and other referenced libraries
-	// Get our library's version without param
+	// The version of this library and other referenced libraries
+	// 获取本库或者所引用的第三方库的版本号
+	// Get this library's version without param
+	// 若要获取本库版本号，请无参调用
 	// Avaliable param values: boost python
+	// 可选参数：boost, python
 	static const Version GetVersion(const char* obj = nullptr);
 };
 
+// define the runtime enviroment infomation singleton class
+// 定义该单例用于获取关于运行时环境的有关信息
 class ARMYANTLIB_API Enviroment
 {
 public:
@@ -142,19 +152,64 @@ public:
 
 namespace Utils {
 
+// log utilities
+// TODO: 应当专门建立Log类进行Log输出
 namespace Log{
-void Log_Debug(const char* msg);
-void Log_Error(const char* msg);
+ARMYANTLIB_API void Log_Debug(const char* msg);
+ARMYANTLIB_API void Log_Error(const char* msg);
 }
 
+// math utilities
+// TODO: 在Math类工具完成时，应当将这些函数转移到Math模块
 namespace Math{
-double GetRandom(double min, double max);
-bool GetRoll(double percent);
-uint32 GetMultiRoll(double percent);
+ARMYANTLIB_API double GetRandom(double min, double max);
+ARMYANTLIB_API bool GetRoll(double percent);
+ARMYANTLIB_API uint32 GetMultiRoll(double percent);
 }
 
+// string utilities
+// TODO: 应当构建专门的string类，并把这些工具也一并转移过去
 namespace CString{
-bool CleanStringSpaces(char*str);
+enum class Encoding {
+	ANSI_C = 0,
+	IBM_EBCDIC = 1,
+	Unicode = 2,
+	GBK = 4,
+	Utf_7 = 6,
+	Utf_8 = 10,
+	Utf_16 = 2,
+	Utf_32 = 14
+};
+ARMYANTLIB_API float isEncoding(Encoding encoding, char*str);
+ARMYANTLIB_API bool convertEncoding(Encoding from, Encoding to, char*str);
+
+template <class Type_Num = int> inline
+ARMYANTLIB_API bool itoa(char*str, Type_Num num) {
+	if (str == nullptr)
+		return false;
+	std::string ret = "";
+	bool isNegative = num < 0;
+	num = Fragment::abs(num);
+	Type_Num afterPoint = Type_Num(num - uint64(num));
+	Type_Num beforePoint = num - afterPoint;
+	do{
+		ret = (beforePoint % 10 + '0') + ret;
+		beforePoint /= 10;
+	} while (beforePoint != 0);
+	if (num - 0.1f != num) {
+		ret += ".";
+		do {
+			beforePoint *= 10;
+			ret = ret + (char(afterPoint + '0'));
+		} while (beforePoint != 0.0);
+	}
+	if (isNegative)
+		ret = "-" + ret;
+	strcpy(str, ret.c_str());
+	return true;
+}
+
+ARMYANTLIB_API bool CleanStringSpaces(char*str);
 inline std::string CleanStringSpaces(const std::string&str) {
 	if (str == "")
 		return std::string(str);
@@ -166,6 +221,7 @@ inline std::string CleanStringSpaces(const std::string&str) {
 		--last;
 	return str.substr(first, last - first + 1);
 }
+
 
 }
 

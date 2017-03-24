@@ -48,14 +48,14 @@ public:
 	virtual uint32 getJsonStringLength()const = 0;
 	virtual bool fromJsonString(const char*str)=0;
 	virtual EJsonValueType getType()const=0;
-	virtual bool isObject()const final;
+	/*virtual bool isObject()const final;
 	virtual bool isDefined()const final;
 	virtual bool lowEquals(const JsonUnit&value)const;
 	virtual bool highEquals(const JsonUnit&value)const;
 
 public:
 	virtual bool operator ==(const JsonUnit&value)const;
-	virtual bool operator !=(const JsonUnit&value)const;
+	virtual bool operator !=(const JsonUnit&value)const;*/
 
 public:
 	static JsonUnit* Create(const char*value);
@@ -185,10 +185,20 @@ public:
 	bool removeChild(int32 key);
 };
 
-class JsonException : public std::exception{
+class JsonException : public std::exception
+{
 public:
-	JsonException(const char* msg) :std::exception(msg){};
+	JsonException(const char* msg)
+#ifdef OS_WINDOWS
+		:std::exception(msg) {}
+#else
+		: std::exception(), message(msg) {}
+	virtual const char* what()const _GLIBCXX_USE_NOEXCEPT override { return this->message.c_str(); }
+protected:
+	std::string message;
+#endif
 };
+
 
 }
 

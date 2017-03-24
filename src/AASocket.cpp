@@ -100,7 +100,7 @@ inline static in6_addr ToCAddr(const IPAddr_v6&addr)
 #ifdef OS_WINDOWS
 		ret.u.Word[i] = addr.GetWord(i);
 #else
-        ret.__u6_addr.__u6_addr16[i] = addr.GetWord(i);
+        ret.__in6_u.__u6_addr16[i] = addr.GetWord(i);
 #endif
 	}
 	return ret;
