@@ -25,7 +25,7 @@
 #ifndef BASE_HPP_2015_11_11
 #define BASE_HPP_2015_11_11
 
-#include "../inc/AADefine.h"
+#include "../../inc/AADefine.h"
 
 /*
 #ifdef DEBUG

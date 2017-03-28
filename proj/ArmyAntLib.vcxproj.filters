@@ -19,9 +19,6 @@
     <ClInclude Include="..\inc\ArmyAntLib.h">
       <Filter>_base</Filter>
     </ClInclude>
-    <ClInclude Include="..\src\base.hpp">
-      <Filter>_base</Filter>
-    </ClInclude>
     <ClInclude Include="..\inc\C_AADefine.h">
       <Filter>_base</Filter>
     </ClInclude>
@@ -82,9 +79,6 @@
     <ClInclude Include="..\inc\AASocket_ProtocolTypes.txt">
       <Filter>io</Filter>
     </ClInclude>
-    <ClInclude Include="..\src\AAIStream_Private.hxx">
-      <Filter>io</Filter>
-    </ClInclude>
     <ClInclude Include="..\inc\AADigraph.hpp">
       <Filter>algorithm</Filter>
     </ClInclude>
@@ -100,37 +94,43 @@
     <ClInclude Include="..\inc\AAMessageQueue.h">
       <Filter>tool</Filter>
     </ClInclude>
+    <ClInclude Include="..\src\base\base.hpp">
+      <Filter>_base</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\io\AAIStream_Private.hxx">
+      <Filter>io</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="..\src\ArmyAntLib.cpp">
+    <ClCompile Include="..\src\base\ArmyAntLib.cpp">
       <Filter>_base</Filter>
     </ClCompile>
-    <ClCompile Include="..\src\AAAes.cpp">
-      <Filter>data</Filter>
-    </ClCompile>
-    <ClCompile Include="..\src\AABinary.cpp">
-      <Filter>data</Filter>
-    </ClCompile>
-    <ClCompile Include="..\src\AAIStream.cpp">
-      <Filter>io</Filter>
-    </ClCompile>
-    <ClCompile Include="..\src\AAIStream_File.cpp">
-      <Filter>io</Filter>
-    </ClCompile>
-    <ClCompile Include="..\src\AAIStream_Memory.cpp">
-      <Filter>io</Filter>
-    </ClCompile>
-    <ClCompile Include="..\src\AASocket.cpp">
-      <Filter>io</Filter>
-    </ClCompile>
-    <ClCompile Include="..\src\C_AAStream.cpp">
-      <Filter>io</Filter>
-    </ClCompile>
-    <ClCompile Include="..\src\C_AANeuron.cpp">
+    <ClCompile Include="..\src\algorithm\C_AANeuron.cpp">
       <Filter>algorithm</Filter>
     </ClCompile>
-    <ClCompile Include="..\src\AAJson.cpp">
+    <ClCompile Include="..\src\data\AAAes.cpp">
       <Filter>data</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\data\AABinary.cpp">
+      <Filter>data</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\data\AAJson.cpp">
+      <Filter>data</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\io\AAIStream.cpp">
+      <Filter>io</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\io\AAIStream_File.cpp">
+      <Filter>io</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\io\AAIStream_Memory.cpp">
+      <Filter>io</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\io\AASocket.cpp">
+      <Filter>io</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\io\C_AAStream.cpp">
+      <Filter>io</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -163,16 +163,16 @@
     <None Include="make_all.sh">
       <Filter>_not_cpp</Filter>
     </None>
-    <None Include="..\src\build_end.bat">
+    <None Include="..\src\not_cpp\build_end.bat">
       <Filter>_not_cpp</Filter>
     </None>
-    <None Include="..\src\build_end.sh">
+    <None Include="..\src\not_cpp\build_end.sh">
       <Filter>_not_cpp</Filter>
     </None>
-    <None Include="..\src\build_start.bat">
+    <None Include="..\src\not_cpp\build_start.bat">
       <Filter>_not_cpp</Filter>
     </None>
-    <None Include="..\src\build_start.sh">
+    <None Include="..\src\not_cpp\build_start.sh">
       <Filter>_not_cpp</Filter>
     </None>
   </ItemGroup>

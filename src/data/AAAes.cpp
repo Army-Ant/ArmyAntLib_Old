@@ -22,9 +22,9 @@
  * 本文件为内部源码文件, 不会包含在闭源发布的本软件中
  */
 
-#include "base.hpp"
-#include "../inc/AAAes.h"
-#include "../inc/AAClassPrivateHandle.hpp"
+#include "../base/base.hpp"
+#include "../../inc/AAAes.h"
+#include "../../inc/AAClassPrivateHandle.hpp"
 #include <boost/random.hpp>
 #include <memory.h>
 

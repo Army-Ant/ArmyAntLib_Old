@@ -286,10 +286,12 @@
       <OutputFile>$(ProjectDir)out\$(TargetName).xml</OutputFile>
     </Xdcmake>
     <PreBuildEvent>
-      <Command>$(ProjectDir)..\src\build_start.bat $(Configuration) $(ProjectDir)..\ $(TargetName) $(PlatformTarget)</Command>
+      <Command>$(ProjectDir)..\src\not_cpp\build_start.bat $(Configuration) $(ProjectDir)..\ $(TargetName) $(PlatformTarget)</Command>
+      <Message>---------编译前脚本---------------------</Message>
     </PreBuildEvent>
     <PostBuildEvent>
-      <Command>$(ProjectDir)..\src\build_end.bat $(Configuration) $(ProjectDir)..\ $(TargetName) $(PlatformTarget)</Command>
+      <Command>$(ProjectDir)..\src\not_cpp\build_end.bat $(Configuration) $(ProjectDir)..\ $(TargetName) $(PlatformTarget)</Command>
+      <Message>---------生成后脚本---------------------</Message>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|ARM'">
@@ -315,10 +317,12 @@
       <OutputFile>$(ProjectDir)out\$(TargetName).xml</OutputFile>
     </Xdcmake>
     <PreBuildEvent>
-      <Command>$(ProjectDir)..\src\build_start.bat $(Configuration) $(ProjectDir)..\ $(TargetName) $(PlatformTarget)</Command>
+      <Command>$(ProjectDir)..\src\not_cpp\build_start.bat $(Configuration) $(ProjectDir)..\ $(TargetName) $(PlatformTarget)</Command>
+      <Message>---------编译前脚本---------------------</Message>
     </PreBuildEvent>
     <PostBuildEvent>
-      <Command>$(ProjectDir)..\src\build_end.bat $(Configuration) $(ProjectDir)..\ $(TargetName) $(PlatformTarget)</Command>
+      <Command>$(ProjectDir)..\src\not_cpp\build_end.bat $(Configuration) $(ProjectDir)..\ $(TargetName) $(PlatformTarget)</Command>
+      <Message>---------生成后脚本---------------------</Message>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug_Static|Win32'">
@@ -344,10 +348,12 @@
       <OutputFile>$(ProjectDir)out\$(TargetName).xml</OutputFile>
     </Xdcmake>
     <PreBuildEvent>
-      <Command>$(ProjectDir)..\src\build_start.bat $(Configuration) $(ProjectDir)..\ $(TargetName) $(PlatformTarget)</Command>
+      <Command>$(ProjectDir)..\src\not_cpp\build_start.bat $(Configuration) $(ProjectDir)..\ $(TargetName) $(PlatformTarget)</Command>
+      <Message>---------编译前脚本---------------------</Message>
     </PreBuildEvent>
     <PostBuildEvent>
-      <Command>$(ProjectDir)..\src\build_end.bat $(Configuration) $(ProjectDir)..\ $(TargetName) $(PlatformTarget)</Command>
+      <Command>$(ProjectDir)..\src\not_cpp\build_end.bat $(Configuration) $(ProjectDir)..\ $(TargetName) $(PlatformTarget)</Command>
+      <Message>---------生成后脚本---------------------</Message>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug_Static|ARM'">
@@ -373,10 +379,12 @@
       <OutputFile>$(ProjectDir)out\$(TargetName).xml</OutputFile>
     </Xdcmake>
     <PreBuildEvent>
-      <Command>$(ProjectDir)..\src\build_start.bat $(Configuration) $(ProjectDir)..\ $(TargetName) $(PlatformTarget)</Command>
+      <Command>$(ProjectDir)..\src\not_cpp\build_start.bat $(Configuration) $(ProjectDir)..\ $(TargetName) $(PlatformTarget)</Command>
+      <Message>---------编译前脚本---------------------</Message>
     </PreBuildEvent>
     <PostBuildEvent>
-      <Command>$(ProjectDir)..\src\build_end.bat $(Configuration) $(ProjectDir)..\ $(TargetName) $(PlatformTarget)</Command>
+      <Command>$(ProjectDir)..\src\not_cpp\build_end.bat $(Configuration) $(ProjectDir)..\ $(TargetName) $(PlatformTarget)</Command>
+      <Message>---------生成后脚本---------------------</Message>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
@@ -402,10 +410,12 @@
       <OutputFile>$(ProjectDir)out\$(TargetName).xml</OutputFile>
     </Xdcmake>
     <PreBuildEvent>
-      <Command>$(ProjectDir)..\src\build_start.bat $(Configuration) $(ProjectDir)..\ $(TargetName) $(PlatformTarget)</Command>
+      <Command>$(ProjectDir)..\src\not_cpp\build_start.bat $(Configuration) $(ProjectDir)..\ $(TargetName) $(PlatformTarget)</Command>
+      <Message>---------编译前脚本---------------------</Message>
     </PreBuildEvent>
     <PostBuildEvent>
-      <Command>$(ProjectDir)..\src\build_end.bat $(Configuration) $(ProjectDir)..\ $(TargetName) $(PlatformTarget)</Command>
+      <Command>$(ProjectDir)..\src\not_cpp\build_end.bat $(Configuration) $(ProjectDir)..\ $(TargetName) $(PlatformTarget)</Command>
+      <Message>---------生成后脚本---------------------</Message>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug_Static|x64'">
@@ -428,10 +438,12 @@
       <OutputFile>$(ProjectDir)out\$(TargetName).xml</OutputFile>
     </Xdcmake>
     <PreBuildEvent>
-      <Command>$(ProjectDir)..\src\build_start.bat $(Configuration) $(ProjectDir)..\ $(TargetName) $(PlatformTarget)</Command>
+      <Command>$(ProjectDir)..\src\not_cpp\build_start.bat $(Configuration) $(ProjectDir)..\ $(TargetName) $(PlatformTarget)</Command>
+      <Message>---------编译前脚本---------------------</Message>
     </PreBuildEvent>
     <PostBuildEvent>
-      <Command>$(ProjectDir)..\src\build_end.bat $(Configuration) $(ProjectDir)..\ $(TargetName) $(PlatformTarget)</Command>
+      <Command>$(ProjectDir)..\src\not_cpp\build_end.bat $(Configuration) $(ProjectDir)..\ $(TargetName) $(PlatformTarget)</Command>
+      <Message>---------生成后脚本---------------------</Message>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -462,10 +474,12 @@
       <OutputFile>$(ProjectDir)out\$(TargetName).xml</OutputFile>
     </Xdcmake>
     <PreBuildEvent>
-      <Command>$(ProjectDir)..\src\build_start.bat $(Configuration) $(ProjectDir)..\ $(TargetName) $(PlatformTarget)</Command>
+      <Command>$(ProjectDir)..\src\not_cpp\build_start.bat $(Configuration) $(ProjectDir)..\ $(TargetName) $(PlatformTarget)</Command>
+      <Message>---------编译前脚本---------------------</Message>
     </PreBuildEvent>
     <PostBuildEvent>
-      <Command>$(ProjectDir)..\src\build_end.bat $(Configuration) $(ProjectDir)..\ $(TargetName) $(PlatformTarget)</Command>
+      <Command>$(ProjectDir)..\src\not_cpp\build_end.bat $(Configuration) $(ProjectDir)..\ $(TargetName) $(PlatformTarget)</Command>
+      <Message>---------生成后脚本---------------------</Message>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|ARM'">
@@ -497,10 +511,12 @@
       <OutputFile>$(ProjectDir)out\$(TargetName).xml</OutputFile>
     </Xdcmake>
     <PreBuildEvent>
-      <Command>$(ProjectDir)..\src\build_start.bat $(Configuration) $(ProjectDir)..\ $(TargetName) $(PlatformTarget)</Command>
+      <Command>$(ProjectDir)..\src\not_cpp\build_start.bat $(Configuration) $(ProjectDir)..\ $(TargetName) $(PlatformTarget)</Command>
+      <Message>---------编译前脚本---------------------</Message>
     </PreBuildEvent>
     <PostBuildEvent>
-      <Command>$(ProjectDir)..\src\build_end.bat $(Configuration) $(ProjectDir)..\ $(TargetName) $(PlatformTarget)</Command>
+      <Command>$(ProjectDir)..\src\not_cpp\build_end.bat $(Configuration) $(ProjectDir)..\ $(TargetName) $(PlatformTarget)</Command>
+      <Message>---------生成后脚本---------------------</Message>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -530,10 +546,12 @@
       <OutputFile>$(ProjectDir)out\$(TargetName).xml</OutputFile>
     </Xdcmake>
     <PreBuildEvent>
-      <Command>$(ProjectDir)..\src\build_start.bat $(Configuration) $(ProjectDir)..\ $(TargetName) $(PlatformTarget)</Command>
+      <Command>$(ProjectDir)..\src\not_cpp\build_start.bat $(Configuration) $(ProjectDir)..\ $(TargetName) $(PlatformTarget)</Command>
+      <Message>---------编译前脚本---------------------</Message>
     </PreBuildEvent>
     <PostBuildEvent>
-      <Command>$(ProjectDir)..\src\build_end.bat $(Configuration) $(ProjectDir)..\ $(TargetName) $(PlatformTarget)</Command>
+      <Command>$(ProjectDir)..\src\not_cpp\build_end.bat $(Configuration) $(ProjectDir)..\ $(TargetName) $(PlatformTarget)</Command>
+      <Message>---------生成后脚本---------------------</Message>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release_Static|Win32'">
@@ -553,10 +571,12 @@
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
     </ClCompile>
     <PreBuildEvent>
-      <Command>$(ProjectDir)..\src\build_start.bat $(Configuration) $(ProjectDir)..\ $(TargetName) $(PlatformTarget)</Command>
+      <Command>$(ProjectDir)..\src\not_cpp\build_start.bat $(Configuration) $(ProjectDir)..\ $(TargetName) $(PlatformTarget)</Command>
+      <Message>---------编译前脚本---------------------</Message>
     </PreBuildEvent>
     <PostBuildEvent>
-      <Command>$(ProjectDir)..\src\build_end.bat $(Configuration) $(ProjectDir)..\ $(TargetName) $(PlatformTarget)</Command>
+      <Command>$(ProjectDir)..\src\not_cpp\build_end.bat $(Configuration) $(ProjectDir)..\ $(TargetName) $(PlatformTarget)</Command>
+      <Message>---------生成后脚本---------------------</Message>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release_Static|ARM'">
@@ -577,10 +597,12 @@
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
     </ClCompile>
     <PreBuildEvent>
-      <Command>$(ProjectDir)..\src\build_start.bat $(Configuration) $(ProjectDir)..\ $(TargetName) $(PlatformTarget)</Command>
+      <Command>$(ProjectDir)..\src\not_cpp\build_start.bat $(Configuration) $(ProjectDir)..\ $(TargetName) $(PlatformTarget)</Command>
+      <Message>---------编译前脚本---------------------</Message>
     </PreBuildEvent>
     <PostBuildEvent>
-      <Command>$(ProjectDir)..\src\build_end.bat $(Configuration) $(ProjectDir)..\ $(TargetName) $(PlatformTarget)</Command>
+      <Command>$(ProjectDir)..\src\not_cpp\build_end.bat $(Configuration) $(ProjectDir)..\ $(TargetName) $(PlatformTarget)</Command>
+      <Message>---------生成后脚本---------------------</Message>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release_Static|x64'">
@@ -597,10 +619,12 @@
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
     </ClCompile>
     <PreBuildEvent>
-      <Command>$(ProjectDir)..\src\build_start.bat $(Configuration) $(ProjectDir)..\ $(TargetName) $(PlatformTarget)</Command>
+      <Command>$(ProjectDir)..\src\not_cpp\build_start.bat $(Configuration) $(ProjectDir)..\ $(TargetName) $(PlatformTarget)</Command>
+      <Message>---------编译前脚本---------------------</Message>
     </PreBuildEvent>
     <PostBuildEvent>
-      <Command>$(ProjectDir)..\src\build_end.bat $(Configuration) $(ProjectDir)..\ $(TargetName) $(PlatformTarget)</Command>
+      <Command>$(ProjectDir)..\src\not_cpp\build_end.bat $(Configuration) $(ProjectDir)..\ $(TargetName) $(PlatformTarget)</Command>
+      <Message>---------生成后脚本---------------------</Message>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
@@ -635,30 +659,26 @@
     <ClInclude Include="..\inc\C_AANeuron.h" />
     <ClInclude Include="..\inc\C_AAStream.h" />
     <ClInclude Include="..\inc\C_ArmyAnt.h" />
-    <ClInclude Include="..\src\base.hpp" />
+    <ClInclude Include="..\src\base\base.hpp" />
+    <ClInclude Include="..\src\io\AAIStream_Private.hxx" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="..\src\AAAes.cpp" />
-    <ClCompile Include="..\src\AABinary.cpp" />
-    <ClCompile Include="..\src\AAIStream.cpp" />
-    <ClCompile Include="..\src\AAIStream_File.cpp" />
-    <ClCompile Include="..\src\AAIStream_Memory.cpp" />
-    <ClCompile Include="..\src\AAJson.cpp" />
-    <ClCompile Include="..\src\AASocket.cpp" />
-    <ClCompile Include="..\src\ArmyAntLib.cpp" />
-    <ClCompile Include="..\src\C_AANeuron.cpp" />
-    <ClCompile Include="..\src\C_AAStream.cpp" />
+    <ClCompile Include="..\src\algorithm\C_AANeuron.cpp" />
+    <ClCompile Include="..\src\base\ArmyAntLib.cpp" />
+    <ClCompile Include="..\src\data\AAAes.cpp" />
+    <ClCompile Include="..\src\data\AABinary.cpp" />
+    <ClCompile Include="..\src\data\AAJson.cpp" />
+    <ClCompile Include="..\src\io\AAIStream.cpp" />
+    <ClCompile Include="..\src\io\AAIStream_File.cpp" />
+    <ClCompile Include="..\src\io\AAIStream_Memory.cpp" />
+    <ClCompile Include="..\src\io\AASocket.cpp" />
+    <ClCompile Include="..\src\io\C_AAStream.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\src\AAIStream_Private.hxx">
-      <FileType>Document</FileType>
-    </ClInclude>
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="..\src\build_end.bat" />
-    <None Include="..\src\build_end.sh" />
-    <None Include="..\src\build_start.bat" />
-    <None Include="..\src\build_start.sh" />
+    <None Include="..\src\not_cpp\build_end.bat" />
+    <None Include="..\src\not_cpp\build_end.sh" />
+    <None Include="..\src\not_cpp\build_start.bat" />
+    <None Include="..\src\not_cpp\build_start.sh" />
     <None Include="make.sh" />
     <None Include="make_all.sh" />
   </ItemGroup>

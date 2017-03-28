@@ -22,9 +22,9 @@
 * 本文件为内部源码文件, 不会包含在闭源发布的本软件中
 */
 
-#include "../inc/AAJson.h"
-#include "../inc/ArmyAntLib.h"
-#include "../inc/AAClassPrivateHandle.hpp"
+#include "../../inc/AAJson.h"
+#include "../../inc/ArmyAntLib.h"
+#include "../../inc/AAClassPrivateHandle.hpp"
 
 #include <inttypes.h>
 #include <map>

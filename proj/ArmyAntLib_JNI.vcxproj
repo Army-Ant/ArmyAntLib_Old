@@ -479,10 +479,10 @@
     </BuildLog>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="..\src\AAJNITools.cpp" />
+    <ClInclude Include="..\inc\AAJNITools.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\inc\AAJNITools.h" />
+    <ClCompile Include="..\src\JNI\AAJNITools.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

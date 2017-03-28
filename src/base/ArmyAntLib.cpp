@@ -22,8 +22,8 @@
 * 本文件为内部源码文件, 不会包含在闭源发布的本软件中
 */
 
-#include "base.hpp"
-#include "../inc/ArmyAntLib.h"
+#include "../base/base.hpp"
+#include "../../inc/ArmyAntLib.h"
 #include <boost/random.hpp>
 
 namespace ArmyAnt {

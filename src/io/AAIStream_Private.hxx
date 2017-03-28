@@ -25,8 +25,8 @@
 #ifndef AA_ISTREAM_PRIVATE_HEADER_2016_5_11
 #define AA_ISTREAM_PRIVATE_HEADER_2016_5_11
 
-#include "../inc/AAClassPrivateHandle.hpp"
-#include "../inc/AAIStream.h"
+#include "../../inc/AAClassPrivateHandle.hpp"
+#include "../../inc/AAIStream.h"
 
 namespace ArmyAnt{
 
