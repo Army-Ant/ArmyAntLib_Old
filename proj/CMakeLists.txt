@@ -108,16 +108,16 @@ add_definitions(
 )
 
 set(CXX_SOURCE_FILES
-        ../src/ArmyAntLib.cpp
-        ../src/AAAes.cpp
-        ../src/AABinary.cpp
-        ../src/AAIStream.cpp
-        ../src/AAIStream_File.cpp
-        ../src/AAIStream_Memory.cpp
-		../src/AASocket.cpp
-        ../src/C_AAStream.cpp
-        ../src/C_AANeuron.cpp
-		../src/AAJNITools.cpp)
+        ../src/base/ArmyAntLib.cpp
+        ../src/data/AAAes.cpp
+        ../src/data/AABinary.cpp
+        ../src/data/AAJson.cpp
+        ../src/io/AAIStream.cpp
+        ../src/io/AAIStream_File.cpp
+        ../src/io/AAIStream_Memory.cpp
+		../src/io/AASocket.cpp
+        ../src/io/C_AAStream.cpp
+        ../src/algorithm/C_AANeuron.cpp)
 
 add_library(${CMAKE_TAR_NAME} SHARED ${CXX_SOURCE_FILES})
 TARGET_LINK_LIBRARIES(${CMAKE_TAR_NAME} dl)

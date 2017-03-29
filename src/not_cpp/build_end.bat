@@ -46,9 +46,11 @@ copy %ProjectPath%external\boost\stage\%TargetLib%\libboost_regex-vc140-mt-gd-1_
 copy %ProjectPath%external\boost\stage\%TargetLib%\libboost_regex-vc140-mt-1_59.lib %ProjectPath%lib\%TargetLib%\ /Y
 )
 
+@echo on
 echo "Move the reference static library"
 copy %ProjectPath%bin\%TargetName%.lib %ProjectPath%lib\
-del %ProjectPath%bin\%TargetName%.lib
+copy %ProjectPath%bin\%TargetName%.dll %ProjectPath%test\
+::del %ProjectPath%bin\%TargetName%.lib
 
 :End
 @echo on

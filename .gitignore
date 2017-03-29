@@ -199,3 +199,6 @@ $RECYCLE.BIN/
 *.ipch
 *.db-shm
 *.db-wal
+/proj/Win32
+.vs
+/test/*.dll

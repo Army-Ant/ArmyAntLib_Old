@@ -23,7 +23,7 @@
 #ifndef A_A_END_2015_11_11
 #define A_A_END_2015_11_11
 
-#ifndef ARMYANTLIB_EXPORTS
+#if !defined ARMYANTLIB_EXPORTS && ! defined AA_DONOT_AUTO_LINK_
 
 #if defined DEBUG || defined _DEBUG
 #define AA_IS_DEBUG "_d"
@@ -78,6 +78,6 @@ static const auto&armyAnt = []()
 #undef AA_TARGET_MACHINE
 #undef AA_LIB_TYPE
 
-#endif // ARMYANTLIB_EXPORTS
+#endif //  !defined ARMYANTLIB_EXPORTS && ! defined AA_DONOT_AUTO_LINK_
 
 #endif // A_A_END_2015_11_11

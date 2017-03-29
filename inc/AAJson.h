@@ -58,8 +58,8 @@ public:
 	virtual bool operator !=(const JsonUnit&value)const;*/
 
 public:
-	static JsonUnit* Create(const char*value);
-	static bool Release(JsonUnit*& ptr);
+	static JsonUnit* create(const char*value);
+	static bool release(JsonUnit*& ptr);
 
 public:
 	static JsonUnit* undefined;
@@ -118,6 +118,7 @@ private:
 		double dvalue;
 	} value;
 	int8 whatvalue;  // 0 means no value, and 1-3 means the value type in union;
+	int8 rightLength;
 };
 
 class ARMYANTLIB_API JsonString : public JsonUnit{
