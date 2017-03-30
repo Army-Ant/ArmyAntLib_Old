@@ -77,9 +77,6 @@ public:
 	bool ClearInfo();
 	bool IsEmpty()const;
 
-public:
-	const uint64 handle;
-
 	AA_FORBID_COPY_CTOR(BinaryParser);
 	AA_FORBID_ASSGN_OPR(BinaryParser);
 };

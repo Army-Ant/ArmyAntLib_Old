@@ -210,16 +210,19 @@ ARMYANTLIB_API bool itoa(char*str, Type_Num num) {
 }
 
 ARMYANTLIB_API bool CleanStringSpaces(char*str);
-inline std::string CleanStringSpaces(const std::string&str) {
-	if (str == "")
-		return std::string(str);
-	int first = 0;
-	while (str[first] == ' ' || str[first] == '\n' || str[first] == '\r' || str[first] == '\t')
-		++first;
-	int last = int(str.size()) - 1;
-	while (str[last] == ' ' || str[last] == '\n' || str[last] == '\r' || str[last] == '\t' || str[last] == '\0')
-		--last;
-	return str.substr(first, last - first + 1);
+inline std::string CleanStringSpaces(const std::string&str)
+{
+    if (str == "")
+        return std::string(str);
+    int first = 0;
+    while (str[first] == ' ' || str[first] == '\n' || str[first] == '\r' || str[first] == '\t')
+        ++first;
+    int last = int(str.size()) - 1;
+    while (str[last] == ' ' || str[last] == '\n' || str[last] == '\r' || str[last] == '\t' || str[last] == '\0')
+        --last;
+    if (first == 0 && last == str.size() - 1)
+        return str;
+    return str.substr(first, last - first + 1);
 }
 
 

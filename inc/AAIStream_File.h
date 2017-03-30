@@ -44,7 +44,7 @@ class ARMYANTLIB_API File : public StaticStream
 {
 public:
 	File();
-	~File();
+	virtual ~File();
 
 public:
 	/* 设定流的打开规则

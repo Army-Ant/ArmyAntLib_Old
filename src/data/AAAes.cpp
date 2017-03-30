@@ -32,13 +32,16 @@ namespace ArmyAnt {
 
 namespace AES {
 
+class ByteEncoder_Private_Ref;
 class ByteEncoder_Private;
+class RoundSetting_Private_Ref;
 class RoundSetting_Private;
+class Parser_Private_Ref;
 class Parser_Private;
 
-static ClassPrivateHandleManager<ByteEncoder, ByteEncoder_Private> byteEncoder_manager;
-static ClassPrivateHandleManager<RoundSetting, RoundSetting_Private> roundSetting_manager;
-static ClassPrivateHandleManager<Parser, Parser_Private> parserManager;
+static ClassPrivateHandleManager<ByteEncoder, ByteEncoder_Private_Ref> byteEncoder_manager;
+static ClassPrivateHandleManager<RoundSetting, RoundSetting_Private_Ref> roundSetting_manager;
+static ClassPrivateHandleManager<Parser, Parser_Private_Ref> parserManager;
 
 /***************** Code : ByteEncoder *******************************************************************/
 
@@ -63,6 +66,35 @@ public:
 
 public:
 	static const int16 c_SBoxLength = 256;
+};
+class ByteEncoder_Private_Ref
+{
+public:
+    ByteEncoder_Private_Ref(ByteEncoder_Private* reffer = nullptr)
+    {
+        if (reffer == nullptr)
+            this->reffer = new ByteEncoder_Private();
+        else
+        {
+            this->reffer = reffer;
+            ++(reffer->refCount);
+        }
+    }
+    ~ByteEncoder_Private_Ref()
+    {
+        --(reffer->refCount);
+        if (reffer->refCount <= 0)
+            delete reffer;
+    }
+    ByteEncoder_Private&operator ->()
+    {
+        return *reffer;
+    }
+    ByteEncoder_Private&operator*()
+    {
+        return *reffer;
+    }
+    ByteEncoder_Private* reffer = nullptr;
 };
 
 ByteEncoder_Private::ByteEncoder_Private()
@@ -146,37 +178,27 @@ bool ByteEncoder_Private::CheckObayRule()
 }
 
 ByteEncoder::ByteEncoder()
-	:handle(byteEncoder_manager.GetHandle(this))
 {
+    byteEncoder_manager.GetHandle(this);
 }
 
 
 ByteEncoder::ByteEncoder(const ByteEncoder&value)
-	: handle(value.handle)
 {
-	AAAssert(byteEncoder_manager[value.handle] != nullptr,);
-	byteEncoder_manager[value.handle]->refCount++;
+    byteEncoder_manager.GetHandle(this, new ByteEncoder_Private_Ref(byteEncoder_manager[&value]->reffer));
 }
 
-
-ByteEncoder::ByteEncoder(uint32 encoderHandle)
-	:handle(encoderHandle)
-{
-	AAAssert(byteEncoder_manager[encoderHandle] != nullptr,);
-	byteEncoder_manager[encoderHandle]->refCount++;
-}
 
 ByteEncoder::~ByteEncoder()
 {
-	if(--byteEncoder_manager[handle]->refCount <= 0)
-		byteEncoder_manager.ReleaseHandle(handle);
+    delete byteEncoder_manager. ReleaseHandle(this);
 }
 
 
 bool ByteEncoder::InputData(const uint8 elems[ByteEncoder_Private::c_SBoxLength], bool needCheck/* = false*/)
 {
 	AAAssert(elems != nullptr,false);
-	auto hd = byteEncoder_manager[handle];
+	auto hd = byteEncoder_manager[this]->reffer;
 	if(needCheck)
 	{
 		//将元数据拷贝到临时区域，失败时将还原
@@ -203,24 +225,22 @@ bool ByteEncoder::InputBackData(const uint8 elems[ByteEncoder_Private::c_SBoxLen
 	//输入数据，然后求反
 	if(!InputData(elems, needCheck))
 		return false;
-	return byteEncoder_manager[handle]->TurnToBack();
+	return byteEncoder_manager[this]->reffer->TurnToBack();
 }
 
 
-bool ByteEncoder::CopiedFromAnother(const ByteEncoder another, bool needCheck /*= false*/)
+bool ByteEncoder::CopiedFromAnother(const ByteEncoder&another, bool needCheck /*= false*/)
 {
 	//找不到元数据
-	if(byteEncoder_manager[another.handle] == nullptr)
+	if(byteEncoder_manager[&another] == nullptr)
 		return false;
 	//要求检查，而元数据不符合规则
-	if(needCheck&&!byteEncoder_manager[another.handle]->CheckObayRule())
+	if(needCheck&&!byteEncoder_manager[&another]->reffer->CheckObayRule())
 		return false;
 	//解除原来的本数据类，引用计数器-1
-	if(--byteEncoder_manager[handle]->refCount <= 0)
-		byteEncoder_manager.ReleaseHandle(handle);
+    delete byteEncoder_manager. ReleaseHandle(this);
 	//绑定目标数据类的句柄，引用计数器+1
-	*const_cast<uint32*>(&this->handle) = another.handle;
-	byteEncoder_manager[handle]->refCount++;
+    byteEncoder_manager.GetHandle(this, new ByteEncoder_Private_Ref(byteEncoder_manager[&another]->reffer));
 	return true;
 }
 
@@ -228,7 +248,7 @@ bool ByteEncoder::CopiedFromAnother(const ByteEncoder another, bool needCheck /*
 bool ByteEncoder::GetData(uint8 elems[ByteEncoder_Private::c_SBoxLength]) const
 {
 	AAAssert(elems != nullptr,false);
-	memcpy(elems, byteEncoder_manager[handle]->data, ByteEncoder_Private::c_SBoxLength);
+	memcpy(elems, byteEncoder_manager[this]->reffer->data, ByteEncoder_Private::c_SBoxLength);
 	return true;
 }
 
@@ -236,7 +256,7 @@ bool ByteEncoder::GetData(uint8 elems[ByteEncoder_Private::c_SBoxLength]) const
 bool ByteEncoder::GetBackData(uint8 elems[ByteEncoder_Private::c_SBoxLength]) const
 {
 	ByteEncoder_Private tmp;
-	memcpy(&tmp, byteEncoder_manager[handle], sizeof(ByteEncoder_Private));
+	memcpy(&tmp, byteEncoder_manager[this]->reffer, sizeof(ByteEncoder_Private));
 	tmp.TurnToBack();
 	memcpy(elems, tmp.data, ByteEncoder_Private::c_SBoxLength);
 	return true;
@@ -246,26 +266,26 @@ bool ByteEncoder::GetBackData(uint8 elems[ByteEncoder_Private::c_SBoxLength]) co
 ByteEncoder ByteEncoder::GetBack() const
 {
 	ByteEncoder ret;
-	memcpy(byteEncoder_manager[ret.handle]->data, byteEncoder_manager[handle]->data, ByteEncoder_Private::c_SBoxLength);
-	byteEncoder_manager[ret.handle]->TurnToBack();
+	memcpy(byteEncoder_manager[&ret]->reffer->data, byteEncoder_manager[this]->reffer->data, ByteEncoder_Private::c_SBoxLength);
+	byteEncoder_manager[&ret]->reffer->TurnToBack();
 	return ret;
 }
 
 ByteEncoder& ByteEncoder::operator= (const ByteEncoder&value)
 {
-	AAAssert(byteEncoder_manager[value.handle] != nullptr, *this);
+	AAAssert(byteEncoder_manager[&value] != nullptr, *this);
 	AAAssert(CopiedFromAnother(value), *this);
 	return *this;
 }
 
 uint8& ByteEncoder::operator[](uint8 src)
 {
-	return byteEncoder_manager[handle]->data[src];
+	return byteEncoder_manager[this]->reffer->data[src];
 }
 
 const uint8 ByteEncoder::operator[](uint8 src) const
 {
-	return byteEncoder_manager[handle]->data[src];
+	return byteEncoder_manager[this]->reffer->data[src];
 }
 
 ByteEncoder ByteEncoder::operator*() const
@@ -276,17 +296,18 @@ ByteEncoder ByteEncoder::operator*() const
 const ByteEncoder ByteEncoder::GetRandomEncoder()
 {
 	ByteEncoder ret;
-	byteEncoder_manager[ret.handle]->MakeRandomSBox();
+	byteEncoder_manager[&ret]->reffer->MakeRandomSBox();
 	return ret;
 }
 
 /***************** Code : RoundSetting ******************************************************************/
 
+
 class RoundSetting_Private
 {
 public:
 	uint8 pwd[16] = {0};
-	uint32 encoder = 0xffffffff;
+    ByteEncoder_Private_Ref* encoder = nullptr;
 	uint8 rectWidth = 4;
 	uint16 refCount = 1;
 
@@ -297,8 +318,8 @@ public:
 
 	inline bool ByteEncode(void* dest, const char*src, uint64 length);
 	inline bool ByteDecode(void* dest, const char*src, uint64 length);
-	static bool ByteEncode(uint32 encoder, void* dest, const char*src, uint64 length);
-	static bool ByteDecode(uint32 encoder, void* dest, const char*src, uint64 length);
+	static bool ByteEncode(ByteEncoder_Private_Ref* encoder, void* dest, const char*src, uint64 length);
+	static bool ByteDecode(ByteEncoder_Private_Ref* encoder, void* dest, const char*src, uint64 length);
 
 	inline bool LineMove(void*dest, const char*src, uint64 length);
 	inline bool LineMoveBack(void*dest, const char*src, uint64 length);
@@ -311,6 +332,35 @@ public:
 public:
 	inline static uint8 BinMul(uint8 x, uint8 y);
 };
+class RoundSetting_Private_Ref
+{
+public:
+    RoundSetting_Private_Ref(RoundSetting_Private* reffer = nullptr)
+    {
+        if (reffer == nullptr)
+            this->reffer = new RoundSetting_Private();
+        else
+        {
+            this->reffer = reffer;
+            ++(reffer->refCount);
+        }
+    }
+    ~RoundSetting_Private_Ref()
+    {
+        --(reffer->refCount);
+        if (reffer->refCount <= 0)
+            delete reffer;
+    }
+    RoundSetting_Private&operator ->()
+    {
+        return *reffer;
+    }
+    RoundSetting_Private&operator*()
+    {
+        return *reffer;
+    }
+    RoundSetting_Private*reffer = nullptr;
+};
 
 RoundSetting_Private::~RoundSetting_Private()
 {
@@ -319,17 +369,16 @@ RoundSetting_Private::~RoundSetting_Private()
 
 void RoundSetting_Private::ResetEncoder()
 {
-	if(encoder < 0xffffffff)
+	if(encoder != nullptr)
 	{
-		if(--byteEncoder_manager[encoder]->refCount <= 0)
-			byteEncoder_manager.ReleaseHandle(encoder);
+        delete encoder;
 	}
-	encoder = 0xffffffff;
+	encoder = nullptr;
 }
 
 bool RoundSetting_Private::CheckCanDo()
 {
-	return (*(uint64*)(pwd) != 0) && encoder < 0xffffffff;
+	return (*(uint64*)(pwd) != 0) && encoder != nullptr;
 }
 
 bool RoundSetting_Private::ByteEncode(void* dest, const char*src, uint64 length)
@@ -434,9 +483,9 @@ bool RoundSetting_Private::LineMoveBack(void*dest, const char*src, uint64 length
 	return LineMove(rectWidth, dest, src, length, true);
 }
 
-bool RoundSetting_Private::ByteEncode(uint32 encoder, void* dest, const char*src, uint64 length)
+bool RoundSetting_Private::ByteEncode(ByteEncoder_Private_Ref* encoder, void* dest, const char*src, uint64 length)
 {
-	auto bhd = byteEncoder_manager[encoder];
+	auto bhd = encoder->reffer;
 	uint8* pdest = static_cast<uint8*>(dest);
 	for(uint64 i = 0; i < length; i++)
 	{
@@ -445,58 +494,45 @@ bool RoundSetting_Private::ByteEncode(uint32 encoder, void* dest, const char*src
 	return true;
 }
 
-bool RoundSetting_Private::ByteDecode(uint32 encoder, void* dest, const char*src, uint64 length)
+bool RoundSetting_Private::ByteDecode(ByteEncoder_Private_Ref* encoder, void* dest, const char*src, uint64 length)
 {
-	auto bhd = byteEncoder_manager.GetHandle(nullptr);
-	memcpy(byteEncoder_manager[bhd]->data, byteEncoder_manager[encoder]->data, 256);
-	byteEncoder_manager[bhd]->TurnToBack();
+	auto bhd = new ByteEncoder_Private_Ref();
+	memcpy(bhd->reffer->data, encoder->reffer->data, 256);
+    bhd->reffer->TurnToBack();
 	bool ret = ByteEncode(bhd, dest, src, length);
-	byteEncoder_manager.ReleaseHandle(bhd);
+    delete bhd;
 	return ret;
 }
 
 RoundSetting::RoundSetting()
-	:handle(roundSetting_manager.GetHandle(this))
 {
-
+    roundSetting_manager.GetHandle(this);
 }
 
 RoundSetting::RoundSetting(const RoundSetting&setting)
-	: handle(setting.handle)
 {
-	AAAssert(roundSetting_manager[setting.handle] != nullptr,);
-	roundSetting_manager[setting.handle]->refCount++;
-}
-
-
-RoundSetting::RoundSetting(uint32 settingHandle)
-	:handle(settingHandle)
-{
-	AAAssert(roundSetting_manager[settingHandle] != nullptr,);
-	roundSetting_manager[settingHandle]->refCount++;
+    roundSetting_manager.GetHandle(this, new RoundSetting_Private_Ref(roundSetting_manager[&setting]->reffer));
 }
 
 RoundSetting::~RoundSetting()
 {
-	if(--roundSetting_manager[handle]->refCount <= 0)
-		roundSetting_manager.ReleaseHandle(handle);
+    delete roundSetting_manager. ReleaseHandle(this);
 }
 
 bool RoundSetting::SetRoundPassword(const uint8 pwd[16])
 {
 	AAAssert(pwd != nullptr, false);
-	memcpy(roundSetting_manager[handle]->pwd, pwd, 16);
+	memcpy(roundSetting_manager[this]->reffer->pwd, pwd, 16);
 	return true;
 }
 
-bool RoundSetting::SetByteEncoder(const ByteEncoder bEncoder)
+bool RoundSetting::SetByteEncoder(const ByteEncoder&bEncoder)
 {
-	if(!byteEncoder_manager[bEncoder.handle]->CheckObayRule())
+	if(!byteEncoder_manager[&bEncoder]->reffer->CheckObayRule())
 		return false;
-	auto hd = roundSetting_manager[handle];
+	auto hd = roundSetting_manager[this]->reffer;
 	hd->ResetEncoder();
-	hd->encoder = bEncoder.handle;
-	byteEncoder_manager[bEncoder.handle]->refCount++;
+	hd->encoder = new ByteEncoder_Private_Ref(byteEncoder_manager[&bEncoder]->reffer);
 	return true;
 }
 
@@ -504,31 +540,29 @@ bool RoundSetting::SetLineMoving(uint8 rectWidth /*= 4*/)
 {
 	if(rectWidth < 4)
 		return false;
-	roundSetting_manager[handle]->rectWidth = rectWidth;
+	roundSetting_manager[this]->reffer->rectWidth = rectWidth;
 	return true;
 }
 
 ByteEncoder RoundSetting::GetByteEncoder()
 {
-	auto ret = ByteEncoder(roundSetting_manager[handle]->encoder);
-	return ret;
+    return *byteEncoder_manager.GetSourceByHandle(roundSetting_manager[this]->reffer->encoder);
 }
 
 
 const ByteEncoder RoundSetting::GetByteEncoder() const
 {
-	auto ret = ByteEncoder(roundSetting_manager[handle]->encoder);
-	return ret;
+    return *byteEncoder_manager.GetSourceByHandle(roundSetting_manager[this]->reffer->encoder);
 }
 
 uint8 RoundSetting::GetLineMoving() const
 {
-	return roundSetting_manager[handle]->rectWidth;
+	return roundSetting_manager[this]->reffer->rectWidth;
 }
 
 bool RoundSetting::Encode(void* dest, const char*src, uint64 length, bool withRowMix /*= true*/)
 {
-	auto hd = roundSetting_manager[handle];
+	auto hd = roundSetting_manager[this]->reffer;
 	if(dest == nullptr || src == nullptr || length < hd->rectWidth*hd->rectWidth)
 		return false;
 	if(!hd->ByteEncode(dest, src, length))
@@ -542,7 +576,7 @@ bool RoundSetting::Encode(void* dest, const char*src, uint64 length, bool withRo
 
 bool RoundSetting::Decode(void* dest, const char*src, uint64 length, bool withRowMix /*= true*/)
 {
-	auto hd = roundSetting_manager[handle];
+	auto hd = roundSetting_manager[this]->reffer;
 	if(dest == nullptr || src == nullptr || length < 16)
 		return false;
 	if(!hd->Lock(dest, src, length))
@@ -559,7 +593,10 @@ bool RoundSetting::Decode(void* dest, const char*src, uint64 length, bool withRo
 class Parser_Private
 {
 public:
-	std::vector<uint32> settings;
+    ~Parser_Private();
+
+public:
+	std::vector<RoundSetting_Private_Ref*> settings;
 	void* data = nullptr;
 	uint64 length = 0;
 	uint8 fpwd[16] = {0};
@@ -569,6 +606,42 @@ public:
 public:
 	inline static uint32 GetGPwd(uint32 src, uint8 rank);
 };
+
+class Parser_Private_Ref
+{
+public:
+    Parser_Private_Ref(Parser_Private* reffer = nullptr)
+    {
+        if (reffer == nullptr)
+            this->reffer = new Parser_Private();
+        else
+        {
+            this->reffer = reffer;
+            ++(reffer->refCount);
+        }
+    }
+    ~Parser_Private_Ref()
+    {
+        --(reffer->refCount);
+        if (reffer->refCount <= 0)
+            delete reffer;
+    }
+    Parser_Private&operator ->()
+    {
+        return *reffer;
+    }
+    Parser_Private&operator*()
+    {
+        return *reffer;
+    }
+    Parser_Private* reffer = nullptr;
+};
+
+Parser_Private::~Parser_Private()
+{
+    for (auto i = settings.begin(); i != settings.end(); ++i)
+        delete*i;
+}
 
 uint32 Parser_Private::GetGPwd(uint32 src, uint8 rank)
 {
@@ -589,39 +662,36 @@ uint32 Parser_Private::GetGPwd(uint32 src, uint8 rank)
 }
 
 Parser::Parser()
-	:handle(parserManager.GetHandle(this))
 {
+    parserManager.GetHandle(this);
 }
 
 
 Parser::Parser(const Parser&value)
-	: handle(value.handle)
 {
-	parserManager[handle]->refCount++;
+    parserManager.GetHandle(this, new Parser_Private_Ref(parserManager[&value]->reffer));
 }
 
 Parser::~Parser()
 {
-	if(--parserManager[handle]->refCount <= 0)
-		parserManager.ReleaseHandle(handle);
+    delete parserManager. ReleaseHandle(this);
 }
 
 
 bool Parser::SetFirstlyPwd(uint8 pwd[16])
 {
-	memcpy(parserManager[handle]->fpwd, pwd, 16);
+	memcpy(parserManager[this]->reffer->fpwd, pwd, 16);
 	return true;
 }
 
 bool Parser::SetRounds(const RoundSetting settingArray[], int roundsCount)
 {
-	auto hd = parserManager[handle];
+	auto hd = parserManager[this]->reffer;
 	for(int i = 0; i < roundsCount; i++)
 	{
-		if(roundSetting_manager[settingArray[i].handle] != nullptr)
+		if(roundSetting_manager[&settingArray[i]] != nullptr)
 		{
-			roundSetting_manager[settingArray[i].handle]->refCount++;
-			hd->settings.push_back(settingArray[i].handle);
+			hd->settings.push_back(new RoundSetting_Private_Ref(roundSetting_manager[&settingArray[i]]->reffer));
 		}
 	}
 	return true;
@@ -630,17 +700,15 @@ bool Parser::SetRounds(const RoundSetting settingArray[], int roundsCount)
 
 bool Parser::SetRound(uint8 round, const RoundSetting setting)
 {
-	if(0 >= roundSetting_manager[parserManager[handle]->settings[round]]->refCount--)
-		roundSetting_manager.ReleaseHandle(parserManager[handle]->settings[round]);
-	parserManager[handle]->settings[round] = setting.handle;
-	roundSetting_manager[parserManager[handle]->settings[round]]->refCount++;
+    delete parserManager[this]->reffer->settings[round];
+    parserManager[this]->reffer->settings[round] = new RoundSetting_Private_Ref(roundSetting_manager[&setting]->reffer);
 	return true;
 }
 
 
 bool Parser::SetData(void*data, uint64 length)
 {
-	auto hd = parserManager[handle];
+	auto hd = parserManager[this]->reffer;
 	hd->data = data;
 	hd->length = length;
 	return true;
@@ -649,19 +717,25 @@ bool Parser::SetData(void*data, uint64 length)
 
 RoundSetting Parser::GetSetting(uint8 round) const
 {
-	return RoundSetting(parserManager[handle]->settings[round]);
+    auto ret = parserManager[this]->reffer->settings[round]->reffer;
+    for (auto i = roundSetting_manager.handleMap.begin(); i != roundSetting_manager.handleMap.end(); ++i)
+    {
+        if (i->second->reffer == ret)
+            return *i->first;
+    }
+    return *(RoundSetting*)(nullptr);
 }
 
 
 uint8 Parser::GetRoundCount() const
 {
-	return uint8(parserManager[handle]->settings.size());
+	return uint8(parserManager[this]->reffer->settings.size());
 }
 
 
 bool Parser::Encode(void*dest, void*data /*= nullptr*/, uint64 length /*= 0*/)
 {
-	auto hd = parserManager[handle];
+	auto hd = parserManager[this]->reffer;
 	if(!RoundSetting_Private::Lock(dest, static_cast<char*>(data), length, hd->fpwd))
 		return false;
 	int rounds = GetRoundCount();
@@ -671,26 +745,26 @@ bool Parser::Encode(void*dest, void*data /*= nullptr*/, uint64 length /*= 0*/)
 		length = hd->length;
 	for(int i = 0; i < rounds - 1; i++)
 	{
-		if(!RoundSetting(hd->settings[i]).Encode(dest, static_cast<char*>(data), length))
+		if(!GetSetting(i).Encode(dest, static_cast<char*>(data), length))
 			return false;
 	}
-	return RoundSetting(hd->settings[rounds - 1]).Encode(dest, static_cast<char*>(data), length, false);
+	return GetSetting(rounds-1).Encode(dest, static_cast<char*>(data), length, false);
 }
 
 
 bool Parser::Decode(void*dest, void*data /*= nullptr*/, uint64 length /*= 0*/)
 {
-	auto hd = parserManager[handle];
+	auto hd = parserManager[this]->reffer;
 	auto rounds = GetRoundCount();
 	if(data == nullptr)
 		data = hd->data;
 	if(length == 0)
 		length = hd->length;
-	if(!RoundSetting(hd->settings[rounds - 1]).Decode(dest, static_cast<char*>(data), length, false))
+	if(!GetSetting(rounds - 1).Decode(dest, static_cast<char*>(data), length, false))
 		return false;
 	for(int i = rounds - 2; i >= 0; i--)
 	{
-		if(!RoundSetting(hd->settings[i]).Decode(dest, static_cast<char*>(data), length))
+		if(!GetSetting(i).Decode(dest, static_cast<char*>(data), length))
 			return false;
 	}
 	return RoundSetting_Private::Lock(dest, static_cast<char*>(data), length, hd->fpwd);

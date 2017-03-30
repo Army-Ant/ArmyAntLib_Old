@@ -23,7 +23,7 @@
 #ifndef CLASS_PRIVATE_HANDLE_HPP_2015_11_13
 #define CLASS_PRIVATE_HANDLE_HPP_2015_11_13
 
-#include "AATripleMap.hpp"
+#include <map>
 
 namespace ArmyAnt {
 
@@ -32,7 +32,7 @@ namespace ArmyAnt {
 //T_Out参数代表原类型，T_In参数代表包含私有成员的类型，T_Handle代表句柄的类型，可从任意整型中选择，默认为uint32
 //使用时，不要把管理器实例或者T_In类的任何信息，暴露在cpp文件之外
 
-template <class T_Out, class T_In, class T_Handle = uint32>
+template <class T_Out, class T_In>
 class ClassPrivateHandleManager
 {
 public:
@@ -40,20 +40,20 @@ public:
 	~ClassPrivateHandleManager() {}
 
 	//创建一个内部类实例，这通常是在建立外部实例时进行调用的
-	T_Handle GetHandle(T_Out* src, T_In* newObject = new T_In());
+	void GetHandle(T_Out* src, T_In* newObject = new T_In());
 	//销毁内部实例，这通常是与外部实例的析构一起进行的
-	void ReleaseHandle(T_Handle handle);
+    T_In* ReleaseHandle(T_Out* src);
 
 	//根据句柄获取外部实例，这通常是用于对C接口时的调用，C语言使用句柄
-	T_Out* GetSourceByHandle(T_Handle handle);
+	T_Out* GetSourceByHandle(const T_In* in);
 	//根据句柄获取内部实例，所有外部对象的公有函数，都需要调用此函数才能访问内部数据
-	T_In* GetDataByHandle(T_Handle handle);
+	T_In* GetDataByHandle(const T_Out* out);
 
 	//根据句柄获取内部实例，是GetDataByHandle的快捷调用法
-	T_In* operator[](T_Handle handle);
+	T_In* operator[](const T_Out* out);
 
 	//内外实例以及句柄的表图
-	TripleMap<T_Handle, T_Out*, T_In*> handleMap;
+	std::map<T_Out*, T_In*> handleMap;
 
 
 	AA_FORBID_COPY_CTOR(ClassPrivateHandleManager);
@@ -62,55 +62,54 @@ public:
 
 /******************************** Source Code *********************************/
 
-template <class T_Out, class T_In, class T_Handle>
-T_Handle ArmyAnt::ClassPrivateHandleManager<T_Out, T_In, T_Handle>::GetHandle(T_Out* src, T_In* newObject)
+template <class T_Out, class T_In>
+void ArmyAnt::ClassPrivateHandleManager<T_Out, T_In>::GetHandle(T_Out* src, T_In* newObject)
 {
-	auto len = handleMap.Size();
-	//获取当前未使用的最小句柄号
-	for(T_Handle n = 0; n < len; n++)
-	{
-		//设置句柄，创建内部实例，并关联到外部实例
-		if(handleMap.Find(n) == handleMap.End())
-		{
-			handleMap.Insert(n, src, newObject);
-			return n;
-		}
-	}
-	//没有未使用的中间句柄号，则在结尾添加新最大句柄号，并创建内部实例、关联到外部实例
-	handleMap.Insert(len, src, newObject);
-	return len;
+    //设置句柄，创建内部实例，并关联到外部实例
+    if (handleMap.find(src) == handleMap.end())
+    {
+        handleMap.insert(std::make_pair(src, newObject));
+    }
+    else
+        throw std::exception("the handle has been existed");
 }
 
-template <class T_Out, class T_In, class T_Handle>
-void ArmyAnt::ClassPrivateHandleManager<T_Out, T_In, T_Handle>::ReleaseHandle(T_Handle handle)
+template <class T_Out, class T_In>
+T_In* ArmyAnt::ClassPrivateHandleManager<T_Out, T_In>::ReleaseHandle(T_Out* src)
 {
-	Iterator_TripleMap<T_Handle, T_Out*, T_In*> ret = handleMap.Find(handle);
+	auto ret = handleMap.find(src);
 	//销毁内部实例，解除关联
-	if(ret != handleMap.End())
+	if(ret != handleMap.end())
 	{
-		delete ret->third;
-		handleMap.Erase(handle);
+        auto result = ret->second;
+		handleMap.erase(src);
+        return result;
 	}
+    return nullptr;
 }
 
-template <class T_Out, class T_In, class T_Handle>
-T_Out* ArmyAnt::ClassPrivateHandleManager<T_Out, T_In, T_Handle>::GetSourceByHandle(T_Handle handle)
+template <class T_Out, class T_In>
+T_Out* ArmyAnt::ClassPrivateHandleManager<T_Out, T_In>::GetSourceByHandle(const T_In* in)
 {
-	auto ret = handleMap.Find(handle);
-	return ret == handleMap.End() ? nullptr : ret->second;
+    for (auto i = handleMap.begin(); i != handleMap.end(); ++i)
+    {
+        if (i->second == in)
+            return i->first;
+    }
+	return nullptr;
 }
 
-template <class T_Out, class T_In, class T_Handle>
-T_In* ArmyAnt::ClassPrivateHandleManager<T_Out, T_In, T_Handle>::GetDataByHandle(T_Handle handle)
+template <class T_Out, class T_In>
+T_In* ArmyAnt::ClassPrivateHandleManager<T_Out, T_In>::GetDataByHandle(const T_Out* out)
 {
-	auto ret = handleMap.Find(handle);
-	return ret == handleMap.End() ? nullptr : ret->third;
+	auto ret = handleMap.find(const_cast<T_Out*>(out));
+	return ret == handleMap.end() ? nullptr : ret->second;
 }
 
-template <class T_Out, class T_In, class T_Handle>
-T_In* ArmyAnt::ClassPrivateHandleManager<T_Out, T_In, T_Handle>::operator[](T_Handle handle)
+template <class T_Out, class T_In>
+T_In* ArmyAnt::ClassPrivateHandleManager<T_Out, T_In>::operator[](const T_Out* out)
 {
-	return GetDataByHandle(handle);
+	return GetDataByHandle(out);
 }
 
 } // namespace ArmyAnt

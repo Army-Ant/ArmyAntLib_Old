@@ -69,9 +69,6 @@ public:
 	static bool GetExtendPwds(uint8 initPwd[16], uint8 gettedPwd[176]);
 	static Parser GetQuickParser(uint8 initPwd[16], uint8 byteEncoder[256] = nullptr);
 
-public:
-	const uint32 handle;
-
 	AA_FORBID_ASSGN_OPR(Parser);
 };
 
@@ -80,12 +77,11 @@ class ARMYANTLIB_API RoundSetting
 public:
 	RoundSetting();
 	RoundSetting(const RoundSetting&setting);
-	RoundSetting(uint32 settingHandle);
 	~RoundSetting();
 
 public:
 	bool SetRoundPassword(const uint8 pwd[16]);
-	bool SetByteEncoder(const ByteEncoder bEncoder);
+	bool SetByteEncoder(const ByteEncoder&bEncoder);
 	bool SetLineMoving(uint8 rectWidth = 4);
 
 public:
@@ -97,9 +93,6 @@ public:
 	bool Encode(void* dest, const char*src, uint64 length, bool withRowMix = true);
 	bool Decode(void* dest, const char*src, uint64 length, bool withRowMix = true);
 
-public:
-	const uint32 handle;
-
 	AA_FORBID_ASSGN_OPR(RoundSetting);
 };
 
@@ -108,14 +101,13 @@ class ARMYANTLIB_API ByteEncoder
 public:
 	ByteEncoder();
 	ByteEncoder(const ByteEncoder&value);
-	ByteEncoder(uint32 encoderHandle);
 	ByteEncoder&operator=(const ByteEncoder&value);
 	~ByteEncoder();
 
 public:
 	bool InputData(const uint8 elems[256], bool needCheck = false);
 	bool InputBackData(const uint8 elems[256], bool needCheck = false);
-	bool CopiedFromAnother(const ByteEncoder another, bool needCheck = false);
+	bool CopiedFromAnother(const ByteEncoder&another, bool needCheck = false);
 
 public:
 	bool GetData(uint8 elems[256])const;
@@ -129,7 +121,6 @@ public:
 
 public:
 	static const ByteEncoder GetRandomEncoder();
-	const uint32 handle;
 };
 
 }

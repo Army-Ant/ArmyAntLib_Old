@@ -198,9 +198,6 @@ public:
 	//获取本机IP地址
 	static IPAddr_v4 GetLocalIPv4Addr(int index = 0);
 	static IPAddr_v6 GetLocalIpv6Addr(int index = 0);
-	
-public:
-	const uint32 handle;
 
 	AA_FORBID_COPY_CTOR(Socket);
 	AA_FORBID_ASSGN_OPR(Socket);

@@ -43,7 +43,7 @@ enum class StreamType : uint8
 class ARMYANTLIB_API IStream
 {
 public:
-	IStream(uint32 handle);
+	IStream();
 	virtual ~IStream();
 
 public:
@@ -92,9 +92,6 @@ public:
 
 	static IStream* GetStream(uint32 handle);
 
-public:
-	const uint32 handle;
-
 	AA_FORBID_ASSGN_OPR(IStream);
 	AA_FORBID_COPY_CTOR(IStream);
 };
@@ -108,7 +105,7 @@ public:
 class ARMYANTLIB_API StaticStream : public IStream
 {
 public:
-	StaticStream(uint32 handle);
+	StaticStream();
 	virtual ~StaticStream();
 
 public:
@@ -189,7 +186,7 @@ public:
 class ARMYANTLIB_API DynamicStream : public IStream
 {
 public:
-	DynamicStream(uint32 handle);
+	DynamicStream();
 	virtual ~DynamicStream();
 
 public:

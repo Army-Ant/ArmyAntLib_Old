@@ -698,25 +698,25 @@ TCPClient_Private::~TCPClient_Private()
 
 
 Socket::Socket(void*innerType)
-	:handle(s_manager.GetHandle(this,reinterpret_cast<Socket_Private*>(innerType)))
 {
+    s_manager.GetHandle(this, reinterpret_cast<Socket_Private*>(innerType));
 }
 
 Socket::~Socket(void)
 {
-	s_manager.ReleaseHandle(handle);
+    delete s_manager.ReleaseHandle(this);
 }
 
 bool Socket::SetGettingCallBack(GettingCall recvCB, void * pUser)
 {
-	s_manager[handle]->gettingCallBack = recvCB;
-	s_manager[handle]->gettingCallData = pUser;
+	s_manager[this]->gettingCallBack = recvCB;
+	s_manager[this]->gettingCallData = pUser;
 	return true;
 }
 
 bool Socket::SetMaxIOBufferLen(uint32 len)
 {
-	s_manager[handle]->maxBufferLen = len;
+	s_manager[this]->maxBufferLen = len;
 	return true;
 }
 
@@ -785,7 +785,7 @@ IPAddr_v6 Socket::GetLocalIpv6Addr(int index)
 TCPServer::TCPServer(int32 maxConnNum)
 	:Socket(new TCPServer_Private(maxConnNum))
 {
-	auto hd = static_cast<TCPServer_Private*>(s_manager[handle]);
+	auto hd = static_cast<TCPServer_Private*>(s_manager[this]);
 	hd->acceptor = boost::asio::ip::tcp::acceptor(hd->localS);
 }
 
@@ -796,7 +796,7 @@ TCPServer::~TCPServer(void)
 
 bool TCPServer::SetConnectCallBack(TCPConnectCall connectCB, void * pUser)
 {
-	auto hd = static_cast<TCPServer_Private*>(s_manager[handle]);
+	auto hd = static_cast<TCPServer_Private*>(s_manager[this]);
 	hd->connectCallBack = connectCB;
 	hd->connetcCallData = pUser;
 	return true;
@@ -804,7 +804,7 @@ bool TCPServer::SetConnectCallBack(TCPConnectCall connectCB, void * pUser)
 
 bool TCPServer::SetDisconnectCallBack(ServerLostCall disconnCB, void * pUser)
 {
-	auto hd = static_cast<TCPServer_Private*>(s_manager[handle]);
+	auto hd = static_cast<TCPServer_Private*>(s_manager[this]);
 	hd->lostCallBack = disconnCB;
 	hd->lostCallData = pUser;
 	return true;
@@ -812,13 +812,13 @@ bool TCPServer::SetDisconnectCallBack(ServerLostCall disconnCB, void * pUser)
 
 bool TCPServer::SetMaxConnNum(int32 maxClientNum)
 {
-	static_cast<TCPServer_Private*>(s_manager[handle])->maxClientNum = maxClientNum;
+	static_cast<TCPServer_Private*>(s_manager[this])->maxClientNum = maxClientNum;
 	return true;
 }
 
 bool TCPServer::StartServer(bool isIPv6)
 {
-	auto hd = static_cast<TCPServer_Private*>(s_manager[handle]);
+	auto hd = static_cast<TCPServer_Private*>(s_manager[this]);
 	if(hd->isListening)
 		return false;
 	// 服务器总是异步
@@ -884,8 +884,8 @@ bool TCPServer::StartServer(bool isIPv6)
 
 bool TCPServer::StopServer(uint32 waitTime)
 {
-	auto hd = static_cast<TCPServer_Private*>(s_manager[handle]);
-	s_manager[handle]->isListening = false;
+	auto hd = static_cast<TCPServer_Private*>(s_manager[this]);
+	s_manager[this]->isListening = false;
 	if(hd->acceptor .is_open())
 	{
 		hd->acceptor.cancel();
@@ -899,7 +899,7 @@ bool TCPServer::StopServer(uint32 waitTime)
 
 bool TCPServer::GivenUpClient(int32 index)
 {
-	auto hd = static_cast<TCPServer_Private*>(s_manager[handle]);
+	auto hd = static_cast<TCPServer_Private*>(s_manager[this]);
 	auto cl = hd->clients.find(index);
 	if(cl == hd->clients.end())
 		return false;
@@ -918,7 +918,7 @@ bool TCPServer::GivenUpClient(const IPAddr& addr, uint16 port)
 
 bool TCPServer::GivenUpAllClients()
 {
-	auto hd = static_cast<TCPServer_Private*>(s_manager[handle]);
+	auto hd = static_cast<TCPServer_Private*>(s_manager[this]);
 	auto i = hd->clients.begin();
 	while(i != hd->clients.end())
 	{
@@ -930,7 +930,7 @@ bool TCPServer::GivenUpAllClients()
 
 mac_uint TCPServer::Send(int32 index, void * data, uint64 len, bool isAsync, const SendingResp&asyncResp, void* asyncRespUserData)
 {
-	auto hd = static_cast<TCPServer_Private*>(s_manager[handle]);
+	auto hd = static_cast<TCPServer_Private*>(s_manager[this]);
 	auto cl = hd->clients.find(index);
 	if(cl == hd->clients.end())
 		return 0;
@@ -960,18 +960,18 @@ mac_uint TCPServer::Send(int32 index, void * data, uint64 len, bool isAsync, con
 
 int TCPServer::GetMaxConnNum() const
 {
-	return static_cast<TCPServer_Private*>(s_manager[handle])->maxClientNum;
+	return static_cast<TCPServer_Private*>(s_manager[this])->maxClientNum;
 }
 
 int TCPServer::GetNowConnNum() const
 {
 	// WARNING : If the number is larger than INT_MAX
-	return int(static_cast<TCPServer_Private*>(s_manager[handle])->clients.size());
+	return int(static_cast<TCPServer_Private*>(s_manager[this])->clients.size());
 }
 
 TCPServer::IPAddrInfo TCPServer::GetClientByIndex(int index) const
 {
-	auto hd = static_cast<TCPServer_Private*>(s_manager[handle]);
+	auto hd = static_cast<TCPServer_Private*>(s_manager[this]);
 	auto hdcls = hd->clients;
 	auto ret = hdcls.find(index);
 	if(ret != hdcls.end())
@@ -981,7 +981,7 @@ TCPServer::IPAddrInfo TCPServer::GetClientByIndex(int index) const
 
 int TCPServer::GetIndexByAddrPort(const IPAddr & addr, uint16 port)
 {
-	auto hd = static_cast<TCPServer_Private*>(s_manager[handle]);
+	auto hd = static_cast<TCPServer_Private*>(s_manager[this]);
 	for(auto i = hd->clients.begin(); i != hd->clients.end(); i++)
 	{
 		if(*i->second->addr == addr&&i->second->port == port)
@@ -992,7 +992,7 @@ int TCPServer::GetIndexByAddrPort(const IPAddr & addr, uint16 port)
 
 bool TCPServer::IsStarting()const
 {
-	return s_manager[handle]->isListening;
+	return s_manager[this]->isListening;
 }
 
 
@@ -1010,7 +1010,7 @@ TCPClient::~TCPClient()
 
 bool TCPClient::SetServerAddr(const IPAddr & addr)
 {
-	auto hd = static_cast<TCPClient_Private*>(s_manager[handle]);
+	auto hd = static_cast<TCPClient_Private*>(s_manager[this]);
 	if(hd->isListening)
 		return false;
 	hd->addr = IPAddr::Clone(addr);
@@ -1019,7 +1019,7 @@ bool TCPClient::SetServerAddr(const IPAddr & addr)
 
 bool TCPClient::SetServerPort(uint16 port)
 {
-	auto hd = static_cast<TCPClient_Private*>(s_manager[handle]);
+	auto hd = static_cast<TCPClient_Private*>(s_manager[this]);
 	if(hd->isListening)
 		return false;
 	hd->port = port;
@@ -1028,7 +1028,7 @@ bool TCPClient::SetServerPort(uint16 port)
 
 bool TCPClient::SetLostServerCallBack(ClientLostCall disconnCB, void * pUser)
 {
-	auto hd = static_cast<TCPClient_Private*>(s_manager[handle]);
+	auto hd = static_cast<TCPClient_Private*>(s_manager[this]);
 	hd->lostCallBack = disconnCB;
 	hd->lostCallData = pUser;
 	return true;
@@ -1036,7 +1036,7 @@ bool TCPClient::SetLostServerCallBack(ClientLostCall disconnCB, void * pUser)
 
 bool TCPClient::ConnectServer(bool isAsync, TCPConnectCall asyncConnectCallBack, void* asyncConnectCallData)
 {
-	auto hd = static_cast<TCPClient_Private*>(s_manager[handle]);
+	auto hd = static_cast<TCPClient_Private*>(s_manager[this]);
 	if(hd->isListening)
 		return false;
 	hd->isAsync = isAsync;
@@ -1116,7 +1116,7 @@ bool TCPClient::ConnectServer(bool isAsync, TCPConnectCall asyncConnectCallBack,
 
 bool TCPClient::DisconnectServer(uint32 waitTime)
 {
-	auto hd = static_cast<TCPClient_Private*>(s_manager[handle]);
+	auto hd = static_cast<TCPClient_Private*>(s_manager[this]);
 	hd->isListening = false;
 	boost::system::error_code err;
 	hd->s->shutdown(hd->s->shutdown_both, err);
@@ -1129,7 +1129,7 @@ bool TCPClient::DisconnectServer(uint32 waitTime)
 
 mac_uint TCPClient::Send(void * pUser, size_t len, bool isAsync, const SendingResp&asyncResp, void* asyncRespUserData)
 {
-	auto hd = static_cast<TCPClient_Private*>(s_manager[handle]);
+	auto hd = static_cast<TCPClient_Private*>(s_manager[this]);
 	if(!hd->isListening)
 		return false;
 	if(!isAsync)
@@ -1158,27 +1158,27 @@ mac_uint TCPClient::Send(void * pUser, size_t len, bool isAsync, const SendingRe
 
 const IPAddr & TCPClient::GetServerAddr() const
 {
-	return *static_cast<TCPClient_Private*>(s_manager[handle])->addr;
+	return *static_cast<TCPClient_Private*>(s_manager[this])->addr;
 }
 
 uint16 TCPClient::GetServerPort() const
 {
-	return static_cast<TCPClient_Private*>(s_manager[handle])->port;
+	return static_cast<TCPClient_Private*>(s_manager[this])->port;
 }
 
 const IPAddr & TCPClient::GetLocalAddr() const
 {
-	return *static_cast<TCPClient_Private*>(s_manager[handle])->localAddr;
+	return *static_cast<TCPClient_Private*>(s_manager[this])->localAddr;
 }
 
 uint16 TCPClient::GetLocalPort() const
 {
-	return static_cast<TCPClient_Private*>(s_manager[handle])->localport;
+	return static_cast<TCPClient_Private*>(s_manager[this])->localport;
 }
 
 bool TCPClient::IsConnection() const
 {
-	return static_cast<TCPClient_Private*>(s_manager[handle])->isListening;
+	return static_cast<TCPClient_Private*>(s_manager[this])->isListening;
 }
 
 
@@ -1192,14 +1192,14 @@ UDPSilgle::UDPSilgle()
 
 UDPSilgle::~UDPSilgle()
 {
-	auto hd = static_cast<UDPSingle_Private*>(s_manager[handle]);
+	auto hd = static_cast<UDPSingle_Private*>(s_manager[this]);
 	if(hd->s->is_open())
 		hd->s->close();
 }
 
 bool UDPSilgle::StartListening(bool isIPv4)
 {
-	auto hd = static_cast<UDPSingle_Private*>(s_manager[handle]);
+	auto hd = static_cast<UDPSingle_Private*>(s_manager[this]);
 	if(hd->isListening)
 		return false;
 	hd->isAsync = true;
@@ -1239,7 +1239,7 @@ bool UDPSilgle::StartListening(bool isIPv4)
 
 mac_uint UDPSilgle::Send(const IPAddr & addr, uint16 port, void * data, size_t len, bool isAsync, const SendingResp & asyncResp, void * asyncRespUserData)
 {
-	auto hd = static_cast<UDPSingle_Private*>(s_manager[handle]);
+	auto hd = static_cast<UDPSingle_Private*>(s_manager[this]);
 	if(!hd->isListening)
 		return 0;
 	try
@@ -1277,7 +1277,7 @@ mac_uint UDPSilgle::Send(const IPAddr & addr, uint16 port, void * data, size_t l
 
 bool UDPSilgle::StopListening(uint32 waitTime)
 {
-	auto hd = static_cast<UDPSingle_Private*>(s_manager[handle]);
+	auto hd = static_cast<UDPSingle_Private*>(s_manager[this]);
 	hd->isListening = false;
 	boost::system::error_code err;
 	hd->s->shutdown(hd->s->shutdown_send, err);
@@ -1286,7 +1286,7 @@ bool UDPSilgle::StopListening(uint32 waitTime)
 
 bool UDPSilgle::IsListening() const
 {
-	return static_cast<UDPSingle_Private*>(s_manager[handle])->isListening;
+	return static_cast<UDPSingle_Private*>(s_manager[this])->isListening;
 }
 
 }

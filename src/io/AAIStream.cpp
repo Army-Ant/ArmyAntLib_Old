@@ -31,17 +31,17 @@ static  ClassPrivateHandleManager<IStream, IStream_Private> manager;
 
 ClassPrivateHandleManager<IStream, IStream_Private>& IStream_Private::handleManager = manager;
 
-IStream::IStream(uint32 handle) :handle(handle)
+IStream::IStream()
 {
 }
 
 IStream::~IStream()
 {
-	IStream_Private::handleManager.ReleaseHandle(handle);
+    delete IStream_Private::handleManager.ReleaseHandle(this);
 }
 
-StaticStream::StaticStream(uint32 handle)
-	:IStream(handle)
+StaticStream::StaticStream()
+	:IStream()
 {
 }
 
@@ -49,8 +49,8 @@ StaticStream::~StaticStream()
 {
 }
 
-DynamicStream::DynamicStream(uint32 handle)
-	: IStream(handle)
+DynamicStream::DynamicStream()
+	: IStream()
 {
 }
 
@@ -83,7 +83,7 @@ bool StaticStream::operator!=(std::nullptr_t) const
 
 StaticStream * StaticStream::GetStream(uint32 handle)
 {
-	auto ret = IStream_Private::handleManager.GetSourceByHandle(handle);
+	auto ret = IStream_Private::handleManager.GetSourceByHandle(reinterpret_cast<IStream_Private*>(handle));
 	if(!ret->IsStatic())
 		return nullptr;
 	return static_cast<StaticStream*>(ret);
@@ -91,7 +91,7 @@ StaticStream * StaticStream::GetStream(uint32 handle)
 
 IStream * IStream::GetStream(uint32 handle)
 {
-	return 	IStream_Private::handleManager.GetSourceByHandle(handle);
+	return 	IStream_Private::handleManager.GetSourceByHandle(reinterpret_cast<IStream_Private*>(handle));
 }
 
 }

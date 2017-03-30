@@ -45,8 +45,9 @@ public:
 };
 
 Memory::Memory()
-	:StaticStream(IStream_Private::handleManager.GetHandle(this, new IStream_Memory_Private()))
+	:StaticStream()
 {
+    IStream_Private::handleManager.GetHandle(this, new IStream_Memory_Private());
 }
 
 Memory::~Memory()
@@ -61,7 +62,7 @@ bool Memory::Open(const char * src)
 
 bool Memory::Open(uint32 len)
 {
-	auto hd = static_cast<IStream_Memory_Private*>(IStream_Private::handleManager[handle]);
+	auto hd = static_cast<IStream_Memory_Private*>(IStream_Private::handleManager[this]);
 	if(len <= 0)
 		return false;
 	hd->mem = malloc(len);
@@ -74,7 +75,7 @@ bool Memory::Open(uint32 len)
 
 bool Memory::Open(mac_uint memaddr, uint64 len)
 {
-	auto hd = static_cast<IStream_Memory_Private*>(IStream_Private::handleManager[handle]);
+	auto hd = static_cast<IStream_Memory_Private*>(IStream_Private::handleManager[this]);
 	//type没有重置，说明本流尚未关闭
 	if(hd->mem != nullptr)
 		return false;
@@ -111,7 +112,7 @@ bool Memory::Open(void* memaddr, uint64 len)
 
 bool Memory::Close()
 {
-	auto hd = static_cast<IStream_Memory_Private*>(IStream_Private::handleManager[handle]);
+	auto hd = static_cast<IStream_Memory_Private*>(IStream_Private::handleManager[this]);
 	if(hd->needFree)
 		free(hd->mem);
 	hd->mem = nullptr;
@@ -122,29 +123,29 @@ bool Memory::Close()
 
 bool Memory::IsOpened(bool)
 {
-	auto hd = static_cast<IStream_Memory_Private*>(IStream_Private::handleManager[handle]);
+	auto hd = static_cast<IStream_Memory_Private*>(IStream_Private::handleManager[this]);
 	return hd->mem != nullptr && hd->len > 0;
 }
 
 uint64 Memory::GetLength() const
 {
-	return static_cast<IStream_Memory_Private*>(IStream_Private::handleManager[handle])->len;
+	return static_cast<IStream_Memory_Private*>(IStream_Private::handleManager[this])->len;
 }
 
 uint64 Memory::GetPos() const
 {
-	return static_cast<IStream_Memory_Private*>(IStream_Private::handleManager[handle])->pos;
+	return static_cast<IStream_Memory_Private*>(IStream_Private::handleManager[this])->pos;
 }
 
 bool Memory::IsEndPos() const
 {
-	auto hd = static_cast<IStream_Memory_Private*>(IStream_Private::handleManager[handle]);
+	auto hd = static_cast<IStream_Memory_Private*>(IStream_Private::handleManager[this]);
 	return hd->pos == hd->len && hd->len > 0;
 }
 
 bool Memory::MovePos(uint64 pos)
 {
-	auto hd = static_cast<IStream_Memory_Private*>(IStream_Private::handleManager[handle]);
+	auto hd = static_cast<IStream_Memory_Private*>(IStream_Private::handleManager[this]);
 	if(hd->len <= 0)
 		return false;
 	if(hd->pos > hd->len)
@@ -161,7 +162,7 @@ const char * Memory::GetSourceName() const
 	if(lock)
 		return nullptr;
 	lock = true;
-	auto hd = static_cast<IStream_Memory_Private*>(IStream_Private::handleManager[handle]);
+	auto hd = static_cast<IStream_Memory_Private*>(IStream_Private::handleManager[this]);
 	//保存内存地址、长度等信息
 #ifdef _32BIT
 	sprintf(name, "%X", mac_uint(hd->mem));
@@ -174,7 +175,7 @@ const char * Memory::GetSourceName() const
 
 void * Memory::GetMemory()
 {
-	return static_cast<IStream_Memory_Private*>(IStream_Private::handleManager[handle])->mem;
+	return static_cast<IStream_Memory_Private*>(IStream_Private::handleManager[this])->mem;
 }
 
 const void * Memory::GetMemory() const
@@ -185,7 +186,7 @@ const void * Memory::GetMemory() const
 uint64 Memory::Read(void * buffer, uint32 len, uint64 pos)
 {
 	AAAssert(buffer != nullptr, uint64(0));
-	auto hd = static_cast<IStream_Memory_Private*>(IStream_Private::handleManager[handle]);
+	auto hd = static_cast<IStream_Memory_Private*>(IStream_Private::handleManager[this]);
 	bool isCurPos = false;
 	if(pos == AA_UINT64_MAX)
 	{
@@ -205,7 +206,7 @@ uint64 Memory::Read(void * buffer, uint32 len, uint64 pos)
 uint64 Memory::Read(void * buffer, uint8 endtag, uint64 maxlen)
 {
 	AAAssert(buffer != nullptr, uint64(0));
-	auto hd = static_cast<IStream_Memory_Private*>(IStream_Private::handleManager[handle]);
+	auto hd = static_cast<IStream_Memory_Private*>(IStream_Private::handleManager[this]);
 	//逐字读取
 	for(auto nowPos = hd->pos; ; nowPos++)
 	{
@@ -222,7 +223,7 @@ uint64 Memory::Read(void * buffer, uint8 endtag, uint64 maxlen)
 uint64 Memory::Write(void * buffer, uint64 len)
 {
 	AAAssert(buffer != nullptr, uint64(0));
-	auto hd = static_cast<IStream_Memory_Private*>(IStream_Private::handleManager[handle]);
+	auto hd = static_cast<IStream_Memory_Private*>(IStream_Private::handleManager[this]);
 	//如果len参数没有传入，则写内存到流，直至遇到0，这相当于写入字符串至流
 	if(len == 0)
 		while(static_cast<uint8*>(buffer)[len] != 0)

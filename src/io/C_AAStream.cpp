@@ -33,12 +33,12 @@ uint32 AA_FILE_MAX_LENGTH = AA_UINT32_MAX;
 
 ARMYANT_CLIB_API AA_CStream AA_File_Create()
 {
-	return (new ArmyAnt::File())->handle;
+	return reinterpret_cast<AA_CStream>(new ArmyAnt::File());
 }
 
 ARMYANT_CLIB_API AA_CStream AA_Memory_Create()
 {
-	return (new ArmyAnt::Memory())->handle;
+	return reinterpret_cast<AA_CStream>(new ArmyAnt::Memory());
 }
 
 ARMYANT_CLIB_API void AA_Stream_Release(AA_CStream stream)

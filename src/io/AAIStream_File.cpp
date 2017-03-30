@@ -110,8 +110,9 @@ private:
 /******************************** Class File *********************************************************/
 
 File::File()
-	:StaticStream(IStream_Private::handleManager.GetHandle(this, new IStream_File_Private()))
+	:StaticStream()
 {
+    IStream_Private::handleManager.GetHandle(this, new IStream_File_Private());
 }
 
 File::~File()
@@ -124,7 +125,7 @@ bool File::SetStreamMode(bool nocreate /*= true*/, bool noexist /*= false*/)
 	if(nocreate&&noexist)
 		return false;
 	//保存设定
-	auto hd = static_cast<IStream_File_Private*>(IStream_Private::handleManager[handle]);
+	auto hd = static_cast<IStream_File_Private*>(IStream_Private::handleManager[this]);
 	hd->nocreate = nocreate;
 	hd->noexist = noexist;
 	return true;
@@ -132,7 +133,7 @@ bool File::SetStreamMode(bool nocreate /*= true*/, bool noexist /*= false*/)
 
 bool File::Open(const char* filepath)
 {
-	auto hd = static_cast<IStream_File_Private*>(IStream_Private::handleManager[handle]);
+	auto hd = static_cast<IStream_File_Private*>(IStream_Private::handleManager[this]);
 	//type没有重置，说明本流尚未关闭
 	if(hd->file != nullptr)
 		return false;
@@ -165,7 +166,7 @@ bool File::Open(const char* filepath)
 /*
 bool File::Open(const char* pipename, const char*pipePath, const char*pipeServer / *= "."* /)
 {
-	auto hd = handleManager[handle];
+	auto hd = handleManager[this];
 	if(hd->type != StreamType::None)
 		return false;
 	AAAssert(pipename != nullptr, false);
@@ -200,7 +201,7 @@ bool File::Open(const char* pipename, const char*pipePath, const char*pipeServer
 bool File::Close()
 {
 	bool ret = true;
-	auto hd = static_cast<IStream_File_Private*>(IStream_Private::handleManager[handle]);
+	auto hd = static_cast<IStream_File_Private*>(IStream_Private::handleManager[this]);
 	//根据相应的类型进行关闭
 	ret = 0 == fclose(hd->file);
 	hd->file = nullptr;
@@ -210,7 +211,7 @@ bool File::Close()
 
 bool File::IsOpened(bool dynamicCheck/* = true*/)
 {
-	auto hd = static_cast<IStream_File_Private*>(IStream_Private::handleManager[handle]);
+	auto hd = static_cast<IStream_File_Private*>(IStream_Private::handleManager[this]);
 	if(hd->file == nullptr)
 		return false;
 	else if(!dynamicCheck)
@@ -230,7 +231,7 @@ bool File::IsOpened(bool dynamicCheck/* = true*/)
 
 uint64 File::GetLength() const
 {
-	auto hd = static_cast<IStream_File_Private*>(IStream_Private::handleManager[handle]);
+	auto hd = static_cast<IStream_File_Private*>(IStream_Private::handleManager[this]);
 	//根据类型获取长度
 	fpos_t nowpos;
 	IStream_File_Private::SetPos(nowpos, 0);
@@ -245,7 +246,7 @@ uint64 File::GetLength() const
 
 uint64 File::GetPos() const
 {
-	auto hd = static_cast<IStream_File_Private*>(IStream_Private::handleManager[handle]);
+	auto hd = static_cast<IStream_File_Private*>(IStream_Private::handleManager[this]);
 	//根据类型获取当前读写位置
 	fpos_t ret;
 	fgetpos(hd->file, &ret);
@@ -254,26 +255,26 @@ uint64 File::GetPos() const
 
 bool File::IsEndPos() const
 {
-	auto hd = static_cast<IStream_File_Private*>(IStream_Private::handleManager[handle]);
+	auto hd = static_cast<IStream_File_Private*>(IStream_Private::handleManager[this]);
 	return feof(hd->file) != 0;
 }
 
 bool File::MovePos(uint64 pos /*= FILE_POS_END*/)
 {
-	auto hd = static_cast<IStream_File_Private*>(IStream_Private::handleManager[handle]);
+	auto hd = static_cast<IStream_File_Private*>(IStream_Private::handleManager[this]);
 	hd->Fseek(pos, SEEK_SET);
 	return true;
 }
 
 const char* File::GetSourceName() const
 {
-	return	static_cast<IStream_File_Private*>(IStream_Private::handleManager[handle])->name.c_str();
+	return	static_cast<IStream_File_Private*>(IStream_Private::handleManager[this])->name.c_str();
 }
 
 uint64 File::Read(void*buffer, uint32 len /*= Constant::c_uint32Max*/, uint64 pos /*= Constant::c_uint64Max*/)
 {
 	AAAssert(buffer != nullptr, uint64(0));
-	auto hd = static_cast<IStream_File_Private*>(IStream_Private::handleManager[handle]);
+	auto hd = static_cast<IStream_File_Private*>(IStream_Private::handleManager[this]);
 	//记录当前位置。如果参数制定了要开始读取的位置，则读取过后要返回到原位置
 	fpos_t now;
 	fgetpos(hd->file, &now);
@@ -297,7 +298,7 @@ uint64 File::Read(void*buffer, uint32 len /*= Constant::c_uint32Max*/, uint64 po
 uint64 File::Read(void*buffer, uint8 endtag, uint64 maxlen/* = FILE_SHORT_POS_END*/)
 {
 	AAAssert(buffer != nullptr, uint64(0));
-	auto hd = static_cast<IStream_File_Private*>(IStream_Private::handleManager[handle]);
+	auto hd = static_cast<IStream_File_Private*>(IStream_Private::handleManager[this]);
 	uint64 len = 0;
 	fpos_t wholeLen;
 	IStream_File_Private::SetPos(wholeLen, GetLength());
@@ -321,7 +322,7 @@ uint64 File::Read(void*buffer, uint8 endtag, uint64 maxlen/* = FILE_SHORT_POS_EN
 uint64 File::Write(void*buffer, uint64 len /*= 0*/)
 {
 	AAAssert(buffer != nullptr, uint64(0));
-	auto hd = static_cast<IStream_File_Private*>(IStream_Private::handleManager[handle]);
+	auto hd = static_cast<IStream_File_Private*>(IStream_Private::handleManager[this]);
 	//如果len参数没有传入，则写内存到流，直至遇到0，这相当于写入字符串至流
 	if(len == 0)
 		while(static_cast<uint8*>(buffer)[len] != 0)
@@ -413,7 +414,7 @@ bool File::IsFileExist(const char*path)
 
 File* File::GetStream(uint32 handle)
 {
-	return 	static_cast<File*>(IStream_Private::handleManager.GetSourceByHandle(handle));
+	return 	static_cast<File*>(IStream_Private::handleManager.GetSourceByHandle(reinterpret_cast<IStream_Private*>(handle)));
 }
 
 bool File::operator^=(const char* filename)

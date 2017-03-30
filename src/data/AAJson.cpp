@@ -27,6 +27,7 @@
 #include "../../inc/AAClassPrivateHandle.hpp"
 
 #include <inttypes.h>
+#include <vector>
 #include <map>
 #include <boost/lexical_cast.hpp>
 
@@ -40,7 +41,7 @@ union JO_Private {
 	std::vector<JsonUnit*>* children_array;
 
 public:
-	JO_Private() :children(){
+	JO_Private() :children(nullptr){
 	}
 
 	~JO_Private() {}
@@ -432,15 +433,16 @@ const char* JsonString::getString()const {
 	return value;
 }
 
-JsonObject::JsonObject() :handle(s_objDatas.GetHandle(this)) {
+JsonObject::JsonObject() {
+    s_objDatas.GetHandle(this);
 	if(this->getType() == EJsonValueType::Object)
-		s_objDatas.GetDataByHandle(handle)->children = new std::map<std::string, JsonUnit*>();
+		s_objDatas[this]->children = new std::map<std::string, JsonUnit*>();
 	else
-		s_objDatas.GetDataByHandle(handle)->children_array = new std::vector<JsonUnit*>();
+		s_objDatas[this]->children_array = new std::vector<JsonUnit*>();
 }
 
 JsonObject::~JsonObject() {
-	auto hd = s_objDatas.GetDataByHandle(handle);
+	auto hd = s_objDatas[this];
 	if (this->getType() == EJsonValueType::Object)
 	{
 		for (auto i = hd->children->begin(); i != hd->children->end(); ++i)
@@ -457,13 +459,13 @@ JsonObject::~JsonObject() {
 		}
 		delete hd->children_array;
 	}
-	s_objDatas.ReleaseHandle(handle);
+    delete s_objDatas. ReleaseHandle(this);
 }
 
 uint32 JsonObject::toJsonString(char * str) const {
 	if (str == nullptr)
 		return 0;
-	auto hd = s_objDatas.GetDataByHandle(handle);
+	auto hd = s_objDatas[this];
 	std::string ret = "{";
 	for (auto i = hd->children->begin(); ;) {
 		ret += '"' + i->first + '"' + ':';
@@ -484,7 +486,7 @@ uint32 JsonObject::toJsonString(char * str) const {
 }
 
 uint32 JsonObject::getJsonStringLength() const {
-	auto hd = s_objDatas.GetDataByHandle(handle);
+	auto hd = s_objDatas[this];
 	int length = 3;
 	for (auto i = hd->children->begin(); i != hd->children->end(); ++i) {
 		length += 3 + i->first.size() + i->second->getJsonStringLength();
@@ -501,7 +503,7 @@ bool JsonObject::fromJsonString(const char * str) {
 		return false;
 	realValue = realValue.substr(1, realValue.size() - 3) + '\0';
 	realValue = Utils::CString::CleanStringSpaces(realValue);
-	auto hd = s_objDatas.GetDataByHandle(handle);
+	auto hd = s_objDatas[this];
 	hd->children->clear();
 	if (realValue != "")
 		try {
@@ -517,7 +519,7 @@ bool JsonObject::fromJsonString(const char * str) {
 }
 
 JsonUnit * JsonObject::getChild(const char*key) {
-	auto hd = s_objDatas.GetDataByHandle(handle);
+	auto hd = s_objDatas[this];
 	auto ret = hd->children->find(key);
 	if (ret == hd->children->end())
 		return nullptr;
@@ -529,7 +531,7 @@ const JsonUnit * JsonObject::getChild(const char * key) const {
 }
 
 bool JsonObject::putChild(const char * key, JsonUnit * value) {
-	auto hd = s_objDatas.GetDataByHandle(handle);
+	auto hd = s_objDatas[this];
 	auto ret = hd->children->find(key);
 	if (ret != hd->children->end())
 		return false;
@@ -538,7 +540,7 @@ bool JsonObject::putChild(const char * key, JsonUnit * value) {
 }
 
 bool JsonObject::removeChild(const char * key) {
-	auto hd = s_objDatas.GetDataByHandle(handle);
+	auto hd = s_objDatas[this];
 	auto ret = hd->children->find(key);
 	if (ret == hd->children->end())
 		return false;
@@ -554,7 +556,7 @@ JsonArray::~JsonArray() {
 }
 
 uint32 JsonArray::toJsonString(char * str) const {
-	auto hd = s_objDatas.GetDataByHandle(handle);
+	auto hd = s_objDatas[this];
 	std::string ret = "[";
 	for (auto i = 0;; ++i) {
 		auto child = (*(hd->children_array))[i];
@@ -573,7 +575,7 @@ uint32 JsonArray::toJsonString(char * str) const {
 }
 
 uint32 JsonArray::getJsonStringLength() const {
-	auto hd = s_objDatas.GetDataByHandle(handle);
+	auto hd = s_objDatas[this];
 	int length = 2;
 	for (auto i = hd->children_array->begin(); i != hd->children_array->end(); ++i) {
 		length += (*i)->getJsonStringLength();
@@ -581,28 +583,34 @@ uint32 JsonArray::getJsonStringLength() const {
 	return length;
 }
 
-bool JsonArray::fromJsonString(const char * str) {
-	std::string realValue = str;
-	realValue = Utils::CString::CleanStringSpaces(str);
-	if (realValue[realValue.size() - 1] != '\0')
-		realValue += '\0';
-	if (realValue[0] != '[' || realValue[realValue.size() - 2] != ']') {
-		return false;
-	}
-	realValue = realValue.substr(1, realValue.size() - 3);
-	realValue = Utils::CString::CleanStringSpaces(realValue);
-	if (realValue != "")
-		try {
-		auto res = JO_Private::CutByComma(realValue);
-		auto hd = s_objDatas.GetDataByHandle(handle);
-		hd->children_array->clear();
-		for (int i = 0; i < res.size(); i++) {
-			hd->children_array->push_back(JsonUnit::create(res[i].c_str()));
-		}
-	} catch (JsonException) {
-		return false;
-	}
-	return true;
+bool JsonArray::fromJsonString(const char * str)
+{
+    std::string realValue = str;
+    realValue = Utils::CString::CleanStringSpaces(str);
+    if (realValue[realValue.size() - 1] != '\0')
+        realValue += '\0';
+    if (realValue[0] != '[' || realValue[realValue.size() - 2] != ']')
+    {
+        return false;
+    }
+    realValue = realValue.substr(1, realValue.size() - 3);
+    realValue = Utils::CString::CleanStringSpaces(realValue);
+    if (realValue != "")
+        try
+    {
+        auto res = JO_Private::CutByComma(realValue);
+        auto hd = s_objDatas[this];
+        hd->children_array->clear();
+        for (int i = 0; i < res.size(); i++)
+        {
+            hd->children_array->push_back(JsonUnit::create(res[i].c_str()));
+        }
+    }
+    catch (JsonException)
+    {
+        return false;
+    }
+    return true;
 }
 
 JsonUnit * JsonArray::getChild(const char * key) {
@@ -632,7 +640,7 @@ bool JsonArray::removeChild(const char * key) {
 }
 
 JsonUnit * JsonArray::getChild(int32 index) {
-	auto&hd = s_objDatas.GetDataByHandle(handle)->children_array;
+	auto&hd = s_objDatas[this]->children_array;
 	auto size = hd->size();
 	if (index < 0)
 		index = size + index;
@@ -646,13 +654,13 @@ const JsonUnit * JsonArray::getChild(int32 index) const {
 }
 
 int32 JsonArray::putChild(JsonUnit * value) {
-	auto&hd = s_objDatas.GetDataByHandle(handle)->children_array;
+	auto&hd = s_objDatas[this]->children_array;
 	hd->push_back(value);
 	return hd->size();
 }
 
 bool JsonArray::insertChild(int32 index, JsonUnit * value) {
-	auto&hd = s_objDatas.GetDataByHandle(handle)->children_array;
+	auto&hd = s_objDatas[this]->children_array;
 	auto size = hd->size();
 	if (index < 0)
 		index = size + index;
@@ -663,7 +671,7 @@ bool JsonArray::insertChild(int32 index, JsonUnit * value) {
 }
 
 bool JsonArray::removeChild(int32 key) {
-	auto&hd = s_objDatas.GetDataByHandle(handle)->children_array;
+	auto&hd = s_objDatas[this]->children_array;
 	auto size = hd->size();
 	if (key < 0)
 		key = size + key;

@@ -156,9 +156,6 @@ public:
 	virtual const JsonUnit* getChild(const char*key)const;
 	virtual bool putChild(const char*key, JsonUnit*value);
 	virtual bool removeChild(const char*key);
-
-public:
-	const uint32 handle;
 };
 
 class ARMYANTLIB_API JsonArray : public JsonObject{
