@@ -27,7 +27,10 @@
 
 namespace ArmyAnt {
 
+class ARMYANTLIB_API Pipe : public DynamicStream
+{
 
+};
 
 } // namespace ArmyAnt
 

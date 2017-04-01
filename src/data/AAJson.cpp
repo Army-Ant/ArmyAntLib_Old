@@ -65,44 +65,44 @@ public:
 		return std::make_pair(key, Utils::CString::CleanStringSpaces(str.substr(1)));
 	}
 
-	static std::vector<std::string> CutByComma(std::string value) {
-		value = Utils::CString::CleanStringSpaces(value);
+	static std::vector<std::string> CutByComma(const std::string&value) {
+		std::string str = Utils::CString::CleanStringSpaces(value);
 		std::vector<std::string> ret;
 		std::string tmp = "";
 		bool isInSingleString = false;
 		bool isInDoubleString = false;
 		int deepInArray = 0;
 		int deepInObject = 0;
-		for (int i = 0; i < value.size(); i++) {
-			if (value[i] == '\'' && !isInDoubleString) {
+		for (int i = 0; i < str.size(); i++) {
+			if (str[i] == '\'' && !isInDoubleString) {
 				if (isInSingleString) {
-					if (i == 0 || value[i - 1] != '\\')
+					if (i == 0 || str[i - 1] != '\\')
 						isInSingleString = false;
 				} else
 					isInSingleString = true;
-			} else if (value[i] == '"' && !isInSingleString) {
+			} else if (str[i] == '"' && !isInSingleString) {
 				if (isInDoubleString) {
-					if (i == 0 || value[i - 1] != '\\')
+					if (i == 0 || str[i - 1] != '\\')
 						isInDoubleString = false;
 				} else
 					isInDoubleString = true;
-			} else if (value[i] == '[' && !isInSingleString && !isInDoubleString)
+			} else if (str[i] == '[' && !isInSingleString && !isInDoubleString)
 				++deepInArray;
-			else if (value[i] == '{' && !isInSingleString && !isInDoubleString)
+			else if (str[i] == '{' && !isInSingleString && !isInDoubleString)
 				++deepInObject;
-			else if (value[i] == ']' && !isInSingleString && !isInDoubleString)
+			else if (str[i] == ']' && !isInSingleString && !isInDoubleString)
 				--deepInArray;
-			else if (value[i] == '}' && !isInSingleString && !isInDoubleString)
+			else if (str[i] == '}' && !isInSingleString && !isInDoubleString)
 				--deepInObject;
 			if (deepInArray < 0 || deepInObject < 0)
 				throw wrongFormat;
-			if (deepInArray == 0 && deepInObject == 0 && !isInSingleString && !isInDoubleString && value[i] == ',') {
+			if (deepInArray == 0 && deepInObject == 0 && !isInSingleString && !isInDoubleString && str[i] == ',') {
 				ret.push_back(tmp);
 				tmp = "";
-				value = Utils::CString::CleanStringSpaces(value.substr(i + 1));
+                str = Utils::CString::CleanStringSpaces(str.substr(i + 1));
 				i = -1;
 			} else
-				tmp += value[i];
+				tmp += str[i];
 		}
 		ret.push_back(tmp);
 		return ret;
@@ -510,6 +510,7 @@ bool JsonObject::fromJsonString(const char * str) {
 		auto res = JO_Private::CutByComma(realValue);
 		for (int i = 0; i < res.size(); i++) {
 			auto ins = JO_Private::cutKeyValue(res[i]);
+            auto key = ins.first.c_str();
 			hd->children->insert(std::make_pair(ins.first, JsonUnit::create(ins.second.c_str())));
 		}
 	} catch (JsonException) {

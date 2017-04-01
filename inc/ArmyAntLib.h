@@ -221,7 +221,7 @@ inline std::string CleanStringSpaces(const std::string&str)
     while (str[last] == ' ' || str[last] == '\n' || str[last] == '\r' || str[last] == '\t' || str[last] == '\0')
         --last;
     if (first == 0 && last == str.size() - 1)
-        return str;
+        return std::string(str);
     return str.substr(first, last - first + 1);
 }
 

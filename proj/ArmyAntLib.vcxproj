@@ -648,6 +648,8 @@
     <ClInclude Include="..\inc\AANeuronNetwork.hpp" />
     <ClInclude Include="..\inc\AASocket.h" />
     <ClInclude Include="..\inc\AASocket_ProtocolTypes.txt" />
+    <ClInclude Include="..\inc\AASqlClient.h" />
+    <ClInclude Include="..\inc\AASqlStructs.h" />
     <ClInclude Include="..\inc\AAStateMachine.hpp" />
     <ClInclude Include="..\inc\AATree.hpp" />
     <ClInclude Include="..\inc\AATripleMap.hpp" />
