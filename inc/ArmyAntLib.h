@@ -167,67 +167,6 @@ ARMYANTLIB_API bool GetRoll(double percent);
 ARMYANTLIB_API uint32 GetMultiRoll(double percent);
 }
 
-// string utilities
-// TODO: 应当构建专门的string类，并把这些工具也一并转移过去
-namespace CString{
-enum class Encoding {
-	ANSI_C = 0,
-	IBM_EBCDIC = 1,
-	Unicode = 2,
-	GBK = 4,
-	Utf_7 = 6,
-	Utf_8 = 10,
-	Utf_16 = 2,
-	Utf_32 = 14
-};
-ARMYANTLIB_API float isEncoding(Encoding encoding, char*str);
-ARMYANTLIB_API bool convertEncoding(Encoding from, Encoding to, char*str);
-
-template <class Type_Num = int> inline
-ARMYANTLIB_API bool itoa(char*str, Type_Num num) {
-	if (str == nullptr)
-		return false;
-	std::string ret = "";
-	bool isNegative = num < 0;
-	num = Fragment::abs(num);
-	Type_Num afterPoint = Type_Num(num - uint64(num));
-	Type_Num beforePoint = num - afterPoint;
-	do{
-		ret = (beforePoint % 10 + '0') + ret;
-		beforePoint /= 10;
-	} while (beforePoint != 0);
-	if (num - 0.1f != num) {
-		ret += ".";
-		do {
-			beforePoint *= 10;
-			ret = ret + (char(afterPoint + '0'));
-		} while (beforePoint != 0.0);
-	}
-	if (isNegative)
-		ret = "-" + ret;
-	strcpy(str, ret.c_str());
-	return true;
-}
-
-ARMYANTLIB_API bool CleanStringSpaces(char*str);
-inline std::string CleanStringSpaces(const std::string&str)
-{
-    if (str == "")
-        return std::string(str);
-    int first = 0;
-    while (str[first] == ' ' || str[first] == '\n' || str[first] == '\r' || str[first] == '\t')
-        ++first;
-    int last = int(str.size()) - 1;
-    while (str[last] == ' ' || str[last] == '\n' || str[last] == '\r' || str[last] == '\t' || str[last] == '\0')
-        --last;
-    if (first == 0 && last == str.size() - 1)
-        return std::string(str);
-    return str.substr(first, last - first + 1);
-}
-
-
-}
-
 }
 
 } // namespace ArmyAnt

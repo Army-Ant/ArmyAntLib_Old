@@ -106,6 +106,9 @@
     <ClInclude Include="..\inc\AASqlStructs.h">
       <Filter>algorithm</Filter>
     </ClInclude>
+    <ClInclude Include="..\inc\AAString.h">
+      <Filter>tool</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\src\base\ArmyAntLib.cpp">
@@ -137,6 +140,9 @@
     </ClCompile>
     <ClCompile Include="..\src\io\C_AAStream.cpp">
       <Filter>io</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\tool\AAString.cpp">
+      <Filter>tool</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

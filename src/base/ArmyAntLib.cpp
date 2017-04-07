@@ -113,20 +113,6 @@ namespace Utils {
 		return ret;
 	}
 
-	bool CString::CleanStringSpaces(char*str){
-		if(str == nullptr)
-			return false;
-		int first = 0;
-		while(str[first]==' ' || str[first]=='\n' || str[first]=='\r'||str[first]=='\t')
-			++first;
-		int last = strlen(str);
-		while(str[last] == ' ' || str[last] == '\n' || str[last] == '\r' || str[last] == '\t')
-			--last;
-		for(int i = first; i < last; ++i)
-			str[i - first] = str[i];
-		str[last] = '\0';
-		return true;
-	}
 
 }
 

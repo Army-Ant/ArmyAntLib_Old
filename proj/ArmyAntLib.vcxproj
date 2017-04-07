@@ -651,6 +651,7 @@
     <ClInclude Include="..\inc\AASqlClient.h" />
     <ClInclude Include="..\inc\AASqlStructs.h" />
     <ClInclude Include="..\inc\AAStateMachine.hpp" />
+    <ClInclude Include="..\inc\AAString.h" />
     <ClInclude Include="..\inc\AATree.hpp" />
     <ClInclude Include="..\inc\AATripleMap.hpp" />
     <ClInclude Include="..\inc\AA_end.h" />
@@ -675,6 +676,7 @@
     <ClCompile Include="..\src\io\AAIStream_Memory.cpp" />
     <ClCompile Include="..\src\io\AASocket.cpp" />
     <ClCompile Include="..\src\io\C_AAStream.cpp" />
+    <ClCompile Include="..\src\tool\AAString.cpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="..\src\not_cpp\build_end.bat" />

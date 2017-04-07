@@ -25,6 +25,7 @@
 #include "../../inc/AAJson.h"
 #include "../../inc/ArmyAntLib.h"
 #include "../../inc/AAClassPrivateHandle.hpp"
+#include "../../inc/AAString.h"
 
 #include <inttypes.h>
 #include <vector>
@@ -47,7 +48,7 @@ public:
 	~JO_Private() {}
 
 	static std::pair<std::string, std::string> cutKeyValue(std::string str) {
-		str = Utils::CString::CleanStringSpaces(str);
+		str = String::cleanStringSpaces(str);
 		char isSingleKey = str[0];
 		if (str[0] != '"' && str[0] != '\'')
 			throw wrongFormat;
@@ -59,14 +60,14 @@ public:
 			else
 				key += str[count++];
 		}
-		str = Utils::CString::CleanStringSpaces(str.substr(count + 1));
+		str = String::cleanStringSpaces(str.substr(count + 1));
 		if (str[0] != ':')
 			throw wrongFormat;
-		return std::make_pair(key, Utils::CString::CleanStringSpaces(str.substr(1)));
+		return std::make_pair(key, String::cleanStringSpaces(str.substr(1)));
 	}
 
 	static std::vector<std::string> CutByComma(const std::string&value) {
-		std::string str = Utils::CString::CleanStringSpaces(value);
+		std::string str = String::cleanStringSpaces(value);
 		std::vector<std::string> ret;
 		std::string tmp = "";
 		bool isInSingleString = false;
@@ -99,7 +100,7 @@ public:
 			if (deepInArray == 0 && deepInObject == 0 && !isInSingleString && !isInDoubleString && str[i] == ',') {
 				ret.push_back(tmp);
 				tmp = "";
-                str = Utils::CString::CleanStringSpaces(str.substr(i + 1));
+                str = String::cleanStringSpaces(str.substr(i + 1));
 				i = -1;
 			} else
 				tmp += str[i];
@@ -133,7 +134,7 @@ JsonUnit * JsonUnit::create(const char * value) {
 		i->isCreated = true;
 		return i;
 	}
-	auto cst = Utils::CString::CleanStringSpaces(std::string(value));
+	auto cst = String::cleanStringSpaces(std::string(value));
 	if (cst == "null")
 		return JsonObject::jsonNull;
 	if (cst == "undefined")
@@ -291,7 +292,7 @@ uint32 JsonBoolean::getJsonStringLength() const {
 bool JsonBoolean::fromJsonString(const char * str) {
 	char* strtmp = new char[strlen(str)];
 	strcpy(strtmp, str);
-	Utils::CString::CleanStringSpaces(strtmp);
+	String::cleanStringSpaces(strtmp);
 	if (!strcmp(strtmp, "true"))
 		value = true;
 	else if (!strcmp(strtmp, "false"))
@@ -354,7 +355,7 @@ uint32 JsonNumeric::getJsonStringLength() const {
 bool JsonNumeric::fromJsonString(const char * str) {
 	char* strtmp = new char[strlen(str)];
 	strcpy(strtmp, str);
-	Utils::CString::CleanStringSpaces(strtmp);
+	String::cleanStringSpaces(strtmp);
 	std::string num = strtmp;
 	if (num.find('.') != num.npos) {
 		value.dvalue = atof(strtmp);
@@ -415,7 +416,7 @@ bool JsonString::fromJsonString(const char*str) {
 	}
 	char* tmp = new char[strlen(str)];
 	strcpy(tmp, str);
-	Utils::CString::CleanStringSpaces(tmp);
+	String::cleanStringSpaces(tmp);
 	std::string strstr = tmp;
 	if (tmp[0] == '"'&&strstr[strstr.size() - 1] == '"') {
 		if (value != nullptr)
@@ -496,13 +497,13 @@ uint32 JsonObject::getJsonStringLength() const {
 
 bool JsonObject::fromJsonString(const char * str) {
 	std::string stdstr = str;
-	auto realValue = Utils::CString::CleanStringSpaces(stdstr);
+	auto realValue = String::cleanStringSpaces(stdstr);
 	if (realValue[realValue.size() - 1] != '\0')
 		realValue += '\0';
 	if (realValue[0] != '{' || realValue[realValue.size() - 2] != '}')
 		return false;
 	realValue = realValue.substr(1, realValue.size() - 3) + '\0';
-	realValue = Utils::CString::CleanStringSpaces(realValue);
+	realValue = String::cleanStringSpaces(realValue);
 	auto hd = s_objDatas[this];
 	hd->children->clear();
 	if (realValue != "")
@@ -587,7 +588,7 @@ uint32 JsonArray::getJsonStringLength() const {
 bool JsonArray::fromJsonString(const char * str)
 {
     std::string realValue = str;
-    realValue = Utils::CString::CleanStringSpaces(str);
+    realValue = String::cleanStringSpaces(str);
     if (realValue[realValue.size() - 1] != '\0')
         realValue += '\0';
     if (realValue[0] != '[' || realValue[realValue.size() - 2] != ']')
@@ -595,7 +596,7 @@ bool JsonArray::fromJsonString(const char * str)
         return false;
     }
     realValue = realValue.substr(1, realValue.size() - 3);
-    realValue = Utils::CString::CleanStringSpaces(realValue);
+    realValue = String::cleanStringSpaces(realValue);
     if (realValue != "")
         try
     {

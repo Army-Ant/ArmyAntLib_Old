@@ -23,13 +23,15 @@
 #ifndef AA_SQL_STRUCTS_H_2017_4_1
 #define AA_SQL_STRUCTS_H_2017_4_1
 
-#include "AA_start.h"
+#include "AAString.h"
 
 namespace ArmyAnt
 {
 
-enum class SqlFieldType
+enum class SqlFieldType : uint8
 {
+    Null,
+
     MySql_CHAR,
     MySql_VARCHAR,
     MySql_TINYTEXT,
@@ -106,9 +108,112 @@ enum class SqlFieldType
     MsExcel_Normal
 };
 
+enum class SqlClauseType
+{
+    Null,
+    Where,
+    OrderBy,
+    Top
+};
+
+struct ARMYANTLIB_API SqlFieldHead
+{
+    uint64 length;
+    String name;
+    String defalutValue;
+    String comment;
+    SqlFieldType type;
+    uint16 primaryKeyIndex;
+    bool allowNull;
+    bool autoIncrease;
+};
+
 class ARMYANTLIB_API SqlField
 {
+public:
+    SqlField(const String&value, const SqlFieldHead*head);
+    ~SqlField();
 
+public:
+    bool setValue(const String&value);
+    const String&getValue()const;
+
+private:
+    const SqlFieldHead* head;
+    String value;
+};
+
+class ARMYANTLIB_API SqlRow
+{
+public:
+    SqlRow(const SqlRow&copied);
+    SqlRow(SqlRow&&moved);
+    ~SqlRow();
+
+public:
+    uint32 size()const;
+    const SqlField&operator[](uint32 index);
+
+private:
+    SqlField* fields;
+    uint32 length;
+};
+
+class ARMYANTLIB_API SqlColumn
+{
+public:
+    SqlColumn(const SqlColumn&copied);
+    SqlColumn(SqlColumn&&moved);
+    ~SqlColumn();
+
+public:
+    uint32 size()const;
+    const SqlFieldHead*getHead()const;
+    const SqlField&operator[](uint32 index);
+
+private:
+    SqlField* fields;
+    uint64* indexes;
+    uint32 length;
+};
+
+struct ARMYANTLIB_API SqlDatabaseInfo
+{
+    String name;
+    String server;
+    String charset;
+    String sortRule;
+};
+
+struct ARMYANTLIB_API SqlTableInfo
+{
+    String tableName;
+    String engine;
+    String comment;
+    SqlDatabaseInfo* parentDatabase;
+};
+
+class ARMYANTLIB_API SqlTable : protected SqlTableInfo 
+{
+public:
+
+private:
+    uint64 width;
+    SqlFieldHead* heads;
+    uint64 height;
+    SqlField** fields;
+};
+
+class ARMYANTLIB_API SqlClause
+{
+public:
+    SqlClause(const String&str);
+    ~SqlClause();
+
+public:
+    SqlClauseType type;
+    String key;
+    String value;
 };
 
 }
