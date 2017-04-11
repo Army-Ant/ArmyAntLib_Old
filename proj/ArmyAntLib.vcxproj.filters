@@ -144,6 +144,9 @@
     <ClCompile Include="..\src\tool\AAString.cpp">
       <Filter>tool</Filter>
     </ClCompile>
+    <ClCompile Include="..\src\algorithm\AASqlStructs.cpp">
+      <Filter>algorithm</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="data">

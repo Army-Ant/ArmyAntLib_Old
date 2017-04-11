@@ -28,6 +28,9 @@
 namespace ArmyAnt {
 
 class ARMYANTLIB_API Com : public DynamicStream
+{
+
+};
 
 } // namespace ArmyAnt
 

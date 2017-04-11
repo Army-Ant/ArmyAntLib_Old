@@ -118,7 +118,7 @@ enum class SqlClauseType
 
 struct ARMYANTLIB_API SqlFieldHead
 {
-    uint64 length;
+    uint32 length;
     String name;
     String defalutValue;
     String comment;
@@ -131,12 +131,14 @@ struct ARMYANTLIB_API SqlFieldHead
 class ARMYANTLIB_API SqlField
 {
 public:
+    SqlField();
     SqlField(const String&value, const SqlFieldHead*head);
     ~SqlField();
 
 public:
     bool setValue(const String&value);
     const String&getValue()const;
+    const SqlFieldHead*getHead()const;
 
 private:
     const SqlFieldHead* head;
@@ -155,6 +157,8 @@ public:
     const SqlField&operator[](uint32 index);
 
 private:
+    friend class SqlClient;
+    friend class SqlTable;
     SqlField* fields;
     uint32 length;
 };
@@ -168,12 +172,14 @@ public:
 
 public:
     uint32 size()const;
-    const SqlFieldHead*getHead()const;
-    const SqlField&operator[](uint32 index);
+    const SqlFieldHead*getHead(uint32 index)const;
+    const SqlField&operator[](uint32 index)const;
 
 private:
+    friend class SqlClient;
+    friend class SqlTable;
     SqlField* fields;
-    uint64* indexes;
+    uint32* indexes;
     uint32 length;
 };
 
@@ -196,11 +202,24 @@ struct ARMYANTLIB_API SqlTableInfo
 class ARMYANTLIB_API SqlTable : protected SqlTableInfo 
 {
 public:
+    SqlTable(const SqlTable&copied);
+    SqlTable(SqlTable&&moved);
+    ~SqlTable();
+
+public:
+    uint32 size()const;
+    uint32 width()const;
+    uint32 height()const;
+    const SqlFieldHead*getHead(uint32 index)const;
+    SqlRow operator[](uint32 index);
+    const SqlField&operator()(uint32 rowIndex, uint32 colIndex);
+    SqlColumn operator()(std::nullptr_t, uint32 colIndex);
 
 private:
-    uint64 width;
+    friend class SqlClient;
+    uint32 _width;
     SqlFieldHead* heads;
-    uint64 height;
+    uint32 _height;
     SqlField** fields;
 };
 

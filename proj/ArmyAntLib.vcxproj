@@ -666,6 +666,7 @@
     <ClInclude Include="..\src\io\AAIStream_Private.hxx" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="..\src\algorithm\AASqlStructs.cpp" />
     <ClCompile Include="..\src\algorithm\C_AANeuron.cpp" />
     <ClCompile Include="..\src\base\ArmyAntLib.cpp" />
     <ClCompile Include="..\src\data\AAAes.cpp" />

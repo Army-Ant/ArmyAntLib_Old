@@ -44,12 +44,11 @@ class ARMYANTLIB_API String
 {
 public:
     String(const char*value = nullptr);
-    String(char);
+    String(char c);
     String(mac_int num);
     String(float num);
     String(const String&value);
     String(String&&_moved);
-    inline String(std::string value) :String(value.c_str()) {}
     ~String();
 
 public:
@@ -66,6 +65,7 @@ public:
     bool encode(Encoding encode);
     void clear();
     String& upsideDown();
+    uint64 copyTo(char*dest, uint64 maxLength = 0);
 
     bool clearFront(char c);
     bool clearFront(const String&value);
@@ -116,9 +116,7 @@ public:
 public:
     // overloaded operators
     String& operator=(const String&value);
-    String& operator=(String&&_moved);
     String& operator=(const char*value);
-    String& operator=(const std::string&value);
     String& operator=(char c);
     String& operator=(int16 value);
     String& operator=(int32 value);
@@ -129,14 +127,11 @@ public:
     bool operator!=(const String&value)const;
     bool operator==(const char*value)const;
     bool operator!=(const char*value)const;
-    bool operator==(const std::string&value)const;
-    bool operator!=(const std::string&value)const;
     char operator[](mac_int index)const;
     operator bool()const;
     bool operator!()const;
     String operator+(const String&value)const;
     String operator+(const char*value)const;
-    String operator+(const std::string&value)const;
     String operator+(char c)const;
     String operator+(int16 value)const;
     String operator+(int32 value)const;
@@ -145,7 +140,6 @@ public:
     String operator+(const double& value)const;
     String& operator+=(const String&value);
     String& operator+=(const char*value);
-    String& operator+=(const std::string&value);
     String& operator+=(char c);
     String& operator+=(int16 value);
     String& operator+=(int32 value);
@@ -157,40 +151,6 @@ public:
     String operator-(const String&value)const;
     String operator-(const char*value)const;
     String& operator-=(int tailLength);
-    std::string& operator->();
-    const std::string& operator->()const;
-
-    // friend operators
-    friend String operator+(const char*value, const String&str);
-    friend String operator+(const std::string&value, const String&str);
-    friend String operator+(char c, const String&str);
-    friend String operator+(int16 value, const String&str);
-    friend String operator+(int32 value, const String&str);
-    friend String operator+(const int64& value, const String&str);
-    friend String operator+(float value, const String&str);
-    friend String operator+(const double& value, const String&str);
-    friend std::string& operator+=(const std::string&value, const String&str);
-    friend String operator-(int tailLength, const String&str);
-    friend bool operator==(const char*cstr, const String&str);
-    friend bool operator!=(const char*cstr, const String&str);
-    friend bool operator==(const std::string&cstr, const String&str);
-    friend bool operator!=(const std::string&cstr, const String&str);
-    friend inline bool operator<<(std::iostream&stream, const String&str);
-
-    // right referenced this value operators
-    friend String operator+(String&&temp, const String&value);
-    friend String operator+(String&&temp, const char*value);
-    friend String operator+(String&&temp, const std::string&value);
-    friend String operator+(String&&temp, char c);
-    friend String operator+(String&&temp, int16 value);
-    friend String operator+(String&&temp, int32 value);
-    friend String operator+(String&&temp, const int64& value);
-    friend String operator+(String&&temp, float value);
-    friend String operator+(String&&temp, const double& value);
-    friend String operator-(String&&temp, int tailLength);
-    friend String operator-(String&&temp, char c);
-    friend String operator-(String&&temp, const String&value);
-    friend String operator-(String&&temp, const char*value);
 
 public:
     static Encoding getEncoding(char*str);
@@ -230,7 +190,7 @@ public:
         int last = int(str.size()) - 1;
         while (str[last] == ' ' || str[last] == '\n' || str[last] == '\r' || str[last] == '\t' || str[last] == '\0')
             --last;
-        if (first == 0 && last == str.size() - 1)
+        if (first == 0 && last == int(str.size()) - 1)
             return std::string(str);
         return str.substr(first, last - first + 1);
     }
@@ -239,28 +199,16 @@ public:
     static bool clearFront(char*str, const String&value);
     static bool clearFront(char*str, const char*value);
     static bool clearFront(char*str, const char**value, uint32 length);
-    static inline bool clearFront(const std::string&str,char c);
-    static inline bool clearFront(const std::string&str,const String&value);
-    static inline bool clearFront(const std::string&str,const char*value);
-    static inline bool clearFront(const std::string&str,const char**value, uint32 length);
 
     static bool clearBack(char*str, char c);
     static bool clearBack(char*str, const String&value);
     static bool clearBack(char*str, const char*value);
     static bool clearBack(char*str, const char**value, uint32 length);
-    static inline bool clearBack(const std::string&str, char c);
-    static inline bool clearBack(const std::string&str, const String&value);
-    static inline bool clearBack(const std::string&str, const char*value);
-    static inline bool clearBack(const std::string&str, const char**value, uint32 length);
  
     static bool clearBothSides(char*str, char c);
     static bool clearBothSides(char*str, const String&value);
     static bool clearBothSides(char*str, const char*value);
     static bool clearBothSides(char*str, const char**value, uint32 length);
-    static inline bool clearBothSides(const std::string&str, char c);
-    static inline bool clearBothSides(const std::string&str, const String&value);
-    static inline bool clearBothSides(const std::string&str, const char*value);
-    static inline bool clearBothSides(const std::string&str, const char**value, uint32 length);
 
     static bool replace(char*str, char src, char tar);
     static bool replace(char*str, char src, const String&tar);
@@ -295,8 +243,33 @@ public:
     static bool subString(char*str, const String& start, const char* endstr);
     static bool subString(char*str, const String& start, const String& endstr);
 
-private:
-    std::string*ptr;
+public:
+    // friend operators
+    friend String operator+(const char*value, const String&str);
+    friend String operator+(char c, const String&str);
+    friend String operator+(int16 value, const String&str);
+    friend String operator+(int32 value, const String&str);
+    friend String operator+(const int64& value, const String&str);
+    friend String operator+(float value, const String&str);
+    friend String operator+(const double& value, const String&str);
+    friend String operator-(int tailLength, const String&str);
+    friend bool operator==(const char*cstr, const String&str);
+    friend bool operator!=(const char*cstr, const String&str);
+    friend inline bool operator<<(std::iostream&stream, const String&str);
+
+    // right referenced this value operators
+    friend String operator+(String&&temp, const String&value);
+    friend String operator+(String&&temp, const char*value);
+    friend String operator+(String&&temp, char c);
+    friend String operator+(String&&temp, int16 value);
+    friend String operator+(String&&temp, int32 value);
+    friend String operator+(String&&temp, const int64& value);
+    friend String operator+(String&&temp, float value);
+    friend String operator+(String&&temp, const double& value);
+    friend String operator-(String&&temp, int tailLength);
+    friend String operator-(String&&temp, char c);
+    friend String operator-(String&&temp, const String&value);
+    friend String operator-(String&&temp, const char*value);
 };
 
 
@@ -305,7 +278,7 @@ inline bool String::itoa(char * str, Type_Num num)
 {
     if (str == nullptr)
         return false;
-    std::string ret = "";
+    String ret = "";
     bool isNegative = num < 0;
     num = Fragment::abs(num);
     Type_Num afterPoint = Type_Num(num - uint64(num));

@@ -39,7 +39,7 @@ union ARMYANTLIB_API Version
 {
 public:
 	uint32 ver;
-	struct VerChar
+	struct ARMYANTLIB_API VerChar
 	{
 		uint8 bigVer;
 		uint8 smallVer;

@@ -53,7 +53,7 @@ public:
 		if (str[0] != '"' && str[0] != '\'')
 			throw wrongFormat;
 		std::string key = "";
-		int count = 1;
+		size_t count = 1;
 		while (count < str.size()) {
 			if (str[count] == isSingleKey)
 				break;
@@ -74,7 +74,7 @@ public:
 		bool isInDoubleString = false;
 		int deepInArray = 0;
 		int deepInObject = 0;
-		for (int i = 0; i < str.size(); i++) {
+		for (int32 i = 0; i < str.size(); i++) {
 			if (str[i] == '\'' && !isInDoubleString) {
 				if (isInSingleString) {
 					if (i == 0 || str[i - 1] != '\\')
@@ -509,7 +509,7 @@ bool JsonObject::fromJsonString(const char * str) {
 	if (realValue != "")
 		try {
 		auto res = JO_Private::CutByComma(realValue);
-		for (int i = 0; i < res.size(); i++) {
+		for (size_t i = 0; i < res.size(); i++) {
 			auto ins = JO_Private::cutKeyValue(res[i]);
             auto key = ins.first.c_str();
 			hd->children->insert(std::make_pair(ins.first, JsonUnit::create(ins.second.c_str())));
@@ -560,7 +560,7 @@ JsonArray::~JsonArray() {
 uint32 JsonArray::toJsonString(char * str) const {
 	auto hd = s_objDatas[this];
 	std::string ret = "[";
-	for (auto i = 0;; ++i) {
+	for (size_t i = 0;; ++i) {
 		auto child = (*(hd->children_array))[i];
 		char* childStr = new char[child->getJsonStringLength() + 1];
 		child->toJsonString(childStr);
@@ -603,7 +603,7 @@ bool JsonArray::fromJsonString(const char * str)
         auto res = JO_Private::CutByComma(realValue);
         auto hd = s_objDatas[this];
         hd->children_array->clear();
-        for (int i = 0; i < res.size(); i++)
+        for (size_t i = 0; i < res.size(); i++)
         {
             hd->children_array->push_back(JsonUnit::create(res[i].c_str()));
         }
@@ -643,7 +643,7 @@ bool JsonArray::removeChild(const char * key) {
 
 JsonUnit * JsonArray::getChild(int32 index) {
 	auto&hd = s_objDatas[this]->children_array;
-	auto size = hd->size();
+    int32 size = int32(hd->size());
 	if (index < 0)
 		index = size + index;
 	if (index < 0 || index >= size)
@@ -663,7 +663,7 @@ int32 JsonArray::putChild(JsonUnit * value) {
 
 bool JsonArray::insertChild(int32 index, JsonUnit * value) {
 	auto&hd = s_objDatas[this]->children_array;
-	auto size = hd->size();
+	auto size = int32(hd->size());
 	if (index < 0)
 		index = size + index;
 	if (index < 0 || index >= size)
@@ -674,7 +674,7 @@ bool JsonArray::insertChild(int32 index, JsonUnit * value) {
 
 bool JsonArray::removeChild(int32 key) {
 	auto&hd = s_objDatas[this]->children_array;
-	auto size = hd->size();
+	auto size = int32(hd->size());
 	if (key < 0)
 		key = size + key;
 	if (key < 0 || key >= size)

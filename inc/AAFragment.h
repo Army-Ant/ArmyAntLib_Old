@@ -36,8 +36,6 @@
 
 #endif
 
-#include <iostream>
-
 #ifdef _cplusplus
 #undef max
 #undef min
