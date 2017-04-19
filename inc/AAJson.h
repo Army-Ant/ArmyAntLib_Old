@@ -26,6 +26,7 @@
 #include "AADefine.h"
 #include "AA_start.h"
 #include <exception>
+#include "AAString.h"
 
 namespace ArmyAnt{
 
@@ -45,8 +46,9 @@ public:
 	virtual ~JsonUnit(){};
 
 public:
-	virtual uint32 toJsonString(char*str)const=0;
-	virtual uint32 getJsonStringLength()const = 0;
+    virtual uint64 toJsonString(char*str)const = 0;
+    virtual String toJsonString()const = 0;
+    virtual uint64 getJsonStringLength()const = 0;
 	virtual bool fromJsonString(const char*str)=0;
 	virtual EJsonValueType getType()const=0;
 	/*virtual bool isObject()const final;
@@ -76,8 +78,9 @@ public:
 	virtual ~JsonBoolean();
 
 public:
-	virtual uint32 toJsonString(char*str)const override;
-	virtual uint32 getJsonStringLength()const override;
+	virtual uint64 toJsonString(char*str)const override;
+    virtual String toJsonString()const override;
+    virtual uint64 getJsonStringLength()const override;
 	virtual bool fromJsonString(const char*str)override;
 	virtual EJsonValueType getType()const override{ return EJsonValueType::Boolean; };
 
@@ -98,8 +101,9 @@ public:
 	virtual ~JsonNumeric();
 
 public:
-	virtual uint32 toJsonString(char*str)const override;
-	virtual uint32 getJsonStringLength()const override;
+	virtual uint64 toJsonString(char*str)const override;
+    virtual String toJsonString()const override;
+    virtual uint64 getJsonStringLength()const override;
 	virtual bool fromJsonString(const char*str)override;
 	virtual EJsonValueType getType()const override{ return EJsonValueType::Numeric; }
 
@@ -128,8 +132,9 @@ public:
 	virtual ~JsonString();
 
 public:
-	virtual uint32 toJsonString(char*str)const override;
-	virtual uint32 getJsonStringLength()const override;
+	virtual uint64 toJsonString(char*str)const override;
+    virtual String toJsonString()const override;
+    virtual uint64 getJsonStringLength()const override;
 	virtual bool fromJsonString(const char*str)override;
 	virtual EJsonValueType getType()const override{ return EJsonValueType::String; };
 
@@ -137,8 +142,7 @@ public:
 	const char* getString()const;
 
 private:
-	char* value;
-	uint32 length;
+	String value;
 };
 
 class ARMYANTLIB_API JsonObject : public JsonUnit{
@@ -147,8 +151,9 @@ public:
 	virtual ~JsonObject();
 
 public:
-	virtual uint32 toJsonString(char*str)const override;
-	virtual uint32 getJsonStringLength()const override;
+	virtual uint64 toJsonString(char*str)const override;
+    virtual String toJsonString()const override;
+    virtual uint64 getJsonStringLength()const override;
 	virtual bool fromJsonString(const char*str)override;
 	virtual EJsonValueType getType()const override{ return EJsonValueType::Object; }
 
@@ -165,8 +170,9 @@ public:
 	virtual ~JsonArray();
 
 public:
-	virtual uint32 toJsonString(char*str)const override;
-	virtual uint32 getJsonStringLength()const override;
+	virtual uint64 toJsonString(char*str)const override;
+    virtual String toJsonString()const override;
+    virtual uint64 getJsonStringLength()const override;
 	virtual bool fromJsonString(const char*str)override;
 	virtual EJsonValueType getType()const override{ return EJsonValueType::Array; };
 
@@ -194,7 +200,7 @@ public:
 		: std::exception(), message(msg) {}
 	virtual const char* what()const _GLIBCXX_USE_NOEXCEPT override { return this->message.c_str(); }
 protected:
-	std::string message;
+	String message;
 #endif
 };
 

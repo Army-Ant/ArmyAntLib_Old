@@ -64,7 +64,6 @@ public:
 	bool RemoveChild(const Configuration&child);
 	bool AddToParent(const Configuration&child);
 	bool RemoveFromParent();
-	// ArmyAnt::Tree<std::string, std::string>*
 	void* GetTree();
 
 public:

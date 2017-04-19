@@ -26,6 +26,7 @@
 #include "../../inc/AABinary.h"
 #include "../../inc/AAClassPrivateHandle.hpp"
 #include "../../inc/AATripleMap.hpp"
+#include "../../inc/AAString.h"
 #include <iostream>
 #include <cstring>
 
@@ -48,14 +49,14 @@ public:
 	typedef std::pair<DataType, uint32> DataAttr;
 
 public:
-	bool InsertData(std::string tag, DataType tp, uint32 len, const void*buffer);
-	bool RemoveData(std::string tag);
+	bool InsertData(String tag, DataType tp, uint32 len, const void*buffer);
+	bool RemoveData(String tag);
 	bool ClearData();
 	uint32 EncodingToBinary(uint8* buffer)const;
 	uint32 DecodingFromBinary(const uint8* buffer);
 
 public:
-	TripleMap<std::string, DataAttr, uint8*> data;
+	TripleMap<String, DataAttr, uint8*> data;
 
 	AA_FORBID_ASSGN_OPR(BinaryParser_Private);
 	AA_FORBID_COPY_CTOR(BinaryParser_Private);
@@ -72,7 +73,7 @@ BinaryParser_Private::~BinaryParser_Private()
 	AAAssert(ClearData(), );
 }
 
-bool BinaryParser_Private::InsertData(std::string tag, DataType tp, uint32 len, const void * buffer)
+bool BinaryParser_Private::InsertData(String tag, DataType tp, uint32 len, const void * buffer)
 {
 	uint8*buf = nullptr;
 	buf = new uint8[len];
@@ -81,7 +82,7 @@ bool BinaryParser_Private::InsertData(std::string tag, DataType tp, uint32 len, 
 	return true;
 }
 
-bool BinaryParser_Private::RemoveData(std::string tag)
+bool BinaryParser_Private::RemoveData(String tag)
 {
 	auto ret = data.Find(tag);
 	if(ret == nullptr)
@@ -120,7 +121,7 @@ uint32 BinaryParser_Private::EncodingToBinary(uint8 * buffer) const
 uint32 BinaryParser_Private::DecodingFromBinary(const uint8 * buffer)
 {
 	uint32 ret = 0;
-	std::string tag = "";
+	String tag = "";
 	DataType tp;
 	uint32 len = 0;
 	while(buffer[ret] != 0)

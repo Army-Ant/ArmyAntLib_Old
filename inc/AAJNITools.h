@@ -28,6 +28,7 @@
 #include <jni.h>
 #include <string>
 #include <cstring>
+#include "AAString.h"
 
 namespace ArmyAnt {
 
@@ -36,13 +37,13 @@ namespace JNITools{
 	/*	Convert the Java string to C++ string
 	 *	将Java的String转化为C++的string输出
 	 */
-ARMYANTLIB_API std::string JstringToCstring(JNIEnv* env, jstring jstr);
+ARMYANTLIB_API String JstringToCstring(JNIEnv* env, jstring jstr);
 
 
 	/*	Convert the C++ string to Java string
 	 *	将C++的string转化为Java的String输出
 	 */
-ARMYANTLIB_API jstring CstringToJstring(JNIEnv*env, std::string str);
+ARMYANTLIB_API jstring CstringToJstring(JNIEnv*env, String str);
 
 	/*	Get the Java method ID from a named method in named Java class or interface
 	 *	获取指定接口的指定Java函数ID

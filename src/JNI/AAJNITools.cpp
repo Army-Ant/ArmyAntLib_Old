@@ -32,10 +32,10 @@ const char* const c_javaStringSig = "java/lang/String";
 const char* const c_javaStringGetBytes = "getBytes";
 const char* const c_javaStringGetBytesSig = "(Ljava/lang/String;)[B";
 
-std::string JstringToCstring(JNIEnv* env, jstring jstr)
+String JstringToCstring(JNIEnv* env, jstring jstr)
 {
 	// 获取Java字符串类
-	std::string rtn = "";
+    String rtn = "";
 	jclass clsstring = env->FindClass(c_javaStringSig);
 	AAAssert(clsstring != nullptr, "");
 	// 获取Java的字符串转字节流函数
@@ -61,7 +61,7 @@ std::string JstringToCstring(JNIEnv* env, jstring jstr)
 	return rtn;
 }
 
-jstring CstringToJstring(JNIEnv*env, std::string str)
+jstring CstringToJstring(JNIEnv*env, String str)
 {
 	return env->NewStringUTF(str.c_str());
 }

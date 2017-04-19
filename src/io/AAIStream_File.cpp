@@ -26,6 +26,7 @@
 #include "../../inc/AAIStream_File.h"
 #include "AAIStream_Private.hxx"
 #include "../../inc/AAClassPrivateHandle.hpp"
+#include "../../inc/AAString.h"
 #include <list>
 
 #ifdef OS_WINDOWS
@@ -64,7 +65,7 @@ public:
 	//是否在打开时不允许文件已存在
 	bool noexist = false;
 	//文件名
-	std::string name = "";
+	String name = "";
 	//文件指针,
 	FILE*file = nullptr;
 
@@ -171,7 +172,7 @@ bool File::Open(const char* pipename, const char*pipePath, const char*pipeServer
 		return false;
 	AAAssert(pipename != nullptr, false);
 	//打开命名管道
-	hd->name = std::string("\\\\") + pipeServer + "\\pipe\\" + pipePath + pipename;
+	hd->name = String("\\\\") + pipeServer + "\\pipe\\" + pipePath + pipename;
 	hd->file = fopen(hd->name.c_str(), "wb+");
 	if(hd->file == nullptr)
 	{

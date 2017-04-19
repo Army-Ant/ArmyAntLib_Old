@@ -24,6 +24,7 @@
 
 #include "../base/base.hpp"
 #include "../../inc/ArmyAntLib.h"
+#include "../../inc/AAString.h"
 #include <boost/random.hpp>
 
 namespace ArmyAnt {
@@ -47,7 +48,7 @@ Version::Version(uint8 bigVer, uint8 smallVer, uint8 patchVer, uint8 testVer)
 
 const Version Version::GetVersion(const char* obj)
 {
-	std::string objstr = obj;
+	String objstr = obj;
 	if(objstr == "boost")
 		return Version(1, 59, 0, 0);
 	else if(objstr == "python")

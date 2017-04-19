@@ -34,11 +34,12 @@
 
 namespace ArmyAnt {
 
+static const char* sg_spaceCleans[] = { "\r","\n"," " };
 static const JsonException invalidNumber = JsonException("This is an invalid number value !");
 static const JsonException wrongFormat = JsonException("");
 
 union JO_Private {
-	std::map<std::string, JsonUnit*>* children;
+	std::map<String, JsonUnit*>* children;
 	std::vector<JsonUnit*>* children_array;
 
 public:
@@ -47,12 +48,12 @@ public:
 
 	~JO_Private() {}
 
-	static std::pair<std::string, std::string> cutKeyValue(std::string str) {
-		str = String::cleanStringSpaces(str);
+	static std::pair<String, String> cutKeyValue(String str) {
+		str.clearBothSides(sg_spaceCleans, 3);
 		char isSingleKey = str[0];
 		if (str[0] != '"' && str[0] != '\'')
 			throw wrongFormat;
-		std::string key = "";
+		String key = "";
 		size_t count = 1;
 		while (count < str.size()) {
 			if (str[count] == isSingleKey)
@@ -60,16 +61,20 @@ public:
 			else
 				key += str[count++];
 		}
-		str = String::cleanStringSpaces(str.substr(count + 1));
+        str.clearBothSides(sg_spaceCleans, 3);
+        str.subString(int(count + 1));
 		if (str[0] != ':')
 			throw wrongFormat;
-		return std::make_pair(key, String::cleanStringSpaces(str.substr(1)));
+        str.subString(1);
+        str.clearBothSides(sg_spaceCleans, 3);
+		return std::make_pair(key, str);
 	}
 
-	static std::vector<std::string> CutByComma(const std::string&value) {
-		std::string str = String::cleanStringSpaces(value);
-		std::vector<std::string> ret;
-		std::string tmp = "";
+	static std::vector<String> CutByComma(const String&value) {
+		String str = value;
+        str.clearBothSides(sg_spaceCleans, 3);
+        std::vector<String> ret;
+		String tmp = "";
 		bool isInSingleString = false;
 		bool isInDoubleString = false;
 		int deepInArray = 0;
@@ -100,8 +105,9 @@ public:
 			if (deepInArray == 0 && deepInObject == 0 && !isInSingleString && !isInDoubleString && str[i] == ',') {
 				ret.push_back(tmp);
 				tmp = "";
-                str = String::cleanStringSpaces(str.substr(i + 1));
-				i = -1;
+                str.clearBothSides(sg_spaceCleans, 3);
+                str.subString(int(i + 1));
+                i = -1;
 			} else
 				tmp += str[i];
 		}
@@ -134,8 +140,9 @@ JsonUnit * JsonUnit::create(const char * value) {
 		i->isCreated = true;
 		return i;
 	}
-	auto cst = String::cleanStringSpaces(std::string(value));
-	if (cst == "null")
+    String cst = value;
+    cst.clearBothSides(sg_spaceCleans, 3);
+    if (cst == "null")
 		return JsonObject::jsonNull;
 	if (cst == "undefined")
 		return JsonObject::undefined;
@@ -165,7 +172,7 @@ bool JsonUnit::release(JsonUnit* & ptr) {
 
 static auto AA_JSON_undefined = ([]() {
 	static class : public ArmyAnt::JsonUnit {
-		virtual uint32 toJsonString(char*str)const override {
+		virtual uint64 toJsonString(char*str)const override {
 			if (str != nullptr) {
 				strcpy(str, "undefined");
 			}
@@ -174,25 +181,29 @@ static auto AA_JSON_undefined = ([]() {
 		virtual bool fromJsonString(const char*)override {
 			return true;
 		}
-		virtual uint32 getJsonStringLength()const override {
+		virtual uint64 getJsonStringLength()const override {
 			return 10;
 		}
 		virtual ArmyAnt::EJsonValueType getType()const override {
 			return ArmyAnt::EJsonValueType::Undefined;
 		}
+        virtual ArmyAnt::String toJsonString()const override
+        {
+            return "undefined";
+        }
 	} ret;
 	return ret;
 }());
 
 static auto AA_JSON_null = []() {
 	static class : public ArmyAnt::JsonUnit {
-		virtual uint32 toJsonString(char*str)const override {
+		virtual uint64 toJsonString(char*str)const override {
 			if (str != nullptr) {
 				strcpy(str, "null");
 			}
 			return 5;
 		}
-		virtual uint32 getJsonStringLength()const override {
+		virtual uint64 getJsonStringLength()const override {
 			return 5;
 		}
 		virtual bool fromJsonString(const char*)override {
@@ -201,7 +212,11 @@ static auto AA_JSON_null = []() {
 		virtual ArmyAnt::EJsonValueType getType()const override {
 			return ArmyAnt::EJsonValueType::Null;
 		}
-	} ret;
+        virtual ArmyAnt::String toJsonString()const override
+        {
+            return "null";
+        }
+    } ret;
 	return ret;
 }();
 
@@ -219,13 +234,13 @@ static auto AA_JSON_false = []() {
 
 static auto AA_JSON_nan = []() {
 	static class : public ArmyAnt::JsonNumeric {
-		virtual uint32 toJsonString(char*str)const override {
+		virtual uint64 toJsonString(char*str)const override {
 			if (str != nullptr) {
 				strcpy(str, "NaN");
 			}
 			return 5;
 		}
-		virtual uint32 getJsonStringLength()const override
+		virtual uint64 getJsonStringLength()const override
 		{
 			return 4;
 		}
@@ -238,19 +253,23 @@ static auto AA_JSON_nan = []() {
 		virtual double getDouble()const override {
 			throw ArmyAnt::invalidNumber;
 		}
-	}ret;
+        virtual ArmyAnt::String toJsonString()const override
+        {
+            return "NaN";
+        }
+    }ret;
 	return ret;
 }();
 
 static auto AA_JSON_infinity = []() {
 	static class : public ArmyAnt::JsonNumeric {
-		virtual uint32 toJsonString(char*str)const override {
+		virtual uint64 toJsonString(char*str)const override {
 			if (str != nullptr) {
 				strcpy(str, "infinity");
 			}
 			return 5;
 		}
-		virtual uint32 getJsonStringLength()const override
+		virtual uint64 getJsonStringLength()const override
 		{
 			return 9;
 		}
@@ -263,7 +282,11 @@ static auto AA_JSON_infinity = []() {
 		virtual double getDouble()const override {
 			throw ArmyAnt::invalidNumber;
 		}
-	}ret;
+        virtual ArmyAnt::String toJsonString()const override
+        {
+            return "infinity";
+        }
+    }ret;
 	return ret;
 }();
 
@@ -280,22 +303,26 @@ JsonBoolean::~JsonBoolean() {
 
 }
 
-uint32 JsonBoolean::toJsonString(char*str) const {
+uint64 JsonBoolean::toJsonString(char*str) const {
 	strcpy(str, value ? "true" : "false");
 	return value ? 5 : 6;
 }
 
-uint32 JsonBoolean::getJsonStringLength() const {
+String JsonBoolean::toJsonString() const
+{
+    return value ? "true" : "false";
+}
+
+uint64 JsonBoolean::getJsonStringLength() const {
 	return value ? 5 : 6;
 }
 
 bool JsonBoolean::fromJsonString(const char * str) {
-	char* strtmp = new char[strlen(str)];
-	strcpy(strtmp, str);
-	String::cleanStringSpaces(strtmp);
-	if (!strcmp(strtmp, "true"))
+    String strtmp = str;
+    strtmp.clearBothSides(sg_spaceCleans, 3);
+	if (strtmp == "true")
 		value = true;
-	else if (!strcmp(strtmp, "false"))
+	else if (strtmp == "false")
 		value = false;
 	else
 		return false;
@@ -318,7 +345,7 @@ JsonNumeric::~JsonNumeric() {
 
 }
 
-uint32 JsonNumeric::toJsonString(char*str) const {
+uint64 JsonNumeric::toJsonString(char*str) const {
 	char tmpstr[64] = "";
 	if (str == nullptr)
 		str = tmpstr;
@@ -339,35 +366,54 @@ uint32 JsonNumeric::toJsonString(char*str) const {
 	return strlen(str);
 }
 
-uint32 JsonNumeric::getJsonStringLength() const {
+String JsonNumeric::toJsonString() const
+{
+    switch (whatvalue)
+    {
+        case 1:
+            return value.ivalue;
+        case 2:
+            return value.lvalue;
+        case 3:
+            return String(value.dvalue, rightLength);
+        default:
+            return nullptr;
+    }
+}
+
+uint64 JsonNumeric::getJsonStringLength() const {
 	switch (whatvalue) {
 		case 1:
-			return boost::lexical_cast<std::string>(value.ivalue).size() + 1;
+			return String(value.ivalue).size() + 1;
 		case 2:
-			return boost::lexical_cast<std::string>(value.lvalue).size() + 1;
+			return String(value.lvalue).size() + 1;
 		case 3:
-			return boost::lexical_cast<std::string>(int64(value.dvalue)).size() + 1 + rightLength + 1;
+			return String(int64(value.dvalue)).size() + 1 + rightLength + 1;
 		default:
 			return 0;
 	}
 }
 
-bool JsonNumeric::fromJsonString(const char * str) {
-	char* strtmp = new char[strlen(str)];
-	strcpy(strtmp, str);
-	String::cleanStringSpaces(strtmp);
-	std::string num = strtmp;
-	if (num.find('.') != num.npos) {
-		value.dvalue = atof(strtmp);
-		whatvalue = 3;
-	} else {
-		value.lvalue = atoll(strtmp);
-		if (value.lvalue <= AA_INT32_MAX) {
-			value.ivalue = int32(value.lvalue);
-			whatvalue = 1;
-		} else whatvalue = 2;
-	}
-	return true;
+bool JsonNumeric::fromJsonString(const char * str)
+{
+    String strtmp = str;
+    strtmp.clearBothSides(sg_spaceCleans, 3);
+    if (strtmp.isFloat())
+    {
+        value.dvalue = strtmp.toDemical();
+        whatvalue = 3;
+    }
+    else
+    {
+        value.lvalue = strtmp.toLong();
+        if (value.lvalue <= AA_INT32_MAX)
+        {
+            value.ivalue = int32(value.lvalue);
+            whatvalue = 1;
+        }
+        else whatvalue = 2;
+    }
+    return true;
 }
 
 int32 JsonNumeric::getInteger()const {
@@ -386,58 +432,41 @@ JsonNumeric* JsonNumeric::nan = &AA_JSON_nan;
 
 JsonNumeric* JsonNumeric::infinity = &AA_JSON_infinity;
 
-JsonString::JsonString() :value(nullptr), length(0) {
+JsonString::JsonString() :value() {
 
 }
 
 JsonString::~JsonString() {
-	if (value != nullptr)
-		delete[] value;
 }
 
-uint32 JsonString::toJsonString(char*str) const {
-	if (value == nullptr)
-		return 0;
+uint64 JsonString::toJsonString(char*str) const {
 	if (str != nullptr) 
-		strcpy(str, ('"'+std::string(value)+'"').c_str());
-	return length + 3;
+		strcpy(str, ('"'+value+'"').c_str());
+	return value.size() + 3;
 }
 
-uint32 JsonString::getJsonStringLength() const {
-	return length + 3;
+String JsonString::toJsonString() const
+{
+    return '"' + value + '"';
+}
+
+uint64 JsonString::getJsonStringLength() const {
+	return value.size() + 3;
 }
 
 bool JsonString::fromJsonString(const char*str) {
-	if (str == nullptr) {
-		if (value != nullptr)
-			delete[] value;
-		length = 0;
-		return true;
-	}
-	char* tmp = new char[strlen(str)];
-	strcpy(tmp, str);
-	String::cleanStringSpaces(tmp);
-	std::string strstr = tmp;
-	if (tmp[0] == '"'&&strstr[strstr.size() - 1] == '"') {
-		if (value != nullptr)
-			delete[] value;
-		length = strstr.size() - 1;
-		value = new char[length];
-		value[length - 1] = '\0';
-		memcpy(value, tmp + 1, length - 1);
-		return true;
-	}
-	return false;
+    value = str;
+    return true;
 }
 
 const char* JsonString::getString()const {
-	return value;
+	return value.c_str();
 }
 
 JsonObject::JsonObject() {
     s_objDatas.GetHandle(this);
 	if(this->getType() == EJsonValueType::Object)
-		s_objDatas[this]->children = new std::map<std::string, JsonUnit*>();
+		s_objDatas[this]->children = new std::map<String, JsonUnit*>();
 	else
 		s_objDatas[this]->children_array = new std::vector<JsonUnit*>();
 }
@@ -463,61 +492,73 @@ JsonObject::~JsonObject() {
     delete s_objDatas. ReleaseHandle(this);
 }
 
-uint32 JsonObject::toJsonString(char * str) const {
+uint64 JsonObject::toJsonString(char * str) const {
 	if (str == nullptr)
 		return 0;
-	auto hd = s_objDatas[this];
-	std::string ret = "{";
-	for (auto i = hd->children->begin(); ;) {
-		ret += '"' + i->first + '"' + ':';
-		if (i->second->getJsonStringLength() > 0) {
-			char* str_child = new char[i->second->getJsonStringLength() + 1];
-			i->second->toJsonString(str_child);
-			ret += std::string(str_child);
-			delete[] str_child;
-		}
-		++i;
-		if (i != hd->children->end())
-			ret += ",";
-		else break;
-	}
-	ret += "}";
+    auto ret = toJsonString();
 	strcpy(str, ret.c_str());
 	return ret.size();
 }
 
-uint32 JsonObject::getJsonStringLength() const {
+String JsonObject::toJsonString() const
+{
+    auto hd = s_objDatas[this];
+    String ret = "{";
+    for (auto i = hd->children->begin(); ;)
+    {
+        ret += '"' + i->first + '"' + ':';
+        if (i->second->getJsonStringLength() > 0)
+        {
+            ret += i->second->toJsonString();
+        }
+        ++i;
+        if (i != hd->children->end())
+            ret += ",";
+        else break;
+    }
+    ret += "}";
+    return ret;
+}
+
+uint64 JsonObject::getJsonStringLength() const {
 	auto hd = s_objDatas[this];
-	int length = 3;
+	uint64 length = 3;
 	for (auto i = hd->children->begin(); i != hd->children->end(); ++i) {
 		length += 3 + i->first.size() + i->second->getJsonStringLength();
 	}
 	return length;
 }
 
-bool JsonObject::fromJsonString(const char * str) {
-	std::string stdstr = str;
-	auto realValue = String::cleanStringSpaces(stdstr);
-	if (realValue[realValue.size() - 1] != '\0')
-		realValue += '\0';
-	if (realValue[0] != '{' || realValue[realValue.size() - 2] != '}')
-		return false;
-	realValue = realValue.substr(1, realValue.size() - 3) + '\0';
-	realValue = String::cleanStringSpaces(realValue);
-	auto hd = s_objDatas[this];
-	hd->children->clear();
-	if (realValue != "")
-		try {
-		auto res = JO_Private::CutByComma(realValue);
-		for (size_t i = 0; i < res.size(); i++) {
-			auto ins = JO_Private::cutKeyValue(res[i]);
-            auto key = ins.first.c_str();
-			hd->children->insert(std::make_pair(ins.first, JsonUnit::create(ins.second.c_str())));
-		}
-	} catch (JsonException) {
-		return false;
-	}
-	return true;
+bool JsonObject::fromJsonString(const char * str)
+{
+    String stdstr = str;
+    stdstr.clearBothSides(sg_spaceCleans, 3);
+    if (stdstr[-1] != '\0')
+        stdstr += '\0';
+    if (stdstr[0] != '{' || stdstr[-2] != '}')
+        return false;
+    if (!stdstr.subString(1, -3))
+        return false;
+    stdstr += '\0';
+    if (!stdstr.clearBothSides(sg_spaceCleans, 3))
+        return false;
+    auto hd = s_objDatas[this];
+    hd->children->clear();
+    if (stdstr != "")
+        try
+    {
+        auto res = JO_Private::CutByComma(stdstr);
+        for (size_t i = 0; i < res.size(); i++)
+        {
+            auto ins = JO_Private::cutKeyValue(res[i]);
+            hd->children->insert(std::make_pair(ins.first, JsonUnit::create(ins.second.c_str())));
+        }
+    }
+    catch (JsonException)
+    {
+        return false;
+    }
+    return true;
 }
 
 JsonUnit * JsonObject::getChild(const char*key) {
@@ -537,7 +578,7 @@ bool JsonObject::putChild(const char * key, JsonUnit * value) {
 	auto ret = hd->children->find(key);
 	if (ret != hd->children->end())
 		return false;
-	hd->children->insert(std::make_pair(std::string(key), value));
+	hd->children->insert(std::make_pair(String(key), value));
 	return true;
 }
 
@@ -557,28 +598,35 @@ JsonArray::JsonArray() : JsonObject() {
 JsonArray::~JsonArray() {
 }
 
-uint32 JsonArray::toJsonString(char * str) const {
-	auto hd = s_objDatas[this];
-	std::string ret = "[";
-	for (size_t i = 0;; ++i) {
-		auto child = (*(hd->children_array))[i];
-		char* childStr = new char[child->getJsonStringLength() + 1];
-		child->toJsonString(childStr);
-		if (i < hd->children_array->size() - 1)
-			ret = ret + childStr + ",";
-		else
-		{
-			ret = ret + childStr + "]";
-			break;
-		}
-	}
+uint64 JsonArray::toJsonString(char * str) const {
+    auto ret = toJsonString();
 	strcpy(str, ret.c_str());
 	return ret.size();
 }
 
-uint32 JsonArray::getJsonStringLength() const {
+String JsonArray::toJsonString() const
+{
+    auto hd = s_objDatas[this];
+    String ret = "[";
+    for (size_t i = 0;; ++i)
+    {
+        ret += (*(hd->children_array))[i]->toJsonString();
+        if (i < hd->children_array->size() - 1)
+        {
+            ret += ",";
+        }
+        else
+        {
+            ret += "]";
+            break;
+        }
+    }
+    return ret;
+}
+
+uint64 JsonArray::getJsonStringLength() const {
 	auto hd = s_objDatas[this];
-	int length = 2;
+	uint64 length = 2;
 	for (auto i = hd->children_array->begin(); i != hd->children_array->end(); ++i) {
 		length += (*i)->getJsonStringLength();
 	}
@@ -587,16 +635,16 @@ uint32 JsonArray::getJsonStringLength() const {
 
 bool JsonArray::fromJsonString(const char * str)
 {
-    std::string realValue = str;
-    realValue = String::cleanStringSpaces(str);
+    String realValue = str;
+    realValue.clearBothSides(sg_spaceCleans, 3);
     if (realValue[realValue.size() - 1] != '\0')
         realValue += '\0';
     if (realValue[0] != '[' || realValue[realValue.size() - 2] != ']')
     {
         return false;
     }
-    realValue = realValue.substr(1, realValue.size() - 3);
-    realValue = String::cleanStringSpaces(realValue);
+    if(!realValue.subString(1, realValue.size() - 3))
+        realValue.clearBothSides(sg_spaceCleans, 3);
     if (realValue != "")
         try
     {
@@ -617,7 +665,7 @@ bool JsonArray::fromJsonString(const char * str)
 
 JsonUnit * JsonArray::getChild(const char * key) {
 	try {
-		int k = boost::lexical_cast<int>(std::string(key));
+		int k = boost::lexical_cast<int>(String(key));
 		return getChild(k);
 	} catch (boost::bad_lexical_cast) {
 		return nullptr;
@@ -634,7 +682,7 @@ bool JsonArray::putChild(const char *, JsonUnit * value) {
 
 bool JsonArray::removeChild(const char * key) {
 	try {
-		int k = boost::lexical_cast<int>(std::string(key));
+		int k = boost::lexical_cast<int>(String(key));
 		return removeChild(k);
 	} catch (boost::bad_lexical_cast) {
 		return false;

@@ -41,14 +41,25 @@ String::String(char c)
     sg_manager.GetHandle(this, new std::string(c + std::string()));
 }
 
-String::String(mac_int num)
-{
-    sg_manager.GetHandle(this, new std::string(static_cast<std::stringstream*>(&(std::stringstream()<< num))->str()));
-}
-
-String::String(float num)
+String::String(int32 num)
 {
     sg_manager.GetHandle(this, new std::string(static_cast<std::stringstream*>(&(std::stringstream() << num))->str()));
+}
+
+String::String(const int64 & num)
+{
+    sg_manager.GetHandle(this, new std::string(static_cast<std::stringstream*>(&(std::stringstream() << num))->str()));
+}
+
+String::String(double num, int32 behindFloat)
+{
+    if (behindFloat >= 0)
+    {
+        int64 powed = int64(pow(10, behindFloat));
+        num -= num - double(int64(num*powed)) / powed;
+    }
+    sg_manager.GetHandle(this, new std::string(static_cast<std::stringstream*>(&(std::stringstream() << num))->str()));
+
 }
 
 String::String(const String & value)
@@ -125,11 +136,11 @@ String & String::operator=(const char * value)
 
 String & String::operator=(char c)
 {
-    *(sg_manager[this]) = std::string() + c;
+    *(sg_manager[this]) = String() + c;
     return *this;
 }
 
-String & String::operator=(int16 value)
+String & String::operator=(int64 value)
 {
     std::ostringstream ss;
     ss << value;
@@ -137,31 +148,7 @@ String & String::operator=(int16 value)
     return *this;
 }
 
-String & String::operator=(int32 value)
-{
-    std::ostringstream ss;
-    ss << value;
-    *(sg_manager[this]) += ss.str();
-    return *this;
-}
-
-String & String::operator=(const int64 & value)
-{
-    std::ostringstream ss;
-    ss << value;
-    *(sg_manager[this]) += ss.str();
-    return *this;
-}
-
-String & String::operator=(float value)
-{
-    std::ostringstream ss;
-    ss << value;
-    *(sg_manager[this]) += ss.str();
-    return *this;
-}
-
-String & String::operator=(const double & value)
+String & String::operator=(double value)
 {
     std::ostringstream ss;
     ss << value;
@@ -189,8 +176,10 @@ bool String::operator!=(const char * value) const
     return !operator==(value);
 }
 
-char String::operator[](mac_int index) const
+char String::operator[](int64 index) const
 {
+    if (index < 0)
+        index += sg_manager[this]->size();
     return (*(sg_manager[this]))[index];
 }
 
@@ -219,7 +208,7 @@ String String::operator+(char c) const
     return String((*(sg_manager[this]) + c).c_str());
 }
 
-String String::operator+(int16 value) const
+String String::operator+(int64 value) const
 {
     std::ostringstream ss;
     ss << sg_manager[this];
@@ -227,31 +216,7 @@ String String::operator+(int16 value) const
     return String(ss.str().c_str());
 }
 
-String String::operator+(int32 value) const
-{
-    std::ostringstream ss;
-    ss << sg_manager[this];
-    ss << value;
-    return String(ss.str().c_str());
-}
-
-String String::operator+(const int64 & value) const
-{
-    std::ostringstream ss;
-    ss << sg_manager[this];
-    ss << value;
-    return String(ss.str().c_str());
-}
-
-String String::operator+(float value) const
-{
-    std::ostringstream ss;
-    ss << sg_manager[this];
-    ss << value;
-    return String(ss.str().c_str());
-}
-
-String String::operator+(const double & value) const
+String String::operator+(double value) const
 {
     std::ostringstream ss;
     ss << sg_manager[this];
@@ -277,7 +242,7 @@ String & String::operator+=(char c)
     return *this;
 }
 
-String & String::operator+=(int16 value)
+String & String::operator+=(int64 value)
 {
     std::ostringstream ss;
     ss << value;
@@ -285,31 +250,7 @@ String & String::operator+=(int16 value)
     return *this;
 }
 
-String & String::operator+=(int32 value)
-{
-    std::ostringstream ss;
-    ss << value;
-    *(sg_manager[this]) += ss.str();
-    return *this;
-}
-
-String & String::operator+=(const int64 & value)
-{
-    std::ostringstream ss;
-    ss << value;
-    *(sg_manager[this]) += ss.str();
-    return *this;
-}
-
-String & String::operator+=(float value)
-{
-    std::ostringstream ss;
-    ss << value;
-    *(sg_manager[this]) += ss.str();
-    return *this;
-}
-
-String & String::operator+=(const double & value)
+String & String::operator+=(double value)
 {
     std::ostringstream ss;
     ss << value;

@@ -45,8 +45,9 @@ class ARMYANTLIB_API String
 public:
     String(const char*value = nullptr);
     String(char c);
-    String(mac_int num);
-    String(float num);
+    String(int32 num);
+    String(const int64&num);
+    String(double num, int32 behindFloat = -1);
     String(const String&value);
     String(String&&_moved);
     ~String();
@@ -56,6 +57,7 @@ public:
     const char* c_str()const;
     uint64 size()const;
     bool isNumeric()const;
+    bool isFloat()const;
     int32 toInteger()const;
     int64 toLong()const;
     double toDemical()const;
@@ -66,6 +68,10 @@ public:
     void clear();
     String& upsideDown();
     uint64 copyTo(char*dest, uint64 maxLength = 0);
+
+    int32 find(char c);
+    int32 find(const char*str);
+    static const int64 c_npos = -1;
 
     bool clearFront(char c);
     bool clearFront(const String&value);
@@ -92,60 +98,74 @@ public:
     bool replace(const char*src, const String&tar);
     bool replace(const char*src, const char*tar);
 
-    bool subString(int start);
-    bool subString(int start, int end);
-    bool subString(int start, char endc);
-    bool subString(int start, const char* endstr);
-    bool subString(int start, const String& endstr);
-    bool subString(char start);
-    bool subString(char start, int end);
-    bool subString(char start, char endc);
-    bool subString(char start, const char* endstr);
-    bool subString(char start, const String& endstr);
+    bool subString(int64 start);
+    bool subString(int64 start, int64 end);
+    bool subString(int64 start, const char* endstr);
+    bool subString(int64 start, const String& endstr);
     bool subString(const char* start);
-    bool subString(const char* start, int end);
-    bool subString(const char* start, char endc);
+    bool subString(const char* start, int64 end);
     bool subString(const char* start, const char* endstr);
     bool subString(const char* start, const String& endstr);
     bool subString(const String& start);
-    bool subString(const String& start, int end);
-    bool subString(const String& start, char endc);
+    bool subString(const String& start, int64 end);
     bool subString(const String& start, const char* endstr);
     bool subString(const String& start, const String& endstr);
+
+    String getReplaced(char src, char tar)const;
+    String getReplaced(char src, const String&tar)const;
+    String getReplaced(char src, const char*tar)const;
+    String getReplaced(const String&src, char tar)const;
+    String getReplaced(const String&src, const String&tar)const;
+    String getReplaced(const String&src, const char*tar)const;
+    String getReplaced(const char*src, char tar)const;
+    String getReplaced(const char*src, const String&tar)const;
+    String getReplaced(const char*src, const char*tar)const;
+
+    String getSubString(int64 start)const;
+    String getSubString(int64 start, int64 end)const;
+    String getSubString(int64 start, char endc)const;
+    String getSubString(int64 start, const char* endstr)const;
+    String getSubString(int64 start, const String& endstr)const;
+    String getSubString(char start)const;
+    String getSubString(char start, int64 end)const;
+    String getSubString(char start, char endc)const;
+    String getSubString(char start, const char* endstr)const;
+    String getSubString(char start, const String& endstr)const;
+    String getSubString(const char* start)const;
+    String getSubString(const char* start, int64 end)const;
+    String getSubString(const char* start, char endc)const;
+    String getSubString(const char* start, const char* endstr)const;
+    String getSubString(const char* start, const String& endstr)const;
+    String getSubString(const String& start)const;
+    String getSubString(const String& start, int end)const;
+    String getSubString(const String& start, char endc)const;
+    String getSubString(const String& start, const char* endstr)const;
+    String getSubString(const String& start, const String& endstr)const;
 
 public:
     // overloaded operators
     String& operator=(const String&value);
     String& operator=(const char*value);
     String& operator=(char c);
-    String& operator=(int16 value);
-    String& operator=(int32 value);
-    String& operator=(const int64& value);
-    String& operator=(float value);
-    String& operator=(const double& value);
+    String& operator=(int64 value);
+    String& operator=(double value);
     bool operator==(const String&value)const;
     bool operator!=(const String&value)const;
     bool operator==(const char*value)const;
     bool operator!=(const char*value)const;
-    char operator[](mac_int index)const;
+    char operator[](int64 index)const;
     operator bool()const;
     bool operator!()const;
     String operator+(const String&value)const;
     String operator+(const char*value)const;
     String operator+(char c)const;
-    String operator+(int16 value)const;
-    String operator+(int32 value)const;
-    String operator+(const int64& value)const;
-    String operator+(float value)const;
-    String operator+(const double& value)const;
+    String operator+(int64 value)const;
+    String operator+(double value)const;
     String& operator+=(const String&value);
     String& operator+=(const char*value);
     String& operator+=(char c);
-    String& operator+=(int16 value);
-    String& operator+=(int32 value);
-    String& operator+=(const int64& value);
-    String& operator+=(float value);
-    String& operator+=(const double& value);
+    String& operator+=(int64 value);
+    String& operator+=(double value);
     String operator-(int tailLength)const;
     String operator-(char c)const;
     String operator-(const String&value)const;
@@ -161,39 +181,7 @@ public:
     static bool isStringEmpty(const char*str);
     static bool isStringNumeric(const char*str);
     static int32 toInteger(const char*str);
-    static int32 toDouble(const char*str);
-
-    [[deprecated]]
-    static inline bool cleanStringSpaces(char*str)
-    {
-        if (str == nullptr)
-            return false;
-        int first = 0;
-        while (str[first] == ' ' || str[first] == '\n' || str[first] == '\r' || str[first] == '\t')
-            ++first;
-        int last = strlen(str);
-        while (str[last] == ' ' || str[last] == '\n' || str[last] == '\r' || str[last] == '\t')
-            --last;
-        for (int i = first; i < last; ++i)
-            str[i - first] = str[i];
-        str[last] = '\0';
-        return true;
-    }
-    [[deprecated]]
-    static inline std::string cleanStringSpaces(const std::string&str)
-    {
-        if (str == "")
-            return std::string(str);
-        int first = 0;
-        while (str[first] == ' ' || str[first] == '\n' || str[first] == '\r' || str[first] == '\t')
-            ++first;
-        int last = int(str.size()) - 1;
-        while (str[last] == ' ' || str[last] == '\n' || str[last] == '\r' || str[last] == '\t' || str[last] == '\0')
-            --last;
-        if (first == 0 && last == int(str.size()) - 1)
-            return std::string(str);
-        return str.substr(first, last - first + 1);
-    }
+    static int32 toDemical(const char*str);
 
     static bool clearFront(char*str, char c);
     static bool clearFront(char*str, const String&value);
@@ -222,23 +210,23 @@ public:
     static bool upsideDown(char*str);
     static bool upsideDown(char*dest, const char*src);
 
-    static bool subString(char*str, int start);
-    static bool subString(char*str, int start, int end);
-    static bool subString(char*str, int start, char endc);
-    static bool subString(char*str, int start, const char* endstr);
-    static bool subString(char*str, int start, const String& endstr);
+    static bool subString(char*str, int64 start);
+    static bool subString(char*str, int64 start, int64 end);
+    static bool subString(char*str, int64 start, char endc);
+    static bool subString(char*str, int64 start, const char* endstr);
+    static bool subString(char*str, int64 start, const String& endstr);
     static bool subString(char*str, char start);
-    static bool subString(char*str, char start, int end);
+    static bool subString(char*str, char start, int64 end);
     static bool subString(char*str, char start, char endc);
     static bool subString(char*str, char start, const char* endstr);
     static bool subString(char*str, char start, const String& endstr);
     static bool subString(char*str, const char* start);
-    static bool subString(char*str, const char* start, int end);
+    static bool subString(char*str, const char* start, int64 end);
     static bool subString(char*str, const char* start, char endc);
     static bool subString(char*str, const char* start, const char* endstr);
     static bool subString(char*str, const char* start, const String& endstr);
     static bool subString(char*str, const String& start);
-    static bool subString(char*str, const String& start, int end);
+    static bool subString(char*str, const String& start, int64 end);
     static bool subString(char*str, const String& start, char endc);
     static bool subString(char*str, const String& start, const char* endstr);
     static bool subString(char*str, const String& start, const String& endstr);
@@ -247,12 +235,9 @@ public:
     // friend operators
     friend String operator+(const char*value, const String&str);
     friend String operator+(char c, const String&str);
-    friend String operator+(int16 value, const String&str);
-    friend String operator+(int32 value, const String&str);
-    friend String operator+(const int64& value, const String&str);
-    friend String operator+(float value, const String&str);
-    friend String operator+(const double& value, const String&str);
-    friend String operator-(int tailLength, const String&str);
+    friend String operator+(int64 value, const String&str);
+    friend String operator+(double value, const String&str);
+    friend String operator-(int headLength, const String&str);
     friend bool operator==(const char*cstr, const String&str);
     friend bool operator!=(const char*cstr, const String&str);
     friend inline bool operator<<(std::iostream&stream, const String&str);
@@ -261,12 +246,9 @@ public:
     friend String operator+(String&&temp, const String&value);
     friend String operator+(String&&temp, const char*value);
     friend String operator+(String&&temp, char c);
-    friend String operator+(String&&temp, int16 value);
-    friend String operator+(String&&temp, int32 value);
-    friend String operator+(String&&temp, const int64& value);
-    friend String operator+(String&&temp, float value);
-    friend String operator+(String&&temp, const double& value);
-    friend String operator-(String&&temp, int tailLength);
+    friend String operator+(String&&temp, int64 value);
+    friend String operator+(String&&temp, double value);
+    friend String operator-(String&&temp, int64 tailLength);
     friend String operator-(String&&temp, char c);
     friend String operator-(String&&temp, const String&value);
     friend String operator-(String&&temp, const char*value);
