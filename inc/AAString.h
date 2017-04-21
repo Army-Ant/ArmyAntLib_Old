@@ -69,8 +69,8 @@ public:
     String& upsideDown();
     uint64 copyTo(char*dest, uint64 maxLength = 0);
 
-    int32 find(char c);
-    int32 find(const char*str);
+    int32 find(char c)const;
+    int32 find(const char*str)const;
     static const int64 c_npos = -1;
 
     bool clearFront(char c);
@@ -87,6 +87,11 @@ public:
     bool clearBothSides(const String&value);
     bool clearBothSides(const char*value);
     bool clearBothSides(const char**value, uint32 length);
+
+    bool clearAnywhere(char c);
+    bool clearAnywhere(const String&value);
+    bool clearAnywhere(const char*value);
+    bool clearAnywhere(const char**value, uint32 length);
 
     bool replace(char src, char tar);
     bool replace(char src, const String&tar);

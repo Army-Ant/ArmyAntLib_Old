@@ -35,8 +35,8 @@
 namespace ArmyAnt {
 
 static const char* sg_spaceCleans[] = { "\r","\n"," " };
-static const JsonException invalidNumber = JsonException("This is an invalid number value !");
-static const JsonException wrongFormat = JsonException("");
+static const JsonException sg_invalidNumber = JsonException("This is an invalid number value !");
+static const JsonException sg_wrongFormat = JsonException("");
 
 union JO_Private {
 	std::map<String, JsonUnit*>* children;
@@ -52,7 +52,7 @@ public:
 		str.clearBothSides(sg_spaceCleans, 3);
 		char isSingleKey = str[0];
 		if (str[0] != '"' && str[0] != '\'')
-			throw wrongFormat;
+			throw sg_wrongFormat;
 		String key = "";
 		size_t count = 1;
 		while (count < str.size()) {
@@ -64,7 +64,7 @@ public:
         str.clearBothSides(sg_spaceCleans, 3);
         str.subString(int(count + 1));
 		if (str[0] != ':')
-			throw wrongFormat;
+			throw sg_wrongFormat;
         str.subString(1);
         str.clearBothSides(sg_spaceCleans, 3);
 		return std::make_pair(key, str);
@@ -101,7 +101,7 @@ public:
 			else if (str[i] == '}' && !isInSingleString && !isInDoubleString)
 				--deepInObject;
 			if (deepInArray < 0 || deepInObject < 0)
-				throw wrongFormat;
+				throw sg_wrongFormat;
 			if (deepInArray == 0 && deepInObject == 0 && !isInSingleString && !isInDoubleString && str[i] == ',') {
 				ret.push_back(tmp);
 				tmp = "";
@@ -245,13 +245,13 @@ static auto AA_JSON_nan = []() {
 			return 4;
 		}
 		virtual int32 getInteger()const override {
-			throw ArmyAnt::invalidNumber;
+			throw ArmyAnt::sg_invalidNumber;
 		}
 		virtual int64 getLong()const override {
-			throw ArmyAnt::invalidNumber;
+			throw ArmyAnt::sg_invalidNumber;
 		}
 		virtual double getDouble()const override {
-			throw ArmyAnt::invalidNumber;
+			throw ArmyAnt::sg_invalidNumber;
 		}
         virtual ArmyAnt::String toJsonString()const override
         {
@@ -274,13 +274,13 @@ static auto AA_JSON_infinity = []() {
 			return 9;
 		}
 		virtual int32 getInteger()const override {
-			throw ArmyAnt::invalidNumber;
+			throw ArmyAnt::sg_invalidNumber;
 		}
 		virtual int64 getLong()const override {
-			throw ArmyAnt::invalidNumber;
+			throw ArmyAnt::sg_invalidNumber;
 		}
 		virtual double getDouble()const override {
-			throw ArmyAnt::invalidNumber;
+			throw ArmyAnt::sg_invalidNumber;
 		}
         virtual ArmyAnt::String toJsonString()const override
         {

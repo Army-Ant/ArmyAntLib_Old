@@ -23,6 +23,7 @@
 */
 
 #include "../base/base.hpp"
+#include "../../inc/AAString.h"
 #include "../../inc/AASocket.h"
 #include "../../inc/AAClassPrivateHandle.hpp"
 #include <map>
@@ -190,7 +191,7 @@ uint8 IPAddr::GetIPVer() const
 
 bool IPAddr::operator==(const char * value)const
 {
-	return std::string(value) == GetStr();
+	return String(value) == GetStr();
 }
 
 bool IPAddr::operator!=(const char * value)const

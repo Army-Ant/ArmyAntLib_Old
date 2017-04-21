@@ -28,58 +28,58 @@
 namespace ArmyAnt
 {
 
-class ARMYANTLIB_API SqlClient
+class ARMYANTLIB_API ISqlClient
 {
 public:
-    SqlClient();
-    virtual ~SqlClient();
+    ISqlClient();
+    virtual ~ISqlClient();
 
 public:
-    bool login(const String&serverHost);
-    bool login(const String&serverAddress, const String&port);
-    void logout();
-    bool isLoggedIn();
-    bool getDatabaseCount();
-    bool getDatabaseList(SqlDatabaseInfo*&dbs, uint32 maxCount = 0);
+    virtual bool connect(const String&serverHost)=0;
+    virtual bool connect(const String&serverAddress, const String&port) = 0;
+    virtual void disconnect() = 0;
+    virtual bool isConnection() = 0;
+    virtual bool getDatabaseCount();
+    virtual bool getDatabaseList(SqlDatabaseInfo*&dbs, uint32 maxCount = 0);
 
 public:
-    bool getTablesCount(const String&dbName);
-    bool getViewsCount(const String&dbName);
-    bool getTableNameList(const String&dbName, SqlTableInfo*&tables, uint32 maxCount = 0);
-    bool getViewNameList(const String&dbName, SqlTableInfo*&tables, uint32 maxCount = 0);
-    SqlTable getWholeTable(const String&dbName, const String&tableName);
-    SqlTable getWholeView(const String&dbName, const String&tableName);
-    SqlTable getTableAllFields(const String&dbName, SqlTableInfo*&tables);
+    virtual bool getTablesCount(const String&dbName);
+    virtual bool getViewsCount(const String&dbName);
+    virtual bool getTableNameList(const String&dbName, SqlTableInfo*&tables, uint32 maxCount = 0);
+    virtual bool getViewNameList(const String&dbName, SqlTableInfo*&tables, uint32 maxCount = 0);
+    virtual SqlTable getWholeTable(const String&dbName, const String&tableName);
+    virtual SqlTable getWholeView(const String&dbName, const String&tableName);
+    virtual SqlTable getTableAllFields(const String&dbName, SqlTableInfo*&tables);
 
 public:
     // select * from [tableName]
-    SqlTable select(const String&dbName, const String&tableName, const SqlClause*clauses = nullptr, int clausesNum = 0);
+    virtual SqlTable select(const String&dbName, const String&tableName, const SqlClause*clauses = nullptr, int clausesNum = 0);
     // select [columnNames] from [tableName]
-    SqlTable select(const String&dbName, const String&tableName, const String*columnNames, int columnNum, const SqlClause*clauses = nullptr, int clausesNum = 0);
+    virtual SqlTable select(const String&dbName, const String&tableName, const String*columnNames, int columnNum, const SqlClause*clauses = nullptr, int clausesNum = 0);
     // update [tableName] set [updatedData ( k=value , k=value ... )]
-    bool update(const String&dbName, const String&tableName, const SqlRow&updatedData, const SqlClause*clauses = nullptr, int clausesNum = 0);
+    virtual bool update(const String&dbName, const String&tableName, const SqlRow&updatedData, const SqlClause*clauses = nullptr, int clausesNum = 0);
     // insert into [tableName] [insertedData (k , k , k ... ) values ( value , value , value ... )]
-    bool insertRow(const String&dbName, const String&tableName, const SqlRow&insertedData);
+    virtual bool insertRow(const String&dbName, const String&tableName, const SqlRow&insertedData);
     // alter table [tableName] add [columnHead name datatype (others)...]
-    bool insertColumn(const String&dbName, const String&tableName, const SqlFieldHead&columnHead);
-    bool insertColumn(const String&dbName, const String&tableName, const SqlColumn&column);
+    virtual bool insertColumn(const String&dbName, const String&tableName, const SqlFieldHead&columnHead);
+    virtual bool insertColumn(const String&dbName, const String&tableName, const SqlColumn&column);
     // delete from [tableName]
-    bool deleteRow(const String&dbName, const String&tableName, const SqlClause*where = nullptr);
+    virtual bool deleteRow(const String&dbName, const String&tableName, const SqlClause*where = nullptr);
     // alter table [tableName] drop column [columnName]
-    bool deleteColumn(const String&dbName, const String&tableName, const String&columnName);
+    virtual bool deleteColumn(const String&dbName, const String&tableName, const String&columnName);
 
 public:
-    bool createDatabase(const String&dbName);
-    bool deleteDatabase(const String&dbName);
-    bool createTable(const String&dbName, const String&tableName);
-    bool deleteTable(const String&dbName, const String&tableName);
+    virtual bool createDatabase(const String&dbName);
+    virtual bool deleteDatabase(const String&dbName);
+    virtual bool createTable(const String&dbName, const String&tableName);
+    virtual bool deleteTable(const String&dbName, const String&tableName);
 
 public:
-    SqlTable select(const String&sql);
-    bool execute(const String&sql, String&result);
+    virtual SqlTable select(const String&sql) = 0;
+    virtual bool execute(const String&sql, String&result) = 0;
 
-    AA_FORBID_ASSGN_OPR(SqlClient);
-    AA_FORBID_COPY_CTOR(SqlClient);
+    AA_FORBID_ASSGN_OPR(ISqlClient);
+    AA_FORBID_COPY_CTOR(ISqlClient);
 };
 
 }

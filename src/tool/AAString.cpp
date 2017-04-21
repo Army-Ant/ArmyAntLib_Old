@@ -25,6 +25,7 @@
 #include "../../inc/AAString.h"
 #include "../../inc/AAClassPrivateHandle.hpp"
 #include <sstream>
+#include <vector>
 
 namespace ArmyAnt
 {
@@ -104,6 +105,15 @@ bool String::isNumeric() const
             if (ret[i] != ' ' && ret[i] != '0' && ret[i] != '.')
                 return false;
         }
+    return true;
+}
+
+bool String::isFloat() const
+{
+    if (!isNumeric())
+        return false;
+    if (find('.') == c_npos)
+        return false;
     return true;
 }
 
@@ -256,6 +266,105 @@ String & String::operator+=(double value)
     ss << value;
     *(sg_manager[this]) += ss.str();
     return *this;
+}
+
+String operator+(char c, const String & str)
+{
+    return str + c;
+}
+
+String operator+(String && temp, char c)
+{
+    temp += c;
+    return String(temp);
+}
+
+bool String::clearFront(const char ** value, uint32 length)
+{
+    auto& str = *(sg_manager[this]);
+    if (value == nullptr || length == 0 || str.empty())
+        return false;
+    int first = 0;
+    while (first<str.size())
+    {
+        bool isSame = false;
+        for (uint32 i = 0; i < length; ++i)
+        {
+            if (value[i] != nullptr && !strcmp(str.c_str() + first, value[i]))
+            {
+                isSame = true;
+                break;
+            }
+        }
+        if (!isSame)
+            break;
+        ++first;
+    }
+    return subString(first);
+}
+
+bool String::clearBack(const char ** value, uint32 length)
+{
+    auto& str = *(sg_manager[this]);
+    if (value == nullptr || length == 0 || str.empty())
+        return false;
+    int last = str.size() - 1;
+    std::vector<size_t> strlens;
+    for (uint32 i = 0; i < length; ++i)
+    {
+        strlens.push_back(strlen(value[i]));
+    }
+    while (last >= 0)
+    {
+        bool isSame = false;
+        for (uint32 i = 0; i < length; ++i)
+        {
+            if (value[i] != nullptr && !strcmp(str.c_str() + last - strlens[i], value[i]))
+            {
+                isSame = true;
+                break;
+            }
+        }
+        if (!isSame)
+            break;
+        --last;
+    }
+    return subString(int64(0), last);
+}
+
+bool String::clearBothSides(const char ** value, uint32 length)
+{
+    return clearFront(value, length) && clearBack(value, length);
+}
+
+bool String::subString(int64 start)
+{
+    return subString(start, int64(0));
+}
+
+bool String::subString(int64 start, int64 end)
+{
+    auto& str = *(sg_manager[this]);
+    auto size = str.size();
+    if (start < 0)
+        start += size;
+    if (end <= 0)
+        end += size;
+    if (start < 0 && end < 0 && start > end)
+        return false;
+    if (end < size)
+        str[end] = '\0';
+    str = str.c_str() + start;
+    return true;
+}
+
+int32 String::find(char c) const
+{
+    auto& str = *(sg_manager[this]);
+    auto ret = str.find(c);
+    if (ret == str.npos)
+        return c_npos;
+    return int32(ret);
 }
 
 }
