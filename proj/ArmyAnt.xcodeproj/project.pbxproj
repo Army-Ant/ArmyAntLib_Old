@@ -173,18 +173,18 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		3E12BD0E1DE5355600B6195A /* AAAes.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = AAAes.cpp; path = ../src/AAAes.cpp; sourceTree = "<group>"; };
-		3E12BD0F1DE5355600B6195A /* AABinary.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = AABinary.cpp; path = ../src/AABinary.cpp; sourceTree = "<group>"; };
-		3E12BD101DE5355600B6195A /* AAIStream_File.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = AAIStream_File.cpp; path = ../src/AAIStream_File.cpp; sourceTree = "<group>"; };
-		3E12BD111DE5355600B6195A /* AAIStream_Memory.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = AAIStream_Memory.cpp; path = ../src/AAIStream_Memory.cpp; sourceTree = "<group>"; };
-		3E12BD121DE5355600B6195A /* AAIStream_Private.hxx */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; name = AAIStream_Private.hxx; path = ../src/AAIStream_Private.hxx; sourceTree = "<group>"; };
-		3E12BD131DE5355600B6195A /* AAIStream.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = AAIStream.cpp; path = ../src/AAIStream.cpp; sourceTree = "<group>"; };
-		3E12BD141DE5355600B6195A /* AAJNITools.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = AAJNITools.cpp; path = ../src/AAJNITools.cpp; sourceTree = "<group>"; };
-		3E12BD151DE5355600B6195A /* AASocket.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = AASocket.cpp; path = ../src/AASocket.cpp; sourceTree = "<group>"; };
-		3E12BD161DE5355600B6195A /* ArmyAntLib.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = ArmyAntLib.cpp; path = ../src/ArmyAntLib.cpp; sourceTree = "<group>"; };
-		3E12BD171DE5355600B6195A /* base.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; name = base.hpp; path = ../src/base.hpp; sourceTree = "<group>"; };
-		3E12BD181DE5356300B6195A /* C_AANeuron.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = C_AANeuron.cpp; path = ../src/C_AANeuron.cpp; sourceTree = "<group>"; };
-		3E12BD191DE5356300B6195A /* C_AAStream.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = C_AAStream.cpp; path = ../src/C_AAStream.cpp; sourceTree = "<group>"; };
+		3E12BD0E1DE5355600B6195A /* AAAes.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = AAAes.cpp; path = ../src/data/AAAes.cpp; sourceTree = "<group>"; };
+		3E12BD0F1DE5355600B6195A /* AABinary.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = AABinary.cpp; path = ../src/data/AABinary.cpp; sourceTree = "<group>"; };
+		3E12BD101DE5355600B6195A /* AAIStream_File.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = AAIStream_File.cpp; path = ../src/io/AAIStream_File.cpp; sourceTree = "<group>"; };
+		3E12BD111DE5355600B6195A /* AAIStream_Memory.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = AAIStream_Memory.cpp; path = ../src/io/AAIStream_Memory.cpp; sourceTree = "<group>"; };
+		3E12BD121DE5355600B6195A /* AAIStream_Private.hxx */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; name = AAIStream_Private.hxx; path = ../src/io/AAIStream_Private.hxx; sourceTree = "<group>"; };
+		3E12BD131DE5355600B6195A /* AAIStream.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = AAIStream.cpp; path = ../src/io/AAIStream.cpp; sourceTree = "<group>"; };
+		3E12BD141DE5355600B6195A /* AAJNITools.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = AAJNITools.cpp; path = ../src/JNI/AAJNITools.cpp; sourceTree = "<group>"; };
+		3E12BD151DE5355600B6195A /* AASocket.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = AASocket.cpp; path = ../src/io/AASocket.cpp; sourceTree = "<group>"; };
+		3E12BD161DE5355600B6195A /* ArmyAntLib.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = ArmyAntLib.cpp; path = ../src/base/ArmyAntLib.cpp; sourceTree = "<group>"; };
+		3E12BD171DE5355600B6195A /* base.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; name = base.hpp; path = ../src/base/base.hpp; sourceTree = "<group>"; };
+		3E12BD181DE5356300B6195A /* C_AANeuron.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = C_AANeuron.cpp; path = ../src/algorithm/C_AANeuron.cpp; sourceTree = "<group>"; };
+		3E12BD191DE5356300B6195A /* C_AAStream.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = C_AAStream.cpp; path = ../src/io/C_AAStream.cpp; sourceTree = "<group>"; };
 		3E12BD1A1DE5357400B6195A /* AA_end.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = AA_end.h; path = ../inc/AA_end.h; sourceTree = "<group>"; };
 		3E12BD1B1DE5357400B6195A /* AA_start.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = AA_start.h; path = ../inc/AA_start.h; sourceTree = "<group>"; };
 		3E12BD1C1DE5357400B6195A /* AAAes.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = AAAes.h; path = ../inc/AAAes.h; sourceTree = "<group>"; };

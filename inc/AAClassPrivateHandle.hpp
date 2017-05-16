@@ -24,6 +24,7 @@
 #define CLASS_PRIVATE_HANDLE_HPP_2015_11_13
 
 #include <map>
+#include <exception>
 
 namespace ArmyAnt {
 
@@ -71,7 +72,7 @@ void ArmyAnt::ClassPrivateHandleManager<T_Out, T_In>::GetHandle(T_Out* src, T_In
         handleMap.insert(std::make_pair(src, newObject));
     }
     else
-        throw std::exception("the handle has been existed");
+        throw std::out_of_range("the handle has been existed");
 }
 
 template <class T_Out, class T_In>
