@@ -169,6 +169,16 @@
 		C33E28261ECAA2B300FD7958 /* AAString.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C33E28231ECAA2B300FD7958 /* AAString.cpp */; };
 /* End PBXBuildFile section */
 
+/* Begin PBXContainerItemProxy section */
+		C33E28421ECAA88300FD7958 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = C33E283E1ECAA88200FD7958 /* ArmyAntLib_Test.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = C33E28341ECAA88200FD7958;
+			remoteInfo = ArmyAntLib_Test;
+		};
+/* End PBXContainerItemProxy section */
+
 /* Begin PBXCopyFilesBuildPhase section */
 		3E12BD5C1DE53C0C00B6195A /* CopyFiles */ = {
 			isa = PBXCopyFilesBuildPhase;
@@ -323,6 +333,7 @@
 		C33E28281ECAA30000FD7958 /* build_end.sh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.sh; name = build_end.sh; path = ../src/not_cpp/build_end.sh; sourceTree = "<group>"; };
 		C33E28291ECAA30000FD7958 /* build_start.bat */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = build_start.bat; path = ../src/not_cpp/build_start.bat; sourceTree = "<group>"; };
 		C33E282A1ECAA30000FD7958 /* build_start.sh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.sh; name = build_start.sh; path = ../src/not_cpp/build_start.sh; sourceTree = "<group>"; };
+		C33E283E1ECAA88200FD7958 /* ArmyAntLib_Test.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = ArmyAntLib_Test.xcodeproj; path = ArmyAntLib_Test/ArmyAntLib_Test.xcodeproj; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -421,6 +432,7 @@
 			children = (
 				3E38EEC01DE6830600E1F22D /* others */,
 				3E38EEBF1DE682F700E1F22D /* source */,
+				C33E283E1ECAA88200FD7958 /* ArmyAntLib_Test.xcodeproj */,
 			);
 			sourceTree = "<group>";
 		};
@@ -683,6 +695,14 @@
 			name = _documents;
 			sourceTree = "<group>";
 		};
+		C33E283F1ECAA88200FD7958 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				C33E28431ECAA88300FD7958 /* ArmyAntLib_Test */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXHeadersBuildPhase section */
@@ -844,6 +864,12 @@
 			mainGroup = 3E12BD071DE534D300B6195A;
 			productRefGroup = 3E12BD4F1DE53B9800B6195A /* Products */;
 			projectDirPath = "";
+			projectReferences = (
+				{
+					ProductGroup = C33E283F1ECAA88200FD7958 /* Products */;
+					ProjectRef = C33E283E1ECAA88200FD7958 /* ArmyAntLib_Test.xcodeproj */;
+				},
+			);
 			projectRoot = "";
 			targets = (
 				3E12BD4D1DE53B9800B6195A /* ArmyAntLib_mac */,
@@ -852,6 +878,16 @@
 			);
 		};
 /* End PBXProject section */
+
+/* Begin PBXReferenceProxy section */
+		C33E28431ECAA88300FD7958 /* ArmyAntLib_Test */ = {
+			isa = PBXReferenceProxy;
+			fileType = "compiled.mach-o.executable";
+			path = ArmyAntLib_Test;
+			remoteRef = C33E28421ECAA88300FD7958 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+/* End PBXReferenceProxy section */
 
 /* Begin PBXSourcesBuildPhase section */
 		3E12BD4A1DE53B9800B6195A /* Sources */ = {
