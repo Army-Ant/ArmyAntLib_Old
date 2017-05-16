@@ -217,10 +217,6 @@
 		3E12BD3D1DE5390C00B6195A /* DeveloperReadme.txt */ = {isa = PBXFileReference; lastKnownFileType = text; name = DeveloperReadme.txt; path = ../doc/DeveloperReadme.txt; sourceTree = "<group>"; };
 		3E12BD3E1DE5394000B6195A /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; name = README.md; path = ../README.md; sourceTree = "<group>"; };
 		3E12BD3F1DE5394C00B6195A /* LICENSE */ = {isa = PBXFileReference; lastKnownFileType = text; name = LICENSE; path = ../LICENSE; sourceTree = "<group>"; };
-		3E12BD401DE5396400B6195A /* build_end.bat */ = {isa = PBXFileReference; lastKnownFileType = text; name = build_end.bat; path = ../src/build_end.bat; sourceTree = "<group>"; };
-		3E12BD411DE5396400B6195A /* build_end.sh */ = {isa = PBXFileReference; lastKnownFileType = text.script.sh; name = build_end.sh; path = ../src/build_end.sh; sourceTree = "<group>"; };
-		3E12BD421DE5396400B6195A /* build_start.bat */ = {isa = PBXFileReference; lastKnownFileType = text; name = build_start.bat; path = ../src/build_start.bat; sourceTree = "<group>"; };
-		3E12BD431DE5396400B6195A /* build_start.sh */ = {isa = PBXFileReference; lastKnownFileType = text.script.sh; name = build_start.sh; path = ../src/build_start.sh; sourceTree = "<group>"; };
 		3E12BD441DE5397700B6195A /* ArmyAntLib.sln */ = {isa = PBXFileReference; lastKnownFileType = text; path = ArmyAntLib.sln; sourceTree = "<group>"; };
 		3E12BD451DE5397700B6195A /* ArmyAntLib.vcxproj */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = ArmyAntLib.vcxproj; sourceTree = "<group>"; };
 		3E12BD461DE5397700B6195A /* ArmyAntLib.vcxproj.filters */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = ArmyAntLib.vcxproj.filters; sourceTree = "<group>"; };
@@ -304,6 +300,13 @@
 		3E38EE331DE6824100E1F22D /* libboost_wave.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libboost_wave.dylib; path = ../external/boost/stage/lib/libboost_wave.dylib; sourceTree = "<group>"; };
 		3E38EE361DE6824100E1F22D /* libboost_wserialization.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libboost_wserialization.a; path = ../external/boost/stage/lib/libboost_wserialization.a; sourceTree = "<group>"; };
 		3E38EE371DE6824100E1F22D /* libboost_wserialization.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libboost_wserialization.dylib; path = ../external/boost/stage/lib/libboost_wserialization.dylib; sourceTree = "<group>"; };
+		C33E28141ECA990700FD7958 /* ArmyAntLib_JNI.vcxproj */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = ArmyAntLib_JNI.vcxproj; sourceTree = "<group>"; };
+		C33E28151ECA990700FD7958 /* ArmyAntLib_JNI.vcxproj.filters */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = ArmyAntLib_JNI.vcxproj.filters; sourceTree = "<group>"; };
+		C33E28161ECA990700FD7958 /* ArmyAntLib_LinuxVC.vcxproj */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = ArmyAntLib_LinuxVC.vcxproj; sourceTree = "<group>"; };
+		C33E28171ECA990700FD7958 /* ArmyAntLib_LinuxVC.vcxproj.filters */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = ArmyAntLib_LinuxVC.vcxproj.filters; sourceTree = "<group>"; };
+		C33E28181ECA990700FD7958 /* ArmyAntLib_Test.vcxproj */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = ArmyAntLib_Test.vcxproj; sourceTree = "<group>"; };
+		C33E28191ECA990700FD7958 /* ArmyAntLib_Test.vcxproj.filters */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = ArmyAntLib_Test.vcxproj.filters; sourceTree = "<group>"; };
+		C33E281A1ECA990700FD7958 /* ArmyAntLib.xcworkspace */ = {isa = PBXFileReference; lastKnownFileType = wrapper.workspace; path = ArmyAntLib.xcworkspace; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -484,10 +487,16 @@
 		3E12BD3C1DE5373800B6195A /* _other_projects */ = {
 			isa = PBXGroup;
 			children = (
+				C33E281A1ECA990700FD7958 /* ArmyAntLib.xcworkspace */,
+				C33E28141ECA990700FD7958 /* ArmyAntLib_JNI.vcxproj */,
+				C33E28151ECA990700FD7958 /* ArmyAntLib_JNI.vcxproj.filters */,
+				C33E28161ECA990700FD7958 /* ArmyAntLib_LinuxVC.vcxproj */,
+				C33E28171ECA990700FD7958 /* ArmyAntLib_LinuxVC.vcxproj.filters */,
+				C33E28181ECA990700FD7958 /* ArmyAntLib_Test.vcxproj */,
+				C33E28191ECA990700FD7958 /* ArmyAntLib_Test.vcxproj.filters */,
 				3E12BD441DE5397700B6195A /* ArmyAntLib.sln */,
 				3E12BD451DE5397700B6195A /* ArmyAntLib.vcxproj */,
 				3E12BD461DE5397700B6195A /* ArmyAntLib.vcxproj.filters */,
-				3E12BD471DE5397700B6195A /* CMakeLists.txt */,
 			);
 			name = _other_projects;
 			sourceTree = "<group>";
@@ -634,12 +643,9 @@
 		3E38EEC11DE6833B00E1F22D /* _building_scripts */ = {
 			isa = PBXGroup;
 			children = (
-				3E12BD401DE5396400B6195A /* build_end.bat */,
-				3E12BD411DE5396400B6195A /* build_end.sh */,
-				3E12BD421DE5396400B6195A /* build_start.bat */,
-				3E12BD431DE5396400B6195A /* build_start.sh */,
 				3E12BD491DE5397700B6195A /* make.sh */,
 				3E12BD481DE5397700B6195A /* make_all.sh */,
+				3E12BD471DE5397700B6195A /* CMakeLists.txt */,
 			);
 			name = _building_scripts;
 			sourceTree = "<group>";
