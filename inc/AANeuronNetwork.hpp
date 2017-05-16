@@ -43,10 +43,10 @@ namespace ArmyAnt {
 
 		};
 	public:
-		NeuronNetwork(std::vector<T_Val> neuronNumAndFloor, T_Val minValue, T_Val maxValue, NeuronAlgorithm::ActiveFunc);
+        NeuronNetwork(std::vector<T_Val> neuronNumAndFloor, T_Val minValue, T_Val maxValue, NeuronAlgorithm<uint32>::ActiveFunc);
 		~NeuronNetwork();
 		NeuronNetwork Clone();
-		static NeuronNetwork Create(std::vector<T_Val> neuronNumAndFloor, T_Val min, T_Val max, NeuronAlgorithm::ActiveFunc);
+		static NeuronNetwork Create(std::vector<T_Val> neuronNumAndFloor, T_Val min, T_Val max, NeuronAlgorithm<uint32>::ActiveFunc);
 		AA_FORBID_COPY_CTOR(NeuronNetwork);
 		AA_FORBID_ASSGN_OPR(NeuronNetwork);
 

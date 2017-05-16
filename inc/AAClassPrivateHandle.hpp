@@ -1,4 +1,4 @@
-﻿/*  
+/*  
  * Copyright (c) 2015 ArmyAnt
  * 版权所有 (c) 2015 ArmyAnt
  *
@@ -37,7 +37,7 @@ template <class T_Out, class T_In>
 class ClassPrivateHandleManager
 {
 public:
-	ClassPrivateHandleManager() {}
+    ClassPrivateHandleManager():handleMap() {}
 	~ClassPrivateHandleManager() {}
 
 	//创建一个内部类实例，这通常是在建立外部实例时进行调用的
