@@ -198,7 +198,12 @@ public:
 		:std::exception(msg) {}
 #else
 		: std::exception(), message(msg) {}
-	virtual const char* what()const _GLIBCXX_USE_NOEXCEPT override { return this->message.c_str(); }
+#ifdef OS_BSD
+    virtual const char* what()const _NOEXCEPT override
+#else
+	virtual const char* what()const _GLIBCXX_USE_NOEXCEPT override
+#endif
+     { return this->message.c_str(); }
 protected:
 	String message;
 #endif

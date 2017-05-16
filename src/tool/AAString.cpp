@@ -27,6 +27,10 @@
 #include <sstream>
 #include <vector>
 
+#ifdef OS_BSD
+#include <cmath>
+#endif
+
 namespace ArmyAnt
 {
 
@@ -44,12 +48,14 @@ String::String(char c)
 
 String::String(int32 num)
 {
-    sg_manager.GetHandle(this, new std::string(static_cast<std::stringstream*>(&(std::stringstream() << num))->str()));
+    auto str = std::stringstream() << num;
+    sg_manager.GetHandle(this, new std::string(static_cast<std::stringstream*>(&(str))->str()));
 }
 
 String::String(const int64 & num)
 {
-    sg_manager.GetHandle(this, new std::string(static_cast<std::stringstream*>(&(std::stringstream() << num))->str()));
+    auto str = std::stringstream() << num;
+    sg_manager.GetHandle(this, new std::string(static_cast<std::stringstream*>(&(str))->str()));
 }
 
 String::String(double num, int32 behindFloat)
@@ -59,8 +65,8 @@ String::String(double num, int32 behindFloat)
         int64 powed = int64(pow(10, behindFloat));
         num -= num - double(int64(num*powed)) / powed;
     }
-    sg_manager.GetHandle(this, new std::string(static_cast<std::stringstream*>(&(std::stringstream() << num))->str()));
-
+    auto str = std::stringstream() << num;
+    sg_manager.GetHandle(this, new std::string(static_cast<std::stringstream*>(&(str))->str()));
 }
 
 String::String(const String & value)
