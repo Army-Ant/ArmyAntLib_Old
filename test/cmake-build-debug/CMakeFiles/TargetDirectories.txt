@@ -1,3 +1,0 @@
-/Volumes/backup/git/ArmyAnt/ArmyAntLib/test/cmake-build-debug/CMakeFiles/rebuild_cache.dir
-/Volumes/backup/git/ArmyAnt/ArmyAntLib/test/cmake-build-debug/CMakeFiles/edit_cache.dir
-/Volumes/backup/git/ArmyAnt/ArmyAntLib/test/cmake-build-debug/CMakeFiles/ArmyAntLib_Test.dir

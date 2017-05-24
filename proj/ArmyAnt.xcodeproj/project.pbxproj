@@ -132,7 +132,7 @@
 		C39DB5E81ECAE5D0002A11E9 /* CopyFiles */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
-			dstPath = "$(BUILD_DIR)";
+			dstPath = "";
 			dstSubfolderSpec = 7;
 			files = (
 				C39DB5E91ECAE5E5002A11E9 /* libboost_system.dylib in CopyFiles */,
@@ -273,11 +273,11 @@
 		C33E28291ECAA30000FD7958 /* build_start.bat */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = build_start.bat; path = ../src/not_cpp/build_start.bat; sourceTree = "<group>"; };
 		C33E282A1ECAA30000FD7958 /* build_start.sh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.sh; name = build_start.sh; path = ../src/not_cpp/build_start.sh; sourceTree = "<group>"; };
 		C33E283E1ECAA88200FD7958 /* ArmyAntLib_Test.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = ArmyAntLib_Test.xcodeproj; path = ArmyAntLib_Test/ArmyAntLib_Test.xcodeproj; sourceTree = "<group>"; };
-		C3889A5E1ECBDDC900097AA7 /* libArmyAntLib_ios.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libArmyAntLib_ios.a; sourceTree = BUILT_PRODUCTS_DIR; };
-		C3889A5F1ECBDDC900097AA7 /* libArmyAntLib_static.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libArmyAntLib_static.a; sourceTree = BUILT_PRODUCTS_DIR; };
-		C39DB5E31ECAE4E8002A11E9 /* libArmyAntLib_mac.dylib */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.dylib"; includeInIndex = 0; path = libArmyAntLib_mac.dylib; sourceTree = BUILT_PRODUCTS_DIR; };
 		C39DB5EA1ECAF403002A11E9 /* AAJson.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AAJson.h; path = ../inc/AAJson.h; sourceTree = "<group>"; };
 		C39DB5ED1ECAF499002A11E9 /* AAString.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AAString.h; path = ../inc/AAString.h; sourceTree = "<group>"; };
+		C3EBA1551ED53D6E00647939 /* libArmyAntLib_mac.dylib */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.dylib"; includeInIndex = 0; path = libArmyAntLib_mac.dylib; sourceTree = BUILT_PRODUCTS_DIR; };
+		C3EBA1561ED53D6E00647939 /* libArmyAntLib_ios.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libArmyAntLib_ios.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		C3EBA1571ED53D6E00647939 /* libArmyAntLib_static.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libArmyAntLib_static.a; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -312,6 +312,9 @@
 				3E38EEC01DE6830600E1F22D /* others */,
 				3E38EEBF1DE682F700E1F22D /* source */,
 				C33E283E1ECAA88200FD7958 /* ArmyAntLib_Test.xcodeproj */,
+				C3EBA1551ED53D6E00647939 /* libArmyAntLib_mac.dylib */,
+				C3EBA1561ED53D6E00647939 /* libArmyAntLib_ios.a */,
+				C3EBA1571ED53D6E00647939 /* libArmyAntLib_static.a */,
 			);
 			sourceTree = "<group>";
 		};
@@ -413,16 +416,6 @@
 			name = _other_projects;
 			sourceTree = "<group>";
 		};
-		3E12BD4F1DE53B9800B6195A /* Products */ = {
-			isa = PBXGroup;
-			children = (
-				C39DB5E31ECAE4E8002A11E9 /* libArmyAntLib_mac.dylib */,
-				C3889A5E1ECBDDC900097AA7 /* libArmyAntLib_ios.a */,
-				C3889A5F1ECBDDC900097AA7 /* libArmyAntLib_static.a */,
-			);
-			name = Products;
-			sourceTree = "<group>";
-		};
 		3E38EEBE1DE6824600E1F22D /* _boostLibrary */ = {
 			isa = PBXGroup;
 			children = (
@@ -503,7 +496,6 @@
 				3E12BD3A1DE536A900B6195A /* algorithm */,
 				3E12BD381DE5369B00B6195A /* data */,
 				3E12BD391DE536A300B6195A /* io */,
-				3E12BD4F1DE53B9800B6195A /* Products */,
 				3E12BD3B1DE536E700B6195A /* tool */,
 			);
 			name = source;
@@ -649,7 +641,7 @@
 			);
 			name = ArmyAntLib_mac;
 			productName = ArmyAntLib;
-			productReference = C39DB5E31ECAE4E8002A11E9 /* libArmyAntLib_mac.dylib */;
+			productReference = C3EBA1551ED53D6E00647939 /* libArmyAntLib_mac.dylib */;
 			productType = "com.apple.product-type.library.dynamic";
 		};
 		3E12BD5D1DE53C0C00B6195A /* ArmyAntLib_ios */ = {
@@ -666,7 +658,7 @@
 			);
 			name = ArmyAntLib_ios;
 			productName = ArmyAntLib_ios;
-			productReference = C3889A5E1ECBDDC900097AA7 /* libArmyAntLib_ios.a */;
+			productReference = C3EBA1561ED53D6E00647939 /* libArmyAntLib_ios.a */;
 			productType = "com.apple.product-type.library.static";
 		};
 		3E12BD6A1DE53C5000B6195A /* ArmyAntLib_static */ = {
@@ -683,7 +675,7 @@
 			);
 			name = ArmyAntLib_static;
 			productName = ArmyAntLib_static;
-			productReference = C3889A5F1ECBDDC900097AA7 /* libArmyAntLib_static.a */;
+			productReference = C3EBA1571ED53D6E00647939 /* libArmyAntLib_static.a */;
 			productType = "com.apple.product-type.library.static";
 		};
 /* End PBXNativeTarget section */
@@ -716,7 +708,7 @@
 				en,
 			);
 			mainGroup = 3E12BD071DE534D300B6195A;
-			productRefGroup = 3E12BD4F1DE53B9800B6195A /* Products */;
+			productRefGroup = 3E12BD071DE534D300B6195A;
 			projectDirPath = "";
 			projectReferences = (
 				{

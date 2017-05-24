@@ -122,7 +122,8 @@ echo $linkType
 echo $TarName
 
 # Building source
-source ../src/not_cpp/build_start.sh $debugType ../ $TarName $targetPlatform $targetBits $linkType
+cd ..
+source src/not_cpp/build_start.sh $debugType ../ $TarName $targetPlatform $targetBits $linkType
 cmake ./ -DCMAKE_BUILD_TYPE=$debugType -DTAR_MAC=$targetPlatform -DTAR_BITS=$targetBits -DTAR_NAME=$TarName -DLINK_TYPE=$linkType
 make
 
@@ -131,5 +132,6 @@ make
 [[ $linkType == "static" ]] && mv lib${TarName}.o ../lib
 [[ $linkType == "static" ]] && mv lib${TarName}.a ../bin
 
-source ../src/not_cpp/build_end.sh $debugType ../ $TarName $targetPlatform $targetBits $linkType
+source src/not_cpp/build_end.sh $debugType ../ $TarName $targetPlatform $targetBits $linkType
+cd proj
 

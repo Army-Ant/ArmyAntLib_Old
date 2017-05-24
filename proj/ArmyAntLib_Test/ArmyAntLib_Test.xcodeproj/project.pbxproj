@@ -7,8 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		C323BC7D1ED4050B004DF62D /* libArmyAntLib_mac.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = C323BC7C1ED4050B004DF62D /* libArmyAntLib_mac.dylib */; };
 		C33E28461ECAA91600FD7958 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C33E28441ECAA91600FD7958 /* main.cpp */; };
+		C3EBA1591ED53D9400647939 /* libArmyAntLib_mac.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = C323BC7C1ED4050B004DF62D /* libArmyAntLib_mac.dylib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -32,6 +32,7 @@
 		C39DB5DA1ECADE36002A11E9 /* libArmyAntLib_mac.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libArmyAntLib_mac.dylib; path = ../DerivedData/ArmyAnt/Build/Products/Debug/libArmyAntLib_mac.dylib; sourceTree = "<group>"; };
 		C39DB5DD1ECAE015002A11E9 /* libboost_math_c99f.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libboost_math_c99f.dylib; path = ../../external/boost/stage/lib/libboost_math_c99f.dylib; sourceTree = "<group>"; };
 		C39DB5E41ECAE54F002A11E9 /* libboost_system.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libboost_system.a; path = ../DerivedData/ArmyAnt/Build/Products/Debug/libboost_system.a; sourceTree = "<group>"; };
+		C3EBA1511ED53CF500647939 /* libArmyAnt_64.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libArmyAnt_64.dylib; path = ../../bin/libArmyAnt_64.dylib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -39,7 +40,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				C323BC7D1ED4050B004DF62D /* libArmyAntLib_mac.dylib in Frameworks */,
+				C3EBA1591ED53D9400647939 /* libArmyAntLib_mac.dylib in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -76,6 +77,7 @@
 		C39DB5D91ECADE35002A11E9 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				C3EBA1511ED53CF500647939 /* libArmyAnt_64.dylib */,
 				C323BC7C1ED4050B004DF62D /* libArmyAntLib_mac.dylib */,
 				C323BC791ED401A4004DF62D /* libArmyAntLib_mac.dylib */,
 				C39DB5E41ECAE54F002A11E9 /* libboost_system.a */,

@@ -202,3 +202,6 @@ $RECYCLE.BIN/
 /proj/Win32
 .vs
 /test/*.dll
+*cmake-build-debug*
+*cmake-build-release*
+

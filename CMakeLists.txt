@@ -62,15 +62,15 @@ ELSE ()
 
 ENDIF ((CMAKE_SYSTEM_NAME MATCHES "Windows") OR (CMAKE_SYSTEM_NAME MATCHES "CYGWIN"))
 
-include_directories(../external/boost)
+include_directories(external/boost)
 
-if(CMAKE_BUILD_TYPE STREQUAL Debug)
+if(CMAKE_BUILD_TYPE STREQUAL Release)
     add_definitions(
-			-DDEBUG=1
+			-DNDEBUG=1
 	)
 else()
     add_definitions(
-            -DNDEBUG=1
+            -DDEBUG=1
     )
 endif()
 
@@ -103,33 +103,41 @@ add_definitions(
 )
 
 set(CXX_SOURCE_FILES
-        ../src/base/ArmyAntLib.cpp
-        ../src/tool/AAString.cpp
-        ../src/data/AAAes.cpp
-        ../src/data/AABinary.cpp
-        ../src/data/AAJson.cpp
-        ../src/io/AAIStream.cpp
-        ../src/io/AAIStream_File.cpp
-        ../src/io/AAIStream_Memory.cpp
-		../src/io/AASocket.cpp
-        ../src/io/C_AAStream.cpp
-        ../src/algorithm/C_AANeuron.cpp
-        ../src/algorithm/AASqlStructs.cpp)
+        src/base/ArmyAntLib.cpp
+        src/tool/AAString.cpp
+        src/data/AAAes.cpp
+        src/data/AABinary.cpp
+        src/data/AAJson.cpp
+        src/io/AAIStream.cpp
+        src/io/AAIStream_File.cpp
+        src/io/AAIStream_Memory.cpp
+		src/io/AASocket.cpp
+        src/io/C_AAStream.cpp
+        src/algorithm/C_AANeuron.cpp
+        src/algorithm/AASqlStructs.cpp
+)
 
-LINK_DIRECTORIES(../external/boost/stage/lib/)
+set(TEST_CXX_SOURCE_FILES
+        ${CXX_SOURCE_FILES}
+		test/main.cpp
+)
+
+LINK_DIRECTORIES(external/boost/stage/lib/)
 
 
 if(LINK_TYPE STREQUAL static)
 	add_library(${CMAKE_TAR_NAME} STATIC ${CXX_SOURCE_FILES})
-else()
+elseif(LINK_TYPE STREQUAL dynamic)
 	add_library(${CMAKE_TAR_NAME} SHARED ${CXX_SOURCE_FILES})
+else()
+	add_executable(${CMAKE_TAR_NAME} ${TEST_CXX_SOURCE_FILES})
 endif()
 
 TARGET_LINK_LIBRARIES(${CMAKE_TAR_NAME} boost_system)
 
 MESSAGE("The binary directory is ${PROJECT_BINARY_DIR}")
 
-set(CMAKE_LIBRARY_OUTPUT_DIRECTORY  ./../bin/)
-set(CMAKE_RUNTIME_OUTPUT_DIRECTORY  ./../bin/)
+set(CMAKE_LIBRARY_OUTPUT_DIRECTORY  bin/)
+set(CMAKE_RUNTIME_OUTPUT_DIRECTORY  bin/)
 
 SET_TARGET_PROPERTIES(${CMAKE_TAR_NAME} PROPERTIES OUTPUT_NAME ${TAR_NAME})

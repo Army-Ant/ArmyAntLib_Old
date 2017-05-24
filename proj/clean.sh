@@ -26,10 +26,9 @@
 # This is a shell script file used to clean build trash in Unix platform
 
 
-rm -rf CMakeCache.txt
-rm -rf *.*~
-rm -rf cmake-build-debug
-rm -rf cmake-build-release
-rm -rf CMakeFiles
-rm -rf Makefile
-rm -rf cmake_install.cmake
+rm -rf ../CMakeCache.txt
+rm -rf ../*.*~
+rm -rf ../cmake-build-*
+rm -rf ../CMakeFiles
+rm -rf ../Makefile
+rm -rf ../cmake_install.cmake

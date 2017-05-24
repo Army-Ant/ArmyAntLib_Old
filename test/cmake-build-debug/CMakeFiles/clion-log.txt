@@ -1,5 +1,0 @@
-/Applications/CLion.app/Contents/bin/cmake/bin/cmake -DCMAKE_BUILD_TYPE=Debug -DTAR_MAC=x86 -DTAR_BITS=64 -DLINK_TYPE=dynamic -G "CodeBlocks - Unix Makefiles" /Volumes/backup/git/ArmyAnt/ArmyAntLib/test
-Current platform is Darwin
--- Configuring done
--- Generating done
--- Build files have been written to: /Volumes/backup/git/ArmyAnt/ArmyAntLib/test/cmake-build-debug
