@@ -7,8 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		C323BC7D1ED4050B004DF62D /* libArmyAntLib_mac.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = C323BC7C1ED4050B004DF62D /* libArmyAntLib_mac.dylib */; };
 		C33E28461ECAA91600FD7958 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C33E28441ECAA91600FD7958 /* main.cpp */; };
-		C39DB5DC1ECADEE9002A11E9 /* libArmyAntLib_mac.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = C39DB5DA1ECADE36002A11E9 /* libArmyAntLib_mac.dylib */; settings = {ATTRIBUTES = (Weak, ); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -24,6 +24,8 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		C323BC791ED401A4004DF62D /* libArmyAntLib_mac.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libArmyAntLib_mac.dylib; path = "../../../../../../../Users/cast/Library/Developer/Xcode/DerivedData/ArmyAntLib-dgfebhcsldgrpmbsubutllrwhydk/Build/Products/Debug/libArmyAntLib_mac.dylib"; sourceTree = "<group>"; };
+		C323BC7C1ED4050B004DF62D /* libArmyAntLib_mac.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libArmyAntLib_mac.dylib; path = ../DerivedData/ArmyAntLib/Build/Products/Debug/libArmyAntLib_mac.dylib; sourceTree = "<group>"; };
 		C33E28341ECAA88200FD7958 /* ArmyAntLib_Test */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = ArmyAntLib_Test; sourceTree = BUILT_PRODUCTS_DIR; };
 		C33E28441ECAA91600FD7958 /* main.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = main.cpp; path = ../../../test/main.cpp; sourceTree = "<group>"; };
 		C33E28451ECAA91600FD7958 /* main.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = main.h; path = ../../../test/main.h; sourceTree = "<group>"; };
@@ -37,7 +39,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				C39DB5DC1ECADEE9002A11E9 /* libArmyAntLib_mac.dylib in Frameworks */,
+				C323BC7D1ED4050B004DF62D /* libArmyAntLib_mac.dylib in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -74,6 +76,8 @@
 		C39DB5D91ECADE35002A11E9 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				C323BC7C1ED4050B004DF62D /* libArmyAntLib_mac.dylib */,
+				C323BC791ED401A4004DF62D /* libArmyAntLib_mac.dylib */,
 				C39DB5E41ECAE54F002A11E9 /* libboost_system.a */,
 				C39DB5DD1ECAE015002A11E9 /* libboost_math_c99f.dylib */,
 				C39DB5DA1ECADE36002A11E9 /* libArmyAntLib_mac.dylib */,
@@ -247,9 +251,11 @@
 					OS_BSD,
 				);
 				LD_RUNPATH_SEARCH_PATHS = "$(PROJECT_DIR)/../../external/boost/stage/lib";
+				LIBRARY_SEARCH_PATHS = "$(PROJECT_DIR)/../../external/boost/stage/lib";
 				OTHER_LDFLAGS = "";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
+				REEXPORTED_LIBRARY_PATHS = "";
 			};
 			name = Debug;
 		};
@@ -266,9 +272,11 @@
 					OS_BSD,
 				);
 				LD_RUNPATH_SEARCH_PATHS = "$(PROJECT_DIR)/../../external/boost/stage/lib";
+				LIBRARY_SEARCH_PATHS = "$(PROJECT_DIR)/../../external/boost/stage/lib";
 				OTHER_LDFLAGS = "";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
+				REEXPORTED_LIBRARY_PATHS = "";
 			};
 			name = Release;
 		};

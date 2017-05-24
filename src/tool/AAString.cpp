@@ -38,7 +38,7 @@ static ClassPrivateHandleManager<String, std::string> sg_manager;
 
 String::String(const char * value)
 {
-    auto newStr = new std::string(value);
+    auto newStr = new std::string(std::string(value));
     sg_manager.GetHandle(this, newStr);
 }
 

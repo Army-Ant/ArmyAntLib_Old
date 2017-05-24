@@ -25,8 +25,8 @@
 #include "../../inc/AAIStream_Memory.h"
 #include "AAIStream_Private.hxx"
 
-#ifdef OS_UNIX
-#include <memory.h>
+#ifndef OS_WINDOWS
+#include <cstdlib>
 #endif
 
 namespace ArmyAnt {
@@ -210,7 +210,7 @@ uint64 Memory::Read(void * buffer, uint8 endtag, uint64 maxlen)
 	//逐字读取
 	for(auto nowPos = hd->pos; ; nowPos++)
 	{
-		if(nowPos < hd->len && static_cast<uint8*>(hd->mem)[nowPos] == endtag || nowPos - hd->pos == maxlen)
+		if((nowPos < hd->len && static_cast<uint8*>(hd->mem)[nowPos] == endtag) || nowPos - hd->pos == maxlen)
 		{
 			auto alllen = uint64(nowPos - hd->pos);
 			memcpy(static_cast<char*>(buffer), static_cast<char*>(hd->mem) + hd->pos, alllen);

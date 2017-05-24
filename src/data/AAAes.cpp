@@ -466,7 +466,7 @@ bool RoundSetting_Private::LineMove(uint8 rectWidth, void*dest, const char*src, 
 		{
 			for(uint8 k = 0; k < rectWidth; k++)
 			{
-				pdest[nowPos + j*rectWidth + k] = src[nowPos + j*rectWidth + isBack ? GetBack(j, k) : GetRound(j, k)];
+				pdest[nowPos + j*rectWidth + k] = src[nowPos + j*rectWidth + (isBack ? GetBack(j, k) : GetRound(j, k))];
 			}
 		}
 	}

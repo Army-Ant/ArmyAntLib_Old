@@ -192,16 +192,6 @@
 		3E12BD471DE5397700B6195A /* CMakeLists.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = CMakeLists.txt; sourceTree = "<group>"; };
 		3E12BD481DE5397700B6195A /* make_all.sh */ = {isa = PBXFileReference; lastKnownFileType = text.script.sh; path = make_all.sh; sourceTree = "<group>"; };
 		3E12BD491DE5397700B6195A /* make.sh */ = {isa = PBXFileReference; lastKnownFileType = text.script.sh; path = make.sh; sourceTree = "<group>"; };
-		3E12BD511DE53B9900B6195A /* ArmyAntLib.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = ArmyAntLib.hpp; sourceTree = "<group>"; };
-		3E12BD531DE53B9900B6195A /* ArmyAntLibPriv.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = ArmyAntLibPriv.hpp; sourceTree = "<group>"; };
-		3E12BD551DE53B9900B6195A /* ArmyAntLib.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = ArmyAntLib.cpp; sourceTree = "<group>"; };
-		3E12BD5E1DE53C0C00B6195A /* libArmyAntLib_ios.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; name = libArmyAntLib_ios.a; path = "/Users/cast/git/ArmyAnt/ArmyAntLib/proj/build/Debug-iphoneos/libArmyAntLib_ios.a"; sourceTree = "<absolute>"; };
-		3E12BD601DE53C0C00B6195A /* ArmyAntLib_ios.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ArmyAntLib_ios.h; sourceTree = "<group>"; };
-		3E12BD611DE53C0C00B6195A /* ArmyAntLib_ios.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ArmyAntLib_ios.m; sourceTree = "<group>"; };
-		3E12BD6B1DE53C5000B6195A /* libArmyAntLib_static.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; name = libArmyAntLib_static.a; path = /Users/cast/git/ArmyAnt/ArmyAntLib/proj/build/Debug/libArmyAntLib_static.a; sourceTree = "<absolute>"; };
-		3E12BD6D1DE53C5000B6195A /* ArmyAntLib_static.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = ArmyAntLib_static.hpp; sourceTree = "<group>"; };
-		3E12BD6F1DE53C5000B6195A /* ArmyAntLib_staticPriv.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = ArmyAntLib_staticPriv.hpp; sourceTree = "<group>"; };
-		3E12BD711DE53C5000B6195A /* ArmyAntLib_static.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = ArmyAntLib_static.cpp; sourceTree = "<group>"; };
 		3E38EDB41DE6824000E1F22D /* libboost_atomic.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libboost_atomic.a; path = ../external/boost/stage/lib/libboost_atomic.a; sourceTree = "<group>"; };
 		3E38EDB51DE6824000E1F22D /* libboost_atomic.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libboost_atomic.dylib; path = ../external/boost/stage/lib/libboost_atomic.dylib; sourceTree = "<group>"; };
 		3E38EDB81DE6824000E1F22D /* libboost_chrono.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libboost_chrono.a; path = ../external/boost/stage/lib/libboost_chrono.a; sourceTree = "<group>"; };
@@ -283,9 +273,8 @@
 		C33E28291ECAA30000FD7958 /* build_start.bat */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = build_start.bat; path = ../src/not_cpp/build_start.bat; sourceTree = "<group>"; };
 		C33E282A1ECAA30000FD7958 /* build_start.sh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.sh; name = build_start.sh; path = ../src/not_cpp/build_start.sh; sourceTree = "<group>"; };
 		C33E283E1ECAA88200FD7958 /* ArmyAntLib_Test.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = ArmyAntLib_Test.xcodeproj; path = ArmyAntLib_Test/ArmyAntLib_Test.xcodeproj; sourceTree = "<group>"; };
-		C39DB5D21ECADDA4002A11E9 /* libArmyAntLib_ios.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libArmyAntLib_ios.a; path = "DerivedData/ArmyAnt/Build/Products/Debug-iphoneos/libArmyAntLib_ios.a"; sourceTree = "<group>"; };
-		C39DB5D51ECADDF7002A11E9 /* libArmyAntLib_mac.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libArmyAntLib_mac.dylib; path = DerivedData/ArmyAnt/Build/Products/Debug/libArmyAntLib_mac.dylib; sourceTree = "<group>"; };
-		C39DB5D61ECADDF7002A11E9 /* libArmyAntLib_static.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libArmyAntLib_static.a; path = DerivedData/ArmyAnt/Build/Products/Debug/libArmyAntLib_static.a; sourceTree = "<group>"; };
+		C3889A5E1ECBDDC900097AA7 /* libArmyAntLib_ios.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libArmyAntLib_ios.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		C3889A5F1ECBDDC900097AA7 /* libArmyAntLib_static.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libArmyAntLib_static.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		C39DB5E31ECAE4E8002A11E9 /* libArmyAntLib_mac.dylib */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.dylib"; includeInIndex = 0; path = libArmyAntLib_mac.dylib; sourceTree = BUILT_PRODUCTS_DIR; };
 		C39DB5EA1ECAF403002A11E9 /* AAJson.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AAJson.h; path = ../inc/AAJson.h; sourceTree = "<group>"; };
 		C39DB5ED1ECAF499002A11E9 /* AAString.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AAString.h; path = ../inc/AAString.h; sourceTree = "<group>"; };
@@ -427,41 +416,11 @@
 		3E12BD4F1DE53B9800B6195A /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				C39DB5D51ECADDF7002A11E9 /* libArmyAntLib_mac.dylib */,
-				C39DB5D61ECADDF7002A11E9 /* libArmyAntLib_static.a */,
-				C39DB5D21ECADDA4002A11E9 /* libArmyAntLib_ios.a */,
 				C39DB5E31ECAE4E8002A11E9 /* libArmyAntLib_mac.dylib */,
+				C3889A5E1ECBDDC900097AA7 /* libArmyAntLib_ios.a */,
+				C3889A5F1ECBDDC900097AA7 /* libArmyAntLib_static.a */,
 			);
 			name = Products;
-			sourceTree = "<group>";
-		};
-		3E12BD501DE53B9900B6195A /* ArmyAntLib */ = {
-			isa = PBXGroup;
-			children = (
-				3E12BD511DE53B9900B6195A /* ArmyAntLib.hpp */,
-				3E12BD531DE53B9900B6195A /* ArmyAntLibPriv.hpp */,
-				3E12BD551DE53B9900B6195A /* ArmyAntLib.cpp */,
-			);
-			path = ArmyAntLib;
-			sourceTree = "<group>";
-		};
-		3E12BD5F1DE53C0C00B6195A /* ArmyAntLib_ios */ = {
-			isa = PBXGroup;
-			children = (
-				3E12BD601DE53C0C00B6195A /* ArmyAntLib_ios.h */,
-				3E12BD611DE53C0C00B6195A /* ArmyAntLib_ios.m */,
-			);
-			path = ArmyAntLib_ios;
-			sourceTree = "<group>";
-		};
-		3E12BD6C1DE53C5000B6195A /* ArmyAntLib_static */ = {
-			isa = PBXGroup;
-			children = (
-				3E12BD6D1DE53C5000B6195A /* ArmyAntLib_static.hpp */,
-				3E12BD6F1DE53C5000B6195A /* ArmyAntLib_staticPriv.hpp */,
-				3E12BD711DE53C5000B6195A /* ArmyAntLib_static.cpp */,
-			);
-			path = ArmyAntLib_static;
 			sourceTree = "<group>";
 		};
 		3E38EEBE1DE6824600E1F22D /* _boostLibrary */ = {
@@ -542,9 +501,6 @@
 			children = (
 				3E12BD371DE535C000B6195A /* _base */,
 				3E12BD3A1DE536A900B6195A /* algorithm */,
-				3E12BD501DE53B9900B6195A /* ArmyAntLib */,
-				3E12BD5F1DE53C0C00B6195A /* ArmyAntLib_ios */,
-				3E12BD6C1DE53C5000B6195A /* ArmyAntLib_static */,
 				3E12BD381DE5369B00B6195A /* data */,
 				3E12BD391DE536A300B6195A /* io */,
 				3E12BD4F1DE53B9800B6195A /* Products */,
@@ -710,7 +666,7 @@
 			);
 			name = ArmyAntLib_ios;
 			productName = ArmyAntLib_ios;
-			productReference = 3E12BD5E1DE53C0C00B6195A /* libArmyAntLib_ios.a */;
+			productReference = C3889A5E1ECBDDC900097AA7 /* libArmyAntLib_ios.a */;
 			productType = "com.apple.product-type.library.static";
 		};
 		3E12BD6A1DE53C5000B6195A /* ArmyAntLib_static */ = {
@@ -727,7 +683,7 @@
 			);
 			name = ArmyAntLib_static;
 			productName = ArmyAntLib_static;
-			productReference = 3E12BD6B1DE53C5000B6195A /* libArmyAntLib_static.a */;
+			productReference = C3889A5F1ECBDDC900097AA7 /* libArmyAntLib_static.a */;
 			productType = "com.apple.product-type.library.static";
 		};
 /* End PBXNativeTarget section */

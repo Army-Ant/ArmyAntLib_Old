@@ -29,11 +29,12 @@
 debugType=""
 targetPlatform=""
 targetBits=""
-TarName=ArmyAntLib
+linkType=""
+TarName=ArmyAnt
 
 # Check the debug type
 if (($#<=0)); then
-    echo "Do you want to built it in release mode ? Input nothing to agree or anything not empty to disagree : "
+    echo "Do you want to built it in release mode ? Input nothing to agree or anything not empty to disagree (as debug mode) : "
     read debugType
     debugType="$debugType rr"
     if [[ ${debugType} == " rr" ]];then
@@ -52,7 +53,7 @@ fi
 
 # Check the target machine
 if (($#<=1)); then
-    echo "Do you want to built it for x86 platform ? Input nothing to agree or anything not empty to disagree : "
+    echo "Do you want to built it for x86 platform ? Input nothing to agree or anything not empty to disagree (as arm) : "
     read targetPlatform
     targetPlatform="$targetPlatform rr"
     if [[ ${targetPlatform} == " rr" ]];then
@@ -71,7 +72,7 @@ fi
 
 # Check the target bits
 if (($#<=2)); then
-    echo "Do you want to built it for 64 Bits platform ? Input nothing to agree or anything not empty to disagree : "
+    echo "Do you want to built it for 64 Bits platform ? Input nothing to agree or anything not empty to disagree (as 32 bits) : "
     read targetBits
     targetBits="$targetBits rr"
     if [[ ${targetBits} == " rr" ]];then
@@ -88,9 +89,28 @@ if [ "${targetBits}" != "64" ] && [ "${targetBits}" != "32" ] ;then
     exit -1
 fi
 
-# Target nameb
-[[ $debugType == "Debug" ]] && TarName=${TarName}d
+# Check the link type
+if (($#<=3)); then
+    echo "Do you want to built it as a dynamic library? Input nothing to agree or anything not empty to disagree (as static) : "
+    read linkType
+    linkType="${linkType} rr"
+    if [[ "${linkType}"==" rr" ]];then
+        linkType=dynamic
+    else
+        linkType=static
+    fi
+else
+	linkType=$4
+fi
+if [ "${linkType}" != "dynamic" ] && [ "${linkType}" != "static" ] ;then
+    echo "Error target link type : ${linkType} !"
+    echo "Build failed !"
+    exit -1
+fi
 
+# Target name
+[[ $debugType == "Debug" ]] && TarName=${TarName}_d
+[[ $linkType == "static" ]] && TarName=${TarName}_s
 [[ $targetPlatform == "arm" ]] && [[ $targetBits == "64" ]] && TarName=${TarName}_arm64
 [[ $targetPlatform == "arm" ]] && [[ $targetBits == "32" ]] && TarName=${TarName}_arm
 [[ $targetPlatform == "x86" ]] && [[ $targetBits == "64" ]] && TarName=${TarName}_64
@@ -98,15 +118,18 @@ fi
 echo $debugType
 echo $targetPlatform
 echo $targetBits
+echo $linkType
 echo $TarName
 
 # Building source
-source ../src/build_start.sh $debugType ../ $TarName $targetPlatform $targetBits
-cmake ./ -DCMAKE_BUILD_TYPE=$debugType -DTAR_MAC=$targetPlatform -DTAR_BITS=$targetBits -DTAR_NAME=$TarName
+source ../src/not_cpp/build_start.sh $debugType ../ $TarName $targetPlatform $targetBits $linkType
+cmake ./ -DCMAKE_BUILD_TYPE=$debugType -DTAR_MAC=$targetPlatform -DTAR_BITS=$targetBits -DTAR_NAME=$TarName -DLINK_TYPE=$linkType
 make
-mv *.so ../bin
-#mv *.o ../lib
-rm -rf CMakeCache.txt
-rm -rf *.*~
-source ../src/build_end.sh $debugType ../ $TarName $targetPlatform $targetBits
+
+[[ $linkType == "dynamic" ]] && mv lib${TarName}.so ../bin
+[[ $linkType == "dynamic" ]] && mv lib${TarName}.dylib ../bin
+[[ $linkType == "static" ]] && mv lib${TarName}.o ../lib
+[[ $linkType == "static" ]] && mv lib${TarName}.a ../bin
+
+source ../src/not_cpp/build_end.sh $debugType ../ $TarName $targetPlatform $targetBits $linkType
 

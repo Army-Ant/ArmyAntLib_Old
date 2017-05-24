@@ -1,6 +1,5 @@
 #include "main.h"
-
-using namespace ArmyAnt;
+#include <map>
 
 void test(int argc, char**argv, char**env_vars);
 
@@ -15,7 +14,7 @@ int main(int argc, char**argv, char**env_vars)
 void test(int argc, char ** argv, char ** env_vars)
 {
 	auto st = new File();
-	st->Open("./testJson.json");
+	st->Open(argv[1]);
 	char buf[32768] = "";
 	st->Read(buf);
 	std::cout << "file read ok" << std::endl;
@@ -24,3 +23,17 @@ void test(int argc, char ** argv, char ** env_vars)
 	j->toJsonString(buf);
 	std::cout << buf << std::endl;
 }
+
+
+
+auto gt_macMapTest = [](){
+    std::map<int, const char*> intMap;
+    if(intMap.find(1) == intMap.end())
+        intMap.insert(std::make_pair(1,"the first one"));
+    intMap.insert(std::make_pair(2,"the second one"));
+    std::map<const char*, const char*> ptrMap;
+    if(ptrMap.find("1") == ptrMap.end())
+        ptrMap.insert(std::make_pair("1", "the first one"));
+    ptrMap.insert(std::make_pair("2", "the second one"));
+    return true;
+}();

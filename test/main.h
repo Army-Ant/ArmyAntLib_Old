@@ -3,4 +3,6 @@
 
 #include "../inc/ArmyAnt.h"
 
+using namespace ArmyAnt;
+
 #endif

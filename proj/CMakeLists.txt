@@ -23,6 +23,8 @@
 cmake_minimum_required(VERSION 3.0)
 project(${TAR_NAME})
 
+MESSAGE("The target name is ${TAR_NAME}")
+
 if(TAR_MAC STREQUAL arm)
 	set(CMAKE_CXX_COMPILER "arm-linux-gnueabi-g++")
 	set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=gnu++11")
@@ -33,41 +35,34 @@ else()
 endif()
 set(CMAKE_TAR_NAME ${TAR_NAME})
 
-set(JNI_INCLUDE_DIR $ENV{JAVA_HOME}/include)
-MESSAGE("The JNI directory is ${JNI_INCLUDE_DIR}")
-include_directories(${JNI_INCLUDE_DIR})
+#set(JNI_INCLUDE_DIR $ENV{JAVA_HOME}/include)
+#MESSAGE("The JNI directory is ${JNI_INCLUDE_DIR}")
+#include_directories(${JNI_INCLUDE_DIR})
 
 MESSAGE("Current platform is ${CMAKE_SYSTEM_NAME}")
 IF ((CMAKE_SYSTEM_NAME MATCHES "Windows") OR (CMAKE_SYSTEM_NAME MATCHES "CYGWIN"))
-	include_directories(${JNI_INCLUDE_DIR}/win32)
-	link_directories(../external/python3.5.1/x64)
-	set(PY_INCLUDE_DIR ../external/python3.5.1/include)
+	#include_directories(${JNI_INCLUDE_DIR}/win32)
 	add_definitions(
 			-DOS_WINDOWS=1
 			-D__USE_W32_SOCKETS
 	)
 ELSEIF (CMAKE_SYSTEM_NAME MATCHES "Linux")
-	include_directories(${JNI_INCLUDE_DIR}/linux)
-	set(PY_INCLUDE_DIR  $ENV{PYTHON_INCLUDE})
-	#set(PY_INCLUDE_DIR ../external/python3.5.1/include)
+	#include_directories(${JNI_INCLUDE_DIR}/linux)
 	add_definitions(
 			-DOS_UNIX=1
 			-DOS_LINUX=1
 	)
-ELSEIF (CMAKE_SYSTEM_NAME MATCHES "BSD")
-	set(PY_INCLUDE_DIR $ENV{PYTHON_INCLUDE})
+ELSEIF (CMAKE_SYSTEM_NAME MATCHES "Darwin")
 	add_definitions(
 			-DOS_UNIX=1
 			-DOS_BSD=1
+			-DOS_MACOS=1
 	)
 ELSE ()
 
 ENDIF ((CMAKE_SYSTEM_NAME MATCHES "Windows") OR (CMAKE_SYSTEM_NAME MATCHES "CYGWIN"))
 
-include_directories(${PY_INCLUDE_DIR})
 include_directories(../external/boost)
-
-MESSAGE("This python header directory is $ENV{PYTHON_INCLUDE}")
 
 if(CMAKE_BUILD_TYPE STREQUAL Debug)
     add_definitions(
@@ -86,7 +81,6 @@ if(TAR_MAC STREQUAL x86)
 elseif(TAR_MAC STREQUAL arm)
 	add_definitions(
 			-D_arm=1
-			-DAA_USE_PYTHON=0
 	)
 else()
 endif()
@@ -102,13 +96,15 @@ else()
 endif()
 
 add_definitions(
-		-D_cplusplus=201412L
-		-D_CMAKE=1
-		-DARMYANTLIB_EXPORTS
+	-D_cplusplus=201412L
+	-D_CMAKE=1
+	-DARMYANTLIB_EXPORTS
+        -DBOOST_ALL_NO_LIB
 )
 
 set(CXX_SOURCE_FILES
         ../src/base/ArmyAntLib.cpp
+        ../src/tool/AAString.cpp
         ../src/data/AAAes.cpp
         ../src/data/AABinary.cpp
         ../src/data/AAJson.cpp
@@ -117,11 +113,23 @@ set(CXX_SOURCE_FILES
         ../src/io/AAIStream_Memory.cpp
 		../src/io/AASocket.cpp
         ../src/io/C_AAStream.cpp
-        ../src/algorithm/C_AANeuron.cpp)
+        ../src/algorithm/C_AANeuron.cpp
+        ../src/algorithm/AASqlStructs.cpp)
 
-add_library(${CMAKE_TAR_NAME} SHARED ${CXX_SOURCE_FILES})
-TARGET_LINK_LIBRARIES(${CMAKE_TAR_NAME} dl)
+LINK_DIRECTORIES(../external/boost/stage/lib/)
+
+
+if(LINK_TYPE STREQUAL static)
+	add_library(${CMAKE_TAR_NAME} STATIC ${CXX_SOURCE_FILES})
+else()
+	add_library(${CMAKE_TAR_NAME} SHARED ${CXX_SOURCE_FILES})
+endif()
+
+TARGET_LINK_LIBRARIES(${CMAKE_TAR_NAME} boost_system)
 
 MESSAGE("The binary directory is ${PROJECT_BINARY_DIR}")
+
+set(CMAKE_LIBRARY_OUTPUT_DIRECTORY  ./../bin/)
+set(CMAKE_RUNTIME_OUTPUT_DIRECTORY  ./../bin/)
 
 SET_TARGET_PROPERTIES(${CMAKE_TAR_NAME} PROPERTIES OUTPUT_NAME ${TAR_NAME})

@@ -23,21 +23,13 @@
 # 本文件为内部源码文件, 不会包含在闭源发布的本软件中
 
 # Created by Jason 4/18/2016
-# This is a shell script file used to build the debug bin for x86 machine in linux platform
+# This is a shell script file used to clean build trash in Unix platform
 
-bash make.sh Debug x86 64 static
-bash make.sh Debug x86 32 static
-bash make.sh Debug arm 64 static
-bash make.sh Debug arm 32 static
-bash make.sh Release x86 64 static
-bash make.sh Release x86 32 static
-bash make.sh Release arm 64 static
-bash make.sh Release arm 32 static
-bash make.sh Debug x86 64 dynamic
-bash make.sh Debug x86 32 dynamic
-bash make.sh Debug arm 64 dynamic
-bash make.sh Debug arm 32 dynamic
-bash make.sh Release x86 64 dynamic
-bash make.sh Release x86 32 dynamic
-bash make.sh Release arm 64 dynamic
-bash make.sh Release arm 32 dynamic
+
+rm -rf CMakeCache.txt
+rm -rf *.*~
+rm -rf cmake-build-debug
+rm -rf cmake-build-release
+rm -rf CMakeFiles
+rm -rf Makefile
+rm -rf cmake_install.cmake
