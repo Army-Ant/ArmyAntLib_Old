@@ -18,28 +18,28 @@
  * 除非法律要求或者版权所有者书面同意,本软件在本协议基础上的发布没有任何形式的条件和担保,无论明示的或默许的.
  * See the License for the specific language governing permissions and limitations under the License.
  * 请在特定限制或语言管理权限下阅读协议
+ * This file is the internal source file of this project, is not contained by the closed source release part of this software
+ * 本文件为内部源码文件, 不会包含在闭源发布的本软件中
  */
 
-#ifndef AA_MATH_H_2016_12_28
-#define AA_MATH_H_2016_12_28
-
+#include "../../inc/AASqlClient.h"
+#include "../../inc/AAClassPrivateHandle.hpp"
 
 namespace ArmyAnt{
-
-namespace Math{
-
-enum class CoordinateType{
-	Unknown,
-	Rectangular,  // ֱ
-	Polar,        //
-	Spherical
-};
-
-
-
+    
+    struct ISqlClient_Private{
+        
+    };
+    
+    static ClassPrivateHandleManager<ISqlClient, ISqlClient_Private> sg_manager;
+    
+    ISqlClient::ISqlClient() {
+        sg_manager.GetHandle(this, new ISqlClient_Private());
+    }
+    
+    ISqlClient::~ISqlClient() {
+        auto del = sg_manager[this];
+        sg_manager.ReleaseHandle(del);
+        delete del;
+    }
 }
-
-}
-
-
-#endif // AA_MATH_H_2016_12_28
