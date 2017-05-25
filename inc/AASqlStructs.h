@@ -116,6 +116,26 @@ enum class SqlClauseType
     Top
 };
 
+enum class SqlOperatorType{
+    none,
+    is,
+    like,
+    in,
+    between,
+    _and,
+    _or,
+    alias,
+    innerJoin,
+    leftJoin,
+    rightJoin,
+    fullJoin
+};
+
+class ARMYANTLIB_API SqlStructHelper{
+public:
+    static String getDataTypeName(SqlFieldType type);
+};
+
 struct ARMYANTLIB_API SqlFieldHead
 {
     uint32 length;
@@ -154,7 +174,7 @@ public:
 
 public:
     uint32 size()const;
-    const SqlField&operator[](int32 index);
+    const SqlField&operator[](int32 index)const;
 
 private:
     friend class SqlClient;
@@ -212,8 +232,10 @@ public:
     uint32 height()const;
     const SqlFieldHead*getHead(int32 index)const;
     SqlRow operator[](int32 index);
-    const SqlField&operator()(int32 rowIndex, int32 colIndex);
+    const SqlRow  operator[](int32 index)const;
+    const SqlField&operator()(int32 rowIndex, int32 colIndex)const;
     SqlColumn operator()(std::nullptr_t, int32 colIndex);
+    const SqlColumn operator()(std::nullptr_t, int32 colIndex)const;
 
 private:
     friend class SqlClient;
@@ -223,16 +245,39 @@ private:
     SqlField** fields;
 };
 
+class ARMYANTLIB_API SqlExpress{
+public:
+    SqlExpress(const String&str="");
+    ~SqlExpress();
+
+public:
+    bool pushValue(const String& value);
+    bool pushValues(const String*values, uint32 num);
+    bool removeValue(uint32 index);
+    bool clear();
+
+public:
+    SqlOperatorType type;
+    String* values;
+    uint32 num;
+};
+
 class ARMYANTLIB_API SqlClause
 {
 public:
-    SqlClause(const String&str);
+    SqlClause(const String&str = "");
     ~SqlClause();
 
 public:
+    bool pushExpress(const SqlExpress& value);
+    bool pushExpresses(const SqlExpress*values, uint32 num);
+    bool removeExpress(uint32 index);
+    bool clear();
+
+public:
     SqlClauseType type;
-    String key;
-    String value;
+    SqlExpress* expresses;
+    uint32 num;
 };
 
 }

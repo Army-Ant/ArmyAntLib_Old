@@ -39,17 +39,17 @@ public:
     virtual bool connect(const String&serverAddress, const String&port) = 0;
     virtual void disconnect() = 0;
     virtual bool isConnection() = 0;
-    virtual bool getDatabaseCount();
-    virtual bool getDatabaseList(SqlDatabaseInfo*&dbs, uint32 maxCount = 0);
+    virtual int64 getDatabaseCount() = 0;
+    virtual bool getDatabaseList(SqlDatabaseInfo*&dbs, uint32 maxCount = 0) = 0;
 
 public:
-    virtual bool getTablesCount(const String&dbName);
-    virtual bool getViewsCount(const String&dbName);
-    virtual bool getTableNameList(const String&dbName, SqlTableInfo*&tables, uint32 maxCount = 0);
-    virtual bool getViewNameList(const String&dbName, SqlTableInfo*&tables, uint32 maxCount = 0);
+    virtual bool getTablesCount(const String&dbName) = 0;
+    virtual bool getViewsCount(const String&dbName) = 0;
+    virtual bool getTableNameList(const String&dbName, SqlTableInfo*&tables, uint32 maxCount = 0) = 0;
+    virtual bool getViewNameList(const String&dbName, SqlTableInfo*&tables, uint32 maxCount = 0) = 0;
     virtual SqlTable getWholeTable(const String&dbName, const String&tableName);
     virtual SqlTable getWholeView(const String&dbName, const String&tableName);
-    virtual SqlTable getTableAllFields(const String&dbName, SqlTableInfo*&tables);
+    virtual SqlTable getTableAllFields(const String&dbName, SqlTableInfo*&tables) = 0;
 
 public:
     // select * from [tableName]
@@ -60,7 +60,7 @@ public:
     virtual bool update(const String&dbName, const String&tableName, const SqlRow&updatedData, const SqlClause*clauses = nullptr, int clausesNum = 0);
     // insert into [tableName] [insertedData (k , k , k ... ) values ( value , value , value ... )]
     virtual bool insertRow(const String&dbName, const String&tableName, const SqlRow&insertedData);
-    // alter table [tableName] add [columnHead name datatype (others)...]
+    // alter table [tableName] add [columnHead name dataType (others)...]
     virtual bool insertColumn(const String&dbName, const String&tableName, const SqlFieldHead&columnHead);
     virtual bool insertColumn(const String&dbName, const String&tableName, const SqlColumn&column);
     // delete from [tableName]
@@ -71,11 +71,14 @@ public:
 public:
     virtual bool createDatabase(const String&dbName);
     virtual bool deleteDatabase(const String&dbName);
-    virtual bool createTable(const String&dbName, const String&tableName);
+    virtual bool createTable(const String&dbName, const String&tableName, const SqlColumn&column, const SqlTableInfo*tableInfo = nullptr);
     virtual bool deleteTable(const String&dbName, const String&tableName);
 
 public:
+    virtual String organizeColumnInfo(const SqlFieldHead&column);
+    virtual String organizeSqlClause(const SqlClause*clauses = nullptr, int clausesNum = 0);
     virtual SqlTable select(const String&sql) = 0;
+    virtual bool execute(const String&sql) = 0;
     virtual bool execute(const String&sql, String&result) = 0;
 
     AA_FORBID_ASSGN_OPR(ISqlClient);

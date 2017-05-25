@@ -23,23 +23,123 @@
  */
 
 #include "../../inc/AASqlClient.h"
-#include "../../inc/AAClassPrivateHandle.hpp"
 
-namespace ArmyAnt{
-    
-    struct ISqlClient_Private{
-        
-    };
-    
-    static ClassPrivateHandleManager<ISqlClient, ISqlClient_Private> sg_manager;
-    
+namespace ArmyAnt {
+
     ISqlClient::ISqlClient() {
-        sg_manager.GetHandle(this, new ISqlClient_Private());
     }
-    
+
     ISqlClient::~ISqlClient() {
-        auto del = sg_manager[this];
-        sg_manager.ReleaseHandle(del);
-        delete del;
+    }
+
+    SqlTable ISqlClient::getWholeTable(const String &dbName, const String &tableName) {
+        return select(dbName, tableName);
+    }
+
+    SqlTable ISqlClient::getWholeView(const String &dbName, const String &tableName) {
+        return select(dbName, tableName);
+    }
+
+    SqlTable
+    ISqlClient::select(const String &dbName, const String &tableName, const SqlClause *clauses, int clausesNum) {
+        return select("select * from " + dbName + '.' + tableName + organizeSqlClause(clauses, clausesNum));
+    }
+
+    SqlTable ISqlClient::select(const String &dbName, const String &tableName, const String *columnNames, int columnNum,
+                                const SqlClause *clauses, int clausesNum) {
+        String sql = "select ";
+        if (columnNames != nullptr)
+            for (int i = 0; i < columnNum; ++i) {
+                sql += columnNames[i] + " , ";
+            }
+        return select(sql + "from " + dbName + '.' + tableName + organizeSqlClause(clauses, clausesNum));
+    }
+
+    bool ISqlClient::update(const String &dbName, const String &tableName, const SqlRow &updatedData,
+                            const SqlClause *clauses, int clausesNum) {
+        if (updatedData.size() <= 0)
+            return false;
+        String sql = "update " + dbName + '.' + tableName + " set ";
+        for (int i = 0; i < updatedData.size(); ++i) {
+            sql += updatedData[i].getHead()->name + " = \"" + updatedData[i].getValue() + "\" ";
+            if (i != updatedData.size() - 1)
+                sql += ", ";
+        }
+        return execute(sql + organizeSqlClause(clauses, clausesNum));
+    }
+
+    bool ISqlClient::insertRow(const String &dbName, const String &tableName, const SqlRow &insertedData) {
+        if (insertedData.size() <= 0)
+            return false;
+        String keys = "";
+        String values = "";
+        for (int i = 0; i < insertedData.size(); ++i) {
+            keys += insertedData[i].getHead()->name;
+            values += insertedData[i].getValue();
+            if (i != insertedData.size() - 1) {
+                keys += ", ";
+                values += ", ";
+            }
+        }
+
+        return execute("insert into " + dbName + '.' + tableName + " ( " + keys + " ) values ( " + values + " )");
+    }
+
+    bool ISqlClient::insertColumn(const String &dbName, const String &tableName, const SqlFieldHead &columnHead) {
+        return execute("alter table " + dbName + '.' + tableName + " add " + organizeColumnInfo(columnHead));
+    }
+
+    bool ISqlClient::insertColumn(const String &dbName, const String &tableName, const SqlColumn &column) {
+        for (int i = 0; i < column.size(); ++i) {
+            if (!insertColumn(dbName, tableName, *(column.getHead(i))))
+                return false;
+        }
+        return column.size() > 0;
+    }
+
+    bool ISqlClient::deleteRow(const String &dbName, const String &tableName, const SqlClause *where) {
+        if (where != nullptr && where->type != SqlClauseType::Where)
+            return false;
+        return execute("delete from " + dbName + '.' + tableName + ' ' + organizeSqlClause(where, 1));
+    }
+
+    bool ISqlClient::deleteColumn(const String &dbName, const String &tableName, const String &columnName) {
+        return execute("alter table " + dbName + '.' + tableName + " drop column " + columnName);
+    }
+
+    bool ISqlClient::createDatabase(const String &dbName) {
+        return execute("create database "+dbName);
+    }
+
+    bool ISqlClient::deleteDatabase(const String &dbName) {
+        return execute("drop database "+dbName);
+    }
+
+    bool ISqlClient::createTable(const String &dbName, const String &tableName, const SqlColumn&column, const SqlTableInfo*tableInfo) {
+        if(column.size()<=0)
+            return false;
+        String sql = "create table " + dbName+'.'+tableName+" ( ";
+        for(int i=0;i<column.size();++i){
+            sql += organizeColumnInfo(*(column[i].getHead()));
+            if(i< column.size()-1)
+                sql+=" , ";
+        }
+        return execute(sql + " )");
+    }
+
+    bool ISqlClient::deleteTable(const String &dbName, const String &tableName) {
+        return execute("drop table "+dbName+'.'+tableName);
+    }
+
+    String ISqlClient::organizeColumnInfo(const SqlFieldHead &column) {
+        // TODO: 应当扩展支持的更多属性
+        return column.name + ' ' + SqlStructHelper::getDataTypeName(column.type) + (column.allowNull ? "" : " not null");
+    }
+
+    String ISqlClient::organizeSqlClause(const SqlClause *clauses, int clausesNum) {
+        // TODO: 完善clause的结构然后补全此处
+        String sql = "";
+
+        return sql;
     }
 }

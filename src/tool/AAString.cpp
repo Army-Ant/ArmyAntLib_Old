@@ -379,4 +379,20 @@ int32 String::find(char c) const
     return int32(ret);
 }
 
+String operator+(const char*value, const String&str){
+    return str+value;
+}
+
+String operator+(String&&temp, const String&value){
+    auto ret = String(temp);
+    ret += value;
+    return ret;
+}
+
+String operator+(String&&temp, const char*value){
+    auto ret = String(temp);
+    ret += value;
+    return ret;
+}
+
 }
