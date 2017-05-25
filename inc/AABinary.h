@@ -25,8 +25,7 @@
 
 /*	* @ author			: Jason
 	* @ date			: 12/08/2015
-	* @ nearly update	: 12/08/2015
-	* @ small version	: 0.1
+	* @ last update	    : 12/08/2015
 	* @ summary			: 二进制数据转换器，转换的数据用于文件或网络通信
 	* @ uncompleted		: operator overload
 	* @ untested		:

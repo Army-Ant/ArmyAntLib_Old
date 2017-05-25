@@ -10,8 +10,6 @@
 # Roslyn cache directories
 *.ide/
 
-*.obj
-*.pdb
 *.pgc
 *.pgd
 *.rsp
@@ -21,8 +19,6 @@
 *.tlh
 *.tmp
 *.tmp_proj
-*.log
-*.tlog
 *.vspscc
 *.vssscc
 .builds
@@ -179,16 +175,32 @@ ehthumbs.db
 $RECYCLE.BIN/
 
 # Build logs
+*.log
 *.tlog
+
+# VC++ debug and intellisence info files
+*.pdb
 *.idb
-*.lastbuildstate
 *.exp
 *.ipdb
-*.xdc
-*.iobj
 *.db
+*.lastbuildstate
+*.obj
+*.iobj
 *.opendb
+*.ipch
+*.db-shm
+*.db-wal
+
+# Microsoft Visual Studio temp files
+.vs
+
+# cmake files
 *.cmake
+*cmake-build-*
+*cmake-build-*
+
+# output directory
 /bin
 /lib
 /proj/Debug
@@ -196,12 +208,8 @@ $RECYCLE.BIN/
 /proj/Release
 /proj/Release_Static
 /proj/out
-*.ipch
-*.db-shm
-*.db-wal
 /proj/Win32
-.vs
 /test/*.dll
-*cmake-build-debug*
-*cmake-build-release*
 
+
+*.xdc

@@ -25,6 +25,7 @@
 # Created by Jason 4/18/2016
 # This is a shell script file used to build in linux platform
 
+# TODO: 需要排除一些无法生成的项目，例如无对应编译器（arm或者不同位数），提前检查并中止脚本运行
 
 debugType=""
 targetPlatform=""

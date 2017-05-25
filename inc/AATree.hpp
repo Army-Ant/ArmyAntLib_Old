@@ -25,7 +25,7 @@
 
 /*	* @ author			: Jason
 	* @ date			: 12/26/2015
-	* @ nearly update	: 01/18/2016
+	* @ last update		: 01/18/2016
 	* @ small version	: 0.2
 	* @ summary			: 树及其遍历迭代器
 	* @ uncompleted		: 

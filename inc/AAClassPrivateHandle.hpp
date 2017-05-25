@@ -28,6 +28,16 @@
 
 namespace ArmyAnt {
 
+
+/*	* @ author			: Jason
+	* @ date			: 13/11/2015
+	* @ last update	    : 23/05/2017
+	* @ summary			: 此类用于保护性隐藏C++类中的私有成员
+	* @ uncompleted		:
+	* @ untested		:
+    * @ issue           : Xcode 下AAJson类const异常对象，初始化时String类对象成员调用String的初始化时，在GetHandle的insert操作中崩溃，需要回归测试确认
+	*/
+
 //此类用于保护性隐藏C++类中的私有成员，将私有成员定义在cpp实现文件的另一个类中（public），而原类增加一个 const T_Handle handle 公有成员
 //实现文件定义一个static本类实例，作为私有成员管理器，原类的函数体内通过handle和管理器来获取私有成员
 //T_Out参数代表原类型，T_In参数代表包含私有成员的类型，T_Handle代表句柄的类型，可从任意整型中选择，默认为uint32

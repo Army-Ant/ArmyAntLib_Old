@@ -25,12 +25,11 @@
 
 /*	* @ author			: Jason
 	* @ date			: 01/21/2016
-	* @ nearly update	: 01/21/2016
-	* @ small version	: 0.1
+	* @ last update		: 01/21/2016
 	* @ summary			: 神经元
 	* @ uncompleted		: all
 	* @ untested		:
-	* @ tested			:
+	* @ issue			:
 	*/
 
 #include "AADefine.h"

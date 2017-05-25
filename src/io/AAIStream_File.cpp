@@ -320,13 +320,13 @@ uint64 File::Read(void*buffer, uint8 endtag, uint64 maxlen/* = FILE_SHORT_POS_EN
 	return len;
 }
 
-uint64 File::Write(void*buffer, uint64 len /*= 0*/)
+uint64 File::Write(const void*buffer, uint64 len /*= 0*/)
 {
 	AAAssert(buffer != nullptr, uint64(0));
 	auto hd = static_cast<IStream_File_Private*>(IStream_Private::handleManager[this]);
 	//如果len参数没有传入，则写内存到流，直至遇到0，这相当于写入字符串至流
 	if(len == 0)
-		while(static_cast<uint8*>(buffer)[len] != 0)
+		while(static_cast<const uint8*>(buffer)[len] != 0)
 			len++;
 
 	uint64 writeLen = 0;

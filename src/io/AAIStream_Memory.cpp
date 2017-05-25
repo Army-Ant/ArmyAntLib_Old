@@ -220,13 +220,13 @@ uint64 Memory::Read(void * buffer, uint8 endtag, uint64 maxlen)
 	}
 }
 
-uint64 Memory::Write(void * buffer, uint64 len)
+uint64 Memory::Write(const void * buffer, uint64 len)
 {
 	AAAssert(buffer != nullptr, uint64(0));
 	auto hd = static_cast<IStream_Memory_Private*>(IStream_Private::handleManager[this]);
 	//如果len参数没有传入，则写内存到流，直至遇到0，这相当于写入字符串至流
 	if(len == 0)
-		while(static_cast<uint8*>(buffer)[len] != 0)
+		while(static_cast<const uint8*>(buffer)[len] != 0)
 			len++;
 
 	uint64 writeLen = 0;

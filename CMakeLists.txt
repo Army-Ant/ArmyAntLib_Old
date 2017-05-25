@@ -116,7 +116,7 @@ set(CXX_SOURCE_FILES
         src/algorithm/C_AANeuron.cpp
         src/algorithm/AASqlStructs.cpp
 		src/io/AASqlClient.cpp
-)
+        src/tool/AALog.cpp)
 
 set(TEST_CXX_SOURCE_FILES
         ${CXX_SOURCE_FILES}

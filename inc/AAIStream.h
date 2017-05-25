@@ -147,7 +147,7 @@ public:
 	  * @ param = "len" : 要写入的长度，不传此参数，则当遇到数据中的0值（字符串结尾）时停止写入
 	  * @ return : 写入的实际长度，如果为0，可能发生了错误
 	  */
-	virtual uint64 Write(void*buffer, uint64 len = 0) = 0;
+	virtual uint64 Write(const void*buffer, uint64 len = 0) = 0;
 
 	/** 判断流是否为空
 	  */

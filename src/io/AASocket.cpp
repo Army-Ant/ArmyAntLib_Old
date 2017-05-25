@@ -401,11 +401,6 @@ bool IPAddr_v4::operator!=(const IPAddr_v4 & value)const
 	return !operator==(value);
 }
 
-IPAddr_v4::operator IPAddr&()
-{
-	return *this;
-}
-
 IPAddr_v4 IPAddr_v4::localhost = IPAddr_v4((unsigned char)127, (unsigned char)0, (unsigned char)0, (unsigned char)1);
 
 void IPAddr_v4::ParseFromString(const char * str)
@@ -548,11 +543,6 @@ uint16 & IPAddr_v6::operator[](int index)
 uint16 IPAddr_v6::operator[](int index) const
 {
 	return const_cast<IPAddr_v6*>(this)->operator[](index);
-}
-
-IPAddr_v6::operator IPAddr&()
-{
-	return *this;
 }
 
 IPAddr_v6 IPAddr_v6::localhost = IPAddr_v6("0:0:0:0:0:0:0:1");
