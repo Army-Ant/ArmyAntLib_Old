@@ -25,6 +25,7 @@
 # Created by Jason 4/18/2016
 # This is a shell script file used to build the debug bin for x86 machine in linux platform
 
+cd proj
 bash make.sh Debug x86 64 static
 bash make.sh Debug x86 32 static
 bash make.sh Debug arm 64 static
@@ -41,3 +42,4 @@ bash make.sh Release x86 64 dynamic
 bash make.sh Release x86 32 dynamic
 bash make.sh Release arm 64 dynamic
 bash make.sh Release arm 32 dynamic
+cd ..
