@@ -25,8 +25,7 @@
 
 /*	* @ author			: Jason
 	* @ date			: 12/08/2015
-	* @ nearly update	: 12/08/2015
-	* @ small version	: 0.1
+	* @ last update	    : 12/08/2015
 	* @ summary			: AES数据加密转换器
 	* @ uncompleted		: 均已完成
 	* @ untested		: 编码然后反编码，无法回到原来内容，因此计算结果有误，但是不会crush了。秘钥扩展算法尚未验证正确性

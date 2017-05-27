@@ -1,24 +1,24 @@
 /*
-* Copyright (c) 2015 ArmyAnt
-* °æÈ¨ËùÓÐ (c) 2015 ArmyAnt
-*
-* Licensed under the BSD License, Version 2.0 (the License);
-* ±¾Èí¼þÊ¹ÓÃBSDÐ­Òé±£»¤, Ð­Òé°æ±¾:2.0
-* you may not use this file except in compliance with the License.
-* Ê¹ÓÃ±¾¿ªÔ´´úÂëÎÄ¼þµÄÄÚÈÝ, ÊÓÎªÍ¬ÒâÐ­Òé
-* You can read the license content in the file "LICENSE" at the root of this project
-* Äú¿ÉÒÔÔÚ±¾ÏîÄ¿µÄ¸ùÄ¿Â¼ÕÒµ½ÃûÎª"LICENSE"µÄÎÄ¼þ, À´ÔÄ¶ÁÐ­ÒéÄÚÈÝ
-* You may also obtain a copy of the License at
-* ÄúÒ²¿ÉÒÔÔÚ´Ë´¦»ñµÃÐ­ÒéµÄ¸±±¾:
-*
-*     http://opensource.org/licenses/BSD-3-Clause
-*
-* Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an AS IS BASIS,
-* WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-* ³ý·Ç·¨ÂÉÒªÇó»òÕß°æÈ¨ËùÓÐÕßÊéÃæÍ¬Òâ,±¾Èí¼þÔÚ±¾Ð­Òé»ù´¡ÉÏµÄ·¢²¼Ã»ÓÐÈÎºÎÐÎÊ½µÄÌõ¼þºÍµ£±£,ÎÞÂÛÃ÷Ê¾µÄ»òÄ¬ÐíµÄ.
-* See the License for the specific language governing permissions and limitations under the License.
-* ÇëÔÚÌØ¶¨ÏÞÖÆ»òÓïÑÔ¹ÜÀíÈ¨ÏÞÏÂÔÄ¶ÁÐ­Òé
-*/
+ * Copyright (c) 2015 ArmyAnt
+ * ç‰ˆæƒæ‰€æœ‰ (c) 2015 ArmyAnt
+ *
+ * Licensed under the BSD License, Version 2.0 (the License);
+ * æœ¬è½¯ä»¶ä½¿ç”¨BSDåè®®ä¿æŠ¤, åè®®ç‰ˆæœ¬:2.0
+ * you may not use this file except in compliance with the License.
+ * ä½¿ç”¨æœ¬å¼€æºä»£ç æ–‡ä»¶çš„å†…å®¹, è§†ä¸ºåŒæ„åè®®
+ * You can read the license content in the file "LICENSE" at the root of this project
+ * æ‚¨å¯ä»¥åœ¨æœ¬é¡¹ç›®çš„æ ¹ç›®å½•æ‰¾åˆ°åä¸º"LICENSE"çš„æ–‡ä»¶, æ¥é˜…è¯»åè®®å†…å®¹
+ * You may also obtain a copy of the License at
+ * æ‚¨ä¹Ÿå¯ä»¥åœ¨æ­¤å¤„èŽ·å¾—åè®®çš„å‰¯æœ¬:
+ *
+ *     http://opensource.org/licenses/BSD-3-Clause
+ *
+ * Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an AS IS BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * é™¤éžæ³•å¾‹è¦æ±‚æˆ–è€…ç‰ˆæƒæ‰€æœ‰è€…ä¹¦é¢åŒæ„,æœ¬è½¯ä»¶åœ¨æœ¬åè®®åŸºç¡€ä¸Šçš„å‘å¸ƒæ²¡æœ‰ä»»ä½•å½¢å¼çš„æ¡ä»¶å’Œæ‹…ä¿,æ— è®ºæ˜Žç¤ºçš„æˆ–é»˜è®¸çš„.
+ * See the License for the specific language governing permissions and limitations under the License.
+ * è¯·åœ¨ç‰¹å®šé™åˆ¶æˆ–è¯­è¨€ç®¡ç†æƒé™ä¸‹é˜…è¯»åè®®
+ */
 
 #ifndef AA_JSON_2017_3_9
 #define AA_JSON_2017_3_9
@@ -198,7 +198,12 @@ public:
 		:std::exception(msg) {}
 #else
 		: std::exception(), message(msg) {}
-	virtual const char* what()const _GLIBCXX_USE_NOEXCEPT override { return this->message.c_str(); }
+#ifdef OS_BSD
+    virtual const char* what()const _NOEXCEPT override
+#else
+	virtual const char* what()const _GLIBCXX_USE_NOEXCEPT override
+#endif
+     { return this->message.c_str(); }
 protected:
 	String message;
 #endif

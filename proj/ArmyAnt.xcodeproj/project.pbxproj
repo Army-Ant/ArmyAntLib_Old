@@ -92,73 +92,32 @@
 		3E12BDCD1DE5484200B6195A /* AASocket.h in Headers */ = {isa = PBXBuildFile; fileRef = 3E12BD2D1DE5357400B6195A /* AASocket.h */; };
 		3E12BDCE1DE5484200B6195A /* C_AAStream.h in Headers */ = {isa = PBXBuildFile; fileRef = 3E12BD351DE5357400B6195A /* C_AAStream.h */; };
 		3E12BDCF1DE5484200B6195A /* AAClassPrivateHandle.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 3E12BD1E1DE5357400B6195A /* AAClassPrivateHandle.hpp */; };
-		3E38EE3A1DE6824100E1F22D /* libboost_atomic.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3E38EDB41DE6824000E1F22D /* libboost_atomic.a */; };
-		3E38EE3B1DE6824100E1F22D /* libboost_atomic.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 3E38EDB51DE6824000E1F22D /* libboost_atomic.dylib */; };
-		3E38EE3E1DE6824100E1F22D /* libboost_chrono.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3E38EDB81DE6824000E1F22D /* libboost_chrono.a */; };
-		3E38EE3F1DE6824100E1F22D /* libboost_chrono.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 3E38EDB91DE6824000E1F22D /* libboost_chrono.dylib */; };
-		3E38EE421DE6824100E1F22D /* libboost_container.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3E38EDBC1DE6824000E1F22D /* libboost_container.a */; };
-		3E38EE431DE6824100E1F22D /* libboost_container.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 3E38EDBD1DE6824000E1F22D /* libboost_container.dylib */; };
-		3E38EE461DE6824100E1F22D /* libboost_context.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3E38EDC01DE6824000E1F22D /* libboost_context.a */; };
-		3E38EE471DE6824100E1F22D /* libboost_context.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 3E38EDC11DE6824000E1F22D /* libboost_context.dylib */; };
-		3E38EE4A1DE6824100E1F22D /* libboost_coroutine.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3E38EDC41DE6824000E1F22D /* libboost_coroutine.a */; };
-		3E38EE4B1DE6824100E1F22D /* libboost_coroutine.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 3E38EDC51DE6824000E1F22D /* libboost_coroutine.dylib */; };
-		3E38EE4E1DE6824100E1F22D /* libboost_date_time.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3E38EDC81DE6824000E1F22D /* libboost_date_time.a */; };
-		3E38EE4F1DE6824100E1F22D /* libboost_date_time.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 3E38EDC91DE6824000E1F22D /* libboost_date_time.dylib */; };
-		3E38EE521DE6824100E1F22D /* libboost_exception.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3E38EDCC1DE6824100E1F22D /* libboost_exception.a */; };
-		3E38EE551DE6824100E1F22D /* libboost_filesystem.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3E38EDCF1DE6824100E1F22D /* libboost_filesystem.a */; };
-		3E38EE561DE6824100E1F22D /* libboost_filesystem.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 3E38EDD01DE6824100E1F22D /* libboost_filesystem.dylib */; };
-		3E38EE591DE6824100E1F22D /* libboost_graph.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3E38EDD31DE6824100E1F22D /* libboost_graph.a */; };
-		3E38EE5A1DE6824100E1F22D /* libboost_graph.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 3E38EDD41DE6824100E1F22D /* libboost_graph.dylib */; };
-		3E38EE5D1DE6824100E1F22D /* libboost_iostreams.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3E38EDD71DE6824100E1F22D /* libboost_iostreams.a */; };
-		3E38EE5E1DE6824100E1F22D /* libboost_iostreams.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 3E38EDD81DE6824100E1F22D /* libboost_iostreams.dylib */; };
-		3E38EE611DE6824100E1F22D /* libboost_locale.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3E38EDDB1DE6824100E1F22D /* libboost_locale.a */; };
-		3E38EE621DE6824100E1F22D /* libboost_locale.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 3E38EDDC1DE6824100E1F22D /* libboost_locale.dylib */; };
-		3E38EE651DE6824100E1F22D /* libboost_log_setup.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3E38EDDF1DE6824100E1F22D /* libboost_log_setup.a */; };
-		3E38EE661DE6824100E1F22D /* libboost_log_setup.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 3E38EDE01DE6824100E1F22D /* libboost_log_setup.dylib */; };
-		3E38EE691DE6824100E1F22D /* libboost_log.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3E38EDE31DE6824100E1F22D /* libboost_log.a */; };
-		3E38EE6A1DE6824100E1F22D /* libboost_log.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 3E38EDE41DE6824100E1F22D /* libboost_log.dylib */; };
-		3E38EE6D1DE6824100E1F22D /* libboost_math_c99.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3E38EDE71DE6824100E1F22D /* libboost_math_c99.a */; };
-		3E38EE6E1DE6824100E1F22D /* libboost_math_c99.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 3E38EDE81DE6824100E1F22D /* libboost_math_c99.dylib */; };
-		3E38EE711DE6824100E1F22D /* libboost_math_c99f.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3E38EDEB1DE6824100E1F22D /* libboost_math_c99f.a */; };
-		3E38EE721DE6824100E1F22D /* libboost_math_c99f.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 3E38EDEC1DE6824100E1F22D /* libboost_math_c99f.dylib */; };
-		3E38EE751DE6824100E1F22D /* libboost_math_c99l.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3E38EDEF1DE6824100E1F22D /* libboost_math_c99l.a */; };
-		3E38EE761DE6824100E1F22D /* libboost_math_c99l.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 3E38EDF01DE6824100E1F22D /* libboost_math_c99l.dylib */; };
-		3E38EE791DE6824100E1F22D /* libboost_math_tr1.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3E38EDF31DE6824100E1F22D /* libboost_math_tr1.a */; };
-		3E38EE7A1DE6824100E1F22D /* libboost_math_tr1.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 3E38EDF41DE6824100E1F22D /* libboost_math_tr1.dylib */; };
-		3E38EE7D1DE6824100E1F22D /* libboost_math_tr1f.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3E38EDF71DE6824100E1F22D /* libboost_math_tr1f.a */; };
-		3E38EE7E1DE6824100E1F22D /* libboost_math_tr1f.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 3E38EDF81DE6824100E1F22D /* libboost_math_tr1f.dylib */; };
-		3E38EE811DE6824100E1F22D /* libboost_math_tr1l.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3E38EDFB1DE6824100E1F22D /* libboost_math_tr1l.a */; };
-		3E38EE821DE6824100E1F22D /* libboost_math_tr1l.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 3E38EDFC1DE6824100E1F22D /* libboost_math_tr1l.dylib */; };
-		3E38EE851DE6824100E1F22D /* libboost_prg_exec_monitor.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3E38EDFF1DE6824100E1F22D /* libboost_prg_exec_monitor.a */; };
-		3E38EE861DE6824100E1F22D /* libboost_prg_exec_monitor.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 3E38EE001DE6824100E1F22D /* libboost_prg_exec_monitor.dylib */; };
-		3E38EE891DE6824100E1F22D /* libboost_program_options.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3E38EE031DE6824100E1F22D /* libboost_program_options.a */; };
-		3E38EE8A1DE6824100E1F22D /* libboost_program_options.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 3E38EE041DE6824100E1F22D /* libboost_program_options.dylib */; };
-		3E38EE8D1DE6824100E1F22D /* libboost_python.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3E38EE071DE6824100E1F22D /* libboost_python.a */; };
-		3E38EE8E1DE6824100E1F22D /* libboost_python.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 3E38EE081DE6824100E1F22D /* libboost_python.dylib */; };
-		3E38EE931DE6824100E1F22D /* libboost_random.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3E38EE0D1DE6824100E1F22D /* libboost_random.a */; };
-		3E38EE941DE6824100E1F22D /* libboost_random.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 3E38EE0E1DE6824100E1F22D /* libboost_random.dylib */; };
-		3E38EE971DE6824100E1F22D /* libboost_regex.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3E38EE111DE6824100E1F22D /* libboost_regex.a */; };
-		3E38EE981DE6824100E1F22D /* libboost_regex.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 3E38EE121DE6824100E1F22D /* libboost_regex.dylib */; };
-		3E38EE9B1DE6824100E1F22D /* libboost_serialization.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3E38EE151DE6824100E1F22D /* libboost_serialization.a */; };
-		3E38EE9C1DE6824100E1F22D /* libboost_serialization.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 3E38EE161DE6824100E1F22D /* libboost_serialization.dylib */; };
-		3E38EE9F1DE6824100E1F22D /* libboost_signals.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3E38EE191DE6824100E1F22D /* libboost_signals.a */; };
-		3E38EEA01DE6824100E1F22D /* libboost_signals.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 3E38EE1A1DE6824100E1F22D /* libboost_signals.dylib */; };
-		3E38EEA31DE6824100E1F22D /* libboost_system.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3E38EE1D1DE6824100E1F22D /* libboost_system.a */; };
-		3E38EEA41DE6824100E1F22D /* libboost_system.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 3E38EE1E1DE6824100E1F22D /* libboost_system.dylib */; };
-		3E38EEA71DE6824100E1F22D /* libboost_test_exec_monitor.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3E38EE211DE6824100E1F22D /* libboost_test_exec_monitor.a */; };
-		3E38EEAA1DE6824200E1F22D /* libboost_thread.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3E38EE241DE6824100E1F22D /* libboost_thread.a */; };
-		3E38EEAB1DE6824200E1F22D /* libboost_thread.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 3E38EE251DE6824100E1F22D /* libboost_thread.dylib */; };
-		3E38EEAE1DE6824200E1F22D /* libboost_timer.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3E38EE281DE6824100E1F22D /* libboost_timer.a */; };
-		3E38EEAF1DE6824200E1F22D /* libboost_timer.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 3E38EE291DE6824100E1F22D /* libboost_timer.dylib */; };
-		3E38EEB01DE6824200E1F22D /* libboost_type_erasure.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3E38EE2A1DE6824100E1F22D /* libboost_type_erasure.a */; };
-		3E38EEB11DE6824200E1F22D /* libboost_type_erasure.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 3E38EE2B1DE6824100E1F22D /* libboost_type_erasure.dylib */; };
-		3E38EEB41DE6824200E1F22D /* libboost_unit_test_framework.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3E38EE2E1DE6824100E1F22D /* libboost_unit_test_framework.a */; };
-		3E38EEB51DE6824200E1F22D /* libboost_unit_test_framework.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 3E38EE2F1DE6824100E1F22D /* libboost_unit_test_framework.dylib */; };
-		3E38EEB81DE6824200E1F22D /* libboost_wave.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3E38EE321DE6824100E1F22D /* libboost_wave.a */; };
-		3E38EEB91DE6824200E1F22D /* libboost_wave.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 3E38EE331DE6824100E1F22D /* libboost_wave.dylib */; };
-		3E38EEBC1DE6824200E1F22D /* libboost_wserialization.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3E38EE361DE6824100E1F22D /* libboost_wserialization.a */; };
-		3E38EEBD1DE6824200E1F22D /* libboost_wserialization.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 3E38EE371DE6824100E1F22D /* libboost_wserialization.dylib */; };
+		C33E281C1ECAA24900FD7958 /* AASqlStructs.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C33E281B1ECAA24900FD7958 /* AASqlStructs.cpp */; };
+		C33E281D1ECAA24900FD7958 /* AASqlStructs.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C33E281B1ECAA24900FD7958 /* AASqlStructs.cpp */; };
+		C33E281E1ECAA24900FD7958 /* AASqlStructs.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C33E281B1ECAA24900FD7958 /* AASqlStructs.cpp */; };
+		C33E28201ECAA28500FD7958 /* AAJson.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C33E281F1ECAA28500FD7958 /* AAJson.cpp */; };
+		C33E28211ECAA28500FD7958 /* AAJson.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C33E281F1ECAA28500FD7958 /* AAJson.cpp */; };
+		C33E28221ECAA28500FD7958 /* AAJson.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C33E281F1ECAA28500FD7958 /* AAJson.cpp */; };
+		C33E28241ECAA2B300FD7958 /* AAString.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C33E28231ECAA2B300FD7958 /* AAString.cpp */; };
+		C33E28251ECAA2B300FD7958 /* AAString.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C33E28231ECAA2B300FD7958 /* AAString.cpp */; };
+		C33E28261ECAA2B300FD7958 /* AAString.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C33E28231ECAA2B300FD7958 /* AAString.cpp */; };
+		C39DB5E61ECAE59C002A11E9 /* libboost_system.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 3E38EE1E1DE6824100E1F22D /* libboost_system.dylib */; };
+		C39DB5E91ECAE5E5002A11E9 /* libboost_system.dylib in CopyFiles */ = {isa = PBXBuildFile; fileRef = 3E38EE1E1DE6824100E1F22D /* libboost_system.dylib */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
+		C39DB5EB1ECAF403002A11E9 /* AAJson.h in Headers */ = {isa = PBXBuildFile; fileRef = C39DB5EA1ECAF403002A11E9 /* AAJson.h */; };
+		C39DB5EC1ECAF403002A11E9 /* AAJson.h in Headers */ = {isa = PBXBuildFile; fileRef = C39DB5EA1ECAF403002A11E9 /* AAJson.h */; };
+		C39DB5EE1ECAF499002A11E9 /* AAString.h in Headers */ = {isa = PBXBuildFile; fileRef = C39DB5ED1ECAF499002A11E9 /* AAString.h */; };
+		C39DB5EF1ECAF499002A11E9 /* AAString.h in Headers */ = {isa = PBXBuildFile; fileRef = C39DB5ED1ECAF499002A11E9 /* AAString.h */; };
 /* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		C33E28421ECAA88300FD7958 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = C33E283E1ECAA88200FD7958 /* ArmyAntLib_Test.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = C33E28341ECAA88200FD7958;
+			remoteInfo = ArmyAntLib_Test;
+		};
+/* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
 		3E12BD5C1DE53C0C00B6195A /* CopyFiles */ = {
@@ -170,21 +129,31 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		C39DB5E81ECAE5D0002A11E9 /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 7;
+			files = (
+				C39DB5E91ECAE5E5002A11E9 /* libboost_system.dylib in CopyFiles */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		3E12BD0E1DE5355600B6195A /* AAAes.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = AAAes.cpp; path = ../src/AAAes.cpp; sourceTree = "<group>"; };
-		3E12BD0F1DE5355600B6195A /* AABinary.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = AABinary.cpp; path = ../src/AABinary.cpp; sourceTree = "<group>"; };
-		3E12BD101DE5355600B6195A /* AAIStream_File.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = AAIStream_File.cpp; path = ../src/AAIStream_File.cpp; sourceTree = "<group>"; };
-		3E12BD111DE5355600B6195A /* AAIStream_Memory.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = AAIStream_Memory.cpp; path = ../src/AAIStream_Memory.cpp; sourceTree = "<group>"; };
-		3E12BD121DE5355600B6195A /* AAIStream_Private.hxx */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; name = AAIStream_Private.hxx; path = ../src/AAIStream_Private.hxx; sourceTree = "<group>"; };
-		3E12BD131DE5355600B6195A /* AAIStream.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = AAIStream.cpp; path = ../src/AAIStream.cpp; sourceTree = "<group>"; };
-		3E12BD141DE5355600B6195A /* AAJNITools.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = AAJNITools.cpp; path = ../src/AAJNITools.cpp; sourceTree = "<group>"; };
-		3E12BD151DE5355600B6195A /* AASocket.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = AASocket.cpp; path = ../src/AASocket.cpp; sourceTree = "<group>"; };
-		3E12BD161DE5355600B6195A /* ArmyAntLib.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = ArmyAntLib.cpp; path = ../src/ArmyAntLib.cpp; sourceTree = "<group>"; };
-		3E12BD171DE5355600B6195A /* base.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; name = base.hpp; path = ../src/base.hpp; sourceTree = "<group>"; };
-		3E12BD181DE5356300B6195A /* C_AANeuron.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = C_AANeuron.cpp; path = ../src/C_AANeuron.cpp; sourceTree = "<group>"; };
-		3E12BD191DE5356300B6195A /* C_AAStream.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = C_AAStream.cpp; path = ../src/C_AAStream.cpp; sourceTree = "<group>"; };
+		3E12BD0E1DE5355600B6195A /* AAAes.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = AAAes.cpp; path = ../src/data/AAAes.cpp; sourceTree = "<group>"; };
+		3E12BD0F1DE5355600B6195A /* AABinary.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = AABinary.cpp; path = ../src/data/AABinary.cpp; sourceTree = "<group>"; };
+		3E12BD101DE5355600B6195A /* AAIStream_File.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = AAIStream_File.cpp; path = ../src/io/AAIStream_File.cpp; sourceTree = "<group>"; };
+		3E12BD111DE5355600B6195A /* AAIStream_Memory.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = AAIStream_Memory.cpp; path = ../src/io/AAIStream_Memory.cpp; sourceTree = "<group>"; };
+		3E12BD121DE5355600B6195A /* AAIStream_Private.hxx */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; name = AAIStream_Private.hxx; path = ../src/io/AAIStream_Private.hxx; sourceTree = "<group>"; };
+		3E12BD131DE5355600B6195A /* AAIStream.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = AAIStream.cpp; path = ../src/io/AAIStream.cpp; sourceTree = "<group>"; };
+		3E12BD141DE5355600B6195A /* AAJNITools.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = AAJNITools.cpp; path = ../src/JNI/AAJNITools.cpp; sourceTree = "<group>"; };
+		3E12BD151DE5355600B6195A /* AASocket.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = AASocket.cpp; path = ../src/io/AASocket.cpp; sourceTree = "<group>"; };
+		3E12BD161DE5355600B6195A /* ArmyAntLib.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = ArmyAntLib.cpp; path = ../src/base/ArmyAntLib.cpp; sourceTree = "<group>"; };
+		3E12BD171DE5355600B6195A /* base.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; name = base.hpp; path = ../src/base/base.hpp; sourceTree = "<group>"; };
+		3E12BD181DE5356300B6195A /* C_AANeuron.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = C_AANeuron.cpp; path = ../src/algorithm/C_AANeuron.cpp; sourceTree = "<group>"; };
+		3E12BD191DE5356300B6195A /* C_AAStream.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = C_AAStream.cpp; path = ../src/io/C_AAStream.cpp; sourceTree = "<group>"; };
 		3E12BD1A1DE5357400B6195A /* AA_end.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = AA_end.h; path = ../inc/AA_end.h; sourceTree = "<group>"; };
 		3E12BD1B1DE5357400B6195A /* AA_start.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = AA_start.h; path = ../inc/AA_start.h; sourceTree = "<group>"; };
 		3E12BD1C1DE5357400B6195A /* AAAes.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = AAAes.h; path = ../inc/AAAes.h; sourceTree = "<group>"; };
@@ -217,27 +186,12 @@
 		3E12BD3D1DE5390C00B6195A /* DeveloperReadme.txt */ = {isa = PBXFileReference; lastKnownFileType = text; name = DeveloperReadme.txt; path = ../doc/DeveloperReadme.txt; sourceTree = "<group>"; };
 		3E12BD3E1DE5394000B6195A /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; name = README.md; path = ../README.md; sourceTree = "<group>"; };
 		3E12BD3F1DE5394C00B6195A /* LICENSE */ = {isa = PBXFileReference; lastKnownFileType = text; name = LICENSE; path = ../LICENSE; sourceTree = "<group>"; };
-		3E12BD401DE5396400B6195A /* build_end.bat */ = {isa = PBXFileReference; lastKnownFileType = text; name = build_end.bat; path = ../src/build_end.bat; sourceTree = "<group>"; };
-		3E12BD411DE5396400B6195A /* build_end.sh */ = {isa = PBXFileReference; lastKnownFileType = text.script.sh; name = build_end.sh; path = ../src/build_end.sh; sourceTree = "<group>"; };
-		3E12BD421DE5396400B6195A /* build_start.bat */ = {isa = PBXFileReference; lastKnownFileType = text; name = build_start.bat; path = ../src/build_start.bat; sourceTree = "<group>"; };
-		3E12BD431DE5396400B6195A /* build_start.sh */ = {isa = PBXFileReference; lastKnownFileType = text.script.sh; name = build_start.sh; path = ../src/build_start.sh; sourceTree = "<group>"; };
 		3E12BD441DE5397700B6195A /* ArmyAntLib.sln */ = {isa = PBXFileReference; lastKnownFileType = text; path = ArmyAntLib.sln; sourceTree = "<group>"; };
 		3E12BD451DE5397700B6195A /* ArmyAntLib.vcxproj */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = ArmyAntLib.vcxproj; sourceTree = "<group>"; };
 		3E12BD461DE5397700B6195A /* ArmyAntLib.vcxproj.filters */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = ArmyAntLib.vcxproj.filters; sourceTree = "<group>"; };
 		3E12BD471DE5397700B6195A /* CMakeLists.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = CMakeLists.txt; sourceTree = "<group>"; };
 		3E12BD481DE5397700B6195A /* make_all.sh */ = {isa = PBXFileReference; lastKnownFileType = text.script.sh; path = make_all.sh; sourceTree = "<group>"; };
 		3E12BD491DE5397700B6195A /* make.sh */ = {isa = PBXFileReference; lastKnownFileType = text.script.sh; path = make.sh; sourceTree = "<group>"; };
-		3E12BD4E1DE53B9800B6195A /* libArmyAntLib_mac.dylib */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.dylib"; includeInIndex = 0; path = libArmyAntLib_mac.dylib; sourceTree = BUILT_PRODUCTS_DIR; };
-		3E12BD511DE53B9900B6195A /* ArmyAntLib.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = ArmyAntLib.hpp; sourceTree = "<group>"; };
-		3E12BD531DE53B9900B6195A /* ArmyAntLibPriv.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = ArmyAntLibPriv.hpp; sourceTree = "<group>"; };
-		3E12BD551DE53B9900B6195A /* ArmyAntLib.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = ArmyAntLib.cpp; sourceTree = "<group>"; };
-		3E12BD5E1DE53C0C00B6195A /* libArmyAntLib_ios.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libArmyAntLib_ios.a; sourceTree = BUILT_PRODUCTS_DIR; };
-		3E12BD601DE53C0C00B6195A /* ArmyAntLib_ios.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ArmyAntLib_ios.h; sourceTree = "<group>"; };
-		3E12BD611DE53C0C00B6195A /* ArmyAntLib_ios.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ArmyAntLib_ios.m; sourceTree = "<group>"; };
-		3E12BD6B1DE53C5000B6195A /* libArmyAntLib_static.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libArmyAntLib_static.a; sourceTree = BUILT_PRODUCTS_DIR; };
-		3E12BD6D1DE53C5000B6195A /* ArmyAntLib_static.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = ArmyAntLib_static.hpp; sourceTree = "<group>"; };
-		3E12BD6F1DE53C5000B6195A /* ArmyAntLib_staticPriv.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = ArmyAntLib_staticPriv.hpp; sourceTree = "<group>"; };
-		3E12BD711DE53C5000B6195A /* ArmyAntLib_static.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = ArmyAntLib_static.cpp; sourceTree = "<group>"; };
 		3E38EDB41DE6824000E1F22D /* libboost_atomic.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libboost_atomic.a; path = ../external/boost/stage/lib/libboost_atomic.a; sourceTree = "<group>"; };
 		3E38EDB51DE6824000E1F22D /* libboost_atomic.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libboost_atomic.dylib; path = ../external/boost/stage/lib/libboost_atomic.dylib; sourceTree = "<group>"; };
 		3E38EDB81DE6824000E1F22D /* libboost_chrono.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libboost_chrono.a; path = ../external/boost/stage/lib/libboost_chrono.a; sourceTree = "<group>"; };
@@ -304,6 +258,26 @@
 		3E38EE331DE6824100E1F22D /* libboost_wave.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libboost_wave.dylib; path = ../external/boost/stage/lib/libboost_wave.dylib; sourceTree = "<group>"; };
 		3E38EE361DE6824100E1F22D /* libboost_wserialization.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libboost_wserialization.a; path = ../external/boost/stage/lib/libboost_wserialization.a; sourceTree = "<group>"; };
 		3E38EE371DE6824100E1F22D /* libboost_wserialization.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libboost_wserialization.dylib; path = ../external/boost/stage/lib/libboost_wserialization.dylib; sourceTree = "<group>"; };
+		C33E28141ECA990700FD7958 /* ArmyAntLib_JNI.vcxproj */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = ArmyAntLib_JNI.vcxproj; sourceTree = "<group>"; };
+		C33E28151ECA990700FD7958 /* ArmyAntLib_JNI.vcxproj.filters */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = ArmyAntLib_JNI.vcxproj.filters; sourceTree = "<group>"; };
+		C33E28161ECA990700FD7958 /* ArmyAntLib_LinuxVC.vcxproj */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = ArmyAntLib_LinuxVC.vcxproj; sourceTree = "<group>"; };
+		C33E28171ECA990700FD7958 /* ArmyAntLib_LinuxVC.vcxproj.filters */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = ArmyAntLib_LinuxVC.vcxproj.filters; sourceTree = "<group>"; };
+		C33E28181ECA990700FD7958 /* ArmyAntLib_Test.vcxproj */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = ArmyAntLib_Test.vcxproj; sourceTree = "<group>"; };
+		C33E28191ECA990700FD7958 /* ArmyAntLib_Test.vcxproj.filters */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = ArmyAntLib_Test.vcxproj.filters; sourceTree = "<group>"; };
+		C33E281A1ECA990700FD7958 /* ArmyAntLib.xcworkspace */ = {isa = PBXFileReference; lastKnownFileType = wrapper.workspace; path = ArmyAntLib.xcworkspace; sourceTree = "<group>"; };
+		C33E281B1ECAA24900FD7958 /* AASqlStructs.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = AASqlStructs.cpp; path = ../src/algorithm/AASqlStructs.cpp; sourceTree = "<group>"; };
+		C33E281F1ECAA28500FD7958 /* AAJson.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = AAJson.cpp; path = ../src/data/AAJson.cpp; sourceTree = "<group>"; };
+		C33E28231ECAA2B300FD7958 /* AAString.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = AAString.cpp; path = ../src/tool/AAString.cpp; sourceTree = "<group>"; };
+		C33E28271ECAA30000FD7958 /* build_end.bat */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = build_end.bat; path = ../src/not_cpp/build_end.bat; sourceTree = "<group>"; };
+		C33E28281ECAA30000FD7958 /* build_end.sh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.sh; name = build_end.sh; path = ../src/not_cpp/build_end.sh; sourceTree = "<group>"; };
+		C33E28291ECAA30000FD7958 /* build_start.bat */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = build_start.bat; path = ../src/not_cpp/build_start.bat; sourceTree = "<group>"; };
+		C33E282A1ECAA30000FD7958 /* build_start.sh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.sh; name = build_start.sh; path = ../src/not_cpp/build_start.sh; sourceTree = "<group>"; };
+		C33E283E1ECAA88200FD7958 /* ArmyAntLib_Test.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = ArmyAntLib_Test.xcodeproj; path = ArmyAntLib_Test/ArmyAntLib_Test.xcodeproj; sourceTree = "<group>"; };
+		C39DB5EA1ECAF403002A11E9 /* AAJson.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AAJson.h; path = ../inc/AAJson.h; sourceTree = "<group>"; };
+		C39DB5ED1ECAF499002A11E9 /* AAString.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AAString.h; path = ../inc/AAString.h; sourceTree = "<group>"; };
+		C3EBA1551ED53D6E00647939 /* libArmyAntLib_mac.dylib */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.dylib"; includeInIndex = 0; path = libArmyAntLib_mac.dylib; sourceTree = BUILT_PRODUCTS_DIR; };
+		C3EBA1561ED53D6E00647939 /* libArmyAntLib_ios.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libArmyAntLib_ios.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		C3EBA1571ED53D6E00647939 /* libArmyAntLib_static.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libArmyAntLib_static.a; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -311,72 +285,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				3E38EE721DE6824100E1F22D /* libboost_math_c99f.dylib in Frameworks */,
-				3E38EEB51DE6824200E1F22D /* libboost_unit_test_framework.dylib in Frameworks */,
-				3E38EEA71DE6824100E1F22D /* libboost_test_exec_monitor.a in Frameworks */,
-				3E38EE591DE6824100E1F22D /* libboost_graph.a in Frameworks */,
-				3E38EE611DE6824100E1F22D /* libboost_locale.a in Frameworks */,
-				3E38EEA31DE6824100E1F22D /* libboost_system.a in Frameworks */,
-				3E38EE8E1DE6824100E1F22D /* libboost_python.dylib in Frameworks */,
-				3E38EE3A1DE6824100E1F22D /* libboost_atomic.a in Frameworks */,
-				3E38EE6D1DE6824100E1F22D /* libboost_math_c99.a in Frameworks */,
-				3E38EE5D1DE6824100E1F22D /* libboost_iostreams.a in Frameworks */,
-				3E38EE8D1DE6824100E1F22D /* libboost_python.a in Frameworks */,
-				3E38EE661DE6824100E1F22D /* libboost_log_setup.dylib in Frameworks */,
-				3E38EE8A1DE6824100E1F22D /* libboost_program_options.dylib in Frameworks */,
-				3E38EE9B1DE6824100E1F22D /* libboost_serialization.a in Frameworks */,
-				3E38EE551DE6824100E1F22D /* libboost_filesystem.a in Frameworks */,
-				3E38EEAA1DE6824200E1F22D /* libboost_thread.a in Frameworks */,
-				3E38EEAE1DE6824200E1F22D /* libboost_timer.a in Frameworks */,
-				3E38EE561DE6824100E1F22D /* libboost_filesystem.dylib in Frameworks */,
-				3E38EE861DE6824100E1F22D /* libboost_prg_exec_monitor.dylib in Frameworks */,
-				3E38EE3E1DE6824100E1F22D /* libboost_chrono.a in Frameworks */,
-				3E38EE751DE6824100E1F22D /* libboost_math_c99l.a in Frameworks */,
-				3E38EEBC1DE6824200E1F22D /* libboost_wserialization.a in Frameworks */,
-				3E38EE4F1DE6824100E1F22D /* libboost_date_time.dylib in Frameworks */,
-				3E38EE711DE6824100E1F22D /* libboost_math_c99f.a in Frameworks */,
-				3E38EE431DE6824100E1F22D /* libboost_container.dylib in Frameworks */,
-				3E38EEB81DE6824200E1F22D /* libboost_wave.a in Frameworks */,
-				3E38EE3B1DE6824100E1F22D /* libboost_atomic.dylib in Frameworks */,
-				3E38EE6A1DE6824100E1F22D /* libboost_log.dylib in Frameworks */,
-				3E38EEB41DE6824200E1F22D /* libboost_unit_test_framework.a in Frameworks */,
-				3E38EE941DE6824100E1F22D /* libboost_random.dylib in Frameworks */,
-				3E38EE7A1DE6824100E1F22D /* libboost_math_tr1.dylib in Frameworks */,
-				3E38EE811DE6824100E1F22D /* libboost_math_tr1l.a in Frameworks */,
-				3E38EE6E1DE6824100E1F22D /* libboost_math_c99.dylib in Frameworks */,
-				3E38EE691DE6824100E1F22D /* libboost_log.a in Frameworks */,
-				3E38EE5E1DE6824100E1F22D /* libboost_iostreams.dylib in Frameworks */,
-				3E38EE421DE6824100E1F22D /* libboost_container.a in Frameworks */,
-				3E38EEAB1DE6824200E1F22D /* libboost_thread.dylib in Frameworks */,
-				3E38EE9F1DE6824100E1F22D /* libboost_signals.a in Frameworks */,
-				3E38EE4B1DE6824100E1F22D /* libboost_coroutine.dylib in Frameworks */,
-				3E38EE4A1DE6824100E1F22D /* libboost_coroutine.a in Frameworks */,
-				3E38EEAF1DE6824200E1F22D /* libboost_timer.dylib in Frameworks */,
-				3E38EE971DE6824100E1F22D /* libboost_regex.a in Frameworks */,
-				3E38EE3F1DE6824100E1F22D /* libboost_chrono.dylib in Frameworks */,
-				3E38EE821DE6824100E1F22D /* libboost_math_tr1l.dylib in Frameworks */,
-				3E38EE981DE6824100E1F22D /* libboost_regex.dylib in Frameworks */,
-				3E38EEB91DE6824200E1F22D /* libboost_wave.dylib in Frameworks */,
-				3E38EE7D1DE6824100E1F22D /* libboost_math_tr1f.a in Frameworks */,
-				3E38EE851DE6824100E1F22D /* libboost_prg_exec_monitor.a in Frameworks */,
-				3E38EE5A1DE6824100E1F22D /* libboost_graph.dylib in Frameworks */,
-				3E38EE7E1DE6824100E1F22D /* libboost_math_tr1f.dylib in Frameworks */,
-				3E38EEB01DE6824200E1F22D /* libboost_type_erasure.a in Frameworks */,
-				3E38EE621DE6824100E1F22D /* libboost_locale.dylib in Frameworks */,
-				3E38EEB11DE6824200E1F22D /* libboost_type_erasure.dylib in Frameworks */,
-				3E38EE9C1DE6824100E1F22D /* libboost_serialization.dylib in Frameworks */,
-				3E38EEBD1DE6824200E1F22D /* libboost_wserialization.dylib in Frameworks */,
-				3E38EE651DE6824100E1F22D /* libboost_log_setup.a in Frameworks */,
-				3E38EE761DE6824100E1F22D /* libboost_math_c99l.dylib in Frameworks */,
-				3E38EE931DE6824100E1F22D /* libboost_random.a in Frameworks */,
-				3E38EE471DE6824100E1F22D /* libboost_context.dylib in Frameworks */,
-				3E38EE891DE6824100E1F22D /* libboost_program_options.a in Frameworks */,
-				3E38EE4E1DE6824100E1F22D /* libboost_date_time.a in Frameworks */,
-				3E38EEA01DE6824100E1F22D /* libboost_signals.dylib in Frameworks */,
-				3E38EE521DE6824100E1F22D /* libboost_exception.a in Frameworks */,
-				3E38EEA41DE6824100E1F22D /* libboost_system.dylib in Frameworks */,
-				3E38EE461DE6824100E1F22D /* libboost_context.a in Frameworks */,
-				3E38EE791DE6824100E1F22D /* libboost_math_tr1.a in Frameworks */,
+				C39DB5E61ECAE59C002A11E9 /* libboost_system.dylib in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -402,6 +311,10 @@
 			children = (
 				3E38EEC01DE6830600E1F22D /* others */,
 				3E38EEBF1DE682F700E1F22D /* source */,
+				C33E283E1ECAA88200FD7958 /* ArmyAntLib_Test.xcodeproj */,
+				C3EBA1551ED53D6E00647939 /* libArmyAntLib_mac.dylib */,
+				C3EBA1561ED53D6E00647939 /* libArmyAntLib_ios.a */,
+				C3EBA1571ED53D6E00647939 /* libArmyAntLib_static.a */,
 			);
 			sourceTree = "<group>";
 		};
@@ -425,11 +338,13 @@
 		3E12BD381DE5369B00B6195A /* data */ = {
 			isa = PBXGroup;
 			children = (
+				C39DB5EA1ECAF403002A11E9 /* AAJson.h */,
 				3E12BD0E1DE5355600B6195A /* AAAes.cpp */,
 				3E12BD1C1DE5357400B6195A /* AAAes.h */,
 				3E12BD0F1DE5355600B6195A /* AABinary.cpp */,
 				3E12BD1D1DE5357400B6195A /* AABinary.h */,
 				3E12BD1F1DE5357400B6195A /* AAConfiguration.h */,
+				C33E281F1ECAA28500FD7958 /* AAJson.cpp */,
 			);
 			name = data;
 			sourceTree = "<group>";
@@ -458,6 +373,7 @@
 		3E12BD3A1DE536A900B6195A /* algorithm */ = {
 			isa = PBXGroup;
 			children = (
+				C33E281B1ECAA24900FD7958 /* AASqlStructs.cpp */,
 				3E12BD211DE5357400B6195A /* AADigraph.hpp */,
 				3E12BD291DE5357400B6195A /* AAMessageQueue.h */,
 				3E12BD2A1DE5357400B6195A /* AANeuron.hpp */,
@@ -474,6 +390,8 @@
 		3E12BD3B1DE536E700B6195A /* tool */ = {
 			isa = PBXGroup;
 			children = (
+				C39DB5ED1ECAF499002A11E9 /* AAString.h */,
+				C33E28231ECAA2B300FD7958 /* AAString.cpp */,
 				3E12BD1E1DE5357400B6195A /* AAClassPrivateHandle.hpp */,
 				3E12BD141DE5355600B6195A /* AAJNITools.cpp */,
 				3E12BD281DE5357400B6195A /* AAJNITools.h */,
@@ -484,51 +402,18 @@
 		3E12BD3C1DE5373800B6195A /* _other_projects */ = {
 			isa = PBXGroup;
 			children = (
+				C33E281A1ECA990700FD7958 /* ArmyAntLib.xcworkspace */,
+				C33E28141ECA990700FD7958 /* ArmyAntLib_JNI.vcxproj */,
+				C33E28151ECA990700FD7958 /* ArmyAntLib_JNI.vcxproj.filters */,
+				C33E28161ECA990700FD7958 /* ArmyAntLib_LinuxVC.vcxproj */,
+				C33E28171ECA990700FD7958 /* ArmyAntLib_LinuxVC.vcxproj.filters */,
+				C33E28181ECA990700FD7958 /* ArmyAntLib_Test.vcxproj */,
+				C33E28191ECA990700FD7958 /* ArmyAntLib_Test.vcxproj.filters */,
 				3E12BD441DE5397700B6195A /* ArmyAntLib.sln */,
 				3E12BD451DE5397700B6195A /* ArmyAntLib.vcxproj */,
 				3E12BD461DE5397700B6195A /* ArmyAntLib.vcxproj.filters */,
-				3E12BD471DE5397700B6195A /* CMakeLists.txt */,
 			);
 			name = _other_projects;
-			sourceTree = "<group>";
-		};
-		3E12BD4F1DE53B9800B6195A /* Products */ = {
-			isa = PBXGroup;
-			children = (
-				3E12BD4E1DE53B9800B6195A /* libArmyAntLib_mac.dylib */,
-				3E12BD5E1DE53C0C00B6195A /* libArmyAntLib_ios.a */,
-				3E12BD6B1DE53C5000B6195A /* libArmyAntLib_static.a */,
-			);
-			name = Products;
-			sourceTree = "<group>";
-		};
-		3E12BD501DE53B9900B6195A /* ArmyAntLib */ = {
-			isa = PBXGroup;
-			children = (
-				3E12BD511DE53B9900B6195A /* ArmyAntLib.hpp */,
-				3E12BD531DE53B9900B6195A /* ArmyAntLibPriv.hpp */,
-				3E12BD551DE53B9900B6195A /* ArmyAntLib.cpp */,
-			);
-			path = ArmyAntLib;
-			sourceTree = "<group>";
-		};
-		3E12BD5F1DE53C0C00B6195A /* ArmyAntLib_ios */ = {
-			isa = PBXGroup;
-			children = (
-				3E12BD601DE53C0C00B6195A /* ArmyAntLib_ios.h */,
-				3E12BD611DE53C0C00B6195A /* ArmyAntLib_ios.m */,
-			);
-			path = ArmyAntLib_ios;
-			sourceTree = "<group>";
-		};
-		3E12BD6C1DE53C5000B6195A /* ArmyAntLib_static */ = {
-			isa = PBXGroup;
-			children = (
-				3E12BD6D1DE53C5000B6195A /* ArmyAntLib_static.hpp */,
-				3E12BD6F1DE53C5000B6195A /* ArmyAntLib_staticPriv.hpp */,
-				3E12BD711DE53C5000B6195A /* ArmyAntLib_static.cpp */,
-			);
-			path = ArmyAntLib_static;
 			sourceTree = "<group>";
 		};
 		3E38EEBE1DE6824600E1F22D /* _boostLibrary */ = {
@@ -609,12 +494,8 @@
 			children = (
 				3E12BD371DE535C000B6195A /* _base */,
 				3E12BD3A1DE536A900B6195A /* algorithm */,
-				3E12BD501DE53B9900B6195A /* ArmyAntLib */,
-				3E12BD5F1DE53C0C00B6195A /* ArmyAntLib_ios */,
-				3E12BD6C1DE53C5000B6195A /* ArmyAntLib_static */,
 				3E12BD381DE5369B00B6195A /* data */,
 				3E12BD391DE536A300B6195A /* io */,
-				3E12BD4F1DE53B9800B6195A /* Products */,
 				3E12BD3B1DE536E700B6195A /* tool */,
 			);
 			name = source;
@@ -634,12 +515,13 @@
 		3E38EEC11DE6833B00E1F22D /* _building_scripts */ = {
 			isa = PBXGroup;
 			children = (
-				3E12BD401DE5396400B6195A /* build_end.bat */,
-				3E12BD411DE5396400B6195A /* build_end.sh */,
-				3E12BD421DE5396400B6195A /* build_start.bat */,
-				3E12BD431DE5396400B6195A /* build_start.sh */,
+				C33E28271ECAA30000FD7958 /* build_end.bat */,
+				C33E28281ECAA30000FD7958 /* build_end.sh */,
+				C33E28291ECAA30000FD7958 /* build_start.bat */,
+				C33E282A1ECAA30000FD7958 /* build_start.sh */,
 				3E12BD491DE5397700B6195A /* make.sh */,
 				3E12BD481DE5397700B6195A /* make_all.sh */,
+				3E12BD471DE5397700B6195A /* CMakeLists.txt */,
 			);
 			name = _building_scripts;
 			sourceTree = "<group>";
@@ -654,6 +536,14 @@
 			name = _documents;
 			sourceTree = "<group>";
 		};
+		C33E283F1ECAA88200FD7958 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				C33E28431ECAA88300FD7958 /* ArmyAntLib_Test */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXHeadersBuildPhase section */
@@ -663,6 +553,7 @@
 			files = (
 				3E12BD811DE5454500B6195A /* AA_end.h in Headers */,
 				3E12BD821DE5454500B6195A /* AA_start.h in Headers */,
+				C39DB5EB1ECAF403002A11E9 /* AAJson.h in Headers */,
 				3E12BD831DE5454500B6195A /* AADefine.h in Headers */,
 				3E12BD841DE5454500B6195A /* AAFragment.h in Headers */,
 				3E12BD851DE5454500B6195A /* ArmyAnt.h in Headers */,
@@ -681,6 +572,7 @@
 				3E12BD921DE5454500B6195A /* AAAes.h in Headers */,
 				3E12BD931DE5454500B6195A /* AABinary.h in Headers */,
 				3E12BD941DE5454500B6195A /* AAConfiguration.h in Headers */,
+				C39DB5EE1ECAF499002A11E9 /* AAString.h in Headers */,
 				3E12BD951DE5454500B6195A /* AAIStream_Com.h in Headers */,
 				3E12BD961DE5454500B6195A /* AAIStream_File.h in Headers */,
 				3E12BD971DE5454500B6195A /* AAIStream_Memory.h in Headers */,
@@ -699,6 +591,7 @@
 			files = (
 				3E12BDB31DE5484200B6195A /* AA_end.h in Headers */,
 				3E12BDB41DE5484200B6195A /* AA_start.h in Headers */,
+				C39DB5EC1ECAF403002A11E9 /* AAJson.h in Headers */,
 				3E12BDB51DE5484200B6195A /* AADefine.h in Headers */,
 				3E12BDB61DE5484200B6195A /* AAFragment.h in Headers */,
 				3E12BDB71DE5484200B6195A /* ArmyAnt.h in Headers */,
@@ -717,6 +610,7 @@
 				3E12BDC41DE5484200B6195A /* AAAes.h in Headers */,
 				3E12BDC51DE5484200B6195A /* AABinary.h in Headers */,
 				3E12BDC61DE5484200B6195A /* AAConfiguration.h in Headers */,
+				C39DB5EF1ECAF499002A11E9 /* AAString.h in Headers */,
 				3E12BDC71DE5484200B6195A /* AAIStream_Com.h in Headers */,
 				3E12BDC81DE5484200B6195A /* AAIStream_File.h in Headers */,
 				3E12BDC91DE5484200B6195A /* AAIStream_Memory.h in Headers */,
@@ -739,6 +633,7 @@
 				3E12BD4A1DE53B9800B6195A /* Sources */,
 				3E12BD4B1DE53B9800B6195A /* Frameworks */,
 				3E12BD4C1DE53B9800B6195A /* Headers */,
+				C39DB5E81ECAE5D0002A11E9 /* CopyFiles */,
 			);
 			buildRules = (
 			);
@@ -746,7 +641,7 @@
 			);
 			name = ArmyAntLib_mac;
 			productName = ArmyAntLib;
-			productReference = 3E12BD4E1DE53B9800B6195A /* libArmyAntLib_mac.dylib */;
+			productReference = C3EBA1551ED53D6E00647939 /* libArmyAntLib_mac.dylib */;
 			productType = "com.apple.product-type.library.dynamic";
 		};
 		3E12BD5D1DE53C0C00B6195A /* ArmyAntLib_ios */ = {
@@ -763,7 +658,7 @@
 			);
 			name = ArmyAntLib_ios;
 			productName = ArmyAntLib_ios;
-			productReference = 3E12BD5E1DE53C0C00B6195A /* libArmyAntLib_ios.a */;
+			productReference = C3EBA1561ED53D6E00647939 /* libArmyAntLib_ios.a */;
 			productType = "com.apple.product-type.library.static";
 		};
 		3E12BD6A1DE53C5000B6195A /* ArmyAntLib_static */ = {
@@ -780,7 +675,7 @@
 			);
 			name = ArmyAntLib_static;
 			productName = ArmyAntLib_static;
-			productReference = 3E12BD6B1DE53C5000B6195A /* libArmyAntLib_static.a */;
+			productReference = C3EBA1571ED53D6E00647939 /* libArmyAntLib_static.a */;
 			productType = "com.apple.product-type.library.static";
 		};
 /* End PBXNativeTarget section */
@@ -813,8 +708,14 @@
 				en,
 			);
 			mainGroup = 3E12BD071DE534D300B6195A;
-			productRefGroup = 3E12BD4F1DE53B9800B6195A /* Products */;
+			productRefGroup = 3E12BD071DE534D300B6195A;
 			projectDirPath = "";
+			projectReferences = (
+				{
+					ProductGroup = C33E283F1ECAA88200FD7958 /* Products */;
+					ProjectRef = C33E283E1ECAA88200FD7958 /* ArmyAntLib_Test.xcodeproj */;
+				},
+			);
 			projectRoot = "";
 			targets = (
 				3E12BD4D1DE53B9800B6195A /* ArmyAntLib_mac */,
@@ -824,12 +725,24 @@
 		};
 /* End PBXProject section */
 
+/* Begin PBXReferenceProxy section */
+		C33E28431ECAA88300FD7958 /* ArmyAntLib_Test */ = {
+			isa = PBXReferenceProxy;
+			fileType = "compiled.mach-o.executable";
+			path = ArmyAntLib_Test;
+			remoteRef = C33E28421ECAA88300FD7958 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+/* End PBXReferenceProxy section */
+
 /* Begin PBXSourcesBuildPhase section */
 		3E12BD4A1DE53B9800B6195A /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 				3E12BD7A1DE544AB00B6195A /* AAIStream_File.cpp in Sources */,
+				C33E28201ECAA28500FD7958 /* AAJson.cpp in Sources */,
+				C33E28241ECAA2B300FD7958 /* AAString.cpp in Sources */,
 				3E12BD7B1DE544AB00B6195A /* AAIStream_Memory.cpp in Sources */,
 				3E12BD7C1DE544AB00B6195A /* AAIStream.cpp in Sources */,
 				3E12BD7D1DE544AB00B6195A /* AASocket.cpp in Sources */,
@@ -838,6 +751,7 @@
 				3E12BD781DE5449E00B6195A /* AABinary.cpp in Sources */,
 				3E12BD771DE5449400B6195A /* AAAes.cpp in Sources */,
 				3E12BD761DE5447C00B6195A /* C_AANeuron.cpp in Sources */,
+				C33E281C1ECAA24900FD7958 /* AASqlStructs.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -846,6 +760,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				3E12BD9F1DE547E300B6195A /* ArmyAntLib.cpp in Sources */,
+				C33E28211ECAA28500FD7958 /* AAJson.cpp in Sources */,
+				C33E28251ECAA2B300FD7958 /* AAString.cpp in Sources */,
 				3E12BDA01DE547E300B6195A /* C_AANeuron.cpp in Sources */,
 				3E12BDA11DE547E300B6195A /* AAAes.cpp in Sources */,
 				3E12BDA21DE547E300B6195A /* AABinary.cpp in Sources */,
@@ -854,6 +770,7 @@
 				3E12BDA51DE547E300B6195A /* AAIStream.cpp in Sources */,
 				3E12BDA61DE547E300B6195A /* AASocket.cpp in Sources */,
 				3E12BDA71DE547E300B6195A /* C_AAStream.cpp in Sources */,
+				C33E281D1ECAA24900FD7958 /* AASqlStructs.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -862,6 +779,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				3E12BDA91DE5483300B6195A /* ArmyAntLib.cpp in Sources */,
+				C33E28221ECAA28500FD7958 /* AAJson.cpp in Sources */,
+				C33E28261ECAA2B300FD7958 /* AAString.cpp in Sources */,
 				3E12BDAA1DE5483300B6195A /* C_AANeuron.cpp in Sources */,
 				3E12BDAB1DE5483300B6195A /* AAAes.cpp in Sources */,
 				3E12BDAC1DE5483300B6195A /* AABinary.cpp in Sources */,
@@ -870,6 +789,7 @@
 				3E12BDAF1DE5483300B6195A /* AAIStream.cpp in Sources */,
 				3E12BDB01DE5483300B6195A /* AASocket.cpp in Sources */,
 				3E12BDB11DE5483300B6195A /* C_AAStream.cpp in Sources */,
+				C33E281E1ECAA24900FD7958 /* AASqlStructs.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -916,6 +836,7 @@
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				CODE_SIGN_IDENTITY = "-";
+				CONFIGURATION_BUILD_DIR = "$(BUILD_DIR)/$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)";
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				DYLIB_COMPATIBILITY_VERSION = 1;
@@ -949,7 +870,11 @@
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				HEADER_SEARCH_PATHS = "$(PROJECT_DIR)/../external/boost";
-				LIBRARY_SEARCH_PATHS = "$(PROJECT_DIR)/../external/boost/stage/lib";
+				LIBRARY_SEARCH_PATHS = (
+					"$(PROJECT_DIR)/../external/boost/stage/lib",
+					"$(PROJECT_DIR)/DerivedData/ArmyAnt/Build/Products/Debug",
+					"$(PROJECT_DIR)/DerivedData/ArmyAnt/Build/Products/Debug-iphoneos",
+				);
 				MACOSX_DEPLOYMENT_TARGET = 10.12;
 				"MAC[sdk=macosx*][arch=x86_64]" = "";
 				MTL_ENABLE_DEBUG_INFO = YES;
@@ -958,6 +883,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = macosx;
 				STRINGS_FILE_OUTPUT_ENCODING = "UTF-16";
+				SYMROOT = "$(PROJECT_DIR)/../bin";
 				"VALID_ARCHS[sdk=macosx*]" = "i386 x86_64";
 			};
 			name = Debug;
@@ -984,6 +910,7 @@
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				CODE_SIGN_IDENTITY = "-";
+				CONFIGURATION_BUILD_DIR = "$(BUILD_DIR)/$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)";
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DYLIB_COMPATIBILITY_VERSION = 1;
@@ -1013,13 +940,18 @@
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				HEADER_SEARCH_PATHS = "$(PROJECT_DIR)/../external/boost";
-				LIBRARY_SEARCH_PATHS = "$(PROJECT_DIR)/../external/boost/stage/lib";
+				LIBRARY_SEARCH_PATHS = (
+					"$(PROJECT_DIR)/../external/boost/stage/lib",
+					"$(PROJECT_DIR)/DerivedData/ArmyAnt/Build/Products/Debug",
+					"$(PROJECT_DIR)/DerivedData/ArmyAnt/Build/Products/Debug-iphoneos",
+				);
 				MACOSX_DEPLOYMENT_TARGET = 10.12;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				ONLY_ACTIVE_ARCH = YES;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = macosx;
 				STRINGS_FILE_OUTPUT_ENCODING = "UTF-16";
+				SYMROOT = "$(PROJECT_DIR)/../bin";
 				"VALID_ARCHS[sdk=macosx*]" = "i386 x86_64";
 			};
 			name = Release;

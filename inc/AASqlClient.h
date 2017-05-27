@@ -1,24 +1,24 @@
-/*	*
-    * Copyright (c) 2015 ArmyAnt
-    * °æÈ¨ËùÓĞ (c) 2015 ArmyAnt
-    *
-    * Licensed under the BSD License, Version 2.0 (the License);
-    * ±¾Èí¼şÊ¹ÓÃBSDĞ­Òé±£»¤, Ğ­Òé°æ±¾:2.0
-    * you may not use this file except in compliance with the License.
-    * Ê¹ÓÃ±¾¿ªÔ´´úÂëÎÄ¼şµÄÄÚÈİ, ÊÓÎªÍ¬ÒâĞ­Òé
-    * You can read the license content in the file "LICENSE" at the root of this project
-    * Äú¿ÉÒÔÔÚ±¾ÏîÄ¿µÄ¸ùÄ¿Â¼ÕÒµ½ÃûÎª"LICENSE"µÄÎÄ¼ş, À´ÔÄ¶ÁĞ­ÒéÄÚÈİ
-    * You may also obtain a copy of the License at
-    * ÄúÒ²¿ÉÒÔÔÚ´Ë´¦»ñµÃĞ­ÒéµÄ¸±±¾:
-    *
-    *     http://opensource.org/licenses/BSD-3-Clause
-    *
-    * Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an AS IS BASIS,
-    * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-    * ³ı·Ç·¨ÂÉÒªÇó»òÕß°æÈ¨ËùÓĞÕßÊéÃæÍ¬Òâ,±¾Èí¼şÔÚ±¾Ğ­Òé»ù´¡ÉÏµÄ·¢²¼Ã»ÓĞÈÎºÎĞÎÊ½µÄÌõ¼şºÍµ£±£,ÎŞÂÛÃ÷Ê¾µÄ»òÄ¬ĞíµÄ.
-    * See the License for the specific language governing permissions and limitations under the License.
-    * ÇëÔÚÌØ¶¨ÏŞÖÆ»òÓïÑÔ¹ÜÀíÈ¨ÏŞÏÂÔÄ¶ÁĞ­Òé
-    */
+/*
+ * Copyright (c) 2015 ArmyAnt
+ * ç‰ˆæƒæ‰€æœ‰ (c) 2015 ArmyAnt
+ *
+ * Licensed under the BSD License, Version 2.0 (the License);
+ * æœ¬è½¯ä»¶ä½¿ç”¨BSDåè®®ä¿æŠ¤, åè®®ç‰ˆæœ¬:2.0
+ * you may not use this file except in compliance with the License.
+ * ä½¿ç”¨æœ¬å¼€æºä»£ç æ–‡ä»¶çš„å†…å®¹, è§†ä¸ºåŒæ„åè®®
+ * You can read the license content in the file "LICENSE" at the root of this project
+ * æ‚¨å¯ä»¥åœ¨æœ¬é¡¹ç›®çš„æ ¹ç›®å½•æ‰¾åˆ°åä¸º"LICENSE"çš„æ–‡ä»¶, æ¥é˜…è¯»åè®®å†…å®¹
+ * You may also obtain a copy of the License at
+ * æ‚¨ä¹Ÿå¯ä»¥åœ¨æ­¤å¤„è·å¾—åè®®çš„å‰¯æœ¬:
+ *
+ *     http://opensource.org/licenses/BSD-3-Clause
+ *
+ * Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an AS IS BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * é™¤éæ³•å¾‹è¦æ±‚æˆ–è€…ç‰ˆæƒæ‰€æœ‰è€…ä¹¦é¢åŒæ„,æœ¬è½¯ä»¶åœ¨æœ¬åè®®åŸºç¡€ä¸Šçš„å‘å¸ƒæ²¡æœ‰ä»»ä½•å½¢å¼çš„æ¡ä»¶å’Œæ‹…ä¿,æ— è®ºæ˜ç¤ºçš„æˆ–é»˜è®¸çš„.
+ * See the License for the specific language governing permissions and limitations under the License.
+ * è¯·åœ¨ç‰¹å®šé™åˆ¶æˆ–è¯­è¨€ç®¡ç†æƒé™ä¸‹é˜…è¯»åè®®
+ */
 
 #ifndef AA_SQL_CLIENT_H_2017_4_1
 #define AA_SQL_CLIENT_H_2017_4_1
@@ -39,17 +39,17 @@ public:
     virtual bool connect(const String&serverAddress, const String&port) = 0;
     virtual void disconnect() = 0;
     virtual bool isConnection() = 0;
-    virtual bool getDatabaseCount();
-    virtual bool getDatabaseList(SqlDatabaseInfo*&dbs, uint32 maxCount = 0);
+    virtual int64 getDatabaseCount() = 0;
+    virtual bool getDatabaseList(SqlDatabaseInfo*&dbs, uint32 maxCount = 0) = 0;
 
 public:
-    virtual bool getTablesCount(const String&dbName);
-    virtual bool getViewsCount(const String&dbName);
-    virtual bool getTableNameList(const String&dbName, SqlTableInfo*&tables, uint32 maxCount = 0);
-    virtual bool getViewNameList(const String&dbName, SqlTableInfo*&tables, uint32 maxCount = 0);
+    virtual bool getTablesCount(const String&dbName) = 0;
+    virtual bool getViewsCount(const String&dbName) = 0;
+    virtual bool getTableNameList(const String&dbName, SqlTableInfo*&tables, uint32 maxCount = 0) = 0;
+    virtual bool getViewNameList(const String&dbName, SqlTableInfo*&tables, uint32 maxCount = 0) = 0;
     virtual SqlTable getWholeTable(const String&dbName, const String&tableName);
     virtual SqlTable getWholeView(const String&dbName, const String&tableName);
-    virtual SqlTable getTableAllFields(const String&dbName, SqlTableInfo*&tables);
+    virtual SqlTable getTableAllFields(const String&dbName, SqlTableInfo*&tables) = 0;
 
 public:
     // select * from [tableName]
@@ -60,7 +60,7 @@ public:
     virtual bool update(const String&dbName, const String&tableName, const SqlRow&updatedData, const SqlClause*clauses = nullptr, int clausesNum = 0);
     // insert into [tableName] [insertedData (k , k , k ... ) values ( value , value , value ... )]
     virtual bool insertRow(const String&dbName, const String&tableName, const SqlRow&insertedData);
-    // alter table [tableName] add [columnHead name datatype (others)...]
+    // alter table [tableName] add [columnHead name dataType (others)...]
     virtual bool insertColumn(const String&dbName, const String&tableName, const SqlFieldHead&columnHead);
     virtual bool insertColumn(const String&dbName, const String&tableName, const SqlColumn&column);
     // delete from [tableName]
@@ -71,11 +71,14 @@ public:
 public:
     virtual bool createDatabase(const String&dbName);
     virtual bool deleteDatabase(const String&dbName);
-    virtual bool createTable(const String&dbName, const String&tableName);
+    virtual bool createTable(const String&dbName, const String&tableName, const SqlColumn&column, const SqlTableInfo*tableInfo = nullptr);
     virtual bool deleteTable(const String&dbName, const String&tableName);
 
 public:
+    virtual String organizeColumnInfo(const SqlFieldHead&column);
+    virtual String organizeSqlClause(const SqlClause*clauses = nullptr, int clausesNum = 0);
     virtual SqlTable select(const String&sql) = 0;
+    virtual bool execute(const String&sql) = 0;
     virtual bool execute(const String&sql, String&result) = 0;
 
     AA_FORBID_ASSGN_OPR(ISqlClient);

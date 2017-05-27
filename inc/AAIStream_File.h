@@ -25,8 +25,7 @@
 
 /*	* @ author			: Jason
 	* @ date			: 10/17/2015
-	* @ nearly update	: 11/12/2015
-	* @ small version	: 0.1
+	* @ last update		: 5/25/2017
 	* @ summary			: 流操作类的文件操作派生类，可以对文件进行打开、关闭、读写
 	* @ uncompleted		: 							
 	* @ untested		: 磁盘文件的静态操作函数（拷贝、移动、重命名、删除等功能）
@@ -114,7 +113,7 @@ public:
 	 * @ param = "len" : 要写入的长度，不传此参数，则当遇到数据中的0值（字符串结尾）时停止写入
 	 * @ return : 写入的实际长度，如果为0，可能发生了错误
 	 */
-	virtual uint64 Write(void*buffer, uint64 len = 0)override;
+	virtual uint64 Write(const void*buffer, uint64 len = 0)override;
 
 	virtual bool IsEmpty() const override;
 

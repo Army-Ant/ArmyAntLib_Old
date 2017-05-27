@@ -1,32 +1,32 @@
-﻿/*	*
-	* Copyright (c) 2015 ArmyAnt
-	* 版权所有 (c) 2015 ArmyAnt
-	*
-	* Licensed under the BSD License, Version 2.0 (the License);
-	* 本软件使用BSD协议保护, 协议版本:2.0
-	* you may not use this file except in compliance with the License.
-	* 使用本开源代码文件的内容, 视为同意协议
-	* You can read the license content in the file "LICENSE" at the root of this project
-	* 您可以在本项目的根目录找到名为"LICENSE"的文件, 来阅读协议内容
-	* You may also obtain a copy of the License at
-	* 您也可以在此处获得协议的副本:
-	*
-	*     http://opensource.org/licenses/BSD-3-Clause
-	*
-	* Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an AS IS BASIS,
-	* WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-	* 除非法律要求或者版权所有者书面同意,本软件在本协议基础上的发布没有任何形式的条件和担保,无论明示的或默许的.
-	* See the License for the specific language governing permissions and limitations under the License.
-	* 请在特定限制或语言管理权限下阅读协议
-	* This file is the internal source file of this project, is not contained by the closed source release part of this software
-	* 本文件为内部源码文件, 不会包含在闭源发布的本软件中
-	*/
+﻿/*
+ * Copyright (c) 2015 ArmyAnt
+ * 版权所有 (c) 2015 ArmyAnt
+ *
+ * Licensed under the BSD License, Version 2.0 (the License);
+ * 本软件使用BSD协议保护, 协议版本:2.0
+ * you may not use this file except in compliance with the License.
+ * 使用本开源代码文件的内容, 视为同意协议
+ * You can read the license content in the file "LICENSE" at the root of this project
+ * 您可以在本项目的根目录找到名为"LICENSE"的文件, 来阅读协议内容
+ * You may also obtain a copy of the License at
+ * 您也可以在此处获得协议的副本:
+ *
+ *     http://opensource.org/licenses/BSD-3-Clause
+ *
+ * Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an AS IS BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * 除非法律要求或者版权所有者书面同意,本软件在本协议基础上的发布没有任何形式的条件和担保,无论明示的或默许的.
+ * See the License for the specific language governing permissions and limitations under the License.
+ * 请在特定限制或语言管理权限下阅读协议
+ * This file is the internal source file of this project, is not contained by the closed source release part of this software
+ * 本文件为内部源码文件, 不会包含在闭源发布的本软件中
+ */
 
 #include "../../inc/AAIStream_Memory.h"
 #include "AAIStream_Private.hxx"
 
-#ifdef OS_UNIX
-#include <memory.h>
+#ifndef OS_WINDOWS
+#include <cstdlib>
 #endif
 
 namespace ArmyAnt {
@@ -210,7 +210,7 @@ uint64 Memory::Read(void * buffer, uint8 endtag, uint64 maxlen)
 	//逐字读取
 	for(auto nowPos = hd->pos; ; nowPos++)
 	{
-		if(nowPos < hd->len && static_cast<uint8*>(hd->mem)[nowPos] == endtag || nowPos - hd->pos == maxlen)
+		if((nowPos < hd->len && static_cast<uint8*>(hd->mem)[nowPos] == endtag) || nowPos - hd->pos == maxlen)
 		{
 			auto alllen = uint64(nowPos - hd->pos);
 			memcpy(static_cast<char*>(buffer), static_cast<char*>(hd->mem) + hd->pos, alllen);
@@ -220,13 +220,13 @@ uint64 Memory::Read(void * buffer, uint8 endtag, uint64 maxlen)
 	}
 }
 
-uint64 Memory::Write(void * buffer, uint64 len)
+uint64 Memory::Write(const void * buffer, uint64 len)
 {
 	AAAssert(buffer != nullptr, uint64(0));
 	auto hd = static_cast<IStream_Memory_Private*>(IStream_Private::handleManager[this]);
 	//如果len参数没有传入，则写内存到流，直至遇到0，这相当于写入字符串至流
 	if(len == 0)
-		while(static_cast<uint8*>(buffer)[len] != 0)
+		while(static_cast<const uint8*>(buffer)[len] != 0)
 			len++;
 
 	uint64 writeLen = 0;

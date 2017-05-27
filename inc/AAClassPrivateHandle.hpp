@@ -1,4 +1,4 @@
-﻿/*  
+/*  
  * Copyright (c) 2015 ArmyAnt
  * 版权所有 (c) 2015 ArmyAnt
  *
@@ -24,8 +24,19 @@
 #define CLASS_PRIVATE_HANDLE_HPP_2015_11_13
 
 #include <map>
+#include <exception>
 
 namespace ArmyAnt {
+
+
+/*	* @ author			: Jason
+	* @ date			: 13/11/2015
+	* @ last update	    : 23/05/2017
+	* @ summary			: 此类用于保护性隐藏C++类中的私有成员
+	* @ uncompleted		:
+	* @ untested		:
+    * @ issue           : Xcode 下AAJson类const异常对象，初始化时String类对象成员调用String的初始化时，在GetHandle的insert操作中崩溃，需要回归测试确认
+	*/
 
 //此类用于保护性隐藏C++类中的私有成员，将私有成员定义在cpp实现文件的另一个类中（public），而原类增加一个 const T_Handle handle 公有成员
 //实现文件定义一个static本类实例，作为私有成员管理器，原类的函数体内通过handle和管理器来获取私有成员
@@ -36,7 +47,7 @@ template <class T_Out, class T_In>
 class ClassPrivateHandleManager
 {
 public:
-	ClassPrivateHandleManager() {}
+    ClassPrivateHandleManager():handleMap() {}
 	~ClassPrivateHandleManager() {}
 
 	//创建一个内部类实例，这通常是在建立外部实例时进行调用的
@@ -71,7 +82,7 @@ void ArmyAnt::ClassPrivateHandleManager<T_Out, T_In>::GetHandle(T_Out* src, T_In
         handleMap.insert(std::make_pair(src, newObject));
     }
     else
-        throw std::exception("the handle has been existed");
+        throw std::out_of_range("the handle has been existed");
 }
 
 template <class T_Out, class T_In>

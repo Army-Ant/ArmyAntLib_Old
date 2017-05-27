@@ -25,7 +25,7 @@
 
 /*	* @ author			: Jason
 	* @ date			: 12/26/2015
-	* @ nearly update	: 01/18/2016
+	* @ last update		: 01/18/2016
 	* @ small version	: 0.2
 	* @ summary			: 树及其遍历迭代器
 	* @ uncompleted		: 
@@ -425,7 +425,7 @@ const TreeNode<T_Val, T_Tag> * TreeNode<T_Val, T_Tag>::GetBackChild(T_Tag tag) c
 template<class T_Val, class T_Tag>
 T_Tag TreeNode<T_Val, T_Tag>::GetChildren(TreeNode<T_Val, T_Tag> * children)
 {
-	for(auto i = this.children.begin(); i != this->children.end(); i++)
+	for(auto i = this->children.begin(); i != this->children.end(); i++)
 	{
 		children[i] = *i;
 	}
@@ -497,7 +497,7 @@ bool TreeNode<T_Val, T_Tag>::AddChild(T_Tag tag, T_Val value)
 template<class T_Val, class T_Tag>
 bool TreeNode<T_Val, T_Tag>::RemoveChild(T_Tag tag)
 {
-	for(auto i = this.children.begin(); i != this->children.end();)
+	for(auto i = this->children.begin(); i != this->children.end();)
 	{
 		if(i->tag == tag)
 		{
@@ -514,7 +514,7 @@ bool TreeNode<T_Val, T_Tag>::RemoveChild(T_Tag tag)
 template<class T_Val, class T_Tag>
 bool TreeNode<T_Val, T_Tag>::RemoveChild(const TreeNode<T_Val, T_Tag> * child)
 {
-	for(auto i = this.children.begin(); i != this->children.end();)
+	for(auto i = this->children.begin(); i != this->children.end();)
 	{
 		if(&*i == child)
 		{
@@ -531,7 +531,7 @@ bool TreeNode<T_Val, T_Tag>::RemoveChild(const TreeNode<T_Val, T_Tag> * child)
 template<class T_Val, class T_Tag>
 bool TreeNode<T_Val, T_Tag>::ClearChildren()
 {
-	for(auto i = this.children.begin(); i != this->children.end(); i++)
+	for(auto i = this->children.begin(); i != this->children.end(); i++)
 	{
 		i->parent = nullptr;
 	}

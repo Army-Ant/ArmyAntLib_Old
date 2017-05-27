@@ -31,4 +31,4 @@ function ArmyAntLib_AfterBuilt()
 	return 0;
 }
 
-ArmyAntLib_AfterBuilt $1 $2 $3 $4 $5
+ArmyAntLib_AfterBuilt $1 $2 $3 $4 $5 $6

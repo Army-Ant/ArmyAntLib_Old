@@ -1,31 +1,177 @@
-/*
-* Copyright (c) 2015 ArmyAnt
-* °æÈ¨ËùÓĞ (c) 2015 ArmyAnt
-*
-* Licensed under the BSD License, Version 2.0 (the License);
-* ±¾Èí¼şÊ¹ÓÃBSDĞ­Òé±£»¤, Ğ­Òé°æ±¾:2.0
-* you may not use this file except in compliance with the License.
-* Ê¹ÓÃ±¾¿ªÔ´´úÂëÎÄ¼şµÄÄÚÈİ, ÊÓÎªÍ¬ÒâĞ­Òé
-* You can read the license content in the file "LICENSE" at the root of this project
-* Äú¿ÉÒÔÔÚ±¾ÏîÄ¿µÄ¸ùÄ¿Â¼ÕÒµ½ÃûÎª"LICENSE"µÄÎÄ¼ş, À´ÔÄ¶ÁĞ­ÒéÄÚÈİ
-* You may also obtain a copy of the License at
-* ÄúÒ²¿ÉÒÔÔÚ´Ë´¦»ñµÃĞ­ÒéµÄ¸±±¾:
-*
-*     http://opensource.org/licenses/BSD-3-Clause
-*
-* Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an AS IS BASIS,
-* WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-* ³ı·Ç·¨ÂÉÒªÇó»òÕß°æÈ¨ËùÓĞÕßÊéÃæÍ¬Òâ,±¾Èí¼şÔÚ±¾Ğ­Òé»ù´¡ÉÏµÄ·¢²¼Ã»ÓĞÈÎºÎĞÎÊ½µÄÌõ¼şºÍµ£±£,ÎŞÂÛÃ÷Ê¾µÄ»òÄ¬ĞíµÄ.
-* See the License for the specific language governing permissions and limitations under the License.
-* ÇëÔÚÌØ¶¨ÏŞÖÆ»òÓïÑÔ¹ÜÀíÈ¨ÏŞÏÂÔÄ¶ÁĞ­Òé
-* This file is the internal source file of this project, is not contained by the closed source release part of this software
-* ±¾ÎÄ¼şÎªÄÚ²¿Ô´ÂëÎÄ¼ş, ²»»á°üº¬ÔÚ±ÕÔ´·¢²¼µÄ±¾Èí¼şÖĞ
-*/
+/* Copyright (c) 2015 ArmyAnt
+ * ç‰ˆæƒæ‰€æœ‰ (c) 2015 ArmyAnt
+ *
+ * Licensed under the BSD License, Version 2.0 (the License);
+ * æœ¬è½¯ä»¶ä½¿ç”¨BSDåè®®ä¿æŠ¤, åè®®ç‰ˆæœ¬:2.0
+ * you may not use this file except in compliance with the License.
+ * ä½¿ç”¨æœ¬å¼€æºä»£ç æ–‡ä»¶çš„å†…å®¹, è§†ä¸ºåŒæ„åè®®
+ * You can read the license content in the file "LICENSE" at the root of this project
+ * æ‚¨å¯ä»¥åœ¨æœ¬é¡¹ç›®çš„æ ¹ç›®å½•æ‰¾åˆ°åä¸º"LICENSE"çš„æ–‡ä»¶, æ¥é˜…è¯»åè®®å†…å®¹
+ * You may also obtain a copy of the License at
+ * æ‚¨ä¹Ÿå¯ä»¥åœ¨æ­¤å¤„è·å¾—åè®®çš„å‰¯æœ¬:
+ *
+ *     http://opensource.org/licenses/BSD-3-Clause
+ *
+ * Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an AS IS BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * é™¤éæ³•å¾‹è¦æ±‚æˆ–è€…ç‰ˆæƒæ‰€æœ‰è€…ä¹¦é¢åŒæ„,æœ¬è½¯ä»¶åœ¨æœ¬åè®®åŸºç¡€ä¸Šçš„å‘å¸ƒæ²¡æœ‰ä»»ä½•å½¢å¼çš„æ¡ä»¶å’Œæ‹…ä¿,æ— è®ºæ˜ç¤ºçš„æˆ–é»˜è®¸çš„.
+ * See the License for the specific language governing permissions and limitations under the License.
+ * è¯·åœ¨ç‰¹å®šé™åˆ¶æˆ–è¯­è¨€ç®¡ç†æƒé™ä¸‹é˜…è¯»åè®®
+ * This file is the internal source file of this project, is not contained by the closed source release part of this software
+ * æœ¬æ–‡ä»¶ä¸ºå†…éƒ¨æºç æ–‡ä»¶, ä¸ä¼šåŒ…å«åœ¨é—­æºå‘å¸ƒçš„æœ¬è½¯ä»¶ä¸­
+ */
 
 #include "../../inc/AASqlStructs.h"
 
 namespace ArmyAnt
 {
+
+String SqlStructHelper::getDataTypeName(SqlFieldType type) {
+    switch (type) {
+        case SqlFieldType::Null:
+            return "null";
+        case SqlFieldType::MySql_CHAR:      // TODO: mysqlæ‰€æœ‰é¡¹ç›®ä»¥åŠéƒ¨åˆ†SqlServeré¡¹ç›®éƒ½åº”å½“å¯¹æ‹¬å·å†…çš„é•¿åº¦é™åˆ¶ä½œå¤„ç†
+            return "char(255)";
+        case SqlFieldType::MySql_VARCHAR:
+            return "varchar(255)";
+        case SqlFieldType::MySql_TINYTEXT:
+            return "tinytext";
+        case SqlFieldType::MySql_TEXT:
+        case SqlFieldType::MsSqlServer_text:
+            return "text";
+        case SqlFieldType::MySql_BLOB:
+            return "blob";
+        case SqlFieldType::MySql_MEDIUMTEXT:
+            return "mediumtext";
+        case SqlFieldType::MySql_MEDIUMBLOB:
+            return "mediumblob";
+        case SqlFieldType::MySql_LONGTEXT:
+            return "longtext";
+        case SqlFieldType::MySql_LONGBLOB:
+            return "longblob";
+        case SqlFieldType::MySql_ENUM:
+            return "enum()";    // TODO: éœ€è¦å¯¹mysqlæšä¸¾ä½œç‰¹æ®Šå¤„ç†,ä¸‹é¢setåŒ
+        case SqlFieldType::MySql_SET:
+            return "set";
+        case SqlFieldType::MySql_TINYINT:
+            return "tinyint";
+        case SqlFieldType::MySql_SMALLINT:
+            return "smallint";
+        case SqlFieldType::MySql_MEDIUMINT:
+            return "mediumint";
+        case SqlFieldType::MySql_INT:
+            return "int";
+        case SqlFieldType::MySql_BIGINT:
+            return "bigint";
+        case SqlFieldType::MySql_FLOAT:
+            return "float";
+        case SqlFieldType::MySql_DOUBLE:
+            return "double";
+        case SqlFieldType::MySql_DEMICAL:
+            return "demical";
+        case SqlFieldType::MySql_DATE:
+        case SqlFieldType::MsSqlServer_date:
+            return "date";
+        case SqlFieldType::MySql_DATETIME:
+        case SqlFieldType::MsSqlServer_datetime:
+            return "datetime";
+        case SqlFieldType::MySql_TIMESTAMP:
+        case SqlFieldType::MsSqlServer_timestamp:
+            return "timestamp";
+        case SqlFieldType::MySql_TIME:
+        case SqlFieldType::MsSqlServer_time:
+            return "time";
+        case SqlFieldType::MySql_YEAR:
+            return "year";
+        case SqlFieldType::MsAccess_Currency:
+            return "Currency";
+        case SqlFieldType::MsAccess_AutoNumber:
+            return "AutoNumber";
+        case SqlFieldType::MsAccess_YesNo:
+            return "Yes/No";
+        case SqlFieldType::MsAccess_Hyperlink:
+            return "Hyperlink";
+        case SqlFieldType::MsAccess_Text:// = MySql_Varchar,
+            return "Text";
+        case SqlFieldType::MsAccess_Memo:// = MySql_Text,
+            return "Memo";
+        case SqlFieldType::MsAccess_Byte:// = MySql_TinyInt,
+            return "Byte";
+        case SqlFieldType::MsAccess_Integer:// = MySql_SmallInt,
+            return "Integer";
+        case SqlFieldType::MsAccess_Long:// = MySql_Int,
+            return "Long";
+        case SqlFieldType::MsAccess_Single:// = MySql_Float,
+            return "Single";
+        case SqlFieldType::MsAccess_Double:// = MySql_Double,
+            return "Double";
+        case SqlFieldType::MsAccess_DateTime:// = MySql_DateTime,
+            return "Date/Time";
+        case SqlFieldType::MsAccess_OleObject:// = MySql_LongBlob,
+            return "Ole Object";
+        case SqlFieldType::MsAccess_LookupWizard:// = MySql_Enum,
+            return "Lookup Wizard";
+        case SqlFieldType::MsSqlServer_char:
+            return "char(8000)";
+        case SqlFieldType::MsSqlServer_varchar:
+            return "varchar(max)";
+        case SqlFieldType::MsSqlServer_nchar:
+            return "nchar(4000)";
+        case SqlFieldType::MsSqlServer_nvarchar:
+            return "nvarchar(4000)";
+        case SqlFieldType::MsSqlServer_ntext:
+            return "ntext";
+        case SqlFieldType::MsSqlServer_bit:
+            return "bit";
+        case SqlFieldType::MsSqlServer_binary:
+            return "binary(8000)";
+        case SqlFieldType::MsSqlServer_varbinary:
+            return "varbinary(max)";
+        case SqlFieldType::MsSqlServer_image:
+            return "image";
+        case SqlFieldType::MsSqlServer_tinyint:
+            return "tinyint";
+        case SqlFieldType::MsSqlServer_smallint:
+            return "smallint";
+        case SqlFieldType::MsSqlServer_int:
+            return "int";
+        case SqlFieldType::MsSqlServer_bigint:
+            return "bigint";
+        case SqlFieldType::MsSqlServer_decimal:
+            return "demical";
+        case SqlFieldType::MsSqlServer_numeric:
+            return "numeric";
+        case SqlFieldType::MsSqlServer_smallmoney:
+            return "smallmoney";
+        case SqlFieldType::MsSqlServer_money:
+            return "money";
+        case SqlFieldType::MsSqlServer_float:
+            return "float";
+        case SqlFieldType::MsSqlServer_real:
+            return "real";
+        case SqlFieldType::MsSqlServer_datetime2:
+            return "datetime2";
+        case SqlFieldType::MsSqlServer_smalldatetime:
+            return "smalldatetime";
+        case SqlFieldType::MsSqlServer_datetimeoffset:
+            return "datetimeoffset";
+        case SqlFieldType::MsSqlServer_sql_variant:
+            return "sql_variant";
+        case SqlFieldType::MsSqlServer_uniqueidentifier:
+            return "uniqueidentifier";
+        case SqlFieldType::MsSqlServer_xml:
+            return "xml";
+        case SqlFieldType::MsSqlServer_cursor:
+            return "cursor";
+        case SqlFieldType::MsSqlServer_table:
+            return "table";
+        case SqlFieldType::MsExcel_Normal:
+            return "excel";
+        default:
+            return "";
+    }
+}
+
 SqlField::SqlField()
     :head(nullptr), value("")
 {
@@ -84,7 +230,7 @@ uint32 SqlRow::size() const
     return length;
 }
 
-const SqlField & SqlRow::operator[](uint32 index)
+const SqlField & SqlRow::operator[](int32 index)const
 {
     if (index < 0)
         index += length;
@@ -131,7 +277,7 @@ const SqlFieldHead * SqlColumn::getHead(uint32 index) const
     return operator[](index).getHead();
 }
 
-const SqlField & SqlColumn::operator[](uint32 index) const
+const SqlField & SqlColumn::operator[](int32 index) const
 {
     if (index < 0)
         index += length;
@@ -199,7 +345,7 @@ uint32 SqlTable::height() const
     return _height;
 }
 
-const SqlFieldHead * SqlTable::getHead(uint32 index) const
+const SqlFieldHead * SqlTable::getHead(int32 index) const
 {
     if (index < 0)
         index += _width;
@@ -208,7 +354,7 @@ const SqlFieldHead * SqlTable::getHead(uint32 index) const
     return heads + index;
 }
 
-SqlRow SqlTable::operator[](uint32 index)
+SqlRow SqlTable::operator[](int32 index)
 {
     if (index < 0)
         index += _height;
@@ -225,7 +371,12 @@ SqlRow SqlTable::operator[](uint32 index)
     return ret;
 }
 
-const SqlField & SqlTable::operator()(uint32 rowIndex, uint32 colIndex)
+const SqlRow SqlTable::operator[](int32 index)const
+{
+    return const_cast<SqlTable*>(this)->operator[](index);
+}
+
+const SqlField & SqlTable::operator()(int32 rowIndex, int32 colIndex)const
 {
     if (rowIndex < 0)
         rowIndex += _height;
@@ -236,7 +387,7 @@ const SqlField & SqlTable::operator()(uint32 rowIndex, uint32 colIndex)
     return fields[rowIndex][colIndex];
 }
 
-SqlColumn SqlTable::operator()(std::nullptr_t, uint32 colIndex)
+SqlColumn SqlTable::operator()(std::nullptr_t, int32 colIndex)
 {
     if (colIndex < 0)
         colIndex += _width;
@@ -254,5 +405,11 @@ SqlColumn SqlTable::operator()(std::nullptr_t, uint32 colIndex)
     }
     return ret;
 }
+
+const SqlColumn SqlTable::operator()(std::nullptr_t, int32 colIndex)const
+{
+    return const_cast<SqlTable *>(this)->operator()(nullptr, colIndex);
+}
+
 
 }

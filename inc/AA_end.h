@@ -49,6 +49,8 @@
 
 #ifdef OS_WINDOWS
 #pragma comment(lib,"lib\\ArmyAntLib" AA_LIB_TYPE AA_IS_DEBUG AA_TARGET_MACHINE ".lib")
+#elif defined OS_BSD // OS_WINDOWS
+
 #else // OS_WINDOWS
 #include <dlfcn.h>
 namespace ArmyAnt { 

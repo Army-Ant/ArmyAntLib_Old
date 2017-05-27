@@ -25,7 +25,7 @@
 
 /*	* @ author			: Jason
 	* @ date			: 01/22/2016
-	* @ nearly update	: 01/22/2015
+	* @ last update		: 01/22/2015
 	* @ small version	: 0.1
 	* @ summary			: 消息队列
 	* @ uncompleted		: all

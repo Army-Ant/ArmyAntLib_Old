@@ -1,0 +1,21 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "Bash-Debug (type in script name)",
+            "type": "bashdb", 
+            "request": "launch",
+            "scriptPath": "/volumes/backup/git/ArmyAnt/ArmyAntLib/proj/make.sh",
+            "commandLineArguments": "Debug x86 64 dynamic",
+            "windows": {
+                "bashPath": "C:\\Windows\\sysnative\\bash.exe"
+            },
+            "linux": {
+                "bashPath": "bash"
+            },
+            "osx": {
+                "bashPath": "bash"
+            }
+        }
+    ]
+}

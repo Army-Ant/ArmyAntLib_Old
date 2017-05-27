@@ -25,12 +25,11 @@
 
 /*	* @ author			: Jason
 	* @ date			: 11/21/2015
-	* @ nearly update	: 12/18/2015
-	* @ small version	: 0.2
+	* @ last update		: 12/18/2015
 	* @ summary			: 三元组及具有双值的键值map
 	* @ uncompleted		:
 	* @ untested		: all 已经在使用中,但不保证没有bug
-	* @ tested			:
+	* @ issue			:
 	*/
 
 #include <cstddef>

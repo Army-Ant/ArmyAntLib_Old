@@ -25,12 +25,11 @@
 
 /* @ author			: Jason
  * @ date			: 01/18/2016
- * @ nearly update	: 01/18/2016
- * @ small version	: 0.1
+ * @ last update	: 11/12/2016
  * @ summary		: 有向图及其遍历迭代器
  * @ uncompleted	: none
  * @ untested		: all
- * @ tested			:
+ * @ issue			:
  */
 
 #include "AADefine.h"

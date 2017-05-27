@@ -40,7 +40,7 @@ extern "C" {
 		Network
 	} AA_StreamType;
 
-	typedef uint32 AA_CStream;
+	typedef mac_uint AA_CStream;
 
 	ARMYANT_CLIB_API AA_CStream AA_Stream_CreateByUrl(const char* url);
 	ARMYANT_CLIB_API AA_CStream AA_Stream_CreateByType(AA_StreamType type, const char* src);

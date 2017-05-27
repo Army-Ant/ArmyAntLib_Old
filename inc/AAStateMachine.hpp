@@ -25,12 +25,11 @@
 
 /*	* @ author			: Jason
 	* @ date			: 12/02/2015
-	* @ nearly update	: 12/02/2015
-	* @ small version	: 0.1
+	* @ last update		: 12/02/2015
 	* @ summary			: 状态机
 	* @ uncompleted		: 
 	* @ untested		: all
-	* @ tested			: 
+	* @ issue			:
 */
 
 #include <functional>
