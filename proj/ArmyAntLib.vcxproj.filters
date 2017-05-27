@@ -100,13 +100,16 @@
     <ClInclude Include="..\src\io\AAIStream_Private.hxx">
       <Filter>io</Filter>
     </ClInclude>
-    <ClInclude Include="..\inc\AASqlClient.h">
-      <Filter>data</Filter>
-    </ClInclude>
     <ClInclude Include="..\inc\AASqlStructs.h">
       <Filter>algorithm</Filter>
     </ClInclude>
     <ClInclude Include="..\inc\AAString.h">
+      <Filter>tool</Filter>
+    </ClInclude>
+    <ClInclude Include="..\inc\AASqlClient.h">
+      <Filter>io</Filter>
+    </ClInclude>
+    <ClInclude Include="..\inc\AALog.h">
       <Filter>tool</Filter>
     </ClInclude>
   </ItemGroup>
@@ -147,6 +150,12 @@
     <ClCompile Include="..\src\algorithm\AASqlStructs.cpp">
       <Filter>algorithm</Filter>
     </ClCompile>
+    <ClCompile Include="..\src\io\AASqlClient.cpp">
+      <Filter>io</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\tool\AALog.cpp">
+      <Filter>tool</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="data">
@@ -175,9 +184,6 @@
     <None Include="make.sh">
       <Filter>_not_cpp</Filter>
     </None>
-    <None Include="make_all.sh">
-      <Filter>_not_cpp</Filter>
-    </None>
     <None Include="..\src\not_cpp\build_end.bat">
       <Filter>_not_cpp</Filter>
     </None>
@@ -190,9 +196,15 @@
     <None Include="..\src\not_cpp\build_start.sh">
       <Filter>_not_cpp</Filter>
     </None>
+    <None Include="..\.gitignore">
+      <Filter>_not_cpp</Filter>
+    </None>
+    <None Include="..\make_all.sh">
+      <Filter>_not_cpp</Filter>
+    </None>
   </ItemGroup>
   <ItemGroup>
-    <Text Include="CMakeLists.txt">
+    <Text Include="..\CMakeLists.txt">
       <Filter>_not_cpp</Filter>
     </Text>
   </ItemGroup>

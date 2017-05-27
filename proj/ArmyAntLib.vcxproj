@@ -641,6 +641,7 @@
     <ClInclude Include="..\inc\AAIStream_Memory.h" />
     <ClInclude Include="..\inc\AAIStream_Pipe.h" />
     <ClInclude Include="..\inc\AAJson.h" />
+    <ClInclude Include="..\inc\AALog.h" />
     <ClInclude Include="..\inc\AAMath.h" />
     <ClInclude Include="..\inc\AAMathStructs.h" />
     <ClInclude Include="..\inc\AAMessageQueue.h" />
@@ -676,19 +677,22 @@
     <ClCompile Include="..\src\io\AAIStream_File.cpp" />
     <ClCompile Include="..\src\io\AAIStream_Memory.cpp" />
     <ClCompile Include="..\src\io\AASocket.cpp" />
+    <ClCompile Include="..\src\io\AASqlClient.cpp" />
     <ClCompile Include="..\src\io\C_AAStream.cpp" />
+    <ClCompile Include="..\src\tool\AALog.cpp" />
     <ClCompile Include="..\src\tool\AAString.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="..\.gitignore" />
+    <None Include="..\make_all.sh" />
     <None Include="..\src\not_cpp\build_end.bat" />
     <None Include="..\src\not_cpp\build_end.sh" />
     <None Include="..\src\not_cpp\build_start.bat" />
     <None Include="..\src\not_cpp\build_start.sh" />
     <None Include="make.sh" />
-    <None Include="make_all.sh" />
   </ItemGroup>
   <ItemGroup>
-    <Text Include="CMakeLists.txt" />
+    <Text Include="..\CMakeLists.txt" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
