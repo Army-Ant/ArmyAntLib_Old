@@ -318,7 +318,7 @@
       <Optimization>MaxSpeed</Optimization>
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
-      <PreprocessorDefinitions>_cplusplus;OS_WINDOWS;AA_DONOT_AUTO_LINK_;_MSVC;NDEBUG;_32BIT;_x86;WIN32;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>_cplusplus;OS_WINDOWS;AA_DONOT_AUTO_LINK_;_MSVC;NDEBUG;_32BIT;_x86;WIN32;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
