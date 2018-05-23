@@ -28,6 +28,7 @@
 
 function ArmyAntLib_AfterBuilt()
 {
+#TODO
 	return 0;
 }
 
