@@ -254,9 +254,23 @@
     <ClCompile Include="..\src\AAIStream_Memory.cpp" />
     <ClCompile Include="..\src\AAJson.cpp" />
     <ClCompile Include="..\src\AASocket.cpp" />
+    <ClCompile Include="..\src\algorithm\AASqlStructs.cpp" />
+    <ClCompile Include="..\src\algorithm\C_AANeuron.cpp" />
     <ClCompile Include="..\src\ArmyAntLib.cpp" />
+    <ClCompile Include="..\src\base\ArmyAntLib.cpp" />
     <ClCompile Include="..\src\C_AANeuron.cpp" />
     <ClCompile Include="..\src\C_AAStream.cpp" />
+    <ClCompile Include="..\src\data\AAAes.cpp" />
+    <ClCompile Include="..\src\data\AABinary.cpp" />
+    <ClCompile Include="..\src\data\AAJson.cpp" />
+    <ClCompile Include="..\src\io\AAIStream.cpp" />
+    <ClCompile Include="..\src\io\AAIStream_File.cpp" />
+    <ClCompile Include="..\src\io\AAIStream_Memory.cpp" />
+    <ClCompile Include="..\src\io\AASocket.cpp" />
+    <ClCompile Include="..\src\io\AASqlClient.cpp" />
+    <ClCompile Include="..\src\io\C_AAStream.cpp" />
+    <ClCompile Include="..\src\tool\AALog.cpp" />
+    <ClCompile Include="..\src\tool\AAString.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\inc\AAAes.h" />
@@ -273,13 +287,17 @@
     <ClInclude Include="..\inc\AAIStream_Pipe.h" />
     <ClInclude Include="..\inc\AAJNITools.h" />
     <ClInclude Include="..\inc\AAJson.h" />
+    <ClInclude Include="..\inc\AALog.h" />
     <ClInclude Include="..\inc\AAMath.h" />
     <ClInclude Include="..\inc\AAMathStructs.h" />
     <ClInclude Include="..\inc\AAMessageQueue.h" />
     <ClInclude Include="..\inc\AANeuron.hpp" />
     <ClInclude Include="..\inc\AANeuronNetwork.hpp" />
     <ClInclude Include="..\inc\AASocket.h" />
+    <ClInclude Include="..\inc\AASqlClient.h" />
+    <ClInclude Include="..\inc\AASqlStructs.h" />
     <ClInclude Include="..\inc\AAStateMachine.hpp" />
+    <ClInclude Include="..\inc\AAString.h" />
     <ClInclude Include="..\inc\AATree.hpp" />
     <ClInclude Include="..\inc\AATripleMap.hpp" />
     <ClInclude Include="..\inc\AA_end.h" />
@@ -292,6 +310,7 @@
     <ClInclude Include="..\inc\C_ArmyAnt.h" />
     <ClInclude Include="..\src\AAIStream_Private.hxx" />
     <ClInclude Include="..\src\base.hpp" />
+    <ClInclude Include="..\src\io\AAIStream_Private.hxx" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="..\inc\AASocket_ProtocolTypes.txt" />
