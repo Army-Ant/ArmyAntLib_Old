@@ -1,4 +1,4 @@
-﻿/*
+/*
  * Copyright (c) 2015 ArmyAnt
  * 版权所有 (c) 2015 ArmyAnt
  *
@@ -86,7 +86,7 @@ inline static in_addr toCAddr(const IPAddr_v4&addr){
 #ifdef OS_WINDOWS
 	ret.S_un.S_addr = addr.getNum();
 #else
-	ret.s_addr = addr.GetNum();
+	ret.s_addr = addr.getNum();
 #endif
 	return ret;
 }
@@ -98,9 +98,9 @@ inline static in6_addr toCAddr(const IPAddr_v6&addr){
 #if defined OS_WINDOWS
 		ret.u.Word[i] = addr.getWord(i);
 #elif defined OS_BSD
-		ret.__u6_addr.__u6_addr16[i] = addr.GetWord(i);
+		ret.__u6_addr.__u6_addr16[i] = addr.getWord(i);
 #else
-		ret.__in6_u.__u6_addr16[i] = addr.GetWord(i);
+		ret.__in6_u.__u6_addr16[i] = addr.getWord(i);
 #endif
 	}
 	return ret;
@@ -309,7 +309,7 @@ uint32 IPAddr_v4::getNum() const{
 	if(getLocalMachineIsBigEnding()){
 		ret = *reinterpret_cast<const uint32*>(this);
 	} else{
-		char chars[4] = {impNum, lh, host, net};
+		uint8 chars[4] = {impNum, lh, host, net};
 		ret = *reinterpret_cast<const uint32*>(chars);
 	}
 	return ret;

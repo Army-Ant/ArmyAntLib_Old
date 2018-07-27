@@ -1,4 +1,4 @@
-﻿/*  
+/*  
  * Copyright (c) 2015 ArmyAnt
  * 版权所有 (c) 2015 ArmyAnt
  *
@@ -274,7 +274,7 @@ ByteEncoder ByteEncoder::GetBack() const
 
 ByteEncoder& ByteEncoder::operator= (const ByteEncoder&value)
 {
-	AAAssert(AA_BYTE_ENCODER_HANDLE_MANAGER[&value] != nullptr, *this);
+	AAAssert((AA_BYTE_ENCODER_HANDLE_MANAGER[&value] != nullptr), *this);
 	AAAssert(CopiedFromAnother(value), *this);
 	return *this;
 }

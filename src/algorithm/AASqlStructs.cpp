@@ -1,4 +1,4 @@
-﻿/* Copyright (c) 2015 ArmyAnt
+/* Copyright (c) 2015 ArmyAnt
  * 版权所有 (c) 2015 ArmyAnt
  *
  * Licensed under the BSD License, Version 2.0 (the License);
@@ -429,7 +429,7 @@ SqlExpress::SqlExpress(const String & str)
 	:type(SqlOperatorType::none)
 {
 	AA_SQL_EXPRESS_HANDLE_MANAGER.GetHandle(this);
-	AAAssert(pushValue(str));
+	AAAssert(pushValue(str), );
 }
 
 SqlExpress::~SqlExpress()

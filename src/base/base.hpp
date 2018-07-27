@@ -1,4 +1,4 @@
-﻿/*	*
+/*	*
 	* Copyright (c) 2015 ArmyAnt
 	* 版权所有 (c) 2015 ArmyAnt
 	*
@@ -39,7 +39,7 @@
 #include <boost/assert.hpp>
 #ifdef DEBUG
 #undef AAAssert
-#define AAAssert(x,y) BOOST_ASSERT(x)
+#define AAAssert(x,y) BOOST_ASSERT((x))
 #endif
 
 // 不允许boost使用自动指针

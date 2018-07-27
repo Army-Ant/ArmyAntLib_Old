@@ -1,4 +1,4 @@
-﻿/*
+/*
  * Copyright (c) 2015 ArmyAnt
  * 版权所有 (c) 2015 ArmyAnt
  *
@@ -53,12 +53,16 @@ String::String(char c)
 
 String::String(int32 num)
 {
-	AA_HANDLE_MANAGER.GetHandle(this, new std::string(static_cast<std::stringstream*>(&(std::stringstream() << num))->str()));
+    std::stringstream tmp;
+    tmp << num;
+	AA_HANDLE_MANAGER.GetHandle(this, new std::string(tmp.str()));
 }
 
 String::String(const int64 & num)
 {
-	AA_HANDLE_MANAGER.GetHandle(this, new std::string(static_cast<std::stringstream*>(&(std::stringstream() << num))->str()));
+    std::stringstream tmp;
+    tmp << num;
+    AA_HANDLE_MANAGER.GetHandle(this, new std::string(tmp.str()));
 }
 
 String::String(double num, int32 behindFloat)
@@ -68,7 +72,9 @@ String::String(double num, int32 behindFloat)
         int64 powed = int64(pow(10, behindFloat));
         num -= num - double(int64(num*powed)) / powed;
     }
-	AA_HANDLE_MANAGER.GetHandle(this, new std::string(static_cast<std::stringstream*>(&(std::stringstream() << num))->str()));
+    std::stringstream tmp;
+    tmp << num;
+    AA_HANDLE_MANAGER.GetHandle(this, new std::string(tmp.str()));
 }
 
 String::String(const String & value)
