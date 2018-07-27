@@ -1,4 +1,4 @@
-/*
+﻿/*
 * Copyright (c) 2015 ArmyAnt
 * 版权所有 (c) 2015 ArmyAnt
 *
