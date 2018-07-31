@@ -178,7 +178,7 @@
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <OutDir>$(ProjectDir)..\bin</OutDir>
-    <IntDir>$(ProjectDir)$(Configuration)</IntDir>
+    <IntDir>$(ProjectDir)\$(ProjectName)$(Configuration)\</IntDir>
     <TargetName>$(ProjectName)_d</TargetName>
     <TargetExt>.dll</TargetExt>
     <IncludePath>$(ProjectDir)..\external\boost;$(JAVA_HOME)\include;$(JAVA_HOME)\include\win32;$(IncludePath)</IncludePath>
@@ -189,10 +189,11 @@
     <TargetExt>.dll</TargetExt>
     <IncludePath>$(ProjectDir)..\external\boost;$(JAVA_HOME)\include;$(JAVA_HOME)\include\win32;$(IncludePath)</IncludePath>
     <LibraryPath>$(ProjectDir)..\external\boost\stage\lib;$(LibraryPath)</LibraryPath>
+    <IntDir>$(ProjectDir)\$(ProjectName)$(Configuration)\</IntDir>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug_Static|Win32'">
     <OutDir>$(ProjectDir)..\bin</OutDir>
-    <IntDir>$(ProjectDir)$(Configuration)</IntDir>
+    <IntDir>$(ProjectDir)\$(ProjectName)$(Configuration)\</IntDir>
     <TargetName>$(ProjectName)_s_d</TargetName>
     <TargetExt>.lib</TargetExt>
     <IncludePath>$(ProjectDir)..\external\boost;$(JAVA_HOME)\include;$(JAVA_HOME)\include\win32;$(IncludePath)</IncludePath>
@@ -203,10 +204,11 @@
     <TargetExt>.lib</TargetExt>
     <IncludePath>$(ProjectDir)..\external\boost;$(JAVA_HOME)\include;$(JAVA_HOME)\include\win32;$(IncludePath)</IncludePath>
     <LibraryPath>$(ProjectDir)..\external\boost\stage\lib;$(LibraryPath)</LibraryPath>
+    <IntDir>$(ProjectDir)\$(ProjectName)$(Configuration)\</IntDir>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <OutDir>$(ProjectDir)..\bin</OutDir>
-    <IntDir>$(ProjectDir)$(Configuration)</IntDir>
+    <IntDir>$(ProjectDir)\$(ProjectName)$(Configuration)\</IntDir>
     <TargetExt>.dll</TargetExt>
     <LinkIncremental>false</LinkIncremental>
     <IncludePath>$(ProjectDir)..\external\boost;$(JAVA_HOME)\include;$(JAVA_HOME)\include\win32;$(IncludePath)</IncludePath>
@@ -217,10 +219,11 @@
     <LinkIncremental>false</LinkIncremental>
     <IncludePath>$(ProjectDir)..\external\boost;$(JAVA_HOME)\include;$(JAVA_HOME)\include\win32;$(IncludePath)</IncludePath>
     <LibraryPath>$(ProjectDir)..\external\boost\stage\lib;$(LibraryPath)</LibraryPath>
+    <IntDir>$(ProjectDir)\$(ProjectName)$(Configuration)\</IntDir>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release_Static|Win32'">
     <OutDir>$(ProjectDir)..\bin</OutDir>
-    <IntDir>$(ProjectDir)$(Configuration)</IntDir>
+    <IntDir>$(ProjectDir)\$(ProjectName)$(Configuration)\</IntDir>
     <TargetName>$(ProjectName)_s</TargetName>
     <TargetExt>.lib</TargetExt>
     <IncludePath>$(ProjectDir)..\external\boost;$(JAVA_HOME)\include;$(JAVA_HOME)\include\win32;$(IncludePath)</IncludePath>
@@ -231,10 +234,11 @@
     <TargetExt>.lib</TargetExt>
     <IncludePath>$(ProjectDir)..\external\boost;$(JAVA_HOME)\include;$(JAVA_HOME)\include\win32;$(IncludePath)</IncludePath>
     <LibraryPath>$(ProjectDir)..\external\boost\stage\lib;$(LibraryPath)</LibraryPath>
+    <IntDir>$(ProjectDir)\$(ProjectName)$(Configuration)\</IntDir>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <OutDir>$(ProjectDir)..\bin</OutDir>
-    <IntDir>$(ProjectDir)$(Configuration)</IntDir>
+    <IntDir>$(ProjectDir)\$(ProjectName)$(Configuration)\</IntDir>
     <TargetName>$(ProjectName)_d_64</TargetName>
     <TargetExt>.dll</TargetExt>
     <LibraryPath>$(ProjectDir)..\external\boost\stage\lib64;$(LibraryPath)</LibraryPath>
@@ -242,7 +246,7 @@
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug_Static|x64'">
     <OutDir>$(ProjectDir)..\bin</OutDir>
-    <IntDir>$(ProjectDir)$(Configuration)</IntDir>
+    <IntDir>$(ProjectDir)\$(ProjectName)$(Configuration)\</IntDir>
     <TargetName>$(ProjectName)_s_d_64</TargetName>
     <TargetExt>.lib</TargetExt>
     <LibraryPath>$(ProjectDir)..\external\boost\stage\lib64;$(LibraryPath)</LibraryPath>
@@ -250,7 +254,7 @@
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <OutDir>$(ProjectDir)..\bin</OutDir>
-    <IntDir>$(ProjectDir)$(Configuration)</IntDir>
+    <IntDir>$(ProjectDir)\$(ProjectName)$(Configuration)\</IntDir>
     <TargetName>$(ProjectName)_64</TargetName>
     <TargetExt>.dll</TargetExt>
     <LinkIncremental>false</LinkIncremental>
@@ -259,7 +263,7 @@
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release_Static|x64'">
     <OutDir>$(ProjectDir)..\bin</OutDir>
-    <IntDir>$(ProjectDir)$(Configuration)</IntDir>
+    <IntDir>$(ProjectDir)\$(ProjectName)$(Configuration)\</IntDir>
     <TargetName>$(ProjectName)_s_64</TargetName>
     <TargetExt>.lib</TargetExt>
     <LibraryPath>$(ProjectDir)..\external\boost\stage\lib64;$(LibraryPath)</LibraryPath>

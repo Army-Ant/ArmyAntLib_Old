@@ -1,4 +1,4 @@
-/*
+﻿/*
  * Copyright (c) 2015 ArmyAnt
  * 版权所有 (c) 2015 ArmyAnt
  *
@@ -54,14 +54,14 @@ String::String(char c)
 
 String::String(int32 num)
 {
-    std::stringstream tmp;
+    std::ostringstream tmp;
     tmp << num;
 	AA_HANDLE_MANAGER.GetHandle(this, new std::string(tmp.str()));
 }
 
 String::String(const int64 & num)
 {
-    std::stringstream tmp;
+    std::ostringstream tmp;
     tmp << num;
     AA_HANDLE_MANAGER.GetHandle(this, new std::string(tmp.str()));
 }
@@ -73,7 +73,7 @@ String::String(double num, int32 behindFloat)
         int64 powed = int64(pow(10, behindFloat));
         num -= num - double(int64(num*powed)) / powed;
     }
-    std::stringstream tmp;
+    std::ostringstream tmp;
     tmp << num;
     AA_HANDLE_MANAGER.GetHandle(this, new std::string(tmp.str()));
 }

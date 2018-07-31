@@ -168,7 +168,7 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <LinkIncremental>true</LinkIncremental>
     <OutDir>$(ProjectDir)..\bin\</OutDir>
-    <IntDir>$(ProjectDir)$(Configuration)\</IntDir>
+    <IntDir>$(ProjectDir)\$(ProjectName)$(Configuration)\</IntDir>
     <TargetName>$(ProjectName)_d</TargetName>
     <IncludePath>$(ProjectDir)..\external\boost;$(IncludePath)</IncludePath>
     <LibraryPath>$(ProjectDir)..\external\boost\stage\lib;$(LibraryPath)</LibraryPath>
@@ -179,12 +179,12 @@
     <LibraryPath>$(ProjectDir)..\external\boost\stage\lib;$(LibraryPath)</LibraryPath>
     <LinkIncremental>true</LinkIncremental>
     <OutDir>$(ProjectDir)..\bin\</OutDir>
-    <IntDir>$(ProjectDir)$(Configuration)\</IntDir>
+    <IntDir>$(ProjectDir)\$(ProjectName)$(Configuration)\</IntDir>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug_Static|Win32'">
     <LinkIncremental>true</LinkIncremental>
     <OutDir>$(ProjectDir)..\bin\</OutDir>
-    <IntDir>$(ProjectDir)$(Configuration)\</IntDir>
+    <IntDir>$(ProjectDir)\$(ProjectName)$(Configuration)\</IntDir>
     <TargetExt>.lib</TargetExt>
     <TargetName>$(ProjectName)_s_d</TargetName>
     <IncludePath>$(ProjectDir)..\external\boost;$(IncludePath)</IncludePath>
@@ -197,12 +197,12 @@
     <LibraryPath>$(ProjectDir)..\external\boost\stage\lib;$(LibraryPath)</LibraryPath>
     <LinkIncremental>true</LinkIncremental>
     <OutDir>$(ProjectDir)..\bin\</OutDir>
-    <IntDir>$(ProjectDir)$(Configuration)\</IntDir>
+    <IntDir>$(ProjectDir)\$(ProjectName)$(Configuration)\</IntDir>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <LinkIncremental>true</LinkIncremental>
     <OutDir>$(ProjectDir)..\bin\</OutDir>
-    <IntDir>$(ProjectDir)$(Configuration)\</IntDir>
+    <IntDir>$(ProjectDir)\$(ProjectName)$(Configuration)\</IntDir>
     <TargetName>$(ProjectName)_d_64</TargetName>
     <IncludePath>$(ProjectDir)..\external\boost;$(IncludePath)</IncludePath>
     <LibraryPath>$(ProjectDir)..\external\boost\stage\lib64;$(LibraryPath)</LibraryPath>
@@ -210,7 +210,7 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug_Static|x64'">
     <LinkIncremental>true</LinkIncremental>
     <OutDir>$(ProjectDir)..\bin\</OutDir>
-    <IntDir>$(ProjectDir)$(Configuration)\</IntDir>
+    <IntDir>$(ProjectDir)\$(ProjectName)$(Configuration)\</IntDir>
     <TargetExt>.lib</TargetExt>
     <TargetName>$(ProjectName)_s_d_64</TargetName>
     <IncludePath>$(ProjectDir)..\external\boost;$(IncludePath)</IncludePath>
@@ -219,7 +219,7 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <LinkIncremental>false</LinkIncremental>
     <OutDir>$(ProjectDir)..\bin\</OutDir>
-    <IntDir>$(ProjectDir)$(Configuration)\</IntDir>
+    <IntDir>$(ProjectDir)\$(ProjectName)$(Configuration)\</IntDir>
     <IncludePath>$(ProjectDir)..\external\boost;$(IncludePath)</IncludePath>
     <LibraryPath>$(ProjectDir)..\external\boost\stage\lib;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
@@ -229,19 +229,19 @@
     <LinkIncremental>false</LinkIncremental>
     <TargetName>$(ProjectName)_arm</TargetName>
     <OutDir>$(ProjectDir)..\bin\</OutDir>
-    <IntDir>$(ProjectDir)$(Configuration)\</IntDir>
+    <IntDir>$(ProjectDir)\$(ProjectName)$(Configuration)\</IntDir>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <LinkIncremental>false</LinkIncremental>
     <OutDir>$(ProjectDir)..\bin\</OutDir>
-    <IntDir>$(ProjectDir)$(Configuration)\</IntDir>
+    <IntDir>$(ProjectDir)\$(ProjectName)$(Configuration)\</IntDir>
     <TargetName>$(ProjectName)_64</TargetName>
     <IncludePath>$(ProjectDir)..\external\boost;$(IncludePath)</IncludePath>
     <LibraryPath>$(ProjectDir)..\external\boost\stage\lib64;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release_Static|Win32'">
     <OutDir>$(ProjectDir)..\bin\</OutDir>
-    <IntDir>$(ProjectDir)$(Configuration)\</IntDir>
+    <IntDir>$(ProjectDir)\$(ProjectName)$(Configuration)\</IntDir>
     <TargetExt>.lib</TargetExt>
     <TargetName>$(ProjectName)_s</TargetName>
     <IncludePath>$(ProjectDir)..\external\boost;$(IncludePath)</IncludePath>
@@ -253,11 +253,11 @@
     <IncludePath>$(ProjectDir)..\external\boost;$(IncludePath)</IncludePath>
     <LibraryPath>$(ProjectDir)..\external\boost\stage\lib;$(LibraryPath)</LibraryPath>
     <OutDir>$(ProjectDir)..\bin\</OutDir>
-    <IntDir>$(ProjectDir)$(Configuration)\</IntDir>
+    <IntDir>$(ProjectDir)\$(ProjectName)$(Configuration)\</IntDir>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release_Static|x64'">
     <OutDir>$(ProjectDir)..\bin\</OutDir>
-    <IntDir>$(ProjectDir)$(Configuration)\</IntDir>
+    <IntDir>$(ProjectDir)\$(ProjectName)$(Configuration)\</IntDir>
     <TargetExt>.lib</TargetExt>
     <TargetName>$(ProjectName)_s_64</TargetName>
     <IncludePath>$(ProjectDir)..\external\boost;$(IncludePath)</IncludePath>
@@ -302,6 +302,7 @@
       <Optimization>Disabled</Optimization>
       <PreprocessorDefinitions>_cplusplus;_SCL_SECURE_NO_WARNINGS;_32BIT;_arm;OS_WINDOWS;WIN32;_WIN32;ARMYANTLIB_EXPORTS;_CRT_SECURE_NO_WARNINGS;_DLL;_SHARED;DEBUG;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <DisableSpecificWarnings>%(DisableSpecificWarnings)</DisableSpecificWarnings>
     </ClCompile>
     <Link>
       <SubSystem>NotSet</SubSystem>
@@ -364,6 +365,7 @@
       <Optimization>Disabled</Optimization>
       <PreprocessorDefinitions>_cplusplus;_SCL_SECURE_NO_WARNINGS;_32BIT;_arm;OS_WINDOWS;WIN32;_WIN32;ARMYANTLIB_EXPORTS;_CRT_SECURE_NO_WARNINGS;_STATIC;DEBUG;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <DisableSpecificWarnings>%(DisableSpecificWarnings)</DisableSpecificWarnings>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -492,6 +494,7 @@
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <PreprocessorDefinitions>_cplusplus;_SCL_SECURE_NO_WARNINGS;_32BIT;_arm;OS_WINDOWS;WIN32;_WIN32;ARMYANTLIB_EXPORTS;_CRT_SECURE_NO_WARNINGS;_DLL;_SHARED;NDEBUG;_NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <DisableSpecificWarnings>%(DisableSpecificWarnings)</DisableSpecificWarnings>
     </ClCompile>
     <Link>
       <SubSystem>NotSet</SubSystem>
@@ -595,6 +598,7 @@
       </PrecompiledHeader>
       <WarningLevel>Level4</WarningLevel>
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <DisableSpecificWarnings>%(DisableSpecificWarnings)</DisableSpecificWarnings>
     </ClCompile>
     <PreBuildEvent>
       <Command>$(ProjectDir)..\src\not_cpp\build_start.bat $(Configuration) $(ProjectDir)..\ $(TargetName) $(PlatformTarget)</Command>

@@ -1,4 +1,4 @@
-/* Copyright (c) 2015 ArmyAnt
+﻿/* Copyright (c) 2015 ArmyAnt
  * 版权所有 (c) 2015 ArmyAnt
  *
  * Licensed under the BSD License, Version 2.0 (the License);
@@ -192,9 +192,9 @@ SqlField::~SqlField()
 {
 }
 
-bool SqlField::setValue(const String & value)
+bool SqlField::setValue(const String & v)
 {
-    this->value = value;
+    value = v;
     return true;
 }
 
