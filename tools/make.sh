@@ -143,5 +143,3 @@ fi
 
 source src/not_cpp/build_end.sh $debugType ../ $TarName $targetPlatform $targetBits $linkType
 cd proj
-
-exit
