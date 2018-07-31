@@ -1,4 +1,4 @@
-﻿/*  
+/*  
  * Copyright (c) 2015 ArmyAnt
  * 版权所有 (c) 2015 ArmyAnt
  *
@@ -76,6 +76,8 @@ public:
 	{
 #if defined OS_WINDOWS && !defined _CMAKE
 		return _fseeki64(file, offset, whence);
+#elif defined OS_BSD
+        return fseek(file, offset, whence);
 #else
 		return fseek(file, offset, whence);
 #endif

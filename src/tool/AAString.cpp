@@ -151,7 +151,7 @@ double String::toDemical() const
     return atof(AA_HANDLE_MANAGER[this]->c_str());
 }
 
-char String::getChar(int64 index) const{
+char String::getChar(int32 index) const{
 	if(index < 0)
 		index += AA_HANDLE_MANAGER[this]->size();
 	return (*(AA_HANDLE_MANAGER[this]))[index];

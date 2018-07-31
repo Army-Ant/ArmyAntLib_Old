@@ -1,4 +1,4 @@
-﻿/*
+/*
  * Copyright (c) 2015 ArmyAnt
  * 版权所有 (c) 2015 ArmyAnt
  *
@@ -148,7 +148,7 @@ public:
     String getSubString(const String& start, const char* endstr)const;
     String getSubString(const String& start, const String& endstr)const;
 
-	char getChar(int64 index)const;
+	char getChar(int32 index)const;
 
 public:
     // overloaded operators
