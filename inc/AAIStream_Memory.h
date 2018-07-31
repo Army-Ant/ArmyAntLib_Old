@@ -24,6 +24,7 @@
 #define AA_I_STREAM_MEMORY_H_2016_5_11
 
 #include "AAIStream.h"
+#include <cstring>
 
 namespace ArmyAnt {
 

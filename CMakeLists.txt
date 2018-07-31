@@ -105,6 +105,7 @@ add_definitions(
 set(CXX_SOURCE_FILES
         src/base/ArmyAntLib.cpp
         src/tool/AAString.cpp
+		src/tool/AALog.cpp
         src/data/AAAes.cpp
         src/data/AABinary.cpp
         src/data/AAJson.cpp
@@ -112,11 +113,10 @@ set(CXX_SOURCE_FILES
         src/io/AAIStream_File.cpp
         src/io/AAIStream_Memory.cpp
 		src/io/AASocket.cpp
+		src/io/AASqlClient.cpp
         src/io/C_AAStream.cpp
         src/algorithm/C_AANeuron.cpp
-        src/algorithm/AASqlStructs.cpp
-		src/io/AASqlClient.cpp
-        src/tool/AALog.cpp)
+        src/algorithm/AASqlStructs.cpp)
 
 set(TEST_CXX_SOURCE_FILES
         ${CXX_SOURCE_FILES}

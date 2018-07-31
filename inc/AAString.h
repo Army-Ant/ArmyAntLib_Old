@@ -26,6 +26,7 @@
 #include "AA_start.h"
 #include "AADefine.h"
 #include <iostream>
+#include <cstring>
 
 namespace ArmyAnt
 {
