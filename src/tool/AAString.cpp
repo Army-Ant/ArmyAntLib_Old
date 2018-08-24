@@ -35,120 +35,100 @@
 
 #define AA_HANDLE_MANAGER ClassPrivateHandleManager<String, std::string>::getInstance()
 
-namespace ArmyAnt
-{
+namespace ArmyAnt{
 
 
-String::String(const char * value)
-{
-    if(value == nullptr)
-        value = "";
-    auto newStr = new std::string(value);
+String::String(const char * value){
+	if(value == nullptr)
+		value = "";
+	auto newStr = new std::string(value);
 	AA_HANDLE_MANAGER.GetHandle(this, newStr);
 }
 
-String::String(char c)
-{
+String::String(char c){
 	AA_HANDLE_MANAGER.GetHandle(this, new std::string(c + std::string()));
 }
 
-String::String(int32 num)
-{
-    std::ostringstream tmp;
-    tmp << num;
+String::String(int32 num){
+	std::ostringstream tmp;
+	tmp << num;
 	AA_HANDLE_MANAGER.GetHandle(this, new std::string(tmp.str()));
 }
 
-String::String(const int64 & num)
-{
-    std::ostringstream tmp;
-    tmp << num;
-    AA_HANDLE_MANAGER.GetHandle(this, new std::string(tmp.str()));
+String::String(const int64 & num){
+	std::ostringstream tmp;
+	tmp << num;
+	AA_HANDLE_MANAGER.GetHandle(this, new std::string(tmp.str()));
 }
 
-String::String(double num, int32 behindFloat)
-{
-    if (behindFloat >= 0)
-    {
-        int64 powed = int64(pow(10, behindFloat));
-        num -= num - double(int64(num*powed)) / powed;
-    }
-    std::ostringstream tmp;
-    tmp << num;
-    AA_HANDLE_MANAGER.GetHandle(this, new std::string(tmp.str()));
+String::String(double num, int32 behindFloat){
+	if(behindFloat >= 0){
+		int64 powed = int64(pow(10, behindFloat));
+		num -= num - double(int64(num*powed)) / powed;
+	}
+	std::ostringstream tmp;
+	tmp << num;
+	AA_HANDLE_MANAGER.GetHandle(this, new std::string(tmp.str()));
 }
 
-String::String(const String & value)
-{
+String::String(const String & value){
 	AA_HANDLE_MANAGER.GetHandle(this, new std::string(*(AA_HANDLE_MANAGER[&value])));
 }
 
-String::String(String && _moved)
-{
-    auto ret = AA_HANDLE_MANAGER.handleMap.find(&_moved);
+String::String(String && _moved){
+	auto ret = AA_HANDLE_MANAGER.handleMap.find(&_moved);
 	AA_HANDLE_MANAGER.handleMap.insert(std::make_pair(this, ret->second));
 	AA_HANDLE_MANAGER.handleMap.erase(ret);
 }
 
-String::~String()
-{
-    if (AA_HANDLE_MANAGER[this] != nullptr)
-    {
-		
+String::~String(){
+	if(AA_HANDLE_MANAGER[this] != nullptr){
+
 		auto hd = AA_HANDLE_MANAGER.ReleaseHandle(this);
 		delete hd;
-    }
+	}
 }
 
-bool String::empty() const
-{
-    return AA_HANDLE_MANAGER[this]->empty();
+bool String::empty() const{
+	return AA_HANDLE_MANAGER[this]->empty();
 }
 
-const char * String::c_str() const
-{
-    return AA_HANDLE_MANAGER[this]->c_str();
+const char * String::c_str() const{
+	return AA_HANDLE_MANAGER[this]->c_str();
 }
 
-uint64 String::size() const
-{
-    return AA_HANDLE_MANAGER[this]->size();
+uint64 String::size() const{
+	return AA_HANDLE_MANAGER[this]->size();
 }
 
-bool String::isNumeric() const
-{
-    auto ret = (*AA_HANDLE_MANAGER[this]);
-    if (atof(ret.c_str()) == 0.0)
-        for (size_t i = 0; i < ret.size(); ++i)
-        {
-            if (ret[i] != ' ' && ret[i] != '0' && ret[i] != '.')
-                return false;
-        }
-    return true;
+bool String::isNumeric() const{
+	auto ret = (*AA_HANDLE_MANAGER[this]);
+	if(atof(ret.c_str()) == 0.0)
+		for(size_t i = 0; i < ret.size(); ++i){
+			if(ret[i] != ' ' && ret[i] != '0' && ret[i] != '.')
+				return false;
+		}
+	return true;
 }
 
-bool String::isFloat() const
-{
-    if (!isNumeric())
-        return false;
-    if (find('.') == c_npos)
-        return false;
-    return true;
+bool String::isFloat() const{
+	if(!isNumeric())
+		return false;
+	if(find('.') == c_npos)
+		return false;
+	return true;
 }
 
-int32 String::toInteger() const
-{
-    return atoi(AA_HANDLE_MANAGER[this]->c_str());
+int32 String::toInteger() const{
+	return atoi(AA_HANDLE_MANAGER[this]->c_str());
 }
 
-int64 String::toLong() const
-{
-    return atoll(AA_HANDLE_MANAGER[this]->c_str());
+int64 String::toLong() const{
+	return atoll(AA_HANDLE_MANAGER[this]->c_str());
 }
 
-double String::toDemical() const
-{
-    return atof(AA_HANDLE_MANAGER[this]->c_str());
+double String::toDemical() const{
+	return atof(AA_HANDLE_MANAGER[this]->c_str());
 }
 
 char String::getChar(int32 index) const{
@@ -157,38 +137,33 @@ char String::getChar(int32 index) const{
 	return (*(AA_HANDLE_MANAGER[this]))[index];
 }
 
-String & String::operator=(const String & value)
-{
-    *(AA_HANDLE_MANAGER[this]) = value.c_str();
-    return *this;
+String & String::operator=(const String & value){
+	*(AA_HANDLE_MANAGER[this]) = value.c_str();
+	return *this;
 }
 
-String & String::operator=(const char * value)
-{
-    *(AA_HANDLE_MANAGER[this]) = value;
-    return *this;
+String & String::operator=(const char * value){
+	*(AA_HANDLE_MANAGER[this]) = value;
+	return *this;
 }
 
-String & String::operator=(char c)
-{
-    *(AA_HANDLE_MANAGER[this]) = String() + c;
-    return *this;
+String & String::operator=(char c){
+	*(AA_HANDLE_MANAGER[this]) = String() + c;
+	return *this;
 }
 
-String & String::operator=(int64 value)
-{
-    std::ostringstream ss;
-    ss << value;
-    *(AA_HANDLE_MANAGER[this]) += ss.str();
-    return *this;
+String & String::operator=(int64 value){
+	std::ostringstream ss;
+	ss << value;
+	*(AA_HANDLE_MANAGER[this]) += ss.str();
+	return *this;
 }
 
-String & String::operator=(double value)
-{
-    std::ostringstream ss;
-    ss << value;
-    *(AA_HANDLE_MANAGER[this]) += ss.str();
-    return *this;
+String & String::operator=(double value){
+	std::ostringstream ss;
+	ss << value;
+	*(AA_HANDLE_MANAGER[this]) += ss.str();
+	return *this;
 }
 
 bool String::operator<(const String & value) const{
@@ -201,119 +176,100 @@ bool String::operator==(const String & value) const{
 	return *(AA_HANDLE_MANAGER[this]) == *(AA_HANDLE_MANAGER[&value]);
 }
 
-bool String::operator!=(const String & value) const
-{
-    return !operator==(value);
+bool String::operator!=(const String & value) const{
+	return !operator==(value);
 }
 
-bool String::operator==(const char * value) const
-{
-    return *(AA_HANDLE_MANAGER[this]) == value;
+bool String::operator==(const char * value) const{
+	return *(AA_HANDLE_MANAGER[this]) == value;
 }
 
-bool String::operator!=(const char * value) const
-{
-    return !operator==(value);
+bool String::operator!=(const char * value) const{
+	return !operator==(value);
 }
 
 String::operator const char*()const{
 	return c_str();
 }
 
-bool String::operator!() const
-{
-    return empty();
+bool String::operator!() const{
+	return empty();
 }
 
-String String::operator+(const String & value) const
-{
-    return String((*(AA_HANDLE_MANAGER[this]) + *(AA_HANDLE_MANAGER[&value])).c_str());
+String String::operator+(const String & value) const{
+	return String((*(AA_HANDLE_MANAGER[this]) + *(AA_HANDLE_MANAGER[&value])).c_str());
 }
 
-String String::operator+(const char * value) const
-{
-    return String((*(AA_HANDLE_MANAGER[this]) + value).c_str());
+String String::operator+(const char * value) const{
+	return String((*(AA_HANDLE_MANAGER[this]) + value).c_str());
 }
 
-String String::operator+(char c) const
-{
-    return String((*(AA_HANDLE_MANAGER[this]) + c).c_str());
+String String::operator+(char c) const{
+	return String((*(AA_HANDLE_MANAGER[this]) + c).c_str());
 }
 
-String String::operator+(int64 value) const
-{
-    std::ostringstream ss;
-    ss << AA_HANDLE_MANAGER[this];
-    ss << value;
-    return String(ss.str().c_str());
+String String::operator+(int64 value) const{
+	std::ostringstream ss;
+	ss << AA_HANDLE_MANAGER[this];
+	ss << value;
+	return String(ss.str().c_str());
 }
 
-String String::operator+(double value) const
-{
-    std::ostringstream ss;
-    ss << AA_HANDLE_MANAGER[this];
-    ss << value;
-    return String(ss.str().c_str());
+String String::operator+(double value) const{
+	std::ostringstream ss;
+	ss << AA_HANDLE_MANAGER[this];
+	ss << value;
+	return String(ss.str().c_str());
 }
 
-String & String::operator+=(const String & value)
-{
-    *(AA_HANDLE_MANAGER[this]) += *(AA_HANDLE_MANAGER[&value]);
-    return *this;
+String & String::operator+=(const String & value){
+	*(AA_HANDLE_MANAGER[this]) += *(AA_HANDLE_MANAGER[&value]);
+	return *this;
 }
 
-String & String::operator+=(const char * value)
-{
-    *(AA_HANDLE_MANAGER[this]) += value;
-    return *this;
+String & String::operator+=(const char * value){
+	*(AA_HANDLE_MANAGER[this]) += value;
+	return *this;
 }
 
-String & String::operator+=(char c)
-{
-    *(AA_HANDLE_MANAGER[this]) += c;
-    return *this;
+String & String::operator+=(char c){
+	*(AA_HANDLE_MANAGER[this]) += c;
+	return *this;
 }
 
-String & String::operator+=(int64 value)
-{
-    std::ostringstream ss;
-    ss << value;
-    *(AA_HANDLE_MANAGER[this]) += ss.str();
-    return *this;
+String & String::operator+=(int64 value){
+	std::ostringstream ss;
+	ss << value;
+	*(AA_HANDLE_MANAGER[this]) += ss.str();
+	return *this;
 }
 
-String & String::operator+=(double value)
-{
-    std::ostringstream ss;
-    ss << value;
-    *(AA_HANDLE_MANAGER[this]) += ss.str();
-    return *this;
+String & String::operator+=(double value){
+	std::ostringstream ss;
+	ss << value;
+	*(AA_HANDLE_MANAGER[this]) += ss.str();
+	return *this;
 }
 
-String operator+(char c, const String & str)
-{
-    return str + c;
+String operator+(char c, const String & str){
+	return str + c;
 }
 
-String operator+(String && temp, char c)
-{
-    temp += c;
-    return String(temp);
+String operator+(String && temp, char c){
+	temp += c;
+	return String(temp);
 }
 
 
-bool String::clearFront(const char ** value, uint32 length)
-{
+bool String::clearFront(const char ** value, uint32 length){
 	auto hddd = AA_HANDLE_MANAGER[this];
-    auto& str = *(hddd);
-    if (value == nullptr || length == 0 || str.empty())
-        return false;
-    int first = 0;
-    while (first<str.size())
-    {
-        bool isSame = false;
-        for (uint32 i = 0; i < length; ++i)
-        {
+	auto& str = *(hddd);
+	if(value == nullptr || length == 0 || str.empty())
+		return false;
+	int first = 0;
+	while(first < str.size()){
+		bool isSame = false;
+		for(uint32 i = 0; i < length; ++i){
 			if(value[i] != nullptr){
 				auto strLen = strlen(value[i]);
 				if(value[i][strLen - 1] == '\0')
@@ -330,30 +286,26 @@ bool String::clearFront(const char ** value, uint32 length)
 					break;
 				}
 			}
-        }
-        if (!isSame)
-            break;
-        ++first;
-    }
-    return subString(first);
+		}
+		if(!isSame)
+			break;
+		++first;
+	}
+	return subString(first);
 }
 
-bool String::clearBack(const char ** value, uint32 length)
-{
-    auto& str = *(AA_HANDLE_MANAGER[this]);
-    if (value == nullptr || length == 0 || str.empty())
-        return false;
-    int last = str.size();
-    std::vector<size_t> strlens;
-    for (uint32 i = 0; i < length; ++i)
-    {
-        strlens.push_back(strlen(value[i]));
-    }
-    while (last >= 0)
-    {
-        bool isSame = false;
-        for (uint32 i = 0; i < length; ++i)
-        {
+bool String::clearBack(const char ** value, uint32 length){
+	auto& str = *(AA_HANDLE_MANAGER[this]);
+	if(value == nullptr || length == 0 || str.empty())
+		return false;
+	int last = str.size();
+	std::vector<size_t> strlens;
+	for(uint32 i = 0; i < length; ++i){
+		strlens.push_back(strlen(value[i]));
+	}
+	while(last >= 0){
+		bool isSame = false;
+		for(uint32 i = 0; i < length; ++i){
 			if(value[i] != nullptr){
 				auto strLen = strlen(value[i]);
 				if(value[i][strLen - 1] == '\0')
@@ -370,77 +322,86 @@ bool String::clearBack(const char ** value, uint32 length)
 					break;
 				}
 			}
-        }
-        if (!isSame)
-            break;
-        --last;
-    }
-    return subString(int64(0), last);
+		}
+		if(!isSame)
+			break;
+		--last;
+	}
+	return subString(int64(0), last);
 }
 
-bool String::clearBothSides(const char ** value, uint32 length)
-{
-    return clearFront(value, length) && clearBack(value, length);
+bool String::clearBothSides(const char ** value, uint32 length){
+	return clearFront(value, length) && clearBack(value, length);
 }
 
-bool String::subString(int64 start)
-{
-    return subString(start, int64(0));
+bool String::subString(int64 start){
+	return subString(start, int64(0));
 }
 
-bool String::subString(int64 start, int64 end)
-{
-    auto& str = *(AA_HANDLE_MANAGER[this]);
-    auto size = str.size();
-    if (start < 0)
-        start += size;
-    if (end <= 0)
-        end += size;
-    if (start < 0 && end < 0 && start > end)
-        return false;
-    if (end < size)
-        str[end] = '\0';
-    std::string tmp = str.c_str() + start;
+bool String::subString(int64 start, int64 end){
+	auto& str = *(AA_HANDLE_MANAGER[this]);
+	auto size = str.size();
+	if(start < 0)
+		start += size;
+	if(end <= 0)
+		end += size;
+	if(start < 0 && end < 0 && start > end)
+		return false;
+	if(end < size)
+		str[end] = '\0';
+	std::string tmp = str.c_str() + start;
 	str = tmp.c_str();
-    return true;
+	return true;
 }
 
-int32 String::find(char c) const
-{
-    auto& str = *(AA_HANDLE_MANAGER[this]);
-    auto ret = str.find(c);
-    if (ret == str.npos)
-        return c_npos;
-    return int32(ret);
+int32 String::find(char c) const{
+	auto& str = *(AA_HANDLE_MANAGER[this]);
+	auto ret = str.find(c);
+	if(ret == str.npos)
+		return c_npos;
+	return int32(ret);
 }
 
 String operator+(const char*value, const String&str){
-    return str+value;
+	return String(value) + str;
 }
 
 String operator+(String&&temp, const String&value){
-    auto ret = String(temp);
-    ret += value;
-    return ret;
-}
-
-String operator+(String&&temp, const char*value){
-    auto ret = String(temp);
-    ret += value;
-    return ret;
-}
-
-String operator+(String && temp, int64 value)
-{
 	auto ret = String(temp);
 	ret += value;
 	return ret;
 }
 
-bool operator==(const char*cstr, const String&str)	{
+String operator+(String&&temp, const char*value){
+	auto ret = String(temp);
+	ret += value;
+	return ret;
+}
+
+String operator+(String && temp, int64 value){
+	auto ret = String(temp);
+	ret += value;
+	return ret;
+}
+
+bool operator==(const char*cstr, const String&str){
 	return str == cstr;
 }
 
+
+bool String::replace(char src, const char * tar){
+	auto& str = *(AA_HANDLE_MANAGER[this]);
+	auto len = str.length();
+	for(size_t i = 0; i < len; ++i){
+		if(str[i] == src){
+			str = str.replace(i, 1, tar);
+			auto newLen = str.length();
+			i += newLen - len;
+			len = newLen;
+		}
+	}
+	return true;
+}
 
 }
 
