@@ -37,25 +37,26 @@ String SqlStructHelper::getDataTypeName(SqlFieldType type) {
     switch (type) {
         case SqlFieldType::Null:
             return "null";
+		case SqlFieldType::MySql_BIT:
+			return "bit";
         case SqlFieldType::MySql_CHAR:      // TODO: mysql所有项目以及部分SqlServer项目都应当对括号内的长度限制作处理
             return "char(255)";
-        case SqlFieldType::MySql_VARCHAR:
-            return "varchar(255)";
-        case SqlFieldType::MySql_TINYTEXT:
-            return "tinytext";
-        case SqlFieldType::MySql_TEXT:
+		case SqlFieldType::MySql_VARCHAR:    //
+            return "varchar(1024)";
+        case SqlFieldType::MySql_GEOMETRY:
+            return "geometry";
         case SqlFieldType::MsSqlServer_text:
             return "text";
-        case SqlFieldType::MySql_BLOB:
-            return "blob";
-        case SqlFieldType::MySql_MEDIUMTEXT:
-            return "mediumtext";
-        case SqlFieldType::MySql_MEDIUMBLOB:
-            return "mediumblob";
-        case SqlFieldType::MySql_LONGTEXT:
-            return "longtext";
-        case SqlFieldType::MySql_LONGBLOB:
-            return "longblob";
+        case SqlFieldType::MySql_BINARY:    //
+            return "binary(4096)";
+        case SqlFieldType::MySql_VARBINARY:    //
+            return "varbinary(32768)";
+        case SqlFieldType::MySql_LONGVARCHAR:    //
+            return "varchar(32768)";
+        case SqlFieldType::MySql_LONGVARBINARY:    //
+            return "varbinary(262144)";
+        case SqlFieldType::MySql_JSON:
+            return "json";
         case SqlFieldType::MySql_ENUM:
             return "enum()";    // TODO: 需要对mysql枚举作特殊处理,下面set同
         case SqlFieldType::MySql_SET:
@@ -239,11 +240,15 @@ uint32 SqlRow::size() const
 
 const SqlField & SqlRow::operator[](int32 index)const
 {
-    if (index < 0)
-        index += length;
-    if (index >= length || index < 0)
-        throw nullptr;
-    return fields[index];
+	return const_cast<SqlRow*>(this)->operator[](index);
+}
+
+SqlField & SqlRow::operator[](int32 index){
+	if(index < 0)
+		index += length;
+	if(index >= length || index < 0)
+		throw nullptr;
+	return fields[index];
 }
 
 SqlColumn::SqlColumn(const SqlColumn & copied)
@@ -286,11 +291,15 @@ const SqlFieldHead * SqlColumn::getHead(uint32 index) const
 
 const SqlField & SqlColumn::operator[](int32 index) const
 {
-    if (index < 0)
-        index += length;
-    if (index >= length || index < 0)
-        throw nullptr;
-    return fields[index];
+	return const_cast<SqlColumn*>(this)->operator[](index);
+}
+
+SqlField & SqlColumn::operator[](int32 index){
+	if(index < 0)
+		index += length;
+	if(index >= length || index < 0)
+		throw nullptr;
+	return fields[index];
 }
 
 SqlTable::SqlTable(const SqlTable & copied)
@@ -327,6 +336,44 @@ SqlTable::SqlTable(SqlTable && moved)
     moved._height = 0;
 }
 
+SqlTable & SqlTable::operator=(const SqlTable & copied){
+	Fragment::AA_SAFE_DELALL(heads);
+	for(uint32 i = 0; i < _height; ++i){
+		Fragment::AA_SAFE_DELALL(fields[i]);
+	}
+	Fragment::AA_SAFE_DELALL(fields);
+	_width = copied._width;
+	_height = copied._height;
+	if(_width > 0){
+		heads = new SqlFieldHead[_width];
+		for(uint32 i = 0; i < _width; ++i){
+			heads[i] = copied.heads[i];
+		}
+		if(_height > 0){
+			fields = new SqlField*[_height];
+			for(uint32 i = 0; i < _height; ++i){
+				fields[i] = new SqlField[_width];
+				for(uint32 n = 0; n < _width; ++n){
+					fields[i][n] = copied.fields[i][n];
+				}
+			}
+		}
+	}
+	return *this;
+}
+
+SqlTable & SqlTable::operator=(SqlTable && moved){
+	_width = moved._width;
+	_height = moved._height;
+	heads = moved.heads;
+	fields = moved.fields;
+	moved._width = 0;
+	moved._height = 0;
+	moved.heads = nullptr;
+	moved.fields = nullptr;
+	return *this;
+}
+
 SqlTable::~SqlTable()
 {
     Fragment::AA_SAFE_DELALL(heads);
@@ -361,37 +408,33 @@ const SqlFieldHead * SqlTable::getHead(int32 index) const
     return heads + index;
 }
 
-SqlRow SqlTable::operator[](int32 index)
-{
-    if (index < 0)
-        index += _height;
-    if (index >= _height || index < 0 || _width <= 0)
-        throw nullptr;
-    char tmp[sizeof(SqlRow)] = "";
-    SqlRow ret = *reinterpret_cast<SqlRow*>(tmp);
-    ret.length = _width;
-    ret.fields = new SqlField[_width];
-    for (uint32 i = 0; i < _width; ++i)
-    {
-        ret.fields[i] = fields[index][i];
-    }
-    return ret;
+SqlRow SqlTable::operator[](int32 index){
+	if(index < 0)
+		index += _height;
+	if(index >= _height || index < 0 || _width <= 0)
+		throw nullptr;
+	char tmp[sizeof(SqlRow)] = "";
+	SqlRow ret = *reinterpret_cast<SqlRow*>(tmp);
+	ret.length = _width;
+	ret.fields = new SqlField[_width];
+	for(uint32 i = 0; i < _width; ++i){
+		ret.fields[i] = fields[index][i];
+	}
+	return ret;
 }
 
-const SqlRow SqlTable::operator[](int32 index)const
-{
-    return const_cast<SqlTable*>(this)->operator[](index);
+const SqlField & SqlTable::operator()(int32 rowIndex, int32 colIndex)const{
+    return const_cast<SqlTable*>(this)->operator()(rowIndex, colIndex);
 }
 
-const SqlField & SqlTable::operator()(int32 rowIndex, int32 colIndex)const
-{
-    if (rowIndex < 0)
-        rowIndex += _height;
-    if (colIndex < 0)
-        colIndex += _width;
-    if (rowIndex >= _height || rowIndex < 0 || colIndex >= _width || colIndex < 0)
-        throw nullptr;
-    return fields[rowIndex][colIndex];
+SqlField & SqlTable::operator()(int32 rowIndex, int32 colIndex){
+	if(rowIndex < 0)
+		rowIndex += _height;
+	if(colIndex < 0)
+		colIndex += _width;
+	if(rowIndex >= _height || rowIndex < 0 || colIndex >= _width || colIndex < 0)
+		throw nullptr;
+	return fields[rowIndex][colIndex];
 }
 
 SqlColumn SqlTable::operator()(std::nullptr_t, int32 colIndex)
@@ -416,6 +459,26 @@ SqlColumn SqlTable::operator()(std::nullptr_t, int32 colIndex)
 const SqlColumn SqlTable::operator()(std::nullptr_t, int32 colIndex)const
 {
     return const_cast<SqlTable *>(this)->operator()(nullptr, colIndex);
+}
+
+SqlTable::SqlTable(const SqlFieldHead* heads, uint32 width, uint32 height)
+	:_width(width), _height(height), heads(nullptr), fields(nullptr){
+	if(width > 0){
+		this->heads = new SqlFieldHead[width];
+		for(uint32 i = 0; i < width; ++i){
+			this->heads[i] = heads[i];
+		}
+		if(_height > 0){
+			fields = new SqlField*[_height];
+			for(uint32 i = 0; i < _height; ++i){
+				fields[i] = new SqlField[width];
+				for(uint32 n = 0; n < _width; ++n){
+					fields[i][n].head = heads + n;
+					fields[i][n].value = "";
+				}
+			}
+		}
+	}
 }
 
 
