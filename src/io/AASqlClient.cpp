@@ -32,34 +32,34 @@ namespace ArmyAnt {
     ISqlClient::~ISqlClient() {
     }
 
-    SqlTable ISqlClient::getWholeTable(const String &dbName, const String &tableName) {
-        return select(dbName, tableName);
+    SqlTable ISqlClient::getWholeTable(const String &tableName) {
+        return select( tableName);
     }
 
-    SqlTable ISqlClient::getWholeView(const String &dbName, const String &tableName) {
-        return select(dbName, tableName);
+    SqlTable ISqlClient::getWholeView(const String &tableName) {
+        return select( tableName);
     }
 
     SqlTable
-    ISqlClient::select(const String &dbName, const String &tableName, const SqlClause *clauses, int clausesNum) {
-        return query("select * from " + dbName + '.' + tableName + organizeSqlClause(clauses, clausesNum));
+    ISqlClient::select(const String &tableName, const SqlClause *clauses, int clausesNum) {
+        return query("select * from " + tableName + organizeSqlClause(clauses, clausesNum));
     }
 
-    SqlTable ISqlClient::select(const String &dbName, const String &tableName, const String *columnNames, int columnNum,
+    SqlTable ISqlClient::select(const String &tableName, const String *columnNames, int columnNum,
                                 const SqlClause *clauses, int clausesNum) {
         String sql = "select ";
         if (columnNames != nullptr)
             for (int i = 0; i < columnNum; ++i) {
                 sql += columnNames[i] + " , ";
             }
-        return query(sql + "from " + dbName + '.' + tableName + organizeSqlClause(clauses, clausesNum));
+        return query(sql + "from " + tableName + organizeSqlClause(clauses, clausesNum));
     }
 
-	int64 ISqlClient::update(const String &dbName, const String &tableName, const SqlRow &updatedData,
+	int64 ISqlClient::update(const String &tableName, const SqlRow &updatedData,
                             const SqlClause *clauses, int clausesNum) {
         if (updatedData.size() <= 0)
             return -1;
-        String sql = "update " + dbName + '.' + tableName + " set ";
+        String sql = "update " + tableName + " set ";
         for (uint32 i = 0; i < updatedData.size(); ++i) {
             sql += updatedData[i].getHead()->columnName + " = \"" + updatedData[i].getValue() + "\" ";
             if (i != updatedData.size() - 1)
@@ -68,7 +68,7 @@ namespace ArmyAnt {
         return update(sql + organizeSqlClause(clauses, clausesNum));
     }
 
-	int64 ISqlClient::insertRow(const String &dbName, const String &tableName, const SqlRow &insertedData) {
+	int64 ISqlClient::insertRow(const String &tableName, const SqlRow &insertedData) {
         if (insertedData.size() <= 0)
             return -1;
         String keys = "";
@@ -82,29 +82,29 @@ namespace ArmyAnt {
             }
         }
 
-        return update("insert into " + dbName + '.' + tableName + " ( " + keys + " ) values ( " + values + " )");
+        return update("insert into " + tableName + " ( " + keys + " ) values ( " + values + " )");
     }
 
-	int64 ISqlClient::insertColumn(const String &dbName, const String &tableName, const SqlFieldHead &columnHead) {
-        return update("alter table " + dbName + '.' + tableName + " add " + organizeColumnInfo(columnHead));
+	int64 ISqlClient::insertColumn(const String &tableName, const SqlFieldHead &columnHead) {
+        return update("alter table " + tableName + " add " + organizeColumnInfo(columnHead));
     }
 
-	int64 ISqlClient::insertColumn(const String &dbName, const String &tableName, const SqlColumn &column) {
+	int64 ISqlClient::insertColumn(const String &tableName, const SqlColumn &column) {
         for (uint32 i = 0; i < column.size(); ++i) {
-            if (!insertColumn(dbName, tableName, *(column.getHead(i))))
+            if (!insertColumn(tableName, *(column.getHead(i))))
                 return -1;
         }
         return column.size() > 0;
     }
 
-	int64 ISqlClient::deleteRow(const String &dbName, const String &tableName, const SqlClause *where) {
+	int64 ISqlClient::deleteRow(const String &tableName, const SqlClause *where) {
         if (where != nullptr && where->type != SqlClauseType::Where)
             return -1;
-        return update("delete from " + dbName + '.' + tableName + ' ' + organizeSqlClause(where, 1));
+        return update("delete from " + tableName + ' ' + organizeSqlClause(where, 1));
     }
 
-	int64 ISqlClient::deleteColumn(const String &dbName, const String &tableName, const String &columnName) {
-        return update("alter table " + dbName + '.' + tableName + " drop column " + columnName);
+	int64 ISqlClient::deleteColumn(const String &tableName, const String &columnName) {
+        return update("alter table " + tableName + " drop column " + columnName);
     }
 
 	int64 ISqlClient::createDatabase(const String &dbName) {
@@ -115,10 +115,10 @@ namespace ArmyAnt {
         return update("drop database "+dbName);
     }
 
-	int64 ISqlClient::createTable(const String &dbName, const String &tableName, const SqlColumn&column, const SqlTableInfo*tableInfo) {
+	int64 ISqlClient::createTable(const String &tableName, const SqlColumn&column, const SqlTableInfo*tableInfo) {
         if(column.size()<=0)
             return -1;
-        String sql = "create table " + dbName+'.'+tableName+" ( ";
+        String sql = "create table " + tableName+" ( ";
         for(uint32 i=0;i<column.size();++i){
             sql += organizeColumnInfo(*(column[i].getHead()));
             if(i< column.size()-1)
@@ -127,8 +127,8 @@ namespace ArmyAnt {
         return update(sql + " )");
     }
 
-	int64 ISqlClient::deleteTable(const String &dbName, const String &tableName) {
-        return update("drop table "+dbName+'.'+tableName);
+	int64 ISqlClient::deleteTable(const String &tableName) {
+        return update("drop table "+tableName);
     }
 
     String ISqlClient::organizeColumnInfo(const SqlFieldHead &column) {
