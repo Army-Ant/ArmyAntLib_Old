@@ -49,7 +49,7 @@ public:
 	virtual int64 getViewNameList(ArmyAnt::String*&views, uint32 maxCount = 0)=0;
     virtual SqlTable getWholeTable(const String&tableName);
     virtual SqlTable getWholeView(const String&tableName);
-	virtual ArmyAnt::SqlTable getTableAllFields(ArmyAnt::String*&tables)=0;
+	virtual int64 getTableAllFields(const ArmyAnt::String&table, ArmyAnt::String*&fields, uint32 maxCount = 0) = 0;
 
 public:
     // select * from [tableName]
