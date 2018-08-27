@@ -723,9 +723,10 @@ void Socket_Private::errorThreading(Socket_Private*self){
 	while(self->isErrorThreadRunning){
 		std::this_thread::sleep_for(std::chrono::milliseconds(1));
 		while(!self->errorInfos.empty()){
-			auto errorInfo = self->errorInfos.back();
+			auto errorInfo = self->errorInfos.front();
 			if(self->errorReportCallBack != nullptr)
 				self->errorReportCallBack(errorInfo.err, *errorInfo.addr, errorInfo.port, errorInfo.functionName, self->errorReportUserData);
+			self->errorInfos.pop();
 		}
 	}
 }
@@ -785,19 +786,19 @@ void TCPServer_Private::onReceived(TCPServer*server, std::shared_ptr<boost::asio
 			hd->gettingCallBack(index, client->buffer, size, hd->gettingCallData);
 			memset(client->buffer, 0, hd->maxBufferLen);
 		}
-	} else switch(err.value()){
-		case boost::asio::error::eof:
-			// TODO : TCP服务器无法主动重新连接掉线的客户端, 因此此回调的返回值无效, 需要注明
-			hd->lostCallBack(index, hd->lostCallData);
-			server->givenUpClient(*client->addr, client->port);
-			return;
-		default:
-		{
-			auto v = err.value();
-			auto m = err.message();
-			SocketException e(SocketException::ErrorType::SystemError, m.c_str(), v);
-			hd->reportError(e, *client->addr, client->port, "onReceived");
-			break;
+	} else{
+		auto v = err.value();
+		auto m = err.message();
+		SocketException e(SocketException::ErrorType::SystemError, m.c_str(), v);
+		hd->reportError(e, *client->addr, client->port, "onReceived");
+		switch(err.value()){
+			case boost::asio::error::eof:
+			case boost::asio::error::connection_aborted:
+			case boost::asio::error::connection_reset:
+				// TODO : TCP服务器无法主动重新连接掉线的客户端, 因此此回调的返回值无效, 需要注明
+				hd->lostCallBack(index, hd->lostCallData);
+				server->givenUpClient(*client->addr, client->port);
+				return;
 		}
 	}
 	memset(client->buffer, 0, hd->maxBufferLen);
