@@ -423,7 +423,7 @@ bool File::IsFileExist(const char*path)
 
 File* File::GetStream(uint32 handle)
 {
-	return 	static_cast<File*>(AA_HANDLE_MANAGER.GetSourceByHandle(reinterpret_cast<IStream_Private*>(mac_uint(handle))));
+	return const_cast<File*>(static_cast<const File*>(AA_HANDLE_MANAGER.GetSourceByHandle(reinterpret_cast<IStream_Private*>(mac_uint(handle)))));
 }
 
 bool File::operator^=(const char* filename)

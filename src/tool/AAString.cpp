@@ -43,22 +43,26 @@ String::String(const char * value){
 		value = "";
 	auto newStr = new std::string(value);
 	AA_HANDLE_MANAGER.GetHandle(this, newStr);
+	resetValue();
 }
 
 String::String(char c){
 	AA_HANDLE_MANAGER.GetHandle(this, new std::string(c + std::string()));
+	resetValue();
 }
 
 String::String(int32 num){
 	std::ostringstream tmp;
 	tmp << num;
 	AA_HANDLE_MANAGER.GetHandle(this, new std::string(tmp.str()));
+	resetValue();
 }
 
 String::String(const int64 & num){
 	std::ostringstream tmp;
 	tmp << num;
 	AA_HANDLE_MANAGER.GetHandle(this, new std::string(tmp.str()));
+	resetValue();
 }
 
 String::String(double num, int32 behindFloat){
@@ -69,20 +73,23 @@ String::String(double num, int32 behindFloat){
 	std::ostringstream tmp;
 	tmp << num;
 	AA_HANDLE_MANAGER.GetHandle(this, new std::string(tmp.str()));
+	resetValue();
 }
 
 String::String(const String & value){
 	AA_HANDLE_MANAGER.GetHandle(this, new std::string(*(AA_HANDLE_MANAGER[&value])));
+	resetValue();
 }
 
 String::String(String && _moved){
 	auto ret = AA_HANDLE_MANAGER.handleMap.find(&_moved);
 	AA_HANDLE_MANAGER.handleMap.insert(std::make_pair(this, ret->second));
 	AA_HANDLE_MANAGER.handleMap.erase(ret);
+	resetValue();
 }
 
 String::~String(){
-	if(AA_HANDLE_MANAGER[this] != nullptr){
+	if(AA_HANDLE_MANAGER.GetDataByHandle(this, true) != nullptr){
 
 		auto hd = AA_HANDLE_MANAGER.ReleaseHandle(this);
 		delete hd;
@@ -139,16 +146,19 @@ char String::getChar(int32 index) const{
 
 String & String::operator=(const String & value){
 	*(AA_HANDLE_MANAGER[this]) = value.c_str();
+	resetValue();
 	return *this;
 }
 
 String & String::operator=(const char * value){
 	*(AA_HANDLE_MANAGER[this]) = value;
+	resetValue();
 	return *this;
 }
 
 String & String::operator=(char c){
 	*(AA_HANDLE_MANAGER[this]) = String() + c;
+	resetValue();
 	return *this;
 }
 
@@ -156,6 +166,7 @@ String & String::operator=(int64 value){
 	std::ostringstream ss;
 	ss << value;
 	*(AA_HANDLE_MANAGER[this]) += ss.str();
+	resetValue();
 	return *this;
 }
 
@@ -163,6 +174,7 @@ String & String::operator=(double value){
 	std::ostringstream ss;
 	ss << value;
 	*(AA_HANDLE_MANAGER[this]) += ss.str();
+	resetValue();
 	return *this;
 }
 
@@ -224,16 +236,19 @@ String String::operator+(double value) const{
 
 String & String::operator+=(const String & value){
 	*(AA_HANDLE_MANAGER[this]) += *(AA_HANDLE_MANAGER[&value]);
+	resetValue();
 	return *this;
 }
 
 String & String::operator+=(const char * value){
 	*(AA_HANDLE_MANAGER[this]) += value;
+	resetValue();
 	return *this;
 }
 
 String & String::operator+=(char c){
 	*(AA_HANDLE_MANAGER[this]) += c;
+	resetValue();
 	return *this;
 }
 
@@ -241,6 +256,7 @@ String & String::operator+=(int64 value){
 	std::ostringstream ss;
 	ss << value;
 	*(AA_HANDLE_MANAGER[this]) += ss.str();
+	resetValue();
 	return *this;
 }
 
@@ -248,6 +264,7 @@ String & String::operator+=(double value){
 	std::ostringstream ss;
 	ss << value;
 	*(AA_HANDLE_MANAGER[this]) += ss.str();
+	resetValue();
 	return *this;
 }
 
@@ -351,6 +368,7 @@ bool String::subString(int64 start, int64 end){
 		str[end] = '\0';
 	std::string tmp = str.c_str() + start;
 	str = tmp.c_str();
+	resetValue();
 	return true;
 }
 
@@ -367,13 +385,13 @@ String operator+(const char*value, const String&str){
 }
 
 String operator+(String&&temp, const String&value){
-	auto ret = String(temp);
+	String ret(temp);
 	ret += value;
 	return ret;
 }
 
 String operator+(String&&temp, const char*value){
-	auto ret = String(temp);
+	String ret(temp);
 	ret += value;
 	return ret;
 }
@@ -400,7 +418,14 @@ bool String::replace(char src, const char * tar){
 			len = newLen;
 		}
 	}
+	resetValue();
 	return true;
+}
+
+void String::resetValue(){
+#ifdef _DEBUG
+	v = AA_HANDLE_MANAGER[this]->c_str();
+#endif
 }
 
 }

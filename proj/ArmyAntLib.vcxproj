@@ -276,7 +276,7 @@
       <SubSystem>NotSet</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <Version>0.0</Version>
-      <ProgramDatabaseFile>$(ProjectDir)out\$(TargetName).pdb</ProgramDatabaseFile>
+      <ProgramDatabaseFile>$(ProjectDir)..\bin\$(TargetName).pdb</ProgramDatabaseFile>
       <ManifestFile>$(ProjectDir)out\$(TargetName)$(TargetExt).intermediate.manifest</ManifestFile>
     </Link>
     <BuildLog>
@@ -308,7 +308,7 @@
       <SubSystem>NotSet</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <Version>0.0</Version>
-      <ProgramDatabaseFile>$(ProjectDir)out\$(TargetName).pdb</ProgramDatabaseFile>
+      <ProgramDatabaseFile>$(ProjectDir)..\bin\$(TargetName).pdb</ProgramDatabaseFile>
       <ManifestFile>$(ProjectDir)out\$(TargetName)$(TargetExt).intermediate.manifest</ManifestFile>
     </Link>
     <BuildLog>
@@ -402,7 +402,7 @@
       <SubSystem>NotSet</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <Version>0.0</Version>
-      <ProgramDatabaseFile>$(ProjectDir)out\$(TargetName).pdb</ProgramDatabaseFile>
+      <ProgramDatabaseFile>$(ProjectDir)..\bin\$(TargetName).pdb</ProgramDatabaseFile>
       <ManifestFile>$(ProjectDir)out\$(TargetName)$(TargetExt).intermediate.manifest</ManifestFile>
     </Link>
     <BuildLog>
@@ -465,7 +465,7 @@
       <OptimizeReferences>true</OptimizeReferences>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <Version>0.0</Version>
-      <ProgramDatabaseFile>$(ProjectDir)out\$(TargetName).pdb</ProgramDatabaseFile>
+      <ProgramDatabaseFile>$(ProjectDir)..\bin\$(TargetName).pdb</ProgramDatabaseFile>
       <ImageHasSafeExceptionHandlers />
       <ManifestFile>$(ProjectDir)out\$(TargetName)$(TargetExt).intermediate.manifest</ManifestFile>
     </Link>
@@ -502,7 +502,7 @@
       <OptimizeReferences>true</OptimizeReferences>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <Version>0.0</Version>
-      <ProgramDatabaseFile>$(ProjectDir)out\$(TargetName).pdb</ProgramDatabaseFile>
+      <ProgramDatabaseFile>$(ProjectDir)..\bin\$(TargetName).pdb</ProgramDatabaseFile>
       <ImageHasSafeExceptionHandlers>
       </ImageHasSafeExceptionHandlers>
       <ManifestFile>$(ProjectDir)out\$(TargetName)$(TargetExt).intermediate.manifest</ManifestFile>
@@ -539,7 +539,7 @@
       <OptimizeReferences>true</OptimizeReferences>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <Version>0.0</Version>
-      <ProgramDatabaseFile>$(ProjectDir)out\$(TargetName).pdb</ProgramDatabaseFile>
+      <ProgramDatabaseFile>$(ProjectDir)..\bin\$(TargetName).pdb</ProgramDatabaseFile>
       <ManifestFile>$(ProjectDir)out\$(TargetName)$(TargetExt).intermediate.manifest</ManifestFile>
     </Link>
     <BuildLog>
@@ -697,6 +697,11 @@
   </ItemGroup>
   <ItemGroup>
     <Text Include="..\CMakeLists.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <Natvis Include="..\src\not_cpp\ArmyAntNatvisFile.natvis">
+      <SubType>Designer</SubType>
+    </Natvis>
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

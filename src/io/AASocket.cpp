@@ -791,7 +791,7 @@ void TCPServer_Private::onReceived(TCPServer*server, std::shared_ptr<boost::asio
 		auto m = err.message();
 		SocketException e(SocketException::ErrorType::SystemError, m.c_str(), v);
 		hd->reportError(e, *client->addr, client->port, "onReceived");
-		switch(err.value()){
+		switch(v){
 			case boost::asio::error::eof:
 			case boost::asio::error::connection_aborted:
 			case boost::asio::error::connection_reset:
@@ -847,11 +847,20 @@ void TCPClient_Private::onReceived(Socket::ClientConnectCall asyncConnectCallBac
 		if(size > 0){
 			hd->gettingCallBack(hd->buffer, size, hd->gettingCallData);
 		}
-	} else switch(err.value()){
-		case boost::asio::error::eof:
-			if(hd->lostCallBack(hd->lostCallData))
-				client->connectServer(hd->localport, hd->isAsync, asyncConnectCallBack, asyncConnectCallData);
-			return;
+	} else{
+		auto v = err.value();
+		auto m = err.message();
+		SocketException e(SocketException::ErrorType::SystemError, m.c_str(), v);
+		hd->reportError(e, *hd->addr, hd->port, "onReceived");
+		switch(v){
+			case boost::asio::error::eof:
+			case boost::asio::error::connection_aborted:
+			case boost::asio::error::connection_reset:
+				client->disconnectServer(20000);
+				if(hd->lostCallBack(hd->lostCallData))
+					client->connectServer(hd->localport, hd->isAsync, asyncConnectCallBack, asyncConnectCallData);
+				return;
+		}
 	}
 	hd->s->async_read_some(boost::asio::buffer(hd->buffer, hd->maxBufferLen), std::bind(onReceived, asyncConnectCallBack, asyncConnectCallData, client, std::placeholders::_1, std::placeholders::_2));
 }
@@ -1197,6 +1206,7 @@ bool TCPClient::connectServer(uint16 port, bool isAsync, ClientConnectCall async
 		auto msg = e.code().message();
 		SocketException ex(SocketException::ErrorType::SystemError, msg.c_str(), code);
 		hd->reportError(ex, *hd->addr, hd->port, "ConnectServer");
+		disconnectServer(10000);
 		return false;
 	}
 	if(isAsync){
@@ -1209,6 +1219,7 @@ bool TCPClient::connectServer(uint16 port, bool isAsync, ClientConnectCall async
 			auto msg = e.code().message();
 			SocketException ex(SocketException::ErrorType::SystemError, msg.c_str(), code);
 			hd->reportError(ex, *hd->addr, hd->port, "ConnectServer");
+			disconnectServer(20000);
 			return false;
 		}
 		hd->onConnect(asyncConnectCallBack, asyncConnectCallData, this, boost::system::error_code());
