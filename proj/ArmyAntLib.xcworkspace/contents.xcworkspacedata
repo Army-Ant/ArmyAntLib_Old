@@ -5,7 +5,7 @@
       location = "group:ArmyAntLib.sln">
    </FileRef>
    <FileRef
-      location = "group:ArmyAntLib_Test/ArmyAntLib_Test.xcodeproj">
+      location = "group:ArmyAntLib_Test.xcodeproj">
    </FileRef>
    <FileRef
       location = "container:ArmyAnt.xcodeproj">
