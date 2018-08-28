@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		9614E14221353C13000C8969 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9614E14121353C13000C8969 /* main.cpp */; };
+		966A083E213545DE00EDAE08 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 966A083D213545DE00EDAE08 /* main.cpp */; };
 		C3EBA1591ED53D9400647939 /* libArmyAntLib_mac.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = C323BC7C1ED4050B004DF62D /* libArmyAntLib_mac.dylib */; };
 /* End PBXBuildFile section */
 
@@ -24,8 +24,10 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		9614E14021353C12000C8969 /* main.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = main.h; path = ../../../test/main.h; sourceTree = "<group>"; };
-		9614E14121353C13000C8969 /* main.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = main.cpp; path = ../../../test/main.cpp; sourceTree = "<group>"; };
+		966A083C213545DE00EDAE08 /* main.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = main.h; path = ../../test/main.h; sourceTree = "<group>"; };
+		966A083D213545DE00EDAE08 /* main.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = main.cpp; path = ../../test/main.cpp; sourceTree = "<group>"; };
+		966A08412135462200EDAE08 /* ArmyAntLib_Test.vcxproj.filters */ = {isa = PBXFileReference; lastKnownFileType = text.xml; name = ArmyAntLib_Test.vcxproj.filters; path = ../ArmyAntLib_Test.vcxproj.filters; sourceTree = "<group>"; };
+		966A08422135462200EDAE08 /* ArmyAntLib_Test.vcxproj */ = {isa = PBXFileReference; lastKnownFileType = text.xml; name = ArmyAntLib_Test.vcxproj; path = ../ArmyAntLib_Test.vcxproj; sourceTree = "<group>"; };
 		C323BC791ED401A4004DF62D /* libArmyAntLib_mac.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libArmyAntLib_mac.dylib; path = "../../../../../../../Users/cast/Library/Developer/Xcode/DerivedData/ArmyAntLib-dgfebhcsldgrpmbsubutllrwhydk/Build/Products/Debug/libArmyAntLib_mac.dylib"; sourceTree = "<group>"; };
 		C323BC7C1ED4050B004DF62D /* libArmyAntLib_mac.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libArmyAntLib_mac.dylib; path = ../DerivedData/ArmyAntLib/Build/Products/Debug/libArmyAntLib_mac.dylib; sourceTree = "<group>"; };
 		C33E28341ECAA88200FD7958 /* ArmyAntLib_Test */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = ArmyAntLib_Test; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -47,10 +49,37 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		966A083B213545CE00EDAE08 /* source */ = {
+			isa = PBXGroup;
+			children = (
+				966A083D213545DE00EDAE08 /* main.cpp */,
+				966A083C213545DE00EDAE08 /* main.h */,
+			);
+			name = source;
+			sourceTree = "<group>";
+		};
+		966A083F213545F900EDAE08 /* others */ = {
+			isa = PBXGroup;
+			children = (
+				966A08402135460200EDAE08 /* _other_projects */,
+			);
+			name = others;
+			sourceTree = "<group>";
+		};
+		966A08402135460200EDAE08 /* _other_projects */ = {
+			isa = PBXGroup;
+			children = (
+				966A08422135462200EDAE08 /* ArmyAntLib_Test.vcxproj */,
+				966A08412135462200EDAE08 /* ArmyAntLib_Test.vcxproj.filters */,
+			);
+			name = _other_projects;
+			sourceTree = "<group>";
+		};
 		C33E282B1ECAA88100FD7958 = {
 			isa = PBXGroup;
 			children = (
-				C33E28361ECAA88200FD7958 /* source */,
+				966A083F213545F900EDAE08 /* others */,
+				966A083B213545CE00EDAE08 /* source */,
 				C33E28351ECAA88200FD7958 /* Products */,
 				C39DB5D91ECADE35002A11E9 /* Frameworks */,
 			);
@@ -62,16 +91,6 @@
 				C33E28341ECAA88200FD7958 /* ArmyAntLib_Test */,
 			);
 			name = Products;
-			sourceTree = "<group>";
-		};
-		C33E28361ECAA88200FD7958 /* source */ = {
-			isa = PBXGroup;
-			children = (
-				9614E14121353C13000C8969 /* main.cpp */,
-				9614E14021353C12000C8969 /* main.h */,
-			);
-			name = source;
-			path = ArmyAntLib_Test;
 			sourceTree = "<group>";
 		};
 		C39DB5D91ECADE35002A11E9 /* Frameworks */ = {
@@ -144,7 +163,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				9614E14221353C13000C8969 /* main.cpp in Sources */,
+				966A083E213545DE00EDAE08 /* main.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -2,6 +2,12 @@
 <Workspace
    version = "1.0">
    <FileRef
+      location = "group:ArmyAntLib.sln">
+   </FileRef>
+   <FileRef
+      location = "group:ArmyAntLib_Test/ArmyAntLib_Test.xcodeproj">
+   </FileRef>
+   <FileRef
       location = "container:ArmyAnt.xcodeproj">
    </FileRef>
 </Workspace>
