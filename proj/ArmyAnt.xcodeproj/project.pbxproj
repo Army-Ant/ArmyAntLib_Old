@@ -295,9 +295,9 @@
 		C33E283E1ECAA88200FD7958 /* ArmyAntLib_Test.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = ArmyAntLib_Test.xcodeproj; path = ArmyAntLib_Test/ArmyAntLib_Test.xcodeproj; sourceTree = "<group>"; };
 		C39DB5EA1ECAF403002A11E9 /* AAJson.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AAJson.h; path = ../inc/AAJson.h; sourceTree = "<group>"; };
 		C39DB5ED1ECAF499002A11E9 /* AAString.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AAString.h; path = ../inc/AAString.h; sourceTree = "<group>"; };
-		C3EBA1551ED53D6E00647939 /* libArmyAntLib_mac.dylib */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.dylib"; includeInIndex = 0; path = libArmyAntLib_mac.dylib; sourceTree = BUILT_PRODUCTS_DIR; };
-		C3EBA1561ED53D6E00647939 /* libArmyAntLib_ios.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libArmyAntLib_ios.a; sourceTree = BUILT_PRODUCTS_DIR; };
-		C3EBA1571ED53D6E00647939 /* libArmyAntLib_static.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libArmyAntLib_static.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		C3EBA1551ED53D6E00647939 /* libArmyAntLib_mac_d.dylib */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.dylib"; includeInIndex = 0; path = libArmyAntLib_mac_d.dylib; sourceTree = BUILT_PRODUCTS_DIR; };
+		C3EBA1561ED53D6E00647939 /* libArmyAntLib_ios_d.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libArmyAntLib_ios_d.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		C3EBA1571ED53D6E00647939 /* libArmyAntLib_static_d.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libArmyAntLib_static_d.a; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -332,9 +332,9 @@
 				3E38EEC01DE6830600E1F22D /* others */,
 				3E38EEBF1DE682F700E1F22D /* source */,
 				C33E283E1ECAA88200FD7958 /* ArmyAntLib_Test.xcodeproj */,
-				C3EBA1551ED53D6E00647939 /* libArmyAntLib_mac.dylib */,
-				C3EBA1561ED53D6E00647939 /* libArmyAntLib_ios.a */,
-				C3EBA1571ED53D6E00647939 /* libArmyAntLib_static.a */,
+				C3EBA1551ED53D6E00647939 /* libArmyAntLib_mac_d.dylib */,
+				C3EBA1561ED53D6E00647939 /* libArmyAntLib_ios_d.a */,
+				C3EBA1571ED53D6E00647939 /* libArmyAntLib_static_d.a */,
 			);
 			sourceTree = "<group>";
 		};
@@ -675,7 +675,7 @@
 			);
 			name = ArmyAntLib_mac;
 			productName = ArmyAntLib;
-			productReference = C3EBA1551ED53D6E00647939 /* libArmyAntLib_mac.dylib */;
+			productReference = C3EBA1551ED53D6E00647939 /* libArmyAntLib_mac_d.dylib */;
 			productType = "com.apple.product-type.library.dynamic";
 		};
 		3E12BD5D1DE53C0C00B6195A /* ArmyAntLib_ios */ = {
@@ -692,7 +692,7 @@
 			);
 			name = ArmyAntLib_ios;
 			productName = ArmyAntLib_ios;
-			productReference = C3EBA1561ED53D6E00647939 /* libArmyAntLib_ios.a */;
+			productReference = C3EBA1561ED53D6E00647939 /* libArmyAntLib_ios_d.a */;
 			productType = "com.apple.product-type.library.static";
 		};
 		3E12BD6A1DE53C5000B6195A /* ArmyAntLib_static */ = {
@@ -709,7 +709,7 @@
 			);
 			name = ArmyAntLib_static;
 			productName = ArmyAntLib_static;
-			productReference = C3EBA1571ED53D6E00647939 /* libArmyAntLib_static.a */;
+			productReference = C3EBA1571ED53D6E00647939 /* libArmyAntLib_static_d.a */;
 			productType = "com.apple.product-type.library.static";
 		};
 /* End PBXNativeTarget section */
@@ -718,7 +718,7 @@
 		3E12BD081DE534D300B6195A /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 0800;
+				LastUpgradeCheck = 0940;
 				TargetAttributes = {
 					3E12BD4D1DE53B9800B6195A = {
 						CreatedOnToolsVersion = 8.0;
@@ -839,7 +839,34 @@
 		3E12BD0C1DE534D300B6195A /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
 				MAC = "";
+				ONLY_ACTIVE_ARCH = YES;
 				PRODUCT_NAME = ArmyAntLib;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -848,6 +875,31 @@
 		3E12BD0D1DE534D300B6195A /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
 				MAC = "";
 				PRODUCT_NAME = ArmyAntLib;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -876,7 +928,7 @@
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				CODE_SIGN_IDENTITY = "-";
-				CONFIGURATION_BUILD_DIR = "$(BUILD_DIR)/$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)";
+				CONFIGURATION_BUILD_DIR = "$(BUILD_DIR)";
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				DYLIB_COMPATIBILITY_VERSION = 1;
@@ -920,9 +972,9 @@
 				MTL_ENABLE_DEBUG_INFO = YES;
 				"MTL_ENABLE_DEBUG_INFO[sdk=macosx*][arch=x86_64]" = YES;
 				ONLY_ACTIVE_ARCH = YES;
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = "$(TARGET_NAME)_d";
 				SDKROOT = macosx;
-				STRINGS_FILE_OUTPUT_ENCODING = "UTF-16";
+				STRINGS_FILE_OUTPUT_ENCODING = "UTF-8";
 				SYMROOT = "$(PROJECT_DIR)/../bin";
 				"VALID_ARCHS[sdk=macosx*]" = "i386 x86_64";
 			};
@@ -950,7 +1002,7 @@
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				CODE_SIGN_IDENTITY = "-";
-				CONFIGURATION_BUILD_DIR = "$(BUILD_DIR)/$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)";
+				CONFIGURATION_BUILD_DIR = "$(BUILD_DIR)";
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DYLIB_COMPATIBILITY_VERSION = 1;
@@ -990,7 +1042,7 @@
 				ONLY_ACTIVE_ARCH = YES;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = macosx;
-				STRINGS_FILE_OUTPUT_ENCODING = "UTF-16";
+				STRINGS_FILE_OUTPUT_ENCODING = "UTF-8";
 				SYMROOT = "$(PROJECT_DIR)/../bin";
 				"VALID_ARCHS[sdk=macosx*]" = "i386 x86_64";
 			};
@@ -1018,6 +1070,7 @@
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CONFIGURATION_BUILD_DIR = "$(BUILD_DIR)";
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
@@ -1050,9 +1103,11 @@
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				OTHER_LDFLAGS = "-ObjC";
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_MODULE_NAME = "$(PRODUCT_NAME:c99extidentifier)";
+				PRODUCT_NAME = "$(TARGET_NAME)_d";
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
+				SYMROOT = "$(PROJECT_DIR)/../bin";
 			};
 			name = Debug;
 		};
@@ -1078,6 +1133,7 @@
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CONFIGURATION_BUILD_DIR = "$(BUILD_DIR)";
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_NS_ASSERTIONS = NO;
@@ -1105,9 +1161,11 @@
 				LIBRARY_SEARCH_PATHS = "$(PROJECT_DIR)/../external/boost/stage/lib";
 				MTL_ENABLE_DEBUG_INFO = NO;
 				OTHER_LDFLAGS = "-ObjC";
+				PRODUCT_MODULE_NAME = "$(PRODUCT_NAME:c99extidentifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
+				SYMROOT = "$(PROJECT_DIR)/../bin";
 				VALIDATE_PRODUCT = YES;
 			};
 			name = Release;
@@ -1134,6 +1192,7 @@
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				CODE_SIGN_IDENTITY = "-";
+				CONFIGURATION_BUILD_DIR = "$(BUILD_DIR)";
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
@@ -1168,8 +1227,10 @@
 				MACOSX_DEPLOYMENT_TARGET = 10.11;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = "$(TARGET_NAME)_d";
 				SDKROOT = macosx;
+				STRINGS_FILE_OUTPUT_ENCODING = "UTF-8";
+				SYMROOT = "$(PROJECT_DIR)/../bin";
 			};
 			name = Debug;
 		};
@@ -1195,6 +1256,7 @@
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				CODE_SIGN_IDENTITY = "-";
+				CONFIGURATION_BUILD_DIR = "$(BUILD_DIR)";
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_NS_ASSERTIONS = NO;
@@ -1226,6 +1288,8 @@
 				MTL_ENABLE_DEBUG_INFO = NO;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = macosx;
+				STRINGS_FILE_OUTPUT_ENCODING = "UTF-8";
+				SYMROOT = "$(PROJECT_DIR)/../bin";
 			};
 			name = Release;
 		};
