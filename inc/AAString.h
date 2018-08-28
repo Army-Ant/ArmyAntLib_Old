@@ -1,4 +1,4 @@
-/*
+﻿/*
  * Copyright (c) 2015 ArmyAnt
  * 版权所有 (c) 2015 ArmyAnt
  *
@@ -241,6 +241,12 @@ public:
 
 public:
     friend inline bool operator<<(std::iostream&stream, const String&str);
+
+#ifdef _DEBUG
+private:
+	const char* v;
+#endif
+	void resetValue();
 };
 
 String ARMYANTLIB_API operator+(const char*value, const String&str);

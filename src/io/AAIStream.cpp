@@ -84,12 +84,12 @@ StaticStream * StaticStream::GetStream(uint32 handle)
 	auto ret = AA_HANDLE_MANAGER.GetSourceByHandle(reinterpret_cast<IStream_Private*>(handle));
 	if(!ret->IsStatic())
 		return nullptr;
-	return static_cast<StaticStream*>(ret);
+	return const_cast<StaticStream*>(static_cast<const StaticStream*>(ret));
 }
 
 IStream * IStream::GetStream(uint32 handle)
 {
-	return 	AA_HANDLE_MANAGER.GetSourceByHandle(reinterpret_cast<IStream_Private*>(handle));
+	return 	const_cast<IStream*>(AA_HANDLE_MANAGER.GetSourceByHandle(reinterpret_cast<IStream_Private*>(handle)));
 }
 
 }

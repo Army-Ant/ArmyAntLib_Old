@@ -208,4 +208,9 @@
       <Filter>_not_cpp</Filter>
     </Text>
   </ItemGroup>
+  <ItemGroup>
+    <Natvis Include="..\src\not_cpp\ArmyAntNatvisFile.natvis">
+      <Filter>_not_cpp</Filter>
+    </Natvis>
+  </ItemGroup>
 </Project>
