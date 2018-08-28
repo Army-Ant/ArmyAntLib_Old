@@ -149,6 +149,7 @@ FakesAssemblies/
 .DS_Store
 .AppleDouble
 .LSOverride
+.xcuserdata
 
 # Thumbnails
 ._*
