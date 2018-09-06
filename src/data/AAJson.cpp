@@ -420,7 +420,7 @@ bool JsonObject::fromJsonString(const char * str)
     stdstr.clearBothSides(sg_spaceCleans, sg_spaceCleanLen);
     if (stdstr[0] != '{' || stdstr.getChar(-1) != '}')
         return false;
-    if (!stdstr.subString(1, -3))
+    if (!stdstr.subString(1, -2))
         return false;
     if (!stdstr.clearBothSides(sg_spaceCleans, sg_spaceCleanLen))
         return false;
@@ -536,7 +536,7 @@ bool JsonArray::fromJsonString(const char * str)
     {
         return false;
     }
-    if(!realValue.subString(1, -3))
+    if(!realValue.subString(1, -2))
         realValue.clearBothSides(sg_spaceCleans, sg_spaceCleanLen);
     if (realValue != "")
         try
