@@ -62,7 +62,7 @@ ELSE ()
 
 ENDIF ((CMAKE_SYSTEM_NAME MATCHES "Windows") OR (CMAKE_SYSTEM_NAME MATCHES "CYGWIN"))
 
-include_directories(external/boost)
+#include_directories(external/boost)
 
 if(CMAKE_BUILD_TYPE STREQUAL Release)
     add_definitions(
@@ -123,7 +123,7 @@ set(TEST_CXX_SOURCE_FILES
 		test/main.cpp
 )
 
-LINK_DIRECTORIES(external/boost/stage/lib/)
+#LINK_DIRECTORIES(external/boost/stage/lib/)
 
 
 if(LINK_TYPE STREQUAL static)
