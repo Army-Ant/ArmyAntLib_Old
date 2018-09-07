@@ -1420,6 +1420,12 @@ bool UDPSilgle::isListening() const{
 SocketException::SocketException(ErrorType type, const char * message, int code)
 	: type(type), message(message), code(code){}
 
+SocketException::SocketException(const SocketException & value)
+	: type(value.type), message(value.message), code(value.code){}
+
+SocketException::SocketException(SocketException && moved)
+	: type(moved.type), message(moved.message), code(moved.code){}
+
 }
 
 #undef AA_HANDLE_MANAGER
