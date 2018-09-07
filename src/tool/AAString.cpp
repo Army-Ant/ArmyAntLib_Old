@@ -273,12 +273,6 @@ String operator+(char c, const String & str){
 	return str + c;
 }
 
-String operator+(String && temp, char c){
-	temp += c;
-	return String(temp);
-}
-
-
 bool String::clearFront(const char ** value, uint32 length){
 	auto hddd = AA_HANDLE_MANAGER[this];
 	auto& str = *(hddd);
@@ -383,24 +377,6 @@ int32 String::find(char c) const{
 
 String operator+(const char*value, const String&str){
 	return String(value) + str;
-}
-
-String operator+(String&&temp, const String&value){
-	String ret(temp);
-	ret += value;
-	return ret;
-}
-
-String operator+(String&&temp, const char*value){
-	String ret(temp);
-	ret += value;
-	return ret;
-}
-
-String operator+(String && temp, int64 value){
-	auto ret = String(temp);
-	ret += value;
-	return ret;
 }
 
 bool operator==(const char*cstr, const String&str){
