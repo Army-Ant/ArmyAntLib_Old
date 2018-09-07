@@ -82,10 +82,7 @@ String::String(const String & value){
 }
 
 String::String(String && _moved){
-	auto ret = AA_HANDLE_MANAGER.handleMap.find(&_moved);
-	auto strp = ret->second;
-	AA_HANDLE_MANAGER.handleMap.erase(ret);
-	AA_HANDLE_MANAGER.handleMap.insert(std::make_pair(this, strp));
+	AA_HANDLE_MANAGER.MoveTo(&_moved, this);
 	resetValue();
 }
 
@@ -223,14 +220,14 @@ String String::operator+(char c) const{
 
 String String::operator+(int64 value) const{
 	std::ostringstream ss;
-	ss << AA_HANDLE_MANAGER[this];
+	ss << *AA_HANDLE_MANAGER[this];
 	ss << value;
 	return String(ss.str().c_str());
 }
 
 String String::operator+(double value) const{
 	std::ostringstream ss;
-	ss << AA_HANDLE_MANAGER[this];
+	ss << *AA_HANDLE_MANAGER[this];
 	ss << value;
 	return String(ss.str().c_str());
 }

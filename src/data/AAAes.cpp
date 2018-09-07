@@ -719,11 +719,15 @@ bool Parser::SetData(void*data, uint64 length)
 RoundSetting Parser::GetSetting(uint8 round) const
 {
     auto ret = AA_PARSER_HANDLE_MANAGER[this]->reffer->settings[round]->reffer;
+
+	AAAssert(false, *(RoundSetting*)(nullptr));
+	/* 因 ClassPrivateHandleManager 安全性修正, 此处代码已不可用, 若稍后要用到此处功能, 另行寻找解决办法
     for (auto i = AA_ROUND_SETTING_HANDLE_MANAGER.handleMap.begin(); i != AA_ROUND_SETTING_HANDLE_MANAGER.handleMap.end(); ++i)
     {
         if (i->second->reffer == ret)
             return *i->first;
     }
+	*/
     return *(RoundSetting*)(nullptr);
 }
 
