@@ -30,6 +30,7 @@
 #include <map>
 #include <queue>
 #include <thread>
+#include <memory>
 #include <boost/asio.hpp>
 
 #ifdef OS_WINDOWS
@@ -582,7 +583,7 @@ struct Socket_Private{
 
 	uint32 maxBufferLen = 65530;		// 接收数据的buffer的最大长度
 	boost::asio::io_service localService;
-	std::thread* localServiceThread = nullptr;
+	std::shared_ptr<std::thread> localServiceThread = nullptr;
 
 	Socket::SendingResp asyncResp = nullptr;
 	void* asyncRespUserData = nullptr;
@@ -795,7 +796,6 @@ void TCPServer_Private::onReceived(TCPServer*server, std::shared_ptr<boost::asio
 			case boost::asio::error::eof:
 			case boost::asio::error::connection_aborted:
 			case boost::asio::error::connection_reset:
-				// TODO : TCP服务器无法主动重新连接掉线的客户端, 因此此回调的返回值无效, 需要注明
 				hd->lostCallBack(index, hd->lostCallData);
 				server->givenUpClient(*client->addr, client->port);
 				return;
@@ -809,9 +809,8 @@ TCPClient_Private::~TCPClient_Private(){}
 
 void TCPClient_Private::onAsyncConnect(Socket::ClientConnectCall asyncConnectCallBack, void* asyncConnectCallData, TCPClient*client, boost::system::error_code err){
 	auto hd = static_cast<TCPClient_Private*>(AA_HANDLE_MANAGER[client]);
-	if(err && hd->lostCallBack(asyncConnectCallData))
-		hd->s->async_connect(boost::asio::ip::tcp::endpoint(toBoostAddr(*hd->addr), hd->port), std::bind(TCPClient_Private::onAsyncConnect, asyncConnectCallBack, asyncConnectCallData, client, std::placeholders::_1));
-	else if(err || !asyncConnectCallBack(!!err, asyncConnectCallData)){
+	if(err){
+		asyncConnectCallBack(!!err, asyncConnectCallData);
 		hd->s->cancel(err);
 		if(!err){
 			boost::system::error_code closeErr;
@@ -838,7 +837,37 @@ void TCPClient_Private::onConnect(Socket::ClientConnectCall asyncConnectCallBack
 	hd->buffer = new uint8[hd->maxBufferLen];
 	memset(hd->buffer, 0, hd->maxBufferLen);
 	hd->s->async_read_some(boost::asio::buffer(hd->buffer, hd->maxBufferLen), std::bind(onReceived, asyncConnectCallBack, asyncConnectCallData, client, std::placeholders::_1, std::placeholders::_2));
-	hd->localServiceThread = new std::thread([hd](){ hd->localService.run(); });
+	hd->localServiceThread = std::shared_ptr<std::thread>(new std::thread([hd, client, asyncConnectCallBack, asyncConnectCallData](){
+		boost::system::error_code err;
+		hd->localService.reset();
+		hd->localService.run(err);
+		auto v = err.value();
+		auto m = err.message();
+		SocketException e(SocketException::ErrorType::SystemError, m.c_str(), v);
+		hd->reportError(e, *hd->addr, hd->port, "onConnect localServiceThread");
+		switch(v){
+			case boost::asio::error::eof:
+			case boost::asio::error::connection_aborted:
+			case boost::asio::error::connection_reset:
+				if(hd->s != nullptr){
+					if(hd->s->is_open()){
+						hd->s->shutdown(hd->s->shutdown_both, err);
+					}
+					if(!err)
+						hd->s->cancel(err);
+					if(!err){
+						hd->s->close(err);
+					}
+				}
+				hd->localService.stop();
+				hd->isListening = false;
+				AA_SAFE_DELALL(hd->buffer);
+				AA_SAFE_DEL(hd->sendBuffer);
+				hd->s.reset();
+				// 此处不进行lostCallback回调
+				return;
+		}
+	}));
 }
 
 void TCPClient_Private::onReceived(Socket::ClientConnectCall asyncConnectCallBack, void* asyncConnectCallData, TCPClient*client, boost::system::error_code err, std::size_t size){
@@ -856,9 +885,22 @@ void TCPClient_Private::onReceived(Socket::ClientConnectCall asyncConnectCallBac
 			case boost::asio::error::eof:
 			case boost::asio::error::connection_aborted:
 			case boost::asio::error::connection_reset:
-				client->disconnectServer(20000);
-				if(hd->lostCallBack(hd->lostCallData))
-					client->connectServer(hd->localport, hd->isAsync, asyncConnectCallBack, asyncConnectCallData);
+				if(hd->s != nullptr){
+					if(hd->s->is_open()){
+						hd->s->shutdown(hd->s->shutdown_both, err);
+					}
+					if(!err)
+						hd->s->cancel(err);
+					if(!err){
+						hd->s->close(err);
+					}
+				}
+				hd->localService.stop();
+				hd->isListening = false;
+				AA_SAFE_DELALL(hd->buffer);
+				AA_SAFE_DEL(hd->sendBuffer);
+				hd->s.reset(); 
+				hd->lostCallBack(hd->lostCallData);
 				return;
 		}
 	}
@@ -998,11 +1040,14 @@ bool TCPServer::setMaxIOBufferLen(uint32 len){
 bool TCPServer::start(uint16 port, bool ipv6){
 	auto hd = static_cast<TCPServer_Private*>(AA_HANDLE_MANAGER[this]);
 
-	auto ip4 = IPAddr_v4(0, 0, 0, 0);
-	auto ip6 = IPAddr_v6(nullptr);
-	IPAddr*ip = &ip4;
-	if(ipv6)
-		ip = &ip6;
+	std::shared_ptr<IPAddr> ip = nullptr;
+	if(ipv6){
+		std::shared_ptr<IPAddr> ip6(new IPAddr_v6(nullptr));
+		ip = ip6;
+	} else{
+		std::shared_ptr<IPAddr> ip4(new IPAddr_v4(0, 0, 0, 0));
+		ip = ip4;
+	}
 
 	if(hd->isListening){
 		SocketException ex(SocketException::ErrorType::SocketStatueError, "The server has started");
@@ -1024,7 +1069,15 @@ bool TCPServer::start(uint16 port, bool ipv6){
 		// 连接套接字
 		std::shared_ptr<boost::asio::ip::tcp::socket> s(new boost::asio::ip::tcp::socket(hd->localService));
 		hd->acceptor.async_accept(*s, std::bind(TCPServer_Private::onConnect, this, s, std::placeholders::_1));
-		hd->localServiceThread = new std::thread([hd](){ hd->localService.run(); });
+		hd->localServiceThread = std::shared_ptr<std::thread>(new std::thread([hd, ip, port](){
+			boost::system::error_code err;
+			hd->localService.reset();
+			hd->localService.run(err);
+			auto code = err.value();
+			auto message = err.message();
+			SocketException ex(SocketException::ErrorType::SystemError, message.c_str(), code);
+			hd->reportError(ex, *ip, port, "StartServer localServiceThread");
+		}));
 	} catch(boost::system::system_error e){
 		auto code = e.code().value();
 		auto message = e.code().message();
@@ -1043,7 +1096,6 @@ bool TCPServer::stop(uint32 waitTime){
 	hd->localService.stop();
 	if(hd->localServiceThread != nullptr)
 		hd->localServiceThread->join();
-	AA_SAFE_DEL(hd->localServiceThread);
 	if(hd->acceptor.is_open()){
 		hd->acceptor.cancel();
 		if(!givenUpAllClients()){
@@ -1241,10 +1293,10 @@ bool TCPClient::disconnectServer(uint32 waitTime){
 		}
 	}
 	hd->localService.stop();
-	if(hd->localServiceThread != nullptr)
+	if(hd->localServiceThread != nullptr && hd->localServiceThread->joinable() && hd->localServiceThread->get_id() != std::this_thread::get_id()){
 		hd->localServiceThread->join();
+	}
 	hd->isListening = false;
-	AA_SAFE_DEL(hd->localServiceThread);
 	AA_SAFE_DELALL(hd->buffer);
 	AA_SAFE_DEL(hd->sendBuffer);
 	hd->s.reset();
