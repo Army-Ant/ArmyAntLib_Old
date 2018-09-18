@@ -37,6 +37,10 @@ class IPAddr_v6;
 class ARMYANTLIB_API IPAddr
 {
 public:
+	typedef IPAddr_v4 V4;
+	typedef IPAddr_v6 V6;
+
+public:
 	IPAddr();
 	IPAddr(const IPAddr&value);
 	virtual IPAddr&operator=(const char* ipStr);
@@ -45,7 +49,7 @@ public:
 
 public:
 	virtual const char*getStr()const = 0;
-	virtual uint8 getIPVer()const;
+	virtual uint8 getIPVer()const = 0;
 	virtual bool operator==(const char*value)const;
 	virtual bool operator!=(const char*value)const;
 	bool operator==(const IPAddr&value)const;
